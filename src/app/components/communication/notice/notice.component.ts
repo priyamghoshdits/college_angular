@@ -121,27 +121,15 @@ export class NoticeComponent {
   }
 
   editNotice(data){
+    let userTypes;
     console.log(data.mailed_to_id.split(',').length);
-    let userType = this.userTypeList;
     let received_data = data.mailed_to_id.split(',');
-    // data.mailed_to_id.split(',').forEach(function (value){
-    //   let index = userType.findIndex(x => x.id === value.id);
-    //   userType[index].checked = true;
-    // });
-    // for(let i = 1; i <= received_data.length; i++){
-    //   let index = this.userTypeList.findIndex(x => x.id === received_data[i]);
-    //   this.userTypeList[index].checked = true;
-    // }
-    // console.log(userType);
-    // this.userTypeList = userType;
-    // console.log(this.userTypeList);
 
     this.userTypeList.forEach(function (value){
       received_data.forEach(function (value2){
         if(value.id === parseInt(value2)){
           value.checked = true;
         }
-        console.log(value2 , ' : ', value);
       })
     })
     console.log(this.userTypeList);
