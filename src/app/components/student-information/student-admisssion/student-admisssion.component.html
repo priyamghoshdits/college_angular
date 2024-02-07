@@ -21,7 +21,7 @@
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
                         </div>
-                        <div [hidden]="active != 1" *ngIf="permission[0].permission == 1 && permission[1].permission == 1 && permission[2].permission == 1">
+                        <div [hidden]="active != 1">
                             <div class="card-body">
                                 <form [formGroup]="studentCreationForm">
                                     <div class="row">
