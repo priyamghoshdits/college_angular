@@ -123,13 +123,18 @@ export class NoticeComponent {
   editNotice(data){
     console.log(data.mailed_to_id.split(',').length);
     let userType = this.userTypeList;
+    let received_data = data.mailed_to_id.split(',');
     // data.mailed_to_id.split(',').forEach(function (value){
     //   let index = userType.findIndex(x => x.id === value.id);
     //   userType[index].checked = true;
     // });
-    console.log(userType);
-    this.userTypeList = userType;
-    console.log(this.userTypeList);
+    for(let i = 1; i <= received_data.length; i++){
+      let index = this.userTypeList.findIndex(x => x.id === received_data[i]);
+      this.userTypeList[index].checked = true;
+    }
+    // console.log(userType);
+    // this.userTypeList = userType;
+    // console.log(this.userTypeList);
 
     this.noticeForm.patchValue(data);
   }
