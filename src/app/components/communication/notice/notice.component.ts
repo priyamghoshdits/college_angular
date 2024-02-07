@@ -127,7 +127,10 @@ export class NoticeComponent {
       let index = userType.findIndex(x => x.id == data.id);
       userType[index].checked = true;
     });
+    console.log(userType);
     this.userTypeList = userType;
+    console.log(this.userTypeList);
+
     this.noticeForm.patchValue(data);
   }
 
