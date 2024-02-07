@@ -5,6 +5,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
 import {NgxPaginationModule} from "ngx-pagination";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-hostel',
@@ -26,7 +27,9 @@ export class HostelComponent {
   hostelList: any[];
   isUpdatable = false;
   p: number;
-  constructor(private hostelService: HostelService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private hostelService: HostelService, private roleAndPermissionService: RolesAndPermissionService) {
 
     this.hostelForm = new FormGroup({
       id: new FormControl(null),
@@ -44,6 +47,15 @@ export class HostelComponent {
       this.hostelList = response;
     });
     this.hostelList = this.hostelService.getHostels();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'ADD HOSTEL').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'ADD HOSTEL').permission;
+    }
   }
 
   saveHostels(){

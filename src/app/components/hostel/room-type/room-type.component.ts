@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import {MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {HostelService} from "../../../services/hostel.service";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-room-type',
@@ -13,7 +14,8 @@ import Swal from "sweetalert2";
         MatIconModule,
         NgForOf,
         NgxPaginationModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgIf
     ],
   templateUrl: './room-type.component.html',
   styleUrl: './room-type.component.scss'
@@ -23,8 +25,10 @@ export class RoomTypeComponent {
     roomTypeList: any[];
     isUpdatable = false;
     p: number;
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
 
-    constructor(private hostelService: HostelService) {
+    constructor(private hostelService: HostelService, private roleAndPermissionService: RolesAndPermissionService) {
         this.roomTypeForm = new FormGroup({
             id: new FormControl(null),
             name: new FormControl(null, [Validators.required]),
@@ -34,6 +38,14 @@ export class RoomTypeComponent {
             this.roomTypeList = response;
         });
         this.roomTypeList = this.hostelService.getRoomTypes();
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'ROOM TYPE').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'ROOM TYPE').permission;
+        }
     }
 
 

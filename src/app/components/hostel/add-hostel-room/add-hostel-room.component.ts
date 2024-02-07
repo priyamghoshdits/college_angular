@@ -60,11 +60,11 @@ export class AddHostelRoomComponent {
 
     this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
       this.rolesAndPermission = response;
-      this.permission = this.rolesAndPermission.find(x => x.name == 'ADD HOSTEL').permission;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'ADD HOSTEL ROOM').permission;
     });
     this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
     if(this.rolesAndPermission.length > 0){
-      this.permission = this.rolesAndPermission.find(x => x.name == 'ADD HOSTEL').permission;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'ADD HOSTEL ROOM').permission;
     }
   }
 
