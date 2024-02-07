@@ -116,6 +116,32 @@ export class LibraryItemIssueComponent {
     this.libraryIssueForm.patchValue({temp_remaining: this.libraryItemList[x].remaining,remaining: this.libraryItemList[x].remaining });
   }
 
+  deleteItem(data){
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Do you sure to delete ?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete It!'
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.libraryService.deleteIssueItem(data.id).subscribe((response: any) => {
+          if(response.success == 1){
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Item Deleted',
+              showConfirmButton: false,
+              timer: 1500
+            });
+          }
+        })
+      }
+    });
+  }
+
   saveIssueDetails(){
     if(this.libraryIssueForm.value.temp_remaining < this.libraryIssueForm.value.quantity){
       Swal.fire({

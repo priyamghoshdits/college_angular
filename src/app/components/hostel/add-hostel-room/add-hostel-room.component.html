@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-5">
             <div class="row">
                 <div class="col-sm-12">
@@ -65,8 +65,8 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveHostelRooms()">Submit</button>
-                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateHostelRooms()">Update</button>
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveHostelRooms()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateHostelRooms()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
                             <!--                            <button class="btn btn-secondary">Cancel</button>-->
                         </div>
@@ -75,7 +75,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-xl-7">
-            <div class="row">
+            <div class="row" *ngIf="permission[3].permission == 1">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <div class="card">
@@ -93,7 +93,7 @@
                                         <th colspan="2">Room Type Name</th>
                                         <th colspan="2">No Of Bed</th>
                                         <th colspan="2">Cost Per Bed</th>
-                                        <th colspan="2">Action</th>
+                                        <th colspan="2" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -105,8 +105,8 @@
                                         <td colspan="2">{{record.no_of_bed}}</td>
                                         <td colspan="2">{{record.cost_per_bed}}</td>
                                         <td colspan="2">
-                                            <a (click)="editHostelRooms(record)"><mat-icon>edit</mat-icon></a>
-                                            <a (click)="deleteHostelRooms(record)"><mat-icon>delete</mat-icon></a>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editHostelRooms(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteHostelRooms(record)"><mat-icon>delete</mat-icon></a>
                                         </td>
                                     </tr>
                                     </tbody>

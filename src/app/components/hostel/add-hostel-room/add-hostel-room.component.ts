@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import {HostelService} from "../../../services/hostel.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-add-hostel-room',
@@ -14,7 +15,8 @@ import Swal from "sweetalert2";
     MatIconModule,
     NgForOf,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './add-hostel-room.component.html',
   styleUrl: './add-hostel-room.component.scss'
@@ -27,8 +29,10 @@ export class AddHostelRoomComponent {
   hostelRoomList: any[];
   isUpdatable = false;
   p: number;
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
 
-  constructor(private hostelServices: HostelService) {
+  constructor(private hostelServices: HostelService, private roleAndPermissionService: RolesAndPermissionService) {
     this.hostelForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
@@ -53,6 +57,15 @@ export class AddHostelRoomComponent {
       this.hostelRoomList = response;
     });
     this.hostelRoomList = this.hostelServices.getHostelRoomListTypes();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'ADD HOSTEL').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'ADD HOSTEL').permission;
+    }
   }
 
   saveHostelRooms(){

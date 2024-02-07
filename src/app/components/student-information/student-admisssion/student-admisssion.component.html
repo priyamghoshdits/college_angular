@@ -187,7 +187,7 @@
                                             <label>Agent</label>
                                             <select style="width: 100%" formControlName="agent_id" class="form-select" required>
                                                 <option *ngFor="let data of agentList" [value]="data.id" >
-                                                    {{data.name}}
+                                                    {{data.first_name}} {{data.last_name}}
                                                 </option>
                                             </select>
                                         </div>

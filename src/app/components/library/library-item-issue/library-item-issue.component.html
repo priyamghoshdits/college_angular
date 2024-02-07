@@ -117,7 +117,7 @@
                                         <th scope="col">Issued On</th>
                                         <th scope="col">Returned On</th>
                                         <th scope="col">Returned</th>
-                                        <th scope="col">Edit</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -134,7 +134,10 @@
                                             </a>
                                             <a *ngIf="record.returned == 1">Returned</a>
                                         </td>
-                                        <td><a *ngIf="permission[1].permission == 1" (click)="editItem(record)"><mat-icon>edit</mat-icon></a></td>
+                                        <td>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editItem(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteItem(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

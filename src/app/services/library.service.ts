@@ -134,4 +134,18 @@ export class LibraryService {
           }));
   }
 
+  deleteIssueItem(id){
+      return this.http.get(this.BASE_API_URL + '/deleteIssuedBooks/' + id)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+              // @ts-ignore
+              if(response.success == 1){
+                  // @ts-ignore
+                  const index = this.libraryIssueItemList.findIndex(x => x.id === response.data.id);
+                  // @ts-ignore
+                  this.libraryIssueItemList.splice(index,1);
+                  this.libraryIssueItemListSubject.next([...this.libraryIssueItemList]);
+              }
+          }));
+  }
+
 }
