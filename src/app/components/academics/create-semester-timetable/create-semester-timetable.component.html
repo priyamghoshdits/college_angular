@@ -1,0 +1,185 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Create Semester Table</h5>
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="semesterTimeTableForm">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" required (change)="getSubject()">
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Subject</label>
+                                        <select style="width: 100%" formControlName="subject_id" class="form-select" required>
+                                            <option [selected]="false" *ngFor="let data of subjectList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Teacher List</label>
+                                        <select style="width: 100%" formControlName="teacher_id" class="form-select" required>
+                                            <option [selected]="false" *ngFor="let data of teacherList" [value]="data.teacher_id" >
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Time From</label>
+                                        <input type="time" class="form-control" formControlName="time_from" placeholder="Time From" required>
+<!--                                        <ngb-timepicker formControlName="time_from" [spinners]="false" class="time-picker-custom"></ngb-timepicker>-->
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Time To</label>
+                                        <input type="time" class="form-control" formControlName="time_to" placeholder="Time Tpo" required>
+<!--                                        <ngb-timepicker formControlName="time_to" [spinners]="false" class="time-picker-custom"></ngb-timepicker>-->
+                                    </div>
+                                </div>
+<!--                                <div class="row">-->
+<!--                                    <div class="col-md-3 mb-3">-->
+<!--                                        <label>Time From (24 hr)</label>-->
+<!--                                        <ngb-timepicker formControlName="time_from" [spinners]="false" class="time-picker-custom"></ngb-timepicker>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-3 mb-3">-->
+<!--                                        <label>Time To (24 hr)</label>-->
+<!--                                        <ngb-timepicker formControlName="time_to" [spinners]="false" class="time-picker-custom"></ngb-timepicker>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Day</label>
+                                        <select style="width: 100%" formControlName="week_id" class="form-select" required>
+                                            <option [selected]="false" *ngFor="let data of weekList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Room No.</label>
+                                        <input type="text" class="form-control" formControlName="room_number" placeholder="Room no." required>
+                                    </div>
+                                </div>
+                                <button class="btn btn-primary" type="submit" (click)="createArray()">Add</button>
+                            </form>
+                        </div>
+                    </div>
+
+
+
+<!--                    <div class="card">-->
+<!--                        <div class="card-header">-->
+<!--                            <h5>Course</h5><span>Add Course</span>-->
+<!--                        </div>-->
+<!--                        <div class="card-body">-->
+<!--                            <form class="needs-validation" [formGroup]="semesterTimeTableForm">-->
+<!--                                <div class="col-md-4 mb-3">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label>Select Course</label>-->
+<!--                                        <select formControlName="course_id" class="form-select" required (change)="getSemester()">-->
+<!--                                            <option *ngFor="let data of courseList" [value]="data.id" >-->
+<!--                                                {{data.course_name}}-->
+<!--                                            </option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-4 mb-3">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <label>Select Semester</label>-->
+<!--                                        <select formControlName="semester_id" class="form-select" required>-->
+<!--                                            <option *ngFor="let data of semesterList" [value]="data.semester_id">-->
+<!--                                                {{data.name}}-->
+<!--                                            </option>-->
+<!--                                        </select>-->
+<!--                                    </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                        <div class="card-footer">-->
+<!--&lt;!&ndash;                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCourse()">Submit</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>&ndash;&gt;-->
+<!--                            &lt;!&ndash;                            <button class="btn btn-secondary">Cancel</button>&ndash;&gt;-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+                <div class="col-sm-12">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>List</h5>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Week</th>
+                                        <th scope="col">Subject Name</th>
+                                        <th scope="col">Teacher Name</th>
+                                        <th scope="col">Time From</th>
+                                        <th scope="col">Time To</th>
+                                        <th scope="col">Room No</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of tableArray;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.week_name}}</td>
+                                        <td>{{record.subject_name}}</td>
+                                        <td>{{record.teacher_name}}</td>
+                                        <td>{{record.time_from}}</td>
+                                        <td>{{record.time_to}}</td>
+                                        <td>{{record.room_no}}</td>
+                                        <td>
+<!--                                            <a (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
+                                            <a (click)="removeRecord(indexOfElement)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2">
+                    <button [hidden]="tableArray.length<1" class="btn btn-primary ml-5" type="submit" (click)="createSemesterTimetable()">Save</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

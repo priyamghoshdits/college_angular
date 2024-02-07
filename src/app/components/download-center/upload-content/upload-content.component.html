@@ -1,0 +1,135 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Content</h5><span>Upload Content</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="uploadContentForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Content Title</label>
+                                        <input class="form-control" formControlName="title" id="exampleInputEmail1" type="text" placeholder="Enter Content Title">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" required (click)="getSubject()">
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Subject</label>
+                                        <select style="width: 100%" formControlName="subject_id" class="form-select" required>
+                                            <option *ngFor="let data of subjectList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Type</label>
+                                        <select style="width: 100%" formControlName="type" class="form-select" required (click)="checkType()">
+                                            <option value="assignment"> Assignment </option>
+                                            <option value="study-material"> Study Material </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Upload Date</label>
+                                        <input class="form-control" formControlName="upload_date" id="exampleInputEmail1" type="date">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Upload File</label>
+                                        <input class="form-control" formControlName="fileTemp" id="exampleInputEmail1" type="file" (change)="setFile($event)">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+                                        <input class="form-control" formControlName="description" id="exampleInputEmail1" type="text">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="uploadContent()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateContent()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                </div>
+            </div>
+        </div>
+                <div class="col-sm-12 col-xl-7">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Content List</h5>
+                                        <span>Full Content List.</span>
+                                    </div>
+                                    <div class="row" style="text-align: center;">
+                                        <div style="margin-top: 9px" class="col-3"><h4>Search</h4></div>
+                                        <div class="col-9">
+                                            <input style="width: 90%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                        </div>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Title</th>
+                                                <th scope="col">Subject Name</th>
+                                                <th scope="col">Upload Date</th>
+                                                <th scope="col">File</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let record of contentList | customFilter:searchItem;let indexOfElement=index">
+                                                <td>{{indexOfElement+1}}</td>
+                                                <td>{{record.title}}</td>
+                                                <td>{{record.subject_name}}</td>
+                                                <td>{{record.upload_date}}</td>
+                                                <td>{{(record.content_name === null)?'No File Uploaded':record.content_name}}</td>
+                                                <td>
+                                                    <a><mat-icon (click)="editUpload(record)">edit</mat-icon></a>
+                                                    <a><mat-icon (click)="deleteContent(record)">delete</mat-icon></a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+<!--                                        <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

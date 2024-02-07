@@ -1,0 +1,101 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Promote Students</h5>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="promotionForm">
+                                <h5 style="margin-bottom: 23px">Promote From:-</h5>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" required>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="session_id" class="form-select" required>
+                                            <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <h5 style="margin-bottom: 23px">Promote To:-</h5>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="promote_semester_id" class="form-select" required>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="promote_session_id" class="form-select" required>
+                                            <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-primary me-1" (click)="searchStudents()">Search</button>
+                            </form>
+
+                            <hr>
+                            <h5 *ngIf="searched">Students</h5>
+                            <div *ngIf="(filteredStudent.length > 0) && searched" >
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">
+                                                <input type="checkbox" (click)="checkAll($event)"> Check All
+                                            </th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Date Of Birth</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of filteredStudent;let indexOfElement=index">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>
+                                                <input type="checkbox" (click)="promotionCheck(record, $event)" [checked]="record.checked">
+                                            </td>
+                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                            <td>{{record.dob}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button style="margin-top: 30px;" class="btn btn-primary me-1" (click)="promoteStudent()">Promote</button>
+                            </div>
+                            <div *ngIf="(filteredStudent.length == 0) && searched">
+                                <h5 style="text-align: center;">No Data</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

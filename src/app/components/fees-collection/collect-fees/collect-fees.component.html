@@ -1,0 +1,330 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header" [hidden]="active != 1">
+                            <h5>Collect Fees</h5>
+                        </div>
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>All Transactions</h5>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Collect Fees</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Show All Transactions</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+<!--                        <div class="card-header">-->
+<!--                            <h5>Fees</h5><span>Collect Fees</span>-->
+<!--                        </div>-->
+                        <div [hidden]="active != 1">
+                            <div class="card-body">
+                                <ng-template #content let-modal>
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-basic-title">Student Payment</h4>
+                                        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table" *ngIf="feesDetailsData.length>0" style="text-align: center;">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Total Amt</th>
+                                                <th scope="col">Paid Amt</th>
+                                                <th scope="col">Discount</th>
+                                                <th scope="col">Due Payment</th>
+                                                <th scope="col">Transaction ID</th>
+                                                <th scope="col">Payment Date</th>
+                                                <th scope="col">Amount Paid</th>
+                                                <th scope="col">Upload</th>
+                                                <th scope="col">Mode</th>
+                                                <th scope="col">Action</th>
+
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let record of feesDetailsData | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                                <td>{{indexOfElement+1}}</td>
+                                                <td>{{record.name}}</td>
+                                                <td>{{record.total_amount}}</td>
+                                                <td>{{record.total_paid}}</td>
+                                                <td><a ngbTooltip="{{record.scholarship_code}}">{{record.discount}}</a></td>
+                                                <td>{{record.remaining}}</td>
+                                                <td>
+                                                    <input class="form-control digits" [(ngModel)]="record.transaction_id" type="text"
+                                                           id="example-datetime-local-input">
+                                                </td>
+                                                <td>
+                                                    <input class="form-control digits" [(ngModel)]="record.paid_on" type="date"
+                                                           id="example-datetime-local-input">
+                                                </td>
+                                                <td style="">
+                                                    <input [(ngModel)]="record.amount" style="width: 150px" class="form-control col-2" type="text"
+                                                           placeholder="Enter Amount">
+                                                </td>
+                                                <td style="">
+                                                    <input (change)="setFile($event)" style="width: 150px" class="form-control col-2" type="file"
+                                                           placeholder="Enter Amount">
+                                                </td>
+                                                <td>
+                                                    <select [(ngModel)]="record.status" style="width: 100%" class="form-select" required>
+                                                        <option value="Online"> Online </option>
+                                                        <option value="Offline"> Offline </option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button style="border-radius: 50px" class="btn btn-primary me-1" (click)="updatePayment(record)">Save</button>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </ng-template>
+                                <form class="theme-form" [formGroup]="collectFeesForm">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <label>Select Course</label>
+                                            <select formControlName="course_id" class="form-select" required (change)="getSemester(1)" style="width: 100%">
+                                                <option *ngFor="let data of courseList" [value]="data.id" >
+                                                    {{data.course_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            <label>Select Semester</label>
+                                            <select formControlName="semester_id" class="form-select" required style="width: 100%">
+                                                <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            <button style="margin-top: 10%" class="btn btn-primary me-1" (click)="searchStudents()">Search</button>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <h5>Student List</h5>
+                                    <div class="row">
+
+
+
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Gender</th>
+                                                    <th scope="col">Date Of Birth</th>
+                                                    <th scope="col">Mobile No.</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let record of filteredStudentList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                                    <td>{{indexOfElement+1}}</td>
+                                                    <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                                    <td>{{record.gender}}</td>
+                                                    <td>{{record.dob}}</td>
+                                                    <td>{{record.mobile_no}}</td>
+                                                    <td>{{record.email}}</td>
+                                                    <td>
+                                                        <button style="border-radius: 50px" class="btn btn-primary me-1" (click)="openCustomModal(content);getFeesDetails(record.id)" >Collect Fees</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+    <!--                                        <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+                                        </div>
+
+
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div [hidden]="active != 2">
+                            <div class="card-body">
+                                <form class="theme-form" [formGroup]="searchTransactionForm">
+                                    <div class="row">
+                                        <div class="col-3">
+                                            <label>Select Course</label>
+                                            <select formControlName="course_id" class="form-select" required (change)="getSemester(2)" style="width: 100%">
+                                                <option *ngFor="let data of courseList" [value]="data.id" >
+                                                    {{data.course_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-3">
+                                            <label>Select Semester</label>
+                                            <select formControlName="semester_id" class="form-select" required style="width: 100%" (change)="getStudents()">
+                                                <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-3">
+                                            <label>Select Student</label>
+                                            <select formControlName="user_id" class="form-select" required style="width: 100%">
+                                                <option *ngFor="let data of filteredStudentListForSearch" [value]="data.id" >
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-3">
+                                            <button style="margin-top: 13%" class="btn btn-primary me-1" (click)="getTransactionDetails()">Search</button>
+                                        </div>
+                                    </div>
+                                    <hr>
+<!--                                    <div class="d-flex">-->
+<!--                                        <div style="float: left"><h5>Transaction List</h5></div>-->
+<!--                                        <div style="float: left"><button class="btn btn-secondary" type="button" id="print" (click)="printTransaction()">Print Form</button></div>-->
+<!--                                    </div>-->
+<!--                                        <div class="playerOne">-->
+<!--                                            <h5>Transaction List</h5>-->
+<!--                                        </div>-->
+<!--                                        <div class="playerTwo">-->
+<!--                                            <button class="btn btn-secondary" type="button" id="print" (click)="printTransaction()">Print Form</button>-->
+<!--                                        </div>-->
+                                    <h5>Transaction List</h5>
+<!--                                    <button class="btn btn-secondary" type="button" id="print" (click)="printTransaction()">Print Form</button>-->
+                                    <div class="row">
+
+
+
+                                        <div class="table-responsive">
+                                            <table class="table" style="text-align: center">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Transaction ID</th>
+                                                    <th scope="col">Student Name</th>
+                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">Paid On</th>
+                                                    <th scope="col">Mode</th>
+                                                    <th scope="col">Payment Proof</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let record of transactionList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                                    <td>{{indexOfElement+1}}</td>
+                                                    <td>{{record.transaction_id}}</td>
+                                                    <td>{{record.user_name}}</td>
+                                                    <td>{{record.amount}}</td>
+                                                    <td>{{record.paid_on}}</td>
+                                                    <td>{{record.mode}}</td>
+                                                    <td [hidden]="record.file_name == null">
+                                                        <a href="{{FILE_URL}}/payment_receipt/{{record.file_name}}" target="_blank"><img class="img-60 rounded-circle" src='{{ FILE_URL + "payment_receipt/" + record.file_name }}' onerror="this.src='assets/images/user/1.jpg'" alt="#"></a>
+                                                    </td>
+                                                    <td [hidden]="record.file_name != null">
+                                                        <input (change)="setTransactionFile($event,record)" style="width: 150px" class="form-control col-2" type="file"
+                                                               placeholder="Enter Amount">
+                                                    </td>
+                                                    <td>
+                                                        <a (click)="deleteTransaction(record)" ><mat-icon>delete</mat-icon></a>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <!--                                        <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+                                        </div>
+
+                                        <div [hidden]="true" id="registration" class="table-responsive">
+                                            <table class="table" style="text-align: center">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Transaction ID</th>
+                                                    <th scope="col">Student Name</th>
+                                                    <th scope="col">Amount</th>
+                                                    <th scope="col">Paid On</th>
+                                                    <th scope="col">Mode</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let record of transactionList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                                    <td>{{indexOfElement+1}}</td>
+                                                    <td>{{record.transaction_id}}</td>
+                                                    <td>{{record.user_name}}</td>
+                                                    <td>{{record.amount}}</td>
+                                                    <td>{{record.paid_on}}</td>
+                                                    <td>{{record.mode}}</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                            <!--                                        <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+                                        </div>
+
+
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+<!--                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCourse()">Submit</button>-->
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="col-sm-12 col-xl-6">-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <div class="col-sm-12">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-header">-->
+<!--                                <h5>Course List</h5>-->
+<!--                                <span>Full Course List.</span>-->
+<!--                            </div>-->
+<!--                            <div class="table-responsive">-->
+<!--                                <table class="table">-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th scope="col">#</th>-->
+<!--                                        <th scope="col">Name</th>-->
+<!--                                        <th scope="col">Course Name</th>-->
+<!--                                        <th scope="col">Action</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+<!--                                        <td>{{indexOfElement+1}}</td>-->
+<!--                                        <td>{{record.course_name}}</td>-->
+<!--                                        <td>-->
+<!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <a (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
+<!--                                            <a (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->

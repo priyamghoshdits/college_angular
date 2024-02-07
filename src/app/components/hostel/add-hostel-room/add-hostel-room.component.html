@@ -1,0 +1,124 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Add Hostel Rooms</h5>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="hostelForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
+                                            <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                                   placeholder="Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Hotel</label>
+                                        <select style="width: 100%" formControlName="hostel_id" class="form-select" required >
+                                            <option *ngFor="let data of hostelList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                            <label>Select Type</label>
+                                            <select style="width: 100%" formControlName="room_type_id" class="form-select" required >
+                                                <option *ngFor="let data of roomType" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">No Of Bed</label>
+                                            <input class="form-control" formControlName="no_of_bed" id="exampleInputEmail1" type="text"
+                                                   placeholder="No Of Bed">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Cost Per Bed</label>
+                                            <input class="form-control" formControlName="cost_per_bed" id="exampleInputEmail1" type="text"
+                                                   placeholder="Cost Per Bed">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+                                            <input class="form-control" formControlName="description" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Description">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveHostelRooms()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateHostelRooms()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Hostel Rooms</h5>
+                                <span>Hostel Rooms List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">#</th>
+                                        <th colspan="2">Name</th>
+                                        <th colspan="2">Hostel Name</th>
+                                        <th colspan="2">Room Type Name</th>
+                                        <th colspan="2">No Of Bed</th>
+                                        <th colspan="2">Cost Per Bed</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of hostelRoomList| paginate: { itemsPerPage: 10, currentPage: p }  ;let indexOfElement=index">
+                                        <td colspan="2">{{indexOfElement+1}}</td>
+                                        <td colspan="2">{{record.name}}</td>
+                                        <td colspan="2">{{record.hostel_name}}</td>
+                                        <td colspan="2">{{record.room_type_name}}</td>
+                                        <td colspan="2">{{record.no_of_bed}}</td>
+                                        <td colspan="2">{{record.cost_per_bed}}</td>
+                                        <td colspan="2">
+                                            <a (click)="editHostelRooms(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteHostelRooms(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls [hidden]="hostelRoomList.length<9" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

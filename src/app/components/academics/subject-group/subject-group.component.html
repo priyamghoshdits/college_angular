@@ -1,0 +1,121 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Subject Group</h5><span>Create Subject Group</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="subjectGroupForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Subject group name</label>
+                                            <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter subject group Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Select Course</label>
+                                            <select formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                                <option *ngFor="let data of courseList" [value]="data.id" >
+                                                    {{data.course_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr [hidden]="semesterList.length<1">
+                                <div class="row">
+<!--                                    <div class="col-md-6 mb-3">-->
+<!--                                        <label [hidden]="semesterList.length<1" class="col-form-label pt-0" for="exampleInputEmail1">Semesters</label>-->
+<!--                                        <div *ngFor="let record of semesterList">-->
+<!--                                            <input style="margin: 10px !important;" [checked]="record.checked" id="checkbox-primary-1" type="checkbox" (change)="importSemester(record, $event)">-->
+<!--                                            <label for="checkbox-primary-1">{{record.name}}</label>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" required (change)="getSemester()">
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <hr [hidden]="semesterList.length<1">
+                                <div class="row">
+                                    <div [hidden]="semesterList.length<1" class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Subject List</label>
+                                        <div *ngFor="let record of subjectList">
+                                            <input style="margin: 10px !important;" [checked]="record.checked" id="checkbox-primary-1" type="checkbox" (change)="importSubject(record, $event)">
+                                            <label for="checkbox-primary-1">{{record.name}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button *ngIf="permission[0].permission == 1" [disabled]="semesterList.length<1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveSubjectGroup()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateSubjectGroup()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Subject Group</h5>
+                                <span>Subject Group List.</span>
+                            </div>
+                            <div class="table-responsive" *ngIf="permission[3].permission == 1">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Course Name</th>
+                                        <th scope="col">Semesters</th>
+                                        <th scope="col">Subjects</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of subjectGroupList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.course_name}}</td>
+                                        <td>
+                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>
+                                        </td>
+
+                                        <td>
+                                            <p *ngFor="let records of record.subject"> {{records.name}} </p>
+                                        </td>
+                                        <td>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editSubjectGroup(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteSubjectGroup(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

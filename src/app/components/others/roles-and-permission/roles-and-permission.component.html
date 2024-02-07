@@ -1,0 +1,134 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Roles And Permission</h5><span>Update Roll And Permission</span>
+                        </div>
+                        <div class="card-body">
+                            <div ngbAccordion>
+                                <div ngbAccordionItem [collapsed]="true">
+                                    <h2 ngbAccordionHeader>
+                                        <button ngbAccordionButton>Menu Permission</button>
+                                    </h2>
+                                    <div ngbAccordionCollapse>
+                                        <div ngbAccordionBody>
+                                            <ng-template>
+                                                <div ngbAccordion *ngFor="let records of menuManagement">
+                                                    <div ngbAccordionItem [collapsed]="true">
+                                                        <h2 ngbAccordionHeader>
+                                                            <button ngbAccordionButton>{{records.name}}</button>
+                                                        </h2>
+                                                        <div ngbAccordionCollapse>
+                                                            <div ngbAccordionBody>
+                                                                <ng-template>
+                                                                    <div class="mt-3">
+                                                                        <table class="table">
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th scope="col">#</th>
+                                                                                <th scope="col">Name</th>
+                                                                                <th scope="col">Permission</th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <tr *ngFor="let record of records.permission ;let indexOfElement=index">
+                                                                                <td>{{indexOfElement + 1}}</td>
+                                                                                <td>{{record.name}}</td>
+                                                                                <td>
+                                                                                    <mat-slide-toggle [(ngModel)]="record.permission" (click)="updatePermission(record)"></mat-slide-toggle>
+                                                                                </td>
+                                                                            </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </ng-template>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ngbAccordion>
+                                <div ngbAccordionItem [collapsed]="true">
+                                    <h2 ngbAccordionHeader>
+                                        <button ngbAccordionButton>Internal Permissions</button>
+                                    </h2>
+                                    <div ngbAccordionCollapse>
+                                        <div ngbAccordionBody>
+                                            <ng-template>
+                                                <div ngbAccordion *ngFor="let records of rolesAndPermission">
+                                                    <div ngbAccordionItem [collapsed]="true">
+                                                        <h2 ngbAccordionHeader>
+                                                            <button ngbAccordionButton>{{records.name}}</button>
+                                                        </h2>
+                                                        <div ngbAccordionCollapse>
+                                                            <div ngbAccordionBody>
+                                                                <ng-template>
+<!--                                                                    Role-->
+                                                                            <div ngbAccordionCollapse>
+                                                                                <div ngbAccordionBody>
+                                                                                    <ng-template>
+                                                                                        <div ngbAccordion *ngFor="let record of records.role">
+                                                                                            <div ngbAccordionItem [collapsed]="true">
+                                                                                                <h2 ngbAccordionHeader>
+                                                                                                    <button ngbAccordionButton>{{record.name}}</button>
+                                                                                                </h2>
+                                                                                                <div ngbAccordionCollapse>
+                                                                                                    <div ngbAccordionBody>
+                                                                                                        <ng-template>
+
+                                                                                                            <div class="mt-3">
+                                                                                                                <table class="table">
+                                                                                                                    <thead>
+                                                                                                                    <tr>
+                                                                                                                        <th scope="col">#</th>
+                                                                                                                        <th scope="col">Name</th>
+                                                                                                                        <th scope="col">Permission</th>
+                                                                                                                    </tr>
+                                                                                                                    </thead>
+                                                                                                                    <tbody>
+                                                                                                                    <tr *ngFor="let item of record.permission ;let indexOfElement=index">
+                                                                                                                        <td>{{indexOfElement + 1}}</td>
+                                                                                                                        <td>{{item.name}}</td>
+                                                                                                                        <td>
+                                                                                                                            <mat-slide-toggle [(ngModel)]="item.permission" (click)="updatePermissionIndividual(item)"></mat-slide-toggle>
+                                                                                                                        </td>
+                                                                                                                    </tr>
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                            </div>
+
+                                                                                                        </ng-template>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </ng-template>
+                                                                                </div>
+                                                                            </div>
+
+                                                                </ng-template>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

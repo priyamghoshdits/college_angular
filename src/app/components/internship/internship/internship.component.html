@@ -1,0 +1,118 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Internship Details</h5><span>Add Internship Details</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="internshipDetailsForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" required (click)="getSemester()">
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" required (click)="getStudentList()">
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                            <label>Select Provider</label>
+                                            <select style="width: 100%" formControlName="internship_provider_id" class="form-select" required >
+                                                <option *ngFor="let data of internshipProviderList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                            <label>Select Student</label>
+                                            <select style="width: 100%" formControlName="user_id" class="form-select" required >
+                                                <option *ngFor="let data of filteredStudent" [value]="data.id" >
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">From Date</label>
+                                            <input class="form-control" formControlName="from_date" type="date"
+                                                   placeholder="From Date">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">To date</label>
+                                            <input class="form-control" formControlName="to_date" type="date"
+                                                   placeholder="To date">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveInternshipDetails()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateInternshipDetails()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Internship</h5>
+                                <span>Internship Details</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">#</th>
+                                        <th colspan="2">Provider Name</th>
+                                        <th colspan="2">Student Name</th>
+                                        <th colspan="2">From Date</th>
+                                        <th colspan="2">To Date</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of internshipDetailsList | paginate: { itemsPerPage: 10, currentPage: p }  ;let indexOfElement=index">
+                                        <td colspan="2">{{indexOfElement+1}}</td>
+                                        <td colspan="2">{{record.internship_provider_name}}</td>
+                                        <td colspan="2">{{record.user_name}}</td>
+                                        <td colspan="2">{{record.from_date}}</td>
+                                        <td colspan="2">{{record.to_date}}</td>
+                                        <td colspan="2">
+                                            <a (click)="editInternshipDetails(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteInternshipDetails(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls [hidden]="internshipDetailsList.length<9" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

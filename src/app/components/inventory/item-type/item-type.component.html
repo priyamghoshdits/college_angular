@@ -1,0 +1,72 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Item Category</h5><span>Add Item Category</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="itemCategoryForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
+                                            <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                                   placeholder="Name">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [disabled]="!itemCategoryForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveItemCategory()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateItemCategory()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Room Type</h5>
+                                <span>Room Type List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">#</th>
+                                        <th colspan="2">Name</th>
+                                        <th colspan="2">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of itemCategoryList| paginate: { itemsPerPage: 15, currentPage: p }  ;let indexOfElement=index">
+                                        <td colspan="2">{{indexOfElement+1}}</td>
+                                        <td colspan="2">{{record.name}}</td>
+                                        <td colspan="2">
+                                            <a (click)="editItemCategory(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteRoomCategory(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls [hidden]="itemCategoryList.length<14" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

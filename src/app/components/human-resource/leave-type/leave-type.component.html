@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Leave Type</h5><span>Add Leave Type</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="leaveTypeForm">
+                                <div class="form-group">
+                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Leave Type Name</label>
+                                    <input class="form-control" formControlName="name"   placeholder="Enter Leave Type Name">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button *ngIf="permission[0].permission == 1" [disabled]="!leaveTypeForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveLeaveType()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateLeaveType()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row" *ngIf="permission[3].permission == 1">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Leave Type  List</h5>
+                                <span>Leave Type List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Session</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of leaveTypeList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editLeaveType(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteLeaveType(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

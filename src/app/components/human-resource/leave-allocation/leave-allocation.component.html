@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Leave Allocation</h5><span>Allocate Leave</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="leaveAllocationForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Member</label>
+                                        <select style="width: 100%" formControlName="user_id" class="form-select" required>
+                                            <option *ngFor="let data of memberList" [value]="data.id" >
+                                                {{data.first_name}} {{data.middlename}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Leave Type</label>
+                                        <select style="width: 100%" formControlName="leave_type_id" class="form-select" required>
+                                            <option *ngFor="let data of leaveTypeList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <label>Leave Count</label>
+                                    <input type="text" class="form-control" formControlName="total_leave" placeholder="Leave Count" required>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button *ngIf="permission[0].permission == 1" [disabled]="!leaveAllocationForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveLeaveAllocation()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateLeaveAllocation()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row" *ngIf="permission[3].permission == 1">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Leave Allocation  List</h5>
+                                <span>Leave Allocation List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">User Name</th>
+                                        <th scope="col">Leaves</th>
+                                        <th scope="col" *ngIf="permission[2].permission == 1">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of leaveAllocationList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.user_name}}</td>
+                                        <td>
+                                            <p *ngFor="let records of record.leave_type">
+                                                {{records.name}} - {{records.total_leave}}
+                                            </p>
+                                        </td>
+                                        <td>
+<!--                                            <a (click)="editLeaveType(record)"><mat-icon>edit</mat-icon></a>-->
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteLeaveAllocation(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

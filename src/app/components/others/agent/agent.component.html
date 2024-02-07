@@ -1,0 +1,197 @@
+<div class="container-fluid">
+    <div class="row" [hidden]="showStudentList">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Agent</h5><span>Agent Name</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="agentForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">First Name</label>
+                                            <input class="form-control" formControlName="first_name" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Agent Name">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Last Name</label>
+                                            <input class="form-control" formControlName="last_name" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Agent Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Mobile Number</label>
+                                            <input class="form-control" formControlName="mobile_no" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Mobile Number">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Category</label>
+                                        <select style="width: 100%" formControlName="category_id" class="form-select" required>
+                                            <option *ngFor="let data of categoryList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Email</label>
+                                            <input class="form-control" formControlName="email" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Commission %</label>
+                                            <input class="form-control" formControlName="commission_percentage" id="exampleInputEmail1" type="text"
+                                                   placeholder="Commission %">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Commission ₹</label>
+                                            <input class="form-control" formControlName="commission_flat" id="exampleInputEmail1" type="text"
+                                                   placeholder="Commission ₹">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [disabled]="!agentForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveAgent()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateAgent()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Agent List</h5>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center;">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Mobile</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of agentList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td><a style="cursor: pointer" (click)="getStudentListByAgent(record)">{{record.first_name}} {{record.last_name}}</a></td>
+                                        <td>{{record.mobile_no}}</td>
+                                        <td>{{record.email}}</td>
+                                        <td>
+                                            <a (click)="editAgent(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteAgent(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls [hidden]="agentList.length<10" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div [hidden]="!showStudentList" *ngIf="selectedAgent">
+        <div class="col-sm-12">
+            <a style="cursor: pointer;" (click)="returnBack()"><mat-icon>backspace</mat-icon></a>
+            <div class="card">
+                <div class="row mt-3" style="margin-left: 30px; margin-right: 30px">
+                    <div class="col-2">
+                        <label>First Name</label>
+                        <input disabled class="form-control" type="text" [(ngModel)]="selectedAgent.first_name"
+                               placeholder="First Name">
+                    </div>
+                    <div class="col-2">
+                        <label>Last Name</label>
+                        <input disabled class="form-control" type="text" [(ngModel)]="selectedAgent.last_name"
+                               placeholder="Last Name">
+                    </div>
+                    <div class="col-2">
+                        <label>Mobile Number</label>
+                        <input disabled class="form-control" type="text" [(ngModel)]="selectedAgent.mobile_no"
+                               placeholder="Mobile Number">
+                    </div>
+                    <div class="col-2">
+                        <label>Commission %</label>
+                        <input disabled class="form-control" type="text" [(ngModel)]="selectedAgent.commission_percentage"
+                               placeholder="Commission Percentage">
+                    </div>
+                    <div class="col-2">
+                        <label>Commission Flat</label>
+                        <input disabled class="form-control" type="text" [(ngModel)]="selectedAgent.commission_flat"
+                               placeholder="Commission Flat">
+                    </div>
+                    <div class="col-2">
+                        <label>Commission Flat</label>
+                        <input disabled class="form-control" type="text" [(ngModel)]="selectedAgent.commission_percentage"
+                               placeholder="Commission Flat">
+                    </div>
+                </div>
+                <div class="card-header">
+                    <h5>Student List</h5>
+<!--                    <button class="bg-primary" (click)="returnBack()"> </button>-->
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Date Of Birth</th>
+                                <th scope="col">Blood Group</th>
+                                <th scope="col">Type</th>
+                                <th scope="col">Email</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let record of studentList ;let indexOfElement=index">
+                                <td>{{indexOfElement + 1}}</td>
+                                <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                <td>{{record.gender}}</td>
+                                <td>{{record.dob}}</td>
+                                <td>{{record.blood_group}}</td>
+                                <td>{{record.user_type}}</td>
+                                <td>{{record.email}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

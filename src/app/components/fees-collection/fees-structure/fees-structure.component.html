@@ -1,0 +1,203 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Fees Structure</h5><span>Add Fees Structure</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="feesStructureForm">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Select Course</label>
+                                        <select formControlName="course_id" class="form-select" required style="width: 100%" (change)="getSemester()">
+                                            <option [disabled]="feesStructureArray.length>0" *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label>Semester</label>
+                                        <select formControlName="semester_id" class="form-select" required style="width: 100%">
+                                            <option [disabled]="feesStructureArray.length>0" *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-6">
+                                        <label>Fees Type</label>
+                                        <select formControlName="fees_type_id" class="form-select" required style="width: 100%">
+                                            <option *ngFor="let data of feesTypeList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Amount</label>
+                                        <input class="form-control" formControlName="amount" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Amount">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [disabled]="!feesStructureForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="addFeesType()">Add</button>
+<!--                            <button [disabled]="!feesStructureForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveFeesStructure()">Submit</button>-->
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateFeesStructure()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6" >
+
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center;">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Semester Name</th>
+                                        <th scope="col">Type Name</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of feesStructureArray | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.semester_name}}</td>
+                                        <td>{{record.fees_type_name}}</td>
+                                        <td>{{record.amount}}</td>
+                                        <td>
+                                            <a (click)="removeFromArray(indexOfElement)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="background-color: beige"></td>
+                                        <td style="background-color: beige"></td>
+                                        <td style="background-color: beige">Total - </td>
+                                        <td style="background-color: beige">{{totalAmount}}</td>
+                                        <td style="background-color: beige"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button [disabled]="feesStructureArray.length<=0" class="btn btn-primary me-1" (click)="saveFeesStructure()">Save</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Show Fees Structure</h5>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="feesStructureSearchForm">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label>Select Course</label>
+                                        <select formControlName="course_id" class="form-select" required style="width: 100%">
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <button style="margin-top: 30px" [disabled]="!feesStructureSearchForm.valid" class="btn btn-primary me-1" (click)="searchFeesStructure()">Search</button>
+                                    </div>
+                                </div>
+                                <div class="row mt-5" [hidden]="feesStructureList.length == 0">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Semester</th>
+                                                <th scope="col">Type Name</th>
+                                                <th scope="col">Total</th>
+<!--                                                <th scope="col">Action</th>-->
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let record of feesStructureList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                                <td>{{indexOfElement+1}}</td>
+                                                <td>{{record.semester_name}}</td>
+                                                <td>
+                                                    <p *ngFor="let record1 of record.fees_types; let indexOfElement=index">
+                                                        {{record1.fees_type_name}} - ₹{{record1.amount}}
+                                                    </p>
+                                                </td>
+                                                <td>{{record.amount}}</td>
+                                                <td>
+<!--                                                    <a (click)="editFeesStructure(record)"><mat-icon>edit</mat-icon></a>-->
+<!--                                                    <a (click)="deleteFeesStructure(record)"><mat-icon>delete</mat-icon></a>-->
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+<!--                                        <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="col-sm-12 col-xl-6">-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <div class="col-sm-12">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-header">-->
+<!--                                <h5>Course List</h5>-->
+<!--                                <span>Full Course List.</span>-->
+<!--                            </div>-->
+<!--                            <div class="table-responsive">-->
+<!--                                <table class="table">-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th scope="col">#</th>-->
+<!--                                        <th scope="col">Name</th>-->
+<!--                                        <th scope="col">Course Name</th>-->
+<!--                                        <th scope="col">Action</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+<!--                                        <td>{{indexOfElement+1}}</td>-->
+<!--                                        <td>{{record.course_name}}</td>-->
+<!--                                        <td>-->
+<!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <a (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
+<!--                                            <a (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->

@@ -1,0 +1,178 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Attendance</h5><span>Student period Attendance</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="attendanceForm">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                            <label>Select Course</label>
+                                            <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                                <option *ngFor="let data of courseList" [value]="data.id" >
+                                                    {{data.course_name}}
+                                                </option>
+                                            </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                            <label>Select Semester</label>
+                                            <select style="width: 100%" formControlName="semester_id" class="form-select" required (change)="getSubject()">
+                                                <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Date</label>
+                                        <input class="form-control" formControlName="date" type="date"
+                                               placeholder="Select date">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Subject</label>
+                                        <select style="width: 100%" formControlName="subject_id" class="form-select" required (change)="getStudentAttendanceList()">
+                                            <option *ngFor="let data of subjectList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+<!--                                    <div>-->
+<!--                                        <button class="btn btn-primary me-1">Search</button>-->
+<!--                                    </div>-->
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+<!--                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCourse()">Submit</button>-->
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+
+
+<!--                            <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">-->
+<!--                                <div class="radio radio-primary">-->
+<!--                                    <input type="radio" name="radio1" id="radioinline1" value="present">-->
+<!--                                    <label for="radioinline1" class="mb-0">Present</label>-->
+<!--                                </div>-->
+<!--                                <div class="radio radio-primary">-->
+<!--                                    <input type="radio" name="radio1" id="radioinline2" value="absent">-->
+<!--                                    <label for="radioinline2" class="mb-0">Absent</label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+<!--                            <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">-->
+<!--                                <div class="radio radio-primary">-->
+<!--                                    <input type="radio" name="radio2" id="radioinline3" value="present" >-->
+<!--                                    <label for="radioinline1" class="mb-0">Present</label>-->
+<!--                                </div>-->
+<!--                                <div class="radio radio-primary">-->
+<!--                                    <input type="radio" name="radio2" id="radioinline4" value="absent">-->
+<!--                                    <label for="radioinline2" class="mb-0">Absent</label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" [hidden]="studentList.length == 0">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Student List</h5>
+                        </div>
+                        <div class="card-body">
+
+
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Attendance</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of studentList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                        <td>
+                                            <input style="margin-left: 15px" type="radio" id="age1" name="age{{indexOfElement}}" [(ngModel)]="record.attendance" [checked]="record.attendance == 'present'" value="present">
+                                            <label for="age1">Present</label>
+                                            <input style="margin-left: 15px" type="radio" id="age1" name="age{{indexOfElement}}" [(ngModel)]="record.attendance" [checked]="record.attendance == 'absent'" value="absent">
+                                            <label for="age1">Absent</label>
+<!--                                            <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">-->
+<!--                                                <div class="radio radio-primary">-->
+<!--                                                    <input type="radio" name="radio3" id="radioinline3" [(ngModel)]="record.attendance" value="present" [checked]="record.attendance == 'present'">-->
+<!--                                                    <label for="radioinline1" class="mb-0">Present</label>-->
+<!--                                                </div>-->
+<!--                                                <div class="radio radio-primary">-->
+<!--                                                    <input type="radio" name="radio4" id="radioinline4" [(ngModel)]="record.attendance" value="absent" [checked]="record.attendance == 'absent'">-->
+<!--                                                    <label for="radioinline2" class="mb-0">Absent</label>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+                                        </td>
+                                    </tr>
+                                    <button class="btn btn-primary me-1" (click)="saveAttendance()">Submit</button>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="col-sm-12 col-xl-6">-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <div class="col-sm-12">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-header">-->
+<!--                                <h5>Course List</h5>-->
+<!--                                <span>Full Course List.</span>-->
+<!--                            </div>-->
+<!--                            <div class="table-responsive">-->
+<!--                                <table class="table">-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th scope="col">#</th>-->
+<!--                                        <th scope="col">Name</th>-->
+<!--                                        <th scope="col">Course Name</th>-->
+<!--                                        <th scope="col">Action</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+<!--                                        <td>{{indexOfElement+1}}</td>-->
+<!--                                        <td>{{record.course_name}}</td>-->
+<!--                                        <td>-->
+<!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
+<!--                                        </td>-->
+<!--                                        <td>-->
+<!--                                            <a (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
+<!--                                            <a (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->

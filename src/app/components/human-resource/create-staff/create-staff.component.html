@@ -1,0 +1,272 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header" [hidden]="active != 1">
+                            <h5>Add Staff</h5>
+                        </div>
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>Show Staff</h5>
+                        </div>
+                            <div class="tabbed-card">
+                                <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
+                                    <li *ngIf="permission[0].permission == 1 && permission[1].permission == 1 && permission[2].permission == 1" [ngbNavItem]="1">
+                                        <a ngbNavLink (click)="activeTab(1)">Add Staff</a>
+                                    </li>
+                                    <li *ngIf="permission[3].permission == 1" [ngbNavItem]="2">
+                                        <a ngbNavLink (click)="activeTab(2)">Show Staff</a>
+                                    </li>
+                                </ul>
+                                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                            </div>
+                        <div [hidden]="active != 1">
+                            <div class="card-body">
+                                <form [formGroup]="staffCreationForm">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                                <label>Staff Id</label>
+                                                <input type="text" class="form-control" (blur)="checkUniqueId()" formControlName="identification_no" placeholder="Staff Id" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                                <label>First Name</label>
+                                                <input type="text" class="form-control" formControlName="first_name" placeholder="First name" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Middle Name</label>
+                                            <input type="text" class="form-control" formControlName="middle_name" placeholder="Middle Name" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control" formControlName="last_name" placeholder="Last Name" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Gender</label>
+                                            <select style="width: 100%" formControlName="gender" class="form-select" required>
+                                                <option value="Male"> Male </option>
+                                                <option value="Female"> Female </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Date Of Birth</label>
+                                            <input class="form-control digits" type="date" formControlName="dob"
+                                                   id="example-datetime-local-input">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Date Of Joining</label>
+                                            <input class="form-control digits" type="date" formControlName="date_of_joining"
+                                                   id="example-datetime-local-input">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Phone Number</label>
+                                            <input type="text" class="form-control" formControlName="mobile_no" placeholder="Phone Number" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Emergency Contact Number</label>
+                                            <input type="text" class="form-control" formControlName="emergency_phone_number" placeholder="Emergency Contact Number" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Material Status</label>
+                                            <select style="width: 100%" formControlName="material_status" class="form-select" required>
+                                                <option value="Single"> Single </option>
+                                                <option value="Married"> Married </option>
+                                                <option value="Widowed"> Widowed </option>
+                                                <option value="Seperated"> Seperated </option>
+                                                <option value="Not Specified"> Not Specified </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Work Experience</label>
+                                            <input type="text" class="form-control" formControlName="work_experience" placeholder="Work Experience" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Qualification</label>
+                                            <input type="text" class="form-control" formControlName="qualification" placeholder="Qualification" required>
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Upload Image</label>
+                                            <input type="file" class="form-control" [multiple]="false" (change)="onSelect1($event)">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Blood Group</label>
+                                            <select style="width: 100%" formControlName="blood_group" class="form-select" required>
+                                                <option value="A+"> A+ </option>
+                                                <option value="A-"> A- </option>
+                                                <option value="B+"> B+ </option>
+                                                <option value="B-"> B- </option>
+                                                <option value="AB+"> AB+ </option>
+                                                <option value="AB-"> AB- </option>
+                                                <option value="O+"> O+ </option>
+                                                <option value="O-"> O- </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Religion</label>
+                                            <input type="text" class="form-control" formControlName="religion" placeholder="Religion" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>User Type</label>
+                                            <select style="width: 100%" formControlName="user_type_id" class="form-select" required>
+                                                <option *ngFor="let data of userTypeList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Email address (Login Email)</label>
+                                            <input type="email" class="form-control" formControlName="email"
+                                                   placeholder="name@example.com">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Password</label>
+                                            <input type="text" class="form-control" formControlName="password">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Category</label>
+                                            <select style="width: 100%" formControlName="category_id" class="form-select" required>
+                                                <option *ngFor="let data of categoryList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Department</label>
+                                            <select style="width: 100%" formControlName="department_id" class="form-select" required>
+                                                <option *ngFor="let data of departmentList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Current Address</label>
+                                            <input type="text" class="form-control" formControlName="current_address" placeholder="Current Address" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Permanent Address</label>
+                                            <input type="text" class="form-control" formControlName="permanent_address" placeholder="Permanent Address" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Designation</label>
+                                            <select style="width: 100%" formControlName="designation_id" class="form-select" required>
+                                                <option *ngFor="let data of designationList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <h3>Payroll</h3>
+                                    <hr>
+
+                                    <div  class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>EPF Number</label>
+                                            <input type="text" class="form-control" formControlName="epf_number">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Basic Salary</label>
+                                            <input type="text" class="form-control" formControlName="basic_salary">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Location</label>
+                                            <input type="text" class="form-control" formControlName="location">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Contract Type</label>
+                                            <select style="width: 100%" formControlName="contract_type" class="form-select" required>
+                                                <option value="Permanent"> Permanent </option>
+                                                <option value="Prohibition"> Prohibition </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <h3>Bank Account Details</h3>
+                                    <hr>
+                                    <div  class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Bank Account Number</label>
+                                            <input type="text" class="form-control" formControlName="bank_account_number">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Bank Name</label>
+                                            <input type="text" class="form-control" formControlName="bank_name">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>IFSC Code</label>
+                                            <input type="text" class="form-control" formControlName="ifsc_code">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Bank Branch name</label>
+                                            <input type="text" class="form-control" formControlName="bank_branch_name">
+                                        </div>
+                                    </div>
+
+
+                                    <button *ngIf="permission[0].permission == 1" [hidden]="isUpdateable == true" class="btn btn-primary me-1" type="submit" (click)="saveMember()">Save Member</button>
+                                    <button *ngIf="permission[1].permission == 1" [hidden]="isUpdateable == false" class="btn btn-primary me-1" type="submit" (click)="updateMember()">Update Member</button>
+                                    <button [hidden]="isUpdateable == false" class="btn btn-primary me-1" type="submit" (click)="cancelUpdate()">cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div [hidden]="active != 2">
+                            <div class="row" style="text-align: center;">
+                                <div style="margin-top: 9px" class="col-3"><h4>Search</h4></div>
+                                <div class="col-9">
+                                    <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Gender</th>
+                                            <th scope="col">Date Of Birth</th>
+                                            <th scope="col">Blood Group</th>
+                                            <th scope="col">Type</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of memberList | customFilter: searchItem;let indexOfElement=index">
+                                            <td>{{indexOfElement + 1}}</td>
+                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                            <td>{{record.gender}}</td>
+                                            <td>{{record.dob}}</td>
+                                            <td>{{record.blood_group}}</td>
+                                            <td>{{record.user_type}}</td>
+                                            <td>{{record.email}}</td>
+                                            <td>
+                                                <a *ngIf="permission[1].permission == 1" (click)="editMember(record)"><mat-icon>edit</mat-icon></a>
+                                                <a *ngIf="permission[2].permission == 1" (click)="deleteMember(record)"><mat-icon>delete</mat-icon></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

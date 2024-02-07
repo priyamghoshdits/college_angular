@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Course</h5><span>Add Course</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="courseForm">
+                                <div class="form-group">
+                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Course name</label>
+                                    <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                           placeholder="Enter Course Name">
+                                </div>
+                                <div >
+                                    <div *ngFor="let record of semesterList">
+                                        <input [checked]="record.checked" id="checkbox-primary-1" (change)="importSemester(record, $event)" type="checkbox">
+                                        <label for="checkbox-primary-1">{{record.name}}</label>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button *ngIf="permission[0].permission === 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCourse()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Course List</h5>
+                                <span>Full Course List.</span>
+                            </div>
+                            <div class="table-responsive" *ngIf="permission[3].permission === 1">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Course Name</th>
+                                        <th scope="col" *ngIf="permission[1].permission === 1 || permission[2].permission === 1">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.course_name}}</td>
+                                        <td>
+                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>
+                                        </td>
+                                        <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">
+                                            <a *ngIf="permission[1].permission === 1" (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission === 1" (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

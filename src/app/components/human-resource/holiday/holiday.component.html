@@ -1,0 +1,154 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Holiday</h5><span>Add Holiday</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="holidayForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Select Date</label>
+                                            <input class="form-control" formControlName="date" type="date"
+                                                   placeholder="Enter Date">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+                                            <input class="form-control" formControlName="description" type="text"
+                                                   placeholder="Enter Description">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveHoliday()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateHoliday()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Holiday For Whole Year</h5>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="holidayYearForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0">Select Date</label>
+                                            <select style="width: 100%" formControlName="week_name" class="form-select" required>
+                                                <option *ngFor="let data of weekDays" [value]="data.name" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+                                            <input class="form-control" formControlName="description" type="text"
+                                                   placeholder="Enter Description">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button *ngIf="permission[0].permission == 1" class="btn btn-primary me-1" (click)="saveForWholeYear()">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Holiday List</h5>
+                            </div>
+
+                            <div class="card-body">
+                                <form class="theme-form" [formGroup]="holidaySearchForm">
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <div class="form-group">
+                                                <label>Select Month</label>
+                                                <select style="width: 100%" formControlName="month_id" class="form-select" required>
+                                                    <option value="1"> January </option>
+                                                    <option value="2-"> February </option>
+                                                    <option value="3"> March </option>
+                                                    <option value="4"> April </option>
+                                                    <option value="5"> May </option>
+                                                    <option value="6"> June </option>
+                                                    <option value="7"> July </option>
+                                                    <option value="8"> August </option>
+                                                    <option value="9"> September </option>
+                                                    <option value="10"> October </option>
+                                                    <option value="11"> November </option>
+                                                    <option value="12"> December </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <button style="margin-top: 30px;" class="btn btn-primary me-1" (click)="getHolidays()">Submit</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                            <div class="table-responsive" style="text-align: center" *ngIf="permission[3].permission == 1">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Day</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of holidayList;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.day}}</td>
+                                        <td>{{record.date}}</td>
+                                        <td>{{record.description}}</td>
+                                        <td>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editHoliday(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteHoliday(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+<!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

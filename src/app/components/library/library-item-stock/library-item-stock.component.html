@@ -1,0 +1,93 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Library</h5><span>Add Books</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="libraryForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
+                                            <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Quantity</label>
+                                            <input class="form-control" formControlName="quantity" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Remaining Quantity</label>
+                                            <input class="form-control" formControlName="remaining" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Remaining">
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveLibraryItem()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateLibraryItem()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row" *ngIf="permission[3].permission == 1">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Library</h5>
+                                <span>Books List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Remaining Quantity</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of libraryItemList ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.quantity}}</td>
+                                        <td>{{record.remaining}}</td>
+                                        <td>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editItemStock(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteItemStock(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+<!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

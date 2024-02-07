@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Fees Type</h5><span>Add Fees Type</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="feesTypeForm">
+                                <div class="form-group">
+                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Fees Type Name</label>
+                                    <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                           placeholder="Enter Fees Type Name">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveFeesType()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateFeesType()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Fees Type</h5>
+                                <span>Fees Type List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Fees Type Name</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of feesTypeList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>
+                                            <a (click)="editFeesType(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteFeesType(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

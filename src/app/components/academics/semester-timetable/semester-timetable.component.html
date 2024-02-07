@@ -1,0 +1,123 @@
+<!-- Container-fluid starts -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 ">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Semester Time Table</h5>
+                </div>
+                <div class="card-body">
+                    <form class="needs-validation" [formGroup]="semesterTimeTableForm">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>Select Course</label>
+                                    <select formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                        <option *ngFor="let data of courseList" [value]="data.id" >
+                                            {{data.course_name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label>Select Semester</label>
+                                    <select formControlName="semester_id" class="form-select" required>
+                                        <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                            {{data.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" (click)="searchTimeTable()" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+    </div>
+</div>
+    <div class="container-fluid">
+        <div class="row" *ngIf="semesterTimeTableList ? semesterTimeTableList.length>0 : false">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Semester Time Table</h5>
+<!--                        <span>All<code>table</code> to any table.</span>-->
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr style="text-align: center;">
+                                <th scope="col" colspan="2">Monday</th>
+                                <th scope="col" colspan="2">Tuesday</th>
+                                <th scope="col" colspan="2">Wednesday</th>
+                                <th scope="col" colspan="2">Thursday</th>
+                                <th scope="col" colspan="2">Friday</th>
+                                <th scope="col" colspan="2">Saturday</th>
+                                <th scope="col" colspan="2">Sunday</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                                <tr style="text-align: center;">
+                                    <td colspan="2">
+                                        <p *ngFor="let record of week1" style="background-color: lightgrey; border: 1px solid black; border-radius: 10px">
+                                            subject : {{record.subject_name}} <br>
+                                            Time : {{record.time_from}} - {{record.time_to}} <br>
+                                            Room no. : {{record.room_no}}
+                                        </p>
+                                    </td>
+                                    <td colspan="2" >
+                                        <p *ngFor="let record of week2" style="background-color: lightgrey; border: 1px solid black; border-radius: 10px">
+                                            subject : {{record.subject_name}} <br>
+                                            Time : {{record.time_from}} - {{record.time_to}} <br>
+                                            Room no. : {{record.room_no}}
+                                        </p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p *ngFor="let record of week3" style="background-color: lightgrey; border: 1px solid black; border-radius: 10px">
+                                            subject : {{record.subject_name}} <br>
+                                            Time : {{record.time_from}} - {{record.time_to}} <br>
+                                            Room no. : {{record.room_no}}
+                                        </p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p *ngFor="let record of week4" style="background-color: lightgrey; border: 1px solid black; border-radius: 10px">
+                                            subject : {{record.subject_name}} <br>
+                                            Time : {{record.time_from}} - {{record.time_to}} <br>
+                                            Room no. : {{record.room_no}}
+                                        </p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p *ngFor="let record of week5" style="background-color: lightgrey; border: 1px solid black; border-radius: 10px">
+                                            subject : {{record.subject_name}} <br>
+                                            Time : {{record.time_from}} - {{record.time_to}} <br>
+                                            Room no. : {{record.room_no}}
+                                        </p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p *ngFor="let record of week6" style="background-color: lightgrey; border: 1px solid black; border-radius: 10px">
+                                            subject : {{record.subject_name}} <br>
+                                            Time : {{record.time_from}} - {{record.time_to}} <br>
+                                            Room no. : {{record.room_no}}
+                                        </p>
+                                    </td>
+                                    <td colspan="2">
+                                        <p *ngFor="let record of week7" style="background-color: lightgrey; border: 1px solid black; border-radius: 10px">
+                                            subject : {{record.subject_name}} <br>
+                                            Time : {{record.time_from}} - {{record.time_to}} <br>
+                                            Room no. : {{record.room_no}}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- Container-fluid Ends -->

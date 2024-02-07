@@ -1,0 +1,145 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Subject Details</h5><span>Add Subject Details</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="subjectDetailsForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Name</label>
+                                        <input type="text" class="form-control" formControlName="name" placeholder="Enter Name" required>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" required (change)="getSubject()">
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Subject</label>
+                                        <select style="width: 100%" formControlName="subject_id" class="form-select" required (change)="getSemester()">
+                                            <option *ngFor="let data of subjectList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="session_id" class="form-select" required (change)="getSemester()">
+                                            <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Time From (24 hr)</label>
+<!--                                        <ngb-timepicker formControlName="time_from" [spinners]="false" class="time-picker-custom"></ngb-timepicker>-->
+                                        <input type="time" class="form-control" formControlName="time_from" placeholder="Enter Time" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Time To (24 hr)</label>
+<!--                                        <ngb-timepicker formControlName="time_to" [spinners]="false" class="time-picker-custom"></ngb-timepicker>-->
+                                        <input type="time" class="form-control" formControlName="time_to" placeholder="Enter Time" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Exam Date</label>
+                                        <input type="date" class="form-control" formControlName="exam_date" placeholder="Enter Exam Date" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Publish Date</label>
+                                        <input type="date" class="form-control" formControlName="publish_date" placeholder="Enter Date to publish result" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Full Marks</label>
+                                        <input type="text" class="form-control" formControlName="full_marks" placeholder="Enter full marks" required>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveSubjectDetails()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateSubjectDetails()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Subject Details</h5>
+                                <span>Subject Detail List</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Subject Name</th>
+                                        <th scope="col">Course Name</th>
+                                        <th scope="col">Semester</th>
+                                        <th scope="col">Published Date</th>
+                                        <th scope="col">Session</th>
+                                        <th scope="col">Full Marks</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of subjectDetailsList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.subject_name}}</td>
+                                        <td>{{record.course_name}}</td>
+                                        <td>{{record.semester_name}}</td>
+                                        <td>{{record.session_name}}</td>
+                                        <td>{{record.publish_date}}</td>
+                                        <td>{{record.full_marks}}</td>
+                                        <td>
+                                            <a (click)="editSubjectDetails(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteSubjectDetails(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

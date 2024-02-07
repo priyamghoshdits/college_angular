@@ -1,0 +1,93 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Notices</h5><span>Add Notice</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="noticeForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Subject</label>
+                                        <input type="text" class="form-control" formControlName="subject" placeholder="Enter Subject" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group mb-0">
+                                            <label for="exampleFormControlTextarea4">Message</label>
+<!--                                            <textarea class="form-control" formControlName="body" id="exampleFormControlTextarea4" rows="10"></textarea>-->
+                                            <ckeditor style="min-height: 350px" [editor]="editor" formControlName="body" [config]="config" [data]="data"></ckeditor>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Mail to</label>
+                                        <div *ngFor="let record of userTypeList">
+                                            <input style="margin: 10px !important;" [checked]="record.checked" id="checkbox-primary-1" type="checkbox" (change)="importUserTypes(record, $event)">
+                                            <label for="checkbox-primary-1"> {{record.name}}</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveNotice()">Submit</button>
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Notice</h5>
+                                <span>Notice List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Subject</th>
+                                        <th scope="col">Message</th>
+                                        <th scope="col">Published On</th>
+                                        <th scope="col">Sent to</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of noticeList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.subject}}</td>
+                                        <td>{{record.body}}</td>
+                                        <td>{{record.published_on}}</td>
+                                        <td>{{record.mailed_to}}</td>
+                                        <td>
+                                            <a (click)="deleteNotice(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

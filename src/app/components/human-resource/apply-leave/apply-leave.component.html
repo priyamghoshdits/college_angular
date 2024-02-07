@@ -1,0 +1,164 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Leave</h5><span>Apply Leave</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="applyLeaveForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Member</label>
+                                        <select style="width: 100%" formControlName="user_id" class="form-select" required>
+                                            <option *ngFor="let data of memberList" [value]="data.id" >
+                                                {{data.first_name}} {{data.middlename}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Leave Type</label>
+                                        <select style="width: 100%" formControlName="leave_type_id" class="form-select" (change)="getRemainingLeaves()" required>
+                                            <option *ngFor="let data of leaveTypeList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Total Days</label>
+                                        <input type="text" class="form-control" formControlName="total_days_show" placeholder="Total days count" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Remaining Leave</label>
+                                        <input type="text" class="form-control" formControlName="remaining_leave_show" placeholder="Remaining Leave" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>From Date</label>
+                                        <input type="date" (change)="calculateNoOFDate()" class="form-control" formControlName="from_date" placeholder="Leave Count" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>To Date</label>
+                                        <input type="date" (change)="calculateNoOFDate()" class="form-control" formControlName="to_date" placeholder="Remaining Leave" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-6 mb-3">
+                                        <label>Reason</label>
+                                        <input type="text" class="form-control" formControlName="reason" placeholder="Reason" required>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button *ngIf="permission[0].permission == 1" [disabled]="!applyLeaveForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveApplyLeave()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateApplyLeave()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row"  *ngIf="permission[3].permission == 1">
+                                    <div class="col-9">
+                                        <h5>Leave List</h5>
+                                        <span>Leave List.</span>
+                                    </div>
+                                    <div class="col-2">
+                                        <ng-template #content let-modal>
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="modal-basic-title">Approve Leave</h4>
+                                                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <table class="table" style="text-align: center">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">#</th>
+                                                        <th scope="col">User Name</th>
+                                                        <th scope="col">Leave Type</th>
+                                                        <th scope="col">From Date</th>
+                                                        <th scope="col">To Date</th>
+                                                        <th scope="col">Total Days</th>
+                                                        <th scope="col">Reason</th>
+                                                        <th scope="col">Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody [hidden]="nonApprovedLeaves.length == 0">
+                                                    <tr *ngFor="let record of nonApprovedLeaves | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                                        <td>{{indexOfElement+1}}</td>
+                                                        <td>{{record.user_name}}</td>
+                                                        <td>{{record.leave_type_name}}</td>
+                                                        <td>{{record.from_date}}</td>
+                                                        <td>{{record.to_date}}</td>
+                                                        <td>{{record.total_days}}</td>
+                                                        <td>{{record.reason}}</td>
+                                                        <td>
+                                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,1)">Approve</button>
+                                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,2)">Reject</button>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <div class="row" [hidden]="nonApprovedLeaves.length > 0">
+                                                    <div class="col"></div>
+                                                    <div class="col"><h2 style="text-align: center;">No Data</h2></div>
+                                                    <div class="col"></div>
+                                                </div>
+
+                                            </div>
+                                        </ng-template>
+                                        <button  class="btn btn-primary me-1" (click)="openCustomModal(content);getLeaveNotApproved()">Approve Leave</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">User Name</th>
+                                        <th scope="col">Leave Type</th>
+                                        <th scope="col">From Date</th>
+                                        <th scope="col">To Date</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of leaveList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.user_name}}</td>
+                                        <td>{{record.leave_type_name}}</td>
+                                        <td>{{record.from_date}}</td>
+                                        <td>{{record.to_date}}</td>
+                                        <td>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editLeaveList(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteLeaveList(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

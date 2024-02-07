@@ -1,0 +1,313 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header" [hidden]="active != 1">
+                            <h5>Student Admission</h5>
+                        </div>
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>Show All Students</h5>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Add Student</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Show Students</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+                        <div [hidden]="active != 1">
+                            <div class="card-body">
+                                <form [formGroup]="studentCreationForm">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Student ID</label>
+                                            <input type="text" class="form-control" (blur)="checkUniqueId()" formControlName="identification_no" placeholder="Student Id" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>First Name</label>
+                                            <input type="text" class="form-control" formControlName="first_name" placeholder="First name" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Middle Name</label>
+                                            <input type="text" class="form-control" formControlName="middle_name" placeholder="Middle Name" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control" formControlName="last_name" placeholder="Last Name" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Gender</label>
+                                            <select style="width: 100%" formControlName="gender" class="form-select" required>
+                                                <option value="Male"> Male </option>
+                                                <option value="Female"> Female </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Date Of Birth</label>
+                                            <input class="form-control digits" type="date" formControlName="dob"
+                                                   id="example-datetime-local-input">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Admission date</label>
+                                            <input class="form-control digits" type="date" formControlName="admission_date"
+                                                   id="example-datetime-local-input">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Phone Number</label>
+                                            <input type="text" class="form-control" formControlName="mobile_no" placeholder="Phone Number" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Emergency Contact Number</label>
+                                            <input type="text" class="form-control" formControlName="emergency_phone_number" placeholder="Emergency Contact Number" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Material Status</label>
+                                            <select style="width: 100%" formControlName="material_status" class="form-select" required>
+                                                <option value="Single"> Single </option>
+                                                <option value="Married"> Married </option>
+                                                <option value="Widowed"> Widowed </option>
+                                                <option value="Seperated"> Seperated </option>
+                                                <option value="Not Specified"> Not Specified </option>
+                                            </select>
+                                        </div>
+<!--                                        <div class="col-md-3 mb-3">-->
+<!--                                            <label>Admission Type</label>-->
+<!--                                            <select style="width: 100%" formControlName="admission_status" class="form-select" required>-->
+<!--                                                <option value="0"> Pre-Admission </option>-->
+<!--                                                <option value="1"> Admission </option>-->
+<!--                                                <option value="2"> Passed out </option>-->
+<!--                                                <option value="3"> Left </option>-->
+<!--                                            </select>-->
+<!--                                        </div>-->
+                                        <div class="col-md-3 mb-3">
+                                            <label>Qualification</label>
+                                            <input type="text" class="form-control" formControlName="qualification" placeholder="Qualification" required>
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Upload Image</label>
+                                            <input type="file" class="form-control" [multiple]="false" (change)="onSelect1($event)">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Blood Group</label>
+                                            <select style="width: 100%" formControlName="blood_group" class="form-select" required>
+                                                <option value="A+"> A+ </option>
+                                                <option value="A-"> A- </option>
+                                                <option value="B+"> B+ </option>
+                                                <option value="B-"> B- </option>
+                                                <option value="AB+"> AB+ </option>
+                                                <option value="AB-"> AB- </option>
+                                                <option value="O+"> O+ </option>
+                                                <option value="O-"> O- </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Religion</label>
+<!--                                            <input type="text" class="form-control" formControlName="religion" placeholder="Religion" required>-->
+                                            <select style="width: 100%" formControlName="religion" class="form-select" required>
+                                                <option value="Hinduism"> Hinduism </option>
+                                                <option value="Buddhism"> Buddhism </option>
+                                                <option value="Christianity"> Christianity </option>
+                                                <option value="Confucianism"> Confucianism </option>
+                                                <option value="Islam"> Islam </option>
+                                                <option value="Jainism"> Jainism </option>
+                                                <option value="Judaism"> Judaism </option>
+                                                <option value="Shinto"> Shinto </option>
+                                                <option value="Sikhism"> Sikhism </option>
+                                                <option value="Taoism"> Taoism </option>
+                                                <option value="Zoroastrianism"> Zoroastrianism </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Category</label>
+                                            <select style="width: 100%" formControlName="category_id" class="form-select" required>
+                                                <option *ngFor="let data of categoryList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Email address (Login Email)</label>
+                                            <input type="email" class="form-control" formControlName="email"
+                                                   placeholder="name@example.com">
+                                        </div>
+<!--                                        <div class="col-md-3 mb-3">-->
+<!--                                            <label>Password</label>-->
+<!--                                            <input type="text" class="form-control" formControlName="password">-->
+<!--                                        </div>-->
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Course</label>
+                                            <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                                <option *ngFor="let data of courseList" [value]="data.id" >
+                                                    {{data.course_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Semester</label>
+                                            <select style="width: 100%" formControlName="semester_id" class="form-select" required>
+                                                <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Current Address</label>
+                                            <input type="text" class="form-control" formControlName="current_address" placeholder="Current Address" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Permanent Address</label>
+                                            <input type="text" class="form-control" formControlName="permanent_address" placeholder="Permanent Address" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Session</label>
+                                            <select style="width: 100%" formControlName="session_id" class="form-select" required>
+                                                <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Agent</label>
+                                            <select style="width: 100%" formControlName="agent_id" class="form-select" required>
+                                                <option *ngFor="let data of agentList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <h3>Guardian Details</h3>
+                                    <hr>
+
+                                    <div  class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Father Name</label>
+                                            <input type="text" class="form-control" formControlName="father_name">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Father Phone no.</label>
+                                            <input type="text" class="form-control" formControlName="father_phone">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Father Occupation</label>
+                                            <input type="text" class="form-control" formControlName="father_occupation">
+                                        </div>
+                                    </div>
+
+                                    <div  class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Mother Name</label>
+                                            <input type="text" class="form-control" formControlName="mother_name">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Mother Phone no.</label>
+                                            <input type="text" class="form-control" formControlName="mother_phone">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Mother Occupation</label>
+                                            <input type="text" class="form-control" formControlName="mother_occupation">
+                                        </div>
+                                    </div>
+
+                                    <div  class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Guardian Name</label>
+                                            <input type="text" class="form-control" formControlName="guardian_name">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Guardian Phone no.</label>
+                                            <input type="text" class="form-control" formControlName="guardian_phone">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Guardian Email</label>
+                                            <input type="text" class="form-control" formControlName="guardian_email">
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Guardian Relation</label>
+                                            <input type="text" class="form-control" formControlName="guardian_relation">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Guardian Occupation</label>
+                                            <input type="text" class="form-control" formControlName="guardian_occupation">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Guardian Address</label>
+                                            <input type="text" class="form-control" formControlName="guardian_address">
+                                        </div>
+                                    </div>
+
+                                    <button [hidden]="isUpdateable == true" class="btn btn-primary me-1" type="submit" (click)="saveStudent()">Save Student</button>
+                                    <button [hidden]="isUpdateable == false" class="btn btn-primary me-1" type="submit" (click)="updateStudent()">Update Student</button>
+                                    <button [hidden]="isUpdateable == false" class="btn btn-primary me-1" type="submit" (click)="cancelUpdate()">cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div [hidden]="active != 2">
+                            <div class="row" style="text-align: center;">
+                                <div style="margin-top: 9px" class="col-3"><h4>Search</h4></div>
+                                <div class="col-9">
+                                    <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Gender</th>
+                                            <th scope="col">Date Of Birth</th>
+                                            <th scope="col">Blood Group</th>
+                                            <th scope="col">Type</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of studentList | customFilter:searchItem;let indexOfElement=index">
+                                            <td>{{indexOfElement + 1}}</td>
+                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                            <td>{{record.gender}}</td>
+                                            <td>{{record.dob}}</td>
+                                            <td>{{record.blood_group}}</td>
+                                            <td>{{record.user_type}}</td>
+                                            <td>{{record.email}}</td>
+                                            <td>
+                                                <a (click)="editStudent(record)"><mat-icon>edit</mat-icon></a>
+                                                <a (click)="deleteStudent(record)"><mat-icon>delete</mat-icon></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

@@ -1,0 +1,101 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Assign Teacher</h5><span>Assign Semester Teacher</span>
+                        </div>
+                        <div class="card-body">
+                        <form [formGroup]="assignSemesterTeacherForm">
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Select Course</label>
+                                    <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                        <option [disabled]="isUpdatable == true" *ngFor="let data of courseList" [value]="data.id" >
+                                            {{data.course_name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label>Select Semester</label>
+                                    <select style="width: 100%" formControlName="semester_id" class="form-select" required>
+                                        <option [disabled]="isUpdatable == true" *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                            {{data.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <div *ngFor="let record of teachers">
+                                        <input style="margin: 10px !important;" [checked]="record.checked" id="checkbox-primary-1" (change)="importTeacher(record, $event)" type="checkbox">
+                                        <label for="checkbox-primary-1"> {{record.first_name}} {{record.middle_name}} {{record.last_name}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                            </div>
+<!--                            <button class="btn btn-primary" type="submit">Submit form</button>-->
+                        </form>
+                    </div>
+                        <div class="card-footer">
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveAssignSemesterTeacher()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateAssignSemesterTeacher()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Assigned Teacher List</h5>
+                                <span>Teachers assigned to this courses and semester</span>
+                            </div>
+                            <div class="table-responsive" *ngIf="permission[3].permission == 1">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Course Name</th>
+                                        <th scope="col">Semester Name</th>
+                                        <th scope="col">Teachers Assigned</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of assignedTeacher | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.course_name}}</td>
+                                        <td>{{record.semester_name}}</td>
+                                        <td>
+                                            <p *ngFor="let records of record.teacher">
+                                                {{records.first_name}} {{records.middle_name}} {{records.last_name}}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editAssignTeacher(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteAssignTeacher(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
