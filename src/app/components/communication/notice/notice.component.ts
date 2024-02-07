@@ -132,7 +132,8 @@ export class NoticeComponent {
         }
       })
     })
-    console.log(this.userTypeList);
+    this.tempUserTypes = this.userTypeList.find(x => x.checked == true);
+    console.log(this.tempUserTypes);
 
     this.noticeForm.patchValue(data);
   }
