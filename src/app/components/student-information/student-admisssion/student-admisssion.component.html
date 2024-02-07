@@ -21,7 +21,7 @@
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
                         </div>
-                        <div [hidden]="active != 1">
+                        <div [hidden]="active != 1" *ngIf="permission[0].permission == 1 && permission[1].permission == 1 && permission[2].permission == 1">
                             <div class="card-body">
                                 <form [formGroup]="studentCreationForm">
                                     <div class="row">
@@ -256,13 +256,13 @@
                                         </div>
                                     </div>
 
-                                    <button [hidden]="isUpdateable == true" class="btn btn-primary me-1" type="submit" (click)="saveStudent()">Save Student</button>
-                                    <button [hidden]="isUpdateable == false" class="btn btn-primary me-1" type="submit" (click)="updateStudent()">Update Student</button>
+                                    <button *ngIf="permission[0].permission == 1" [hidden]="isUpdateable == true" class="btn btn-primary me-1" type="submit" (click)="saveStudent()">Save Student</button>
+                                    <button *ngIf="permission[1].permission == 1" [hidden]="isUpdateable == false" class="btn btn-primary me-1" type="submit" (click)="updateStudent()">Update Student</button>
                                     <button [hidden]="isUpdateable == false" class="btn btn-primary me-1" type="submit" (click)="cancelUpdate()">cancel</button>
                                 </form>
                             </div>
                         </div>
-                        <div [hidden]="active != 2">
+                        <div [hidden]="active != 2" *ngIf="permission[3].permission == 1">
                             <div class="row" style="text-align: center;">
                                 <div style="margin-top: 9px" class="col-3"><h4>Search</h4></div>
                                 <div class="col-9">
@@ -281,7 +281,7 @@
                                             <th scope="col">Blood Group</th>
                                             <th scope="col">Type</th>
                                             <th scope="col">Email</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col" *ngIf="permission[0].permission == 1 && permission[1].permission == 1">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -294,8 +294,8 @@
                                             <td>{{record.user_type}}</td>
                                             <td>{{record.email}}</td>
                                             <td>
-                                                <a (click)="editStudent(record)"><mat-icon>edit</mat-icon></a>
-                                                <a (click)="deleteStudent(record)"><mat-icon>delete</mat-icon></a>
+                                                <a *ngIf="permission[1].permission == 1" (click)="editStudent(record)"><mat-icon>edit</mat-icon></a>
+                                                <a *ngIf="permission[2].permission == 1" (click)="deleteStudent(record)"><mat-icon>delete</mat-icon></a>
                                             </td>
                                         </tr>
                                         </tbody>
