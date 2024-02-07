@@ -128,13 +128,23 @@ export class NoticeComponent {
     //   let index = userType.findIndex(x => x.id === value.id);
     //   userType[index].checked = true;
     // });
-    for(let i = 1; i <= received_data.length; i++){
-      let index = this.userTypeList.findIndex(x => x.id === received_data[i]);
-      this.userTypeList[index].checked = true;
-    }
+    // for(let i = 1; i <= received_data.length; i++){
+    //   let index = this.userTypeList.findIndex(x => x.id === received_data[i]);
+    //   this.userTypeList[index].checked = true;
+    // }
     // console.log(userType);
     // this.userTypeList = userType;
     // console.log(this.userTypeList);
+
+    this.userTypeList.forEach(function (value){
+      received_data.forEach(function (value2){
+        if(value.id === value2){
+          value.checked = true;
+        }else{
+          value.checked = false;
+        }
+      })
+    })
 
     this.noticeForm.patchValue(data);
   }
