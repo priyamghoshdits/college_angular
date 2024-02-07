@@ -120,6 +120,10 @@ export class NoticeComponent {
     }
   }
 
+  editNotice(data){
+    this.noticeForm.patchValue(data);
+  }
+
   saveNotice(){
     let arr;
     arr = [

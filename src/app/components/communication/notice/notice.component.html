@@ -75,6 +75,7 @@
                                         <td>{{record.published_on}}</td>
                                         <td>{{record.mailed_to}}</td>
                                         <td>
+                                            <a (click)="editNotice(record)"><mat-icon>edit</mat-icon></a>
                                             <a (click)="deleteNotice(record)"><mat-icon>delete</mat-icon></a>
                                         </td>
                                     </tr>
