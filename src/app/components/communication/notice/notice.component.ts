@@ -121,12 +121,12 @@ export class NoticeComponent {
   }
 
   editNotice(data){
-    // console.log(data.mailed_to_id.split(','));
+    console.log(data.mailed_to_id.split(',').length);
     let userType = this.userTypeList;
-    data.mailed_to_id.split(',').forEach(function (value){
-      let index = userType.findIndex(x => x.id === value.id);
-      userType[index].checked = true;
-    });
+    // data.mailed_to_id.split(',').forEach(function (value){
+    //   let index = userType.findIndex(x => x.id === value.id);
+    //   userType[index].checked = true;
+    // });
     console.log(userType);
     this.userTypeList = userType;
     console.log(this.userTypeList);
