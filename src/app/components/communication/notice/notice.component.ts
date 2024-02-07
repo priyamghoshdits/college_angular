@@ -138,7 +138,7 @@ export class NoticeComponent {
 
     this.userTypeList.forEach(function (value){
       received_data.forEach(function (value2){
-        if(value.id === value2){
+        if(value.id === parseInt(value2)){
           value.checked = true;
         }else{
           value.checked = false;
