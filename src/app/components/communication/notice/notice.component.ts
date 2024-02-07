@@ -121,8 +121,6 @@ export class NoticeComponent {
   }
 
   editNotice(data){
-    let userTypes;
-    console.log(data.mailed_to_id.split(',').length);
     let received_data = data.mailed_to_id.split(',');
 
     this.userTypeList.forEach(function (value){
@@ -133,9 +131,39 @@ export class NoticeComponent {
       })
     })
     this.tempUserTypes = this.userTypeList.filter(x => x.checked == true);
-    console.log(this.tempUserTypes);
 
     this.noticeForm.patchValue(data);
+    this.isUpdatable = true;
+  }
+
+  updateNotice(){
+    let arr;
+    arr = [
+      {
+        id: this.noticeForm.value.id,
+        subject: this.noticeForm.value.subject,
+        body: this.noticeForm.value.body,
+        mail_to : this.tempUserTypes
+      }
+    ];
+    this.communicationService.updateNotice(arr[0]).subscribe((response: any) => {
+      if(response.success == 1){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Notice Updated',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        this.cancelUpdate();
+      }
+    })
+  }
+
+  cancelUpdate(){
+    this.isUpdatable = false;
+    this.tempUserTypes = [];
+    this.noticeForm.reset();
   }
 
   saveNotice(){

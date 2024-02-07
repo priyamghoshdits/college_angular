@@ -70,4 +70,18 @@ export class CommunicationService {
         }));
   }
 
+  updateNotice(data){
+    return this.http.post(this.BASE_API_URL + '/updateNotices', data)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+          // @ts-ignore
+          if(response.success == 1){
+            // @ts-ignore
+            const index = this.noticeList.findIndex(x => x.id === response.data.id);
+            // @ts-ignore
+            this.noticeList[index] = response.data;
+            this.noticeListSubject.next([...this.noticeList]);
+          }
+        }));
+  }
+
 }
