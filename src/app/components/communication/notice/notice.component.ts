@@ -122,9 +122,12 @@ export class NoticeComponent {
 
   editNotice(data){
     // console.log(data.mailed_to_id.split(','));
+    let userType = this.userTypeList;
     data.mailed_to_id.split(',').forEach(function (value){
-      console.log(value);
+      let index = userType.findIndex(x => x.id == data.id);
+      userType[index].checked = true;
     });
+    this.userTypeList = userType;
     this.noticeForm.patchValue(data);
   }
 
