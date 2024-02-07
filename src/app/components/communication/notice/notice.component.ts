@@ -121,6 +121,7 @@ export class NoticeComponent {
   }
 
   editNotice(data){
+    console.log(data);
     this.noticeForm.patchValue(data);
   }
 
