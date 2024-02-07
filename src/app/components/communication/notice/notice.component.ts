@@ -73,7 +73,7 @@ export class NoticeComponent {
   noticeForm: FormGroup;
   noticeList: any[];
   userTypeList: any[];
-  tempUserTypes = [];
+  tempUserTypes: any[] = [];
   isUpdatable = false;
   p:number;
   rolesAndPermission: any[] = [];
@@ -132,7 +132,7 @@ export class NoticeComponent {
         }
       })
     })
-    this.tempUserTypes = this.userTypeList.find(x => x.checked == true);
+    this.tempUserTypes = this.userTypeList.filter(x => x.checked == true);
     console.log(this.tempUserTypes);
 
     this.noticeForm.patchValue(data);
