@@ -143,8 +143,10 @@ export class NoticeComponent {
         }else{
           value.checked = false;
         }
+        console.log(value2);
       })
     })
+    console.log(this.userTypeList);
 
     this.noticeForm.patchValue(data);
   }
