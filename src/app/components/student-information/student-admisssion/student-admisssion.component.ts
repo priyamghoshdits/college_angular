@@ -13,6 +13,7 @@ import {ImageService} from "../../../services/image.service";
 import {AgentService} from "../../../services/agent.service";
 import {CustomFilterPipe} from "custom-filter.pipe";
 import {CommonService} from "../../../services/common.service";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-student-admisssion',
@@ -43,10 +44,13 @@ export class StudentAdmisssionComponent {
     studentList: any[];
     agentList: any[];
     searchItem: string;
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
 
     constructor(private memberService: MemberService, private subjectService: SubjectService
                 , private sessionService: SessionService, private studentService: StudentService
-                , private imageService: ImageService, private agentService: AgentService, private commonService: CommonService) {
+                , private imageService: ImageService, private agentService: AgentService
+                , private commonService: CommonService, private roleAndPermissionService: RolesAndPermissionService) {
         this.studentCreationForm = new FormGroup({
             id: new FormControl(null),
             identification_no: new FormControl(null, [Validators.required]),
@@ -110,6 +114,16 @@ export class StudentAdmisssionComponent {
             this.studentList = response;
         });
         this.studentList = this.studentService.getStudentLists();
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'STUDENT ADMISSION').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'STUDENT ADMISSION').permission;
+        }
+
     }
 
     getSemester(){
