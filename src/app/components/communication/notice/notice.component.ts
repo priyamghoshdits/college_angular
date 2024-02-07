@@ -7,6 +7,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import Swal from "sweetalert2";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-notice',
@@ -74,7 +75,9 @@ export class NoticeComponent {
   tempUserTypes = [];
   isUpdatable = false;
   p:number;
-  constructor(private communicationService: CommunicationService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private communicationService: CommunicationService, private roleAndPermissionService: RolesAndPermissionService) {
     this.noticeForm = new FormGroup({
       id: new FormControl(null),
       subject: new FormControl(null, [Validators.required]),
@@ -89,6 +92,16 @@ export class NoticeComponent {
       this.userTypeList = response;
     });
     this.userTypeList = this.communicationService.getUserTypeList();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'COURSE').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'COURSE').permission;
+    }
+
   }
 
   importUserTypes(data, event){
