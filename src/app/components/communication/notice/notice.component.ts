@@ -121,7 +121,7 @@ export class NoticeComponent {
   }
 
   editNotice(data){
-    console.log(data);
+    console.log(data.mailed_to_id.split(','));
     this.noticeForm.patchValue(data);
   }
 
