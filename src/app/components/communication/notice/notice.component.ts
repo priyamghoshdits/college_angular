@@ -140,8 +140,6 @@ export class NoticeComponent {
       received_data.forEach(function (value2){
         if(value.id === parseInt(value2)){
           value.checked = true;
-        }else{
-          value.checked = false;
         }
         console.log(value2 , ' : ', value);
       })
