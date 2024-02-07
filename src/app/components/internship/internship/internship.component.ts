@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import {InternshipService} from "../../../services/internship.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
-import {CommonModule, NgForOf} from "@angular/common";
+import {CommonModule, NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {StudentService} from "../../../services/student.service";
 import Swal from "sweetalert2";
 import {SubjectService} from "../../../services/subject.service";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-internship',
@@ -16,7 +17,8 @@ import {SubjectService} from "../../../services/subject.service";
     MatIconModule,
     NgForOf,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './internship.component.html',
   styleUrl: './internship.component.scss'
@@ -31,7 +33,10 @@ export class InternshipComponent {
   isUpdatable = false;
   p: number;
   filteredStudent: any[];
-  constructor(private internshipService: InternshipService, private studentService: StudentService, private subjectService: SubjectService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private internshipService: InternshipService, private studentService: StudentService
+              , private subjectService: SubjectService, private roleAndPermissionService: RolesAndPermissionService) {
 
     this.internshipDetailsForm = new FormGroup({
       id: new FormControl(null),
@@ -62,6 +67,15 @@ export class InternshipComponent {
       this.studentList = response;
     });
     this.studentList = this.studentService.getStudentLists();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'INTERNSHIP DETAILS').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'INTERNSHIP DETAILS').permission;
+    }
   }
 
   getSemester(){
