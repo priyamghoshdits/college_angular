@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {SubjectService} from "../../../services/subject.service";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {SessionService} from "../../../services/session.service";
@@ -9,17 +9,19 @@ import {interval} from "rxjs";
 import {ExaminationService} from "../../../services/examination.service";
 import Swal from "sweetalert2";
 import {NgbTimepicker} from "@ng-bootstrap/ng-bootstrap";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-subject-details',
   standalone: true,
-    imports: [
-        MatIconModule,
-        NgForOf,
-        NgxPaginationModule,
-        ReactiveFormsModule,
-        NgbTimepicker
-    ],
+  imports: [
+    MatIconModule,
+    NgForOf,
+    NgxPaginationModule,
+    ReactiveFormsModule,
+    NgbTimepicker,
+    NgIf
+  ],
   templateUrl: './subject-details.component.html',
   styleUrl: './subject-details.component.scss'
 })
@@ -32,7 +34,10 @@ export class SubjectDetailsComponent {
   subjectDetailsList: any[];
   isUpdatable = false;
   p:number;
-  constructor(private subjectService: SubjectService, private sessionService: SessionService, private examinationService: ExaminationService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private subjectService: SubjectService, private sessionService: SessionService
+              , private examinationService: ExaminationService , private roleAndPermissionService: RolesAndPermissionService) {
     this.subjectDetailsForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
@@ -58,6 +63,16 @@ export class SubjectDetailsComponent {
       this.subjectDetailsList = response;
     });
     this.subjectDetailsList = this.examinationService.getSubjectDetailsList();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'SUBJECT DETAILS').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'SUBJECT DETAILS').permission;
+    }
+
   }
 
   getSemester(){

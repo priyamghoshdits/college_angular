@@ -164,6 +164,9 @@ export class NoticeComponent {
     this.isUpdatable = false;
     this.tempUserTypes = [];
     this.noticeForm.reset();
+    this.userTypeList.forEach(function (value){
+      value.checked = false;
+    })
   }
 
   saveNotice(){
