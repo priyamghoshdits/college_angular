@@ -124,7 +124,7 @@ export class NoticeComponent {
     // console.log(data.mailed_to_id.split(','));
     let userType = this.userTypeList;
     data.mailed_to_id.split(',').forEach(function (value){
-      let index = userType.findIndex(x => x.id == data.id);
+      let index = userType.findIndex(x => x.id === value.id);
       userType[index].checked = true;
     });
     console.log(userType);
