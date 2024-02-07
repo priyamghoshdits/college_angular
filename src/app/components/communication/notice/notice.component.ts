@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {CommunicationService} from "../../../services/communication.service";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
@@ -12,13 +12,14 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
 @Component({
   selector: 'app-notice',
   standalone: true,
-    imports: [
-        MatIconModule,
-        NgForOf,
-        NgxPaginationModule,
-        ReactiveFormsModule,
-        CKEditorModule
-    ],
+  imports: [
+    MatIconModule,
+    NgForOf,
+    NgxPaginationModule,
+    ReactiveFormsModule,
+    CKEditorModule,
+    NgIf
+  ],
   templateUrl: './notice.component.html',
   styleUrl: './notice.component.scss'
 })
@@ -95,11 +96,11 @@ export class NoticeComponent {
 
     this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
       this.rolesAndPermission = response;
-      this.permission = this.rolesAndPermission.find(x => x.name == 'COURSE').permission;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'NOTICE').permission;
     });
     this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
     if(this.rolesAndPermission.length > 0){
-      this.permission = this.rolesAndPermission.find(x => x.name == 'COURSE').permission;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'NOTICE').permission;
     }
 
   }
