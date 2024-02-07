@@ -143,7 +143,7 @@ export class NoticeComponent {
         }else{
           value.checked = false;
         }
-        console.log(value2);
+        console.log(value2 , ' : ', value);
       })
     })
     console.log(this.userTypeList);
