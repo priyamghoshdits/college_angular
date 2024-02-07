@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MemberService} from "../../../services/member.service";
@@ -28,7 +28,8 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
         NgbNavOutlet,
         NgbNavItem,
         FormsModule,
-        CustomFilterPipe
+        CustomFilterPipe,
+        NgIf
     ],
   templateUrl: './student-admisssion.component.html',
   styleUrl: './student-admisssion.component.scss'

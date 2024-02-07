@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
@@ -7,7 +7,7 @@
                         <div class="card-header" [hidden]="active != 1">
                             <h5>Student Admission</h5>
                         </div>
-                        <div class="card-header" [hidden]="active != 2">
+                        <div *ngIf="permission[3].permission == 1" class="card-header" [hidden]="active != 2">
                             <h5>Show All Students</h5>
                         </div>
                         <div class="tabbed-card">
@@ -15,7 +15,7 @@
                                 <li [ngbNavItem]="1">
                                     <a ngbNavLink (click)="activeTab(1)">Add Student</a>
                                 </li>
-                                <li [ngbNavItem]="2">
+                                <li *ngIf="permission[3].permission == 1" [ngbNavItem]="2">
                                     <a ngbNavLink (click)="activeTab(2)">Show Students</a>
                                 </li>
                             </ul>
