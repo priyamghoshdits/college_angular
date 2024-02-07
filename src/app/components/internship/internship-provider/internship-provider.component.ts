@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import {InternshipService} from "../../../services/internship.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-internship-provider',
@@ -14,7 +15,8 @@ import Swal from "sweetalert2";
     MatIconModule,
     NgForOf,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './internship-provider.component.html',
   styleUrl: './internship-provider.component.scss'
@@ -24,8 +26,10 @@ export class InternshipProviderComponent {
   isUpdatable = false;
   p: number;
   internshipProviderForm: FormGroup;
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
 
-  constructor(private internshipService: InternshipService) {
+  constructor(private internshipService: InternshipService, private roleAndPermissionService: RolesAndPermissionService) {
     this.internshipProviderForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required])
@@ -34,6 +38,15 @@ export class InternshipProviderComponent {
       this.internshipProviderList = response;
     });
     this.internshipProviderList = this.internshipService.getInternshipProviderList();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'INTERNSHIP PROVIDER').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'INTERNSHIP PROVIDER').permission;
+    }
   }
 
   saveInternshipProvider(){
