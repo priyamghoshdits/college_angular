@@ -101,6 +101,16 @@ export class ExaminationService {
           }));
   }
 
+  updateQuestions(value){
+      return this.http.post(this.BASE_API_URL + '/saveQuestions', value)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+              // @ts-ignore
+              if(response.success == 1){
+                  this.getUpdatedQuestionList();
+              }
+          }));
+  }
+
   updateSubjectStatus(id){
       return this.http.get(this.BASE_API_URL + '/updateStatus/'+ id)
           .pipe(catchError(this.errorService.serverError), tap(response => {

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {SubjectService} from "../../../services/subject.service";
 import {DownloadCenterService} from "../../../services/download-center.service";
 import Swal from "sweetalert2";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {CustomFilterPipe} from "custom-filter.pipe";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-upload-content',
@@ -16,6 +17,7 @@ import {CustomFilterPipe} from "custom-filter.pipe";
     MatIconModule,
     CustomFilterPipe,
     FormsModule,
+    NgIf,
     // Ng2SearchPipeModule
   ],
   templateUrl: './upload-content.component.html',
@@ -31,7 +33,10 @@ export class UploadContentComponent {
   contentList: any[];
   isUpdatable = false;
   searchItem: string;
-  constructor(private subjectService: SubjectService, private downloadCenterService: DownloadCenterService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private subjectService: SubjectService, private downloadCenterService: DownloadCenterService
+              , private roleAndPermissionService: RolesAndPermissionService) {
     this.uploadContentForm = new FormGroup({
       id: new FormControl(null),
       title: new FormControl(null, [Validators.required]),
@@ -54,6 +59,15 @@ export class UploadContentComponent {
       this.contentList = response;
     })
     this.contentList = this.downloadCenterService.getAllContents();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'USER TYPE').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'USER TYPE').permission;
+    }
   }
 
   getSemester(){

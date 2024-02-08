@@ -104,7 +104,7 @@
                             </div>
                             <div class="card-footer">
                                 <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveQuestions()">Submit</button>
-    <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
+                                <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateQuestionPaper()">Update</button>
     <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
                                 <!--                            <button class="btn btn-secondary">Cancel</button>-->
                             </div>
@@ -116,14 +116,15 @@
                                     <tr>
                                         <th colspan="2">Subject Name</th>
                                         <th colspan="2">Course Name</th>
-                                        <th colspan="8">Question</th>
+                                        <th colspan="7">Question</th>
+                                        <th colspan="1">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr *ngFor="let record of questionList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
                                         <td colspan="2">{{record.subject_name}}</td>
                                         <td colspan="2">{{record.course_name}}</td>
-                                        <td colspan="8">
+                                        <td colspan="7">
                                             <div *ngFor="let record of record.questions ;let indexOfElement1=index">
                                                 <div class="row m-1">
                                                     <div class="col-3">Question {{indexOfElement1 + 1}}</div>
@@ -153,6 +154,9 @@
                                                 <br>
                                                 <br>
                                             </div>
+                                        </td>
+                                        <td>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editQuestionPaper(record)"><mat-icon>edit</mat-icon></a>
                                         </td>
                                     </tr>
                                     </tbody>

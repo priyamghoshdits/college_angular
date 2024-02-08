@@ -103,6 +103,34 @@ export class SubjectQuestionsComponent {
     this.questionForm.patchValue(x);
   }
 
+  updateQuestionPaper(){
+    let arr = [
+      {
+        'subject_details_id': this.questionForm.value.subject_details_id,
+        'questions': this.questionAnswers
+      }
+    ];
+    console.log(arr[0]);
+    this.examinationService.updateQuestions(this.questionForm.value).subscribe((response: any) => {
+      if(response.success == 1){
+        
+      }
+    })
+  }
+
+  editQuestionPaper(data){
+    this.questionAnswers = data.questions;
+    this.total_question[data.questions.length -1] = [];
+    this.active = 1;
+    this.totalMarks = this.questionAnswers.reduce((accumulator, currentItem) => accumulator + parseInt(currentItem.marks), 0);
+    let x = this.subjectDetailsList.find(x => x.id == data.subject_details_id);
+    this.selected_details = x;
+    this.questionForm.patchValue(x);
+    this.questionForm.patchValue({subject_details_id: data.subject_details_id});
+    this.isUpdatable = true;
+    this.counter = data.questions.length -1;
+  }
+
   saveQuestions(){
     // @ts-ignore
     if(this.totalMarks >= this.selected_details.full_marks){
