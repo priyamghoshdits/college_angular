@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
-import {JsonPipe, NgForOf} from "@angular/common";
+import {JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {SubjectService} from "../../../services/subject.service";
-import {NgbTimepicker} from "@ng-bootstrap/ng-bootstrap";
+import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet, NgbTimepicker} from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
 
 @Component({
@@ -17,19 +17,27 @@ import Swal from "sweetalert2";
         NgxPaginationModule,
         ReactiveFormsModule,
         NgbTimepicker,
-        JsonPipe
+        JsonPipe,
+        NgIf,
+        NgbNav,
+        NgbNavLink,
+        NgbNavLinkBase,
+        NgbNavItem,
+        NgbNavOutlet
     ],
   templateUrl: './create-semester-timetable.component.html',
   styleUrl: './create-semester-timetable.component.scss'
 })
 export class CreateSemesterTimetableComponent {
     semesterTimeTableForm: FormGroup;
+    semesterTimeTableSearchForm: FormGroup;
     courseList: any[];
     semesterList: any[];
     subjectList: any[];
     teacherList: any[];
     weekList: any[];
     tableArray : any[] = [];
+    public active = 1;
 
     constructor(private subjectService: SubjectService) {
         this.semesterTimeTableForm = new FormGroup({
@@ -43,6 +51,11 @@ export class CreateSemesterTimetableComponent {
             room_number: new FormControl(null),
             week_id: new FormControl(null),
         });
+        this.semesterTimeTableSearchForm = new FormGroup({
+            id: new FormControl(null),
+            course_id: new FormControl(null, [Validators.required]),
+            semester_id: new FormControl(null, [Validators.required]),
+        });
         this.subjectService.getCourseListener().subscribe((response) => {
             this.courseList = response;
         });
@@ -52,6 +65,14 @@ export class CreateSemesterTimetableComponent {
             this.weekList = response;
         });
         this.weekList = this.subjectService.getWeekDays();
+    }
+
+    getSemesterTimeTable(){
+
+    }
+
+    activeTab(data){
+        this.active = data;
     }
 
     getSemester(){

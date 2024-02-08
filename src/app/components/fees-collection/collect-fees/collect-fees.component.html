@@ -27,65 +27,67 @@
                         <div [hidden]="active != 1">
                             <div class="card-body">
                                 <ng-template #content let-modal>
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="modal-basic-title">Student Payment</h4>
-                                        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table" *ngIf="feesDetailsData.length>0" style="text-align: center;">
-                                            <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Type</th>
-                                                <th scope="col">Total Amt</th>
-                                                <th scope="col">Paid Amt</th>
-                                                <th scope="col">Discount</th>
-                                                <th scope="col">Due Payment</th>
-                                                <th scope="col">Transaction ID</th>
-                                                <th scope="col">Payment Date</th>
-                                                <th scope="col">Amount Paid</th>
-                                                <th scope="col">Upload</th>
-                                                <th scope="col">Mode</th>
-                                                <th scope="col">Action</th>
+                                    <div class="modal-content" style="margin-left:-40px;">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="modal-basic-title">Student Payment</h4>
+                                            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <table class="table" *ngIf="feesDetailsData.length>0" style="text-align: center;">
+                                                <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Total Amt</th>
+                                                    <th scope="col">Paid Amt</th>
+                                                    <th scope="col">Discount</th>
+                                                    <th scope="col">Due Payment</th>
+                                                    <th scope="col">Transaction ID</th>
+                                                    <th scope="col">Payment Date</th>
+                                                    <th scope="col">Amount Paid</th>
+                                                    <th scope="col">Upload</th>
+                                                    <th scope="col">Mode</th>
+                                                    <th scope="col" *ngIf="permission[2].permission == 1">Action</th>
 
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr *ngFor="let record of feesDetailsData | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
-                                                <td>{{indexOfElement+1}}</td>
-                                                <td>{{record.name}}</td>
-                                                <td>{{record.total_amount}}</td>
-                                                <td>{{record.total_paid}}</td>
-                                                <td><a ngbTooltip="{{record.scholarship_code}}">{{record.discount}}</a></td>
-                                                <td>{{record.remaining}}</td>
-                                                <td>
-                                                    <input class="form-control digits" [(ngModel)]="record.transaction_id" type="text"
-                                                           id="example-datetime-local-input">
-                                                </td>
-                                                <td>
-                                                    <input class="form-control digits" [(ngModel)]="record.paid_on" type="date"
-                                                           id="example-datetime-local-input">
-                                                </td>
-                                                <td style="">
-                                                    <input [(ngModel)]="record.amount" style="width: 150px" class="form-control col-2" type="text"
-                                                           placeholder="Enter Amount">
-                                                </td>
-                                                <td style="">
-                                                    <input (change)="setFile($event)" style="width: 150px" class="form-control col-2" type="file"
-                                                           placeholder="Enter Amount">
-                                                </td>
-                                                <td>
-                                                    <select [(ngModel)]="record.status" style="width: 100%" class="form-select" required>
-                                                        <option value="Online"> Online </option>
-                                                        <option value="Offline"> Offline </option>
-                                                    </select>
-                                                </td>
-                                                <td>
-                                                    <button style="border-radius: 50px" class="btn btn-primary me-1" (click)="updatePayment(record)">Save</button>
-                                                </td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr *ngFor="let record of feesDetailsData | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                                    <td>{{indexOfElement+1}}</td>
+                                                    <td>{{record.name}}</td>
+                                                    <td>{{record.total_amount}}</td>
+                                                    <td>{{record.total_paid}}</td>
+                                                    <td><a ngbTooltip="{{record.scholarship_code}}">{{record.discount}}</a></td>
+                                                    <td>{{record.remaining}}</td>
+                                                    <td>
+                                                        <input class="form-control digits" [(ngModel)]="record.transaction_id" type="text"
+                                                               id="example-datetime-local-input">
+                                                    </td>
+                                                    <td>
+                                                        <input class="form-control digits" [(ngModel)]="record.paid_on" type="date"
+                                                               id="example-datetime-local-input">
+                                                    </td>
+                                                    <td style="">
+                                                        <input [(ngModel)]="record.amount" style="width: 150px" class="form-control col-2" type="text"
+                                                               placeholder="Enter Amount">
+                                                    </td>
+                                                    <td style="">
+                                                        <input (change)="setFile($event)" style="width: 150px" class="form-control col-2" type="file"
+                                                               placeholder="Enter Amount">
+                                                    </td>
+                                                    <td>
+                                                        <select [(ngModel)]="record.status" style="width: 100%" class="form-select" required>
+                                                            <option value="Online"> Online </option>
+                                                            <option value="Offline"> Offline </option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <button *ngIf="permission[2].permission == 1" style="border-radius: 50px" class="btn btn-primary me-1" (click)="updatePayment(record)">Save</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </ng-template>
                                 <form class="theme-form" [formGroup]="collectFeesForm">
