@@ -1,1 +1,295 @@
-<p>icard works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>ICard</h5>
+                        </div>
+
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Student</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Staff</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+
+                        <ng-template #content let-modal>
+
+
+                            <div class="modal-header">
+                                <h4 class="modal-title">Modal title</h4>
+                                <button type="button" class="btn-close" aria-label="Close"
+                                    (click)="modal.dismiss('Cross click')"> <i class="icon-calendar"></i> </button>
+                            </div>
+                            <div class="modal-body">
+
+
+                                <div>
+                                    <div class="row newadd1">
+                                        <div class="col-lg-6 newadd">
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td style="width:100%;text-align:center;text-transform:uppercase;">
+                                                        <label class="marksheetheading"
+                                                            style="width:100%; height:20px;display:inline-block;text-align:center;color:#ffffff;font-size:16px;font-weight:700;padding:0px 0px 0px 0px ;margin-top:5px;margin-bottom:0px;border-radius: 0px 0px 26px 26px; ">
+                                                            <!--  TAKKE SAYALI SANTOSH  -->
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <table cellspacing="0" border="0" width="100%"
+                                                style="width:100%;margin-top:1% ;">
+                                                <tr>
+                                                    <td style="width: 60%;text-align: center;; ">
+                                                        <img src='{{ FILE_URL + "logo/site-logo.jpg" }}'
+                                                            width="60px; height:60px;"><br>
+
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+
+
+
+                                          
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td>
+                                                        <img src='{{ FILE_URL + "user_image/" + selectedMember.image }}'
+                                                            onerror="this.src='assets/images/user/1.jpg'"
+                                                            style="width:60px; height: 65px;top:10px; border: 2px solid #d3d1d1; padding: 4px;margin-left: 42%;margin-top: 20px;">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table style="margin:10px 0px 0px 0px;width:100%;">
+
+                                                <tr>
+                                                    <th style="margin-top: 2Z%; font-size: 11px; font-weight: 900; text-align:center;">
+                                                        STUDENT NAME:<b style="font-weight: 500;">TAKKE SAYALI SANTOSH
+                                                        </b>
+                                                    </th>
+                                                </tr>
+                                            </table>
+                                            <table
+                                                style="margin:20px 0px 0px 0px;width:100%;padding:0px 10px; margin-left: 17%;">
+                                                <tr>
+                                                    <th
+                                                        style="padding:0px 0px 5px 0px;text-align:center;font-size: 13px; font-weight: 800;color:#000;width: 137px;">
+                                                        Enrollment No.</th>
+                                                    <td
+                                                        style="padding:0px 0px 5px 0px;font-size: 12px;text-align:left;">
+                                                        : APMESTEN3920</td>
+                                                </tr>
+                                                <tr>
+                                                    <th
+                                                        style="padding:0px 0px 5px 0px;text-align:center;font-size: 13px; font-weight: 800;color:#000;width: 100px; ">
+                                                        Blood Group</th>
+                                                    <td
+                                                        style="padding:0px 0px 5px 0px;font-size: 12px;text-align: left;">
+                                                        : NA
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                            <table style="width: 100%;">
+            
+                                                <tr>
+                                                    <td style="width:100%;text-align:center;margin:0 auto;">
+                                                        <label
+                                                            style="font-style: italic; margin: 0 auto;width: 100%;display: inline-block;text-align: center;color: #fff;font-size: 15px;font-weight: 800;padding: 9px 0px; margin-top: 5px;margin-bottom: 0px; background-color: #322f6a; height: 10px;">
+                                                            <!-- This card is not transferable and it's the property of Board. -->
+                                                        </label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        
+
+                                        <div class="col-lg-6 newadd">
+                                            <div style="width: 100%;">
+                                                <table style="width: 100%;">
+                                                    <tr>
+                                                        <td style="width:100%;text-align:center;text-transform:uppercase;">
+                                                            <label class="marksheetheading"
+                                                                style="width:100%; height:20px;display:inline-block;text-align:center;color:#ffffff;font-size:16px;font-weight:700;padding:0px 0px 0px 0px ;margin-top:5px;margin-bottom:0px;border-radius: 0px 0px 26px 26px; ">
+                                                                <!--  TAKKE SAYALI SANTOSH  -->
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <table style="width: 100%; margin-top:%;">
+                                                    <tr>
+                                                        <td style="width: 60%;text-align: center; ">
+                                                            <img src='{{ FILE_URL + "logo/site-logo.jpg" }}'
+                                                                width="60px; height:60px;"><br>
+            
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 80%;text-align: center;">
+                                                            <img src='{{ FILE_URL + "logo/qr.png" }}'
+                                                                width="80px;margin-top: 2%;margin-bottom: 2%; " style="margin-top: 22px;">
+            
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="font-size: 13px; text-align: center;">Phone No:- <br><b
+                                                                style="font-weight: 500; font-size: 11px;padding-top: 2%;">+91
+                                                                9448011281</b></th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="font-size: 13px; text-align: center;">Address:- <br><b
+                                                                style="font-weight: 500; font-size: 11px;padding-top: 2%;">Berhampore,
+                                                                Murshidabad West Bengal- 742101</b></th>
+                                                    </tr>
+            
+            
+                                                </table>
+            
+                                                <table style="width: 100%; margin: 10px 0px 0px 0px; ">
+            
+            
+                                                    <tr>
+                                                        <td style="width:100%;text-align:center;margin:0 auto;">
+                                                            <label
+                                                                style="font-style: italic; margin: 0 auto;width: 100%;display: inline-block;text-align: center;color: #fff;font-size: 15px;font-weight: 800;padding: 9px 0px; margin-top: 5px;margin-bottom: 0px; background-color: #322f6a; height: 10px;">
+            
+                                                            </label>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                          
+                                        </div>
+                            
+
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light"
+                                    (click)="modal.close('Close click')">Close</button>
+                            </div>
+                        </ng-template>
+
+                        <div [hidden]="active != 1">
+                            <div>
+                                <div class="row" style="text-align: center;">
+                                    <div style="margin-top: 9px" class="col-3">
+                                        <h4>Search</h4>
+                                    </div>
+                                    <div class="col-9">
+                                        <input style="width: 60%" class="form-control" type="text"
+                                            placeholder="Search Or Filter">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Gender</th>
+                                                    <th scope="col">Date Of Birth</th>
+                                                    <th scope="col">Blood Group</th>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let record of studentList;let indexOfElement=index">
+                                                    <td>{{indexOfElement + 1}}</td>
+                                                    <td>{{record.first_name}} {{record.middle_name}}
+                                                        {{record.last_name}}</td>
+                                                    <td>{{record.gender}}</td>
+                                                    <td>{{record.dob}}</td>
+                                                    <td>{{record.blood_group}}</td>
+                                                    <td>{{record.user_type}}</td>
+                                                    <td>{{record.email}}</td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary"
+                                                            (click)="openLg(content);genarateIcard(record)">Generate</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div [hidden]="active != 2">
+                            <div>
+                                <div class="row" style="text-align: center;">
+                                    <div style="margin-top: 9px" class="col-3">
+                                        <h4>Search</h4>
+                                    </div>
+                                    <div class="col-9">
+                                        <input style="width: 60%" class="form-control" type="text"
+                                            placeholder="Search Or Filter">
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Gender</th>
+                                                    <th scope="col">Date Of Birth</th>
+                                                    <th scope="col">Blood Group</th>
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Email</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let record of memberList ;let indexOfElement=index">
+                                                    <td>{{indexOfElement + 1}}</td>
+                                                    <td>{{record.first_name}} {{record.middle_name}}
+                                                        {{record.last_name}}</td>
+                                                    <td>{{record.gender}}</td>
+                                                    <td>{{record.dob}}</td>
+                                                    <td>{{record.blood_group}}</td>
+                                                    <td>{{record.user_type}}</td>
+                                                    <td>{{record.email}}</td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary"
+                                                            (click)="openLg(content);genarateIcard(record)">Generate</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
