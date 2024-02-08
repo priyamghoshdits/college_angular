@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-6">
@@ -45,10 +45,10 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button [disabled]="!feesStructureForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="addFeesType()">Add</button>
+                            <button *ngIf="permission[0].permission == 1" [disabled]="!feesStructureForm.valid" class="btn btn-primary me-1" (click)="addFeesType()">Add</button>
 <!--                            <button [disabled]="!feesStructureForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveFeesStructure()">Submit</button>-->
-                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateFeesStructure()">Update</button>
-                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateFeesStructure()">Update</button>-->
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
                         </div>
                     </div>
                 </div>
@@ -90,14 +90,16 @@
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button [disabled]="feesStructureArray.length<=0" class="btn btn-primary me-1" (click)="saveFeesStructure()">Save</button>
+                            <button *ngIf="permission[0].permission == 1" [disabled]="feesStructureArray.length<=0" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveFeesStructure()">Save</button>
+                            <button *ngIf="permission[1].permission == 1" [disabled]="feesStructureArray.length<=0" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateFeesStructure()">Update</button>
+                            <button [disabled]="feesStructureArray.length<=0" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
                         </div>
                     </div>
 
 
                 </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="permission[3].permission == 1">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
@@ -127,7 +129,7 @@
                                                 <th scope="col">Semester</th>
                                                 <th scope="col">Type Name</th>
                                                 <th scope="col">Total</th>
-<!--                                                <th scope="col">Action</th>-->
+                                                <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -141,8 +143,8 @@
                                                 </td>
                                                 <td>{{record.amount}}</td>
                                                 <td>
-<!--                                                    <a (click)="editFeesStructure(record)"><mat-icon>edit</mat-icon></a>-->
-<!--                                                    <a (click)="deleteFeesStructure(record)"><mat-icon>delete</mat-icon></a>-->
+                                                    <a *ngIf="permission[1].permission == 1" (click)="editFeesStructure(record)"><mat-icon>edit</mat-icon></a>
+                                                    <a *ngIf="permission[2].permission == 1" (click)="deleteFeesStructure(record)"><mat-icon>delete</mat-icon></a>
                                                 </td>
                                             </tr>
                                             </tbody>

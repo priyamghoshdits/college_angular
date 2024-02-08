@@ -3,9 +3,10 @@ import {SubjectService} from "../../../services/subject.service";
 import {FeesService} from "../../../services/fees.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-fees-structure',
@@ -15,7 +16,8 @@ import Swal from "sweetalert2";
     MatIconModule,
     NgForOf,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './fees-structure.component.html',
   styleUrl: './fees-structure.component.scss'
@@ -32,8 +34,10 @@ export class FeesStructureComponent {
   feesStructureArray: any[] = [];
   totalAmount = 0;
   tableTotalAmount = 0;
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
 
-  constructor(private subjectService: SubjectService, private feesService: FeesService) {
+  constructor(private subjectService: SubjectService, private feesService: FeesService, private roleAndPermissionService: RolesAndPermissionService) {
     this.feesStructureForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
@@ -54,6 +58,15 @@ export class FeesStructureComponent {
       this.feesTypeList = response
     });
     this.feesTypeList = this.feesService.getFeesType();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'FEES STRUCTURE').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'FEES STRUCTURE').permission;
+    }
   }
 
   addFeesType(){
@@ -92,6 +105,7 @@ export class FeesStructureComponent {
         });
         this.feesStructureForm.reset();
         this.feesStructureArray = [];
+        this.feesStructureList = [];
         this.totalAmount = 0;
       }
     });
@@ -112,8 +126,19 @@ export class FeesStructureComponent {
   }
 
   editFeesStructure(data){
-    this.feesStructureForm.patchValue({id: data.id,course_id: this.feesStructureSearchForm.value.course_id, fees_type_id: data.fees_type_id,amount:data.amount});
+    let tempData = [...(data.fees_types)];
+
+    tempData.forEach(function (value){
+      value.semester_name = data.semester_name;
+      value.semester_id = data.semester_id;
+      value.course_id = data.course_id;
+    });
+    this.feesStructureForm.patchValue({course_id: data.course_id, semester_id: data.semester_id});
+    this.getSemester();
+    this.feesStructureForm.patchValue({course_id: data.course_id, semester_id: data.semester_id});
+    this.feesStructureArray = data.fees_types;
     this.isUpdatable = true;
+    this.totalAmount = this.feesStructureArray.reduce((accumulator, currentItem) => accumulator + parseInt(currentItem.amount), 0);
   }
 
   deleteFeesStructure(data){
@@ -127,7 +152,7 @@ export class FeesStructureComponent {
       confirmButtonText: 'Yes, delete It!'
     }).then((result) => {
       if(result.isConfirmed){
-        this.feesService.deleteFeesStructure(data.id).subscribe((response) => {
+        this.feesService.deleteFeesStructure(data).subscribe((response) => {
           // @ts-ignore
           if(response.success == 1){
             Swal.fire({
@@ -137,6 +162,8 @@ export class FeesStructureComponent {
               showConfirmButton: false,
               timer: 1000
             });
+            this.feesStructureArray = [];
+            this.feesStructureList = [];
           }
         })
       }
@@ -145,7 +172,9 @@ export class FeesStructureComponent {
   }
 
   updateFeesStructure(){
-    this.feesService.updateFeesStructure(this.feesStructureForm.value).subscribe((response) => {
+    // console.log(this.feesStructureArray);
+    // return;
+    this.feesService.updateFeesStructure(this.feesStructureArray).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
         Swal.fire({
@@ -155,10 +184,7 @@ export class FeesStructureComponent {
           showConfirmButton: false,
           timer: 1000
         });
-        this.isUpdatable = false;
-        this.feesStructureList = [];
-        this.feesStructureForm.reset();
-        this.feesStructureSearchForm.reset();
+        this.cancelUpdate();
       }
     })
   }
@@ -166,6 +192,9 @@ export class FeesStructureComponent {
   cancelUpdate(){
     this.feesStructureForm.reset();
     this.isUpdatable = false;
+    this.feesStructureArray = [];
+    this.totalAmount = 0;
+    this.feesStructureList = [];
   }
 
 }

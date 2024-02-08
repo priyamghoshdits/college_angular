@@ -17,6 +17,7 @@ import {FeesService} from "../../../services/fees.service";
 import {ToastrService} from "ngx-toastr";
 import {environment} from "../../../../environments/environment";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-collect-fees',
@@ -59,7 +60,11 @@ export class CollectFeesComponent {
   collectFees = false;
   file: File | null;
   transactionFile: File | null;
-  constructor(private toastrService: ToastrService,private subjectService: SubjectService, private feesService: FeesService ,private studentService: StudentService, private modalService: NgbModal) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private toastrService: ToastrService,private subjectService: SubjectService
+              , private feesService: FeesService ,private studentService: StudentService
+              , private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService) {
     this.collectFeesForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
@@ -82,6 +87,15 @@ export class CollectFeesComponent {
       this.studentList = response;
     });
     this.studentList = this.studentService.getStudentLists();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'COLLECT FEES').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'COLLECT FEES').permission;
+    }
   }
 
   printTransaction(){

@@ -162,7 +162,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                <pagination-controls *ngIf="questionList.length > 5" (pageChange)="p = $event"></pagination-controls>
 
                             </div>
                         </div>

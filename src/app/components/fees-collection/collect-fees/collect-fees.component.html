@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
@@ -15,7 +15,7 @@
                                 <li [ngbNavItem]="1">
                                     <a ngbNavLink (click)="activeTab(1)">Collect Fees</a>
                                 </li>
-                                <li [ngbNavItem]="2">
+                                <li *ngIf="permission[3].permission == 1" [ngbNavItem]="2">
                                     <a ngbNavLink (click)="activeTab(2)">Show All Transactions</a>
                                 </li>
                             </ul>
@@ -114,8 +114,6 @@
                                     <h5>Student List</h5>
                                     <div class="row">
 
-
-
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
@@ -126,7 +124,7 @@
                                                     <th scope="col">Date Of Birth</th>
                                                     <th scope="col">Mobile No.</th>
                                                     <th scope="col">Email</th>
-                                                    <th scope="col">Action</th>
+                                                    <th scope="col" *ngIf="permission[1].permission == 1">Action</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -137,7 +135,7 @@
                                                     <td>{{record.dob}}</td>
                                                     <td>{{record.mobile_no}}</td>
                                                     <td>{{record.email}}</td>
-                                                    <td>
+                                                    <td *ngIf="permission[1].permission == 1">
                                                         <button style="border-radius: 50px" class="btn btn-primary me-1" (click)="openCustomModal(content);getFeesDetails(record.id)" >Collect Fees</button>
                                                     </td>
                                                 </tr>
@@ -153,7 +151,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div [hidden]="active != 2">
+                        <div [hidden]="active != 2" *ngIf="permission[3].permission == 1">
                             <div class="card-body">
                                 <form class="theme-form" [formGroup]="searchTransactionForm">
                                     <div class="row">
@@ -186,21 +184,8 @@
                                         </div>
                                     </div>
                                     <hr>
-<!--                                    <div class="d-flex">-->
-<!--                                        <div style="float: left"><h5>Transaction List</h5></div>-->
-<!--                                        <div style="float: left"><button class="btn btn-secondary" type="button" id="print" (click)="printTransaction()">Print Form</button></div>-->
-<!--                                    </div>-->
-<!--                                        <div class="playerOne">-->
-<!--                                            <h5>Transaction List</h5>-->
-<!--                                        </div>-->
-<!--                                        <div class="playerTwo">-->
-<!--                                            <button class="btn btn-secondary" type="button" id="print" (click)="printTransaction()">Print Form</button>-->
-<!--                                        </div>-->
                                     <h5>Transaction List</h5>
-<!--                                    <button class="btn btn-secondary" type="button" id="print" (click)="printTransaction()">Print Form</button>-->
                                     <div class="row">
-
-
 
                                         <div class="table-responsive">
                                             <table class="table" style="text-align: center">
@@ -232,7 +217,7 @@
                                                                placeholder="Enter Amount">
                                                     </td>
                                                     <td>
-                                                        <a (click)="deleteTransaction(record)" ><mat-icon>delete</mat-icon></a>
+                                                        <a *ngIf="permission[2].permission == 1" (click)="deleteTransaction(record)" ><mat-icon>delete</mat-icon></a>
                                                     </td>
                                                 </tr>
                                                 </tbody>

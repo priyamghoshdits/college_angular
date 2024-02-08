@@ -102,8 +102,8 @@ export class FeesService {
           }));
   }
 
-  deleteFeesStructure(id){
-      return this.http.get(this.BASE_API_URL + '/deleteFeesStructure/' + id)
+  deleteFeesStructure(data){
+      return this.http.post(this.BASE_API_URL + '/deleteFeesStructure', data)
           .pipe(catchError(this.errorService.serverError), tap(response => {
               // @ts-ignore
           }));
