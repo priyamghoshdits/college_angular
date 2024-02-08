@@ -69,32 +69,41 @@
                                                     </td>
                                                 </tr>
                                             </table>
-                                            <table style="margin:10px 0px 0px 0px;width:100%;">
+                                            <!-- <table style="margin:10px 0px 0px 0px;width:100%;">
 
                                                 <tr>
                                                     <th style="margin-top: 2Z%; font-size: 11px; font-weight: 900; text-align:center;">
-                                                        STUDENT NAME:<b style="font-weight: 500;">TAKKE SAYALI SANTOSH
+                                                        STUDENT NAME:<b style="font-weight: 500;"> 
                                                         </b>
                                                     </th>
                                                 </tr>
-                                            </table>
+                                                
+                                            </table> -->
                                             <table
                                                 style="margin:20px 0px 0px 0px;width:100%;padding:0px 10px; margin-left: 17%;">
                                                 <tr>
+                                                    <th style="padding:0px 0px 5px 0px;font-size: 13px; font-weight: 800;color:#000;width: 137px;">
+                                                        Student Name
+                                                    </th>
+                                                  
+                                                    <td style="padding:0px 0px 5px 0px;font-size: 12px;text-align:left;">
+                                                        {{selectedMember.first_name}} {{selectedMember.middle_name}} {{selectedMember.last_name}}
+                                                    </td>
+                                                </tr><tr>
                                                     <th
-                                                        style="padding:0px 0px 5px 0px;text-align:center;font-size: 13px; font-weight: 800;color:#000;width: 137px;">
-                                                        Enrollment No.</th>
+                                                        style="padding:0px 0px 5px 0px;font-size: 13px; font-weight: 800;color:#000;width: 109px;">
+                                                        Identity No.</th>
                                                     <td
                                                         style="padding:0px 0px 5px 0px;font-size: 12px;text-align:left;">
-                                                        : APMESTEN3920</td>
+                                                        : {{selectedMember.identification_no}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th
-                                                        style="padding:0px 0px 5px 0px;text-align:center;font-size: 13px; font-weight: 800;color:#000;width: 100px; ">
-                                                        Blood Group</th>
+                                                        style="padding:0px 0px 5px 0px;font-size: 13px; font-weight: 800;color:#000;width: 100px; ">
+                                                        Date of Birth</th>
                                                     <td
                                                         style="padding:0px 0px 5px 0px;font-size: 12px;text-align: left;">
-                                                        : NA
+                                                        : {{selectedMember.dob}}
                                                     </td>
                                                 </tr>
 
@@ -142,13 +151,14 @@
                                                     </tr>
                                                     <tr>
                                                         <th style="font-size: 13px; text-align: center;">Phone No:- <br><b
-                                                                style="font-weight: 500; font-size: 11px;padding-top: 2%;">+91
-                                                                9448011281</b></th>
+                                                                style="font-weight: 500; font-size: 11px;padding-top: 2%;">
+                                                                {{selectedMember.mobile_no}} </b></th>
                                                     </tr>
                                                     <tr>
                                                         <th style="font-size: 13px; text-align: center;">Address:- <br><b
-                                                                style="font-weight: 500; font-size: 11px;padding-top: 2%;">Berhampore,
-                                                                Murshidabad West Bengal- 742101</b></th>
+                                                                style="font-weight: 500; font-size: 11px;padding-top: 2%;">
+                                                                {{selectedMember.permanent_address}}
+                                                            </b></th>
                                                     </tr>
             
             
