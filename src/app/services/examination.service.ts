@@ -86,8 +86,8 @@ export class ExaminationService {
 
   getUpdatedQuestionList(){
       this.http.get(this.BASE_API_URL + '/getQuestions').subscribe((response: any) =>{
-          this.questionList = response;
-          this.questionListSubject.next([...this.subjectDetailsList]);
+          this.questionList = response.data;
+          this.questionListSubject.next([...this.questionList]);
       });
   }
 
@@ -102,7 +102,17 @@ export class ExaminationService {
   }
 
   updateQuestions(value){
-      return this.http.post(this.BASE_API_URL + '/saveQuestions', value)
+      return this.http.post(this.BASE_API_URL + '/updateQuestions', value)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+              // @ts-ignore
+              if(response.success == 1){
+                  this.getUpdatedQuestionList();
+              }
+          }));
+  }
+
+  deleteQuestions(value){
+      return this.http.post(this.BASE_API_URL + '/deleteQuestion', value)
           .pipe(catchError(this.errorService.serverError), tap(response => {
               // @ts-ignore
               if(response.success == 1){
