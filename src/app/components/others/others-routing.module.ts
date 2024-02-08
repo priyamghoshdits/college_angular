@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {AgentComponent} from "./agent/agent.component";
 import {RolesAndPermissionComponent} from "./roles-and-permission/roles-and-permission.component";
 import {UserTypesComponent} from "./user-types/user-types.component";
+import { IcardComponent } from './icard/icard.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,14 @@ const routes: Routes = [
     data: {
       title: "User Type",
       breadcrumb: "User Type"
+    }
+  },
+  {
+    path: 'icard',
+    component: IcardComponent,
+    data: {
+      title: "Icard",
+      breadcrumb: "Icard"
     }
   }
 ];
