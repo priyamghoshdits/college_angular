@@ -6,6 +6,7 @@ import {JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import Swal from "sweetalert2";
 import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 interface QuestionAnswer {
   question: string;
@@ -45,7 +46,9 @@ export class SubjectQuestionsComponent {
   counter = 0;
   active = 1;
   p:number;
-  constructor(private examinationService:ExaminationService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private examinationService:ExaminationService, private roleAndPermissionService: RolesAndPermissionService) {
     this.questionAnswers = [
         {
           'question': null,
@@ -83,6 +86,15 @@ export class SubjectQuestionsComponent {
       this.questionList = response;
     });
     this.questionList = this.examinationService.getQuestionListList();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'SUBJECT QUESTION').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'SUBJECT QUESTION').permission;
+    }
   }
 
   selectDetails(){

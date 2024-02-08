@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FeesService} from "../../../services/fees.service";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-fees-type',
@@ -14,7 +15,8 @@ import Swal from "sweetalert2";
         MatIconModule,
         NgForOf,
         NgxPaginationModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgIf
     ],
   templateUrl: './fees-type.component.html',
   styleUrl: './fees-type.component.scss'
@@ -24,8 +26,10 @@ export class FeesTypeComponent {
     isUpdatable= false;
     feesTypeList: any[];
     p: number;
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
 
-    constructor(private feesService:FeesService) {
+    constructor(private feesService:FeesService, private roleAndPermissionService: RolesAndPermissionService) {
         this.feesTypeForm = new FormGroup({
             id: new FormControl(null),
             name: new FormControl(null, [Validators.required]),
@@ -34,6 +38,15 @@ export class FeesTypeComponent {
             this.feesTypeList = response;
         })
         this.feesTypeList = this.feesService.getFeesType();
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'FEES TYPE').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'FEES TYPE').permission;
+        }
     }
 
     saveFeesType(){

@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-6">
             <div class="row">
                 <div class="col-sm-12">
@@ -62,8 +62,8 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveDiscount()">Submit</button>
-                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateDiscount()">Update</button>
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveDiscount()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateDiscount()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
                             <!--                            <button class="btn btn-secondary">Cancel</button>-->
                         </div>
@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-xl-6">
-            <div class="row">
+            <div class="row" *ngIf="permission[3].permission == 1">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <div class="card">
@@ -88,7 +88,7 @@
                                         <th scope="col">Fees Type Name</th>
                                         <th scope="col">Scholarship Code</th>
                                         <th scope="col">Amount</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -99,13 +99,13 @@
                                         <td>{{record.scholarship_code}}</td>
                                         <td>{{record.amount}}</td>
                                         <td>
-                                            <a (click)="editDiscount(record)"><mat-icon>edit</mat-icon></a>
-                                            <a (click)="deleteDiscount(record)"><mat-icon>delete</mat-icon></a>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editDiscount(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteDiscount(record)"><mat-icon>delete</mat-icon></a>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
-                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                <pagination-controls *ngIf="discountList.length > 9" (pageChange)="p = $event"></pagination-controls>
 
                             </div>
                         </div>

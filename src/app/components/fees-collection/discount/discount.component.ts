@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import {FeesService} from "../../../services/fees.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {StudentService} from "../../../services/student.service";
 import Swal from "sweetalert2";
 import {SubjectService} from "../../../services/subject.service";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-discount',
@@ -16,7 +17,8 @@ import {SubjectService} from "../../../services/subject.service";
     MatIconModule,
     NgForOf,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './discount.component.html',
   styleUrl: './discount.component.scss'
@@ -31,7 +33,10 @@ export class DiscountComponent {
   isUpdatable = false;
   p: number;
   filteredStudent: any[];
-  constructor(private feesService: FeesService, private studentService: StudentService, private subjectService: SubjectService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private feesService: FeesService, private studentService: StudentService
+              , private subjectService: SubjectService, private roleAndPermissionService: RolesAndPermissionService) {
     this.discountForm = new FormGroup({
       id: new FormControl(null),
       student_id: new FormControl(null, [Validators.required]),
@@ -60,6 +65,15 @@ export class DiscountComponent {
       this.feesTypeList = response;
     });
     this.feesTypeList = this.feesService.getFeesType();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'DISCOUNT').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'DISCOUNT').permission;
+    }
   }
 
   getSemester(){

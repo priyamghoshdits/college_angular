@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-6">
             <div class="row">
                 <div class="col-sm-12">
@@ -17,8 +17,8 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveUserType()">Submit</button>
-                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateUserType()">Update</button>
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveUserType()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateUserType()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-xl-6">
-            <div class="row">
+            <div class="row" *ngIf="permission[3].permission == 1">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <div class="card">
@@ -40,7 +40,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -48,8 +48,8 @@
                                         <td>{{indexOfElement+1}}</td>
                                         <td>{{record.name}}</td>
                                         <td>
-                                            <a (click)="editUserType(record)"><mat-icon>edit</mat-icon></a>
-                                            <a (click)="deleteUserType(record)"><mat-icon>delete</mat-icon></a>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editUserType(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteUserType(record)"><mat-icon>delete</mat-icon></a>
                                         </td>
                                     </tr>
                                     </tbody>

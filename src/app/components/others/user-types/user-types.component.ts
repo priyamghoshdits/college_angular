@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {UserTypeService} from "../../../services/user-type.service";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-user-types',
@@ -14,7 +15,8 @@ import Swal from "sweetalert2";
     MatIconModule,
     NgForOf,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './user-types.component.html',
   styleUrl: './user-types.component.scss'
@@ -23,8 +25,10 @@ export class UserTypesComponent {
   userTypeForm: FormGroup;
   isUpdatable = false;
   userTypeList: any[];
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
 
-  constructor(private userTypeService: UserTypeService) {
+  constructor(private userTypeService: UserTypeService, private roleAndPermissionService: RolesAndPermissionService) {
     this.userTypeForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
@@ -34,6 +38,15 @@ export class UserTypesComponent {
       this.userTypeList = response;
     })
     this.userTypeList = this.userTypeService.getUserTypeList();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'USER TYPE').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'USER TYPE').permission;
+    }
   }
 
   saveUserType(){

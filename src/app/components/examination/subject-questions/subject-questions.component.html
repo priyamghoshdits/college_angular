@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
@@ -103,7 +103,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveQuestions()">Submit</button>
+                                <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveQuestions()">Submit</button>
     <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
     <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
                                 <!--                            <button class="btn btn-secondary">Cancel</button>-->

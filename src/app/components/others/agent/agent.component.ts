@@ -6,6 +6,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {AgentService} from "../../../services/agent.service";
 import Swal from "sweetalert2";
 import {MemberService} from "../../../services/member.service";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-agent',
@@ -29,9 +30,11 @@ export class AgentComponent {
   studentList: any[];
   categoryList: any[];
   showStudentList = false;
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
   selectedAgent: { name,first_name,last_name,mobile_no,email,commission_percentage,commission_flat };
 
-  constructor(private agentService: AgentService, private memberService: MemberService) {
+  constructor(private agentService: AgentService, private memberService: MemberService, private roleAndPermissionService: RolesAndPermissionService) {
     this.agentForm = new FormGroup({
       id: new FormControl(null),
       first_name: new FormControl(null, [Validators.required]),
@@ -52,6 +55,15 @@ export class AgentComponent {
       this.categoryList = response;
     });
     this.categoryList = this.memberService.getCategoryList();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'AGENT').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'AGENT').permission;
+    }
   }
 
   saveAgent(){
