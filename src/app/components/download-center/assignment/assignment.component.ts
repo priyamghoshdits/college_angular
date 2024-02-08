@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {SubjectService} from "../../../services/subject.service";
 import {DownloadCenterService} from "../../../services/download-center.service";
 import {environment} from "../../../../environments/environment";
 import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-assignment',
@@ -17,7 +18,8 @@ import {NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
     NgForOf,
     NgxPaginationModule,
     ReactiveFormsModule,
-    NgbTooltip
+    NgbTooltip,
+    NgIf
   ],
   templateUrl: './assignment.component.html',
   styleUrl: './assignment.component.scss'
@@ -30,6 +32,7 @@ export class AssignmentComponent {
       this.assignmentList = response;
     });
     this.assignmentList = this.downloadCenterService.getAssignmentList();
+
   }
 
 }

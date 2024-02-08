@@ -84,6 +84,7 @@ export class SubjectQuestionsComponent {
 
     this.examinationService.getQuestionListListener().subscribe((response) => {
       this.questionList = response;
+      console.log(this.questionList);
     });
     this.questionList = this.examinationService.getQuestionListList();
 
@@ -101,6 +102,86 @@ export class SubjectQuestionsComponent {
     let x = this.subjectDetailsList.find(x => x.id == this.questionForm.value.subject_details_id);
     this.selected_details = x;
     this.questionForm.patchValue(x);
+  }
+
+  cancelUpdate(){
+    this.isUpdatable = false;
+    this.total_question = [1];
+    this.totalMarks = 0;
+    this.questionAnswers = [
+      {
+        'question': null,
+        'option_1': null,
+        'option_2': null,
+        'option_3': null,
+        'option_4': null,
+        'marks': null,
+        'answer': null
+      }
+    ];
+    this.counter = 0;
+    this.questionForm.reset();
+  }
+
+  updateQuestionPaper(){
+    let arr = [
+      {
+        'subject_details_id': this.questionForm.value.subject_details_id,
+        'questions': this.questionAnswers
+      }
+    ];
+    this.examinationService.updateQuestions(arr[0]).subscribe((response: any) => {
+      if(response.success == 1){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Question paper updated',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        this.cancelUpdate();
+      }
+    })
+  }
+
+  deleteQuestionPaper(data){
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Do you sure to delete ?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete It!'
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.examinationService.deleteQuestions(data).subscribe((response: any) => {
+          if(response.success == 1){
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Successfully deleted',
+              showConfirmButton: false,
+              timer: 1000
+            });
+          }
+        })
+      }
+    });
+
+  }
+
+  editQuestionPaper(data){
+    this.questionAnswers = data.questions;
+    this.total_question[data.questions.length -1] = [];
+    this.active = 1;
+    this.totalMarks = this.questionAnswers.reduce((accumulator, currentItem) => accumulator + parseInt(currentItem.marks), 0);
+    let x = this.subjectDetailsList.find(x => x.id == data.subject_details_id);
+    this.selected_details = x;
+    this.questionForm.patchValue(x);
+    this.questionForm.patchValue({subject_details_id: data.subject_details_id});
+    this.isUpdatable = true;
+    this.counter = data.questions.length -1;
   }
 
   saveQuestions(){
