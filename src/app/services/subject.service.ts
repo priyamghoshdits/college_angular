@@ -238,6 +238,20 @@ export class SubjectService {
           }));
   }
 
+  updateSemesterTimeTable(data){
+      return this.http.post(this.BASE_API_URL + '/updateSemesterTimeTable', data)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+
+          }));
+  }
+
+  deleteSemesterTimeTable(id){
+      return this.http.get(this.BASE_API_URL + '/deleteSemesterTimeTable/' + id)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+
+          }));
+  }
+
   saveSubjectGroup(value){
       return this.http.post(this.BASE_API_URL + '/saveSubjectGroup', value)
           .pipe(catchError(this.errorService.serverError), tap(response => {

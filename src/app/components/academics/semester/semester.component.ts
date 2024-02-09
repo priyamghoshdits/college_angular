@@ -31,8 +31,16 @@ export class SemesterComponent {
     page = 4;
     rolesAndPermission: any[] = [];
     permission: any[] = [];
-    constructor(private subjectService: SubjectService, private roleAndPermissionService: RolesAndPermissionService) {
+    constructor(private roleAndPermissionService: RolesAndPermissionService, private subjectService: SubjectService) {
         this.p = 1;
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'SEMESTER').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'SEMESTER').permission;
+        }
         this.semesterForm = new FormGroup({
             id: new FormControl(null),
             name: new FormControl(null, [Validators.required]),
@@ -42,15 +50,6 @@ export class SemesterComponent {
             this.semesterList = response;
         });
         this.semesterList = this.subjectService.getSemester();
-
-        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
-            this.rolesAndPermission = response;
-            this.permission = this.rolesAndPermission.find(x => x.name == 'SEMESTER').permission;
-        });
-        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
-        if(this.rolesAndPermission.length > 0){
-            this.permission = this.rolesAndPermission.find(x => x.name == 'SEMESTER').permission;
-        }
     }
 
     saveSemester(){

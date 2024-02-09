@@ -4,8 +4,17 @@ import {MatIconModule} from "@angular/material/icon";
 import {JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {SubjectService} from "../../../services/subject.service";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet, NgbTimepicker} from "@ng-bootstrap/ng-bootstrap";
+import {
+    NgbNav,
+    NgbNavItem,
+    NgbNavLink,
+    NgbNavLinkBase,
+    NgbNavOutlet,
+    NgbTimepicker,
+    NgbTooltip
+} from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-create-semester-timetable',
@@ -23,7 +32,8 @@ import Swal from "sweetalert2";
         NgbNavLink,
         NgbNavLinkBase,
         NgbNavItem,
-        NgbNavOutlet
+        NgbNavOutlet,
+        NgbTooltip
     ],
   templateUrl: './create-semester-timetable.component.html',
   styleUrl: './create-semester-timetable.component.scss'
@@ -38,8 +48,18 @@ export class CreateSemesterTimetableComponent {
     weekList: any[];
     tableArray : any[] = [];
     public active = 1;
+    week1: any[];
+    week2: any[];
+    week3: any[];
+    week4: any[];
+    week5: any[];
+    week6: any[];
+    week7: any[];
+    isUpdatable = false;
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
 
-    constructor(private subjectService: SubjectService) {
+    constructor(private subjectService: SubjectService, private roleAndPermissionService: RolesAndPermissionService){
         this.semesterTimeTableForm = new FormGroup({
             id: new FormControl(null),
             course_id: new FormControl(null, [Validators.required]),
@@ -56,6 +76,14 @@ export class CreateSemesterTimetableComponent {
             course_id: new FormControl(null, [Validators.required]),
             semester_id: new FormControl(null, [Validators.required]),
         });
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'CREATE SEMESTER TIMETABLE').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'CREATE SEMESTER TIMETABLE').permission;
+        }
         this.subjectService.getCourseListener().subscribe((response) => {
             this.courseList = response;
         });
@@ -67,12 +95,26 @@ export class CreateSemesterTimetableComponent {
         this.weekList = this.subjectService.getWeekDays();
     }
 
-    getSemesterTimeTable(){
-
-    }
-
     activeTab(data){
         this.active = data;
+    }
+
+    searchTimeTable(){
+        this.subjectService.getSemesterTimeTable(this.semesterTimeTableSearchForm.value.course_id, this.semesterTimeTableSearchForm.value.semester_id)
+            .subscribe((response) => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    let x = response.data
+                    this.week1 = x.filter(x => x.week_id === 1);
+                    this.week2 = x.filter(x => x.week_id === 2);
+                    this.week3 = x.filter(x => x.week_id === 3);
+                    this.week4 = x.filter(x => x.week_id === 4);
+                    this.week5 = x.filter(x => x.week_id === 5);
+                    this.week6 = x.filter(x => x.week_id === 6);
+                    this.week7 = x.filter(x => x.week_id === 7);
+                }
+            });
     }
 
     getSemester(){
@@ -80,6 +122,93 @@ export class CreateSemesterTimetableComponent {
             // @ts-ignore
             this.semesterList = response.data;
         })
+    }
+
+    getSemesterSearch(){
+        this.subjectService.getSemesterByCourseId(this.semesterTimeTableSearchForm.value.course_id).subscribe((response) => {
+            // @ts-ignore
+            this.semesterList = response.data;
+        })
+    }
+
+    editSemesterTimeTable(data){
+        Swal.fire({
+            title: 'Please Wait !',
+            html: 'Editing ...', // add html attribute if you want or remove
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+        this.subjectService.getSubjects(data.course_id, data.semester_id)
+            .subscribe((response) => {
+                // @ts-ignore
+                this.subjectList = response.data;
+                this.subjectService.getTeacherList(data.course_id, data.semester_id)
+                    .subscribe((response) => {
+                        // @ts-ignore
+                        this.teacherList = response.data;
+                        this.semesterTimeTableForm.patchValue(data);
+                        this.active = 1;
+                        this.semesterTimeTableForm.patchValue({room_number: data.room_no});
+                        this.isUpdatable = true;
+                        Swal.close();
+                    });
+            });
+    }
+
+    updateSemesterTimeTable(){
+        this.subjectService.updateSemesterTimeTable(this.semesterTimeTableForm.value).subscribe((response: any) => {
+            if(response.success){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Updated Successfully',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                this.cancelUpdate();
+                this.week1 = [];
+                this.week2 = [];
+                this.week3 = [];
+                this.week4 = [];
+                this.week5 = [];
+                this.week6 = [];
+                this.week7 = [];
+            }
+        })
+    }
+
+    deleteSemesterTimeTable(data){
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete leave Type ?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if(result.isConfirmed){
+                this.subjectService.deleteSemesterTimeTable(data.id).subscribe((response: any) => {
+                    if(response.success == 1){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Successfully Deleted',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                        this.searchTimeTable();
+                    }
+                })
+            }
+        });
+    }
+
+    cancelUpdate(){
+        this.semesterTimeTableForm.reset();
+        this.isUpdatable = false;
     }
 
     getSubject(){
