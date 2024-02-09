@@ -47,9 +47,18 @@ export class IcardComponent {
   }
 
   genarateIcard(item){
-    console.log(item);
     this.selectedMember = item;
   }
+
+  onPrint() {
+    console.log('woking print');
+          // @ts-ignore
+    const printContents = document.getElementById('sectionToPrint').innerHTML;
+    const originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+}
 
   activeTab(data) {
     this.active = data;
