@@ -176,17 +176,27 @@ export class StudentAdmisssionComponent {
     }
 
     saveStudent(){
+        Swal.fire({
+            title: 'Please Wait !',
+            html: 'Saving ...', // add html attribute if you want or remove
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
         this.studentService.saveStudent(this.studentCreationForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){
+                Swal.close();
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Student Save',
+                    title: 'Student Saved',
                     showConfirmButton: false,
                     timer: 1000
                 });
                 this.studentCreationForm.reset();
+
             }
         })
     }

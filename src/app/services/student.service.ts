@@ -92,6 +92,12 @@ export class StudentService {
           }));
   }
 
+  getUserAttendance(course_id,semester_id,date){
+      return this.http.get(this.BASE_API_URL + '/getStudentOwnAttendance/' + course_id + '/' + semester_id + '/' + date)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+          }));
+  }
+
   saveStudentAttendance(data){
       return this.http.post(this.BASE_API_URL + '/saveAttendance',data)
           .pipe(catchError(this.errorService.serverError), tap(response => {

@@ -71,6 +71,7 @@ export class NavService {
 		{
 			title: 'Attendance', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/attendance/period-attendance', title: 'Period Attendance', type: 'link' },
+				{ path: '/attendance/show-attendance', title: 'Show Attendance', type: 'link' },
 			]
 		},
 		{

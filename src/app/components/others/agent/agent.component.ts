@@ -59,6 +59,7 @@ export class AgentComponent {
     this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
       this.rolesAndPermission = response;
       this.permission = this.rolesAndPermission.find(x => x.name == 'AGENT').permission;
+      console.log(this.permission);
     });
     this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
     if(this.rolesAndPermission.length > 0){

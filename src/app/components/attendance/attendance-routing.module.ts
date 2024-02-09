@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {PeriodAttendanceComponent} from "./period-attendance/period-attendance.component";
+import {ShowAttendanceComponent} from "./show-attendance/show-attendance.component";
 
 const routes: Routes = [
   {
@@ -12,6 +13,14 @@ const routes: Routes = [
         data: {
           title: "Period Attendance",
           breadcrumb: "Period Attendance"
+        }
+      },
+      {
+        path: 'show-attendance',
+        component: ShowAttendanceComponent,
+        data: {
+          title: "Show Attendance",
+          breadcrumb: "Show Attendance"
         }
       },
     ]

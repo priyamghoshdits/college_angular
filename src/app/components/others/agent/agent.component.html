@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <div class="row" [hidden]="showStudentList">
+    <div class="row" [hidden]="showStudentList" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-6">
-            <div class="row" *ngIf="permission.length > 0">
+            <div class="row" >
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
@@ -121,7 +121,7 @@
             </div>
         </div>
     </div>
-    <div [hidden]="!showStudentList" *ngIf="selectedAgent">
+    <div [hidden]="!showStudentList" *ngIf="selectedAgent && permission.length > 0">
         <div class="col-sm-12">
             <a style="cursor: pointer;" (click)="returnBack()"><mat-icon>backspace</mat-icon></a>
             <div class="card">

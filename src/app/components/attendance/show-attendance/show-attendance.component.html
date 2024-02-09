@@ -1,0 +1,61 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Attendance</h5><span>Student period Attendance</span>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Attendance</h5><span>Student period Attendance</span>
+                            </div>
+                            <div class="card-body">
+                                <form class="theme-form" [formGroup]="attendanceForm">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Course</label>
+                                            <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                                <option *ngFor="let data of courseList" [value]="data.id" >
+                                                    {{data.course_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Semester</label>
+                                            <select style="width: 100%" formControlName="semester_id" class="form-select" required>
+                                                <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Date</label>
+                                            <input class="form-control" formControlName="date" type="date"
+                                                   placeholder="Select date">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <div>
+                                                <button style="margin-top: 25px;" (click)="getStudentAttendanceList()" class="btn btn-primary me-1">Search</button>
+                                            </div>
+                                        </div>
+<!--                                        <div class="col-md-3 mb-3">-->
+<!--                                            <label>Select Subject</label>-->
+<!--                                            <select style="width: 100%" formControlName="subject_id" class="form-select" required (change)="getStudentAttendanceList()">-->
+<!--                                                <option *ngFor="let data of subjectList" [value]="data.id" >-->
+<!--                                                    {{data.name}}-->
+<!--                                                </option>-->
+<!--                                            </select>-->
+<!--                                        </div>-->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

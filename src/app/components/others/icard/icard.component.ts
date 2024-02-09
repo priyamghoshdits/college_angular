@@ -47,28 +47,19 @@ export class IcardComponent {
       });
       this.memberList = this.memberService.getMemberList();
     }
-    // else{
-    //   this.studentService.getStudentListener().subscribe((response) => {
-    //     let temp = response.find(x => x.id == user.id);
-    //     let myArray = Object.keys(temp).map(key => (
-    //       { 
-    //           key: key
-    //         , value: temp[key] 
-    //       }));
-    //     // this.studentList.push(response.find(x => x.id == user.id));
-    //     console.log(myArray);
-    //   });
-    //   // this.studentList = this.studentService.getStudentLists();
-    //   // if(this.studentList.length > 0){
-    //   //   // this.studentList = this.studentList.find(x => x.id == user.id);
-    //   //   // console.log(this.studentList);
-    //   //   this.studentList.push(this.studentList.find(x => x.id == user.id));
-    //   // }
-    // }
+    else{
+      this.studentService.getStudentListener().subscribe((response) => {
+        this.studentList = response.filter(x => x.id == user.id);
+      });
+      this.studentList = this.studentService.getStudentLists();
+      if(this.studentList.length > 0){
+        this.studentList = this.studentList.filter(x => x.id == user.id);
+      }
+    }
    
   }
 
-  genarateIcard(item) {
+  generateIcard(item) {
     this.selectedMember = item;
   }
 
