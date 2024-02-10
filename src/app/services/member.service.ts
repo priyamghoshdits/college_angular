@@ -14,18 +14,23 @@ export class MemberService {
   teacherList = [];
   memberList = [];
   categoryList = [];
-  userTypeList = [];
+  staffAttendance = [];
 
 
   teacherListSubject = new Subject<any[]>();
   memberListSubject = new Subject<any[]>();
   CategoryListSubject = new Subject<any[]>();
+  staffAttendanceSubject = new Subject<any[]>();
   getTeacherListener(){
     return this.teacherListSubject.asObservable();
   }
 
   getMemberListener(){
     return this.memberListSubject.asObservable();
+  }
+
+  getStaffAttendanceListener(){
+    return this.staffAttendanceSubject.asObservable();
   }
 
   getCategoryListener(){
@@ -57,6 +62,20 @@ export class MemberService {
 
   getCategoryList(){
     return [...this.categoryList];
+  }
+
+  getStaffAttendance(user_type_id, date){
+    return this.http.get(this.BASE_API_URL + '/getStaffAttendance/' + user_type_id + '/' + date)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+
+        }));
+  }
+
+  saveAttendance(data){
+    return this.http.post(this.BASE_API_URL + '/saveStaffAttendance', data)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+
+        }));
   }
 
   saveMember(value){

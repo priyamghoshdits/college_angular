@@ -9,6 +9,7 @@ import {DepartmentComponent} from "./department/department.component";
 import {DesignationComponent} from "./designation/designation.component";
 import {CategoryComponent} from "./category/category.component";
 import {HolidayComponent} from "./holiday/holiday.component";
+import {StaffAttendanceComponent} from "./staff-attendance/staff-attendance.component";
 
 const routes: Routes = [
   {
@@ -73,6 +74,14 @@ const routes: Routes = [
     data: {
       title: "Holiday",
       breadcrumb: "Holiday"
+    }
+  },
+  {
+    path: 'staff-attendance',
+    component: StaffAttendanceComponent,
+    data: {
+      title: "Staff Attendance",
+      breadcrumb: "Staff Attendance"
     }
   }
 ];

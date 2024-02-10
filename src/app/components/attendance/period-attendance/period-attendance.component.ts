@@ -75,8 +75,6 @@ export class PeriodAttendanceComponent {
       value.course_id = course_id;
       value.semester_id = semester_id;
     })
-    // console.log(this.studentList);
-    // return;
     this.studentService.saveStudentAttendance(this.studentList).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
