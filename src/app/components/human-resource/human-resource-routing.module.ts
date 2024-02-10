@@ -10,6 +10,7 @@ import {DesignationComponent} from "./designation/designation.component";
 import {CategoryComponent} from "./category/category.component";
 import {HolidayComponent} from "./holiday/holiday.component";
 import {StaffAttendanceComponent} from "./staff-attendance/staff-attendance.component";
+import {PayrollComponent} from "./payroll/payroll.component";
 
 const routes: Routes = [
   {
@@ -82,6 +83,14 @@ const routes: Routes = [
     data: {
       title: "Staff Attendance",
       breadcrumb: "Staff Attendance"
+    }
+  },
+  {
+    path: 'staff-payroll',
+    component: PayrollComponent,
+    data: {
+      title: "Payroll",
+      breadcrumb: "Payroll"
     }
   }
 ];

@@ -1,0 +1,89 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Payroll</h5><span>Staff Payroll</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="payrollForm">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select User Type</label>
+                                        <select style="width: 100%" formControlName="user_type_id" class="form-select" required>
+                                            <option *ngFor="let data of userTypeList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Month</label>
+                                        <select style="width: 100%" formControlName="month" class="form-select" required>
+                                            <option value="January"> January </option>
+                                            <option value="February"> February </option>
+                                            <option value="March"> March </option>
+                                            <option value="April"> April </option>
+                                            <option value="May"> May </option>
+                                            <option value="June"> June </option>
+                                            <option value="July"> July </option>
+                                            <option value="August"> August </option>
+                                            <option value="September"> September </option>
+                                            <option value="October"> October </option>
+                                            <option value="November"> November </option>
+                                            <option value="December"> December </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Year</label>
+                                        <select style="width: 100%" formControlName="year" class="form-select" required>
+                                            <option *ngFor="let data of year" [value]="data.year" >
+                                                {{data.year}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <div>
+                                            <button style="margin-top: 28px;" class="btn btn-primary me-1" (click)="getStaff()">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Gender</th>
+                                        <th scope="col">Date Of Birth</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Generate Payroll</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of memberList ;let indexOfElement=index">
+                                        <td>{{indexOfElement + 1}}</td>
+                                        <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                        <td>{{record.gender}}</td>
+                                        <td>{{record.dob}}</td>
+                                        <td>{{record.email}}</td>
+                                        <td>
+                                            <button class="btn btn-primary me-1" type="submit">Generate</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--&lt;!&ndash; Container-fluid Ends&ndash;&gt;-->

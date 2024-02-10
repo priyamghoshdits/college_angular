@@ -71,6 +71,13 @@ export class MemberService {
         }));
   }
 
+  getMembers(user_type_id){
+    return this.http.get(this.BASE_API_URL + '/getMembers/' + user_type_id)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+
+        }));
+  }
+
   saveAttendance(data){
     return this.http.post(this.BASE_API_URL + '/saveStaffAttendance', data)
         .pipe(catchError(this.errorService.serverError), tap(response => {
