@@ -20,7 +20,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Leave Type</label>
-                                        <select style="width: 100%" formControlName="leave_type_id" class="form-select" required>
+                                        <select style="width: 100%" formControlName="leave_type_id" class="form-select" required (change)="checkIfEdit()">
                                             <option *ngFor="let data of leaveTypeList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>
@@ -71,7 +71,7 @@
                                             </p>
                                         </td>
                                         <td>
-<!--                                            <a (click)="editLeaveType(record)"><mat-icon>edit</mat-icon></a>-->
+                                            <a (click)="editLeaveAllocation(record)"><mat-icon>edit</mat-icon></a>
                                             <a *ngIf="permission[2].permission == 1" (click)="deleteLeaveAllocation(record)"><mat-icon>delete</mat-icon></a>
                                         </td>
                                     </tr>

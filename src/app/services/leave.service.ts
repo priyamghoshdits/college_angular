@@ -81,6 +81,20 @@ export class LeaveService {
             }));
     }
 
+    updateLeaveAllocation(data){
+        return this.http.post(this.BASE_API_URL + '/updateLeaveList', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    console.log(response.data);
+                    // // @ts-ignore
+                    // this.leaveAllocationList.push(response.data);
+                    // this.leaveAllocationSubject.next([...this.leaveAllocationList]);
+                }
+            }));
+    }
+
   updateLeaveType(data){
     return this.http.post(this.BASE_API_URL + '/updateLeaveType', data)
         .pipe(catchError(this.errorService.serverError), tap(response => {

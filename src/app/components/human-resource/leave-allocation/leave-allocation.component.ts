@@ -30,6 +30,7 @@ export class LeaveAllocationComponent {
   p: number;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
+  editAbleData : any[] = [];
 
   constructor(private leaveService: LeaveService,private memberService: MemberService, private roleAndPermissionService: RolesAndPermissionService) {
     this.leaveAllocationForm = new FormGroup({
@@ -60,6 +61,19 @@ export class LeaveAllocationComponent {
     this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
     if(this.rolesAndPermission.length > 0){
       this.permission = this.rolesAndPermission.find(x => x.name == 'ALLOCATE LEAVE').permission;
+    }
+  }
+
+  editLeaveAllocation(data){
+    console.log(data);
+    this.editAbleData = data.leave_type;
+    this.leaveAllocationForm.patchValue({user_id: data.user_id, leave_type_id: data.leave_type[0].id, total_leave: data.leave_type[0].total_leave});
+    this.isUpdatable = true;
+  }
+
+  checkIfEdit(){
+    if(this.editAbleData.length > 0){
+      this.leaveAllocationForm.patchValue({leave_type_id: this.leaveAllocationForm.value.leave_type_id, total_leave: this.editAbleData.find(x => x.id == this.leaveAllocationForm.value.leave_type_id).total_leave});
     }
   }
 
@@ -107,11 +121,24 @@ export class LeaveAllocationComponent {
   }
 
   updateLeaveAllocation(){
-
+    this.leaveService.updateLeaveAllocation(this.leaveAllocationForm.value).subscribe((response: any) => {
+      if(response.success == 1){
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Leave Allocation Updated',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        this.cancelUpdate();
+      }
+    })
   }
 
   cancelUpdate(){
-
+    this.editAbleData = [];
+    this.isUpdatable = false;
+    this.leaveAllocationForm.reset();
   }
 
 }
