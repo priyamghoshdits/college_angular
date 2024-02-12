@@ -84,7 +84,7 @@
                         <ng-template #content let-modal>
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="modal-basic-title">Student Payment</h4>
+                                    <h4 class="modal-title" id="modal-basic-title">Generate Payroll for - {{months[memberPayrollForm.value.month - 1]}}, Year- {{memberPayrollForm.value.year}}</h4>
                                     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
                                 </div>
                                 <div class="modal-body">
@@ -131,9 +131,21 @@
                                                 <input class="form-control" formControlName="contract_type" id="exampleInputEmail1" type="text">
                                             </div>
                                             <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Total Holidays</label>
+                                                <input class="form-control" formControlName="total_holidays" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Total Working Days</label>
+                                                <input class="form-control" formControlName="working_days" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
                                                 <label class="col-form-label pt-0" for="exampleInputEmail1">Present Days</label>
                                                 <input class="form-control" formControlName="total_present" id="exampleInputEmail1" type="text">
                                             </div>
+
+                                        </div>
+
+                                        <div class="row">
                                             <div class="col-md-2 mb-3">
                                                 <label class="col-form-label pt-0" for="exampleInputEmail1">Absent Days</label>
                                                 <input class="form-control" formControlName="total_absent" id="exampleInputEmail1" type="text">
@@ -143,13 +155,15 @@
                                                 <input class="form-control" formControlName="basic_salary" id="exampleInputEmail1" type="text">
                                                 <div *ngIf="memberPayrollForm.controls['basic_salary'].invalid && memberPayrollForm.controls['basic_salary'].touched" style="color: red">Basic salary cannot be null</div>
                                             </div>
-                                        </div>
-
-                                        <div class="row">
                                             <div class="col-md-2 mb-3">
                                                 <label class="col-form-label pt-0" for="exampleInputEmail1">Gross Salary</label>
                                                 <input class="form-control" formControlName="gross_salary" id="exampleInputEmail1" type="text">
                                                 <div *ngIf="memberPayrollForm.controls['gross_salary'].invalid && memberPayrollForm.controls['gross_salary'].touched" style="color: red">Gross salary cannot be null</div>
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Net Salary</label>
+                                                <input class="form-control" formControlName="net_salary" id="exampleInputEmail1" type="text">
+                                                <div *ngIf="memberPayrollForm.controls['net_salary'].invalid && memberPayrollForm.controls['net_salary'].touched" style="color: red">Net salary cannot be null</div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label class="col-form-label pt-0" for="exampleInputEmail1">Deduction</label>
@@ -167,8 +181,10 @@
                                             <div class="col-md-2 mb-3">
                                                 <button class="btn btn-primary me-1" type="submit" (click)="savePayroll(modal)">Save</button>
                                             </div>
+                                            <div class="col-md-2 mb-3">
+                                                <button class="btn btn-primary me-1" type="submit" (click)="calculate()">Auto Calculate</button>
+                                            </div>
                                         </div>
-
                                     </form>
                                 </div>
                             </div>

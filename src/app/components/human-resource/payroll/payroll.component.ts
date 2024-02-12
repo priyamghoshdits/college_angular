@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {UserTypeService} from "../../../services/user-type.service";
-import {JsonPipe, NgForOf, NgIf} from "@angular/common";
+import {DatePipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MemberService} from "../../../services/member.service";
@@ -20,19 +20,22 @@ import Swal from "sweetalert2";
     CustomFilterPipe,
     MatIconModule,
     NgbTooltip,
-    JsonPipe
+    JsonPipe,
+    DatePipe
   ],
   templateUrl: './payroll.component.html',
   styleUrl: './payroll.component.scss'
 })
 export class PayrollComponent {
-
+  months  = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
   payrollForm: FormGroup;
   memberPayrollForm: FormGroup;
   userTypeList : any[];
   year: any[] = [];
   memberList: any[];
-  selectedData: any[] = [];
+  selectedData: any;
   constructor(private userTypeService: UserTypeService, private memberService: MemberService, private modalService: NgbModal) {
     this.payrollForm = new FormGroup({
       id: new FormControl(null),
@@ -54,9 +57,12 @@ export class PayrollComponent {
       total_present: new FormControl(null, [Validators.required]),
       total_absent: new FormControl(null, [Validators.required]),
       designation_name: new FormControl({value: '', disabled: true}),
+      working_days: new FormControl({value: '', disabled: true}),
       total_approved_leave: new FormControl({value: '', disabled: true}),
       total_non_approved_leave: new FormControl({value: '', disabled: true}),
+      total_holidays: new FormControl({value: '', disabled: true}),
       gross_salary: new FormControl(null, [Validators.required]),
+      net_salary: new FormControl(null, [Validators.required]),
       basic_salary: new FormControl(null, [Validators.required]),
       contract_type: new FormControl({value: '', disabled: true}),
       deduction: new FormControl(null, [Validators.required]),
@@ -78,7 +84,7 @@ export class PayrollComponent {
   getStaff(){
     this.memberService.getMembers(this.payrollForm.value.user_type_id, this.payrollForm.value.month, this.payrollForm.value.year).subscribe((response: any) => {
       this.memberList = response.data;
-    })
+    });
   }
 
   openCustomModal(content) {
@@ -108,7 +114,25 @@ export class PayrollComponent {
   generatePayroll(data){
     this.memberPayrollForm.patchValue(data);
     this.memberPayrollForm.patchValue({total_leave: data.total_approved_leave
-      , staff_id : data.id, year: this.payrollForm.value.year, month: this.payrollForm.value.month});
+      , staff_id : data.id, year: this.payrollForm.value.year, month: this.payrollForm.value.month
+      , working_days: data.no_of_days - data.total_holidays});
+    this.selectedData = data;
+  }
+
+  calculate(){
+    if(this.memberPayrollForm.value.gross_salary == null){
+      this.memberPayrollForm.patchValue({gross_salary: this.memberPayrollForm.value.basic_salary});
+    }
+    console.log(this.memberPayrollForm.value.gross_salary);
+    console.log(this.selectedData.no_of_days);
+    let per_day = parseFloat(this.memberPayrollForm.value.gross_salary)/this.selectedData.no_of_days;
+    let deduction = parseFloat(this.selectedData.total_absent) * per_day;
+    console.log(per_day);
+    console.log(deduction);
+    // if(deduction > 0){
+    //   deduction = deduction + (this.memberPayrollForm.value.total_holidays * per_day)
+    // }
+    this.memberPayrollForm.patchValue({tax: 0, deduction: deduction.toFixed(2)});
   }
 
 }
