@@ -80,8 +80,16 @@ export class FeesStructureComponent {
       'semester_name': semester.name,
       'amount': this.feesStructureForm.value.amount
     }];
+    let index = this.feesStructureArray.findIndex(x => x.fees_type_id == this.feesStructureForm.value.fees_type_id);
+    if(index != -1){
+      this.feesStructureArray[index].amount = parseInt(this.feesStructureArray[index].amount)  + parseInt(this.feesStructureForm.value.amount);
+    }else{
+      // @ts-ignore
+      this.feesStructureArray.push(a[0]);
+    }
     // @ts-ignore
-    this.feesStructureArray.push(a[0]);
+    // this.feesStructureArray.push(a[0]);
+
     this.totalAmount = this.feesStructureArray.reduce((accumulator, currentItem) => accumulator + parseInt(currentItem.amount), 0);
     this.feesStructureForm.controls['fees_type_id'].reset();
     this.feesStructureForm.controls['amount'].reset();

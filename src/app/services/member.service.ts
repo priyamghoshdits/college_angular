@@ -21,8 +21,13 @@ export class MemberService {
   memberListSubject = new Subject<any[]>();
   CategoryListSubject = new Subject<any[]>();
   staffAttendanceSubject = new Subject<any[]>();
+  generatedPayrollSubject = new Subject<any[]>();
   getTeacherListener(){
     return this.teacherListSubject.asObservable();
+  }
+
+  getGeneratedPayrollListener(){
+    return this.generatedPayrollSubject.asObservable();
   }
 
   getMemberListener(){
@@ -71,6 +76,13 @@ export class MemberService {
         }));
   }
 
+  getMembers(user_type_id, month, year){
+    return this.http.get(this.BASE_API_URL + '/getMembers/' + user_type_id + '/' + month + '/' + year)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+
+        }));
+  }
+
   saveAttendance(data){
     return this.http.post(this.BASE_API_URL + '/saveStaffAttendance', data)
         .pipe(catchError(this.errorService.serverError), tap(response => {
@@ -87,6 +99,12 @@ export class MemberService {
             this.memberList.push(response.data);
             this.memberListSubject.next([...this.memberList]);
           }
+        }));
+  }
+
+  saveGeneratedPayroll(value){
+    return this.http.post(this.BASE_API_URL + '/savePayroll', value)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
         }));
   }
 

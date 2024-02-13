@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="applyLeaveForm">
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
+                                    <div *ngIf="user.user_type_id == 1" class="col-md-6 mb-3">
                                         <label>Select Member</label>
                                         <select style="width: 100%" formControlName="user_id" class="form-select" required>
                                             <option *ngFor="let data of memberList" [value]="data.id" >

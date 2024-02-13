@@ -109,7 +109,20 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Religion</label>
-                                            <input type="text" class="form-control" formControlName="religion" placeholder="Religion" required>
+                                            <!--                                            <input type="text" class="form-control" formControlName="religion" placeholder="Religion" required>-->
+                                            <select style="width: 100%" formControlName="religion" class="form-select" required>
+                                                <option value="Hinduism"> Hinduism </option>
+                                                <option value="Buddhism"> Buddhism </option>
+                                                <option value="Christianity"> Christianity </option>
+                                                <option value="Confucianism"> Confucianism </option>
+                                                <option value="Islam"> Islam </option>
+                                                <option value="Jainism"> Jainism </option>
+                                                <option value="Judaism"> Judaism </option>
+                                                <option value="Shinto"> Shinto </option>
+                                                <option value="Sikhism"> Sikhism </option>
+                                                <option value="Taoism"> Taoism </option>
+                                                <option value="Zoroastrianism"> Zoroastrianism </option>
+                                            </select>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>User Type</label>
@@ -126,10 +139,10 @@
                                             <input type="email" class="form-control" formControlName="email"
                                                    placeholder="name@example.com">
                                         </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Password</label>
-                                            <input type="text" class="form-control" formControlName="password">
-                                        </div>
+<!--                                        <div class="col-md-3 mb-3">-->
+<!--                                            <label>Password</label>-->
+<!--                                            <input type="text" class="form-control" formControlName="password">-->
+<!--                                        </div>-->
                                         <div class="col-md-3 mb-3">
                                             <label>Category</label>
                                             <select style="width: 100%" formControlName="category_id" class="form-select" required>

@@ -161,8 +161,8 @@ export class CreateStaffComponent {
         this.staffCreationForm.patchValue({image: file['name']});
     }
     saveMember(){
-        this.memberService.saveMember(this.staffCreationForm.value).subscribe((response) => {
-            // @ts-ignore
+        this.memberService.saveMember(this.staffCreationForm.value).subscribe((response: any) => {
+            console.log(response)
             if(response.success == 1){
                 Swal.fire({
                     position: 'center',

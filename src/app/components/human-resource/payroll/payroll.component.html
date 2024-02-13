@@ -1,0 +1,198 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Payroll</h5><span>Staff Payroll</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="payrollForm">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select User Type</label>
+                                        <select style="width: 100%" formControlName="user_type_id" class="form-select" required>
+                                            <option *ngFor="let data of userTypeList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Month</label>
+                                        <select style="width: 100%" formControlName="month" class="form-select" required>
+                                            <option value="01"> January </option>
+                                            <option value="02"> February </option>
+                                            <option value="03"> March </option>
+                                            <option value="04"> April </option>
+                                            <option value="05"> May </option>
+                                            <option value="06"> June </option>
+                                            <option value="07"> July </option>
+                                            <option value="08"> August </option>
+                                            <option value="09"> September </option>
+                                            <option value="10"> October </option>
+                                            <option value="11"> November </option>
+                                            <option value="12"> December </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Year</label>
+                                        <select style="width: 100%" formControlName="year" class="form-select" required>
+                                            <option *ngFor="let data of year" [value]="data.year" >
+                                                {{data.year}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <div>
+                                            <button style="margin-top: 28px;" class="btn btn-primary me-1" (click)="getStaff()">Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Gender</th>
+                                        <th scope="col">Date Of Birth</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col" *ngIf="permission[0].permission == 1">Generate Payroll</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of memberList ;let indexOfElement=index">
+                                        <td>{{indexOfElement + 1}}</td>
+                                        <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                        <td>{{record.gender}}</td>
+                                        <td>{{record.dob}}</td>
+                                        <td>{{record.email}}</td>
+                                        <td *ngIf="permission[0].permission == 1">
+                                            <button *ngIf="record.generated == 0" class="btn btn-primary me-1" type="submit" (click)="openCustomModal(content);generatePayroll(record)">Generate</button>
+                                            <button *ngIf="record.generated == 1" class="btn btn-primary me-1" type="submit">Download</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <ng-template #content let-modal>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-basic-title">Generate Payroll for - {{months[memberPayrollForm.value.month - 1]}}, Year- {{memberPayrollForm.value.year}}</h4>
+                                    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form class="theme-form" [formGroup]="memberPayrollForm">
+
+                                        <div class="row">
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">First Name</label>
+                                                <input class="form-control" formControlName="first_name" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Middle Name</label>
+                                                <input class="form-control" formControlName="middle_name" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Last Name</label>
+                                                <input class="form-control" formControlName="last_name" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Department Name</label>
+                                                <input class="form-control" formControlName="department_name" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Designation Name</label>
+                                                <input class="form-control" formControlName="designation_name" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Total Days</label>
+                                                <input class="form-control" formControlName="no_of_days" id="exampleInputEmail1" type="text">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Non Approved Leave</label>
+                                                <input class="form-control" formControlName="total_non_approved_leave" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Approved Leave</label>
+                                                <input class="form-control" formControlName="total_approved_leave" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Contract Type</label>
+                                                <input class="form-control" formControlName="contract_type" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Total Holidays</label>
+                                                <input class="form-control" formControlName="total_holidays" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Total Working Days</label>
+                                                <input class="form-control" formControlName="working_days" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Present Days</label>
+                                                <input class="form-control" formControlName="total_present" id="exampleInputEmail1" type="text">
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Absent Days</label>
+                                                <input class="form-control" formControlName="total_absent" id="exampleInputEmail1" type="text">
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Basic Salary</label>
+                                                <input class="form-control" formControlName="basic_salary" id="exampleInputEmail1" type="text">
+                                                <div *ngIf="memberPayrollForm.controls['basic_salary'].invalid && memberPayrollForm.controls['basic_salary'].touched" style="color: red">Basic salary cannot be null</div>
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Gross Salary</label>
+                                                <input class="form-control" formControlName="gross_salary" id="exampleInputEmail1" type="text">
+                                                <div *ngIf="memberPayrollForm.controls['gross_salary'].invalid && memberPayrollForm.controls['gross_salary'].touched" style="color: red">Gross salary cannot be null</div>
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Net Salary</label>
+                                                <input class="form-control" formControlName="net_salary" id="exampleInputEmail1" type="text">
+                                                <div *ngIf="memberPayrollForm.controls['net_salary'].invalid && memberPayrollForm.controls['net_salary'].touched" style="color: red">Net salary cannot be null</div>
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Deduction</label>
+                                                <input class="form-control" formControlName="deduction" id="exampleInputEmail1" type="text">
+                                                <div *ngIf="memberPayrollForm.controls['deduction'].invalid && memberPayrollForm.controls['deduction'].touched" style="color: red">Deduction cannot be null</div>
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Tax</label>
+                                                <input class="form-control" formControlName="tax" id="exampleInputEmail1" type="text">
+                                                <div *ngIf="memberPayrollForm.controls['tax'].invalid && memberPayrollForm.controls['tax'].touched" style="color: red">Enter Tax</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-2 mb-3">
+                                                <button class="btn btn-primary me-1" type="submit" (click)="savePayroll(modal)">Save</button>
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <button class="btn btn-primary me-1" type="submit" (click)="calculate()">Auto Calculate</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--&lt;!&ndash; Container-fluid Ends&ndash;&gt;-->

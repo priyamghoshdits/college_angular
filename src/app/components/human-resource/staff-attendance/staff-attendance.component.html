@@ -11,7 +11,7 @@
                             <form class="theme-form" [formGroup]="attendanceForm">
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <label>Select Semester</label>
+                                        <label>Select User Type</label>
                                         <select style="width: 100%" formControlName="user_type_id" class="form-select" required>
                                             <option *ngFor="let data of userTypeList" [value]="data.id" >
                                                 {{data.name}}

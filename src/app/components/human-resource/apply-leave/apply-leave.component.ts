@@ -35,6 +35,8 @@ export class ApplyLeaveComponent {
   nonApprovedLeaves: any[] = [];
   rolesAndPermission: any[] = [];
   permission: any[] = [];
+  user: any;
+
   constructor(private memberService: MemberService, private leaveService: LeaveService
               , private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService) {
     this.applyLeaveForm = new FormGroup({
@@ -49,6 +51,12 @@ export class ApplyLeaveComponent {
       remaining_leave: new FormControl(null),
       remaining_leave_show: new FormControl({value: '', disabled: true}),
     });
+
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
+
+    if(this.user.user_type_id != 1){
+      this.applyLeaveForm.patchValue({user_id: this.user.id});
+    }
 
     this.memberService.getMemberListener().subscribe((response) => {
       this.memberList = response;
@@ -88,6 +96,7 @@ export class ApplyLeaveComponent {
   }
 
   calculateNoOFDate(){
+    this.applyLeaveForm.getRawValue();
     if(this.applyLeaveForm.value.from_date && this.applyLeaveForm.value.to_date){
       // @ts-ignore
       let x =Math.floor(((new Date(this.applyLeaveForm.value.to_date) - new Date(this.applyLeaveForm.value.from_date))) / (1000 * 60 * 60 * 24))+1;

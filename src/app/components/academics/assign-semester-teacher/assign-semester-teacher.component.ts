@@ -8,6 +8,7 @@ import {MemberService} from "../../../services/member.service";
 import {SemesterService} from "../../../services/semester.service";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'app-assign-semester-teacher',
@@ -27,6 +28,7 @@ export class AssignSemesterTeacherComponent {
     courseList: any[];
     semesterList: any[];
     teachers: any[];
+    cloneTeacher: any[];
     assignSemesterTeacherForm: FormGroup;
     tempTeacher = [];
     assignedTeacher: any[];
@@ -49,6 +51,7 @@ export class AssignSemesterTeacherComponent {
 
         this.memberService.getTeacherListener().subscribe((response) => {
             this.teachers = response;
+            this.cloneTeacher = cloneDeep(this.teachers);
         })
         this.teachers = this.memberService.getTeacherList();
 
@@ -94,10 +97,12 @@ export class AssignSemesterTeacherComponent {
                     timer: 1000
                 });
                 this.assignSemesterTeacherForm.reset();
-                this.teachers.forEach(function (value){
-                    value.checked = false;
-                });
+                // this.teachers.forEach(function (value){
+                //     value.checked = false;
+                // });
                 this.tempTeacher = [];
+                this.cancelUpdate();
+                this.teachers = cloneDeep(this.cloneTeacher);
             }
         });
     }
