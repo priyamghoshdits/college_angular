@@ -194,8 +194,7 @@
                                         <h4>Search</h4>
                                     </div>
                                     <div class="col-9">
-                                        <input style="width: 60%" class="form-control" type="text"
-                                            placeholder="Search Or Filter">
+                                        <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
                                     </div>
                                 </div>
                                 <div class="card">
@@ -214,7 +213,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let record of studentList;let indexOfElement=index">
+                                                <tr *ngFor="let record of studentList | customFilter:searchItem;let indexOfElement=index">
                                                     <td>{{indexOfElement + 1}}</td>
                                                     <td>{{record.first_name}} {{record.middle_name}}
                                                         {{record.last_name}}</td>

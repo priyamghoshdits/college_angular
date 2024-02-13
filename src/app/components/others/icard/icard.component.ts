@@ -7,6 +7,7 @@ import { StudentService } from "../../../services/student.service";
 import { MemberService } from "../../../services/member.service";
 import { NgbActiveModal, NgbModal, ModalDismissReasons, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { environment } from "../../../../environments/environment";
+import {CustomFilterPipe} from "custom-filter.pipe";
 
 @Component({
   selector: 'app-icard',
@@ -21,7 +22,8 @@ import { environment } from "../../../../environments/environment";
     NgbNavOutlet,
     NgbNavItem,
     FormsModule,
-    NgIf
+    NgIf,
+    CustomFilterPipe,
   ],
   templateUrl: './icard.component.html',
   styleUrl: './icard.component.scss'
@@ -33,6 +35,7 @@ export class IcardComponent {
   studentList: any[];
   memberList: any[];
   selectedMember: any;
+  searchItem: string;
 
   constructor(private studentService: StudentService, private memberService: MemberService, private modalService: NgbModal) {
     let user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -79,5 +82,8 @@ export class IcardComponent {
   openLg(content) {
     this.modalService.open(content, { size: 'lg' });
   }
+
+  
+
 
 }
