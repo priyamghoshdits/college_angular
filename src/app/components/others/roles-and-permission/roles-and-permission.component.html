@@ -33,11 +33,11 @@
                                                                                 <th scope="col">Permission</th>
                                                                             </tr>
                                                                             </thead>
-                                                                            <tbody>
-                                                                            <tr *ngFor="let record of records.permission ;let indexOfElement=index">
-                                                                                <td>{{indexOfElement + 1}}</td>
-                                                                                <td>{{record.name}}</td>
-                                                                                <td>
+                                                                            <tbody *ngFor="let record of records.permission ;let indexOfElement=index">
+                                                                            <tr>
+                                                                                <td [ngStyle]="{'background-color': record.groups == 1 ? '#eacbcb' : 'white'}">{{indexOfElement + 1}}</td>
+                                                                                <td [ngStyle]="{'background-color': record.groups == 1 ? '#eacbcb' : 'white'}">{{record.name}}</td>
+                                                                                <td [ngStyle]="{'background-color': record.groups == 1 ? '#eacbcb' : 'white'}">
                                                                                     <mat-slide-toggle [(ngModel)]="record.permission" (click)="updatePermission(record)"></mat-slide-toggle>
                                                                                 </td>
                                                                             </tr>

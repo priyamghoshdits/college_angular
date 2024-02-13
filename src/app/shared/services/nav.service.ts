@@ -63,6 +63,7 @@ export class NavService {
 				{ path: '/human-resource/leave-type', title: 'Leave Type', type: 'link' },
 				{ path: '/human-resource/allocate-leave', title: 'Allocate Leave', type: 'link' },
 				{ path: '/human-resource/apply-leave', title: 'Apply Leave', type: 'link' },
+				{ path: '/human-resource/approve-leave', title: 'Approve Leave', type: 'link' },
 				{ path: '/human-resource/department', title: 'Department', type: 'link' },
 				{ path: '/human-resource/designation', title: 'Designation', type: 'link' },
 				{ path: '/human-resource/category', title: 'Category', type: 'link' },

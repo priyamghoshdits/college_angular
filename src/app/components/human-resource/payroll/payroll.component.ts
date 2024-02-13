@@ -8,6 +8,7 @@ import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
 import {MatIconModule} from "@angular/material/icon";
 import {NgbModal, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-payroll',
@@ -36,7 +37,10 @@ export class PayrollComponent {
   year: any[] = [];
   memberList: any[];
   selectedData: any;
-  constructor(private userTypeService: UserTypeService, private memberService: MemberService, private modalService: NgbModal) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private userTypeService: UserTypeService, private memberService: MemberService
+              , private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService) {
     this.payrollForm = new FormGroup({
       id: new FormControl(null),
       user_type_id: new FormControl(null, [Validators.required]),
@@ -69,6 +73,14 @@ export class PayrollComponent {
       tax: new FormControl(null, [Validators.required]),
       total_leave: new FormControl(null, [Validators.required]),
     });
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'PAYROLL').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'PAYROLL').permission;
+    }
     this.userTypeService.getUserTypeListener().subscribe((response) => {
       this.userTypeList = response;
     });
@@ -127,11 +139,6 @@ export class PayrollComponent {
     console.log(this.selectedData.no_of_days);
     let per_day = parseFloat(this.memberPayrollForm.value.gross_salary)/this.selectedData.no_of_days;
     let deduction = parseFloat(this.selectedData.total_absent) * per_day;
-    console.log(per_day);
-    console.log(deduction);
-    // if(deduction > 0){
-    //   deduction = deduction + (this.memberPayrollForm.value.total_holidays * per_day)
-    // }
     this.memberPayrollForm.patchValue({tax: 0, deduction: deduction.toFixed(2)});
   }
 

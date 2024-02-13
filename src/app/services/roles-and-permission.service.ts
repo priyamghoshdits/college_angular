@@ -33,14 +33,14 @@ export class RolesAndPermissionService {
   }
 
   constructor(private  http: HttpClient, private errorService: ErrorService) {
-    this.http.get(this.BASE_API_URL + '/getMenuForUpdate').subscribe((response: any) =>{
-      this.menuManagement = response.data;
-      this.menuManagementSubject.next([...this.menuManagement]);
-    });
-
     this.http.get(this.BASE_API_URL + '/getRolesAndPermission').subscribe((response: any) =>{
       this.rolesAndPermission = response.data;
       this.rolesAndPermissionSubject.next([...this.rolesAndPermission]);
+    });
+
+    this.http.get(this.BASE_API_URL + '/getMenuForUpdate').subscribe((response: any) =>{
+      this.menuManagement = response.data;
+      this.menuManagementSubject.next([...this.menuManagement]);
     });
 
     this.http.get(this.BASE_API_URL + '/getRolesAndPermissionForUpdate').subscribe((response: any) =>{

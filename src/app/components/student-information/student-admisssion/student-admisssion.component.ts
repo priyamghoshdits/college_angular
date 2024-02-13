@@ -52,6 +52,16 @@ export class StudentAdmisssionComponent {
                 , private sessionService: SessionService, private studentService: StudentService
                 , private imageService: ImageService, private agentService: AgentService
                 , private commonService: CommonService, private roleAndPermissionService: RolesAndPermissionService) {
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'STUDENT ADMISSION').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'STUDENT ADMISSION').permission;
+        }
+
         this.studentCreationForm = new FormGroup({
             id: new FormControl(null),
             identification_no: new FormControl(null, [Validators.required]),
@@ -115,15 +125,6 @@ export class StudentAdmisssionComponent {
             this.studentList = response;
         });
         this.studentList = this.studentService.getStudentLists();
-
-        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
-            this.rolesAndPermission = response;
-            this.permission = this.rolesAndPermission.find(x => x.name == 'STUDENT ADMISSION').permission;
-        });
-        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
-        if(this.rolesAndPermission.length > 0){
-            this.permission = this.rolesAndPermission.find(x => x.name == 'STUDENT ADMISSION').permission;
-        }
 
     }
 

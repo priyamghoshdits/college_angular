@@ -147,10 +147,10 @@ export class SubjectGroupComponent {
     this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response) => {
       // @ts-ignore
       this.semesterList = response.data;
-      this.subjectGroupForm.patchValue({'course_id' :data.course_id, 'name': data.name});
-      this.semesterList.forEach(function (value){
-        value.checked = data.semester.findIndex(x => x.semester_id === value.semester_id) != -1;
-      });
+      this.subjectGroupForm.patchValue({'course_id' :data.course_id, 'name': data.name, 'semester_id': data.semester_id});
+      // this.semesterList.forEach(function (value){
+      //   value.checked = data.semester.findIndex(x => x.semester_id === value.semester_id) != -1;
+      // });
       let tempSem = [];
       data.semester.forEach(function (value){
         let sem;

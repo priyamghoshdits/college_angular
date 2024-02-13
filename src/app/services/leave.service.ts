@@ -75,6 +75,11 @@ export class LeaveService {
                 // @ts-ignore
                 if(response.success == 1){
                     // @ts-ignore
+                    let index = this.leaveAllocationList.findIndex(x => x.user_id == response.data.user_id);
+                    if(index != -1){
+                        this.leaveAllocationList.splice(index,1);
+                    }
+                    // @ts-ignore
                     this.leaveAllocationList.push(response.data);
                     this.leaveAllocationSubject.next([...this.leaveAllocationList]);
                 }
