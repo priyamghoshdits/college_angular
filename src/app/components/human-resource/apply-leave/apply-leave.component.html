@@ -77,51 +77,51 @@
                                         <span>Leave List.</span>
                                     </div>
                                     <div class="col-2">
-                                        <ng-template #content let-modal>
-                                            <div class="modal-header">
-                                                <h4 class="modal-title" id="modal-basic-title">Approve Leave</h4>
-                                                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
-                                            </div>
-                                            <div class="modal-body">
+<!--                                        <ng-template #content let-modal>-->
+<!--                                            <div class="modal-header">-->
+<!--                                                <h4 class="modal-title" id="modal-basic-title">Approve Leave</h4>-->
+<!--                                                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>-->
+<!--                                            </div>-->
+<!--                                            <div class="modal-body">-->
 
-                                                <table class="table" style="text-align: center">
-                                                    <thead>
-                                                    <tr>
-                                                        <th scope="col">#</th>
-                                                        <th scope="col">User Name</th>
-                                                        <th scope="col">Leave Type</th>
-                                                        <th scope="col">From Date</th>
-                                                        <th scope="col">To Date</th>
-                                                        <th scope="col">Total Days</th>
-                                                        <th scope="col">Reason</th>
-                                                        <th scope="col">Action</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody [hidden]="nonApprovedLeaves.length == 0">
-                                                    <tr *ngFor="let record of nonApprovedLeaves | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
-                                                        <td>{{indexOfElement+1}}</td>
-                                                        <td>{{record.user_name}}</td>
-                                                        <td>{{record.leave_type_name}}</td>
-                                                        <td>{{record.from_date}}</td>
-                                                        <td>{{record.to_date}}</td>
-                                                        <td>{{record.total_days}}</td>
-                                                        <td>{{record.reason}}</td>
-                                                        <td>
-                                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,1)">Approve</button>
-                                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,2)">Reject</button>
-                                                        </td>
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
-                                                <div class="row" [hidden]="nonApprovedLeaves.length > 0">
-                                                    <div class="col"></div>
-                                                    <div class="col"><h2 style="text-align: center;">No Data</h2></div>
-                                                    <div class="col"></div>
-                                                </div>
+<!--                                                <table class="table" style="text-align: center">-->
+<!--                                                    <thead>-->
+<!--                                                    <tr>-->
+<!--                                                        <th scope="col">#</th>-->
+<!--                                                        <th scope="col">User Name</th>-->
+<!--                                                        <th scope="col">Leave Type</th>-->
+<!--                                                        <th scope="col">From Date</th>-->
+<!--                                                        <th scope="col">To Date</th>-->
+<!--                                                        <th scope="col">Total Days</th>-->
+<!--                                                        <th scope="col">Reason</th>-->
+<!--                                                        <th scope="col">Action</th>-->
+<!--                                                    </tr>-->
+<!--                                                    </thead>-->
+<!--                                                    <tbody [hidden]="nonApprovedLeaves.length == 0">-->
+<!--                                                    <tr *ngFor="let record of nonApprovedLeaves | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+<!--                                                        <td>{{indexOfElement+1}}</td>-->
+<!--                                                        <td>{{record.user_name}}</td>-->
+<!--                                                        <td>{{record.leave_type_name}}</td>-->
+<!--                                                        <td>{{record.from_date}}</td>-->
+<!--                                                        <td>{{record.to_date}}</td>-->
+<!--                                                        <td>{{record.total_days}}</td>-->
+<!--                                                        <td>{{record.reason}}</td>-->
+<!--                                                        <td>-->
+<!--                                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,1)">Approve</button>-->
+<!--                                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,2)">Reject</button>-->
+<!--                                                        </td>-->
+<!--                                                    </tr>-->
+<!--                                                    </tbody>-->
+<!--                                                </table>-->
+<!--                                                <div class="row" [hidden]="nonApprovedLeaves.length > 0">-->
+<!--                                                    <div class="col"></div>-->
+<!--                                                    <div class="col"><h2 style="text-align: center;">No Data</h2></div>-->
+<!--                                                    <div class="col"></div>-->
+<!--                                                </div>-->
 
-                                            </div>
-                                        </ng-template>
-                                        <button  class="btn btn-primary me-1" (click)="openCustomModal(content);getLeaveNotApproved()">Approve Leave</button>
+<!--                                            </div>-->
+<!--                                        </ng-template>-->
+<!--                                        <button  class="btn btn-primary me-1" (click)="openCustomModal(content);getLeaveNotApproved()">Approve Leave</button>-->
                                     </div>
                                 </div>
                             </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from "@angular/core";
 import * as chartData from "./../../../shared/data/dashboard/default";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 declare var require: any;
 // var Knob = require('knob')// browserify require
 
@@ -13,7 +14,7 @@ var secondary = localStorage.getItem("secondary_color") || "#1ea6ec";
   encapsulation: ViewEncapsulation.None,
 })
 export class DefaultComponent implements OnInit {
-  constructor() {}
+  constructor(private roleAndPermission: RolesAndPermissionService) {}
 
   ngOnInit() {
   }

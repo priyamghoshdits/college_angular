@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import Swal from "sweetalert2";
 import {CommonService} from "../../../services/common.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
-
+import {cloneDeep} from 'lodash';
 
 
 
@@ -28,6 +28,7 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
 export class CourseComponent {
     courseForm: FormGroup;
     semesterList: any[];
+    cloneSemesterList: any[];
     rolesAndPermission: any[] = [];
     permission: any[] = [];
     courseList: any[];
@@ -55,8 +56,12 @@ export class CourseComponent {
         this.courseList = this.subjectService.getCourses();
         this.subjectService.getSemesterListener().subscribe((response: any) => {
             this.semesterList = response;
+            this.cloneSemesterList = cloneDeep(this.semesterList);
         });
         this.semesterList = this.subjectService.getSemester();
+        if(this.semesterList.length > 0){
+            this.cloneSemesterList = cloneDeep(this.semesterList);
+        }
     }
 
     editCourse(data){
@@ -126,9 +131,7 @@ export class CourseComponent {
                     timer: 1000
                 });
                 this.courseForm.reset();
-                this.semesterList.forEach(function (value){
-                    value.checked = false;
-                });
+                this.semesterList= cloneDeep(this.cloneSemesterList);
                 this.tempSem = [];
             }
         });
@@ -136,9 +139,10 @@ export class CourseComponent {
 
     cancelUpdate(){
         this.courseForm.reset();
-        this.semesterList.forEach(function (value){
-            value.checked = false;
-        })
+        // this.semesterList.forEach(function (value){
+        //     value.checked = false;
+        // })
+        this.semesterList= cloneDeep(this.cloneSemesterList);
         this.isUpdatable = false;
     }
 

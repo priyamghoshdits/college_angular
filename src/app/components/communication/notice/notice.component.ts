@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import {CommunicationService} from "../../../services/communication.service";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
 import {CKEditorModule} from "@ckeditor/ckeditor5-angular";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'app-notice',
@@ -18,7 +19,8 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
     NgxPaginationModule,
     ReactiveFormsModule,
     CKEditorModule,
-    NgIf
+    NgIf,
+    DatePipe
   ],
   templateUrl: './notice.component.html',
   styleUrl: './notice.component.scss'
@@ -73,6 +75,7 @@ export class NoticeComponent {
   noticeForm: FormGroup;
   noticeList: any[];
   userTypeList: any[];
+  cloneUserTypeList: any[];
   tempUserTypes: any[] = [];
   isUpdatable = false;
   p:number;
@@ -91,8 +94,12 @@ export class NoticeComponent {
 
     this.communicationService.getUserTypeListListener().subscribe((response) => {
       this.userTypeList = response;
+      this.cloneUserTypeList = cloneDeep(this.userTypeList);
     });
     this.userTypeList = this.communicationService.getUserTypeList();
+    if(this.userTypeList.length > 0){
+      this.cloneUserTypeList = cloneDeep(this.userTypeList);
+    }
 
     this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
       this.rolesAndPermission = response;
@@ -164,9 +171,10 @@ export class NoticeComponent {
     this.isUpdatable = false;
     this.tempUserTypes = [];
     this.noticeForm.reset();
-    this.userTypeList.forEach(function (value){
-      value.checked = false;
-    })
+    this.userTypeList= cloneDeep(this.cloneUserTypeList);
+    // this.userTypeList.forEach(function (value){
+    //   value.checked = false;
+    // })
   }
 
   saveNotice(){
@@ -189,9 +197,7 @@ export class NoticeComponent {
           timer: 1000
         });
         this.noticeForm.reset();
-        this.userTypeList.forEach(function (value){
-          value.checked = false;
-        });
+        this.userTypeList= cloneDeep(this.cloneUserTypeList);
         this.tempUserTypes = [];
       }
     });

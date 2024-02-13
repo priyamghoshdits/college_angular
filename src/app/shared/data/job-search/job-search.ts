@@ -8,7 +8,7 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
-            Job_description: 'RUDKARSH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
+            Job_description: 'RUDRAKASH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
             Qualifications: {
                 title: 'Qualifications',
                 desc: `
@@ -370,7 +370,7 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
-            Job_description: 'RUDKARSH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
+            Job_description: 'RUDRAKASH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
             Qualifications: {
                 title: 'Qualifications',
                 desc: `
@@ -417,7 +417,7 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
-            Job_description: 'RUDKARSH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
+            Job_description: 'RUDRAKASH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
             Qualifications: {
                 title: 'Qualifications',
                 desc: `
@@ -464,7 +464,7 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
-            Job_description: 'RUDKARSH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
+            Job_description: 'RUDRAKASH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
             Qualifications: {
                 title: 'Qualifications',
                 desc: `
@@ -511,7 +511,7 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
-            Job_description: 'RUDKARSH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
+            Job_description: 'RUDRAKASH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
             Qualifications: {
                 title: 'Qualifications',
                 desc: `
@@ -558,7 +558,7 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
-            Job_description: 'RUDKARSH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
+            Job_description: 'RUDRAKASH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
             Qualifications: {
                 title: 'Qualifications',
                 desc: `
@@ -605,7 +605,7 @@ export class JobDB {
             badgeValue: 'New',
             job_area: '(L6) Salt Lake City,',
             job_city: 'UT',
-            Job_description: 'RUDKARSH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
+            Job_description: 'RUDRAKASH is looking for a UI/UX Designer to join our team. The world is seeing an explosion in the amount and variety of location-baWe are looking for a versatile UX/UI Designer to join our growing design team. React Native and other front end frameworks. Transform product wireframes into responsive, mobile user interface components and',
             Qualifications: {
                 title: 'Qualifications',
                 desc: `

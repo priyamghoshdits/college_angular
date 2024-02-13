@@ -84,7 +84,6 @@ export class SubjectQuestionsComponent {
 
     this.examinationService.getQuestionListListener().subscribe((response) => {
       this.questionList = response;
-      console.log(this.questionList);
     });
     this.questionList = this.examinationService.getQuestionListList();
 

@@ -29,7 +29,7 @@ export class SweetAlertComponent implements OnInit {
 
   // Alert with Image
   withImage() {
-    Swal.fire({ imageUrl: 'assets/images/RUDKARSH-logo.png', imageHeight: 65, imageAlt: 'A RUDKARSH Logo' })
+    Swal.fire({ imageUrl: 'assets/images/RUDRAKASH-logo.png', imageHeight: 65, imageAlt: 'A RUDRAKASH Logo' })
   }
 
   // A modal with a title, an error icon, a text, and a footer

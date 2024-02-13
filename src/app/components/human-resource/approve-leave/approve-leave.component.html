@@ -8,6 +8,14 @@
                             <h5>Approve Leave</h5><span>Approve Leave List</span>
                         </div>
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-3"></div>
+                                <div class="col-6">
+                                    <input style="width: 100%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                </div>
+                                <div class="col-3"></div>
+                            </div>
+
                             <table class="table" style="text-align: center">
                                 <thead>
                                 <tr>
@@ -22,7 +30,7 @@
                                 </tr>
                                 </thead>
                                 <tbody [hidden]="leaveList.length == 0">
-                                <tr *ngFor="let record of leaveList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                <tr *ngFor="let record of leaveList | customFilter:searchItem | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
                                     <td>{{indexOfElement+1}}</td>
                                     <td>{{record.user_name}}</td>
                                     <td>{{record.leave_type_name}}</td>

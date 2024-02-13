@@ -40,7 +40,6 @@
                             <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveNotice()">Submit</button>
                             <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateNotice()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
-                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
                         </div>
                     </div>
                 </div>
@@ -72,7 +71,7 @@
                                         <td>{{indexOfElement+1}}</td>
                                         <td>{{record.subject}}</td>
                                         <td>{{record.body}}</td>
-                                        <td>{{record.published_on}}</td>
+                                        <td>{{record.published_on | date}}</td>
                                         <td>{{record.mailed_to}}</td>
                                         <td>
                                             <a *ngIf="permission[1].permission == 1" (click)="editNotice(record)"><mat-icon>edit</mat-icon></a>

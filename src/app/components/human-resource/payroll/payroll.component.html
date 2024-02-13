@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row" *ngIf="permission.length > 0">
+    <div class="row">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
@@ -61,7 +61,7 @@
                                         <th scope="col">Gender</th>
                                         <th scope="col">Date Of Birth</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col" *ngIf="permission[0].permission == 1">Generate Payroll</th>
+                                        <th scope="col">Generate Payroll</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -71,7 +71,7 @@
                                         <td>{{record.gender}}</td>
                                         <td>{{record.dob}}</td>
                                         <td>{{record.email}}</td>
-                                        <td *ngIf="permission[0].permission == 1">
+                                        <td>
                                             <button *ngIf="record.generated == 0" class="btn btn-primary me-1" type="submit" (click)="openCustomModal(content);generatePayroll(record)">Generate</button>
                                             <button *ngIf="record.generated == 1" class="btn btn-primary me-1" type="submit">Download</button>
                                         </td>

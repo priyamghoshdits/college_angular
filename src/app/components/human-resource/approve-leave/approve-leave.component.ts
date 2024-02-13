@@ -3,6 +3,8 @@ import {LeaveService} from "../../../services/leave.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import Swal from "sweetalert2";
+import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-approve-leave',
@@ -10,7 +12,10 @@ import Swal from "sweetalert2";
   imports: [
     NgIf,
     NgForOf,
-    NgxPaginationModule
+    NgxPaginationModule,
+    CustomFilterPipe,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   templateUrl: './approve-leave.component.html',
   styleUrl: './approve-leave.component.scss'
@@ -18,6 +23,7 @@ import Swal from "sweetalert2";
 export class ApproveLeaveComponent {
   p: number;
   leaveList: any[];
+  searchItem: string;
   constructor(private leaveService: LeaveService) {
     this.leaveService.getLeaveListListener().subscribe((response) => {
       this.leaveList = response.filter(a => a.approved == 0);
