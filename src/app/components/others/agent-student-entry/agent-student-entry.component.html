@@ -4,48 +4,57 @@
             <div class="row" >
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h5>Student</h5><span>Student Entry Form</span>
+                        <div class="card-header" [hidden]="active != 1">
+                            <h5>Student Admission</h5>
                         </div>
-                        <div class="card-body">
-                            <form class="theme-form" [formGroup]="studentForm">
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>Show All Students</h5>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Add Student</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Show Students</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+
+                        <div class="card-body" >
+                            <form class="theme-form" [formGroup]="studentForm" [hidden]="active != 1">
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">First Name</label>
                                             <input class="form-control" formControlName="first_name" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter First Name">
-                                        </div>
+                                        <div *ngIf="studentForm.controls['first_name'].errors?.['required'] && studentForm.controls['first_name'].touched " class="text text-danger mt-1">First Name required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Middle Name</label>
                                             <input class="form-control" formControlName="middle_name" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Middle Name">
-                                        </div>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Last Name</label>
                                             <input class="form-control" formControlName="last_name" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Last Name">
-                                        </div>
+                                        <div *ngIf="studentForm.controls['last_name'].errors?.['required'] && studentForm.controls['last_name'].touched " class="text text-danger mt-1">Last Name required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Mobile Number</label>
                                             <input class="form-control" formControlName="mobile_no" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Mobile Number">
-                                        </div>
+                                        <div *ngIf="studentForm.controls['mobile_no'].errors?.['required'] && studentForm.controls['mobile_no'].touched " class="text text-danger mt-1">Mobile Number required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Qualification</label>
                                             <input class="form-control" formControlName="qualification" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Qualification">
-                                        </div>
+                                        <div *ngIf="studentForm.controls['qualification'].errors?.['required'] && studentForm.controls['qualification'].touched " class="text text-danger mt-1">Qualification required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Category</label>
@@ -54,6 +63,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="studentForm.controls['category_id'].errors?.['required'] && studentForm.controls['category_id'].touched " class="text text-danger mt-1">Category required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Select Course</label>
@@ -62,6 +72,7 @@
                                                 {{data.course_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="studentForm.controls['course_id'].errors?.['required'] && studentForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Select Semester</label>
@@ -70,33 +81,93 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="studentForm.controls['semester_id'].errors?.['required'] && studentForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                 </div>
                                 <div  class="row">
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Email</label>
                                             <input class="form-control" formControlName="email" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Email">
+                                        <div *ngIf="studentForm.controls['email'].errors?.['required'] && studentForm.controls['email'].touched " class="text text-danger mt-1">Email is required</div>
+                                        <div *ngIf="studentForm.controls['email'].touched && studentForm.controls['email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Current Address</label>
                                         <input class="form-control" formControlName="current_address" id="exampleInputEmail1" type="text"
                                                placeholder="Enter Current Address">
+                                        <div *ngIf="studentForm.controls['current_address'].errors?.['required'] && studentForm.controls['current_address'].touched " class="text text-danger mt-1">Current Address required</div>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Permanent Address</label>
                                         <input class="form-control" formControlName="permanent_address" id="exampleInputEmail1" type="text"
                                                placeholder="Enter Permanent Address">
+                                        <div *ngIf="studentForm.controls['permanent_address'].errors?.['required'] && studentForm.controls['permanent_address'].touched " class="text text-danger mt-1">Permanent Address required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="session_id" class="form-select" required>
+                                            <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="studentForm.controls['session_id'].errors?.['required'] && studentForm.controls['session_id'].touched " class="text text-danger mt-1">Permanent Address required</div>
                                     </div>
                                 </div>
                             </form>
+                            <div [hidden]="active != 2">
+                                <div *ngIf="isSuperAdmin">
+                                    <form class="theme-form" [formGroup]="agentForm">
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                <label>Agent List</label>
+                                                <select style="width: 100%" formControlName="id" class="form-select" required>
+                                                    <option *ngFor="let data of agentList" [value]="data.id" >
+                                                        {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <button style="margin-top: 30px;" class="btn btn-primary me-1" (click)="getStudentListByAgent()">Submit</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Type</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Admission</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of studentList ;let indexOfElement=index">
+                                            <td>{{indexOfElement + 1}}</td>
+                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                            <td>{{record.user_type}}</td>
+                                            <td>{{record.email}}</td>
+                                            <td>{{(record.admission_status == 0)?'Not Admitted':'Admitted'}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-footer">
-<!--                            <button *ngIf="permission[0].permission == 1" [disabled]="!agentForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveAgent()">Submit</button>-->
+                        <div class="card-footer" [hidden]="active != 1">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveStudent()">Submit</button>
 <!--                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateAgent()">Update</button>-->
 <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
                             <!--                            <button class="btn btn-secondary">Cancel</button>-->
                         </div>
+
+
+
+
                     </div>
                 </div>
 

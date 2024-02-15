@@ -4,7 +4,6 @@ import {AgentComponent} from "./agent/agent.component";
 import {RolesAndPermissionComponent} from "./roles-and-permission/roles-and-permission.component";
 import {UserTypesComponent} from "./user-types/user-types.component";
 import { IcardComponent } from './icard/icard.component';
-import {AgentStudentListComponent} from "./agent-student-list/agent-student-list.component";
 import {AgentStudentEntryComponent} from "./agent-student-entry/agent-student-entry.component";
 
 const routes: Routes = [
@@ -14,14 +13,6 @@ const routes: Routes = [
     data: {
       title: "Agent",
       breadcrumb: "Agent"
-    }
-  },
-  {
-    path: 'agent-student-list',
-    component: AgentStudentListComponent,
-    data: {
-      title: "Agent Student List",
-      breadcrumb: "Agent Student List"
     }
   },
   {

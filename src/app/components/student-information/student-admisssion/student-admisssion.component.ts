@@ -177,6 +177,7 @@ export class StudentAdmisssionComponent {
     }
 
     saveStudent(){
+        this.studentCreationForm.patchValue({admission_status: 1});
         Swal.fire({
             title: 'Please Wait !',
             html: 'Saving ...', // add html attribute if you want or remove
