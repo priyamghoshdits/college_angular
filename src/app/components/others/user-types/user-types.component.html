@@ -9,11 +9,10 @@
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="userTypeForm">
-                                <div class="form-group">
                                     <label class="col-form-label pt-0" for="exampleInputEmail1">User Type Name</label>
                                     <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
                                            placeholder="Enter User Type Name">
-                                </div>
+                                <div *ngIf="userTypeForm.controls['name'].errors?.['required'] && userTypeForm.controls['name'].touched " class="text text-danger mt-1">User Type Name required</div>
                             </form>
                         </div>
                         <div class="card-footer">

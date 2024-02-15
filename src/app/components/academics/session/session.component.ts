@@ -51,6 +51,10 @@ export class SessionComponent {
     }
 
     saveSession(){
+        if(!this.sessionForm.valid){
+            this.sessionForm.markAllAsTouched();
+            return;
+        }
         this.sessionService.saveSession(this.sessionForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){

@@ -81,6 +81,10 @@ export class SubjectComponent {
     }
 
     saveSubject(){
+        if(!this.subjectForm.valid){
+            this.subjectForm.markAllAsTouched();
+            return;
+        }
         this.subjectService.saveSubject(this.subjectForm.value).subscribe((response) => {
             // @ts-ignore
            if(response.success == 1){
@@ -97,6 +101,10 @@ export class SubjectComponent {
     }
 
     updateSubject(){
+        if(!this.subjectForm.valid){
+            this.subjectForm.markAllAsTouched();
+            return;
+        }
         this.subjectService.updateSubject(this.subjectForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){

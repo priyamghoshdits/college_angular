@@ -53,6 +53,10 @@ export class SemesterComponent {
     }
 
     saveSemester(){
+        if(!this.semesterForm.valid){
+            this.semesterForm.markAllAsTouched();
+            return;
+        }
         this.subjectService.saveSemester(this.semesterForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){
@@ -101,6 +105,10 @@ export class SemesterComponent {
     }
 
     updateSemester(){
+        if(!this.semesterForm.valid){
+            this.semesterForm.markAllAsTouched();
+            return;
+        }
         this.subjectService.updateSemester(this.semesterForm.value).subscribe((response) =>{
             // @ts-ignore
             if(response.success == 1){

@@ -112,6 +112,20 @@ export class CourseComponent {
     }
 
     saveCourse(){
+        if(!this.courseForm.valid){
+            this.courseForm.markAllAsTouched();
+            return;
+        }
+        if(this.tempSem.length == 0){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select atleast one sem',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            return;
+        }
         let arr;
         arr = [
             {
@@ -162,6 +176,20 @@ export class CourseComponent {
     }
 
     updateCourse(){
+        if(!this.courseForm.valid){
+            this.courseForm.markAllAsTouched();
+            return;
+        }
+        if(this.tempSem.length == 0){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select atleast one sem',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            return;
+        }
         let arr;
         arr = [
             {

@@ -11,27 +11,24 @@
                             <form class="theme-form" [formGroup]="agentForm">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">First Name</label>
                                             <input class="form-control" formControlName="first_name" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Agent Name">
-                                        </div>
+                                        <div *ngIf="agentForm.controls['first_name'].errors?.['required'] && agentForm.controls['first_name'].touched " class="text text-danger mt-1">First Name required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Last Name</label>
                                             <input class="form-control" formControlName="last_name" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Agent Name">
-                                        </div>
+                                        <div *ngIf="agentForm.controls['last_name'].errors?.['required'] && agentForm.controls['last_name'].touched " class="text text-danger mt-1">Last Name required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Mobile Number</label>
                                             <input class="form-control" formControlName="mobile_no" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Mobile Number">
-                                        </div>
+                                        <div *ngIf="agentForm.controls['mobile_no'].errors?.['required'] && agentForm.controls['mobile_no'].touched " class="text text-danger mt-1">Mobile Number required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Category</label>
@@ -40,15 +37,16 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="agentForm.controls['category_id'].errors?.['required'] && agentForm.controls['category_id'].touched " class="text text-danger mt-1">Category Name required</div>
                                     </div>
                                 </div>
                                 <div  class="row">
                                     <div class="col-md-12 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Email</label>
                                             <input class="form-control" formControlName="email" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Email">
-                                        </div>
+                                        <div *ngIf="agentForm.controls['email'].errors?.['required'] && agentForm.controls['email'].touched " class="text text-danger mt-1">Email is required</div>
+                                        <div *ngIf="agentForm.controls['email'].touched && agentForm.controls['email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
                                     </div>
                                 </div>
                                 <div class="row">

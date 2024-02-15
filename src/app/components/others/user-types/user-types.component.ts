@@ -50,6 +50,10 @@ export class UserTypesComponent {
   }
 
   saveUserType(){
+    if(!this.userTypeForm.valid){
+      this.userTypeForm.markAllAsTouched();
+      return;
+    }
     this.userTypeService.saveUserType(this.userTypeForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

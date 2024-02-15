@@ -65,28 +65,28 @@ export class StudentAdmisssionComponent {
 
         this.studentCreationForm = new FormGroup({
             id: new FormControl(null),
-            identification_no: new FormControl(null, [Validators.required]),
+            identification_no: new FormControl(null),
             first_name: new FormControl(null, [Validators.required]),
-            middle_name: new FormControl(null, [Validators.required]),
+            middle_name: new FormControl(null),
             last_name: new FormControl(null, [Validators.required]),
             gender: new FormControl(null, [Validators.required]),
             dob: new FormControl(null, [Validators.required]),
-            admission_date: new FormControl(null),
+            admission_date: new FormControl(null, [Validators.required]),
             image: new FormControl(null),
             mobile_no: new FormControl(null, [Validators.required]),
             emergency_phone_number: new FormControl(null, [Validators.required]),
-            material_status: new FormControl(null, [Validators.required]),
-            admission_status: new FormControl(null, [Validators.required]),
+            material_status: new FormControl(null),
+            admission_status: new FormControl(null),
             qualification: new FormControl(null, [Validators.required]),
             current_address: new FormControl(null, [Validators.required]),
             permanent_address: new FormControl(null, [Validators.required]),
-            religion: new FormControl(null, [Validators.required]),
-            blood_group: new FormControl(null, [Validators.required]),
+            religion: new FormControl(null),
+            blood_group: new FormControl(null),
             category_id: new FormControl(null, [Validators.required]),
-            email: new FormControl(null, [Validators.required]),
-            course_id: new FormControl(null),
-            semester_id: new FormControl(null),
-            agent_id: new FormControl(null),
+            email: new FormControl(null, [Validators.required, Validators.email]),
+            course_id: new FormControl(null, [Validators.required]),
+            semester_id: new FormControl(null, [Validators.required]),
+            agent_id: new FormControl(null, [Validators.required]),
             father_name: new FormControl(null),
             father_phone: new FormControl(null),
             father_occupation: new FormControl(null),
@@ -99,7 +99,7 @@ export class StudentAdmisssionComponent {
             guardian_relation: new FormControl(null),
             guardian_occupation: new FormControl(null),
             guardian_address: new FormControl(null),
-            session_id: new FormControl(null),
+            session_id: new FormControl(null, [Validators.required]),
         });
 
         this.memberService.getCategoryListener().subscribe((response) => {
@@ -182,6 +182,10 @@ export class StudentAdmisssionComponent {
     }
 
     saveStudent(){
+        if(!this.studentCreationForm.valid){
+            this.studentCreationForm.markAllAsTouched();
+            return;
+        }
         this.studentCreationForm.patchValue({admission_status: 1});
         Swal.fire({
             title: 'Please Wait !',

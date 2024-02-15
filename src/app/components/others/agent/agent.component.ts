@@ -41,7 +41,7 @@ export class AgentComponent {
       last_name: new FormControl(null, [Validators.required]),
       mobile_no: new FormControl(null, [Validators.required]),
       category_id: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       commission_percentage: new FormControl(null),
       commission_flat: new FormControl(null),
     });
@@ -76,6 +76,10 @@ export class AgentComponent {
   }
 
   saveAgent(){
+    if(!this.agentForm.valid){
+      this.agentForm.markAllAsTouched();
+      return;
+    }
     if(this.agentForm.value.commission_flat == ""){
       this.agentForm.patchValue({commission_flat: null});
     }

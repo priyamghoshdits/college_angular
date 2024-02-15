@@ -9,11 +9,10 @@
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="semesterForm">
-                                <div class="form-group">
                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Semester</label>
                                     <input class="form-control" formControlName="name" id="exampleInputEmail1" type="email" aria-describedby="emailHelp"
                                            placeholder="Enter Semester">
-                                </div>
+                                <div *ngIf="semesterForm.controls['name'].errors?.['required'] && semesterForm.controls['name'].touched " class="text text-danger mt-1">Semester Name required</div>
                             </form>
                         </div>
                         <div class="card-footer">

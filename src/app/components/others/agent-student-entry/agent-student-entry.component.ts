@@ -119,10 +119,13 @@ export class AgentStudentEntryComponent {
 
 
     saveStudent(){
+        if(!this.studentForm.valid){
+            this.studentForm.markAllAsTouched();
+            return;
+        }
         let user = JSON.parse(localStorage.getItem('user') || '{}');
         this.studentForm.patchValue({admission_status: 0, agent_id:user.id});
         this.studentForm.markAllAsTouched();
-        if(this.studentForm.valid){
             Swal.fire({
                 title: 'Please Wait !',
                 html: 'Saving ...', // add html attribute if you want or remove
@@ -144,6 +147,5 @@ export class AgentStudentEntryComponent {
                     this.studentForm.reset();
                 }
             })
-        }
     }
 }

@@ -9,12 +9,16 @@
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="courseForm">
-                                <div class="form-group">
-                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Course name</label>
-                                    <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
-                                           placeholder="Enter Course Name">
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Course name</label>
+                                        <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Course Name">
+                                        <div *ngIf="courseForm.controls['name'].errors?.['required'] && courseForm.controls['name'].touched " class="text text-danger mt-1">Course Name required</div>
+                                    </div>
                                 </div>
-                                <div >
+
+                                <div>
                                     <div *ngFor="let record of semesterList">
                                         <input [checked]="record.checked" id="checkbox-primary-1" (change)="importSemester(record, $event)" type="checkbox">
                                         <label for="checkbox-primary-1">{{record.name}}</label>
@@ -25,7 +29,7 @@
                         </div>
                         <div class="card-footer">
                             <button *ngIf="permission[0].permission === 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCourse()">Submit</button>
-                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>
+                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
                             <!--                            <button class="btn btn-secondary">Cancel</button>-->
                         </div>

@@ -9,11 +9,10 @@
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="sessionForm">
-                                <div class="form-group">
                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Session</label>
                                     <input class="form-control" formControlName="name" id="exampleInputEmail1" aria-describedby="emailHelp"
                                            placeholder="Enter Session">
-                                </div>
+                                    <div *ngIf="sessionForm.controls['name'].errors?.['required'] && sessionForm.controls['name'].touched " class="text text-danger mt-1">Session Name required</div>
                             </form>
                         </div>
                         <div class="card-footer">

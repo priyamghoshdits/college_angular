@@ -9,16 +9,24 @@
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="subjectForm">
-                                <div class="form-group">
-                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Subject Name</label>
-                                    <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
-                                           placeholder="Enter Course Name">
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Subject Name</label>
+                                        <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Subject Name">
+                                        <div *ngIf="subjectForm.controls['name'].errors?.['required'] && subjectForm.controls['name'].touched " class="text text-danger mt-1">Subject Name required</div>
+                                    </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Subject Code</label>
-                                    <input class="form-control" formControlName="subject_code" id="exampleInputEmail1" type="text"
-                                           placeholder="Enter Subject Code">
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Subject Code</label>
+                                        <input class="form-control" formControlName="subject_code" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Subject Code">
+                                        <div *ngIf="subjectForm.controls['subject_code'].errors?.['required'] && subjectForm.controls['subject_code'].touched " class="text text-danger mt-1">Subject Code required</div>
+                                    </div>
                                 </div>
+
+
                             </form>
                         </div>
                         <div class="card-footer">
