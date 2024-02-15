@@ -17,6 +17,7 @@
                                             {{data.course_name}}
                                         </option>
                                     </select>
+                                    <div *ngIf="assignSemesterTeacherForm.controls['course_id'].errors?.['required'] && assignSemesterTeacherForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                 </div>
                                 <div class="col-6">
                                     <label>Select Semester</label>
@@ -25,6 +26,7 @@
                                             {{data.name}}
                                         </option>
                                     </select>
+                                    <div *ngIf="assignSemesterTeacherForm.controls['semester_id'].errors?.['required'] && assignSemesterTeacherForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                 </div>
                             </div>
                             <hr>
@@ -35,8 +37,6 @@
                                         <label for="checkbox-primary-1"> {{record.first_name}} {{record.middle_name}} {{record.last_name}}</label>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                             </div>
 <!--                            <button class="btn btn-primary" type="submit">Submit form</button>-->
                         </form>

@@ -37,6 +37,10 @@ export class StaffAttendanceComponent {
   }
 
   getStaff(){
+    if(!this.attendanceForm.valid){
+      this.attendanceForm.markAllAsTouched();
+      return;
+    }
     this.memberService.getStaffAttendance(this.attendanceForm.value.user_type_id, this.attendanceForm.value.date).subscribe((response: any) => {
       this.memberAttendanceList = response.data;
     })

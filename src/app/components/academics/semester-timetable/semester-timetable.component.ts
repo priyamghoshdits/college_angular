@@ -57,6 +57,10 @@ export class SemesterTimetableComponent {
   }
 
   searchTimeTable(){
+    if(!this.semesterTimeTableForm.valid){
+      this.semesterTimeTableForm.markAllAsTouched();
+      return;
+    }
     this.subjectService.getSemesterTimeTable(this.semesterTimeTableForm.value.course_id, this.semesterTimeTableForm.value.semester_id)
         .subscribe((response) => {
           // @ts-ignore

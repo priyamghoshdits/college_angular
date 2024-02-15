@@ -64,6 +64,10 @@ export class PromoteStudentComponent {
     }
 
     searchStudents(){
+        if(!this.promotionForm.valid){
+            this.promotionForm.markAllAsTouched();
+            return;
+        }
         let studentsByCourse = this.studentList.filter(x => x.course_id == this.promotionForm.value.course_id);
         let studentsBySemester = studentsByCourse.filter(x => x.current_semester_id == this.promotionForm.value.semester_id);
         this.filteredStudent = studentsBySemester.filter(x => x.session_id == this.promotionForm.value.session_id);
@@ -103,7 +107,7 @@ export class PromoteStudentComponent {
                 icon: 'error',
                 title: 'Select atleast one student',
                 showConfirmButton: false,
-                timer: 1000
+                timer: 1500
             });
             return;
         }

@@ -107,6 +107,20 @@ export class SubjectGroupComponent {
   }
 
   saveSubjectGroup(){
+    if(!this.subjectGroupForm.valid){
+      this.subjectGroupForm.markAllAsTouched();
+      return;
+    }
+    if(this.tempSub.length == 0){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Subjects',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
     let arr;
     arr = [
       {

@@ -18,6 +18,7 @@
                                                 {{data.course_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="promotionForm.controls['course_id'].errors?.['required'] && promotionForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label>Select Semester</label>
@@ -26,6 +27,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="promotionForm.controls['semester_id'].errors?.['required'] && promotionForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label>Select Session</label>
@@ -34,6 +36,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="promotionForm.controls['session_id'].errors?.['required'] && promotionForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
                                     </div>
                                 </div>
                                 <h5 style="margin-bottom: 23px">Promote To:-</h5>
@@ -45,6 +48,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="promotionForm.controls['promote_semester_id'].errors?.['required'] && promotionForm.controls['promote_semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label>Select Session</label>
@@ -53,6 +57,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="promotionForm.controls['promote_session_id'].errors?.['required'] && promotionForm.controls['promote_session_id'].touched " class="text text-danger mt-1">Session required</div>
                                     </div>
                                 </div>
 

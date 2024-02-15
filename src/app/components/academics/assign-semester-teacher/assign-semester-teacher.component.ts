@@ -79,6 +79,19 @@ export class AssignSemesterTeacherComponent {
     }
 
     saveAssignSemesterTeacher(){
+        if(!this.assignSemesterTeacherForm.valid){
+            this.assignSemesterTeacherForm.markAllAsTouched();
+            return;
+        }
+        if(this.tempTeacher.length == 0){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Please select teacher',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
         let arr;
         arr = [
             {course_id: this.assignSemesterTeacherForm.value.course_id,

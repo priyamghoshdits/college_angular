@@ -158,6 +158,14 @@ export class CreateSemesterTimetableComponent {
     }
 
     updateSemesterTimeTable(){
+        if(!this.semesterTimeTableForm.controls['course_id'].valid){
+            this.semesterTimeTableForm.controls['course_id'].markAsTouched();
+            return;
+        }
+        if(!this.semesterTimeTableForm.controls['semester_id'].valid){
+            this.semesterTimeTableForm.controls['semester_id'].markAsTouched();
+            return;
+        }
         this.subjectService.updateSemesterTimeTable(this.semesterTimeTableForm.value).subscribe((response: any) => {
             if(response.success){
                 Swal.fire({
@@ -225,6 +233,10 @@ export class CreateSemesterTimetableComponent {
     }
 
     createArray(){
+        if(!this.semesterTimeTableForm.valid){
+            this.semesterTimeTableForm.markAllAsTouched();
+            return;
+        }
         let time_from_sec = (parseInt(this.semesterTimeTableForm.value.time_from.split(':')[0]) * 3600) + (parseInt(this.semesterTimeTableForm.value.time_from.split(':')[1]) * 60);
         let time_to_sec = (parseInt(this.semesterTimeTableForm.value.time_to.split(':')[0]) * 3600) + (parseInt(this.semesterTimeTableForm.value.time_to.split(':')[1]) * 60);
         let formValue = this.semesterTimeTableForm.value;
@@ -312,6 +324,23 @@ export class CreateSemesterTimetableComponent {
     }
 
     createSemesterTimetable(){
+        if(!this.semesterTimeTableForm.controls['course_id'].valid){
+            this.semesterTimeTableForm.controls['course_id'].markAsTouched();
+            return;
+        }
+        if(!this.semesterTimeTableForm.controls['semester_id'].valid){
+            this.semesterTimeTableForm.controls['semester_id'].markAsTouched();
+            return;
+        }
+        if(this.tableArray.length == 0){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Add timetables before save',
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
         Swal.fire({
             title: 'Confirmation',
             text: 'Please check once before saving',

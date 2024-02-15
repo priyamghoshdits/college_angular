@@ -78,6 +78,10 @@ export class LeaveAllocationComponent {
   }
 
   saveLeaveAllocation(){
+    if(!this.leaveAllocationForm.valid){
+      this.leaveAllocationForm.markAllAsTouched();
+      return;
+    }
     this.leaveService.saveLeaveAllocation(this.leaveAllocationForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
@@ -121,6 +125,10 @@ export class LeaveAllocationComponent {
   }
 
   updateLeaveAllocation(){
+    if(!this.leaveAllocationForm.valid){
+      this.leaveAllocationForm.markAllAsTouched();
+      return;
+    }
     this.leaveService.updateLeaveAllocation(this.leaveAllocationForm.value).subscribe((response: any) => {
       if(response.success == 1){
         Swal.fire({

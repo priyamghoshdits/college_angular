@@ -105,6 +105,10 @@ export class ApplyLeaveComponent {
   }
 
   saveApplyLeave(){
+    if(!this.applyLeaveForm.valid){
+      this.applyLeaveForm.markAllAsTouched();
+      return;
+    }
     if(this.applyLeaveForm.value.total_days > this.applyLeaveForm.value.remaining_leave){
       Swal.fire({
         position: 'center',
@@ -144,6 +148,10 @@ export class ApplyLeaveComponent {
   }
 
   updateApplyLeave(){
+    if(!this.applyLeaveForm.valid){
+      this.applyLeaveForm.markAllAsTouched();
+      return;
+    }
     this.leaveService.updateLeave(this.applyLeaveForm.value).subscribe((response: any) => {
       if(response.success == 1){
         Swal.fire({

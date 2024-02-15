@@ -28,10 +28,12 @@
                                         <div class="col-md-3 mb-3">
                                                 <label>Staff Id</label>
                                                 <input type="text" class="form-control" (blur)="checkUniqueId()" formControlName="identification_no" placeholder="Staff Id" required>
+
                                         </div>
                                         <div class="col-md-3 mb-3">
                                                 <label>First Name</label>
                                                 <input type="text" class="form-control" formControlName="first_name" placeholder="First name" required>
+                                            <div *ngIf="staffCreationForm.controls['first_name'].errors?.['required'] && staffCreationForm.controls['first_name'].touched " class="text text-danger mt-1">First Name required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Middle Name</label>
@@ -40,6 +42,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Last Name</label>
                                             <input type="text" class="form-control" formControlName="last_name" placeholder="Last Name" required>
+                                            <div *ngIf="staffCreationForm.controls['last_name'].errors?.['required'] && staffCreationForm.controls['last_name'].touched " class="text text-danger mt-1">Last Name required</div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -49,26 +52,31 @@
                                                 <option value="Male"> Male </option>
                                                 <option value="Female"> Female </option>
                                             </select>
+                                            <div *ngIf="staffCreationForm.controls['gender'].errors?.['required'] && staffCreationForm.controls['gender'].touched " class="text text-danger mt-1">Gender required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Date Of Birth</label>
                                             <input class="form-control digits" type="date" formControlName="dob"
                                                    id="example-datetime-local-input">
+                                            <div *ngIf="staffCreationForm.controls['dob'].errors?.['required'] && staffCreationForm.controls['dob'].touched " class="text text-danger mt-1">Date Of Birth required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Date Of Joining</label>
                                             <input class="form-control digits" type="date" formControlName="date_of_joining"
                                                    id="example-datetime-local-input">
+                                            <div *ngIf="staffCreationForm.controls['date_of_joining'].errors?.['required'] && staffCreationForm.controls['date_of_joining'].touched " class="text text-danger mt-1">Date Of Joining required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Phone Number</label>
                                             <input type="text" class="form-control" formControlName="mobile_no" placeholder="Phone Number" required>
+                                            <div *ngIf="staffCreationForm.controls['mobile_no'].errors?.['required'] && staffCreationForm.controls['mobile_no'].touched " class="text text-danger mt-1">Mobile Number required</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Emergency Contact Number</label>
                                             <input type="text" class="form-control" formControlName="emergency_phone_number" placeholder="Emergency Contact Number" required>
+                                            <div *ngIf="staffCreationForm.controls['emergency_phone_number'].errors?.['required'] && staffCreationForm.controls['emergency_phone_number'].touched " class="text text-danger mt-1">Emergency Number required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Material Status</label>
@@ -79,14 +87,17 @@
                                                 <option value="Seperated"> Seperated </option>
                                                 <option value="Not Specified"> Not Specified </option>
                                             </select>
+                                            <div *ngIf="staffCreationForm.controls['material_status'].errors?.['required'] && staffCreationForm.controls['material_status'].touched " class="text text-danger mt-1">Material Status required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Work Experience</label>
                                             <input type="text" class="form-control" formControlName="work_experience" placeholder="Work Experience" required>
+                                            <div *ngIf="staffCreationForm.controls['work_experience'].errors?.['required'] && staffCreationForm.controls['work_experience'].touched " class="text text-danger mt-1">Work Experience required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Qualification</label>
                                             <input type="text" class="form-control" formControlName="qualification" placeholder="Qualification" required>
+                                            <div *ngIf="staffCreationForm.controls['qualification'].errors?.['required'] && staffCreationForm.controls['qualification'].touched " class="text text-danger mt-1">Qualification required</div>
                                         </div>
                                     </div>
                                     <div  class="row">
@@ -131,6 +142,7 @@
                                                     {{data.name}}
                                                 </option>
                                             </select>
+                                            <div *ngIf="staffCreationForm.controls['user_type_id'].errors?.['required'] && staffCreationForm.controls['user_type_id'].touched " class="text text-danger mt-1">User Type required</div>
                                         </div>
                                     </div>
                                     <div  class="row">
@@ -138,11 +150,9 @@
                                             <label>Email address (Login Email)</label>
                                             <input type="email" class="form-control" formControlName="email"
                                                    placeholder="name@example.com">
+                                            <div *ngIf="staffCreationForm.controls['email'].errors?.['required'] && staffCreationForm.controls['email'].touched " class="text text-danger mt-1">Email is required</div>
+                                            <div *ngIf="staffCreationForm.controls['email'].touched && staffCreationForm.controls['email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
                                         </div>
-<!--                                        <div class="col-md-3 mb-3">-->
-<!--                                            <label>Password</label>-->
-<!--                                            <input type="text" class="form-control" formControlName="password">-->
-<!--                                        </div>-->
                                         <div class="col-md-3 mb-3">
                                             <label>Category</label>
                                             <select style="width: 100%" formControlName="category_id" class="form-select" required>
@@ -150,6 +160,7 @@
                                                     {{data.name}}
                                                 </option>
                                             </select>
+                                            <div *ngIf="staffCreationForm.controls['category_id'].errors?.['required'] && staffCreationForm.controls['category_id'].touched " class="text text-danger mt-1">Category required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Department</label>
@@ -158,16 +169,19 @@
                                                     {{data.name}}
                                                 </option>
                                             </select>
+                                            <div *ngIf="staffCreationForm.controls['department_id'].errors?.['required'] && staffCreationForm.controls['department_id'].touched " class="text text-danger mt-1">Department required</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Current Address</label>
                                             <input type="text" class="form-control" formControlName="current_address" placeholder="Current Address" required>
+                                            <div *ngIf="staffCreationForm.controls['current_address'].errors?.['required'] && staffCreationForm.controls['current_address'].touched " class="text text-danger mt-1">Current Address required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Permanent Address</label>
                                             <input type="text" class="form-control" formControlName="permanent_address" placeholder="Permanent Address" required>
+                                            <div *ngIf="staffCreationForm.controls['permanent_address'].errors?.['required'] && staffCreationForm.controls['permanent_address'].touched " class="text text-danger mt-1">Permanent Address required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Designation</label>
@@ -176,6 +190,7 @@
                                                     {{data.name}}
                                                 </option>
                                             </select>
+                                            <div *ngIf="staffCreationForm.controls['designation_id'].errors?.['required'] && staffCreationForm.controls['designation_id'].touched " class="text text-danger mt-1">Designation required</div>
                                         </div>
                                     </div>
 

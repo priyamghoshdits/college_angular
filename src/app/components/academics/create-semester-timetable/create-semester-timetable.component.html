@@ -36,6 +36,7 @@
                                                 {{data.course_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="semesterTimeTableForm.controls['course_id'].errors?.['required'] && semesterTimeTableForm.controls['course_id'].touched " class="text text-danger mt-1">Course Name required</div>
                                     </div>
                                     <div class="col-6">
                                         <label>Select Semester</label>
@@ -44,6 +45,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="semesterTimeTableForm.controls['semester_id'].errors?.['required'] && semesterTimeTableForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                 </div>
                                 <hr>
@@ -55,6 +57,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="semesterTimeTableForm.controls['subject_id'].errors?.['required'] && semesterTimeTableForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject Name required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Teacher List</label>
@@ -63,16 +66,19 @@
                                                 {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="semesterTimeTableForm.controls['teacher_id'].errors?.['required'] && semesterTimeTableForm.controls['teacher_id'].touched " class="text text-danger mt-1">Teacher required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Time From</label>
                                         <input type="time" class="form-control" formControlName="time_from" placeholder="Time From" required>
 <!--                                        <ngb-timepicker formControlName="time_from" [spinners]="false" class="time-picker-custom"></ngb-timepicker>-->
+                                        <div *ngIf="semesterTimeTableForm.controls['time_from'].errors?.['required'] && semesterTimeTableForm.controls['time_from'].touched " class="text text-danger mt-1">Time From required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Time To</label>
                                         <input type="time" class="form-control" formControlName="time_to" placeholder="Time Tpo" required>
 <!--                                        <ngb-timepicker formControlName="time_to" [spinners]="false" class="time-picker-custom"></ngb-timepicker>-->
+                                        <div *ngIf="semesterTimeTableForm.controls['time_to'].errors?.['required'] && semesterTimeTableForm.controls['time_to'].touched " class="text text-danger mt-1">Time To required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -83,10 +89,12 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="semesterTimeTableForm.controls['week_id'].errors?.['required'] && semesterTimeTableForm.controls['week_id'].touched " class="text text-danger mt-1">Week required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Room No.</label>
                                         <input type="text" class="form-control" formControlName="room_number" placeholder="Room no." required>
+                                        <div *ngIf="semesterTimeTableForm.controls['room_number'].errors?.['required'] && semesterTimeTableForm.controls['room_number'].touched " class="text text-danger mt-1">Room no. required</div>
                                     </div>
                                 </div>
                                 <button *ngIf="!isUpdatable && permission[0].permission == 1" class="btn btn-primary me-1" type="submit" (click)="createArray()">Add</button>

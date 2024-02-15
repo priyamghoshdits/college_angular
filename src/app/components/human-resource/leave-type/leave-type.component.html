@@ -9,14 +9,13 @@
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="leaveTypeForm">
-                                <div class="form-group">
                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Leave Type Name</label>
-                                    <input class="form-control" formControlName="name"   placeholder="Enter Leave Type Name">
-                                </div>
+                                    <input class="form-control" formControlName="name" placeholder="Enter Leave Type Name">
+                                <div *ngIf="leaveTypeForm.controls['name'].errors?.['required'] && leaveTypeForm.controls['name'].touched " class="text text-danger mt-1">Leave Type Name required</div>
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button *ngIf="permission[0].permission == 1" [disabled]="!leaveTypeForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveLeaveType()">Submit</button>
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveLeaveType()">Submit</button>
                             <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateLeaveType()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
                             <!--                            <button class="btn btn-secondary">Cancel</button>-->

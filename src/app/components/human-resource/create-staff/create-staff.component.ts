@@ -79,9 +79,9 @@ export class CreateStaffComponent {
                 , private roleAndPermissionService: RolesAndPermissionService) {
         this.staffCreationForm = new FormGroup({
             id: new FormControl(null),
-            identification_no: new FormControl(null, [Validators.required]),
+            identification_no: new FormControl(null),
             first_name: new FormControl(null, [Validators.required]),
-            middle_name: new FormControl(null, [Validators.required]),
+            middle_name: new FormControl(null),
             last_name: new FormControl(null, [Validators.required]),
             gender: new FormControl(null, [Validators.required]),
             dob: new FormControl(null, [Validators.required]),
@@ -94,11 +94,11 @@ export class CreateStaffComponent {
             qualification: new FormControl(null, [Validators.required]),
             current_address: new FormControl(null, [Validators.required]),
             permanent_address: new FormControl(null, [Validators.required]),
-            religion: new FormControl(null, [Validators.required]),
-            blood_group: new FormControl(null, [Validators.required]),
+            religion: new FormControl(null),
+            blood_group: new FormControl(null),
             category_id: new FormControl(null, [Validators.required]),
             user_type_id: new FormControl(null, [Validators.required]),
-            email: new FormControl(null, [Validators.required]),
+            email: new FormControl(null, [Validators.required, Validators.email]),
             department_id: new FormControl(null, [Validators.required]),
             designation_id: new FormControl(null, [Validators.required]),
             epf_number: new FormControl(null),
@@ -161,8 +161,11 @@ export class CreateStaffComponent {
         this.staffCreationForm.patchValue({image: file['name']});
     }
     saveMember(){
+        if(!this.staffCreationForm.valid){
+            this.staffCreationForm.markAllAsTouched();
+            return;
+        }
         this.memberService.saveMember(this.staffCreationForm.value).subscribe((response: any) => {
-            console.log(response)
             if(response.success == 1){
                 Swal.fire({
                     position: 'center',

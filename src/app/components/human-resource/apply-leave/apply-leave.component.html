@@ -17,6 +17,7 @@
                                                 {{data.first_name}} {{data.middlename}} {{data.last_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="applyLeaveForm.controls['user_id'].errors?.['required'] && applyLeaveForm.controls['user_id'].touched " class="text text-danger mt-1">Member required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Leave Type</label>
@@ -25,6 +26,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="applyLeaveForm.controls['leave_type_id'].errors?.['required'] && applyLeaveForm.controls['leave_type_id'].touched " class="text text-danger mt-1">Leave Type required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -40,24 +42,26 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label>From Date</label>
-                                        <input type="date" (change)="calculateNoOFDate()" class="form-control" formControlName="from_date" placeholder="Leave Count" required>
+                                        <input type="date" (change)="calculateNoOFDate()" class="form-control" formControlName="from_date" placeholder="From Date" required>
+                                        <div *ngIf="applyLeaveForm.controls['from_date'].errors?.['required'] && applyLeaveForm.controls['from_date'].touched " class="text text-danger mt-1">From Date required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>To Date</label>
-                                        <input type="date" (change)="calculateNoOFDate()" class="form-control" formControlName="to_date" placeholder="Remaining Leave" required>
+                                        <input type="date" (change)="calculateNoOFDate()" class="form-control" formControlName="to_date" placeholder="To Date" required>
+                                        <div *ngIf="applyLeaveForm.controls['to_date'].errors?.['required'] && applyLeaveForm.controls['to_date'].touched " class="text text-danger mt-1">To Date required</div>
                                     </div>
                                 </div>
                                 <div class="row">
-
                                     <div class="col-md-6 mb-3">
                                         <label>Reason</label>
                                         <input type="text" class="form-control" formControlName="reason" placeholder="Reason" required>
+                                        <div *ngIf="applyLeaveForm.controls['reason'].errors?.['required'] && applyLeaveForm.controls['reason'].touched " class="text text-danger mt-1">Reaon required</div>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button *ngIf="permission[0].permission == 1" [disabled]="!applyLeaveForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveApplyLeave()">Submit</button>
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveApplyLeave()">Submit</button>
                             <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateApplyLeave()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
                         </div>

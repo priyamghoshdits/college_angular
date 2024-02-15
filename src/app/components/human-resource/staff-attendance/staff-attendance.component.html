@@ -17,11 +17,13 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="attendanceForm.controls['user_type_id'].errors?.['required'] && attendanceForm.controls['user_type_id'].touched " class="text text-danger mt-1">User Type required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Select Date</label>
                                         <input class="form-control" formControlName="date" type="date"
                                                placeholder="Select date">
+                                        <div *ngIf="attendanceForm.controls['date'].errors?.['required'] && attendanceForm.controls['date'].touched " class="text text-danger mt-1">Date required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <div>

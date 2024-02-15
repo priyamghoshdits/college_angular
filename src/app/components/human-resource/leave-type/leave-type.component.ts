@@ -49,6 +49,10 @@ export class LeaveTypeComponent {
     }
 
     saveLeaveType(){
+        if(!this.leaveTypeForm.valid){
+            this.leaveTypeForm.markAllAsTouched();
+            return;
+        }
         this.leaveService.saveLeaveType(this.leaveTypeForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){

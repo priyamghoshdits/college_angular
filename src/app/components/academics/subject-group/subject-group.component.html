@@ -11,32 +11,23 @@
                             <form class="theme-form" [formGroup]="subjectGroupForm">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Subject group name</label>
                                             <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter subject group Name">
-                                        </div>
+                                        <div *ngIf="subjectGroupForm.controls['name'].errors?.['required'] && subjectGroupForm.controls['name'].touched " class="text text-danger mt-1">Subject Group name required</div>
                                     </div>
                                     <div class="col-md-6">
-                                        <div class="form-group">
                                             <label>Select Course</label>
-                                            <select formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                            <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
                                                 <option *ngFor="let data of courseList" [value]="data.id" >
                                                     {{data.course_name}}
                                                 </option>
                                             </select>
-                                        </div>
+                                        <div *ngIf="subjectGroupForm.controls['course_id'].errors?.['required'] && subjectGroupForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
                                 </div>
-                                <hr [hidden]="semesterList.length<1">
+                                <hr>
                                 <div class="row">
-<!--                                    <div class="col-md-6 mb-3">-->
-<!--                                        <label [hidden]="semesterList.length<1" class="col-form-label pt-0" for="exampleInputEmail1">Semesters</label>-->
-<!--                                        <div *ngFor="let record of semesterList">-->
-<!--                                            <input style="margin: 10px !important;" [checked]="record.checked" id="checkbox-primary-1" type="checkbox" (change)="importSemester(record, $event)">-->
-<!--                                            <label for="checkbox-primary-1">{{record.name}}</label>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
                                     <div class="col-md-6 mb-3">
                                         <label>Select Semester</label>
                                         <select style="width: 100%" formControlName="semester_id" class="form-select" required (change)="getSemester()">
@@ -44,11 +35,12 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="subjectGroupForm.controls['semester_id'].errors?.['required'] && subjectGroupForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                 </div>
-                                <hr [hidden]="semesterList.length<1">
+                                <hr>
                                 <div class="row">
-                                    <div [hidden]="semesterList.length<1" class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Subject List</label>
                                         <div *ngFor="let record of subjectList">
                                             <input style="margin: 10px !important;" [checked]="record.checked" id="checkbox-primary-1" type="checkbox" (change)="importSubject(record, $event)">

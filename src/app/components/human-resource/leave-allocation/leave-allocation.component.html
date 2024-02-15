@@ -17,6 +17,7 @@
                                                 {{data.first_name}} {{data.middlename}} {{data.last_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="leaveAllocationForm.controls['user_id'].errors?.['required'] && leaveAllocationForm.controls['user_id'].touched " class="text text-danger mt-1">Staff required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Leave Type</label>
@@ -25,11 +26,13 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="leaveAllocationForm.controls['leave_type_id'].errors?.['required'] && leaveAllocationForm.controls['leave_type_id'].touched " class="text text-danger mt-1">Leave Type required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label>Leave Count</label>
                                     <input type="text" class="form-control" formControlName="total_leave" placeholder="Leave Count" required>
+                                    <div *ngIf="leaveAllocationForm.controls['total_leave'].errors?.['required'] && leaveAllocationForm.controls['total_leave'].touched " class="text text-danger mt-1">Total Leave required</div>
                                 </div>
                             </form>
                         </div>
