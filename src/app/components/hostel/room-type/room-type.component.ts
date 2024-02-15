@@ -32,7 +32,7 @@ export class RoomTypeComponent {
         this.roomTypeForm = new FormGroup({
             id: new FormControl(null),
             name: new FormControl(null, [Validators.required]),
-            description: new FormControl(null, [Validators.required]),
+            description: new FormControl(null),
         });
         this.hostelService.getRoomTypeListListener().subscribe((response) => {
             this.roomTypeList = response;
@@ -50,6 +50,10 @@ export class RoomTypeComponent {
 
 
     saveRoomType(){
+        if(!this.roomTypeForm.valid){
+            this.roomTypeForm.markAllAsTouched();
+            return;
+        }
         this.hostelService.saveRoomType(this.roomTypeForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){
@@ -66,6 +70,10 @@ export class RoomTypeComponent {
     }
 
     updateRoomType(){
+        if(!this.roomTypeForm.valid){
+            this.roomTypeForm.markAllAsTouched();
+            return;
+        }
         this.hostelService.updateRoomType(this.roomTypeForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){

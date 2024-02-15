@@ -34,7 +34,7 @@ export class HostelComponent {
     this.hostelForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
-      hostel_type_id: new FormControl(0, [Validators.required]),
+      hostel_type_id: new FormControl(null, [Validators.required]),
       address: new FormControl(null, [Validators.required]),
       description: new FormControl(null),
     });
@@ -59,6 +59,10 @@ export class HostelComponent {
   }
 
   saveHostels(){
+    if(!this.hostelForm.valid){
+      this.hostelForm.markAllAsTouched();
+      return;
+    }
     this.hostelService.saveHostels(this.hostelForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
@@ -109,6 +113,10 @@ export class HostelComponent {
   }
 
   updateHostels(){
+    if(!this.hostelForm.valid){
+      this.hostelForm.markAllAsTouched();
+      return;
+    }
     this.hostelService.updateHostels(this.hostelForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

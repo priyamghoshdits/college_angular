@@ -44,8 +44,8 @@ export class InternshipComponent {
       user_id: new FormControl(null, [Validators.required]),
       from_date: new FormControl(null, [Validators.required]),
       to_date: new FormControl(null, [Validators.required]),
-      course_id: new FormControl(null),
-      semester_id: new FormControl(null),
+      course_id: new FormControl(null,[Validators.required]),
+      semester_id: new FormControl(null, [Validators.required]),
     });
 
     this.internshipService.getInternshipDetailsListener().subscribe((response) => {
@@ -91,8 +91,10 @@ export class InternshipComponent {
   }
 
   saveInternshipDetails(){
-    // console.log(this.internshipDetailsForm.value);
-    // return
+    if(!this.internshipDetailsForm.valid){
+      this.internshipDetailsForm.markAllAsTouched();
+      return;
+    }
     this.internshipService.saveInternshipDetails(this.internshipDetailsForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

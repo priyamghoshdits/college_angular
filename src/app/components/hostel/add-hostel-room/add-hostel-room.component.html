@@ -15,6 +15,7 @@
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
                                             <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
                                                    placeholder="Name">
+                                            <div *ngIf="hostelForm.controls['name'].errors?.['required'] && hostelForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
                                         </div>
                                     </div>
                                 </div>
@@ -26,6 +27,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="hostelForm.controls['hostel_id'].errors?.['required'] && hostelForm.controls['hostel_id'].touched " class="text text-danger mt-1">Hostel required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                             <label>Select Type</label>
@@ -34,31 +36,28 @@
                                                     {{data.name}}
                                                 </option>
                                             </select>
+                                        <div *ngIf="hostelForm.controls['room_type_id'].errors?.['required'] && hostelForm.controls['room_type_id'].touched " class="text text-danger mt-1">Room Type required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">No Of Bed</label>
                                             <input class="form-control" formControlName="no_of_bed" id="exampleInputEmail1" type="text"
                                                    placeholder="No Of Bed">
-                                        </div>
+                                        <div *ngIf="hostelForm.controls['no_of_bed'].errors?.['required'] && hostelForm.controls['no_of_bed'].touched " class="text text-danger mt-1">No Of Bed required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Cost Per Bed</label>
                                             <input class="form-control" formControlName="cost_per_bed" id="exampleInputEmail1" type="text"
                                                    placeholder="Cost Per Bed">
-                                        </div>
+                                        <div *ngIf="hostelForm.controls['cost_per_bed'].errors?.['required'] && hostelForm.controls['cost_per_bed'].touched " class="text text-danger mt-1">Cost Per Bed required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
                                             <input class="form-control" formControlName="description" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Description">
-                                        </div>
                                     </div>
                                 </div>
 

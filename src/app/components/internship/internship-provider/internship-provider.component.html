@@ -11,11 +11,10 @@
                             <form class="theme-form" [formGroup]="internshipProviderForm">
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
                                             <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
                                                    placeholder="Name">
-                                        </div>
+                                        <div *ngIf="internshipProviderForm.controls['name'].errors?.['required'] && internshipProviderForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
                                     </div>
                                 </div>
 
@@ -37,8 +36,8 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Room Type</h5>
-                                <span>Room Type List.</span>
+                                <h5>Internship Provider</h5>
+                                <span>Internship Provider List.</span>
                             </div>
                             <div class="table-responsive">
                                 <table class="table" style="text-align: center">

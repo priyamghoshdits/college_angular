@@ -17,6 +17,7 @@
                                                 {{data.course_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="internshipDetailsForm.controls['course_id'].errors?.['required'] && internshipDetailsForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Select Semester</label>
@@ -25,6 +26,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="internshipDetailsForm.controls['semester_id'].errors?.['required'] && internshipDetailsForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -35,6 +37,7 @@
                                                     {{data.name}}
                                                 </option>
                                             </select>
+                                        <div *ngIf="internshipDetailsForm.controls['internship_provider_id'].errors?.['required'] && internshipDetailsForm.controls['internship_provider_id'].touched " class="text text-danger mt-1">Provider required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                             <label>Select Student</label>
@@ -43,6 +46,7 @@
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
                                             </select>
+                                        <div *ngIf="internshipDetailsForm.controls['user_id'].errors?.['required'] && internshipDetailsForm.controls['user_id'].touched " class="text text-danger mt-1">Student required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -50,11 +54,13 @@
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">From Date</label>
                                             <input class="form-control" formControlName="from_date" type="date"
                                                    placeholder="From Date">
+                                        <div *ngIf="internshipDetailsForm.controls['from_date'].errors?.['required'] && internshipDetailsForm.controls['from_date'].touched " class="text text-danger mt-1">From Date required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">To date</label>
                                             <input class="form-control" formControlName="to_date" type="date"
                                                    placeholder="To date">
+                                        <div *ngIf="internshipDetailsForm.controls['to_date'].errors?.['required'] && internshipDetailsForm.controls['to_date'].touched " class="text text-danger mt-1">To Date required</div>
                                     </div>
                                 </div>
 

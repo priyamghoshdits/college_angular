@@ -11,39 +11,35 @@
                             <form class="theme-form" [formGroup]="hostelForm">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
                                             <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Name">
-                                        </div>
+                                        <div *ngIf="hostelForm.controls['name'].errors?.['required'] && hostelForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <div class="form-group">
                                             <label>Select Type</label>
                                             <select style="width: 100%" formControlName="hostel_type_id" class="form-select" required >
                                                 <option *ngFor="let data of hostelTypes" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>
                                             </select>
-                                        </div>
+                                        <div *ngIf="hostelForm.controls['hostel_type_id'].errors?.['required'] && hostelForm.controls['hostel_type_id'].touched " class="text text-danger mt-1">Type required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
-                                        <div class="form-group">
+
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Address</label>
                                             <input class="form-control" formControlName="address" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Address">
-                                        </div>
+                                        <div *ngIf="hostelForm.controls['address'].errors?.['required'] && hostelForm.controls['address'].touched " class="text text-danger mt-1">Address required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
                                             <input class="form-control" formControlName="description" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Description">
-                                        </div>
                                     </div>
                                 </div>
 

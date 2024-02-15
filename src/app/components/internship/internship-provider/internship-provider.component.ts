@@ -50,6 +50,10 @@ export class InternshipProviderComponent {
   }
 
   saveInternshipProvider(){
+    if(!this.internshipProviderForm.valid){
+      this.internshipProviderForm.markAllAsTouched();
+      return;
+    }
     this.internshipService.saveInternshipProvider(this.internshipProviderForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
@@ -66,6 +70,10 @@ export class InternshipProviderComponent {
   }
 
   updateInternshipProvider(){
+    if(this.internshipProviderForm.valid){
+      this.internshipProviderForm.markAllAsTouched();
+      return;
+    }
     this.internshipService.updateInternshipProvider(this.internshipProviderForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

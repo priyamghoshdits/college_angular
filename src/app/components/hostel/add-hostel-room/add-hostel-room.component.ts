@@ -69,6 +69,10 @@ export class AddHostelRoomComponent {
   }
 
   saveHostelRooms(){
+    if(!this.hostelForm.valid){
+      this.hostelForm.markAllAsTouched();
+      return;
+    }
     this.hostelServices.saveHostelRoomList(this.hostelForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
@@ -85,6 +89,10 @@ export class AddHostelRoomComponent {
   }
 
   updateHostelRooms(){
+    if(!this.hostelForm.valid){
+      this.hostelForm.markAllAsTouched();
+      return;
+    }
     this.hostelServices.updateHostelRoomList(this.hostelForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
