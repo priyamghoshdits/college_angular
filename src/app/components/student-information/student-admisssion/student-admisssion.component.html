@@ -10,13 +10,19 @@
                         <div *ngIf="permission[3].permission == 1" class="card-header" [hidden]="active != 2">
                             <h5>Show All Students</h5>
                         </div>
+                        <div *ngIf="permission[3].permission == 1" class="card-header" [hidden]="active != 3">
+                            <h5>Non Admitted Students</h5>
+                        </div>
                         <div class="tabbed-card">
-                            <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
+                            <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
                                 <li [ngbNavItem]="1">
                                     <a ngbNavLink (click)="activeTab(1)">Add Student</a>
                                 </li>
                                 <li *ngIf="permission[3].permission == 1" [ngbNavItem]="2">
                                     <a ngbNavLink (click)="activeTab(2)">Show Students</a>
+                                </li>
+                                <li *ngIf="permission[3].permission == 1" [ngbNavItem]="3">
+                                    <a ngbNavLink (click)="activeTab(3)">Non Admitted Students</a>
                                 </li>
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
@@ -278,6 +284,42 @@
                                             <td>{{record.gender}}</td>
                                             <td>{{record.dob}}</td>
                                             <td>{{record.blood_group}}</td>
+                                            <td>{{record.user_type}}</td>
+                                            <td>{{record.email}}</td>
+                                            <td>
+                                                <a *ngIf="permission[1].permission == 1" (click)="editStudent(record)"><mat-icon>edit</mat-icon></a>
+                                                <a *ngIf="permission[2].permission == 1" (click)="deleteStudent(record)"><mat-icon>delete</mat-icon></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div [hidden]="active != 3" *ngIf="permission[3].permission == 1">
+                            <div class="row" style="text-align: center;">
+                                <div style="margin-top: 9px" class="col-3"><h4>Search</h4></div>
+                                <div class="col-9">
+                                    <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Type</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col" *ngIf="permission[0].permission == 1 && permission[1].permission == 1">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of nonAdmittedStudents | customFilter:searchItem;let indexOfElement=index">
+                                            <td>{{indexOfElement + 1}}</td>
+                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
                                             <td>{{record.user_type}}</td>
                                             <td>{{record.email}}</td>
                                             <td>

@@ -47,7 +47,7 @@ export const content: Routes = [
     path: 'student-information',
     loadChildren: () => import('../../components/student-information/student-information.module').then(m => m.StudentInformationModule),
     data: {
-      breadcrumb: "Internship"
+      breadcrumb: "Student Information"
     }
   },
   {
