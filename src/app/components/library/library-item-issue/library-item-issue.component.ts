@@ -39,10 +39,10 @@ export class LibraryItemIssueComponent {
     this.libraryIssueForm = new FormGroup({
       id: new FormControl(null),
       book_id: new FormControl(null, [Validators.required]),
-      user_id: new FormControl(0, [Validators.required]),
-      quantity: new FormControl(0, [Validators.required]),
-      issued_on: new FormControl(0, [Validators.required]),
-      return_date: new FormControl(0, [Validators.required]),
+      user_id: new FormControl(null, [Validators.required]),
+      quantity: new FormControl(null, [Validators.required]),
+      issued_on: new FormControl(null, [Validators.required]),
+      return_date: new FormControl(null, [Validators.required]),
       remaining: new FormControl({value: '', disabled: true}, [Validators.required]),
       temp_remaining: new FormControl(0),
       course_id: new FormControl(null),
@@ -79,6 +79,10 @@ export class LibraryItemIssueComponent {
   }
 
   updateIssueDetails(){
+    if(!this.libraryIssueForm.valid){
+      this.libraryIssueForm.markAllAsTouched();
+      return;
+    }
     this.libraryService.updateItemIssue(this.libraryIssueForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
@@ -143,6 +147,10 @@ export class LibraryItemIssueComponent {
   }
 
   saveIssueDetails(){
+    if(!this.libraryIssueForm.valid){
+      this.libraryIssueForm.markAllAsTouched();
+      return;
+    }
     if(this.libraryIssueForm.value.temp_remaining < this.libraryIssueForm.value.quantity){
       Swal.fire({
         position: 'top-end',

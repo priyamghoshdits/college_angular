@@ -31,8 +31,8 @@ export class LibraryItemStockComponent {
     this.libraryForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
-      quantity: new FormControl(0, [Validators.required]),
-      remaining: new FormControl(0, [Validators.required]),
+      quantity: new FormControl(null, [Validators.required]),
+      remaining: new FormControl(null, [Validators.required]),
     });
     this.libraryService.getLibraryItemListener().subscribe((response) =>{
       this.libraryItemList = response;
@@ -50,6 +50,10 @@ export class LibraryItemStockComponent {
   }
 
   saveLibraryItem(){
+    if(!this.libraryForm.valid){
+      this.libraryForm.markAllAsTouched();
+      return;
+    }
     if(this.libraryForm.value.remaining > this.libraryForm.value.quantity){
       Swal.fire({
         position: 'top-end',
@@ -108,6 +112,10 @@ export class LibraryItemStockComponent {
   }
 
   updateLibraryItem(){
+    if(!this.libraryForm.valid){
+      this.libraryForm.markAllAsTouched();
+      return;
+    }
     this.libraryService.updateLibraryItems(this.libraryForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

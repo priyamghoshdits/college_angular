@@ -11,11 +11,10 @@
                             <form class="theme-form" [formGroup]="libraryForm">
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
-                                        <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
                                             <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Name">
-                                        </div>
+                                        <div *ngIf="libraryForm.controls['name'].errors?.['required'] && libraryForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -24,6 +23,7 @@
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Quantity</label>
                                             <input class="form-control" formControlName="quantity" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Quantity">
+                                            <div *ngIf="libraryForm.controls['quantity'].errors?.['required'] && libraryForm.controls['quantity'].touched " class="text text-danger mt-1">Quantity required</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
@@ -31,6 +31,7 @@
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Remaining Quantity</label>
                                             <input class="form-control" formControlName="remaining" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Remaining">
+                                            <div *ngIf="libraryForm.controls['remaining'].errors?.['required'] && libraryForm.controls['remaining'].touched " class="text text-danger mt-1">Remaining Quantity required</div>
                                         </div>
                                     </div>
                                 </div>

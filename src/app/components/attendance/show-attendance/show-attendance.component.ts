@@ -80,6 +80,10 @@ export class ShowAttendanceComponent {
 
 
   getStudentAttendanceList(){
+      if(!this.attendanceForm.valid){
+          this.attendanceForm.markAllAsTouched();
+          return;
+      }
     this.studentList = [];
     this.studentService.getUserAttendance(this.attendanceForm.value.course_id,this.attendanceForm.value.semester_id, this.attendanceForm.value.date, this.attendanceForm.value.student_id).subscribe((response) => {
       // @ts-ignore
