@@ -21,7 +21,7 @@ export class SidebarComponent {
   public fileurl: any;
   menuManagement : any[];
 
-  user : { id, first_name, middle_name, last_name, user_type_id, email, image, token};
+  user : { id, first_name, middle_name, last_name, user_type_id, user_type_name,email, image, token};
 
   constructor(private router: Router, public navServices: NavService, private commonService: CommonService,private  http: HttpClient) {
     // @ts-ignore

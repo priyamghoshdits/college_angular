@@ -46,10 +46,19 @@ export class AgentComponent {
       commission_flat: new FormControl(null),
     });
 
+    let user = JSON.parse(localStorage.getItem('user') || '{}');
+
     this.agentService.getAgentListListener().subscribe((response) => {
       this.agentList = response;
+      if(user.user_type_id != 1){
+        this.agentList = this.agentList.filter(x => x.id == user.id)
+      }
     });
     this.agentList = this.agentService.getAgentList();
+    if(user.user_type_id != 1 && this.agentList.length > 0){
+      this.agentList = this.agentList.filter(x => x.id == user.id)
+    }
+
 
     this.memberService.getCategoryListener().subscribe((response) => {
       this.categoryList = response;

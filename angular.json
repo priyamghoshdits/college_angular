@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "RUDRAKASH": {
+    "RUDKARSH": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -58,7 +58,7 @@
               "rfdc",
               "leaflet"
             ],
-            "outputPath": "dist/RUDRAKASH",
+            "outputPath": "dist/RUDKARSH",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -78,9 +78,9 @@
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": true,
+            "buildOptimizer": false,
             "sourceMap": true,
-            "optimization": true,
+            "optimization": false,
             "namedChunks": true
           },
           "configurations": {
@@ -106,8 +106,8 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": true,
-              "optimization": true,
+              "buildOptimizer": false,
+              "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
@@ -120,10 +120,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "RUDRAKASH:build:production"
+              "buildTarget": "RUDKARSH:build:production"
             },
             "development": {
-              "buildTarget": "RUDRAKASH:build:development"
+              "buildTarget": "RUDKARSH:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -131,7 +131,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "RUDRAKASH:build"
+            "buildTarget": "RUDKARSH:build"
           }
         },
         "test": {
