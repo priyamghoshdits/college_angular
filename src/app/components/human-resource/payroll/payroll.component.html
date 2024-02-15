@@ -17,6 +17,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="payrollForm.controls['user_type_id'].errors?.['required'] && payrollForm.controls['user_type_id'].touched " class="text text-danger mt-1">User Type required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Select Month</label>
@@ -34,6 +35,7 @@
                                             <option value="11"> November </option>
                                             <option value="12"> December </option>
                                         </select>
+                                        <div *ngIf="payrollForm.controls['month'].errors?.['required'] && payrollForm.controls['month'].touched " class="text text-danger mt-1">User Type required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Select Year</label>
@@ -42,6 +44,7 @@
                                                 {{data.year}}
                                             </option>
                                         </select>
+                                        <div *ngIf="payrollForm.controls['year'].errors?.['required'] && payrollForm.controls['year'].touched " class="text text-danger mt-1">Year required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <div>

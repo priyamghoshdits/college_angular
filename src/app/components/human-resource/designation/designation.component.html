@@ -9,11 +9,10 @@
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="designationForm">
-                                <div class="form-group">
                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
                                     <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
                                            placeholder="Enter Designation">
-                                </div>
+                                <div *ngIf="designationForm.controls['name'].errors?.['required'] && designationForm.controls['name'].touched " class="text text-danger mt-1">Designation Name required</div>
 
                             </form>
                         </div>

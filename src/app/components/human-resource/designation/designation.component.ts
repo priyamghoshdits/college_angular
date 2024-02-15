@@ -48,6 +48,10 @@ export class DesignationComponent {
   }
 
   saveDesignation(){
+    if(!this.designationForm.valid){
+      this.designationForm.markAllAsTouched();
+      return;
+    }
     this.designationService.saveDesignation(this.designationForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
@@ -64,6 +68,10 @@ export class DesignationComponent {
   }
 
   updateDesignation(){
+    if(!this.designationForm.valid){
+      this.designationForm.markAllAsTouched();
+      return;
+    }
     this.designationService.updateDesignation(this.designationForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

@@ -57,6 +57,10 @@ export class DepartmentComponent {
   }
 
   saveDepartment(){
+    if(!this.departmentForm.valid){
+      this.departmentForm.markAllAsTouched();
+      return;
+    }
     this.departmentService.saveDepartment(this.departmentForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
@@ -78,6 +82,10 @@ export class DepartmentComponent {
   }
 
   updateDepartment(){
+    if(!this.departmentForm.valid){
+      this.departmentForm.markAllAsTouched();
+      return;
+    }
     this.departmentService.updateDepartment(this.departmentForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

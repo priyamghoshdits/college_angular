@@ -17,6 +17,7 @@
                                                     {{data.course_name}}
                                                 </option>
                                             </select>
+                                        <div *ngIf="attendanceForm.controls['course_id'].errors?.['required'] && attendanceForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                             <label>Select Semester</label>
@@ -25,23 +26,26 @@
                                                     {{data.name}}
                                                 </option>
                                             </select>
+                                        <div *ngIf="attendanceForm.controls['semester_id'].errors?.['required'] && attendanceForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Select Date</label>
                                         <input class="form-control" formControlName="date" type="date"
                                                placeholder="Select date">
+                                        <div *ngIf="attendanceForm.controls['date'].errors?.['required'] && attendanceForm.controls['date'].touched " class="text text-danger mt-1">Date required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Select Subject</label>
-                                        <select style="width: 100%" formControlName="subject_id" class="form-select" required (change)="getStudentAttendanceList()">
+                                        <select style="width: 100%" formControlName="subject_id" class="form-select" required>
                                             <option *ngFor="let data of subjectList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="attendanceForm.controls['subject_id'].errors?.['required'] && attendanceForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject required</div>
                                     </div>
-<!--                                    <div>-->
-<!--                                        <button class="btn btn-primary me-1">Search</button>-->
-<!--                                    </div>-->
+                                    <div>
+                                        <button class="btn btn-primary me-1" (click)="getStudentAttendanceList()">Search</button>
+                                    </div>
                                 </div>
                             </form>
                         </div>

@@ -34,11 +34,11 @@ export class HolidayComponent {
     this.holidayForm = new FormGroup({
       id: new FormControl(null),
       date: new FormControl(null, [Validators.required]),
-      description: new FormControl(null),
+      description: new FormControl(null, [Validators.required]),
     });
     this.holidayYearForm = new FormGroup({
       id: new FormControl(null),
-      description: new FormControl(null),
+      description: new FormControl(null, [Validators.required]),
       week_name: new FormControl(null, [Validators.required]),
     });
     this.holidaySearchForm = new FormGroup({
@@ -62,6 +62,10 @@ export class HolidayComponent {
   }
 
   saveForWholeYear(){
+    if(!this.holidayYearForm.valid){
+      this.holidayYearForm.markAllAsTouched();
+      return;
+    }
     this.holidayService.saveHolidayForWholeYear(this.holidayYearForm.value).subscribe((response : any) => {
       if(response.success == 1){
         Swal.fire({
@@ -77,6 +81,10 @@ export class HolidayComponent {
   }
 
   saveHoliday(){
+    if(!this.holidayForm.valid){
+      this.holidayForm.markAllAsTouched();
+      return;
+    }
     this.holidayService.saveHoliday(this.holidayForm.value).subscribe((response: any) => {
       if(response.success == 1){
         Swal.fire({
@@ -92,6 +100,10 @@ export class HolidayComponent {
   }
 
   getHolidays(){
+    if(!this.holidaySearchForm.valid){
+      this.holidaySearchForm.markAllAsTouched();
+      return;
+    }
     this.holidayService.getHolidaysByMonth(this.holidaySearchForm.value.month_id).subscribe((response: any) => {
       this.holidayList = response.data;
     })
@@ -114,6 +126,10 @@ export class HolidayComponent {
   }
 
   updateHoliday(){
+    if(!this.holidayForm.valid){
+      this.holidayForm.markAllAsTouched();
+      return;
+    }
     this.holidayService.updateHoliday(this.holidayForm.value).subscribe((response: any) => {
       if(response.success == 1){
         Swal.fire({

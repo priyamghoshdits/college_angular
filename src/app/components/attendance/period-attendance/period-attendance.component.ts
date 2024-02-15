@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {SubjectService} from "../../../services/subject.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {StudentService} from "../../../services/student.service";
 import Swal from "sweetalert2";
@@ -16,6 +16,7 @@ import Swal from "sweetalert2";
     NgForOf,
     NgxPaginationModule,
     ReactiveFormsModule,
+    NgIf,
   ],
   templateUrl: './period-attendance.component.html',
   styleUrl: './period-attendance.component.scss'
@@ -57,6 +58,10 @@ export class PeriodAttendanceComponent {
   }
 
   getStudentAttendanceList(){
+    if(!this.attendanceForm.valid){
+      this.attendanceForm.markAllAsTouched();
+      return;
+    }
     this.studentList = [];
     this.studentService.getStudentAttendance(this.attendanceForm.value.course_id,this.attendanceForm.value.semester_id, this.attendanceForm.value.date, this.attendanceForm.value.subject_id).subscribe((response) => {
       // @ts-ignore

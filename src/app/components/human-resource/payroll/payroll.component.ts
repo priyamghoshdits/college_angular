@@ -44,7 +44,6 @@ export class PayrollComponent {
     this.payrollForm = new FormGroup({
       id: new FormControl(null),
       user_type_id: new FormControl(null, [Validators.required]),
-      date: new FormControl(null, [Validators.required]),
       month: new FormControl(null, [Validators.required]),
       year: new FormControl(null, [Validators.required]),
     });
@@ -94,6 +93,10 @@ export class PayrollComponent {
   }
 
   getStaff(){
+    if(!this.payrollForm.valid){
+      this.payrollForm.markAllAsTouched();
+      return;
+    }
     this.memberService.getMembers(this.payrollForm.value.user_type_id, this.payrollForm.value.month, this.payrollForm.value.year).subscribe((response: any) => {
       this.memberList = response.data;
     });

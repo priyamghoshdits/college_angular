@@ -51,6 +51,10 @@ export class CategoryComponent {
   }
 
   saveCategory(){
+    if(!this.categoryForm.valid){
+      this.categoryForm.markAllAsTouched();
+      return;
+    }
     this.categoryService.saveCategory(this.categoryForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
@@ -67,6 +71,10 @@ export class CategoryComponent {
   }
 
   updateCategory(){
+    if(!this.categoryForm.valid){
+      this.categoryForm.markAllAsTouched();
+      return;
+    }
     this.categoryService.updateCategory(this.categoryForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

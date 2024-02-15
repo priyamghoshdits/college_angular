@@ -13,6 +13,7 @@
                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
                                     <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
                                            placeholder="Enter Department Name">
+                                    <div *ngIf="departmentForm.controls['name'].errors?.['required'] && departmentForm.controls['name'].touched " class="text text-danger mt-1">Department Name required</div>
                                 </div>
                                 <div >
                                     <label>Select Department In-charge</label>
@@ -21,6 +22,7 @@
                                             {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                         </option>
                                     </select>
+                                    <div *ngIf="departmentForm.controls['user_id'].errors?.['required'] && departmentForm.controls['user_id'].touched " class="text text-danger mt-1">Member required</div>
                                 </div>
 
                             </form>
