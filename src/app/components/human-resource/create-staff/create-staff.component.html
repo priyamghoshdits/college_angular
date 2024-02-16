@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Middle Name</label>
-                                            <input type="text" class="form-control" formControlName="middle_name" placeholder="Middle Name" required>
+                                            <input type="text" class="form-control" formControlName="middle_name" placeholder="Middle Name">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Last Name</label>
@@ -217,6 +217,7 @@
                                                 <option value="Permanent"> Permanent </option>
                                                 <option value="Prohibition"> Prohibition </option>
                                             </select>
+                                            <div *ngIf="staffCreationForm.controls['contract_type'].errors?.['required'] && staffCreationForm.controls['contract_type'].touched " class="text text-danger mt-1">Contract Type required</div>
                                         </div>
                                     </div>
 

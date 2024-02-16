@@ -104,12 +104,12 @@ export class CreateStaffComponent {
             epf_number: new FormControl(null),
             basic_salary: new FormControl(null),
             location: new FormControl(null),
-            contract_type: new FormControl(null),
+            contract_type: new FormControl(null, [Validators.required]),
             bank_account_number: new FormControl(null),
             bank_name: new FormControl(null),
             ifsc_code: new FormControl(null),
             bank_branch_name: new FormControl(null),
-            password: new FormControl(null, [Validators.required]),
+            password: new FormControl(null),
         });
 
         this.memberService.getMemberListener().subscribe((response) => {
@@ -162,6 +162,7 @@ export class CreateStaffComponent {
     }
     saveMember(){
         if(!this.staffCreationForm.valid){
+            console.log(this.staffCreationForm.controls['middle_name'].errors);
             this.staffCreationForm.markAllAsTouched();
             return;
         }
@@ -187,7 +188,29 @@ export class CreateStaffComponent {
     }
 
     deleteMember(record){
-
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if(result.isConfirmed){
+                this.memberService.deleteStaff(record.id).subscribe((response: any) => {
+                    if(response.success == 1){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Member Deleted Successfully',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }
+                })
+            }
+        });
     }
 
     cancelUpdate(){
@@ -196,6 +219,13 @@ export class CreateStaffComponent {
     }
 
     updateMember(){
+        if(!this.staffCreationForm.valid){
+            console.log(this.staffCreationForm.valid);
+            console.log(this.staffCreationForm.controls['middle_name'].errors);
+            // loginForm.controls['email'].errors
+            this.staffCreationForm.markAllAsTouched();
+            return;
+        }
         this.memberService.updateMember(this.staffCreationForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){

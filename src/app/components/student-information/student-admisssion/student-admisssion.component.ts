@@ -172,6 +172,7 @@ export class StudentAdmisssionComponent {
     }
 
     editStudent(data){
+        this.studentCreationForm.reset();
         this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response) => {
             // @ts-ignore
             this.semesterList = response.data;

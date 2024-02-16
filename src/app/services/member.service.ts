@@ -122,4 +122,18 @@ export class MemberService {
         }));
   }
 
+  deleteStaff(id){
+    return this.http.get(this.BASE_API_URL + '/deleteMember/' + id)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+          // @ts-ignore
+          if(response.success == 1){
+            // @ts-ignore
+            const index = this.memberList.findIndex(x => x.id === response.data.id);
+            this.memberList.splice(index,1);
+            this.memberListSubject.next([...this.memberList]);
+          }
+        }));
+  }
+
+
 }
