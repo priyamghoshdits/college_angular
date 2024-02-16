@@ -14,6 +14,7 @@
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Content Title</label>
                                         <input class="form-control" formControlName="title" id="exampleInputEmail1" type="text" placeholder="Enter Content Title">
                                     </div>
+                                    <div *ngIf="uploadContentForm.controls['title'].errors?.['required'] && uploadContentForm.controls['title'].touched " class="text text-danger mt-1">Content Title required</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -23,6 +24,7 @@
                                                 {{data.course_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="uploadContentForm.controls['course_id'].errors?.['required'] && uploadContentForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Select Semester</label>
@@ -31,6 +33,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="uploadContentForm.controls['semester_id'].errors?.['required'] && uploadContentForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -41,6 +44,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="uploadContentForm.controls['subject_id'].errors?.['required'] && uploadContentForm.controls['subject_id'].touched " class="text text-danger mt-1">Content Title required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Select Type</label>
@@ -48,12 +52,14 @@
                                             <option value="assignment"> Assignment </option>
                                             <option value="study-material"> Study Material </option>
                                         </select>
+                                        <div *ngIf="uploadContentForm.controls['type'].errors?.['required'] && uploadContentForm.controls['type'].touched " class="text text-danger mt-1">Type required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Upload Date</label>
                                         <input class="form-control" formControlName="upload_date" id="exampleInputEmail1" type="date">
+                                        <div *ngIf="uploadContentForm.controls['upload_date'].errors?.['required'] && uploadContentForm.controls['upload_date'].touched " class="text text-danger mt-1">Type required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Upload File</label>

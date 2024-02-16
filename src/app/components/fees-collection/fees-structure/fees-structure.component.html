@@ -17,6 +17,7 @@
                                                 {{data.course_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="feesStructureForm.controls['course_id'].errors?.['required'] && feesStructureForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-6">
                                         <label>Semester</label>
@@ -25,6 +26,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="feesStructureForm.controls['semester_id'].errors?.['required'] && feesStructureForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                 </div>
                                 <div class="row mt-2">
@@ -35,17 +37,19 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="feesStructureForm.controls['fees_type_id'].errors?.['required'] && feesStructureForm.controls['fees_type_id'].touched " class="text text-danger mt-1">Fees Type Id required</div>
                                     </div>
                                     <div class="col-6">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Amount</label>
                                         <input class="form-control" formControlName="amount" id="exampleInputEmail1" type="text"
                                                placeholder="Enter Amount">
+                                        <div *ngIf="feesStructureForm.controls['amount'].errors?.['required'] && feesStructureForm.controls['amount'].touched " class="text text-danger mt-1">Amount required</div>
                                     </div>
                                 </div>
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button *ngIf="permission[0].permission == 1" [disabled]="!feesStructureForm.valid" class="btn btn-primary me-1" (click)="addFeesType()">Add</button>
+                            <button *ngIf="permission[0].permission == 1" class="btn btn-primary me-1" (click)="addFeesType()">Add</button>
 <!--                            <button [disabled]="!feesStructureForm.valid" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveFeesStructure()">Submit</button>-->
 <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateFeesStructure()">Update</button>-->
 <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->

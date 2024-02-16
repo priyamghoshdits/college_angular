@@ -32,6 +32,7 @@
                                                     {{data.name}}
                                                 </option>
                                             </select>
+                                            <div *ngIf="questionForm.controls['subject_details_id'].errors?.['required'] && questionForm.controls['subject_details_id'].touched " class="text text-danger mt-1">Subject details required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Course Name</label>

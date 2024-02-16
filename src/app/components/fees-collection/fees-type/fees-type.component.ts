@@ -50,6 +50,10 @@ export class FeesTypeComponent {
     }
 
     saveFeesType(){
+        if(!this.feesTypeForm.valid){
+            this.feesTypeForm.markAllAsTouched();
+            return;
+        }
         this.feesService.saveFeesType(this.feesTypeForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){
@@ -98,6 +102,10 @@ export class FeesTypeComponent {
     }
 
     updateFeesType(){
+        if(!this.feesTypeForm.valid){
+            this.feesTypeForm.markAllAsTouched();
+            return;
+        }
         this.feesService.updateFeesType(this.feesTypeForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){

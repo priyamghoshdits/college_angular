@@ -13,6 +13,7 @@
                                     <div class="col-md-12 mb-3">
                                         <label>Name</label>
                                         <input type="text" class="form-control" formControlName="name" placeholder="Enter Name" required>
+                                        <div *ngIf="subjectDetailsForm.controls['name'].errors?.['required'] && subjectDetailsForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
                                     </div>
 
                                 </div>
@@ -24,6 +25,7 @@
                                                 {{data.course_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="subjectDetailsForm.controls['course_id'].errors?.['required'] && subjectDetailsForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Select Semester</label>
@@ -32,6 +34,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="subjectDetailsForm.controls['semester_id'].errors?.['required'] && subjectDetailsForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -42,6 +45,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="subjectDetailsForm.controls['subject_id'].errors?.['required'] && subjectDetailsForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Select Session</label>
@@ -50,6 +54,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="subjectDetailsForm.controls['session_id'].errors?.['required'] && subjectDetailsForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -57,27 +62,32 @@
                                         <label>Time From (24 hr)</label>
 <!--                                        <ngb-timepicker formControlName="time_from" [spinners]="false" class="time-picker-custom"></ngb-timepicker>-->
                                         <input type="time" class="form-control" formControlName="time_from" placeholder="Enter Time" required>
+                                        <div *ngIf="subjectDetailsForm.controls['time_from'].errors?.['required'] && subjectDetailsForm.controls['time_from'].touched " class="text text-danger mt-1">Time From required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Time To (24 hr)</label>
 <!--                                        <ngb-timepicker formControlName="time_to" [spinners]="false" class="time-picker-custom"></ngb-timepicker>-->
                                         <input type="time" class="form-control" formControlName="time_to" placeholder="Enter Time" required>
+                                        <div *ngIf="subjectDetailsForm.controls['time_to'].errors?.['required'] && subjectDetailsForm.controls['time_to'].touched " class="text text-danger mt-1">Time To required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label>Exam Date</label>
                                         <input type="date" class="form-control" formControlName="exam_date" placeholder="Enter Exam Date" required>
+                                        <div *ngIf="subjectDetailsForm.controls['exam_date'].errors?.['required'] && subjectDetailsForm.controls['exam_date'].touched " class="text text-danger mt-1">Exam Date required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Publish Date</label>
                                         <input type="date" class="form-control" formControlName="publish_date" placeholder="Enter Date to publish result" required>
+                                        <div *ngIf="subjectDetailsForm.controls['publish_date'].errors?.['required'] && subjectDetailsForm.controls['publish_date'].touched " class="text text-danger mt-1">Published Date required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label>Full Marks</label>
                                         <input type="text" class="form-control" formControlName="full_marks" placeholder="Enter full marks" required>
+                                        <div *ngIf="subjectDetailsForm.controls['full_marks'].errors?.['required'] && subjectDetailsForm.controls['full_marks'].touched " class="text text-danger mt-1">Full marks required</div>
                                     </div>
                                 </div>
                             </form>

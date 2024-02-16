@@ -48,8 +48,8 @@ export class SubjectDetailsComponent {
       exam_date: new FormControl(null, [Validators.required]),
       publish_date: new FormControl(null, [Validators.required]),
       full_marks: new FormControl(null, [Validators.required]),
-      time_from: new FormControl(null),
-      time_to: new FormControl(null),
+      time_from: new FormControl(null, [Validators.required]),
+      time_to: new FormControl(null, [Validators.required]),
     });
     this.subjectService.getCourseListener().subscribe((response) => {
       this.courseList = response;
@@ -90,6 +90,10 @@ export class SubjectDetailsComponent {
   }
 
   saveSubjectDetails(){
+    if(!this.subjectDetailsForm.valid){
+      this.subjectDetailsForm.markAllAsTouched();
+      return;
+    }
     this.examinationService.saveSubjectDetails(this.subjectDetailsForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

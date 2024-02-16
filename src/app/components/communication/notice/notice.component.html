@@ -13,6 +13,7 @@
                                     <div class="col-md-12 mb-3">
                                         <label>Subject</label>
                                         <input type="text" class="form-control" formControlName="subject" placeholder="Enter Subject" required>
+                                        <div *ngIf="noticeForm.controls['subject'].errors?.['required'] && noticeForm.controls['subject'].touched " class="text text-danger mt-1">Subject required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -21,6 +22,7 @@
                                             <label for="exampleFormControlTextarea4">Message</label>
 <!--                                            <textarea class="form-control" formControlName="body" id="exampleFormControlTextarea4" rows="10"></textarea>-->
                                             <ckeditor style="min-height: 350px" [editor]="editor" formControlName="body" [config]="config" [data]="data"></ckeditor>
+                                            <div *ngIf="noticeForm.controls['body'].errors?.['required'] && noticeForm.controls['body'].touched " class="text text-danger mt-1">Message required</div>
                                         </div>
                                     </div>
                                 </div>

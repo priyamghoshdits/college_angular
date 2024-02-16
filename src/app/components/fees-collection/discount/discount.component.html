@@ -18,6 +18,7 @@
                                                 {{data.course_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="discountForm.controls['course_id'].errors?.['required'] && discountForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Select Semester</label>
@@ -26,6 +27,7 @@
                                                 {{data.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="discountForm.controls['semester_id'].errors?.['required'] && discountForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -36,11 +38,13 @@
                                                 {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="discountForm.controls['student_id'].errors?.['required'] && discountForm.controls['student_id'].touched " class="text text-danger mt-1">Student required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Scholarship Code</label>
                                         <input class="form-control" formControlName="scholarship_code" id="exampleInputEmail1" type="text"
                                                placeholder="Enter Scholarship Code">
+                                        <div *ngIf="discountForm.controls['scholarship_code'].errors?.['required'] && discountForm.controls['scholarship_code'].touched " class="text text-danger mt-1">Scholarship code required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -49,6 +53,7 @@
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Amount</label>
                                         <input class="form-control" formControlName="amount" id="exampleInputEmail1" type="text"
                                                placeholder="Enter Amount">
+                                        <div *ngIf="discountForm.controls['amount'].errors?.['required'] && discountForm.controls['amount'].touched " class="text text-danger mt-1">Amount required</div>
                                     </div>
                                 </div>
                                 <div class="row">

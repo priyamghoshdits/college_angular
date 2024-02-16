@@ -129,6 +129,10 @@ export class CollectFeesComponent {
   // };
 
   getTransactionDetails(){
+    if(!this.searchTransactionForm.valid){
+      this.searchTransactionForm.markAllAsTouched();
+      return;
+    }
     this.feesService.getTransactionDetails(this.searchTransactionForm.value.user_id).subscribe((response) => {
       // @ts-ignore
       this.transactionList = response.data;
@@ -246,6 +250,10 @@ export class CollectFeesComponent {
   }
 
   searchStudents(){
+    if(!this.collectFeesForm.valid){
+      this.collectFeesForm.markAllAsTouched();
+      return;
+    }
     if(this.collectFeesForm.value.course_id){
       this.filteredStudentList = this.studentList.filter(x => x.course_id == this.collectFeesForm.value.course_id);
     }

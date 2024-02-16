@@ -99,6 +99,7 @@
                                                     {{data.course_name}}
                                                 </option>
                                             </select>
+                                            <div *ngIf="collectFeesForm.controls['course_id'].errors?.['required'] && collectFeesForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                         </div>
                                         <div class="col-4">
                                             <label>Select Semester</label>
@@ -107,6 +108,7 @@
                                                     {{data.name}}
                                                 </option>
                                             </select>
+                                            <div *ngIf="collectFeesForm.controls['semester_id'].errors?.['required'] && collectFeesForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                         </div>
                                         <div class="col-4">
                                             <button style="margin-top: 10%" class="btn btn-primary me-1" (click)="searchStudents()">Search</button>
@@ -164,6 +166,7 @@
                                                     {{data.course_name}}
                                                 </option>
                                             </select>
+                                            <div *ngIf="searchTransactionForm.controls['course_id'].errors?.['required'] && searchTransactionForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                         </div>
                                         <div class="col-3">
                                             <label>Select Semester</label>
@@ -172,6 +175,7 @@
                                                     {{data.name}}
                                                 </option>
                                             </select>
+                                            <div *ngIf="searchTransactionForm.controls['semester_id'].errors?.['required'] && searchTransactionForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                         </div>
                                         <div class="col-3">
                                             <label>Select Student</label>
@@ -180,6 +184,7 @@
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
                                             </select>
+                                            <div *ngIf="searchTransactionForm.controls['user_id'].errors?.['required'] && searchTransactionForm.controls['user_id'].touched " class="text text-danger mt-1">Student required</div>
                                         </div>
                                         <div class="col-3">
                                             <button style="margin-top: 13%" class="btn btn-primary me-1" (click)="getTransactionDetails()">Search</button>

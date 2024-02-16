@@ -178,6 +178,18 @@ export class NoticeComponent {
   }
 
   saveNotice(){
+    if(!this.noticeForm.valid){
+      this.noticeForm.markAllAsTouched();
+      return;
+    }
+    Swal.fire({
+      title: 'Please Wait !',
+      html: 'Saving ...', // add html attribute if you want or remove
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
     let arr;
     arr = [
         {
@@ -189,6 +201,7 @@ export class NoticeComponent {
     this.communicationService.saveNotices(arr[0]).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
+        Swal.close();
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -208,7 +221,7 @@ export class NoticeComponent {
     Swal.fire({
       title: 'Confirmation',
       text: 'Do you sure to delete ?',
-      icon: 'info',
+      icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',

@@ -70,6 +70,10 @@ export class FeesStructureComponent {
   }
 
   addFeesType(){
+    if(!this.feesStructureForm.valid){
+      this.feesStructureForm.markAllAsTouched();
+      return;
+    }
     let feesType = this.feesTypeList.find(x => x.id == this.feesStructureForm.value.fees_type_id);
     let semester = this.semesterList.find(x => x.semester_id == this.feesStructureForm.value.semester_id);
     let a = [{
@@ -101,6 +105,16 @@ export class FeesStructureComponent {
   }
 
   saveFeesStructure(){
+    if(this.feesStructureArray.length == 0){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Please add fees type before save',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      return;
+    }
     this.feesService.saveFeesStructure(this.feesStructureArray).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

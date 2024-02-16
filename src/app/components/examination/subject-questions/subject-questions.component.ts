@@ -63,14 +63,14 @@ export class SubjectQuestionsComponent {
     this.questionForm = new FormGroup({
       id: new FormControl(null),
       subject_details_id: new FormControl(null, [Validators.required]),
-      course_name: new FormControl({value: null, disabled: true}, [Validators.required]),
-      semester_name: new FormControl({value: null, disabled: true}, [Validators.required]),
-      session_name: new FormControl({value: null, disabled: true}, [Validators.required]),
-      subject_name: new FormControl({value: null, disabled: true}, [Validators.required]),
-      full_marks: new FormControl({value: null, disabled: true}, [Validators.required]),
-      total_questions: new FormControl(1, [Validators.required]),
-      time_from: new FormControl(null, [Validators.required]),
-      time_to: new FormControl(null, [Validators.required]),
+      course_name: new FormControl({value: null, disabled: true}),
+      semester_name: new FormControl({value: null, disabled: true}),
+      session_name: new FormControl({value: null, disabled: true}),
+      subject_name: new FormControl({value: null, disabled: true}),
+      full_marks: new FormControl({value: null, disabled: true}),
+      total_questions: new FormControl(1),
+      time_from: new FormControl(null),
+      time_to: new FormControl(null),
       question: new FormControl(null),
       option1: new FormControl(null),
       option2: new FormControl(null),
@@ -184,6 +184,10 @@ export class SubjectQuestionsComponent {
   }
 
   saveQuestions(){
+    if(!this.questionForm.valid){
+      this.questionForm.markAllAsTouched();
+      return;
+    }
     // @ts-ignore
     if(this.totalMarks >= this.selected_details.full_marks){
       Swal.fire({
@@ -282,6 +286,16 @@ export class SubjectQuestionsComponent {
           position: 'center',
           icon: 'error',
           title: 'Enter the question',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        return;
+      }
+      if((parseInt(this.questionAnswers[i].answer) >=5) || (parseInt(this.questionAnswers[i].answer) < 1)){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Enter valid answer option',
           showConfirmButton: false,
           timer: 1000
         });

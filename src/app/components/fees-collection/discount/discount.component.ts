@@ -42,7 +42,7 @@ export class DiscountComponent {
       student_id: new FormControl(null, [Validators.required]),
       course_id: new FormControl(null, [Validators.required]),
       semester_id: new FormControl(null, [Validators.required]),
-      scholarship_code: new FormControl(null),
+      scholarship_code: new FormControl(null, [Validators.required]),
       amount: new FormControl(null, [Validators.required]),
       description: new FormControl(null),
     });
@@ -89,6 +89,10 @@ export class DiscountComponent {
   }
 
   saveDiscount(){
+    if(!this.discountForm.valid){
+      this.discountForm.markAllAsTouched();
+      return;
+    }
     this.feesService.saveDiscount(this.discountForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

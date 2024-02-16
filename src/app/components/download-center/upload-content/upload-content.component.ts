@@ -97,6 +97,10 @@ export class UploadContentComponent {
   }
 
   uploadContent(){
+    if(!this.uploadContentForm.valid){
+      this.uploadContentForm.markAllAsTouched();
+      return;
+    }
     if(!this.file){
       Swal.fire({
         position: 'center',

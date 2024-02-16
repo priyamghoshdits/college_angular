@@ -13,6 +13,7 @@
                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Fees Type Name</label>
                                     <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
                                            placeholder="Enter Fees Type Name">
+                                    <div *ngIf="feesTypeForm.controls['name'].errors?.['required'] && feesTypeForm.controls['name'].touched " class="text text-danger mt-1">Fees Type Name required</div>
                                 </div>
                             </form>
                         </div>
