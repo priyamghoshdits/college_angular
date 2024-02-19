@@ -44,7 +44,7 @@ export class UploadContentComponent {
       semester_id: new FormControl(null, [Validators.required]),
       type: new FormControl(null, [Validators.required]),
       subject_id: new FormControl(null, [Validators.required]),
-      content_name: new FormControl(null, [Validators.required]),
+      content_name: new FormControl(null),
       upload_date: new FormControl(null, [Validators.required]),
       description: new FormControl(null),
       fileTemp: new FormControl(null),

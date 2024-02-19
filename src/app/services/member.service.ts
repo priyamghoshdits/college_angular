@@ -14,8 +14,6 @@ export class MemberService {
   teacherList = [];
   memberList = [];
   categoryList = [];
-  staffAttendance = [];
-
 
   teacherListSubject = new Subject<any[]>();
   memberListSubject = new Subject<any[]>();

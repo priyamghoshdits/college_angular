@@ -220,9 +220,6 @@ export class CreateStaffComponent {
 
     updateMember(){
         if(!this.staffCreationForm.valid){
-            console.log(this.staffCreationForm.valid);
-            console.log(this.staffCreationForm.controls['middle_name'].errors);
-            // loginForm.controls['email'].errors
             this.staffCreationForm.markAllAsTouched();
             return;
         }

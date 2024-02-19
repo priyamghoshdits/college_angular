@@ -10,6 +10,7 @@ import {StudentService} from "../../../services/student.service";
 import {SessionService} from "../../../services/session.service";
 import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
 import {AgentService} from "../../../services/agent.service";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-agent-student-entry',
@@ -42,9 +43,11 @@ export class AgentStudentEntryComponent {
     agentList: any[];
     studentList: any[];
     isSuperAdmin = false;
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
     constructor(private memberService: MemberService, private subjectService: SubjectService
                 , private studentService: StudentService, private sessionService: SessionService
-                , private agentService: AgentService) {
+                , private agentService: AgentService, private roleAndPermissionService: RolesAndPermissionService) {
         this.agentForm = new FormGroup({
             id: new FormControl(null),
         });
@@ -55,9 +58,9 @@ export class AgentStudentEntryComponent {
             last_name: new FormControl(null, [Validators.required]),
             mobile_no: new FormControl(null, [Validators.required]),
             admission_status: new FormControl(0),
-            qualification: new FormControl(null, [Validators.required]),
             current_address: new FormControl(null, [Validators.required]),
             permanent_address: new FormControl(null, [Validators.required]),
+            gender: new FormControl(null, [Validators.required]),
             category_id: new FormControl(null, [Validators.required]),
             email: new FormControl(null, [Validators.required, Validators.email]),
             course_id: new FormControl(null, [Validators.required]),
@@ -78,6 +81,15 @@ export class AgentStudentEntryComponent {
             this.agentForm.patchValue(user);
             this.isSuperAdmin = false;
             this.getStudentListByAgent();
+        }
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'AGENT STUDENT ENTRY').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'AGENT STUDENT ENTRY').permission;
         }
 
         this.memberService.getCategoryListener().subscribe((response) => {
@@ -147,5 +159,59 @@ export class AgentStudentEntryComponent {
                     this.studentForm.reset();
                 }
             })
+    }
+
+    editStudent(data){
+        this.studentForm.patchValue(data);
+        this.getSemester();
+        this.studentForm.patchValue(data);
+        this.isUpdatable = true;
+        this.active = 1;
+    }
+
+    deleteStudent(data){
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete student ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if(result.isConfirmed){
+                this.studentService.deleteStudents(data.id).subscribe((response: any) => {
+                    if(response.success == 1){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Student Deleted',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }
+                })
+            }
+        });
+    }
+
+    updateStudent(){
+        this.studentService.updateStudent(this.studentForm.value).subscribe((response: any) => {
+            if(response.success == 1){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Student Updated',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                this.cancelUpdate();
+            }
+        })
+    }
+
+    cancelUpdate(){
+        this.isUpdatable = false;
+        this.studentForm.reset();
     }
 }

@@ -77,7 +77,6 @@ export class StudentAdmisssionComponent {
             emergency_phone_number: new FormControl(null, [Validators.required]),
             material_status: new FormControl(null),
             admission_status: new FormControl(null),
-            qualification: new FormControl(null, [Validators.required]),
             current_address: new FormControl(null, [Validators.required]),
             permanent_address: new FormControl(null, [Validators.required]),
             religion: new FormControl(null),

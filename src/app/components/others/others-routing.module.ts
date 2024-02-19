@@ -5,6 +5,7 @@ import {RolesAndPermissionComponent} from "./roles-and-permission/roles-and-perm
 import {UserTypesComponent} from "./user-types/user-types.component";
 import { IcardComponent } from './icard/icard.component';
 import {AgentStudentEntryComponent} from "./agent-student-entry/agent-student-entry.component";
+import {FranchiseComponent} from "./franchise/franchise.component";
 
 const routes: Routes = [
   {
@@ -29,6 +30,14 @@ const routes: Routes = [
     data: {
       title: "User Type",
       breadcrumb: "User Type"
+    }
+  },
+  {
+    path: 'franchise',
+    component: FranchiseComponent,
+    data: {
+      title: "Franchise",
+      breadcrumb: "Franchise"
     }
   },
   {
