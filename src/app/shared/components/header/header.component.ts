@@ -21,6 +21,8 @@ export class HeaderComponent implements OnInit {
 
   private BASE_API_URL = environment.BASE_API_URL;
   public menuItems: Menu[];
+  public FILE_URL = environment.FILE_URL;
+  public url: any;
   passwordResetForm: FormGroup;
   public items: Menu[];
   public searchResult: boolean = false;
@@ -28,6 +30,7 @@ export class HeaderComponent implements OnInit {
   public openNav: boolean = false
   public right_sidebar: boolean = false
   public text: string;
+  user : { id, first_name, middle_name, last_name, user_type_id, user_type_name,email, image, token};
   public elem:any;
   public isOpenMobile: boolean = false
   @Output() rightSidebarEvent = new EventEmitter<boolean>();
@@ -45,6 +48,12 @@ export class HeaderComponent implements OnInit {
       new_password: new FormControl(null, [Validators.required]),
       confirm_password: new FormControl(null, [Validators.required]),
     });
+
+    // @ts-ignore
+    this.user = JSON.parse(localStorage.getItem('user'));
+    if(this.user){
+      this.url = this.FILE_URL + '/user_image/' + this.user.image;
+    }
   }
 
 

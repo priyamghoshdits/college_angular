@@ -42,8 +42,12 @@ export class IcardComponent {
     if (user.user_type_id == 1) {
       this.studentService.getStudentListener().subscribe((response) => {
         this.studentList = response;
+        this.studentList = this.studentList.filter(x => x.admission_status == 1);
       });
       this.studentList = this.studentService.getStudentLists();
+      if(this.studentList.length > 0){
+        this.studentList = this.studentList.filter(x => x.admission_status == 1);
+      }
   
       this.memberService.getMemberListener().subscribe((response) => {
         this.memberList = response;
@@ -53,10 +57,12 @@ export class IcardComponent {
     else{
       this.studentService.getStudentListener().subscribe((response) => {
         this.studentList = response.filter(x => x.id == user.id);
+        this.studentList = this.studentList.filter(x => x.admission_status == 1);
       });
       this.studentList = this.studentService.getStudentLists();
       if(this.studentList.length > 0){
         this.studentList = this.studentList.filter(x => x.id == user.id);
+        this.studentList = this.studentList.filter(x => x.admission_status == 1);
       }
     }
    
