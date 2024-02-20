@@ -1,0 +1,66 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Payroll Type</h5><span>Payroll Type List</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="payrollTypeForm">
+                                <label class="col-form-label pt-0" for="exampleInputEmail1">Payroll Type Name</label>
+                                <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                       placeholder="Enter Payroll Type Name">
+                                <div *ngIf="payrollTypeForm.controls['name'].errors?.['required'] && payrollTypeForm.controls['name'].touched " class="text text-danger mt-1">Payroll Type Name required</div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="savePayrollTypes()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updatePayrollTypes()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Payroll Type List</h5>
+                                <span>Payroll Type List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of payrollTypeList;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>
+                                            <a (click)="editPayrollType(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deletePayrollType(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

@@ -57,7 +57,7 @@ export class AgentStudentEntryComponent {
             middle_name: new FormControl(null),
             last_name: new FormControl(null, [Validators.required]),
             mobile_no: new FormControl(null, [Validators.required]),
-            admission_status: new FormControl(0),
+            admission_status: new FormControl(null),
             current_address: new FormControl(null, [Validators.required]),
             permanent_address: new FormControl(null, [Validators.required]),
             gender: new FormControl(null, [Validators.required]),
@@ -131,6 +131,7 @@ export class AgentStudentEntryComponent {
 
 
     saveStudent(){
+        this.studentForm.patchValue({admission_status: 0});
         if(!this.studentForm.valid){
             this.studentForm.markAllAsTouched();
             return;

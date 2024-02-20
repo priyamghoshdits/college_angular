@@ -12,6 +12,7 @@ import {HolidayComponent} from "./holiday/holiday.component";
 import {StaffAttendanceComponent} from "./staff-attendance/staff-attendance.component";
 import {PayrollComponent} from "./payroll/payroll.component";
 import {ApproveLeaveComponent} from "./approve-leave/approve-leave.component";
+import {PayrollTypesComponent} from "./payroll-types/payroll-types.component";
 
 const routes: Routes = [
   {
@@ -100,6 +101,14 @@ const routes: Routes = [
     data: {
       title: "Approve Leave",
       breadcrumb: "Approve Leave"
+    }
+  },
+  {
+    path: 'payroll-types',
+    component: PayrollTypesComponent,
+    data: {
+      title: "Payroll Types",
+      breadcrumb: "Payroll Types"
     }
   }
 ];

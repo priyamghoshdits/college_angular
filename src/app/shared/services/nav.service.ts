@@ -69,6 +69,7 @@ export class NavService {
 				{ path: '/human-resource/category', title: 'Category', type: 'link' },
 				{ path: '/human-resource/holiday', title: 'Holiday', type: 'link' },
 				{ path: '/human-resource/staff-payroll', title: 'Payroll', type: 'link' },
+				{ path: '/human-resource/payroll-types', title: 'Payroll Types', type: 'link' },
 			]
 		},
 		{

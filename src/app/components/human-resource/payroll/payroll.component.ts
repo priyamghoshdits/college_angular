@@ -107,14 +107,13 @@ export class PayrollComponent {
     this.modalService.open(content,{ size: 'xl'});
   }
 
-  savePayroll($event){
+  savePayroll(){
     if(!this.memberPayrollForm.valid){
       this.memberPayrollForm.markAllAsTouched();
       return;
     }
     this.memberService.saveGeneratedPayroll(this.memberPayrollForm.value).subscribe((response: any) => {
       if(response.success == 1){
-        $event.close();
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -134,12 +133,14 @@ export class PayrollComponent {
     this.selectedData = data;
   }
 
+  returnBack(){
+    this.selectedData = null;
+  }
+
   calculate(){
     if(this.memberPayrollForm.value.gross_salary == null){
       this.memberPayrollForm.patchValue({gross_salary: this.memberPayrollForm.value.basic_salary});
     }
-    console.log(this.memberPayrollForm.value.gross_salary);
-    console.log(this.selectedData.no_of_days);
     let per_day = parseFloat(this.memberPayrollForm.value.gross_salary)/this.selectedData.no_of_days;
     let deduction = parseFloat(this.selectedData.total_absent) * per_day;
     this.memberPayrollForm.patchValue({tax: 0, deduction: deduction.toFixed(2)});
