@@ -158,83 +158,80 @@
                                         <input class="form-control" formControlName="total_absent" id="exampleInputEmail1" type="text">
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Basic Salary</label>
-                                        <input class="form-control" formControlName="basic_salary" id="exampleInputEmail1" type="text">
-                                        <div *ngIf="memberPayrollForm.controls['basic_salary'].invalid && memberPayrollForm.controls['basic_salary'].touched" style="color: red">Basic salary cannot be null</div>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Gross Salary</label>
-                                        <input class="form-control" formControlName="gross_salary" id="exampleInputEmail1" type="text">
+                                        <input readonly class="form-control" formControlName="gross_salary" id="exampleInputEmail1" type="text">
                                         <div *ngIf="memberPayrollForm.controls['gross_salary'].invalid && memberPayrollForm.controls['gross_salary'].touched" style="color: red">Gross salary cannot be null</div>
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Net Salary</label>
-                                        <input class="form-control" formControlName="net_salary" id="exampleInputEmail1" type="text">
+                                        <input readonly class="form-control" formControlName="net_salary" id="exampleInputEmail1" type="text">
                                         <div *ngIf="memberPayrollForm.controls['net_salary'].invalid && memberPayrollForm.controls['net_salary'].touched" style="color: red">Net salary cannot be null</div>
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Deduction</label>
-                                        <input class="form-control" formControlName="deduction" id="exampleInputEmail1" type="text">
+                                        <input readonly class="form-control" formControlName="deduction" id="exampleInputEmail1" type="text">
                                         <div *ngIf="memberPayrollForm.controls['deduction'].invalid && memberPayrollForm.controls['deduction'].touched" style="color: red">Deduction cannot be null</div>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Tax</label>
-                                        <input class="form-control" formControlName="tax" id="exampleInputEmail1" type="text">
-                                        <div *ngIf="memberPayrollForm.controls['tax'].invalid && memberPayrollForm.controls['tax'].touched" style="color: red">Enter Tax</div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3" style="border: 1px solid lightblue; min-height: 350px; width: 48%; margin-right: 10px">
-                                        <div class="row">
-                                            <h3>Earnings :-</h3>
-                                            <div class="col-md-6 mb-3">
-                                                <select style="width: 100%" formControlName="blood_group" class="form-select" required>
-                                                    <option value="A+"> A+ </option>
-                                                    <option value="A-"> A- </option>
-                                                    <option value="B+"> B+ </option>
-                                                    <option value="B-"> B- </option>
-                                                    <option value="AB+"> AB+ </option>
-                                                    <option value="AB-"> AB- </option>
-                                                    <option value="O+"> O+ </option>
-                                                    <option value="O-"> O- </option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-6 mb-3" style="padding-top: 5px">
-                                                <input class="form-control" formControlName="basic_salary" id="exampleInputEmail1" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3" style="border: 1px solid lightblue; min-height: 350px; width: 48%; margin-left: 10px">
-                                        <div class="row">
-                                            <h3>Deductions :-</h3>
-                                            <div class="col m-1">
-                                                <select style="width: 100%" formControlName="blood_group" class="form-select" required>
-                                                    <option value="A+"> A+ </option>
-                                                    <option value="A-"> A- </option>
-                                                    <option value="B+"> B+ </option>
-                                                    <option value="B-"> B- </option>
-                                                    <option value="AB+"> AB+ </option>
-                                                    <option value="AB-"> AB- </option>
-                                                    <option value="O+"> O+ </option>
-                                                    <option value="O-"> O- </option>
-                                                </select>
-                                            </div>
-                                            <div class="col m-1" style="padding-top: 5px">
-                                                <input class="form-control" formControlName="basic_salary" id="exampleInputEmail1" type="text">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-2 mb-3">
-                                        <button class="btn btn-primary me-1" type="submit" (click)="savePayroll()">Save</button>
-                                    </div>
-                                    <div class="col-md-2 mb-3">
-                                        <button class="btn btn-primary me-1" type="submit" (click)="calculate()">Auto Calculate</button>
                                     </div>
                                 </div>
                             </form>
+                            <div class="row">
+                                <div class="col-md-6 mb-3" style="border: 1px solid lightblue; min-height: 350px; width: 48%; margin-right: 10px">
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col-10"><h3>Earnings :-</h3></div>
+                                            <div class="col">
+                                                <a (click)="addEarnings()"><mat-icon style="font-size: 40px;height: 60px; width: 40px; line-height: 1">add_box</mat-icon></a>
+                                            </div>
+                                        </div>
+                                        <div *ngFor="let item of earnings ;let indexOfElement=index">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <select style="width: 100%" [(ngModel)]="earnings[indexOfElement].payroll_type_id" class="form-select">
+                                                        <option *ngFor="let data of payrollTypeList" [value]="data.id" >
+                                                            {{data.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mb-3" style="padding-top: 5px">
+                                                    <input class="form-control" [(ngModel)]="earnings[indexOfElement].amount" type="text" placeholder="Amount">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3" style="border: 1px solid lightblue; min-height: 350px; width: 48%; margin-left: 10px">
+                                    <div class="row">
+                                        <div class="row">
+                                            <div class="col-10"><h3>Deductions :-</h3></div>
+                                            <div class="col">
+                                                <a (click)="addDeduction()"><mat-icon style="font-size: 40px;height: 60px; width: 40px; line-height: 1">add_box</mat-icon></a>
+                                            </div>
+                                        </div>
+                                        <div *ngFor="let item of deductions ;let indexOfElement=index">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <select style="width: 100%" [(ngModel)]="deductions[indexOfElement].payroll_type_id" class="form-select">
+                                                        <option *ngFor="let data of payrollTypeList" [value]="data.id" >
+                                                            {{data.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6 mb-3" style="padding-top: 5px">
+                                                    <input class="form-control" [(ngModel)]="deductions[indexOfElement].amount" type="text" placeholder="Amount">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 mb-3">
+                                    <button class="btn btn-primary me-1" type="submit" (click)="savePayroll()">Save</button>
+                                </div>
+                                <div class="col-md-2 mb-3">
+                                    <button class="btn btn-primary me-1" type="submit" (click)="calculate()">Auto Calculate</button>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

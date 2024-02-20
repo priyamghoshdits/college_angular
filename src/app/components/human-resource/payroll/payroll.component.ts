@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import {UserTypeService} from "../../../services/user-type.service";
 import {DatePipe, JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MemberService} from "../../../services/member.service";
 import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
 import {MatIconModule} from "@angular/material/icon";
 import {NgbModal, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {PayrollTypesService} from "../../../services/payroll-types.service";
 
 @Component({
   selector: 'app-payroll',
@@ -22,7 +23,8 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
     MatIconModule,
     NgbTooltip,
     JsonPipe,
-    DatePipe
+    DatePipe,
+    FormsModule
   ],
   templateUrl: './payroll.component.html',
   styleUrl: './payroll.component.scss'
@@ -39,14 +41,36 @@ export class PayrollComponent {
   selectedData: any;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
+  payrollTypeList: any[] = [];
+  earnings: any[]= [];
+  deductions: any[]= [];
+
   constructor(private userTypeService: UserTypeService, private memberService: MemberService
-              , private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService) {
+              , private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService
+              , private payrollTypeService: PayrollTypesService) {
     this.payrollForm = new FormGroup({
       id: new FormControl(null),
       user_type_id: new FormControl(null, [Validators.required]),
       month: new FormControl(null, [Validators.required]),
       year: new FormControl(null, [Validators.required]),
     });
+    this.earnings = [
+      {
+        'payroll_type_id': null,
+        'amount': null
+      }
+    ];
+    this.deductions = [
+      {
+        'payroll_type_id': null,
+        'amount': null
+      }
+    ];
+    this.payrollTypeService.getPayrollTypeListener().subscribe((response) => {
+      this.payrollTypeList = response;
+    });
+    this.payrollTypeList = this.payrollTypeService.getPayrollTypes();
+
     this.memberPayrollForm = new FormGroup({
       id: new FormControl(null),
       staff_id: new FormControl(null),
@@ -64,12 +88,10 @@ export class PayrollComponent {
       total_approved_leave: new FormControl({value: '', disabled: true}),
       total_non_approved_leave: new FormControl({value: '', disabled: true}),
       total_holidays: new FormControl({value: '', disabled: true}),
-      gross_salary: new FormControl(null, [Validators.required]),
-      net_salary: new FormControl(null, [Validators.required]),
-      basic_salary: new FormControl(null, [Validators.required]),
+      gross_salary: new FormControl(0, [Validators.required]),
+      net_salary: new FormControl(0, [Validators.required]),
       contract_type: new FormControl({value: '', disabled: true}),
-      deduction: new FormControl(null, [Validators.required]),
-      tax: new FormControl(null, [Validators.required]),
+      deduction: new FormControl(0, [Validators.required]),
       total_leave: new FormControl(null, [Validators.required]),
     });
     this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
@@ -107,17 +129,101 @@ export class PayrollComponent {
     this.modalService.open(content,{ size: 'xl'});
   }
 
+  addEarnings(){
+    let flag = 0;
+    this.earnings.forEach(function (value){
+      if(value.payroll_type_id == null){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Select payroll type',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        flag = 1;
+      }
+      if(value.amount == null){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Enter Amount',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        flag = 1;
+      }
+    });
+    if(flag == 1){
+      return;
+    }
+    let arr = {
+      'payroll_type_id': null,
+      'amount': null
+    }
+    this.earnings.push(arr);
+  }
+
+  addDeduction(){
+    let flag = 0;
+    this.deductions.forEach(function (value){
+      if(value.payroll_type_id == null){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Select payroll type',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        flag = 1;
+      }
+      if(value.amount == null){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Enter Amount',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        flag = 1;
+      }
+    })
+    if(flag == 1){
+      return;
+    }
+    let arr = {
+      'payroll_type_id': null,
+      'amount': null
+    }
+    this.deductions.push(arr);
+  }
+
   savePayroll(){
+    this.calculate();
+    let arr = {
+      'member_payroll_form': this.memberPayrollForm.value,
+      'earnings': this.earnings,
+      'deductions': this.deductions,
+    }
+    // console.log(arr);
+    // return;
     if(!this.memberPayrollForm.valid){
       this.memberPayrollForm.markAllAsTouched();
       return;
     }
-    this.memberService.saveGeneratedPayroll(this.memberPayrollForm.value).subscribe((response: any) => {
+    this.memberService.saveGeneratedPayroll(arr).subscribe((response: any) => {
       if(response.success == 1){
         Swal.fire({
           position: 'center',
           icon: 'success',
           title: 'Payroll generated',
+          showConfirmButton: false,
+          timer: 1000
+        });
+      }else{
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Error in generating payroll',
           showConfirmButton: false,
           timer: 1000
         });
@@ -138,12 +244,17 @@ export class PayrollComponent {
   }
 
   calculate(){
-    if(this.memberPayrollForm.value.gross_salary == null){
-      this.memberPayrollForm.patchValue({gross_salary: this.memberPayrollForm.value.basic_salary});
-    }
-    let per_day = parseFloat(this.memberPayrollForm.value.gross_salary)/this.selectedData.no_of_days;
-    let deduction = parseFloat(this.selectedData.total_absent) * per_day;
-    this.memberPayrollForm.patchValue({tax: 0, deduction: deduction.toFixed(2)});
+    // if(this.memberPayrollForm.value.gross_salary == null){
+    //   this.memberPayrollForm.patchValue({gross_salary: this.memberPayrollForm.value.basic_salary});
+    // }
+    // let per_day = parseFloat(this.memberPayrollForm.value.gross_salary)/this.selectedData.no_of_days;
+    // let deduction = parseFloat(this.selectedData.total_absent) * per_day;
+    // this.memberPayrollForm.patchValue({tax: 0, deduction: deduction.toFixed(2)});
+    this.memberPayrollForm.patchValue({
+      deduction: this.deductions.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0),
+      gross_salary: this.earnings.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0),
+      net_salary: this.earnings.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0) - this.deductions.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0)
+    });
   }
 
 }

@@ -137,12 +137,10 @@ export class HeaderComponent implements OnInit {
 
   SignOut(){
     this.http.get(this.BASE_API_URL + '/logout',).subscribe((response: any) =>{
-      if(response.success == 1){
-        localStorage.removeItem('user');
-        this.router.navigate(["/auth/login"]);
-        window.location.reload();
-      }
     });
+    localStorage.removeItem('user');
+    this.router.navigate(["/auth/login"]);
+    window.location.reload();
   }
 
   toggleFullScreen() {
