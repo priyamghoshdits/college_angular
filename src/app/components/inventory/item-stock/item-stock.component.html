@@ -1,0 +1,127 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Item Stock</h5><span>Add Item Stock</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="itemStockForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label>Select Type</label>
+                                            <select style="width: 100%" formControlName="item_type_id" class="form-select" required >
+                                                <option *ngFor="let data of itemList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label>Select Type</label>
+                                            <select style="width: 100%" formControlName="item_supplier_id" class="form-select" required >
+                                                <option *ngFor="let data of itemSupplyList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label>Select Type</label>
+                                            <select style="width: 100%" formControlName="item_store_id" class="form-select" required >
+                                                <option *ngFor="let data of itemStoreList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Quantity</label>
+                                        <input class="form-control" formControlName="quantity" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Quantity">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Purchase Price</label>
+                                        <input class="form-control" formControlName="purchase_price" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Purchase Price">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Date</label>
+                                        <input class="form-control" formControlName="purchase_date" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Date">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+                                        <input class="form-control" formControlName="description" type="text"
+                                               placeholder="Enter Description">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveItemStock()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateItemStock()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="col-sm-12 col-xl-7">-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <div class="col-sm-12">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-header">-->
+<!--                                <h5>Items</h5>-->
+<!--                                <span>Items List.</span>-->
+<!--                            </div>-->
+<!--                            <div class="table-responsive">-->
+
+<!--                                <table class="table" style="text-align: center">-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th colspan="2">#</th>-->
+<!--                                        <th colspan="2">Name</th>-->
+<!--                                        <th colspan="2">Item Type</th>-->
+<!--                                        <th colspan="2">Unit</th>-->
+<!--                                        <th colspan="2">Description</th>-->
+<!--                                        <th colspan="2">Action</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                    <tr *ngFor="let record of itemList| paginate: { itemsPerPage: 10, currentPage: p }  ;let indexOfElement=index">-->
+<!--                                        <td colspan="2">{{indexOfElement+1}}</td>-->
+<!--                                        <td colspan="2">{{record.name}}</td>-->
+<!--                                        <td colspan="2">{{record.item_type_name}}</td>-->
+<!--                                        <td colspan="2">{{record.unit}}</td>-->
+<!--                                        <td colspan="2">{{record.description}}</td>-->
+<!--                                        <td colspan="2">-->
+<!--                                            <a (click)="editItem(record)"><mat-icon>edit</mat-icon></a>-->
+<!--                                            <a (click)="deleteItem(record)"><mat-icon>delete</mat-icon></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                                <pagination-controls [hidden]="itemList.length<9" (pageChange)="p = $event"></pagination-controls>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->

@@ -13,15 +13,21 @@ export class InventoryService {
   itemCategoryList = [];
   itemList = [];
   itemSupplier = [];
+  itemStoreList = [];
 
   itemListSubject = new Subject<any[]>();
   itemCategoryListSubject = new Subject<any[]>();
   itemSupplierListSubject = new Subject<any[]>();
+  itemStoreListSubject = new Subject<any[]>();
 
 
-  getItemCategoryListListener(){
-    return this.itemCategoryListSubject.asObservable();
+  getItemStoreListListener(){
+    return this.itemStoreListSubject.asObservable();
   }
+
+    getItemCategoryListListener(){
+        return this.itemCategoryListSubject.asObservable();
+    }
 
   getItemSupplierListListener(){
       return this.itemSupplierListSubject.asObservable();
@@ -47,7 +53,16 @@ export class InventoryService {
           this.itemSupplierListSubject.next([...this.itemSupplier]);
       });
 
+      this.http.get(this.BASE_API_URL + '/getItemStore').subscribe((response: any) =>{
+          this.itemStoreList = response.data;
+          this.itemStoreListSubject.next([...this.itemStoreList]);
+      });
+
   }
+
+    getItemStoreList(){
+        return [...this.itemStoreList];
+    }
 
   getItemSupplier(){
       return [...this.itemSupplier];
@@ -69,6 +84,18 @@ export class InventoryService {
                     // @ts-ignore
                     this.itemSupplier.push(response.data);
                     this.itemSupplierListSubject.next([...this.itemSupplier]);
+                }
+            }));
+    }
+
+    saveItemStore(data){
+        return this.http.post(this.BASE_API_URL + '/saveItemStore', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    this.itemStoreList.push(response.data);
+                    this.itemStoreListSubject.next([...this.itemStoreList]);
                 }
             }));
     }
@@ -126,6 +153,20 @@ export class InventoryService {
             }));
     }
 
+    updateItemStore(data){
+        return this.http.post(this.BASE_API_URL + '/updateItemStore', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    const index = this.itemStoreList.findIndex(x => x.id === response.data.id);
+                    // @ts-ignore
+                    this.itemStoreList[index] = response.data;
+                    this.itemStoreListSubject.next([...this.itemStoreList]);
+                }
+            }));
+    }
+
     saveItems(data){
         return this.http.post(this.BASE_API_URL + '/saveInventoryItems', data)
             .pipe(catchError(this.errorService.serverError), tap(response => {
@@ -173,6 +214,19 @@ export class InventoryService {
                     const index = this.itemSupplier.findIndex(x => x.id === response.data.id);
                     this.itemSupplier.splice(index,1);
                     this.itemSupplierListSubject.next([...this.itemSupplier]);
+                }
+            }));
+    }
+
+    deleteItemStore(id){
+        return this.http.get(this.BASE_API_URL + '/deleteItemStore/' + id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    const index = this.itemStoreList.findIndex(x => x.id === response.data.id);
+                    this.itemStoreList.splice(index,1);
+                    this.itemStoreListSubject.next([...this.itemStoreList]);
                 }
             }));
     }

@@ -1,1 +1,88 @@
-<p>item-store works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Item Supplier</h5><span>Item Supplier List</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="itemStoreForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0">Name</label>
+                                        <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Name">
+                                        <div *ngIf="itemStoreForm.controls['name'].errors?.['required'] && itemStoreForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0">Item Stock Code</label>
+                                        <input class="form-control" formControlName="stock_code" type="text"
+                                               placeholder="Enter Item Stock Code">
+                                        <div *ngIf="itemStoreForm.controls['stock_code'].errors?.['required'] && itemStoreForm.controls['stock_code'].touched " class="text text-danger mt-1">Item Stock Code required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0">Description</label>
+                                        <input class="form-control" formControlName="description" type="text"
+                                               placeholder="Enter Description">
+                                        <div *ngIf="itemStoreForm.controls['description'].errors?.['required'] && itemStoreForm.controls['description'].touched " class="text text-danger mt-1">Description required</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveItemStore()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateItemStore()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Item Supplier</h5>
+                                <span>Item Supplier List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Stock Code</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of itemStoreList;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.stock_code}}</td>
+                                        <td>
+                                            <a (click)="editItemStore(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteItemStore(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

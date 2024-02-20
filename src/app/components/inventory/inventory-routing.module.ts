@@ -4,6 +4,7 @@ import {ItemTypeComponent} from "./item-type/item-type.component";
 import {AddItemsComponent} from "./add-items/add-items.component";
 import {ItemSupplierComponent} from "./item-supplier/item-supplier.component";
 import {ItemStoreComponent} from "./item-store/item-store.component";
+import {ItemStockComponent} from "./item-stock/item-stock.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,14 @@ const routes: Routes = [
     data: {
       title: "Item Store",
       breadcrumb: "Item Store"
+    }
+  },
+  {
+    path: 'item-stock',
+    component: ItemStockComponent,
+    data: {
+      title: "Item Stock",
+      breadcrumb: "Item Stock"
     }
   }
 ];
