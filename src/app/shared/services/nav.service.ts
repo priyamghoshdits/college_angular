@@ -93,8 +93,10 @@ export class NavService {
 		},
 		{
 			title: 'Inventory', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/inventory/inventoryItem', title: 'Item Category', type: 'link' },
-				{ path: '/inventory/addItem', title: 'Add Item', type: 'link' },
+				{ path: '/inventory/inventory-item', title: 'Item Category', type: 'link' },
+				{ path: '/inventory/add-item', title: 'Add Item', type: 'link' },
+				{ path: '/inventory/item-supplier', title: 'Item Supplier', type: 'link' },
+				{ path: '/inventory/item-store', title: 'Item Store', type: 'link' },
 			]
 		},
 		{

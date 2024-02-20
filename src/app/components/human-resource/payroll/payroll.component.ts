@@ -44,6 +44,7 @@ export class PayrollComponent {
   payrollTypeList: any[] = [];
   earnings: any[]= [];
   deductions: any[]= [];
+  viewPayslip = false;
 
   constructor(private userTypeService: UserTypeService, private memberService: MemberService
               , private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService
@@ -122,6 +123,14 @@ export class PayrollComponent {
     this.memberService.getMembers(this.payrollForm.value.user_type_id, this.payrollForm.value.month, this.payrollForm.value.year).subscribe((response: any) => {
       this.memberList = response.data;
     });
+  }
+
+  viewSalarySlip(){
+    this.viewPayslip = true;
+  }
+
+  returnBackPayslip(){
+    this.viewPayslip = false;
   }
 
   openCustomModal(content) {

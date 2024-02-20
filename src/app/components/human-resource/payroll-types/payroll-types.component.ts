@@ -4,6 +4,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {PayrollTypesService} from "../../../services/payroll-types.service";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-payroll-types',
@@ -21,7 +22,9 @@ export class PayrollTypesComponent {
     payrollTypeForm: FormGroup;
     isUpdatable = false;
     payrollTypeList: any[];
-    constructor(private payrollTypeService: PayrollTypesService) {
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
+    constructor(private payrollTypeService: PayrollTypesService, private roleAndPermissionService: RolesAndPermissionService) {
         this.payrollTypeForm = new FormGroup({
             id: new FormControl(null),
             name: new FormControl(null, [Validators.required]),
@@ -31,6 +34,15 @@ export class PayrollTypesComponent {
             this.payrollTypeList = response;
         });
         this.payrollTypeList = this.payrollTypeService.getPayrollTypes();
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'PAYROLL TYPES').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'PAYROLL TYPES').permission;
+        }
     }
 
     savePayrollTypes(){

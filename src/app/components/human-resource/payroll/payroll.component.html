@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12 col-xl-12">
-            <div class="row" *ngIf="!selectedData">
+            <div class="row" *ngIf="!selectedData && !viewPayslip">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
@@ -77,7 +77,7 @@
                                         <td>
 <!--                                            <button *ngIf="record.generated == 0" class="btn btn-primary me-1" type="submit" (click)="openCustomModal(content);generatePayroll(record)">Generate</button>-->
                                             <button *ngIf="record.generated == 0" class="btn btn-primary me-1" type="submit" (click)="generatePayroll(record)">Generate</button>
-                                            <button *ngIf="record.generated == 1" class="btn btn-primary me-1" type="submit">Download</button>
+                                            <button *ngIf="record.generated == 1" class="btn btn-primary me-1" (click)="viewSalarySlip()" type="submit">View Salary Slip</button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -88,7 +88,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row" *ngIf="selectedData">
+            <div class="row" *ngIf="selectedData && !viewPayslip">
                 <div class="col-sm-12">
                     <a style="cursor: pointer;" (click)="returnBack()"><mat-icon>backspace</mat-icon></a>
                     <div class="card">
@@ -236,6 +236,9 @@
 
                     </div>
                 </div>
+            </div>
+            <div class="row" *ngIf="viewPayslip">
+                <a style="cursor: pointer;" (click)="returnBackPayslip()"><mat-icon>backspace</mat-icon></a>
             </div>
         </div>
     </div>
