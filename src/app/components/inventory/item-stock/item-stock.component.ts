@@ -22,6 +22,7 @@ export class ItemStockComponent {
   itemList: any[];
   itemSupplyList: any[];
   itemStoreList: any[];
+  itemStockList: any[];
   isUpdatable = false;
   constructor(private inventoryService: InventoryService) {
     this.itemStockForm = new FormGroup({
@@ -47,6 +48,10 @@ export class ItemStockComponent {
       this.itemList = response;
     })
     this.itemList = this.inventoryService.getItem();
+    this.inventoryService.getItemStockListener().subscribe((response) => {
+      this.itemStockList = response;
+    });
+    this.itemStockList = this.inventoryService.getItemStockList();
   }
 
   saveItemStock(){

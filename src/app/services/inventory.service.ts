@@ -14,11 +14,13 @@ export class InventoryService {
   itemList = [];
   itemSupplier = [];
   itemStoreList = [];
+  itemStockList = [];
 
   itemListSubject = new Subject<any[]>();
   itemCategoryListSubject = new Subject<any[]>();
   itemSupplierListSubject = new Subject<any[]>();
   itemStoreListSubject = new Subject<any[]>();
+  itemStockListSubject = new Subject<any[]>();
 
 
   getItemStoreListListener(){
@@ -37,6 +39,10 @@ export class InventoryService {
       return this.itemListSubject.asObservable();
   }
 
+    getItemStockListener(){
+        return this.itemStockListSubject.asObservable();
+    }
+
 
   constructor(private  http: HttpClient, private errorService: ErrorService) {
     this.http.get(this.BASE_API_URL + '/getItemCategory').subscribe((response: any) =>{
@@ -46,6 +52,11 @@ export class InventoryService {
       this.http.get(this.BASE_API_URL + '/getInventoryItems').subscribe((response: any) =>{
           this.itemList = response.data;
           this.itemListSubject.next([...this.itemList]);
+      });
+
+      this.http.get(this.BASE_API_URL + '/getItemStock').subscribe((response: any) =>{
+          this.itemStockList = response.data;
+          this.itemStockListSubject.next([...this.itemStockList]);
       });
 
       this.http.get(this.BASE_API_URL + '/getItemSupplier').subscribe((response: any) =>{
@@ -62,6 +73,10 @@ export class InventoryService {
 
     getItemStoreList(){
         return [...this.itemStoreList];
+    }
+
+    getItemStockList(){
+        return [...this.itemStockList];
     }
 
   getItemSupplier(){
