@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-6">
             <div class="row">
                 <div class="col-sm-12">
@@ -21,6 +21,7 @@
                                         <input class="form-control" formControlName="phone" type="text"
                                                placeholder="Enter Phone">
                                         <div *ngIf="itemSupplierForm.controls['phone'].errors?.['required'] && itemSupplierForm.controls['phone'].touched " class="text text-danger mt-1">Phone required</div>
+                                        <div *ngIf="itemSupplierForm.controls['phone'].touched && itemSupplierForm.controls['phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone Number</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -28,7 +29,8 @@
                                         <label class="col-form-label pt-0">Email</label>
                                         <input class="form-control" formControlName="email" id="exampleInputEmail1" type="text"
                                                placeholder="Enter Email">
-                                        <div *ngIf="itemSupplierForm.controls['email'].errors?.['required'] && itemSupplierForm.controls['email'].touched " class="text text-danger mt-1">Email required</div>
+                                        <div *ngIf="itemSupplierForm.controls['email'].errors?.['required'] && itemSupplierForm.controls['email'].touched " class="text text-danger mt-1">Email is required</div>
+                                        <div *ngIf="itemSupplierForm.controls['email'].touched && itemSupplierForm.controls['email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -51,6 +53,7 @@
                                         <input class="form-control" formControlName="contact_person_phone" type="text"
                                                placeholder="Enter Contact Person Phone">
                                         <div *ngIf="itemSupplierForm.controls['contact_person_phone'].errors?.['required'] && itemSupplierForm.controls['contact_person_phone'].touched " class="text text-danger mt-1">Contact Person Phone required</div>
+                                        <div *ngIf="itemSupplierForm.controls['contact_person_phone'].touched && itemSupplierForm.controls['contact_person_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone Number</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -58,7 +61,8 @@
                                         <label class="col-form-label pt-0">Contact Person Email</label>
                                         <input class="form-control" formControlName="contact_person_email" type="text"
                                                placeholder="Enter Contact Person Email">
-                                        <div *ngIf="itemSupplierForm.controls['contact_person_email'].errors?.['required'] && itemSupplierForm.controls['contact_person_email'].touched " class="text text-danger mt-1">Contact Person Email required</div>
+                                        <div *ngIf="itemSupplierForm.controls['contact_person_email'].errors?.['required'] && itemSupplierForm.controls['contact_person_email'].touched " class="text text-danger mt-1">Email is required</div>
+                                        <div *ngIf="itemSupplierForm.controls['contact_person_email'].touched && itemSupplierForm.controls['contact_person_email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -72,8 +76,8 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveItemSupplier()">Submit</button>
-                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateItemSupplier()">Update</button>
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveItemSupplier()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateItemSupplier()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
                         </div>
                     </div>
@@ -81,7 +85,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-xl-6">
-            <div class="row">
+            <div class="row" *ngIf="permission[3].permission == 1">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <div class="card">
@@ -97,7 +101,7 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Contact Person</th>
                                         <th scope="col">Contact Phone</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -107,8 +111,8 @@
                                         <td>{{record.contact_person_name}}</td>
                                         <td>{{record.contact_person_phone}}</td>
                                         <td>
-                                            <a (click)="editItemSupplier(record)"><mat-icon>edit</mat-icon></a>
-                                            <a (click)="deleteItemSupplier(record)"><mat-icon>delete</mat-icon></a>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editItemSupplier(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteItemSupplier(record)"><mat-icon>delete</mat-icon></a>
                                         </td>
                                     </tr>
                                     </tbody>

@@ -4,96 +4,155 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h5>Items</h5><span>Add Item</span>
+                        <div class="card-header" [hidden]="active != 1">
+                            <h5>Issue Items</h5>
+                        </div>
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>Show Issued Item</h5>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Issue Item</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Show Issued Item</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
                         </div>
                         <div class="card-body">
-                            <form class="theme-form" [formGroup]="issueItemsForm">
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label>Select User Type</label>
-                                        <select style="width: 100%" formControlName="user_type_id" class="form-select" (change)="getUsers()">
-                                            <option value="null">Select</option>
-                                            <option *ngFor="let data of userTypeList" [value]="data.id" >
-                                                {{data.name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="issueItemsForm.controls['user_type_id'].errors?.['required'] && issueItemsForm.controls['user_type_id'].touched " class="text text-danger mt-1">User Type required</div>
+                            <div [hidden]="active != 1">
+                                <form class="theme-form" [formGroup]="issueItemsForm">
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Select User Type</label>
+                                            <select style="width: 100%" formControlName="user_type_id" class="form-select" (change)="getUsers()">
+                                                <option value="null">Select</option>
+                                                <option *ngFor="let data of userTypeList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="issueItemsForm.controls['user_type_id'].errors?.['required'] && issueItemsForm.controls['user_type_id'].touched " class="text text-danger mt-1">User Type required</div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Issue To</label>
+                                            <select style="width: 100%" formControlName="issue_to" class="form-select">
+                                                <option value="null">Select</option>
+                                                <option *ngFor="let data of userList" [value]="data.id" >
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="issueItemsForm.controls['issue_to'].errors?.['required'] && issueItemsForm.controls['issue_to'].touched " class="text text-danger mt-1">Issue To required</div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Issue By</label>
+                                            <select style="width: 100%" formControlName="issue_by" class="form-select">
+                                                <option value="null">Select</option>
+                                                <option *ngFor="let data of staffList" [value]="data.id" >
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="issueItemsForm.controls['issue_by'].errors?.['required'] && issueItemsForm.controls['issue_by'].touched " class="text text-danger mt-1">Issue By required</div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label>Issue To</label>
-                                        <select style="width: 100%" formControlName="issue_to" class="form-select">
-                                            <option value="null">Select</option>
-                                            <option *ngFor="let data of userList" [value]="data.id" >
-                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="issueItemsForm.controls['issue_to'].errors?.['required'] && issueItemsForm.controls['issue_to'].touched " class="text text-danger mt-1">Issue To required</div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Issue date</label>
+                                            <input class="form-control" formControlName="issue_date" type="date"
+                                                   placeholder="Issue date">
+                                            <div *ngIf="issueItemsForm.controls['issue_date'].errors?.['required'] && issueItemsForm.controls['issue_date'].touched " class="text text-danger mt-1">Issue Date required</div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Return date</label>
+                                            <input class="form-control" formControlName="return_date" type="date"
+                                                   placeholder="Return date">
+                                            <div *ngIf="issueItemsForm.controls['return_date'].errors?.['required'] && issueItemsForm.controls['return_date'].touched " class="text text-danger mt-1">Return Date required</div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label>Issue By</label>
-                                        <select style="width: 100%" formControlName="issue_by" class="form-select">
-                                            <option value="null">Select</option>
-                                            <option *ngFor="let data of staffList" [value]="data.id" >
-                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="issueItemsForm.controls['issue_by'].errors?.['required'] && issueItemsForm.controls['issue_by'].touched " class="text text-danger mt-1">Issue By required</div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Item Category</label>
+                                            <select style="width: 100%" formControlName="item_type_id" class="form-select" (change)="getItems()">
+                                                <option value="null">Select</option>
+                                                <option *ngFor="let data of itemCategoryList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="issueItemsForm.controls['item_type_id'].errors?.['required'] && issueItemsForm.controls['item_type_id'].touched " class="text text-danger mt-1">Item Category required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Item</label>
+                                            <select style="width: 100%" formControlName="inventory_item_id" class="form-select" (change)="showQuantity()">
+                                                <option value="null">Select</option>
+                                                <option *ngFor="let data of itemList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="issueItemsForm.controls['inventory_item_id'].errors?.['required'] && issueItemsForm.controls['inventory_item_id'].touched " class="text text-danger mt-1">Item required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Available Quantity</label>
+                                            <input class="form-control" readonly formControlName="available_quantity" id="exampleInputEmail1" type="text"
+                                                   placeholder="Available Quantity">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Quantity</label>
+                                            <input class="form-control" formControlName="quantity" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Quantity">
+                                            <div *ngIf="issueItemsForm.controls['quantity'].errors?.['required'] && issueItemsForm.controls['quantity'].touched " class="text text-danger mt-1">Quantity required</div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4 mb-3">
-                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Issue date</label>
-                                        <input class="form-control" formControlName="issue_date" type="date"
-                                               placeholder="Issue date">
-                                        <div *ngIf="issueItemsForm.controls['issue_date'].errors?.['required'] && issueItemsForm.controls['issue_date'].touched " class="text text-danger mt-1">Issue Date required</div>
-                                    </div>
-                                    <div class="col-md-4 mb-3">
-                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Return date</label>
-                                        <input class="form-control" formControlName="return_date" type="date"
-                                               placeholder="Return date">
-                                        <div *ngIf="issueItemsForm.controls['return_date'].errors?.['required'] && issueItemsForm.controls['return_date'].touched " class="text text-danger mt-1">Return Date required</div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row">
-                                    <div class="col-md-3 mb-3">
-                                        <label>Item Category</label>
-                                        <select style="width: 100%" formControlName="item_type_id" class="form-select" (change)="getItems()">
-                                            <option value="null">Select</option>
-                                            <option *ngFor="let data of itemCategoryList" [value]="data.id" >
-                                                {{data.name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="issueItemsForm.controls['item_type_id'].errors?.['required'] && issueItemsForm.controls['item_type_id'].touched " class="text text-danger mt-1">Item Category required</div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>Item</label>
-                                        <select style="width: 100%" formControlName="inventory_item_id" class="form-select" (change)="showQuantity()">
-                                            <option value="null">Select</option>
-                                            <option *ngFor="let data of itemList" [value]="data.id" >
-                                                {{data.name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="issueItemsForm.controls['inventory_item_id'].errors?.['required'] && issueItemsForm.controls['inventory_item_id'].touched " class="text text-danger mt-1">Item required</div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Available Quantity</label>
-                                        <input class="form-control" readonly formControlName="available_quantity" id="exampleInputEmail1" type="text"
-                                               placeholder="Available Quantity">
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Quantity</label>
-                                        <input class="form-control" formControlName="quantity" id="exampleInputEmail1" type="text"
-                                               placeholder="Enter Quantity">
-                                        <div *ngIf="issueItemsForm.controls['quantity'].errors?.['required'] && issueItemsForm.controls['quantity'].touched " class="text text-danger mt-1">Quantity required</div>
-                                    </div>
-                                </div>
 
-                            </form>
+                                </form>
+                            </div>
+                            <div [hidden]="active != 2">
+                                <div class="table-responsive" style="text-align: center">
+
+                                    <table class="table" style="text-align: center">
+                                        <thead>
+                                        <tr>
+                                            <th colspan="2">#</th>
+                                            <th colspan="2">Item Category</th>
+                                            <th colspan="2">Item Issue - Item Return</th>
+                                            <th colspan="2">Issue To</th>
+                                            <th colspan="2">Issue By</th>
+                                            <th colspan="2">Quantity</th>
+                                            <th colspan="2">Status</th>
+                                            <th colspan="2">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of issueItemList;let indexOfElement=index">
+                                            <td colspan="2">{{indexOfElement+1}}</td>
+                                            <td colspan="2">{{record.item_type_name}}</td>
+                                            <td colspan="2">{{record.issue_date}} - {{record.return_date}}</td>
+                                            <td colspan="2">{{record.issue_to_name}}</td>
+                                            <td colspan="2">{{record.issue_by_name}}</td>
+                                            <td colspan="2">{{record.quantity}}</td>
+                                            <td colspan="2" *ngIf="record.status == 1">
+                                                <button class="btn btn-primary-gradien me-1" (click)="returnItem(record)">Return</button>
+                                            </td>
+                                            <td colspan="2" *ngIf="record.status == 0">
+                                                Returned
+                                            </td>
+                                            <td colspan="2">
+                                                <a (click)="deleteIssueItem(record)"><mat-icon>delete</mat-icon></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+<!--                                    <pagination-controls [hidden]="itemList.length<9" (pageChange)="p = $event"></pagination-controls>-->
+
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer">
-                            <button class="btn btn-primary me-1" (click)="saveIssueItem()">Submit</button>
+                            <div [hidden]="active != 1">
+                                <button class="btn btn-primary me-1" (click)="saveIssueItem()">Submit</button>
+                            </div>
+<!--                            <button class="btn btn-primary me-1" (click)="saveIssueItem()">Submit</button>-->
 <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateItems()">Update</button>-->
 <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
                         </div>

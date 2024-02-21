@@ -128,6 +128,34 @@ export class InventoryService {
             }));
     }
 
+    updateStatus(id){
+        return this.http.get(this.BASE_API_URL + '/updateStatusInventoryIssue/' + id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    const index = this.issueItemList.findIndex(x => x.id === response.data.id);
+                    // @ts-ignore
+                    this.issueItemList[index] = response.data;
+                    this.issueItemListSubject.next([...this.issueItemList]);
+                }
+            }));
+    }
+
+    deleteIssueItem(id){
+        return this.http.get(this.BASE_API_URL + '/deleteIssueItem/' + id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    const index = this.issueItemList.findIndex(x => x.id === response.data.id);
+                    // @ts-ignore
+                    this.issueItemList.splice(index,1);
+                    this.issueItemListSubject.next([...this.issueItemList]);
+                }
+            }));
+    }
+
     getQuantityByInventoryTypeId(inventory_type_id){
         return this.http.get(this.BASE_API_URL + '/getQuantityByItemId/' + inventory_type_id)
             .pipe(catchError(this.errorService.serverError), tap(response => {

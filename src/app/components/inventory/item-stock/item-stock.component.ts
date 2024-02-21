@@ -5,6 +5,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-item-stock',
@@ -28,7 +29,9 @@ export class ItemStockComponent {
   itemTypeList: any[];
   isUpdatable = false;
   p:number;
-  constructor(private inventoryService: InventoryService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private inventoryService: InventoryService, private roleAndPermissionService: RolesAndPermissionService) {
     this.itemStockForm = new FormGroup({
       id: new FormControl(null),
       item_type_id: new FormControl(null, [Validators.required]),
@@ -48,10 +51,6 @@ export class ItemStockComponent {
       this.itemSupplyList = response;
     })
     this.itemSupplyList = this.inventoryService.getItemSupplier();
-    // this.inventoryService.getItemListListener().subscribe((response) => {
-    //   this.itemList = response;
-    // })
-    // this.itemList = this.inventoryService.getItem();
     this.inventoryService.getItemStockListener().subscribe((response) => {
       this.itemStockList = response;
     });
@@ -60,6 +59,14 @@ export class ItemStockComponent {
       this.itemTypeList = response;
     })
     this.itemTypeList = this.inventoryService.getItemCategory();
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'INVENTORY ITEM STOCK').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'INVENTORY ITEM STOCK').permission;
+    }
   }
 
   getItemList(){

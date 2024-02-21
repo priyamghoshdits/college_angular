@@ -7,6 +7,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {UserTypeService} from "../../../services/user-type.service";
 import {MemberService} from "../../../services/member.service";
 import Swal from "sweetalert2";
+import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-issue-item',
@@ -17,7 +18,12 @@ import Swal from "sweetalert2";
     NgForOf,
     NgIf,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbNav,
+    NgbNavLink,
+    NgbNavLinkBase,
+    NgbNavItem,
+    NgbNavOutlet
   ],
   templateUrl: './issue-item.component.html',
   styleUrl: './issue-item.component.scss'
@@ -30,6 +36,7 @@ export class IssueItemComponent {
   itemCategoryList: any[];
   itemList: any[];
   issueItemList: any[];
+  active = 1;
   constructor(private inventoryService: InventoryService, private userTypeService: UserTypeService
               , private memberService: MemberService) {
     this.issueItemsForm = new FormGroup({
@@ -66,13 +73,65 @@ export class IssueItemComponent {
   getItems(){
     this.inventoryService.getItemListByItemCategory(this.issueItemsForm.value.item_type_id).subscribe((response: any) => {
         this.itemList = response.data;
+        this.issueItemsForm.patchValue({available_quantity: null});
     })
   }
 
+  activeTab(data){
+    this.active = data;
+  }
+
   showQuantity(){
-    this.inventoryService.getQuantityByInventoryTypeId(this.issueItemsForm.value.item_type_id).subscribe((response: any) => {
+    if(this.issueItemsForm.value.inventory_item_id == 'null'){
+      this.issueItemsForm.patchValue({available_quantity: null});
+      return;
+    }
+    this.inventoryService.getQuantityByInventoryTypeId(this.issueItemsForm.value.inventory_item_id).subscribe((response: any) => {
       this.issueItemsForm.patchValue({available_quantity: response.data});
     })
+  }
+
+  deleteIssueItem(data){
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Do you sure to delete Issue Item ?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete It!'
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.inventoryService.deleteIssueItem(data.id).subscribe((response: any) => {
+          if(response.success == 1){
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Issue Item Deleted',
+              showConfirmButton: false,
+              timer: 1000
+            });
+          }
+        })
+      }
+    });
+  }
+
+  returnItem(data){
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Do you sure to return ?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, return It!'
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.inventoryService.updateStatus(data.id).subscribe((response: any) => {
+        });
+      }
+    });
   }
 
   getUsers(){
@@ -86,6 +145,18 @@ export class IssueItemComponent {
       this.issueItemsForm.markAllAsTouched();
       return;
     }
+
+    if(this.issueItemsForm.value.available_quantity < this.issueItemsForm.value.quantity){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Quantity cannot be greater than available',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+
     this.inventoryService.saveIssueItem(this.issueItemsForm.value).subscribe((response: any) => {
       if(response.success == 1){
         Swal.fire({
@@ -95,6 +166,7 @@ export class IssueItemComponent {
           showConfirmButton: false,
           timer: 1000
         });
+        this.issueItemsForm.reset();
       }
     })
   }

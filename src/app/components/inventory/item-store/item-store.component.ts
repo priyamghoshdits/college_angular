@@ -4,6 +4,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-item-store',
@@ -21,7 +22,9 @@ export class ItemStoreComponent {
   itemStoreForm: FormGroup;
   itemStoreList: any[];
   isUpdatable = false;
-  constructor(private inventoryService: InventoryService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private inventoryService: InventoryService, private roleAndPermissionService: RolesAndPermissionService) {
     this.itemStoreForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
@@ -32,6 +35,14 @@ export class ItemStoreComponent {
       this.itemStoreList = response;
     });
     this.itemStoreList = this.inventoryService.getItemStoreList();
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'INVENTORY ITEM STORE').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'INVENTORY ITEM STORE').permission;
+    }
   }
 
   saveItemStore(){

@@ -4,6 +4,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-item-supplier',
@@ -21,28 +22,41 @@ export class ItemSupplierComponent {
   itemSupplierForm: FormGroup;
   itemSupplier: any[];
   isUpdatable = false;
-  constructor(private inventoryService: InventoryService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private inventoryService: InventoryService, private roleAndPermissionService: RolesAndPermissionService) {
     this.itemSupplierForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
-      phone: new FormControl(null, [Validators.required]),
-      email: new FormControl(null, [Validators.required]),
+      phone: new FormControl(null, [Validators.required, Validators.pattern("[0-9 ]{10}")]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
       address: new FormControl(null, [Validators.required]),
       contact_person_name: new FormControl(null, [Validators.required]),
-      contact_person_phone: new FormControl(null, [Validators.required]),
-      contact_person_email: new FormControl(null, [Validators.required]),
+      contact_person_phone: new FormControl(null, [Validators.required, Validators.pattern("[0-9 ]{10}")]),
+      contact_person_email: new FormControl(null, [Validators.required, Validators.email]),
       description: new FormControl(null),
     });
     this.inventoryService.getItemSupplierListListener().subscribe((response) => {
       this.itemSupplier = response;
     });
     this.itemSupplier = this.inventoryService.getItemSupplier();
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'INVENTORY ITEM SUPPLIER').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'INVENTORY ITEM SUPPLIER').permission;
+    }
   }
 
   saveItemSupplier(){
     if(!this.itemSupplierForm.valid){
       this.itemSupplierForm.markAllAsTouched();
       return;
+    }
+    if(this.itemSupplierForm){
+
     }
     this.inventoryService.saveItemSupplier(this.itemSupplierForm.value).subscribe((response: any) => {
       if(response.success == 1){
