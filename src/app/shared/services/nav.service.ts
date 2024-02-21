@@ -98,6 +98,7 @@ export class NavService {
 				{ path: '/inventory/item-supplier', title: 'Item Supplier', type: 'link' },
 				{ path: '/inventory/item-store', title: 'Item Store', type: 'link' },
 				{ path: '/inventory/item-stock', title: 'Add Item Stock', type: 'link' },
+				{ path: '/inventory/issue-item', title: 'Issue Item', type: 'link' },
 			]
 		},
 		{

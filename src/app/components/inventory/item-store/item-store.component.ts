@@ -25,7 +25,7 @@ export class ItemStoreComponent {
     this.itemStoreForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
-      stock_code: new FormControl(null, [Validators.required]),
+      stock_code: new FormControl(null),
       description: new FormControl(null),
     });
     this.inventoryService.getItemStoreListListener().subscribe((response) => {
@@ -35,6 +35,10 @@ export class ItemStoreComponent {
   }
 
   saveItemStore(){
+    if(!this.itemStoreForm.valid){
+      this.itemStoreForm.markAllAsTouched();
+      return;
+    }
     this.inventoryService.saveItemStore(this.itemStoreForm.value).subscribe((response: any) => {
       if(response.success == 1){
         Swal.fire({
@@ -50,6 +54,10 @@ export class ItemStoreComponent {
   }
 
   updateItemStore(){
+    if(!this.itemStoreForm.valid){
+      this.itemStoreForm.markAllAsTouched();
+      return;
+    }
     this.inventoryService.updateItemStore(this.itemStoreForm.value).subscribe((response: any) => {
       if(response.success == 1){
         Swal.fire({

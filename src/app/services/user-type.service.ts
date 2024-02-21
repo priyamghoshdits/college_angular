@@ -30,6 +30,12 @@ export class UserTypeService {
     return [...this.userTypeList];
   }
 
+  getUsersByUserType(user_type_id){
+      return this.http.get(this.BASE_API_URL + '/getUserByUserTypes/' + user_type_id)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+          }));
+  }
+
   saveUserType(data){
     return this.http.post(this.BASE_API_URL + '/saveUserTypes', data)
         .pipe(catchError(this.errorService.serverError), tap(response => {

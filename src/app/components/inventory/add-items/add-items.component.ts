@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {InventoryService} from "../../../services/inventory.service";
 import {MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
@@ -13,7 +13,8 @@ import Swal from "sweetalert2";
     MatIconModule,
     NgForOf,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './add-items.component.html',
   styleUrl: './add-items.component.scss'
@@ -28,7 +29,7 @@ export class AddItemsComponent {
     this.inventoryItemsForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
-      item_type_id: new FormControl(0, [Validators.required]),
+      item_type_id: new FormControl(null, [Validators.required]),
       unit: new FormControl(null, [Validators.required]),
       description: new FormControl(null),
     });
@@ -44,6 +45,10 @@ export class AddItemsComponent {
   }
 
   saveItems(){
+    if(!this.inventoryItemsForm.valid){
+      this.inventoryItemsForm.markAllAsTouched();
+      return;
+    }
     Swal.fire({
       title: 'Please Wait !',
       html: 'Saving ...', // add html attribute if you want or remove
@@ -68,6 +73,10 @@ export class AddItemsComponent {
     })
   }
   updateItems(){
+    if(!this.inventoryItemsForm.valid){
+      this.inventoryItemsForm.markAllAsTouched();
+      return;
+    }
     Swal.fire({
       title: 'Please Wait !',
       html: 'Updating ...', // add html attribute if you want or remove

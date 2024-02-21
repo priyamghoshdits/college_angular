@@ -15,17 +15,17 @@
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
                                             <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Name">
+                                            <div *ngIf="inventoryItemsForm.controls['name'].errors?.['required'] && inventoryItemsForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <div class="form-group">
                                             <label>Select Type</label>
-                                            <select style="width: 100%" formControlName="item_type_id" class="form-select" required >
+                                            <select style="width: 100%" formControlName="item_type_id" class="form-select">
                                                 <option *ngFor="let data of itemCategoryList" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>
                                             </select>
-                                        </div>
+                                            <div *ngIf="inventoryItemsForm.controls['item_type_id'].errors?.['required'] && inventoryItemsForm.controls['item_type_id'].touched " class="text text-danger mt-1">Type required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -34,6 +34,7 @@
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Unit</label>
                                             <input class="form-control" formControlName="unit" id="exampleInputEmail1" type="number"
                                                    placeholder="Enter Unit">
+                                            <div *ngIf="inventoryItemsForm.controls['unit'].errors?.['required'] && inventoryItemsForm.controls['unit'].touched " class="text text-danger mt-1">Unit required</div>
                                         </div>
                                     </div>
                                 </div>

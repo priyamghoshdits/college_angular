@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {InventoryService} from "../../../services/inventory.service";
 import {MatIconModule} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
@@ -13,7 +13,8 @@ import Swal from "sweetalert2";
     MatIconModule,
     NgForOf,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgIf
   ],
   templateUrl: './item-type.component.html',
   styleUrl: './item-type.component.scss'
@@ -36,6 +37,10 @@ export class ItemTypeComponent {
   }
 
   saveItemCategory(){
+    if(!this.itemCategoryForm.valid){
+      this.itemCategoryForm.markAllAsTouched();
+      return;
+    }
     this.inventoryService.saveItemCategory(this.itemCategoryForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
@@ -52,6 +57,10 @@ export class ItemTypeComponent {
   }
 
   updateItemCategory(){
+    if(!this.itemCategoryForm.valid){
+      this.itemCategoryForm.markAllAsTouched();
+      return;
+    }
     this.inventoryService.updateItemCategory(this.itemCategoryForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

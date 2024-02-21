@@ -15,6 +15,7 @@
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
                                             <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
                                                    placeholder="Name">
+                                            <div *ngIf="itemCategoryForm.controls['name'].errors?.['required'] && itemCategoryForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
                                         </div>
                                     </div>
                                 </div>
