@@ -37,8 +37,12 @@ export class IssueItemComponent {
   itemList: any[];
   issueItemList: any[];
   active = 1;
+  user: {
+    user_type_id: number;
+  };
   constructor(private inventoryService: InventoryService, private userTypeService: UserTypeService
               , private memberService: MemberService) {
+    this.user = JSON.parse(localStorage.getItem('user') || '{}');
     this.issueItemsForm = new FormGroup({
       id: new FormControl(null),
       user_type_id: new FormControl(null, [Validators.required]),
@@ -68,6 +72,10 @@ export class IssueItemComponent {
       this.issueItemList = response;
     });
     this.issueItemList = this.inventoryService.getIssueItem();
+
+    if(this.user.user_type_id != 1){
+      this.issueItemsForm.patchValue({user_type_id: this.user.user_type_id})
+    }
   }
 
   getItems(){
@@ -141,6 +149,11 @@ export class IssueItemComponent {
   }
 
   saveIssueItem(){
+    // console.log(this.user.user_type_id);
+    if(this.user.user_type_id != 1){
+      this.issueItemsForm.patchValue({user_type_id: this.user.user_type_id})
+    }
+    // return;
     if(!this.issueItemsForm.valid){
       this.issueItemsForm.markAllAsTouched();
       return;

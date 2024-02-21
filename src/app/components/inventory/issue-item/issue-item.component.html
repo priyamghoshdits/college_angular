@@ -28,7 +28,7 @@
                                         <div class="col-md-4 mb-3">
                                             <label>Select User Type</label>
                                             <select style="width: 100%" formControlName="user_type_id" class="form-select" (change)="getUsers()">
-                                                <option value="null">Select</option>
+<!--                                                <option value="null">Select</option>-->
                                                 <option *ngFor="let data of userTypeList" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>
