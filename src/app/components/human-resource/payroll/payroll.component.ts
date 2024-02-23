@@ -35,6 +35,7 @@ export class PayrollComponent {
   ];
   payrollForm: FormGroup;
   memberPayrollForm: FormGroup;
+  paymentForm: FormGroup;
   userTypeList : any[];
   year: any[] = [];
   memberList: any[];
@@ -45,7 +46,12 @@ export class PayrollComponent {
   earnings: any[]= [];
   deductions: any[]= [];
   viewPayslip = false;
-
+  earningsPayslip: any[] = [];
+  grossSalaryPayslip = 0;
+  deductionSalaryPayslip = 0;
+  deductionsPayslip: any[] = [];
+  payslipTableLength: any[0] = [];
+  fullPayslipData: any;
   constructor(private userTypeService: UserTypeService, private memberService: MemberService
               , private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService
               , private payrollTypeService: PayrollTypesService) {
@@ -95,6 +101,13 @@ export class PayrollComponent {
       deduction: new FormControl(0, [Validators.required]),
       total_leave: new FormControl(null, [Validators.required]),
     });
+
+    this.paymentForm = new FormGroup({
+      id: new FormControl(null),
+      staff_id: new FormControl(null),
+
+    });
+
     this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
       this.rolesAndPermission = response;
       this.permission = this.rolesAndPermission.find(x => x.name == 'PAYROLL').permission;
@@ -125,16 +138,54 @@ export class PayrollComponent {
     });
   }
 
-  viewSalarySlip(){
+  getMonthName(month_id){
+    if(month_id == 1){
+      return "JANUARY";
+    }else if(month_id == 2){
+      return "FEBRUARY";
+    }else if(month_id == 3){
+      return "MARCH";
+    }else if(month_id == 4){
+      return "APRIL";
+    }else if(month_id == 5){
+      return "MAY";
+    }else if(month_id == 6){
+      return "JUNE";
+    }else if(month_id == 7){
+      return "JULY";
+    }else if(month_id == 8){
+      return "AUGUST";
+    }else if(month_id == 9){
+      return "SEPTEMBER";
+    }else if(month_id == 10){
+      return "OCTOBER";
+    }else if(month_id == 11){
+      return "NOVEMBER";
+    }else if(month_id == 12){
+      return "DECEMBER";
+    }
+  }
+
+  viewSalarySlip(record){
+    this.payslipTableLength = [];
     this.viewPayslip = true;
+    this.fullPayslipData = record;
+    this.earningsPayslip = record.earnings;
+    this.deductionsPayslip = record.deductions;
+    this.grossSalaryPayslip = this.earningsPayslip.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0);
+    this.deductionSalaryPayslip = this.deductionsPayslip.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0);
+    this.payslipTableLength[(this.earningsPayslip.length >= this.deductionsPayslip.length)? this.earningsPayslip.length-1 : this.deductionsPayslip.length-1] = [];
   }
 
   returnBackPayslip(){
     this.viewPayslip = false;
   }
 
+  proceedToPay(data){
+    console.log(data);
+  }
+
   openCustomModal(content) {
-    this.memberPayrollForm.markAsUntouched();
     this.modalService.open(content,{ size: 'xl'});
   }
 
@@ -213,8 +264,6 @@ export class PayrollComponent {
       'earnings': this.earnings,
       'deductions': this.deductions,
     }
-    // console.log(arr);
-    // return;
     if(!this.memberPayrollForm.valid){
       this.memberPayrollForm.markAllAsTouched();
       return;
@@ -253,12 +302,6 @@ export class PayrollComponent {
   }
 
   calculate(){
-    // if(this.memberPayrollForm.value.gross_salary == null){
-    //   this.memberPayrollForm.patchValue({gross_salary: this.memberPayrollForm.value.basic_salary});
-    // }
-    // let per_day = parseFloat(this.memberPayrollForm.value.gross_salary)/this.selectedData.no_of_days;
-    // let deduction = parseFloat(this.selectedData.total_absent) * per_day;
-    // this.memberPayrollForm.patchValue({tax: 0, deduction: deduction.toFixed(2)});
     this.memberPayrollForm.patchValue({
       deduction: this.deductions.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0),
       gross_salary: this.earnings.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0),

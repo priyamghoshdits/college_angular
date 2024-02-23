@@ -162,7 +162,6 @@ export class CreateStaffComponent {
     }
     saveMember(){
         if(!this.staffCreationForm.valid){
-            console.log(this.staffCreationForm.controls['middle_name'].errors);
             this.staffCreationForm.markAllAsTouched();
             return;
         }

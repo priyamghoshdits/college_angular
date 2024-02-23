@@ -38,6 +38,7 @@ export class IssueItemComponent {
   issueItemList: any[];
   active = 1;
   user: {
+    id: number;
     user_type_id: number;
   };
   constructor(private inventoryService: InventoryService, private userTypeService: UserTypeService
@@ -72,9 +73,9 @@ export class IssueItemComponent {
       this.issueItemList = response;
     });
     this.issueItemList = this.inventoryService.getIssueItem();
-
     if(this.user.user_type_id != 1){
-      this.issueItemsForm.patchValue({user_type_id: this.user.user_type_id})
+      this.issueItemsForm.patchValue({user_type_id: this.user.user_type_id,issue_by: this.user.id});
+      this.getUsers();
     }
   }
 
@@ -149,11 +150,7 @@ export class IssueItemComponent {
   }
 
   saveIssueItem(){
-    // console.log(this.user.user_type_id);
-    if(this.user.user_type_id != 1){
-      this.issueItemsForm.patchValue({user_type_id: this.user.user_type_id})
-    }
-    // return;
+
     if(!this.issueItemsForm.valid){
       this.issueItemsForm.markAllAsTouched();
       return;

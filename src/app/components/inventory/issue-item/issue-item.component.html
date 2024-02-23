@@ -25,10 +25,10 @@
                             <div [hidden]="active != 1">
                                 <form class="theme-form" [formGroup]="issueItemsForm">
                                     <div class="row">
-                                        <div class="col-md-4 mb-3">
+                                        <div *ngIf="user.user_type_id == 1" class="col-md-4 mb-3">
                                             <label>Select User Type</label>
                                             <select style="width: 100%" formControlName="user_type_id" class="form-select" (change)="getUsers()">
-<!--                                                <option value="null">Select</option>-->
+                                                <option value="null">Select</option>
                                                 <option *ngFor="let data of userTypeList" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>
@@ -45,7 +45,7 @@
                                             </select>
                                             <div *ngIf="issueItemsForm.controls['issue_to'].errors?.['required'] && issueItemsForm.controls['issue_to'].touched " class="text text-danger mt-1">Issue To required</div>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div *ngIf="user.user_type_id == 1" class="col-md-4 mb-3">
                                             <label>Issue By</label>
                                             <select style="width: 100%" formControlName="issue_by" class="form-select">
                                                 <option value="null">Select</option>
