@@ -62,48 +62,48 @@
                                         <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="theme-form" [formGroup]="payrollForm">
+                                        <form class="theme-form" [formGroup]="paymentForm">
                                             <div class="row">
-                                                <div class="col-md-3 mb-3">
-                                                    <label>Select User Type</label>
-                                                    <select style="width: 100%" formControlName="user_type_id" class="form-select" required>
-                                                        <option *ngFor="let data of userTypeList" [value]="data.id" >
-                                                            {{data.name}}
-                                                        </option>
-                                                    </select>
-                                                    <div *ngIf="payrollForm.controls['user_type_id'].errors?.['required'] && payrollForm.controls['user_type_id'].touched " class="text text-danger mt-1">User Type required</div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Staff Name</label>
+                                                    <input class="form-control" formControlName="staff_name" type="text"
+                                                           placeholder="Month">
                                                 </div>
-                                                <div class="col-md-3 mb-3">
-                                                    <label>Select Month</label>
-                                                    <select style="width: 100%" formControlName="month" class="form-select" required>
-                                                        <option value="01"> January </option>
-                                                        <option value="02"> February </option>
-                                                        <option value="03"> March </option>
-                                                        <option value="04"> April </option>
-                                                        <option value="05"> May </option>
-                                                        <option value="06"> June </option>
-                                                        <option value="07"> July </option>
-                                                        <option value="08"> August </option>
-                                                        <option value="09"> September </option>
-                                                        <option value="10"> October </option>
-                                                        <option value="11"> November </option>
-                                                        <option value="12"> December </option>
-                                                    </select>
-                                                    <div *ngIf="payrollForm.controls['month'].errors?.['required'] && payrollForm.controls['month'].touched " class="text text-danger mt-1">User Type required</div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Payment Amount</label>
+                                                    <input class="form-control" formControlName="payment_amount" type="text"
+                                                           placeholder="Payment Amount">
                                                 </div>
-                                                <div class="col-md-3 mb-3">
-                                                    <label>Select Year</label>
-                                                    <select style="width: 100%" formControlName="year" class="form-select" required>
-                                                        <option *ngFor="let data of year" [value]="data.year" >
-                                                            {{data.year}}
-                                                        </option>
-                                                    </select>
-                                                    <div *ngIf="payrollForm.controls['year'].errors?.['required'] && payrollForm.controls['year'].touched " class="text text-danger mt-1">Year required</div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Year</label>
+                                                    <input class="form-control" formControlName="year" type="text"
+                                                           placeholder="Year">
                                                 </div>
-                                                <div class="col-md-3 mb-3">
-                                                    <div>
-                                                        <button style="margin-top: 28px;" class="btn btn-primary me-1" (click)="getStaff()">Search</button>
-                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Month</label>
+                                                    <input class="form-control" formControlName="month" type="text"
+                                                           placeholder="Month">
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>Select Payment Mode</label>
+                                                    <select style="width: 100%" formControlName="payment_mode" class="form-select" required>
+                                                        <option value="Cash"> Cash </option>
+                                                        <option value="Cheque"> Cheque </option>
+                                                        <option value="Transfer To Bank"> Transfer To Bank </option>
+                                                        <option value="Others"> Others </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label class="col-form-label pt-0" for="exampleInputEmail1">Payment Date</label>
+                                                    <input class="form-control" formControlName="payment_date" type="date"
+                                                           placeholder="Month">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <button class="btn btn-primary me-1 pull-right" (click)="savePayrollDetails()">Submit</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -302,7 +302,7 @@
                     <table style="margin:10px 0px 0px 0px;  width:100%;padding: 10px;">
                         <tr>
                             <td style="font-size: 23px;line-height: 20px;text-align: center;">
-                                <span style="font-weight: 500; text-align: center;">Company Name</span><br>
+                                <span style="font-weight: 500; text-align: center;">Rudraksh Group Institute</span><br>
                             </td>
                         </tr>
                     </table>
@@ -402,11 +402,21 @@
                <span style="display:inline-block;line-height:10px;font-size: 13px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
                Net Salary Transfared
                </span>
-                            <span  style="width:63%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> 13-08-2023
+                            <span  style="margin-left: 10px;width:15%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:15px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.payroll.net_salary}}
+               </span>
+
+                            <span style="margin-left: 30px ;display:inline-block;line-height:10px;font-size: 13px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
+               Payment Mode
+               </span>
+                            <span  style="margin-left: 10px;width:15%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:15px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.payroll.payment_mode}}
+               </span>
+                            <span style="margin-left: 30px ;display:inline-block;line-height:10px;font-size: 13px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
+               Payment Date
+               </span>
+                            <span  style="margin-left: 10px;width:15%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:15px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.payroll.payment_date}}
                </span>
                         </th>
                     </table>
-                    <!-- coading -->
                 </div>
 
 

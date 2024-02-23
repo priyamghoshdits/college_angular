@@ -81,6 +81,13 @@ export class MemberService {
         }));
   }
 
+  saveProceedToPay(value){
+    return this.http.post(this.BASE_API_URL + '/saveProceedToPay/', value)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+
+        }));
+  }
+
   saveAttendance(data){
     return this.http.post(this.BASE_API_URL + '/saveStaffAttendance', data)
         .pipe(catchError(this.errorService.serverError), tap(response => {

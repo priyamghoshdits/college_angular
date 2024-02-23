@@ -104,8 +104,12 @@ export class PayrollComponent {
 
     this.paymentForm = new FormGroup({
       id: new FormControl(null),
-      staff_id: new FormControl(null),
-
+      staff_name: new FormControl(null),
+      payment_amount: new FormControl(null),
+      month: new FormControl(null),
+      year: new FormControl(null),
+      payment_mode: new FormControl(null),
+      payment_date: new FormControl(null),
     });
 
     this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
@@ -182,7 +186,21 @@ export class PayrollComponent {
   }
 
   proceedToPay(data){
-    console.log(data);
+    this.paymentForm.patchValue({
+      'id': data.payroll.id,
+      'staff_name': data.first_name + ' ' + data.middle_name + ' ' + data.last_name,
+      'payment_amount': data.payroll.net_salary,
+      'month': this.getMonthName(this.payrollForm.value.month),
+      'year': this.payrollForm.value.year
+    });
+  }
+
+  savePayrollDetails(){
+    this.memberService.saveProceedToPay(this.paymentForm.value).subscribe((response: any) => {
+      if(response.success == 1){
+        this.getStaff();
+      }
+    })
   }
 
   openCustomModal(content) {
