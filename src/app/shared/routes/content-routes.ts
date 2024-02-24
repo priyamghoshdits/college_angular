@@ -16,6 +16,20 @@ export const content: Routes = [
     }
   },
   {
+    path: 'income',
+    loadChildren: () => import('../../components/income/income.module').then(m => m.IncomeModule),
+    data: {
+      breadcrumb: "Income"
+    }
+  },
+  {
+    path: 'expense',
+    loadChildren: () => import('../../components/expense/expense.module').then(m => m.ExpenseModule),
+    data: {
+      breadcrumb: "Expense"
+    }
+  },
+  {
     path: 'attendance',
     loadChildren: () => import('../../components/attendance/attendance.module').then(m => m.AttendanceModule),
     data: {

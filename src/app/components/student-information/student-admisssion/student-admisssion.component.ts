@@ -50,12 +50,16 @@ export class StudentAdmisssionComponent {
     rolesAndPermission: any[] = [];
     permission: any[] = [];
     franchiseList: any[];
+    user: {
+        user_type_id: number;
+    };
 
     constructor(private memberService: MemberService, private subjectService: SubjectService
                 , private sessionService: SessionService, private studentService: StudentService
                 , private imageService: ImageService, private agentService: AgentService
                 , private commonService: CommonService, private roleAndPermissionService: RolesAndPermissionService
                 , private franchiseService: FranchiseService) {
+        this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;

@@ -85,6 +85,18 @@ export class NavService {
 			]
 		},
 		{
+			title: 'Income', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/income/income-head', title: 'Income Head', type: 'link' },
+				{ path: '/income/add-income', title: 'Add Income', type: 'link' },
+			]
+		},
+		{
+			title: 'Expense', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/expense/expense-head', title: 'Expense Head', type: 'link' },
+				{ path: '/expense/add-expense', title: 'Add Expense', type: 'link' },
+			]
+		},
+		{
 			title: 'Hostel', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/hostel/hostel', title: 'Add Hostel', type: 'link' },
 				{ path: '/hostel/roomType', title: 'Room Type', type: 'link' },

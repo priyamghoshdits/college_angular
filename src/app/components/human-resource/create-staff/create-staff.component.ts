@@ -73,12 +73,16 @@ export class CreateStaffComponent {
     rolesAndPermission: any[] = [];
     permission: any[] = [];
     franchiseList: any[];
+    user: {
+        user_type_id: number;
+    };
 
     constructor(private departmentService: DepartmentService
                 , private calendar: NgbCalendar, private memberService: MemberService
                 , private imageService: ImageService, private designationService: DesignationService
                 , private userTypeService: UserTypeService, private commonService: CommonService
                 , private roleAndPermissionService: RolesAndPermissionService, private franchiseService: FranchiseService) {
+        this.user = JSON.parse(localStorage.getItem('user') || '{}');
         this.staffCreationForm = new FormGroup({
             id: new FormControl(null),
             identification_no: new FormControl(null),

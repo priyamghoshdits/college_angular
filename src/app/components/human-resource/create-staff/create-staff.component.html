@@ -177,7 +177,7 @@
                                             </select>
                                             <div *ngIf="staffCreationForm.controls['department_id'].errors?.['required'] && staffCreationForm.controls['department_id'].touched " class="text text-danger mt-1">Department required</div>
                                         </div>
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-3 mb-3" *ngIf="user.user_type_id == 1">
                                             <label>Select Franchise</label>
                                             <select style="width: 100%" formControlName="franchise_id" class="form-select">
                                                 <option value="null">Select</option>

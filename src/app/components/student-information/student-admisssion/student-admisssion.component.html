@@ -183,7 +183,6 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Semester</label>
-                                            <option value="null">Select</option>
                                             <select style="width: 100%" formControlName="semester_id" class="form-select" required>
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of semesterList" [value]="data.semester_id" >
