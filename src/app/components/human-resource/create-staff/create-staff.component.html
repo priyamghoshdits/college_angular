@@ -49,6 +49,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Gender</label>
                                             <select style="width: 100%" formControlName="gender" class="form-select" required>
+                                                <option value="null">Select</option>
                                                 <option value="Male"> Male </option>
                                                 <option value="Female"> Female </option>
                                             </select>
@@ -81,6 +82,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Material Status</label>
                                             <select style="width: 100%" formControlName="material_status" class="form-select" required>
+                                                <option value="null">Select</option>
                                                 <option value="Single"> Single </option>
                                                 <option value="Married"> Married </option>
                                                 <option value="Widowed"> Widowed </option>
@@ -108,6 +110,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Blood Group</label>
                                             <select style="width: 100%" formControlName="blood_group" class="form-select" required>
+                                                <option value="null">Select</option>
                                                 <option value="A+"> A+ </option>
                                                 <option value="A-"> A- </option>
                                                 <option value="B+"> B+ </option>
@@ -121,6 +124,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Religion</label>
                                             <select style="width: 100%" formControlName="religion" class="form-select" required>
+                                                <option value="null">Select</option>
                                                 <option value="Hinduism"> Hinduism </option>
                                                 <option value="Buddhism"> Buddhism </option>
                                                 <option value="Christianity"> Christianity </option>
@@ -137,6 +141,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>User Type</label>
                                             <select style="width: 100%" formControlName="user_type_id" class="form-select" required>
+                                                <option value="null">Select</option>
                                                 <option *ngFor="let data of userTypeList" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>
@@ -155,6 +160,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Category</label>
                                             <select style="width: 100%" formControlName="category_id" class="form-select" required>
+                                                <option value="null">Select</option>
                                                 <option *ngFor="let data of categoryList" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>
@@ -164,11 +170,22 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Department</label>
                                             <select style="width: 100%" formControlName="department_id" class="form-select" required>
+                                                <option value="null">Select</option>
                                                 <option *ngFor="let data of departmentList" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="staffCreationForm.controls['department_id'].errors?.['required'] && staffCreationForm.controls['department_id'].touched " class="text text-danger mt-1">Department required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Franchise</label>
+                                            <select style="width: 100%" formControlName="franchise_id" class="form-select">
+                                                <option value="null">Select</option>
+                                                <option *ngFor="let data of franchiseList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="staffCreationForm.controls['franchise_id'].errors?.['required'] && staffCreationForm.controls['franchise_id'].touched " class="text text-danger mt-1">Franchise required</div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -185,6 +202,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Designation</label>
                                             <select style="width: 100%" formControlName="designation_id" class="form-select" required>
+                                                <option value="null">Select</option>
                                                 <option *ngFor="let data of designationList" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>
@@ -213,6 +231,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Contract Type</label>
                                             <select style="width: 100%" formControlName="contract_type" class="form-select" required>
+                                                <option value="null">Select</option>
                                                 <option value="Permanent"> Permanent </option>
                                                 <option value="Prohibition"> Prohibition </option>
                                             </select>

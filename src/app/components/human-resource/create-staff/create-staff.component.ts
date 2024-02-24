@@ -27,6 +27,7 @@ import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
 import {UserTypeService} from "../../../services/user-type.service";
 import {CommonService} from "../../../services/common.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {FranchiseService} from "../../../services/franchise.service";
 
 @Component({
   selector: 'app-create-staff',
@@ -71,12 +72,13 @@ export class CreateStaffComponent {
     searchItem: string;
     rolesAndPermission: any[] = [];
     permission: any[] = [];
+    franchiseList: any[];
 
     constructor(private departmentService: DepartmentService
                 , private calendar: NgbCalendar, private memberService: MemberService
                 , private imageService: ImageService, private designationService: DesignationService
                 , private userTypeService: UserTypeService, private commonService: CommonService
-                , private roleAndPermissionService: RolesAndPermissionService) {
+                , private roleAndPermissionService: RolesAndPermissionService, private franchiseService: FranchiseService) {
         this.staffCreationForm = new FormGroup({
             id: new FormControl(null),
             identification_no: new FormControl(null),
@@ -102,6 +104,7 @@ export class CreateStaffComponent {
             department_id: new FormControl(null, [Validators.required]),
             designation_id: new FormControl(null, [Validators.required]),
             epf_number: new FormControl(null),
+            franchise_id: new FormControl(null),
             basic_salary: new FormControl(null),
             location: new FormControl(null),
             contract_type: new FormControl(null, [Validators.required]),
@@ -112,6 +115,10 @@ export class CreateStaffComponent {
             password: new FormControl(null),
         });
 
+        this.franchiseService.getFranchiseListener().subscribe((response) => {
+            this.franchiseList = response;
+        });
+        this.franchiseList = this.franchiseService.getFranchiseList();
         this.memberService.getMemberListener().subscribe((response) => {
             this.memberList = response;
         });

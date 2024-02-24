@@ -145,6 +145,22 @@ export class PayrollComponent {
     document.body.innerHTML = originalContents;
   }
 
+  revertToProceedToPay(data){
+    this.memberService.revertToProceedToPay(data.payroll.id).subscribe((response: any) => {
+      if(response.success == 1){
+        this.getStaff();
+      }
+    });
+  }
+
+  revertBackToGenerate(data){
+    this.memberService.revertBackToGenerate(data.payroll.id).subscribe((response: any) => {
+      if(response.success == 1){
+        this.getStaff();
+      }
+    });
+  }
+
   download_pdf(){
     Swal.fire({
       title: 'Please Wait !',

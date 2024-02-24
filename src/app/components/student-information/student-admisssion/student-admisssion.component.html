@@ -183,6 +183,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Semester</label>
+                                            <option value="null">Select</option>
                                             <select style="width: 100%" formControlName="semester_id" class="form-select" required>
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of semesterList" [value]="data.semester_id" >
@@ -190,6 +191,17 @@
                                                 </option>
                                             </select>
                                             <div *ngIf="studentCreationForm.controls['semester_id'].errors?.['required'] && studentCreationForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                        </div>
+
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Franchise</label>
+                                            <select style="width: 100%" formControlName="franchise_id" class="form-select">
+                                                <option value="null">Select</option>
+                                                <option *ngFor="let data of franchiseList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="studentCreationForm.controls['franchise_id'].errors?.['required'] && studentCreationForm.controls['franchise_id'].touched " class="text text-danger mt-1">Franchise required</div>
                                         </div>
 
                                     </div>

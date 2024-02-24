@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-12">
             <div class="row" *ngIf="!selectedData && !viewPayslip">
                 <div class="col-sm-12">
@@ -111,7 +111,7 @@
                                 </div>
                             </ng-template>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" style="text-align: center">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
@@ -120,6 +120,7 @@
                                         <th scope="col">Date Of Birth</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Generate Payroll</th>
+                                        <th scope="col">Revert</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -129,11 +130,14 @@
                                         <td>{{record.gender}}</td>
                                         <td>{{record.dob}}</td>
                                         <td>{{record.email}}</td>
-                                        <td>
-<!--                                            <button *ngIf="record.generated == 0" class="btn btn-primary me-1" type="submit" (click)="openCustomModal(content);generatePayroll(record)">Generate</button>-->
+                                        <td *ngIf="permission[0].permission == 1">
                                             <button *ngIf="record.generated == 0" class="btn btn-primary me-1" type="submit" (click)="generatePayroll(record)">Generate</button>
                                             <button *ngIf="record.generated == 1" class="btn btn-primary me-1" (click)="openCustomModal(content);proceedToPay(record)" type="submit">Proceed To Pay</button>
                                             <button *ngIf="record.generated == 2" class="btn btn-primary me-1" (click)="viewSalarySlip(record)" type="submit">View Salary Slip</button>
+                                        </td>
+                                        <td *ngIf="permission[2].permission == 1">
+                                            <button *ngIf="record.generated == 1" class="btn btn-primary me-1" (click)="revertBackToGenerate(record)" type="submit">Back to generate</button>
+                                            <button *ngIf="record.generated == 2" class="btn btn-primary me-1" (click)="revertToProceedToPay(record)" type="submit">Back proceed to pay</button>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -299,14 +303,14 @@
                         <a style="cursor: pointer;" (click)="returnBackPayslip()"><mat-icon>backspace</mat-icon></a>
                     </div>
                     <div class="col">
-                        <a class="pull-right" style="cursor: pointer;" (click)="print_div()"><mat-icon>print</mat-icon></a>
-                        <a class="pull-right" style="cursor: pointer;" (click)="download_pdf()"><mat-icon>download</mat-icon></a>
+                        <a class="pull-right" style="cursor: pointer;margin-right: 30px;" (click)="print_div()"><mat-icon>print</mat-icon></a>
+                        <a class="pull-right" style="cursor: pointer; margin-right: 25px;" (click)="download_pdf()"><mat-icon>download</mat-icon></a>
                     </div>
                 </div>
 
                 <div id="sectionToPrint">
 
-                    <div style="width:100%; margin: 0px 0px 0px 0px;">
+                    <div style="width:100%; margin: 0px 0px 0px -20px;">
                         <!-- heading -->
                         <table style="margin:10px 0px 0px 0px;  width:100%;padding: 10px;">
                             <tr>

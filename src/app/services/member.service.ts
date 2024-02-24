@@ -88,6 +88,20 @@ export class MemberService {
         }));
   }
 
+  revertToProceedToPay(id){
+    return this.http.get(this.BASE_API_URL + '/revertToProceedToPay/' + id)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+
+        }));
+  }
+
+  revertBackToGenerate(id){
+    return this.http.get(this.BASE_API_URL + '/revertToGenerate/' + id)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+
+        }));
+  }
+
   saveAttendance(data){
     return this.http.post(this.BASE_API_URL + '/saveStaffAttendance', data)
         .pipe(catchError(this.errorService.serverError), tap(response => {

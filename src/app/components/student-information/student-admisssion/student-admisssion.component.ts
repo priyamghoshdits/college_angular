@@ -14,6 +14,7 @@ import {AgentService} from "../../../services/agent.service";
 import {CustomFilterPipe} from "custom-filter.pipe";
 import {CommonService} from "../../../services/common.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {FranchiseService} from "../../../services/franchise.service";
 
 @Component({
   selector: 'app-student-admisssion',
@@ -48,11 +49,13 @@ export class StudentAdmisssionComponent {
     searchItem: string;
     rolesAndPermission: any[] = [];
     permission: any[] = [];
+    franchiseList: any[];
 
     constructor(private memberService: MemberService, private subjectService: SubjectService
                 , private sessionService: SessionService, private studentService: StudentService
                 , private imageService: ImageService, private agentService: AgentService
-                , private commonService: CommonService, private roleAndPermissionService: RolesAndPermissionService) {
+                , private commonService: CommonService, private roleAndPermissionService: RolesAndPermissionService
+                , private franchiseService: FranchiseService) {
 
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;
@@ -98,8 +101,14 @@ export class StudentAdmisssionComponent {
             guardian_relation: new FormControl(null),
             guardian_occupation: new FormControl(null),
             guardian_address: new FormControl(null),
+            franchise_id: new FormControl(null),
             session_id: new FormControl(null, [Validators.required]),
         });
+
+        this.franchiseService.getFranchiseListener().subscribe((response) => {
+            this.franchiseList = response;
+        });
+        this.franchiseList = this.franchiseService.getFranchiseList();
 
         this.memberService.getCategoryListener().subscribe((response) => {
             this.categoryList = response;
