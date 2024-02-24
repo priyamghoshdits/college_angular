@@ -294,8 +294,15 @@
                 </div>
             </div>
             <div class="row" *ngIf="viewPayslip">
-                <a style="cursor: pointer;" (click)="returnBackPayslip()"><mat-icon>backspace</mat-icon></a>
-                <a style="cursor: pointer;" (click)="print_div()"><mat-icon>download</mat-icon></a>
+                <div class="row">
+                    <div class="col">
+                        <a style="cursor: pointer;" (click)="returnBackPayslip()"><mat-icon>backspace</mat-icon></a>
+                    </div>
+                    <div class="col">
+                        <a class="pull-right" style="cursor: pointer;" (click)="print_div()"><mat-icon>print</mat-icon></a>
+                        <a class="pull-right" style="cursor: pointer;" (click)="download_pdf()"><mat-icon>download</mat-icon></a>
+                    </div>
+                </div>
 
                 <div id="sectionToPrint">
 

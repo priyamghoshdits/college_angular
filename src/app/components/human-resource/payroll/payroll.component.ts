@@ -10,6 +10,8 @@ import {NgbModal, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {PayrollTypesService} from "../../../services/payroll-types.service";
+import html2canvas from 'html2canvas';
+import jspdf from 'jspdf';
 
 @Component({
   selector: 'app-payroll',
@@ -141,6 +143,33 @@ export class PayrollComponent {
     document.body.innerHTML = printContents;
     window.print();
     document.body.innerHTML = originalContents;
+  }
+
+  download_pdf(){
+    Swal.fire({
+      title: 'Please Wait !',
+      html: 'Creating Pdf ...', // add html attribute if you want or remove
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+    let data = document.getElementById('sectionToPrint');
+    // @ts-ignore
+    html2canvas(data).then(canvas => {
+// Few necessary setting options
+      let imgWidth = 208;
+      let pageHeight = 295;
+      let imgHeight = canvas.height * imgWidth / canvas.width;
+      let heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      let position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+      Swal.close();
+      pdf.save('new-file.pdf'); // Generated PDF
+  })
   }
 
   getStaff(){
