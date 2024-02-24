@@ -66,24 +66,24 @@
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Staff Name</label>
-                                                    <input class="form-control" formControlName="staff_name" type="text"
-                                                           placeholder="Month">
+                                                    <input readonly class="form-control" formControlName="staff_name" type="text"
+                                                           placeholder="Staff Name">
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Payment Amount</label>
-                                                    <input class="form-control" formControlName="payment_amount" type="text"
+                                                    <input readonly class="form-control" formControlName="payment_amount" type="text"
                                                            placeholder="Payment Amount">
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Year</label>
-                                                    <input class="form-control" formControlName="year" type="text"
+                                                    <input readonly class="form-control" formControlName="year" type="text"
                                                            placeholder="Year">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Month</label>
-                                                    <input class="form-control" formControlName="month" type="text"
+                                                    <input readonly class="form-control" formControlName="month" type="text"
                                                            placeholder="Month">
                                                 </div>
                                                 <div class="col-md-4 mb-3">
@@ -98,12 +98,12 @@
                                                 <div class="col-md-4 mb-3">
                                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Payment Date</label>
                                                     <input class="form-control" formControlName="payment_date" type="date"
-                                                           placeholder="Month">
+                                                           placeholder="Payment Date">
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-12 mb-3">
-                                                    <button class="btn btn-primary me-1 pull-right" (click)="savePayrollDetails()">Submit</button>
+                                                    <button class="btn btn-primary me-1 pull-right" (click)="savePayrollDetails(modal)">Submit</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -295,129 +295,135 @@
             </div>
             <div class="row" *ngIf="viewPayslip">
                 <a style="cursor: pointer;" (click)="returnBackPayslip()"><mat-icon>backspace</mat-icon></a>
+                <a style="cursor: pointer;" (click)="print_div()"><mat-icon>download</mat-icon></a>
 
+                <div id="sectionToPrint">
 
-                <div style="width:100%; margin: 0px 0px 0px 0px;">
-                    <!-- heading -->
-                    <table style="margin:10px 0px 0px 0px;  width:100%;padding: 10px;">
-                        <tr>
-                            <td style="font-size: 23px;line-height: 20px;text-align: center;">
-                                <span style="font-weight: 500; text-align: center;">Rudraksh Group Institute</span><br>
-                            </td>
-                        </tr>
-                    </table>
-                    <table style="margin:0px 0px 0px 0px;  width:100%;padding: 10px;">
-                        <tr>
-                            <td style="font-size: 23px;line-height: 60px;text-align: center;">
-                                <span style="font-weight: 500; text-align: center; ">Payslip</span>
-                            </td>
-                        </tr>
-                    </table>
-                    <!-- heading -->
-                    <!-- coading -->
-                    <table style="width: 93%; margin: 20px 0px 0px 50px;border: 1px solid #000; padding:5px 5px 5px 5px; ">
-                        <th>
+                    <div style="width:100%; margin: 0px 0px 0px 0px;">
+                        <!-- heading -->
+                        <table style="margin:10px 0px 0px 0px;  width:100%;padding: 10px;">
+                            <tr>
+                                <td style="font-size: 23px;line-height: 20px;text-align: center;">
+                                    <span style="font-weight: 500; text-align: center;">Rudraksh Group Institute</span><br>
+                                </td>
+                            </tr>
+                        </table>
+                        <table style="margin:0px 0px 0px 0px;  width:100%;padding: 10px;">
+                            <tr>
+                                <td style="font-size: 23px;line-height: 60px;text-align: center;">
+                                    <span style="font-weight: 500; text-align: center; ">Payslip</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- heading -->
+                        <!-- coading -->
+                        <table style="width: 93%; margin: 20px 0px 0px 50px;border: 1px solid #000; padding:5px 5px 5px 5px; ">
+                            <th>
                <span style="padding-right: 60px ; display:inline-block;line-height:10px;font-size:14px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
                Employee Name
                </span>
-                            <span  style="width:50%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;">{{fullPayslipData.first_name}} {{fullPayslipData.middle_name}} {{fullPayslipData.last_name}}
+                                <span  style="width:50%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;">{{fullPayslipData.first_name}} {{fullPayslipData.middle_name}} {{fullPayslipData.last_name}}
                </span><br>
-                            <span style="padding-right: 86px ; display:inline-block;line-height:10px;font-size:14px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
+                                <span style="padding-right: 86px ; display:inline-block;line-height:10px;font-size:14px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
                Designation
                </span>
-                            <span  style="width:50%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.designation_name}}
+                                <span  style="width:50%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.designation_name}}
                </span><br>
-                            <span style="padding-right: 112px ; display:inline-block;line-height:10px;font-size:14px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
+                                <span style="padding-right: 112px ; display:inline-block;line-height:10px;font-size:14px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
                Email Id
                </span>
-                            <span  style="width:50%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;">{{fullPayslipData.email}}
+                                <span  style="width:50%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;">{{fullPayslipData.email}}
                </span><br>
-                            <span style="padding-right: 122px ; display:inline-block;line-height:10px;font-size:14px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
+                                <span style="padding-right: 122px ; display:inline-block;line-height:10px;font-size:14px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
                Month
                </span>
-                            <span  style="width:20%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;">{{getMonthName(payrollForm.value.month)}}
+                                <span  style="width:20%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;">{{getMonthName(payrollForm.value.month)}}
                </span>
-                            <span style="padding-left: 68px ;display:inline-block;line-height:10px;font-size:14px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
+                                <span style="padding-left: 68px ;display:inline-block;line-height:10px;font-size:14px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
                Year
                </span>
-                            <span  style="width:20%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{payrollForm.value.year}}
+                                <span  style="width:20%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{payrollForm.value.year}}
                </span><br>
-                            <span style="padding-right: 21px ; display:inline-block;line-height:10px;font-size:14px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
+                                <span style="padding-right: 21px ; display:inline-block;line-height:10px;font-size:14px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
                Bank Account Number
                </span>
-                            <span  style="width:50%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.bank_account_number?fullPayslipData.bank_account_number:'No Account Linked'}}
+                                <span  style="width:50%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:13px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px solid #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.bank_account_number?fullPayslipData.bank_account_number:'No Account Linked'}}
                </span>
 
-                        </th>
-<!--                        </th>-->
-                    </table>
-                    <div style="width: 45%; float: left; margin-left: 50px; border: 1px solid #000; border-collapse: collapse; margin-top: 30px;">
-                        <table style="width: 100%; margin: 0px 0px 0px 0px;  ">
-                            <!-- Earnings Table -->
-                            <tr>
-                                <th style=" border-bottom:1px solid #000; border-right:1px solid #000;font-size: 13px; padding: 3px; background-color:#e2e2e2;">Earnings</th>
-                                <th style="border-bottom:1px solid #000; border-left:1px solid #000;font-size: 13px; padding: 3px; background-color:#e2e2e2;">Amount</th>
-                            </tr>
-                            <tr style="height: 31px" *ngFor="let record of payslipTableLength ;let indexOfElement=index">
-                                <th style=" border:1px solid #000;font-size: 13px; padding: 5px; text-align: left;">{{earningsPayslip[indexOfElement]? earningsPayslip[indexOfElement].payroll_type_name: ''}}</th>
-                                <td style="border:1px solid #000;font-size: 13px; padding: 5px; text-align: left;">{{earningsPayslip[indexOfElement]? earningsPayslip[indexOfElement].amount: ''}}</td>
-                            </tr>
-                            <tr>
-                                <th style="border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">Gross Earnings</th>
-                                <td style="border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">{{grossSalaryPayslip}}</td>
-                            </tr>
-                            <tr>
-                                <th style=" border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">Net Salary</th>
-                                <td style="border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">{{grossSalaryPayslip - deductionSalaryPayslip}}</td>
-                            </tr>
+                            </th>
+                            <!--                        </th>-->
                         </table>
-                    </div>
-                    <div style="width: 48%; float: left; border-collapse: collapse;">
-                        <table style="width: 100%; margin: 30px 0px 0px 0px;border: 1px solid #000; ">
-                            <!-- Deductions Table -->
-                            <tr>
-                                <th style=" border-bottom:1px solid #000; border-right:1px solid #000;font-size: 13px; padding: 3px; background-color:#e2e2e2; ">Deductions</th>
-                                <th style="border-bottom:1px solid #000; border-left:1px solid #000;font-size: 13px; padding: 3px; background-color:#e2e2e2;">Amount</th>
-                            </tr>
-                            <tr style="height: 31px" *ngFor="let record of payslipTableLength ;let indexOfElement=index">
-                                <th style="height: 31px;border:1px solid #000;font-size: 13px; padding: 5px; text-align: left;">{{deductionsPayslip[indexOfElement]? deductionsPayslip[indexOfElement].payroll_type_name: ' '}}</th>
-                                <td style="height: 31px;border:1px solid #000;font-size: 13px; padding: 5px; text-align: left;">{{deductionsPayslip[indexOfElement]? deductionsPayslip[indexOfElement].amount: ' '}}</td>
-                            </tr>
-                            <tr>
-                                <th style=" border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">Total Deduction</th>
-                                <td style="border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">{{deductionSalaryPayslip}}</td>
-                            </tr>
+                        <div style="width: 45%; float: left; margin-left: 50px; border: 1px solid #000; border-collapse: collapse; margin-top: 30px;">
+                            <table style="width: 100%; margin: 0px 0px 0px 0px;  ">
+                                <!-- Earnings Table -->
+                                <tr>
+                                    <th style=" border-bottom:1px solid #000; border-right:1px solid #000;font-size: 13px; padding: 3px; background-color:#e2e2e2;">Earnings</th>
+                                    <th style="border-bottom:1px solid #000; border-left:1px solid #000;font-size: 13px; padding: 3px; background-color:#e2e2e2;">Amount</th>
+                                </tr>
+                                <tr style="height: 31px" *ngFor="let record of payslipTableLength ;let indexOfElement=index">
+                                    <th style=" border:1px solid #000;font-size: 13px; padding: 5px; text-align: left;">{{earningsPayslip[indexOfElement]? earningsPayslip[indexOfElement].payroll_type_name: ''}}</th>
+                                    <td style="border:1px solid #000;font-size: 13px; padding: 5px; text-align: left;">{{earningsPayslip[indexOfElement]? earningsPayslip[indexOfElement].amount: ''}}</td>
+                                </tr>
+                                <tr>
+                                    <th style="border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">Gross Earnings</th>
+                                    <td style="border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">{{grossSalaryPayslip}}</td>
+                                </tr>
+                                <tr>
+                                    <th style=" border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">Net Salary</th>
+                                    <td style="border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">{{grossSalaryPayslip - deductionSalaryPayslip}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="width: 48%; float: left; border-collapse: collapse;">
+                            <table style="width: 100%; margin: 30px 0px 0px 0px;border: 1px solid #000; ">
+                                <!-- Deductions Table -->
+                                <tr>
+                                    <th style=" border-bottom:1px solid #000; border-right:1px solid #000;font-size: 13px; padding: 3px; background-color:#e2e2e2; ">Deductions</th>
+                                    <th style="border-bottom:1px solid #000; border-left:1px solid #000;font-size: 13px; padding: 3px; background-color:#e2e2e2;">Amount</th>
+                                </tr>
+                                <tr style="height: 31px" *ngFor="let record of payslipTableLength ;let indexOfElement=index">
+                                    <th style="height: 31px;border:1px solid #000;font-size: 13px; padding: 5px; text-align: left;">{{deductionsPayslip[indexOfElement]? deductionsPayslip[indexOfElement].payroll_type_name: ' '}}</th>
+                                    <td style="height: 31px;border:1px solid #000;font-size: 13px; padding: 5px; text-align: left;">{{deductionsPayslip[indexOfElement]? deductionsPayslip[indexOfElement].amount: ' '}}</td>
+                                </tr>
+                                <tr>
+                                    <th style=" border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">Total Deduction</th>
+                                    <td style="border:1px solid #000;font-size: 13px; padding: 5px; text-align: left; background-color:#e2e2e2">{{deductionSalaryPayslip}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <table style="width: 93%; margin-top: 90px; margin-left: 50px; border-collapse: collapse; ">
+                            <!--                        <tr>-->
+                            <!--                            <th style="border: 1px solid #000; font-size: 13px; padding: 5px;text-align: left;background-color:#e2e2e2;width:180px;">Gross Earnings</th>-->
+                            <!--                            <td style="border: 1px solid #000; font-size: 13px; padding: 5px;text-align: left;background-color:#e2e2e2;">{{grossSalaryPayslip}}</td>-->
+                            <!--                            <th style="border: 1px solid #000; font-size: 13px; padding: 5px;text-align: left;background-color:#e2e2e2;width: 191px;">Total Deduction</th>-->
+                            <!--                            <td style="border: 1px solid #000; font-size: 13px; padding: 5px;text-align: left;background-color:#e2e2e2;">{{deductionSalaryPayslip}}</td>-->
+                            <!--                        </tr>-->
                         </table>
-                    </div>
-                    <table style="width: 93%; margin-top: 90px; margin-left: 50px; border-collapse: collapse; ">
-<!--                        <tr>-->
-<!--                            <th style="border: 1px solid #000; font-size: 13px; padding: 5px;text-align: left;background-color:#e2e2e2;width:180px;">Gross Earnings</th>-->
-<!--                            <td style="border: 1px solid #000; font-size: 13px; padding: 5px;text-align: left;background-color:#e2e2e2;">{{grossSalaryPayslip}}</td>-->
-<!--                            <th style="border: 1px solid #000; font-size: 13px; padding: 5px;text-align: left;background-color:#e2e2e2;width: 191px;">Total Deduction</th>-->
-<!--                            <td style="border: 1px solid #000; font-size: 13px; padding: 5px;text-align: left;background-color:#e2e2e2;">{{deductionSalaryPayslip}}</td>-->
-<!--                        </tr>-->
-                    </table>
-                    <table style="width: 93%; background-color:#e2e2e2; margin: 30px 0px 0px 50px; border: 1px solid #000;">
-                        <th>
+                        <table style="width: 93%; background-color:#e2e2e2; margin: 30px 0px 0px 50px; border: 1px solid #000;">
+                            <th>
                <span style="display:inline-block;line-height:10px;font-size: 13px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
                Net Salary Transfared
                </span>
-                            <span  style="margin-left: 10px;width:15%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:15px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.payroll.net_salary}}
+                                <span  style="margin-left: 10px;width:15%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:15px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.payroll.net_salary}}
                </span>
 
-                            <span style="margin-left: 30px ;display:inline-block;line-height:10px;font-size: 13px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
+                                <span style="margin-left: 30px ;display:inline-block;line-height:10px;font-size: 13px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
                Payment Mode
                </span>
-                            <span  style="margin-left: 10px;width:15%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:15px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.payroll.payment_mode}}
+                                <span  style="margin-left: 10px;width:15%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:15px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.payroll.payment_mode}}
                </span>
-                            <span style="margin-left: 30px ;display:inline-block;line-height:10px;font-size: 13px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
+                                <span style="margin-left: 30px ;display:inline-block;line-height:10px;font-size: 13px;color:#000; margin-bottom: 10px; text-align: justify; font-weight: 300;">
                Payment Date
                </span>
-                            <span  style="margin-left: 10px;width:15%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:15px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.payroll.payment_date}}
+                                <span  style="margin-left: 10px;width:15%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:15px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 10px; text-align: justify;"> {{fullPayslipData.payroll.payment_date}}
                </span>
-                        </th>
-                    </table>
+                            </th>
+                        </table>
+                    </div>
+
+
                 </div>
+
 
 
 

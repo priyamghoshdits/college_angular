@@ -26,6 +26,7 @@ import {PayrollTypesService} from "../../../services/payroll-types.service";
     DatePipe,
     FormsModule
   ],
+  providers: [DatePipe],
   templateUrl: './payroll.component.html',
   styleUrl: './payroll.component.scss'
 })
@@ -52,6 +53,7 @@ export class PayrollComponent {
   deductionsPayslip: any[] = [];
   payslipTableLength: any[0] = [];
   fullPayslipData: any;
+  datePipe: DatePipe = new DatePipe('en-US');
   constructor(private userTypeService: UserTypeService, private memberService: MemberService
               , private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService
               , private payrollTypeService: PayrollTypesService) {
@@ -132,6 +134,15 @@ export class PayrollComponent {
     }
   }
 
+  print_div(){
+    // @ts-ignore
+    const printContents = document.getElementById('sectionToPrint').innerHTML;
+    const originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }
+
   getStaff(){
     if(!this.payrollForm.valid){
       this.payrollForm.markAllAsTouched();
@@ -186,19 +197,22 @@ export class PayrollComponent {
   }
 
   proceedToPay(data){
+    let myDate = new Date();
     this.paymentForm.patchValue({
       'id': data.payroll.id,
       'staff_name': data.first_name + ' ' + data.middle_name + ' ' + data.last_name,
       'payment_amount': data.payroll.net_salary,
       'month': this.getMonthName(this.payrollForm.value.month),
-      'year': this.payrollForm.value.year
+      'year': this.payrollForm.value.year,
+      'payment_date': this.datePipe.transform(myDate, 'yyyy-MM-dd')
     });
   }
 
-  savePayrollDetails(){
+  savePayrollDetails(modal){
     this.memberService.saveProceedToPay(this.paymentForm.value).subscribe((response: any) => {
       if(response.success == 1){
         this.getStaff();
+        modal.dismiss();
       }
     })
   }
