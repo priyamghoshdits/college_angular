@@ -10,34 +10,30 @@
                   class="fe fe-chevron-up"></i></a><a class="card-options-remove" [routerLink]="[]"
                 data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
           </div>
-          <div class="card-body">
-            <form>
+          <div class="card-body" *ngIf="userDetails">
+            <form [formGroup]="studentCreationForm">
               <div class="row mb-2">
                 <div class="col-auto"><img class="img-70 rounded-circle" alt="" src="assets/images/user/7.jpg"></div>
                 <div class="col">
-                  <h3 class="mb-1">MARK JECNO</h3>
-                  <p class="mb-4">DESIGNER</p>
+                  <h3 class="mb-1">{{userDetails.first_name}} {{userDetails.middle_name}} {{userDetails.last_name}}</h3>
+                  <p class="mb-4">{{userDetails.user_type}}</p>
                 </div>
               </div>
               <div class="form-group">
-                <h6 class="form-label">Bio</h6>
-                <textarea class="form-control"
-                  rows="5">On the other hand, we denounce with righteous indignation</textarea>
+                <label class="form-label">Student Id</label>
+                <input class="form-control" readonly formControlName="identification_no" placeholder="your-email@domain.com">
               </div>
               <div class="form-group">
                 <label class="form-label">Email-Address</label>
-                <input class="form-control" placeholder="your-email@domain.com">
+                <input class="form-control" readonly formControlName="email" placeholder="your-email@domain.com">
               </div>
               <div class="form-group">
-                <label class="form-label">Password</label>
-                <input class="form-control" type="password" value="password">
+                <label class="form-label">Course</label>
+                <input class="form-control" readonly formControlName="course_name">
               </div>
               <div class="form-group">
-                <label class="form-label">Website</label>
-                <input class="form-control" placeholder="http://Uplor.com">
-              </div>
-              <div class="form-footer">
-                <button class="btn btn-primary btn-block">Save</button>
+                <label class="form-label">Semester</label>
+                <input class="form-control" readonly formControlName="semester_name">
               </div>
             </form>
           </div>
@@ -46,166 +42,168 @@
       <div class="col-lg-8">
         <form class="card">
           <div class="card-header">
-            <h4 class="card-title mb-0">Edit Profile</h4>
+<!--            <h4 class="card-title mb-0">Edit Profile</h4>-->
             <div class="card-options"><a class="card-options-collapse" [routerLink]="[]" data-bs-toggle="card-collapse"><i
                   class="fe fe-chevron-up"></i></a><a class="card-options-remove" [routerLink]="[]"
                 data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
           </div>
           <div class="card-body">
+            <form [formGroup]="studentCreationForm">
             <div class="row">
-              <div class="col-md-5">
+              <div class="col-md-4">
                 <div class="form-group">
-                  <label class="form-label">Company</label>
-                  <input class="form-control" type="text" placeholder="Company">
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-3">
-                <div class="form-group">
-                  <label class="form-label">Username</label>
-                  <input class="form-control" type="text" placeholder="Username">
+                  <label class="form-label">Gender</label>
+                  <input class="form-control" formControlName="gender" type="text" placeholder="Company">
                 </div>
               </div>
               <div class="col-sm-6 col-md-4">
                 <div class="form-group">
-                  <label class="form-label">Email address</label>
-                  <input class="form-control" type="email" placeholder="Email">
+                  <label class="form-label">Date Of Birth</label>
+                  <input class="form-control" formControlName="dob" type="date" placeholder="Date Of Birth">
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="form-group">
+                  <label class="form-label">Phone Number</label>
+                  <input class="form-control" formControlName="mobile_no" type="mobile_no" placeholder="Phone Number">
                 </div>
               </div>
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
-                  <label class="form-label">First Name</label>
-                  <input class="form-control" type="text" placeholder="Company">
+                  <label class="form-label">Blood Group</label>
+                  <input class="form-control" formControlName="blood_group" type="blood_group" placeholder="Blood Group">
                 </div>
               </div>
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
-                  <label class="form-label">Last Name</label>
-                  <input class="form-control" type="text" placeholder="Last Name">
+                  <label class="form-label">Relegion</label>
+                  <input class="form-control" formControlName="religion" type="text" placeholder="Relegion">
                 </div>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Category</label>
+                  <input class="form-control" formControlName="category_name" type="text" placeholder="Category">
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-6">
+                <div class="form-group">
+                  <label class="form-label">Material Status</label>
+                  <input class="form-control" type="text" formControlName="material_status" placeholder="Material Status">
+                </div>
+              </div>
+              <div class="col-sm-12">
                 <div class="form-group">
                   <label class="form-label">Address</label>
-                  <input class="form-control" type="text" placeholder="Home Address">
+                  <input class="form-control" formControlName="permanent_address" type="text" placeholder="Address">
                 </div>
               </div>
-              <div class="col-sm-6 col-md-4">
-                <div class="form-group">
-                  <label class="form-label">City</label>
-                  <input class="form-control" type="text" placeholder="City">
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-3">
-                <div class="form-group">
-                  <label class="form-label">Postal Code</label>
-                  <input class="form-control" type="number" placeholder="ZIP Code">
-                </div>
-              </div>
-              <div class="col-md-5">
-                <div class="form-group">
-                  <label class="form-label">Country</label>
-                  <select class="form-control btn-square">
-                    <option value="0">--Select--</option>
-                    <option value="1">Germany</option>
-                    <option value="2">Canada</option>
-                    <option value="3">Usa</option>
-                    <option value="4">Aus</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-group mb-0">
-                  <label class="form-label">About Me</label>
-                  <textarea class="form-control" rows="5" placeholder="Enter About your description"></textarea>
-                </div>
-              </div>
+<!--              <div class="col-md-5">-->
+<!--                <div class="form-group">-->
+<!--                  <label class="form-label">Country</label>-->
+<!--                  <select class="form-control btn-square">-->
+<!--                    <option value="0">&#45;&#45;Select&#45;&#45;</option>-->
+<!--                    <option value="1">Germany</option>-->
+<!--                    <option value="2">Canada</option>-->
+<!--                    <option value="3">Usa</option>-->
+<!--                    <option value="4">Aus</option>-->
+<!--                  </select>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div class="col-md-12">-->
+<!--                <div class="form-group mb-0">-->
+<!--                  <label class="form-label">About Me</label>-->
+<!--                  <textarea class="form-control" rows="5" placeholder="Enter About your description"></textarea>-->
+<!--                </div>-->
+<!--              </div>-->
             </div>
+            </form>
           </div>
-          <div class="card-footer text-end">
-            <button class="btn btn-primary" type="submit">Update Profile</button>
-          </div>
+<!--          <div class="card-footer text-end">-->
+<!--            <button class="btn btn-primary" type="submit">Update Profile</button>-->
+<!--          </div>-->
         </form>
       </div>
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="card-title mb-0">Add projects And Upload</h4>
-            <div class="card-options"><a class="card-options-collapse" [routerLink]="[]" data-bs-toggle="card-collapse"><i
-                  class="fe fe-chevron-up"></i></a><a class="card-options-remove" [routerLink]="[]"
-                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>
-          </div>
-          <div class="table-responsive card-body">
-            <table class="table card-table table-vcenter text-nowrap">
-              <thead>
-                <tr>
-                  <th>Project Name</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Price</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents </a></td>
-                  <td>28 May 2018</td>
-                  <td><span class="status-icon bg-success"></span> Completed</td>
-                  <td>$56,908</td>
-                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"
-                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a
-                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a
-                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i
-                        class="fa fa-trash"></i> Delete</a></td>
-                </tr>
-                <tr>
-                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>
-                  <td>12 June 2018</td>
-                  <td><span class="status-icon bg-danger"></span> On going</td>
-                  <td>$45,087</td>
-                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"
-                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a
-                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a
-                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i
-                        class="fa fa-trash"></i> Delete</a></td>
-                </tr>
-                <tr>
-                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>
-                  <td>12 July 2018</td>
-                  <td><span class="status-icon bg-warning"></span> Pending</td>
-                  <td>$60,123</td>
-                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"
-                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a
-                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a
-                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i
-                        class="fa fa-trash"></i> Delete</a></td>
-                </tr>
-                <tr>
-                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>
-                  <td>14 June 2018</td>
-                  <td><span class="status-icon bg-warning"></span> Pending</td>
-                  <td>$70,435</td>
-                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"
-                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a
-                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a
-                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i
-                        class="fa fa-trash"></i> Delete</a></td>
-                </tr>
-                <tr>
-                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>
-                  <td>25 June 2018</td>
-                  <td><span class="status-icon bg-success"></span> Completed</td>
-                  <td>$15,987</td>
-                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"
-                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a
-                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a
-                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i
-                        class="fa fa-trash"></i> Delete</a></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+<!--      <div class="col-md-12">-->
+<!--        <div class="card">-->
+<!--          <div class="card-header">-->
+<!--            <h4 class="card-title mb-0">Add projects And Upload</h4>-->
+<!--            <div class="card-options"><a class="card-options-collapse" [routerLink]="[]" data-bs-toggle="card-collapse"><i-->
+<!--                  class="fe fe-chevron-up"></i></a><a class="card-options-remove" [routerLink]="[]"-->
+<!--                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>-->
+<!--          </div>-->
+<!--          <div class="table-responsive card-body">-->
+<!--            <table class="table card-table table-vcenter text-nowrap">-->
+<!--              <thead>-->
+<!--                <tr>-->
+<!--                  <th>Project Name</th>-->
+<!--                  <th>Date</th>-->
+<!--                  <th>Status</th>-->
+<!--                  <th>Price</th>-->
+<!--                  <th></th>-->
+<!--                </tr>-->
+<!--              </thead>-->
+<!--              <tbody>-->
+<!--                <tr>-->
+<!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents </a></td>-->
+<!--                  <td>28 May 2018</td>-->
+<!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
+<!--                  <td>$56,908</td>-->
+<!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+<!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+<!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+<!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+<!--                        class="fa fa-trash"></i> Delete</a></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+<!--                  <td>12 June 2018</td>-->
+<!--                  <td><span class="status-icon bg-danger"></span> On going</td>-->
+<!--                  <td>$45,087</td>-->
+<!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+<!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+<!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+<!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+<!--                        class="fa fa-trash"></i> Delete</a></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+<!--                  <td>12 July 2018</td>-->
+<!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
+<!--                  <td>$60,123</td>-->
+<!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+<!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+<!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+<!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+<!--                        class="fa fa-trash"></i> Delete</a></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+<!--                  <td>14 June 2018</td>-->
+<!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
+<!--                  <td>$70,435</td>-->
+<!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+<!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+<!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+<!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+<!--                        class="fa fa-trash"></i> Delete</a></td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+<!--                  <td>25 June 2018</td>-->
+<!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
+<!--                  <td>$15,987</td>-->
+<!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+<!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+<!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+<!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+<!--                        class="fa fa-trash"></i> Delete</a></td>-->
+<!--                </tr>-->
+<!--              </tbody>-->
+<!--            </table>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
     </div>
   </div>
 </div>

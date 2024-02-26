@@ -315,7 +315,7 @@ export class NavService {
 		// {
 		// 	title: 'Users', icon: 'users', type: 'sub', active: false, children: [
 		// 		{ path: '/users/profile', title: 'Users Profile', type: 'link' },
-		// 		{ path: '/users/edit', title: 'Users Edit', type: 'link' },
+		// 		{ path: '/users/show-profile', title: 'Show Profile', type: 'link' },
 		// 		{ path: '/users/cards', title: 'Users Cards', type: 'link' }
 		// 	]
 		// },

@@ -9,14 +9,17 @@ import { UsersRoutingModule } from './users-routing.module';
 import { UsersProfileComponent } from './users-profile/users-profile.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserCardsComponent } from './user-cards/user-cards.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
   declarations: [UsersProfileComponent, UserEditComponent, UserCardsComponent],
-  imports: [
-    CommonModule,
-    UsersRoutingModule,
-    GalleryModule
-  ]
+    imports: [
+        CommonModule,
+        UsersRoutingModule,
+        GalleryModule,
+        FormsModule,
+        ReactiveFormsModule
+    ]
 })
 export class UsersModule { }

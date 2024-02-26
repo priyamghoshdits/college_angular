@@ -17,11 +17,11 @@ const routes: Routes = [
         }
       },
       {
-        path: 'edit',
+        path: 'show-profile',
         component: UserEditComponent,
         data: {
-          title: "Edit",
-          breadcrumb: "Edit"
+          title: "Show Profile",
+          breadcrumb: "Show Profile"
         }
       },
       {
