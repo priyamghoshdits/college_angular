@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {IncomeHeadComponent} from "./income-head/income-head.component";
-import {AddExpenseComponent} from "../expense/add-expense/add-expense.component";
+import {AddIncomeComponent} from "./add-income/add-income.component";
 
 const routes: Routes = [
   {
@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'add-income',
-    component: AddExpenseComponent,
+    component: AddIncomeComponent,
     data: {
       title: "Add Income",
       breadcrumb: "Add Income"

@@ -39,6 +39,10 @@ export class IncomeHeadComponent {
     }
 
     saveIncomeHead(){
+        if(!this.incomeHeadForm.valid){
+            this.incomeHeadForm.markAllAsTouched();
+            return;
+        }
         this.incomeService.saveIncomeHead(this.incomeHeadForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 Swal.fire({
@@ -54,6 +58,10 @@ export class IncomeHeadComponent {
     }
 
     updateIncomeHead(){
+        if(!this.incomeHeadForm.valid){
+            this.incomeHeadForm.markAllAsTouched();
+            return;
+        }
         this.incomeService.updateIncomeHead(this.incomeHeadForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 Swal.fire({

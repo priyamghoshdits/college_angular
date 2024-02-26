@@ -37,6 +37,10 @@ export class ExpenseHeadComponent {
   }
 
   saveExpenseHead(){
+    if(!this.expenseHeadForm.valid){
+      this.expenseHeadForm.markAllAsTouched();
+      return;
+    }
     this.expenseService.saveExpenseHead(this.expenseHeadForm.value).subscribe((response: any) => {
       if(response.success == 1){
         Swal.fire({
@@ -52,6 +56,10 @@ export class ExpenseHeadComponent {
   }
 
   updateExpenseHead(){
+    if(!this.expenseHeadForm.valid){
+      this.expenseHeadForm.markAllAsTouched();
+      return;
+    }
     this.expenseService.updateExpenseHead(this.expenseHeadForm.value).subscribe((response: any) => {
       if(response.success == 1){
         Swal.fire({

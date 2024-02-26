@@ -1,1 +1,125 @@
-<p>add-income works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Income</h5><span>Add Income</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="incomeForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Select income head</label>
+                                        <select style="width: 100%" formControlName="income_head_id" class="form-select" required>
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of incomeHeadList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="incomeForm.controls['income_head_id'].errors?.['required'] && incomeForm.controls['income_head_id'].touched " class="text text-danger mt-1">Income Head required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
+                                        <input class="form-control" formControlName="name" type="text"
+                                               placeholder="Enter Name">
+                                        <div *ngIf="incomeForm.controls['name'].errors?.['required'] && incomeForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Invoice Number</label>
+                                        <input class="form-control" formControlName="invoice_number" type="text"
+                                               placeholder="Enter Invoice Number">
+                                        <div *ngIf="incomeForm.controls['invoice_number'].errors?.['required'] && incomeForm.controls['invoice_number'].touched " class="text text-danger mt-1">Invoice Number required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Date</label>
+                                        <input class="form-control" formControlName="date" type="date"
+                                               placeholder="Enter Date">
+                                        <div *ngIf="incomeForm.controls['date'].errors?.['required'] && incomeForm.controls['date'].touched " class="text text-danger mt-1">Date required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Amount</label>
+                                        <input class="form-control" formControlName="amount" type="text"
+                                               placeholder="Enter Amount">
+                                        <div *ngIf="incomeForm.controls['amount'].errors?.['required'] && incomeForm.controls['amount'].touched " class="text text-danger mt-1">Amount required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+                                        <input class="form-control" formControlName="description" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Description">
+                                        <div *ngIf="incomeForm.controls['description'].errors?.['required'] && incomeForm.controls['description'].touched " class="text text-danger mt-1">Description required</div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveIncome()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateIncome()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Income</h5>
+                                <span>Full Income List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Invoice Number</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Income Head</th>
+                                        <th scope="col">Description</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of incomeList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.invoice_number}}</td>
+                                        <td>{{record.date}}</td>
+                                        <td>{{record.amount}}</td>
+                                        <td>{{record.income_head_name}}</td>
+                                        <td>{{record.description}}</td>
+                                        <td>
+                                            <a (click)="editIncome(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteIncome(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="incomeList.length > 9" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
