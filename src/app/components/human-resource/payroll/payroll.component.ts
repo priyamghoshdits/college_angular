@@ -147,17 +147,44 @@ export class PayrollComponent {
   }
 
   revertToProceedToPay(data){
-    this.memberService.revertToProceedToPay(data.payroll.id).subscribe((response: any) => {
-      if(response.success == 1){
-        this.getStaff();
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Back to Proceed To Pay ?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Proceed!',
+      cancelButtonText: 'No, wait!'
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.memberService.revertToProceedToPay(data.payroll.id).subscribe((response: any) => {
+          if(response.success == 1){
+            this.getStaff();
+          }
+        });
       }
     });
+
   }
 
   revertBackToGenerate(data){
-    this.memberService.revertBackToGenerate(data.payroll.id).subscribe((response: any) => {
-      if(response.success == 1){
-        this.getStaff();
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Back to Generate ?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Proceed!',
+      cancelButtonText: 'No, wait!'
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.memberService.revertBackToGenerate(data.payroll.id).subscribe((response: any) => {
+          if(response.success == 1){
+            this.getStaff();
+          }
+        });
       }
     });
   }
@@ -388,6 +415,8 @@ export class PayrollComponent {
                 showConfirmButton: false,
                 timer: 1000
               });
+              this.returnBack();
+              this.getStaff();
             }else{
               Swal.fire({
                 position: 'center',
@@ -410,6 +439,8 @@ export class PayrollComponent {
             showConfirmButton: false,
             timer: 1000
           });
+          this.returnBack();
+          this.getStaff();
         }else{
           Swal.fire({
             position: 'center',
