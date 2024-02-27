@@ -6,6 +6,7 @@ import {UserTypesComponent} from "./user-types/user-types.component";
 import { IcardComponent } from './icard/icard.component';
 import {AgentStudentEntryComponent} from "./agent-student-entry/agent-student-entry.component";
 import {FranchiseComponent} from "./franchise/franchise.component";
+import {UserLogComponent} from "./user-log/user-log.component";
 
 const routes: Routes = [
   {
@@ -30,6 +31,14 @@ const routes: Routes = [
     data: {
       title: "User Type",
       breadcrumb: "User Type"
+    }
+  },
+  {
+    path: 'user-logs',
+    component: UserLogComponent,
+    data: {
+      title: "User Log",
+      breadcrumb: "User Log"
     }
   },
   {

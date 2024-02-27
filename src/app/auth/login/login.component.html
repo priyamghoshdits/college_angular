@@ -20,6 +20,7 @@
               <input class="form-control" type="password" formControlName="password" required="" />
               <div *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].errors?.['required']" class="text text-danger mtz-1">Password is required</div>
             </div>
+            <div class="text text-danger mt-1" *ngIf="checked">Username or Password Wrong</div>
             <div class="checkbox p-0">
               <input id="checkbox1" type="checkbox" />
               <label for="checkbox1">Remember me</label>

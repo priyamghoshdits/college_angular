@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import Swal from "sweetalert2";
+import {TimeInterval} from "rxjs/internal/operators/timeInterval";
 
 type UserFields = "email" | "password";
 type FormErrors = { [u in UserFields]: string };
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   public forgotPasswordForm: FormGroup;
   isForgotPassword = false;
+  checked = false;
 
   public errorMessage: any;
   private BASE_API_URL = environment.BASE_API_URL;
@@ -53,6 +55,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("user", JSON.stringify(response.data));
         // @ts-ignore
         this.router.navigate(["/dashboard/default"]);
+      }else{
+          this.checked = true;
       }
     });
 

@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5>User Log</h5>
+                                        <span>Full User Log List.</span>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-primary me-1 pull-right" (click)="getUserLogs()">Refresh</button>
+                                        <button class="btn btn-primary me-1 pull-right" (click)="clearLogs()">Clear Logs</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive" style="text-align: center">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">User</th>
+                                        <th scope="col">Role</th>
+                                        <th scope="col">IP Address</th>
+                                        <th scope="col">Login Date and Time</th>
+                                        <th scope="col">Media</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody *ngIf="userLogs">
+                                    <tr *ngFor="let record of userLogs | paginate: { itemsPerPage: 50, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.email}}</td>
+                                        <td>{{record.role}}</td>
+                                        <td>{{record.ip_address}}</td>
+                                        <td>{{record.login_time}}</td>
+                                        <td>{{record.media}}</td>
+                                    </tr>
+                                    <tr *ngIf="userLogs.length == 0">
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><h3> No Data Found </h3></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div *ngIf="userLogs">
+                                    <pagination-controls *ngIf="userLogs.length > 48" (pageChange)="p = $event"></pagination-controls>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

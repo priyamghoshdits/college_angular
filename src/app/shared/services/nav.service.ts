@@ -149,6 +149,7 @@ export class NavService {
 				{ path: '/others/agent', title: 'Agent', type: 'link' },
 				{ path: '/others/roles-and-permission', title: 'Roles And Permission', type: 'link' },
 				{ path: '/others/user-types', title: 'Add User Type', type: 'link' },
+				{ path: '/others/user-logs', title: 'User Logs', type: 'link' },
 				{ path: '/others/franchise', title: 'Franchise', type: 'link' },
 				{ path: '/others/icard', title: 'Icard', type: 'link' },
 				{ path: '/others/agent-student-entry', title: 'Agent Student Entry', type: 'link' },

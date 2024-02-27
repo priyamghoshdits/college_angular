@@ -5,6 +5,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-expense-head',
@@ -24,12 +25,22 @@ export class ExpenseHeadComponent {
   expenseHeadList: any[];
   isUpdatable = false;
   p: number;
-  constructor(private expenseService:IncomeAndExpenseServiceService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private expenseService:IncomeAndExpenseServiceService, private roleAndPermissionService: RolesAndPermissionService) {
     this.expenseHeadForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
       description: new FormControl(null),
     });
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'EXPENSE HEAD').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'EXPENSE HEAD').permission;
+    }
     this.expenseService.getExpenseHeadListener().subscribe((response) => {
       this.expenseHeadList = response;
     });

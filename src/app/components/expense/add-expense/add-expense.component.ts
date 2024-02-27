@@ -5,6 +5,7 @@ import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {IncomeAndExpenseServiceService} from "../../../services/income-and-expense-service.service";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-add-expense',
@@ -27,7 +28,9 @@ export class AddExpenseComponent {
     expenseList: any[];
     expenseHeadList: any[];
     datePipe: DatePipe = new DatePipe('en-US');
-    constructor(public expenseService: IncomeAndExpenseServiceService) {
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
+    constructor(public expenseService: IncomeAndExpenseServiceService, private roleAndPermissionService: RolesAndPermissionService) {
         this.expenseForm = new FormGroup({
             id: new FormControl(null),
             expense_head_id: new FormControl(null, [Validators.required]),
@@ -37,7 +40,16 @@ export class AddExpenseComponent {
             amount: new FormControl(null, [Validators.required]),
             description: new FormControl(null),
         });
-        this.expenseForm.patchValue({date: this.datePipe.transform(new Date(), 'yyyy-MM-dd')})
+        this.expenseForm.patchValue({date: this.datePipe.transform(new Date(), 'yyyy-MM-dd')});
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'ADD EXPENSE').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'ADD EXPENSE').permission;
+        }
 
         this.expenseService.getExpenseListener().subscribe((response) => {
             this.expenseList = response;

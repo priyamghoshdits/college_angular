@@ -5,6 +5,7 @@ import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {IncomeAndExpenseServiceService} from "../../../services/income-and-expense-service.service";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-add-income',
@@ -27,7 +28,9 @@ export class AddIncomeComponent {
     isUpdatable = false;
     p: number;
     datePipe: DatePipe = new DatePipe('en-US');
-    constructor(private incomeService: IncomeAndExpenseServiceService) {
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
+    constructor(private incomeService: IncomeAndExpenseServiceService, private roleAndPermissionService: RolesAndPermissionService) {
         this.incomeForm = new FormGroup({
             id: new FormControl(null),
             income_head_id: new FormControl(null, [Validators.required]),
@@ -37,6 +40,16 @@ export class AddIncomeComponent {
             amount: new FormControl(null, [Validators.required]),
             description: new FormControl(null),
         });
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'ADD INCOME').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'ADD INCOME').permission;
+        }
+
         this.incomeForm.patchValue({date: this.datePipe.transform(new Date(), 'yyyy-MM-dd')})
         this.incomeService.getIncomeHeadListener().subscribe((response) => {
             this.incomeHeadList = response;
