@@ -4,51 +4,155 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header">
-                            <h5>Approve Leave</h5><span>Approve Leave List</span>
+                        <div class="card-header" [hidden]="active != 1">
+                            <h5>Pending Leave</h5><span>Pending Leave List</span>
+                        </div>
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>Approved Leave</h5><span>Full Approved Leave List</span>
+                        </div>
+                        <div class="card-header" [hidden]="active != 3">
+                            <h5>Approved Leave</h5><span>Non Approved Leave List</span>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Pending Leave</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Approved Leave</a>
+                                </li>
+                                <li [ngbNavItem]="3">
+                                    <a ngbNavLink (click)="activeTab(3)">Non Approved Leave</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
                         </div>
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-3"></div>
-                                <div class="col-6">
-                                    <input style="width: 100%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                            <div [hidden]="active != 1">
+                                <div class="row">
+                                    <div class="col-3"></div>
+                                    <div class="col-6">
+                                        <input style="width: 100%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                    </div>
+                                    <div class="col-3"></div>
                                 </div>
-                                <div class="col-3"></div>
-                            </div>
 
-                            <table class="table" style="text-align: center">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">User Name</th>
-                                    <th scope="col">Leave Type</th>
-                                    <th scope="col">From Date</th>
-                                    <th scope="col">To Date</th>
-                                    <th scope="col">Total Days</th>
-                                    <th scope="col">Reason</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody [hidden]="leaveList.length == 0">
-                                <tr *ngFor="let record of leaveList | customFilter:searchItem | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
-                                    <td>{{indexOfElement+1}}</td>
-                                    <td>{{record.user_name}}</td>
-                                    <td>{{record.leave_type_name}}</td>
-                                    <td>{{record.from_date}}</td>
-                                    <td>{{record.to_date}}</td>
-                                    <td>{{record.total_days}}</td>
-                                    <td>{{record.reason}}</td>
-                                    <td>
-                                        <button class="btn btn-primary me-1" (click)="leaveAction(record,1)">Approve</button>
-                                        <button class="btn btn-primary me-1" (click)="leaveAction(record,2)">Reject</button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="row" [hidden]="leaveList.length > 0">
-                                <div class="col"></div>
-                                <div class="col"><h2 style="text-align: center;">No Data</h2></div>
-                                <div class="col"></div>
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">User Name</th>
+                                        <th scope="col">Leave Type</th>
+                                        <th scope="col">From Date</th>
+                                        <th scope="col">To Date</th>
+                                        <th scope="col">Total Days</th>
+                                        <th scope="col">Reason</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody [hidden]="leaveList.length == 0">
+                                    <tr *ngFor="let record of leaveList | customFilter:searchItem | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.user_name}}</td>
+                                        <td>{{record.leave_type_name}}</td>
+                                        <td>{{record.from_date}}</td>
+                                        <td>{{record.to_date}}</td>
+                                        <td>{{record.total_days}}</td>
+                                        <td>{{record.reason}}</td>
+                                        <td>
+                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,1)">Approve</button>
+                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,2)">Reject</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row" [hidden]="leaveList.length > 0">
+                                    <div class="col"></div>
+                                    <div class="col"><h2 style="text-align: center;">No Data</h2></div>
+                                    <div class="col"></div>
+                                </div>
+                            </div>
+                            <div [hidden]="active != 2">
+                                <div class="row">
+                                    <div class="col-3"></div>
+                                    <div class="col-6">
+                                        <input style="width: 100%" class="form-control" [(ngModel)]="approvedLeaveListSearchItem" type="text" placeholder="Search Or Filter">
+                                    </div>
+                                    <div class="col-3"></div>
+                                </div>
+
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">User Name</th>
+                                        <th scope="col">Leave Type</th>
+                                        <th scope="col">From Date</th>
+                                        <th scope="col">To Date</th>
+                                        <th scope="col">Total Days</th>
+                                        <th scope="col">Reason</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody *ngIf="approvedLeaveList.length > 0">
+                                    <tr *ngFor="let record of approvedLeaveList | customFilter:approvedLeaveListSearchItem | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.user_name}}</td>
+                                        <td>{{record.leave_type_name}}</td>
+                                        <td>{{record.from_date}}</td>
+                                        <td>{{record.to_date}}</td>
+                                        <td>{{record.total_days}}</td>
+                                        <td>{{record.reason}}</td>
+                                        <td>Approved</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row" [hidden]="approvedLeaveList.length > 0">
+                                    <div class="col"></div>
+                                    <div class="col"><h2 style="text-align: center;">No Data</h2></div>
+                                    <div class="col"></div>
+                                </div>
+                            </div>
+                            <div [hidden]="active != 3">
+                                <div class="row">
+                                    <div class="col-3"></div>
+                                    <div class="col-6">
+                                        <input style="width: 100%" class="form-control" [(ngModel)]="nonApprovedLeaveListSearchItem" type="text" placeholder="Search Or Filter">
+                                    </div>
+                                    <div class="col-3"></div>
+                                </div>
+
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">User Name</th>
+                                        <th scope="col">Leave Type</th>
+                                        <th scope="col">From Date</th>
+                                        <th scope="col">To Date</th>
+                                        <th scope="col">Total Days</th>
+                                        <th scope="col">Reason</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody [hidden]="nonApprovedLeaveList.length == 0">
+                                    <tr *ngFor="let record of nonApprovedLeaveList | customFilter:nonApprovedLeaveListSearchItem | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.user_name}}</td>
+                                        <td>{{record.leave_type_name}}</td>
+                                        <td>{{record.from_date}}</td>
+                                        <td>{{record.to_date}}</td>
+                                        <td>{{record.total_days}}</td>
+                                        <td>{{record.reason}}</td>
+                                        <td>Rejected</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row" [hidden]="nonApprovedLeaveList.length > 0">
+                                    <div class="col"></div>
+                                    <div class="col"><h2 style="text-align: center;">No Data</h2></div>
+                                    <div class="col"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
