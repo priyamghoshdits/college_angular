@@ -100,12 +100,23 @@ export class CreateSemesterTimetableComponent {
     }
 
     searchTimeTable(){
+        if(!this.semesterTimeTableSearchForm.valid){
+            this.semesterTimeTableSearchForm.markAllAsTouched();
+            return;
+        }
         this.subjectService.getSemesterTimeTable(this.semesterTimeTableSearchForm.value.course_id, this.semesterTimeTableSearchForm.value.semester_id)
-            .subscribe((response) => {
-                // @ts-ignore
+            .subscribe((response: any) => {
                 if(response.success == 1){
-                    // @ts-ignore
-                    let x = response.data
+                    let x = response.data;
+                    if(x.length == 0){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'info',
+                            title: 'No Data Found',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }
                     this.week1 = x.filter(x => x.week_id === 1);
                     this.week2 = x.filter(x => x.week_id === 2);
                     this.week3 = x.filter(x => x.week_id === 3);

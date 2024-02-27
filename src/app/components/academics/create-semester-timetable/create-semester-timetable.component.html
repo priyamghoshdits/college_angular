@@ -120,6 +120,7 @@
                                                                 {{data.course_name}}
                                                             </option>
                                                         </select>
+                                                        <div *ngIf="semesterTimeTableSearchForm.controls['course_id'].errors?.['required'] && semesterTimeTableSearchForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
@@ -130,6 +131,7 @@
                                                                 {{data.name}}
                                                             </option>
                                                         </select>
+                                                        <div *ngIf="semesterTimeTableSearchForm.controls['semester_id'].errors?.['required'] && semesterTimeTableSearchForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                                     </div>
                                                 </div>
                                             </div>
