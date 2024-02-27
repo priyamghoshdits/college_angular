@@ -15,15 +15,15 @@
                                            placeholder="Enter Department Name">
                                     <div *ngIf="departmentForm.controls['name'].errors?.['required'] && departmentForm.controls['name'].touched " class="text text-danger mt-1">Department Name required</div>
                                 </div>
-                                <div >
-                                    <label>Select Department In-charge</label>
-                                    <select style="width: 100%" formControlName="user_id" class="form-select" required>
-                                        <option *ngFor="let data of memberList" [value]="data.id" >
-                                            {{data.first_name}} {{data.middle_name}} {{data.last_name}}
-                                        </option>
-                                    </select>
-                                    <div *ngIf="departmentForm.controls['user_id'].errors?.['required'] && departmentForm.controls['user_id'].touched " class="text text-danger mt-1">Member required</div>
-                                </div>
+<!--                                <div >-->
+<!--                                    <label>Select Department In-charge</label>-->
+<!--                                    <select style="width: 100%" formControlName="user_id" class="form-select" required>-->
+<!--                                        <option *ngFor="let data of memberList" [value]="data.id" >-->
+<!--                                            {{data.first_name}} {{data.middle_name}} {{data.last_name}}-->
+<!--                                        </option>-->
+<!--                                    </select>-->
+<!--                                    <div *ngIf="departmentForm.controls['user_id'].errors?.['required'] && departmentForm.controls['user_id'].touched " class="text text-danger mt-1">Member required</div>-->
+<!--                                </div>-->
 
                             </form>
                         </div>
@@ -43,8 +43,8 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Designation List</h5>
-                                <span>Full Designation List.</span>
+                                <h5>Department List</h5>
+                                <span>Full Department List.</span>
                             </div>
                             <div class="table-responsive">
                                 <table class="table">
@@ -52,7 +52,7 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">In-Charge</th>
+<!--                                        <th scope="col">In-Charge</th>-->
                                         <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
                                     </tr>
                                     </thead>
@@ -60,7 +60,7 @@
                                     <tr *ngFor="let record of departmentList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
                                         <td>{{indexOfElement+1}}</td>
                                         <td>{{record.name}}</td>
-                                        <td>{{record.user_name}}</td>
+<!--                                        <td>{{record.user_name}}</td>-->
                                         <td>
                                             <a *ngIf="permission[1].permission == 1" (click)="editDepartment(record)"><mat-icon>edit</mat-icon></a>
                                             <a *ngIf="permission[2].permission == 1" (click)="deleteDepartment(record)"><mat-icon>delete</mat-icon></a>

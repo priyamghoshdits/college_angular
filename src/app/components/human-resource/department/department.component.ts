@@ -34,8 +34,7 @@ export class DepartmentComponent {
   constructor(private memberService: MemberService, private departmentService: DepartmentService, private roleAndPermissionService: RolesAndPermissionService) {
     this.departmentForm = new FormGroup({
       id: new FormControl(null),
-      name: new FormControl(null, [Validators.required]),
-      user_id: new FormControl(null, [Validators.required]),
+      name: new FormControl(null, [Validators.required])
     });
     this.memberService.getMemberListener().subscribe((response) => {
       this.memberList = response;
