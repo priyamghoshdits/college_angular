@@ -219,6 +219,10 @@
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Gross Salary</label>
+                                        <input readonly class="form-control" formControlName="calculated_gross_salary" id="exampleInputEmail1" type="text">
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Calculated Gross Salary</label>
                                         <input readonly class="form-control" formControlName="gross_salary" id="exampleInputEmail1" type="text">
                                         <div *ngIf="memberPayrollForm.controls['gross_salary'].invalid && memberPayrollForm.controls['gross_salary'].touched" style="color: red">Gross salary cannot be null</div>
                                     </div>

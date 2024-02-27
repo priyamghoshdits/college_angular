@@ -109,7 +109,7 @@ export class CreateStaffComponent {
             designation_id: new FormControl(null, [Validators.required]),
             epf_number: new FormControl(null),
             franchise_id: new FormControl(null),
-            basic_salary: new FormControl(null),
+            gross_salary: new FormControl(null),
             location: new FormControl(null),
             contract_type: new FormControl(null, [Validators.required]),
             bank_account_number: new FormControl(null),

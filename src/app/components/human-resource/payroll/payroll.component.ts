@@ -100,6 +100,7 @@ export class PayrollComponent {
       total_non_approved_leave: new FormControl({value: '', disabled: true}),
       total_holidays: new FormControl({value: '', disabled: true}),
       gross_salary: new FormControl(0, [Validators.required]),
+      calculated_gross_salary: new FormControl(0, [Validators.required]),
       net_salary: new FormControl(0, [Validators.required]),
       contract_type: new FormControl({value: '', disabled: true}),
       deduction: new FormControl(0, [Validators.required]),
@@ -336,6 +337,27 @@ export class PayrollComponent {
 
   savePayroll(){
     this.calculate();
+    let deduction = this.deductions;
+    let flag = 0;
+      for (let i = 0; i < (this.deductions.length-1); i++){
+        this.earnings.forEach(function (value){
+          if(deduction[i].payroll_type_id == value.payroll_type_id){
+            flag = 1;
+            return;
+          }
+        });
+      }
+      if(flag == 1){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Deduction and earning have save payroll type',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        return;
+      }
+
     let arr = {
       'member_payroll_form': this.memberPayrollForm.value,
       'earnings': this.earnings,
@@ -345,25 +367,61 @@ export class PayrollComponent {
       this.memberPayrollForm.markAllAsTouched();
       return;
     }
-    this.memberService.saveGeneratedPayroll(arr).subscribe((response: any) => {
-      if(response.success == 1){
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Payroll generated',
-          showConfirmButton: false,
-          timer: 1000
-        });
-      }else{
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: 'Error in generating payroll',
-          showConfirmButton: false,
-          timer: 1000
-        });
-      }
-    })
+    if(this.memberPayrollForm.value.gross_salary != this.memberPayrollForm.value.calculated_gross_salary){
+      Swal.fire({
+        title: 'Confirmation',
+        text: 'Gross Salary did not matched still save ?',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, save It!',
+        cancelButtonText: 'No, Do not save'
+      }).then((result) => {
+        if(result.isConfirmed){
+          this.memberService.saveGeneratedPayroll(arr).subscribe((response: any) => {
+            if(response.success == 1){
+              Swal.fire({
+                position: 'center',
+                icon: 'success',
+                title: 'Payroll generated',
+                showConfirmButton: false,
+                timer: 1000
+              });
+            }else{
+              Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Error in generating payroll',
+                showConfirmButton: false,
+                timer: 1000
+              });
+            }
+          })
+        }
+      });
+    }else{
+      this.memberService.saveGeneratedPayroll(arr).subscribe((response: any) => {
+        if(response.success == 1){
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Payroll generated',
+            showConfirmButton: false,
+            timer: 1000
+          });
+        }else{
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Error in generating payroll',
+            showConfirmButton: false,
+            timer: 1000
+          });
+        }
+      })
+    }
+
   }
 
   generatePayroll(data){
@@ -381,7 +439,7 @@ export class PayrollComponent {
   calculate(){
     this.memberPayrollForm.patchValue({
       deduction: this.deductions.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0),
-      gross_salary: this.earnings.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0),
+      calculated_gross_salary: this.earnings.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0),
       net_salary: this.earnings.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0) - this.deductions.reduce((accumulator, currentItem) => accumulator + parseFloat(currentItem.amount), 0)
     });
   }
