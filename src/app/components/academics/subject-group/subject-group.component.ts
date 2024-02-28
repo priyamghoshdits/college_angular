@@ -61,7 +61,6 @@ export class SubjectGroupComponent {
     this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
       this.rolesAndPermission = response;
       this.permission = this.rolesAndPermission.find(x => x.name == 'SUBJECT GROUP').permission;
-      console.log(this.permission);
     });
     this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
     if(this.rolesAndPermission.length > 0){
@@ -222,6 +221,20 @@ export class SubjectGroupComponent {
   }
 
   updateSubjectGroup(){
+    if(!this.subjectGroupForm.valid){
+      this.subjectGroupForm.markAllAsTouched();
+      return;
+    }
+    if(this.tempSub.length == 0){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Subjects',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
     let arr = [
       {
         name: this.subjectGroupForm.value.name,

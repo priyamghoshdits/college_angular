@@ -226,6 +226,10 @@ export class StudentAdmisssionComponent {
     }
 
     updateStudent(){
+        if(!this.studentCreationForm.valid){
+            this.studentCreationForm.markAllAsTouched();
+            return;
+        }
         this.studentService.updateStudent(this.studentCreationForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){

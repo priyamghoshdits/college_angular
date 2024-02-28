@@ -65,7 +65,6 @@ export class LeaveAllocationComponent {
   }
 
   editLeaveAllocation(data){
-    console.log(data);
     this.editAbleData = data.leave_type;
     this.leaveAllocationForm.patchValue({user_id: data.user_id, leave_type_id: data.leave_type[0].id, total_leave: data.leave_type[0].total_leave});
     this.isUpdatable = true;

@@ -172,6 +172,10 @@ export class AssignSemesterTeacherComponent {
     }
 
     updateAssignSemesterTeacher(){
+        if(!this.assignSemesterTeacherForm.valid){
+            this.assignSemesterTeacherForm.markAllAsTouched();
+            return;
+        }
         let arr;
         arr = [
             {course_id: this.assignSemesterTeacherForm.value.course_id,

@@ -71,6 +71,10 @@ export class SessionComponent {
     }
 
     updateSession(){
+        if(!this.sessionForm.valid){
+            this.sessionForm.markAllAsTouched();
+            return;
+        }
         this.sessionService.updateSession(this.sessionForm.value).subscribe((response) => {
             // @ts-ignore
             if(response.success == 1){

@@ -77,6 +77,20 @@ export class AgentPaymentComponent {
     }
 
     saveAgentPayment(){
+        if(!this.paymentForm.valid){
+            this.paymentForm.markAllAsTouched();
+            return;
+        }
+        if(this.paymentForm.value.due_amount < this.paymentForm.value.amount){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Amount cannot be greater than due amount',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            return;
+        }
         this.agentPaymentService.saveAgentPayment(this.paymentForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 Swal.fire({
@@ -93,6 +107,10 @@ export class AgentPaymentComponent {
     }
 
     updateAgentPayment(){
+        if(!this.paymentForm.valid){
+            this.paymentForm.markAllAsTouched();
+            return;
+        }
         this.agentPaymentService.updateAgentPayment(this.paymentForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 Swal.fire({

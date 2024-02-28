@@ -12,6 +12,7 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
 import {PayrollTypesService} from "../../../services/payroll-types.service";
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
+import jsPDF from "jspdf";
 
 @Component({
   selector: 'app-payroll',
@@ -189,7 +190,7 @@ export class PayrollComponent {
     });
   }
 
-  download_pdf(){
+  async download_pdf() {
     Swal.fire({
       title: 'Please Wait !',
       html: 'Creating Pdf ...', // add html attribute if you want or remove
@@ -198,22 +199,32 @@ export class PayrollComponent {
         Swal.showLoading();
       }
     });
-    let data = document.getElementById('sectionToPrint');
-    // @ts-ignore
-    html2canvas(data).then(canvas => {
-// Few necessary setting options
-      let imgWidth = 208;
-      let pageHeight = 295;
-      let imgHeight = canvas.height * imgWidth / canvas.width;
-      let heightLeft = imgHeight;
+        let data = document.getElementById('sectionToPrint');
+        // @ts-ignore
+        html2canvas(data).then(canvas => {
+    // Few necessary setting options
+          let imgWidth = 208;
+          let pageHeight = 295;
+          let imgHeight = canvas.height * imgWidth / canvas.width;
+          let heightLeft = imgHeight;
 
-      const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
-      let position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      Swal.close();
-      pdf.save('new-file.pdf'); // Generated PDF
-  })
+          const contentDataURL = canvas.toDataURL('image/png')
+          let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+          let position = 0;
+          pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
+          Swal.close();
+          pdf.save('new-file.pdf'); // Generated PDF
+      })
+    //   let doc = new jsPDF('p', 'mm', 'a4');
+    //   doc.addHTML(document.getElementById("sectionToPrint"), function() {
+    //     Swal.close();
+    //     doc.save("obrz.pdf");
+    //   });
+    // const doc = new jsPDF('p', 'mm', 'a4');
+    // const div = document.getElementById('sectionToPrint');
+    // // @ts-ignore
+    // await doc.html(div);
+    // doc.save('test.pdf'); // save / download
   }
 
   getStaff(){
