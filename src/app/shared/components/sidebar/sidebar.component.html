@@ -4,7 +4,7 @@
 <div class="sidebar custom-scrollbar">
   <div class="sidebar-user text-center">
 <!--    <div><img class="img-60 rounded-circle" src="assets/images/user/1.jpg" onerror="this.src='assets/images/user/2.png'" alt="#">-->
-    <div><img class="img-60 rounded-circle" [src]="url" onerror="this.src='assets/images/user/1.jpg'" alt="#">
+    <div><img class="img-60 rounded-circle" loading="lazy" [src]="url" onerror="this.src='assets/images/user/1.jpg'" alt="#">
       <div class="profile-edit"><a>
           <i class="icofont icofont-pencil-alt-5"><input class="upload" type="file" (change)="readUrl($event)" /></i>
         </a></div>
