@@ -32,7 +32,9 @@ export class AgentComponent {
   showStudentList = false;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
-  selectedAgent: { name,first_name,last_name,mobile_no,email,commission_percentage,commission_flat };
+  selectedAgent: {
+    name,first_name,last_name,mobile_no,email,commission_percentage,commission_flat,admitted_student
+    ,non_admitted_student,due_payment};
 
   constructor(private agentService: AgentService, private memberService: MemberService, private roleAndPermissionService: RolesAndPermissionService) {
     this.agentForm = new FormGroup({

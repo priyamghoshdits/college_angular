@@ -7,6 +7,7 @@ import { IcardComponent } from './icard/icard.component';
 import {AgentStudentEntryComponent} from "./agent-student-entry/agent-student-entry.component";
 import {FranchiseComponent} from "./franchise/franchise.component";
 import {UserLogComponent} from "./user-log/user-log.component";
+import {AgentPaymentComponent} from "./agent-payment/agent-payment.component";
 
 const routes: Routes = [
   {
@@ -39,6 +40,14 @@ const routes: Routes = [
     data: {
       title: "User Log",
       breadcrumb: "User Log"
+    }
+  },
+  {
+    path: 'agent-payment',
+    component: AgentPaymentComponent,
+    data: {
+      title: "Agent Payment",
+      breadcrumb: "Agent Payment"
     }
   },
   {

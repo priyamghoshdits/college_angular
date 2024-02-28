@@ -7,6 +7,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import Swal from "sweetalert2";
 import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {isNumber} from "chart.js/helpers";
 
 interface QuestionAnswer {
   question: string;
@@ -143,6 +144,19 @@ export class SubjectQuestionsComponent {
     })
   }
 
+  checkValidityAnswer(){
+    if((this.questionAnswers[this.questionAnswers.length - 1].answer <=0) || (this.questionAnswers[this.questionAnswers.length - 1].answer >=5) || (isNumber(this.questionAnswers[this.questionAnswers.length - 1].answer) == false)){
+      this.questionAnswers[this.questionAnswers.length - 1].answer = null;
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Enter valid answer',
+        showConfirmButton: false,
+        timer: 1000
+      });
+    }
+  }
+
   deleteQuestionPaper(data){
     Swal.fire({
       title: 'Confirmation',
@@ -240,6 +254,16 @@ export class SubjectQuestionsComponent {
   }
 
   updateMarks(){
+    if(isNumber(this.questionAnswers[this.questionAnswers.length - 1].marks) == false){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Enter valid marks',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
       this.totalMarks = this.questionAnswers.reduce((accumulator, currentItem) => accumulator + parseInt(currentItem.marks), 0);
     // @ts-ignore
     if(this.totalMarks > this.selected_details.full_marks){

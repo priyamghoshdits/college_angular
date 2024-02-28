@@ -153,6 +153,7 @@ export class NavService {
 				{ path: '/others/franchise', title: 'Franchise', type: 'link' },
 				{ path: '/others/icard', title: 'Icard', type: 'link' },
 				{ path: '/others/agent-student-entry', title: 'Agent Student Entry', type: 'link' },
+				{ path: '/others/agent-payment', title: 'Agent Payment', type: 'link' },
 			]
 		},
 		{

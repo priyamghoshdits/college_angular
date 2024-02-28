@@ -95,7 +95,7 @@
                                             </div>
                                             <div class="col-md-3 mb-3">
                                                 <label>Correct Ans (input 1,2,3 or 4)</label>
-                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].answer" placeholder="Correct Answer" required>
+                                                <input (change)="checkValidityAnswer()" type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].answer" placeholder="Correct Answer" required>
                                             </div>
                                         </div>
                                     </div>
