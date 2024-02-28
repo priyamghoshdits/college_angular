@@ -30,6 +30,13 @@ export class AgentService {
     return [...this.agentList];
   }
 
+  getUpdatedAgents(){
+      this.http.get(this.BASE_API_URL + '/getAgent').subscribe((response: any) =>{
+          this.agentList = response.data;
+          this.agentListSubject.next([...this.agentList]);
+      });
+  }
+
   saveAgent(value){
     return this.http.post(this.BASE_API_URL + '/saveAgent', value)
         .pipe(catchError(this.errorService.serverError), tap(response => {

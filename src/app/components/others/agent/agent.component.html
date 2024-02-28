@@ -160,9 +160,19 @@
                                placeholder="Non Admitted Student">
                     </div>
                     <div class="col-3 mt-2">
+                        <label>Total Payment</label>
+                        <input disabled class="form-control" type="text" [(ngModel)]="selectedAgent.total"
+                               placeholder="Total Payment">
+                    </div>
+                    <div class="col-3 mt-2">
+                        <label>Total Paid</label>
+                        <input disabled class="form-control" type="text" [(ngModel)]="selectedAgent.total_paid"
+                               placeholder="Total Paid">
+                    </div>
+                    <div class="col-3 mt-2">
                         <label>Due Payment</label>
                         <input disabled class="form-control" type="text" [(ngModel)]="selectedAgent.due_payment"
-                               placeholder="Non Admitted Student">
+                               placeholder="Due payment">
                     </div>
                 </div>
                 <div class="card-header">

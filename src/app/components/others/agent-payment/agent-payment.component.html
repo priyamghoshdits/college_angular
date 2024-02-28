@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-6">
             <div class="row">
                 <div class="col-sm-12">
@@ -33,10 +33,10 @@
                                         <label>Mode</label>
                                         <select style="width: 100%" formControlName="mode" class="form-select" required>
                                             <option value="null">Select</option>
-                                            <option value="Hinduism"> Cash </option>
-                                            <option value="Buddhism"> Transfer to bank </option>
-                                            <option value="Christianity"> Cheque </option>
-                                            <option value="Christianity"> Others </option>
+                                            <option value="Cash"> Cash </option>
+                                            <option value="Transfer to bank"> Transfer to bank </option>
+                                            <option value="Cheque"> Cheque </option>
+                                            <option value="Others"> Others </option>
                                         </select>
                                         <div *ngIf="paymentForm.controls['mode'].errors?.['required'] && paymentForm.controls['mode'].touched " class="text text-danger mt-1">Mode required</div>
                                     </div>
@@ -52,6 +52,12 @@
                                         <input readonly type="text" class="form-control" formControlName="total_amount">
                                     </div>
                                     <div class="col-md-6 mb-3">
+                                        <label>Due Amount</label>
+                                        <input readonly type="text" class="form-control" formControlName="due_amount">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
                                         <label>Amount</label>
                                         <input type="text" class="form-control" formControlName="amount">
                                         <div *ngIf="paymentForm.controls['amount'].errors?.['required'] && paymentForm.controls['amount'].touched " class="text text-danger mt-1">Amount required</div>
@@ -60,57 +66,59 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button [hidden]="isUpdatable" class="btn btn-primary me-1" (click)="saveAgentPayment()">Submit</button>
-<!--                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
-<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable" class="btn btn-primary me-1" (click)="saveAgentPayment()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateAgentPayment()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row" *ngIf="permission[3].permission == 1">
                 <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Payment</h5>
+                                <span>Payment List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Agent Name</th>
+                                        <th scope="col">Transaction No.</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Mode</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of paymentList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.user_name}}</td>
+                                        <td>{{record.transaction_no}}</td>
+                                        <td>{{record.date}}</td>
+                                        <td>{{record.mode}}</td>
+                                        <td>{{record.amount}}</td>
+                                        <td>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editPayment(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deletePayment(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="paymentList.length >8" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-<!--        <div class="col-sm-12 col-xl-6">-->
-<!--            <div class="row">-->
-<!--                <div class="col-sm-12">-->
-<!--                    <div class="col-sm-12">-->
-<!--                        <div class="card">-->
-<!--                            <div class="card-header">-->
-<!--                                <h5>Course List</h5>-->
-<!--                                <span>Full Course List.</span>-->
-<!--                            </div>-->
-<!--                            <div class="table-responsive" *ngIf="permission[3].permission === 1">-->
-<!--                                <table class="table" >-->
-<!--                                    <thead>-->
-<!--                                    <tr>-->
-<!--                                        <th scope="col">#</th>-->
-<!--                                        <th scope="col">Name</th>-->
-<!--                                        <th scope="col">Course Name</th>-->
-<!--                                        <th scope="col" *ngIf="permission[1].permission === 1 || permission[2].permission === 1">Action</th>-->
-<!--                                    </tr>-->
-<!--                                    </thead>-->
-<!--                                    <tbody>-->
-<!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
-<!--                                        <td>{{indexOfElement+1}}</td>-->
-<!--                                        <td>{{record.course_name}}</td>-->
-<!--                                        <td>-->
-<!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
-<!--                                        </td>-->
-<!--                                        <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">-->
-<!--                                            <a *ngIf="permission[1].permission === 1" (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
-<!--                                            <a *ngIf="permission[2].permission === 1" (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
-<!--                                    </tbody>-->
-<!--                                </table>-->
-<!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
-
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
 </div>
 <!-- Container-fluid Ends-->

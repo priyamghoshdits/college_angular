@@ -32,9 +32,10 @@ export class AgentComponent {
   showStudentList = false;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
+
   selectedAgent: {
     name,first_name,last_name,mobile_no,email,commission_percentage,commission_flat,admitted_student
-    ,non_admitted_student,due_payment};
+    ,non_admitted_student,due_payment, total, total_paid};
 
   constructor(private agentService: AgentService, private memberService: MemberService, private roleAndPermissionService: RolesAndPermissionService) {
     this.agentForm = new FormGroup({
@@ -60,7 +61,6 @@ export class AgentComponent {
     if(user.user_type_id != 1 && this.agentList.length > 0){
       this.agentList = this.agentList.filter(x => x.id == user.id)
     }
-
 
     this.memberService.getCategoryListener().subscribe((response) => {
       this.categoryList = response;
@@ -115,6 +115,10 @@ export class AgentComponent {
   }
 
   updateAgent(){
+    if(!this.agentForm.valid){
+      this.agentForm.markAllAsTouched();
+      return;
+    }
     this.agentService.updateAgent(this.agentForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){
