@@ -15,6 +15,7 @@ import {
 } from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {SessionService} from "../../../services/session.service";
 
 @Component({
   selector: 'app-create-semester-timetable',
@@ -44,6 +45,7 @@ export class CreateSemesterTimetableComponent {
     courseList: any[];
     semesterList: any[];
     subjectList: any[];
+    sessionList: any[];
     teacherList: any[];
     weekList: any[];
     tableArray : any[] = [];
@@ -59,11 +61,13 @@ export class CreateSemesterTimetableComponent {
     rolesAndPermission: any[] = [];
     permission: any[] = [];
 
-    constructor(private subjectService: SubjectService, private roleAndPermissionService: RolesAndPermissionService){
+    constructor(private subjectService: SubjectService, private roleAndPermissionService: RolesAndPermissionService
+                ,private sessionService: SessionService){
         this.semesterTimeTableForm = new FormGroup({
             id: new FormControl(null),
             course_id: new FormControl(null, [Validators.required]),
             semester_id: new FormControl(null, [Validators.required]),
+            session_id: new FormControl(null, [Validators.required]),
             teacher_id: new FormControl(null),
             subject_id: new FormControl(null),
             time_from: new FormControl(null),
@@ -75,6 +79,7 @@ export class CreateSemesterTimetableComponent {
             id: new FormControl(null),
             course_id: new FormControl(null, [Validators.required]),
             semester_id: new FormControl(null, [Validators.required]),
+            session_id: new FormControl(null, [Validators.required]),
         });
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;
@@ -88,6 +93,11 @@ export class CreateSemesterTimetableComponent {
             this.courseList = response;
         });
         this.courseList = this.subjectService.getCourses();
+
+        this.sessionService.getSessionListener().subscribe((response) => {
+            this.sessionList = response;
+        });
+        this.sessionList = this.sessionService.getSessionList();
 
         this.subjectService.getWeekListener().subscribe((response) => {
             this.weekList = response;
@@ -104,7 +114,8 @@ export class CreateSemesterTimetableComponent {
             this.semesterTimeTableSearchForm.markAllAsTouched();
             return;
         }
-        this.subjectService.getSemesterTimeTable(this.semesterTimeTableSearchForm.value.course_id, this.semesterTimeTableSearchForm.value.semester_id)
+        this.subjectService.getSemesterTimeTable(this.semesterTimeTableSearchForm.value.course_id, this.semesterTimeTableSearchForm.value.semester_id
+            , this.semesterTimeTableSearchForm.value.session_id)
             .subscribe((response: any) => {
                 if(response.success == 1){
                     let x = response.data;
@@ -365,6 +376,7 @@ export class CreateSemesterTimetableComponent {
                 {
                     "course_id": this.semesterTimeTableForm.value.course_id,
                     "semester_id": this.semesterTimeTableForm.value.semester_id,
+                    "session_id": this.semesterTimeTableForm.value.session_id,
                     "details": this.tableArray
                 }
             ];

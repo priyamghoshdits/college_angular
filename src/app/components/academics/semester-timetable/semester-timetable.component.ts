@@ -6,6 +6,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatSelectModule} from "@angular/material/select";
 import {SubjectService} from "../../../services/subject.service";
 import {MatTabsModule} from "@angular/material/tabs";
+import {SessionService} from "../../../services/session.service";
 
 @Component({
   selector: 'app-semester-timetable',
@@ -28,6 +29,7 @@ export class SemesterTimetableComponent {
   semesterTimeTableForm: FormGroup;
   semesterList: any[];
   courseList: any[];
+  sessionList: any[];
   semesterTimeTableList: any[];
   lengthOfSemesterTimeTableList : number;
   week1: any[];
@@ -37,16 +39,22 @@ export class SemesterTimetableComponent {
   week5: any[];
   week6: any[];
   week7: any[];
-  constructor(private subjectService: SubjectService) {
+  constructor(private subjectService: SubjectService, private sessionService: SessionService) {
     this.semesterTimeTableForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
       semester_id: new FormControl(null, [Validators.required]),
+      session_id: new FormControl(null, [Validators.required]),
     });
     this.subjectService.getCourseListener().subscribe((response) => {
       this.courseList = response;
     });
     this.courseList = this.subjectService.getCourses();
+
+    this.sessionService.getSessionListener().subscribe((response) => {
+      this.sessionList = response;
+    });
+    this.sessionList = this.sessionService.getSessionList();
   }
 
   getSemester(){
@@ -61,7 +69,7 @@ export class SemesterTimetableComponent {
       this.semesterTimeTableForm.markAllAsTouched();
       return;
     }
-    this.subjectService.getSemesterTimeTable(this.semesterTimeTableForm.value.course_id, this.semesterTimeTableForm.value.semester_id)
+    this.subjectService.getSemesterTimeTable(this.semesterTimeTableForm.value.course_id, this.semesterTimeTableForm.value.semester_id, this.semesterTimeTableForm.value.session_id)
         .subscribe((response) => {
           // @ts-ignore
             if(response.success == 1){

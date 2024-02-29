@@ -213,7 +213,7 @@ export class PayrollComponent {
           let position = 0;
           pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
           Swal.close();
-          pdf.save('new-file.pdf'); // Generated PDF
+          pdf.save('payslip.pdf'); // Generated PDF
       })
     //   let doc = new jsPDF('p', 'mm', 'a4');
     //   doc.addHTML(document.getElementById("sectionToPrint"), function() {

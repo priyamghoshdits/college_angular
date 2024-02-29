@@ -164,8 +164,8 @@ export class SubjectService {
           }));
   }
 
-  getSemesterTimeTable(course_id, semester_id){
-      return this.http.get(this.BASE_API_URL + '/getSemesterTimeTableByCourseAndSemesterId/' + course_id + '/' + semester_id)
+  getSemesterTimeTable(course_id, semester_id, session_id){
+      return this.http.get(this.BASE_API_URL + '/getSemesterTimeTableByCourseAndSemesterId/' + course_id + '/' + semester_id + '/' + session_id)
           .pipe(catchError(this.errorService.serverError), tap(response => {
           }));
   }

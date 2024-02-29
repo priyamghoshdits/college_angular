@@ -29,23 +29,35 @@
                         <div class="card-body" [hidden]="active != 1">
                             <form [formGroup]="semesterTimeTableForm">
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label>Select Course</label>
-                                        <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <option value="null">Select</option>
                                             <option *ngFor="let data of courseList" [value]="data.id" >
                                                 {{data.course_name}}
                                             </option>
                                         </select>
                                         <div *ngIf="semesterTimeTableForm.controls['course_id'].errors?.['required'] && semesterTimeTableForm.controls['course_id'].touched " class="text text-danger mt-1">Course Name required</div>
                                     </div>
-                                    <div class="col-6">
+                                    <div class="col-4">
                                         <label>Select Semester</label>
-                                        <select style="width: 100%" formControlName="semester_id" class="form-select" required (change)="getSubject()">
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" (change)="getSubject()">
+                                            <option value="null">Select</option>
                                             <option *ngFor="let data of semesterList" [value]="data.semester_id" >
                                                 {{data.name}}
                                             </option>
                                         </select>
                                         <div *ngIf="semesterTimeTableForm.controls['semester_id'].errors?.['required'] && semesterTimeTableForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="session_id" class="form-select">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="semesterTimeTableForm.controls['session_id'].errors?.['required'] && semesterTimeTableForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
                                     </div>
                                 </div>
                                 <hr>
@@ -53,6 +65,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label>Select Subject</label>
                                         <select style="width: 100%" formControlName="subject_id" class="form-select" required>
+                                            <option value="null">Select</option>
                                             <option [selected]="false" *ngFor="let data of subjectList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>
@@ -62,6 +75,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label>Teacher List</label>
                                         <select style="width: 100%" formControlName="teacher_id" class="form-select" required>
+                                            <option value="null">Select</option>
                                             <option [selected]="false" *ngFor="let data of teacherList" [value]="data.teacher_id" >
                                                 {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                             </option>
@@ -85,6 +99,7 @@
                                     <div class="col-md-6 mb-3">
                                         <label>Select Day</label>
                                         <select style="width: 100%" formControlName="week_id" class="form-select" required>
+                                            <option value="null">Select</option>
                                             <option [selected]="false" *ngFor="let data of weekList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>
@@ -116,6 +131,7 @@
                                                     <div class="form-group">
                                                         <label>Select Course</label>
                                                         <select formControlName="course_id" class="form-select" required (change)="getSemesterSearch()">
+                                                            <option value="null">Select</option>
                                                             <option *ngFor="let data of courseList" [value]="data.id" >
                                                                 {{data.course_name}}
                                                             </option>
@@ -127,11 +143,24 @@
                                                     <div class="form-group">
                                                         <label>Select Semester</label>
                                                         <select formControlName="semester_id" class="form-select" required>
+                                                            <option value="null">Select</option>
                                                             <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                                                 {{data.name}}
                                                             </option>
                                                         </select>
                                                         <div *ngIf="semesterTimeTableSearchForm.controls['semester_id'].errors?.['required'] && semesterTimeTableSearchForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <div class="form-group">
+                                                        <label>Select Session</label>
+                                                        <select formControlName="session_id" class="form-select" required>
+                                                            <option value="null">Select</option>
+                                                            <option *ngFor="let data of sessionList" [value]="data.id">
+                                                                {{data.name}}
+                                                            </option>
+                                                        </select>
+                                                        <div *ngIf="semesterTimeTableSearchForm.controls['session_id'].errors?.['required'] && semesterTimeTableSearchForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
                                                     </div>
                                                 </div>
                                             </div>

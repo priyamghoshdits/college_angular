@@ -33,27 +33,27 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Student ID</label>
-                                            <input type="text" class="form-control" (blur)="checkUniqueId()" formControlName="identification_no" placeholder="Student Id" required>
+                                            <input type="text" class="form-control" (blur)="checkUniqueId()" formControlName="identification_no" placeholder="Student Id">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>First Name</label>
-                                            <input type="text" class="form-control" formControlName="first_name" placeholder="First name" required>
+                                            <input type="text" class="form-control" formControlName="first_name" placeholder="First name">
                                             <div *ngIf="studentCreationForm.controls['first_name'].errors?.['required'] && studentCreationForm.controls['first_name'].touched " class="text text-danger mt-1">First Name required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Middle Name</label>
-                                            <input type="text" class="form-control" formControlName="middle_name" placeholder="Middle Name" required>
+                                            <input type="text" class="form-control" formControlName="middle_name" placeholder="Middle Name" >
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Last Name</label>
-                                            <input type="text" class="form-control" formControlName="last_name" placeholder="Last Name" required>
+                                            <input type="text" class="form-control" formControlName="last_name" placeholder="Last Name" >
                                             <div *ngIf="studentCreationForm.controls['last_name'].errors?.['required'] && studentCreationForm.controls['last_name'].touched " class="text text-danger mt-1">Last Name required</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Gender</label>
-                                            <select style="width: 100%" formControlName="gender" class="form-select" required>
+                                            <select style="width: 100%" formControlName="gender" class="form-select" >
                                                 <option value="null">Select</option>
                                                 <option value="Male"> Male </option>
                                                 <option value="Female"> Female </option>
@@ -74,19 +74,19 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Phone Number</label>
-                                            <input type="text" class="form-control" formControlName="mobile_no" placeholder="Phone Number" required>
+                                            <input type="text" class="form-control" formControlName="mobile_no" placeholder="Phone Number">
                                             <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['required'] && studentCreationForm.controls['mobile_no'].touched " class="text text-danger mt-1">Mobile Number required</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Emergency Contact Number</label>
-                                            <input type="text" class="form-control" formControlName="emergency_phone_number" placeholder="Emergency Contact Number" required>
+                                            <input type="text" class="form-control" formControlName="emergency_phone_number" placeholder="Emergency Contact Number">
                                             <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['required'] && studentCreationForm.controls['emergency_phone_number'].touched " class="text text-danger mt-1">Emergency phone required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Material Status</label>
-                                            <select style="width: 100%" formControlName="material_status" class="form-select" required>
+                                            <select style="width: 100%" formControlName="material_status" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option value="Single"> Single </option>
                                                 <option value="Married"> Married </option>
@@ -97,7 +97,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Session</label>
-                                            <select style="width: 100%" formControlName="session_id" class="form-select" required>
+                                            <select style="width: 100%" formControlName="session_id" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of sessionList" [value]="data.id" >
                                                     {{data.name}}
@@ -107,7 +107,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Agent</label>
-                                            <select style="width: 100%" formControlName="agent_id" class="form-select" required>
+                                            <select style="width: 100%" formControlName="agent_id" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of agentList" [value]="data.id" >
                                                     {{data.first_name}} {{data.last_name}}
@@ -123,7 +123,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Blood Group</label>
-                                            <select style="width: 100%" formControlName="blood_group" class="form-select" required>
+                                            <select style="width: 100%" formControlName="blood_group" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option value="A+"> A+ </option>
                                                 <option value="A-"> A- </option>
@@ -137,7 +137,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Religion</label>
-                                            <select style="width: 100%" formControlName="religion" class="form-select" required>
+                                            <select style="width: 100%" formControlName="religion" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option value="Hinduism"> Hinduism </option>
                                                 <option value="Buddhism"> Buddhism </option>
@@ -154,7 +154,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Category</label>
-                                            <select style="width: 100%" formControlName="category_id" class="form-select" required>
+                                            <select style="width: 100%" formControlName="category_id" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of categoryList" [value]="data.id" >
                                                     {{data.name}}
@@ -183,7 +183,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Semester</label>
-                                            <select style="width: 100%" formControlName="semester_id" class="form-select" required>
+                                            <select style="width: 100%" formControlName="semester_id" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of semesterList" [value]="data.semester_id" >
                                                     {{data.name}}
@@ -207,12 +207,12 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Current Address</label>
-                                            <input type="text" class="form-control" formControlName="current_address" placeholder="Current Address" required>
+                                            <input type="text" class="form-control" formControlName="current_address" placeholder="Current Address">
                                             <div *ngIf="studentCreationForm.controls['current_address'].errors?.['required'] && studentCreationForm.controls['current_address'].touched " class="text text-danger mt-1">Current Address required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Permanent Address</label>
-                                            <input type="text" class="form-control" formControlName="permanent_address" placeholder="Permanent Address" required>
+                                            <input type="text" class="form-control" formControlName="permanent_address" placeholder="Permanent Address">
                                             <div *ngIf="studentCreationForm.controls['permanent_address'].errors?.['required'] && studentCreationForm.controls['permanent_address'].touched " class="text text-danger mt-1">Permanent Address required</div>
                                         </div>
                                     </div>
