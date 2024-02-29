@@ -145,6 +145,11 @@ export class NavService {
 			]
 		},
 		{
+			title: 'Report', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/report/attendance-report', title: 'Attendance report', type: 'link' },
+			]
+		},
+		{
 			title: 'Others', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/others/agent', title: 'Agent', type: 'link' },
 				{ path: '/others/roles-and-permission', title: 'Roles And Permission', type: 'link' },

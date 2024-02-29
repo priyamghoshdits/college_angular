@@ -1,0 +1,113 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Attendance</h5><span>Student period Attendance</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="attendanceReportForm">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="attendanceReportForm.controls['course_id'].errors?.['required'] && attendanceReportForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select">
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="attendanceReportForm.controls['semester_id'].errors?.['required'] && attendanceReportForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="session_id" class="form-select">
+                                            <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="attendanceReportForm.controls['session_id'].errors?.['required'] && attendanceReportForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>From Date</label>
+                                        <input type="date" class="form-control" formControlName="from_date" placeholder="From Date">
+                                        <div *ngIf="attendanceReportForm.controls['from_date'].errors?.['required'] && attendanceReportForm.controls['from_date'].touched " class="text text-danger mt-1">From Date required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>To Date</label>
+                                        <input type="date" class="form-control" formControlName="to_date" placeholder="To Date">
+                                        <div *ngIf="attendanceReportForm.controls['to_date'].errors?.['required'] && attendanceReportForm.controls['to_date'].touched " class="text text-danger mt-1">To Date required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <button style="margin-top: 25px;" class="btn btn-primary me-1" (click)="getAttendance()">Search</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="studentAttendanceList.length > 0">
+                <div class="col-sm-12">
+                    <div class="card">
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card-header">
+                                        <h5>Student Attendance Report</h5>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <a class="pull-right" style="margin-top: 22px;margin-right: 55px;cursor: pointer;" (click)="print_div()"><mat-icon>print</mat-icon></a>
+                                </div>
+                            </div>
+                        <div id="sectionToPrint">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table" style="text-align: center">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Total Classes</th>
+                                            <th scope="col">Present</th>
+                                            <th scope="col">Absent</th>
+                                            <th scope="col">Percentage</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of studentAttendanceList;let indexOfElement=index">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{record.name}}</td>
+                                            <td>{{record.total_classes}}</td>
+                                            <td>{{record.present}}</td>
+                                            <td>{{record.absent}}</td>
+                                            <td>{{(record.present/record.total_classes)*100}}%</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--&lt;!&ndash; Container-fluid Ends&ndash;&gt;-->

@@ -45,6 +45,7 @@ export class ShowAttendanceComponent {
           });
           this.studentList = this.studentService.getStudentLists();
           this.isSuperAdmin = true;
+          this.attendanceForm.patchValue({date: this.datepipe.transform(new Date(), 'yyyy-MM-dd')});
       }else{
           this.studentService.getStudentListener().subscribe((response) => {
               this.studentList = response;
