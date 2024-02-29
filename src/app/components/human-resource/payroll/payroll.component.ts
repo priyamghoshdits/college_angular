@@ -12,7 +12,6 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
 import {PayrollTypesService} from "../../../services/payroll-types.service";
 import html2canvas from 'html2canvas';
 import jspdf from 'jspdf';
-import jsPDF from "jspdf";
 
 @Component({
   selector: 'app-payroll',

@@ -6,6 +6,7 @@ import {SubjectService} from "../../../services/subject.service";
 import {SessionService} from "../../../services/session.service";
 import {ReportService} from "../../../services/report.service";
 import {MatIconModule} from "@angular/material/icon";
+import jspdf from 'jspdf';
 
 @Component({
   selector: 'app-attendance-report',
