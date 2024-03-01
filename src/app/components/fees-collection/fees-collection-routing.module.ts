@@ -4,6 +4,7 @@ import {FeesTypeComponent} from "./fees-type/fees-type.component";
 import {CollectFeesComponent} from "./collect-fees/collect-fees.component";
 import {FeesStructureComponent} from "./fees-structure/fees-structure.component";
 import {DiscountComponent} from "./discount/discount.component";
+import {SearchFeesComponent} from "./search-fees/search-fees.component";
 
 const routes: Routes = [
   {
@@ -20,6 +21,14 @@ const routes: Routes = [
     data: {
       title: "Collect Fees",
       breadcrumb: "Collect Fees"
+    }
+  },
+  {
+    path: 'search-fees-payment',
+    component: SearchFeesComponent,
+    data: {
+      title: "Search Fees Payment",
+      breadcrumb: "Search Fees Payment"
     }
   },
   {
