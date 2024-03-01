@@ -17,4 +17,10 @@ export class ReportService {
         .pipe(catchError(this.errorService.serverError), tap(response => {
         }));
   }
+
+  getExaminationReport(value){
+    return this.http.post(this.BASE_API_URL + '/getExamReport', value)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+        }));
+  }
 }

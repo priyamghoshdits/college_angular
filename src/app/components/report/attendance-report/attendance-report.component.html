@@ -64,13 +64,14 @@
                     <div class="card">
 
                             <div class="row">
-                                <div class="col">
+                                <div class="col-8">
                                     <div class="card-header">
-                                        <h5>Student Attendance Report</h5>
+                                        <h5>Student Attendance Report ({{attendanceReportForm.value.from_date}} - {{attendanceReportForm.value.to_date}})</h5>
                                     </div>
                                 </div>
-                                <div class="col">
-                                    <a class="pull-right" style="margin-top: 22px;margin-right: 55px;cursor: pointer;" (click)="print_div()"><mat-icon>print</mat-icon></a>
+                                <div class="col-4">
+                                    <a class="pull-right" style="margin-top: 22px;margin-right: 95px;cursor: pointer;" (click)="print_div()"><mat-icon>print</mat-icon></a>
+                                    <a class="pull-right" style="margin-top: 22px;margin-right: 40px;cursor: pointer;" (click)="exportexcel()"><mat-icon>cloud_download</mat-icon></a>
                                 </div>
                             </div>
                         <div id="sectionToPrint">
@@ -94,7 +95,7 @@
                                             <td>{{record.total_classes}}</td>
                                             <td>{{record.present}}</td>
                                             <td>{{record.absent}}</td>
-                                            <td>{{(record.present/record.total_classes)*100}}%</td>
+                                            <td>{{record.attendance_percentage}}%</td>
                                         </tr>
                                         </tbody>
                                     </table>

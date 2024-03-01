@@ -7,6 +7,8 @@ import {SessionService} from "../../../services/session.service";
 import {ReportService} from "../../../services/report.service";
 import {MatIconModule} from "@angular/material/icon";
 import jspdf from 'jspdf';
+import * as XLSX from 'xlsx';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-attendance-report',
@@ -60,17 +62,36 @@ export class AttendanceReportComponent {
     this.reportService.getAttendanceReport(this.attendanceReportForm.value).subscribe((response: any) => {
       if(response.success){
         this.studentAttendanceList = response.data;
+        if(this.studentAttendanceList.length == 0){
+          Swal.fire({
+            position: 'center',
+            icon: 'info',
+            title: 'No Data Found',
+            showConfirmButton: false,
+            timer: 1000
+          });
+        }
       }
     })
   }
 
   print_div(){
-// @ts-ignore
+    // @ts-ignore
     const printContents = document.getElementById('sectionToPrint').innerHTML;
     const originalContents = document.body.innerHTML;
     document.body.innerHTML = printContents;
     window.print();
     document.body.innerHTML = originalContents;
   }
+
+    exportexcel(): void {
+        /* pass here the table id */
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.studentAttendanceList);
+        /* generate workbook and add the worksheet */
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        /* save to file */
+        XLSX.writeFile(wb, 'Attendance-Report.xlsx');
+    }
 
 }

@@ -1,0 +1,99 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Examination</h5><span>Student Examination Report</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="examinationReportForm">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="examinationReportForm.controls['course_id'].errors?.['required'] && examinationReportForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select">
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="examinationReportForm.controls['semester_id'].errors?.['required'] && examinationReportForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="session_id" class="form-select">
+                                            <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="examinationReportForm.controls['session_id'].errors?.['required'] && examinationReportForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <button style="margin-top: 30px;" class="btn btn-primary me-1" (click)="getExaminationReport()">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="examinationReportList.length > 0">
+                <div class="col-sm-12">
+                    <div class="card">
+
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="card-header">
+                                    <h5>Student Examination Report</h5>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <a class="pull-right" style="margin-top: 22px;margin-right: 95px;cursor: pointer;" (click)="print_div()"><mat-icon>print</mat-icon></a>
+                                <a class="pull-right" style="margin-top: 22px;margin-right: 40px;cursor: pointer;" (click)="exportExcel()"><mat-icon>cloud_download</mat-icon></a>
+                            </div>
+                        </div>
+                        <div id="sectionToPrint">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table" style="text-align: center">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Full Marks</th>
+                                            <th scope="col">Marks Obtained</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of examinationReportList;let indexOfElement=index">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{record.name}}</td>
+                                            <td>{{record.full_marks}}</td>
+                                            <td>{{record.obtained_marks}}</td>
+                                            <td>{{record.status}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--&lt;!&ndash; Container-fluid Ends&ndash;&gt;-->

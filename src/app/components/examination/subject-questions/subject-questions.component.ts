@@ -144,9 +144,9 @@ export class SubjectQuestionsComponent {
     })
   }
 
-  checkValidityAnswer(){
-    if((this.questionAnswers[this.questionAnswers.length - 1].answer <=0) || (this.questionAnswers[this.questionAnswers.length - 1].answer >=5) || (isNumber(this.questionAnswers[this.questionAnswers.length - 1].answer) == false)){
-      this.questionAnswers[this.questionAnswers.length - 1].answer = null;
+  checkValidityAnswer(index){
+    if((this.questionAnswers[index].answer <=0) || (this.questionAnswers[index].answer >=5) || (isNumber(this.questionAnswers[index].answer) == false)){
+      this.questionAnswers[index].answer = null;
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -253,8 +253,8 @@ export class SubjectQuestionsComponent {
     this.active = data;
   }
 
-  updateMarks(){
-    if(isNumber(this.questionAnswers[this.questionAnswers.length - 1].marks) == false){
+  updateMarks(index){
+    if(isNumber(this.questionAnswers[index].marks) == false){
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -262,6 +262,7 @@ export class SubjectQuestionsComponent {
         showConfirmButton: false,
         timer: 1000
       });
+      this.questionAnswers[index].marks = null;
       return;
     }
       this.totalMarks = this.questionAnswers.reduce((accumulator, currentItem) => accumulator + parseInt(currentItem.marks), 0);
