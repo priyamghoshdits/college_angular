@@ -149,6 +149,7 @@ export class NavService {
 				{ path: '/report/attendance-report', title: 'Attendance report', type: 'link' },
 				{ path: '/report/examination-report', title: 'Examination report', type: 'link' },
 				{ path: '/report/fees-collection-report', title: 'Fees Collection report', type: 'link' },
+				{ path: '/report/admission-report', title: 'Admission report', type: 'link' },
 			]
 		},
 		{

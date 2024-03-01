@@ -24,6 +24,12 @@ export class ReportService {
         }));
   }
 
+  getStudentReport(value){
+      return this.http.post(this.BASE_API_URL + '/getStudentReport', value)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+          }));
+  }
+
   getFeesCollectionReport(value){
     return this.http.post(this.BASE_API_URL + '/getFeesCollectionReport', value)
         .pipe(catchError(this.errorService.serverError), tap(response => {

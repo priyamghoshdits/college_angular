@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {AttendanceReportComponent} from "./attendance-report/attendance-report.component";
 import {ExaminationReportComponent} from "./examination-report/examination-report.component";
 import {FeesCollectionReportComponent} from "./fees-collection-report/fees-collection-report.component";
+import {AdmissionReportComponent} from "./admission-report/admission-report.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,14 @@ const routes: Routes = [
     data: {
       title: "Examination Report",
       breadcrumb: "Examination Report"
+    }
+  },
+  {
+    path: 'admission-report',
+    component: AdmissionReportComponent,
+    data: {
+      title: "Admission Report",
+      breadcrumb: "Admission Report"
     }
   },
   {
