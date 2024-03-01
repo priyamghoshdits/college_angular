@@ -23,4 +23,10 @@ export class ReportService {
         .pipe(catchError(this.errorService.serverError), tap(response => {
         }));
   }
+
+  getFeesCollectionReport(value){
+    return this.http.post(this.BASE_API_URL + '/getFeesCollectionReport', value)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+        }));
+  }
 }

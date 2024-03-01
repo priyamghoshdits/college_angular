@@ -84,9 +84,23 @@ export class AttendanceReportComponent {
     document.body.innerHTML = originalContents;
   }
 
-    exportexcel(): void {
+    exportExcel(): void {
+        // @ts-ignore
+      let x: [{ Percentage: any; Present: any; Absent: any; "Total Classes": any; Name: any }] = [];
+      let output = [];
+      this.studentAttendanceList.forEach(function (value){
+        x =[{
+          'Name' : value.name,
+          'Total Classes': value.total_classes,
+          'Present': value.present,
+          'Absent': value.absent,
+          'Percentage': value.attendance_percentage,
+        }];
+        // @ts-ignore
+        output.push(x[0]);
+      })
         /* pass here the table id */
-        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.studentAttendanceList);
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(output);
         /* generate workbook and add the worksheet */
         const wb: XLSX.WorkBook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');

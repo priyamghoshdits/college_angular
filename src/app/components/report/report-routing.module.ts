@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {AttendanceReportComponent} from "./attendance-report/attendance-report.component";
 import {ExaminationReportComponent} from "./examination-report/examination-report.component";
+import {FeesCollectionReportComponent} from "./fees-collection-report/fees-collection-report.component";
 
 const routes: Routes = [
   {
@@ -18,6 +19,14 @@ const routes: Routes = [
     data: {
       title: "Examination Report",
       breadcrumb: "Examination Report"
+    }
+  },
+  {
+    path: 'fees-collection-report',
+    component: FeesCollectionReportComponent,
+    data: {
+      title: "Fees Collection Report",
+      breadcrumb: "Fees Collection Report"
     }
   }
 ];

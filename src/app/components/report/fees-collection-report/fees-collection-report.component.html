@@ -1,0 +1,116 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Fees Collection Report</h5>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="feesCollectionReportForm">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="feesCollectionReportForm.controls['course_id'].errors?.['required'] && feesCollectionReportForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select">
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="feesCollectionReportForm.controls['semester_id'].errors?.['required'] && feesCollectionReportForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>From Date</label>
+                                        <input type="date" class="form-control" formControlName="from_date" placeholder="From Date">
+                                        <div *ngIf="feesCollectionReportForm.controls['from_date'].errors?.['required'] && feesCollectionReportForm.controls['from_date'].touched " class="text text-danger mt-1">From Date required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>To Date</label>
+                                        <input type="date" class="form-control" formControlName="to_date" placeholder="To Date">
+                                        <div *ngIf="feesCollectionReportForm.controls['to_date'].errors?.['required'] && feesCollectionReportForm.controls['to_date'].touched " class="text text-danger mt-1">To Date required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <button style="margin-top: 25px;" class="btn btn-primary me-1" (click)="getFeesCollectionReport()">Search</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="feesCollectionReport.length > 0">
+                <div class="col-sm-12">
+                    <div class="card">
+
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="card-header">
+                                    <h5>Fees Collection Report ({{feesCollectionReportForm.value.from_date}} - {{feesCollectionReportForm.value.to_date}})</h5>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <a class="pull-right" style="margin-top: 22px;margin-right: 95px;cursor: pointer;" (click)="print_div()"><mat-icon>print</mat-icon></a>
+                                <a class="pull-right" style="margin-top: 22px;margin-right: 40px;cursor: pointer;" (click)="exportExcel()"><mat-icon>cloud_download</mat-icon></a>
+                            </div>
+                        </div>
+                        <div id="sectionToPrint">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table" style="text-align: center">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Course</th>
+                                            <th scope="col">Semester</th>
+                                            <th scope="col">Student</th>
+                                            <th scope="col">Transaction ID</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col">Payment Date</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of feesCollectionReport;let indexOfElement=index">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{record.course_name}}</td>
+                                            <td>{{record.semester_name}}</td>
+                                            <td>{{record.student_name}}</td>
+                                            <td>{{record.transaction_id}}</td>
+                                            <td>{{record.amount}}</td>
+                                            <td>{{record.paid_on}}</td>
+                                        </tr>
+                                        <tr style="background-color: lightgray">
+                                            <td style="background-color: lightgray"></td>
+                                            <td style="background-color: lightgray"></td>
+                                            <td style="background-color: lightgray"></td>
+                                            <td style="background-color: lightgray"></td>
+                                            <td style="background-color: lightgray">Grand Total</td>
+                                            <td style="background-color: lightgray">{{total}}</td>
+                                            <td style="background-color: lightgray"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--&lt;!&ndash; Container-fluid Ends&ndash;&gt;-->

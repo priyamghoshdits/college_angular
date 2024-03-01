@@ -148,6 +148,7 @@ export class NavService {
 			title: 'Report', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/report/attendance-report', title: 'Attendance report', type: 'link' },
 				{ path: '/report/examination-report', title: 'Examination report', type: 'link' },
+				{ path: '/report/fees-collection-report', title: 'Fees Collection report', type: 'link' },
 			]
 		},
 		{

@@ -82,8 +82,22 @@ export class ExaminationReportComponent {
     }
 
     exportExcel(){
+        // @ts-ignore
+        let x: [{ "Name": any; "Full Marks": any; "Marks Obtained": any; "Status": any}] = [];
+        let output = [];
+        this.examinationReportList.forEach(function (value){
+            x =[{
+                'Name' : value.name,
+                'Full Marks': value.full_marks,
+                'Marks Obtained': value.obtained_marks,
+                'Status': value.status
+            }];
+            // @ts-ignore
+            output.push(x[0]);
+        });
+
         /* pass here the table id */
-        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(this.examinationReportList);
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(output);
         /* generate workbook and add the worksheet */
         const wb: XLSX.WorkBook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
