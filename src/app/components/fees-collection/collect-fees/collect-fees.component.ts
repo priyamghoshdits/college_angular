@@ -18,6 +18,7 @@ import {ToastrService} from "ngx-toastr";
 import {environment} from "../../../../environments/environment";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {SessionService} from "../../../services/session.service";
 
 @Component({
   selector: 'app-collect-fees',
@@ -62,13 +63,16 @@ export class CollectFeesComponent {
   transactionFile: File | null;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
+  sessionList: any[] = [];
   constructor(private toastrService: ToastrService,private subjectService: SubjectService
               , private feesService: FeesService ,private studentService: StudentService
-              , private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService) {
+              , private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService
+              , private sessionService: SessionService) {
     this.collectFeesForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
       semester_id: new FormControl(null, [Validators.required]),
+      session_id: new FormControl(null, [Validators.required]),
     });
 
     this.searchTransactionForm = new FormGroup({
@@ -96,6 +100,10 @@ export class CollectFeesComponent {
     if(this.rolesAndPermission.length > 0){
       this.permission = this.rolesAndPermission.find(x => x.name == 'COLLECT FEES').permission;
     }
+    this.sessionService.getSessionListener().subscribe((response) => {
+      this.sessionList = response;
+    });
+    this.sessionList = this.sessionService.getSessionList();
   }
 
   printTransaction(){
@@ -270,6 +278,9 @@ export class CollectFeesComponent {
     }
     if(this.collectFeesForm.value.semester_id != null){
       this.filteredStudentList = this.filteredStudentList.filter(x => x.semester_id == this.collectFeesForm.value.semester_id);
+    }
+    if(this.collectFeesForm.value.session_id != null){
+      this.filteredStudentList = this.filteredStudentList.filter(x => x.session_id == this.collectFeesForm.value.session_id);
     }
   }
 

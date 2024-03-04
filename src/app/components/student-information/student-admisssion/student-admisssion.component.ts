@@ -45,6 +45,7 @@ export class StudentAdmisssionComponent {
     isUpdateable = false;
     studentList: any[];
     nonAdmittedStudents: any[];
+    disabledStudents: any[];
     agentList: any[];
     searchItem: string;
     rolesAndPermission: any[] = [];
@@ -137,10 +138,12 @@ export class StudentAdmisssionComponent {
         this.studentService.getStudentListener().subscribe((response) => {
             this.studentList = response;
             this.nonAdmittedStudents = this.studentList.filter(x => x.admission_status == 0);
+            this.disabledStudents = this.studentList.filter(x => x.status == 0);
         });
         this.studentList = this.studentService.getStudentLists();
         if(this.studentList.length > 0){
             this.nonAdmittedStudents = this.studentList.filter(x => x.admission_status == 0);
+            this.disabledStudents = this.studentList.filter(x => x.status == 0);
         }
 
     }

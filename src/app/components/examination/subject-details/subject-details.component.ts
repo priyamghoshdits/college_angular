@@ -47,7 +47,7 @@ export class SubjectDetailsComponent {
       session_id: new FormControl(null, [Validators.required]),
       exam_date: new FormControl(null, [Validators.required]),
       publish_date: new FormControl(null, [Validators.required]),
-      full_marks: new FormControl(null, [Validators.required]),
+      full_marks: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
       time_from: new FormControl(null, [Validators.required]),
       time_to: new FormControl(null, [Validators.required]),
     });

@@ -88,6 +88,7 @@
                                         <label>Full Marks</label>
                                         <input type="text" class="form-control" formControlName="full_marks" placeholder="Enter full marks" required>
                                         <div *ngIf="subjectDetailsForm.controls['full_marks'].errors?.['required'] && subjectDetailsForm.controls['full_marks'].touched " class="text text-danger mt-1">Full marks required</div>
+                                        <div *ngIf="subjectDetailsForm.controls['full_marks'].errors?.['pattern']" class="text text-danger mt-1">Invalid input</div>
                                     </div>
                                 </div>
                             </form>
@@ -142,7 +143,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                <pagination-controls *ngIf="subjectDetailsList.length > 0" (pageChange)="p = $event"></pagination-controls>
 
                             </div>
                         </div>
