@@ -4,6 +4,7 @@ import {DatePipe, formatDate, NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {StudentService} from "../../../services/student.service";
 import {SubjectService} from "../../../services/subject.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-show-attendance',
@@ -26,7 +27,7 @@ export class ShowAttendanceComponent {
   subjectList: any[];
   studentList: any[];
   copyStudentList: any[];
-  attendanceList: any[];
+  attendanceList: any[] = [];
   isSuperAdmin = false;
 
   constructor(private subjectService: SubjectService, private studentService: StudentService, public datepipe: DatePipe) {
@@ -89,6 +90,15 @@ export class ShowAttendanceComponent {
     this.studentService.getUserAttendance(this.attendanceForm.value.course_id,this.attendanceForm.value.semester_id, this.attendanceForm.value.date, this.attendanceForm.value.student_id).subscribe((response) => {
       // @ts-ignore
       this.attendanceList = response.data;
+      if(this.attendanceList.length == 0){
+          Swal.fire({
+              position: 'center',
+              icon: 'info',
+              title: 'No Attendance Found',
+              showConfirmButton: false,
+              timer: 1000
+          });
+      }
     });
   }
 

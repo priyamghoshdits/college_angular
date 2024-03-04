@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {SubjectService} from "../../../services/subject.service";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
+import {DatePipe, NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {StudentService} from "../../../services/student.service";
 import Swal from "sweetalert2";
@@ -19,6 +19,7 @@ import {SessionService} from "../../../services/session.service";
     ReactiveFormsModule,
     NgIf,
   ],
+  providers: [DatePipe],
   templateUrl: './period-attendance.component.html',
   styleUrl: './period-attendance.component.scss'
 })
@@ -31,7 +32,8 @@ export class PeriodAttendanceComponent {
   studentList: any[] = [];
   p: number;
 
-  constructor(private subjectService: SubjectService, private studentService:StudentService, private sessionService: SessionService) {
+  constructor(private subjectService: SubjectService, private studentService:StudentService
+              , private sessionService: SessionService, public datepipe: DatePipe) {
     this.attendanceForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
@@ -40,6 +42,7 @@ export class PeriodAttendanceComponent {
       subject_id: new FormControl(null, [Validators.required]),
       session_id: new FormControl(null, [Validators.required]),
     });
+    this.attendanceForm.patchValue({date: this.datepipe.transform(new Date(), 'yyyy-MM-dd')});
     this.subjectService.getCourseListener().subscribe((response) => {
       this.courseList = response;
     })
