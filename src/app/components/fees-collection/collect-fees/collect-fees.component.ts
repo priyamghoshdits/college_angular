@@ -218,6 +218,17 @@ export class CollectFeesComponent {
     //   'mode' : data.status,
     // }
 
+    if(data.amount > data.remaining){
+      Swal.fire({
+        position: 'center',
+        icon: 'info',
+        title: 'Amount cannot be greater than due amount',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+
     const formData = new FormData();
     formData.append("fees_structure_id", data.fees_structure_id);
     // @ts-ignore
