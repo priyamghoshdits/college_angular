@@ -152,6 +152,11 @@ export class StudentAdmisssionComponent {
         })
     }
 
+    changeStatus(id){
+        this.studentService.changeStudentStatus(id).subscribe((response: any) => {
+        });
+    }
+
     checkUniqueId(){
         this.commonService.checkId(this.studentCreationForm.value.identification_no).subscribe((response: any) => {
             if(response.success == 0){

@@ -98,6 +98,20 @@ export class StudentService {
           }));
   }
 
+  changeStudentStatus(id){
+      return this.http.get(this.BASE_API_URL + '/changeStudentStatus/'+id)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+              // @ts-ignore
+              if(response.success == 1){
+                  // @ts-ignore
+                  const index = this.studentList.findIndex(x => x.id === response.data.id);
+                  // @ts-ignore
+                  this.studentList[index] = response.data;
+                  this.studentListSubject.next([...this.studentList]);
+              }
+          }));
+  }
+
   saveStudentAttendance(data){
       return this.http.post(this.BASE_API_URL + '/saveAttendance',data)
           .pipe(catchError(this.errorService.serverError), tap(response => {

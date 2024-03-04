@@ -295,7 +295,7 @@
                             </div>
                             <div class="card">
                                 <div class="table-responsive">
-                                    <table class="table">
+                                    <table class="table" style="text-align: center">
                                         <thead>
                                         <tr>
                                             <th scope="col">#</th>
@@ -305,6 +305,7 @@
                                             <th scope="col">Blood Group</th>
                                             <th scope="col">Type</th>
                                             <th scope="col">Email</th>
+                                            <th scope="col">Status</th>
                                             <th scope="col" *ngIf="permission[0].permission == 1 && permission[1].permission == 1">Action</th>
                                         </tr>
                                         </thead>
@@ -317,6 +318,14 @@
                                             <td>{{record.blood_group}}</td>
                                             <td>{{record.user_type}}</td>
                                             <td>{{record.email}}</td>
+                                            <td>
+                                                <a *ngIf="record.status == 1">
+                                                    <button class="btn btn-primary me-1" type="submit" (click)="changeStatus(record.id)">Disable</button>
+                                                </a>
+                                                <a *ngIf="record.status == 0">
+                                                    <button class="btn btn-primary me-1" type="submit" (click)="changeStatus(record.id)">Enable</button>
+                                                </a>
+                                            </td>
                                             <td>
                                                 <a *ngIf="permission[1].permission == 1" (click)="editStudent(record)"><mat-icon>edit</mat-icon></a>
                                                 <a *ngIf="permission[2].permission == 1" (click)="deleteStudent(record)"><mat-icon>delete</mat-icon></a>
