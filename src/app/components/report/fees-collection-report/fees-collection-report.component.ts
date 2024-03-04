@@ -47,6 +47,10 @@ export class FeesCollectionReportComponent {
   }
 
   getFeesCollectionReport(){
+    if(!this.feesCollectionReportForm.valid){
+      this.feesCollectionReportForm.markAllAsTouched();
+      return;
+    }
     this.reportService.getFeesCollectionReport(this.feesCollectionReportForm.value).subscribe((response: any) => {
       if(response.success == 1){
         this.feesCollectionReport = response.data;

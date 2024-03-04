@@ -6,6 +6,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {StudentService} from "../../../services/student.service";
 import Swal from "sweetalert2";
+import {SessionService} from "../../../services/session.service";
 
 @Component({
   selector: 'app-period-attendance',
@@ -26,21 +27,28 @@ export class PeriodAttendanceComponent {
   courseList: any[];
   semesterList: any[];
   subjectList: any[];
+  sessionList: any[];
   studentList: any[] = [];
   p: number;
 
-  constructor(private subjectService: SubjectService, private studentService:StudentService) {
+  constructor(private subjectService: SubjectService, private studentService:StudentService, private sessionService: SessionService) {
     this.attendanceForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
       semester_id: new FormControl(null, [Validators.required]),
       date: new FormControl(null, [Validators.required]),
       subject_id: new FormControl(null, [Validators.required]),
+      session_id: new FormControl(null, [Validators.required]),
     });
     this.subjectService.getCourseListener().subscribe((response) => {
       this.courseList = response;
     })
     this.courseList = this.subjectService.getCourses();
+
+    this.sessionService.getSessionListener().subscribe((response) => {
+      this.sessionList = response;
+    });
+    this.sessionList = this.sessionService.getSessionList();
   }
 
   getSemester(){
@@ -63,9 +71,46 @@ export class PeriodAttendanceComponent {
       return;
     }
     this.studentList = [];
-    this.studentService.getStudentAttendance(this.attendanceForm.value.course_id,this.attendanceForm.value.semester_id, this.attendanceForm.value.date, this.attendanceForm.value.subject_id).subscribe((response) => {
-      // @ts-ignore
-      this.studentList = response.data;
+    this.studentService.getStudentAttendance(this.attendanceForm.value.course_id
+        ,this.attendanceForm.value.semester_id, this.attendanceForm.value.date
+        , this.attendanceForm.value.subject_id
+        , this.attendanceForm.value.session_id).subscribe((response: any) => {
+
+          if(response.semester_time_table == 0){
+            Swal.fire({
+              title: 'Confirmation',
+              text: 'This subject class is not assigned today still want to give attendance ?',
+              icon: 'info',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Yes!'
+            }).then((result) => {
+              if(result.isConfirmed){
+                this.studentList = response.data;
+                if(this.studentList.length == 0){
+                  Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'No Student Found',
+                    showConfirmButton: false,
+                    timer: 1000
+                  });
+                }
+              }
+            });
+          }else{
+            this.studentList = response.data;
+            if(this.studentList.length == 0){
+              Swal.fire({
+                position: 'center',
+                icon: 'info',
+                title: 'No Student Found',
+                showConfirmButton: false,
+                timer: 1000
+              });
+            }
+          }
     });
   }
 
@@ -74,11 +119,13 @@ export class PeriodAttendanceComponent {
     let subject_id = this.attendanceForm.value.subject_id;
     let course_id = this.attendanceForm.value.course_id;
     let semester_id = this.attendanceForm.value.semester_id;
+    let session_id = this.attendanceForm.value.session_id;
     this.studentList.forEach(function (value){
       value.date = date;
       value.subject_id = subject_id;
       value.course_id = course_id;
       value.semester_id = semester_id;
+      value.session_id = session_id;
     })
     this.studentService.saveStudentAttendance(this.studentList).subscribe((response) => {
       // @ts-ignore

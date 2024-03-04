@@ -59,6 +59,10 @@ export class AttendanceReportComponent {
   }
 
   getAttendance(){
+    if(!this.attendanceReportForm.valid){
+      this.attendanceReportForm.markAllAsTouched();
+      return;
+    }
     this.reportService.getAttendanceReport(this.attendanceReportForm.value).subscribe((response: any) => {
       if(response.success){
         this.studentAttendanceList = response.data;

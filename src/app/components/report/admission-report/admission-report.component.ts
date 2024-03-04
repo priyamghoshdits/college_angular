@@ -31,7 +31,10 @@ export class AdmissionReportComponent {
   }
 
   getStudentReport(){
-
+    if(!this.admissionReportForm.valid){
+      this.admissionReportForm.markAllAsTouched();
+      return;
+    }
     this.reportService.getStudentReport(this.admissionReportForm.value).subscribe((response:any) => {
       if(response.success == 1){
         this.admissionReport = response.data;

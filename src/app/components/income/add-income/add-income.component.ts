@@ -6,6 +6,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {IncomeAndExpenseServiceService} from "../../../services/income-and-expense-service.service";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-add-income',
@@ -37,7 +38,7 @@ export class AddIncomeComponent {
             name: new FormControl(null, [Validators.required]),
             invoice_number: new FormControl(null, [Validators.required]),
             date: new FormControl(null, [Validators.required]),
-            amount: new FormControl(null, [Validators.required]),
+            amount: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
             description: new FormControl(null),
         });
 
@@ -79,6 +80,41 @@ export class AddIncomeComponent {
                 this.incomeForm.reset();
             }
         })
+    }
+
+    exportExcel(){
+        if(this.incomeList.length == 0){
+            Swal.fire({
+                position: 'center',
+                icon: 'info',
+                title: 'No Data To Export',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            return;
+        }
+        // @ts-ignore
+        let x: [{ "Invoice Number": any; "Date": any; "Amount": any; "Income Head Name": any; "Name": any; "Description": any; }] = [];
+        let output = [];
+        this.incomeList.forEach(function (value){
+            x =[{
+                'Name' : value.name,
+                'Invoice Number': value.invoice_number,
+                'Date': value.date,
+                'Amount': value.amount,
+                'Income Head Name': value.income_head_name,
+                'Description': value.description,
+            }];
+            // @ts-ignore
+            output.push(x[0]);
+        })
+        /* pass here the table id */
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(output);
+        /* generate workbook and add the worksheet */
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        /* save to file */
+        XLSX.writeFile(wb, 'Income-Report.xlsx');
     }
 
     updateIncome(){

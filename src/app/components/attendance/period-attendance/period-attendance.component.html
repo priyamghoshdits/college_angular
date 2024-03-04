@@ -10,38 +10,51 @@
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="attendanceForm">
                                 <div class="row">
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                             <label>Select Course</label>
                                             <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                                <option value="null">Select</option>
                                                 <option *ngFor="let data of courseList" [value]="data.id" >
                                                     {{data.course_name}}
                                                 </option>
                                             </select>
                                         <div *ngIf="attendanceForm.controls['course_id'].errors?.['required'] && attendanceForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                             <label>Select Semester</label>
                                             <select style="width: 100%" formControlName="semester_id" class="form-select" required (change)="getSubject()">
+                                                <option value="null">Select</option>
                                                 <option *ngFor="let data of semesterList" [value]="data.semester_id" >
                                                     {{data.name}}
                                                 </option>
                                             </select>
                                         <div *ngIf="attendanceForm.controls['semester_id'].errors?.['required'] && attendanceForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label>Select Date</label>
                                         <input class="form-control" formControlName="date" type="date"
                                                placeholder="Select date">
                                         <div *ngIf="attendanceForm.controls['date'].errors?.['required'] && attendanceForm.controls['date'].touched " class="text text-danger mt-1">Date required</div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label>Select Subject</label>
                                         <select style="width: 100%" formControlName="subject_id" class="form-select" required>
+                                            <option value="null">Select</option>
                                             <option *ngFor="let data of subjectList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>
                                         </select>
                                         <div *ngIf="attendanceForm.controls['subject_id'].errors?.['required'] && attendanceForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="session_id" class="form-select" required>
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="attendanceForm.controls['session_id'].errors?.['required'] && attendanceForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
                                     </div>
                                     <div>
                                         <button class="btn btn-primary me-1" (click)="getStudentAttendanceList()">Search</button>

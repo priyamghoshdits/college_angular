@@ -86,8 +86,8 @@ export class StudentService {
         }));
   }
 
-  getStudentAttendance(course_id,semester_id,date,subject_id){
-      return this.http.get(this.BASE_API_URL + '/getStudentAttendance/' + course_id + '/' + semester_id + '/' + date + '/' + subject_id)
+  getStudentAttendance(course_id,semester_id,date,subject_id,session_id){
+      return this.http.get(this.BASE_API_URL + '/getStudentAttendance/' + course_id + '/' + semester_id + '/' + date + '/' + subject_id + '/' + session_id)
           .pipe(catchError(this.errorService.serverError), tap(response => {
           }));
   }

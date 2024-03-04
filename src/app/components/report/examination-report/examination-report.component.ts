@@ -34,8 +34,6 @@ export class ExaminationReportComponent {
             course_id: new FormControl(null, [Validators.required]),
             semester_id: new FormControl(null, [Validators.required]),
             session_id: new FormControl(null, [Validators.required]),
-            from_date: new FormControl(null, [Validators.required]),
-            to_date: new FormControl(null, [Validators.required]),
         });
 
         this.subjectService.getCourseListener().subscribe((response) => {
@@ -56,10 +54,13 @@ export class ExaminationReportComponent {
     }
 
     getExaminationReport(){
+        if(!this.examinationReportForm.valid){
+            this.examinationReportForm.markAllAsTouched();
+            return;
+        }
         this.reportService.getExaminationReport(this.examinationReportForm.value).subscribe((response: any) => {
             if(response.success == 1){
-                this.examinationReportList = response.data;
-                if(this.examinationReportList.length == 0){
+                if(response.data[0].name == null){
                     Swal.fire({
                         position: 'center',
                         icon: 'info',
@@ -67,6 +68,8 @@ export class ExaminationReportComponent {
                         showConfirmButton: false,
                         timer: 1000
                     });
+                }else{
+                    this.examinationReportList = response.data;
                 }
             }
         })
