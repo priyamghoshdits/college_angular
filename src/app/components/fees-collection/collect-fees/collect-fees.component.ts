@@ -106,6 +106,16 @@ export class CollectFeesComponent {
     this.sessionList = this.sessionService.getSessionList();
   }
 
+
+  print_div(){
+    // @ts-ignore
+    const printContents = document.getElementById('sectionToPrint').innerHTML;
+    const originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+    document.body.innerHTML = originalContents;
+  }
+
   printTransaction(){
     //@ts-ignore
     let printContents = document.getElementById('registration').innerHTML;

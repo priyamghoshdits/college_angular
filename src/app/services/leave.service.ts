@@ -161,7 +161,7 @@ export class LeaveService {
                   // @ts-ignore
                   this.leaveList.push(response.data);
                   this.leaveListSubject.next([...this.leaveList]);
-                   this.getUpdatedLeaveList();
+                   // this.getUpdatedLeaveList();
               }
           }));
   }

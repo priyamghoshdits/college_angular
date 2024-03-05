@@ -24,6 +24,10 @@ export class StaffAttendanceComponent {
   memberAttendanceList : any[] = [];
   userTypeList : any[];
   p: number;
+  markAllAsPresent = false;
+  markAllAsAbsent = true;
+  markAllAsLate = false;
+  markAllAsHalfDay = false
   constructor(private memberService: MemberService, private userTypeService: UserTypeService) {
     this.attendanceForm = new FormGroup({
       id: new FormControl(null),
@@ -62,6 +66,12 @@ export class StaffAttendanceComponent {
         });
       }
     })
+  }
+
+  markForAll(status){
+    this.memberAttendanceList.forEach(function (value){
+      value.attendance = status;
+    });
   }
 
 

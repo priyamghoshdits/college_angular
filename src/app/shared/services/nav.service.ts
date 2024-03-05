@@ -66,7 +66,7 @@ export class NavService {
 				{ path: '/human-resource/approve-leave', title: 'Approve Leave', type: 'link' },
 				{ path: '/human-resource/department', title: 'Department', type: 'link' },
 				{ path: '/human-resource/designation', title: 'Designation', type: 'link' },
-				{ path: '/human-resource/category', title: 'Category', type: 'link' },
+				{ path: '/human-resource/caste', title: 'Caste', type: 'link' },
 				{ path: '/human-resource/holiday', title: 'Holiday', type: 'link' },
 				{ path: '/human-resource/staff-payroll', title: 'Payroll', type: 'link' },
 				{ path: '/human-resource/payroll-types', title: 'Payroll Types', type: 'link' },
@@ -80,8 +80,9 @@ export class NavService {
 		},
 		{
 			title: 'Library', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/library/itemStock', title: 'Add Item', type: 'link' },
-				{ path: '/library/issueItem', title: 'Issue Book', type: 'link' },
+				{ path: '/library/item-stock', title: 'Add Item', type: 'link' },
+				{ path: '/library/issue-item', title: 'Issue Book', type: 'link' },
+				{ path: '/library/upload-digital-book', title: 'Upload Digital Book', type: 'link' },
 			]
 		},
 		{

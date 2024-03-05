@@ -158,14 +158,14 @@
                                             <div *ngIf="staffCreationForm.controls['email'].touched && staffCreationForm.controls['email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
-                                            <label>Category</label>
+                                            <label>Caste</label>
                                             <select style="width: 100%" formControlName="category_id" class="form-select" required>
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of categoryList" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="staffCreationForm.controls['category_id'].errors?.['required'] && staffCreationForm.controls['category_id'].touched " class="text text-danger mt-1">Category required</div>
+                                            <div *ngIf="staffCreationForm.controls['category_id'].errors?.['required'] && staffCreationForm.controls['category_id'].touched " class="text text-danger mt-1">Caste required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Department</label>

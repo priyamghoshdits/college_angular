@@ -64,11 +64,11 @@ const routes: Routes = [
     }
   },
   {
-    path: 'category',
+    path: 'caste',
     component: CategoryComponent,
     data: {
-      title: "Category",
-      breadcrumb: "Category"
+      title: "Caste",
+      breadcrumb: "Caste"
     }
   },
   {

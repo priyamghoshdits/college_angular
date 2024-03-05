@@ -5,13 +5,13 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Category</h5><span>Add Category</span>
+                            <h5>Caste</h5><span>Add Caste</span>
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="categoryForm">
                                     <label class="col-form-label pt-0" for="exampleInputEmail1">Course name</label>
                                     <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
-                                           placeholder="Enter Category Name">
+                                           placeholder="Enter Caste Name">
                                 <div *ngIf="categoryForm.controls['name'].errors?.['required'] && categoryForm.controls['name'].touched " class="text text-danger mt-1">Course Name required</div>
                             </form>
                         </div>
@@ -33,8 +33,8 @@
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-header">
-                                <h5>Category List</h5>
-                                <span>Full Category List.</span>
+                                <h5>Caste List</h5>
+                                <span>Full Caste List.</span>
                             </div>
                             <div class="table-responsive">
                                 <table class="table">

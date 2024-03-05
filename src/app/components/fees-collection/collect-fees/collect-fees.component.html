@@ -220,6 +220,7 @@
                                                     <th scope="col">Paid On</th>
                                                     <th scope="col">Mode</th>
                                                     <th scope="col">Payment Proof</th>
+                                                    <th scope="col">Print Receipt</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                                 </thead>
@@ -237,6 +238,9 @@
                                                     <td [hidden]="record.file_name != null">
                                                         <input (change)="setTransactionFile($event,record)" style="width: 150px" class="form-control col-2" type="file"
                                                                placeholder="Enter Amount">
+                                                    </td>
+                                                    <td>
+                                                        <a style="cursor: pointer" (click)="print_div()"><mat-icon>print</mat-icon></a>
                                                     </td>
                                                     <td>
                                                         <a *ngIf="permission[2].permission == 1" (click)="deleteTransaction(record)" ><mat-icon>delete</mat-icon></a>
@@ -279,6 +283,86 @@
 
                                     </div>
                                 </form>
+                                <div id="sectionToPrint" >
+
+
+
+                                    <div style="">
+                                        <!-- =====================code section===================== -->
+                                        <div style="margin: 40px 0px 0px -8px; width:100%; ">
+                                            <table style="width: 100%;">
+                                                <tr>
+                                                    <td style="text-align: center; font-weight: 500; font-size: 30px">
+                                                        Rudraksh
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="text-align: center; font-weight: 500; font-size: 20px">
+                                                        Payment Report
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <table style="margin:20px 0px 0px 130px;width:100%; ">
+                                                <tr>
+                                                    <td>
+                    <span style="padding:0px 0px 5px 0px;text-align:left;font-size: 15px; font-weight: 800;color:#000; line-height: 30px;">
+                      Name:<b style="font-weight: 500; font-size: 14px;">  VIKASH BABU</b>
+                    </span><br>
+                                                        <span style="padding:0px 0px 5px 0px;text-align:left;font-size: 15px; font-weight: 800;color:#000;line-height: 30px;">
+                      Date:<b style="font-weight: 500; font-size: 14px;">  02/05/2024</b>
+                    </span><br>
+                                                        <span style="padding:0px 0px 5px 0px;text-align:left;font-size: 15px; font-weight: 800;color:#000;line-height: 30px;">
+                      Course:<b style="font-weight: 500; font-size: 14px;">  General</b>
+                    </span><br>
+                                                        <span style="padding:0px 0px 5px 0px;text-align:left;font-size: 15px; font-weight: 800;color:#000;line-height: 30px;">
+                      Recieved By:<b style="font-weight: 500; font-size: 14px;">  Mr.Roy</b>
+                    </span>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <table style="width: 85%; margin: 10px 0px 0px 130px;border: 1px solid #899499;border-collapse: collapse;">
+                                                <tr>
+                                                    <th style="text-align: left;font-size: 11px; padding: 10px 10px 10px 10px;border: 1px solid #000;">
+                                                        Payment For
+                                                    </th>
+                                                    <td style="text-align: left;font-size: 11px; padding: 10px 10px 10px 10px;border: 1px solid #000;">
+                                                        whmjglnk
+                                                    </td>
+
+
+                                                </tr>
+                                                <tr>
+
+                                                    <th style="text-align: left;font-size: 11px; padding: 10px 10px 10px 10px;border: 1px solid #000;">
+                                                        Amount
+                                                    </th>
+                                                    <td style="text-align: left;font-size: 11px; padding: 10px 10px 10px 10px;border: 1px solid #000;">
+                                                        10,000
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                            <table cellspacing="0" border="0" width="96%" style="width:100%;margin: 0 auto;margin-top: 0px;">
+                                                <tr>
+                                                    <th style="">
+                                                        <h2 style="margin: 10px 0px 0px 30px;font-size: 15px;font-weight: 500;padding: 10px 0px 0px 0px; ">
+                                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry
+                                                        </h2>
+
+                                                    </th>
+
+
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <!-- =====================code section===================== -->
+                                    </div>
+
+
+
+
+                                </div>
                             </div>
                         </div>
                         <div class="card-footer">

@@ -6,6 +6,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-library-item-stock',
@@ -77,6 +78,36 @@ export class LibraryItemStockComponent {
         this.libraryForm.reset();
       }
     });
+  }
+
+  exportExcel(){
+    if(this.libraryItemList.length == 0){
+      Swal.fire({
+        position: 'center',
+        icon: 'info',
+        title: 'No Data To Export',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+    // @ts-ignore
+    let x: [{ "Name": any;}] = [];
+    let output = [];
+    this.libraryItemList.forEach(function (value){
+      x =[{
+        'Name' : value.name,
+      }];
+      // @ts-ignore
+      output.push(x[0]);
+    })
+    /* pass here the table id */
+    const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(output);
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    /* save to file */
+    XLSX.writeFile(wb, 'Income-Report.xlsx');
   }
 
   editItemStock(data){

@@ -157,7 +157,7 @@ export class ApplyLeaveComponent {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Leave Deleted',
+          title: 'Leave Updated',
           showConfirmButton: false,
           timer: 1000
         });

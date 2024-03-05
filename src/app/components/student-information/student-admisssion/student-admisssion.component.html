@@ -159,14 +159,14 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3 mb-3">
-                                            <label>Category</label>
+                                            <label>Caste</label>
                                             <select style="width: 100%" formControlName="category_id" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of categoryList" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="studentCreationForm.controls['category_id'].errors?.['required'] && studentCreationForm.controls['category_id'].touched " class="text text-danger mt-1">Category required</div>
+                                            <div *ngIf="studentCreationForm.controls['category_id'].errors?.['required'] && studentCreationForm.controls['category_id'].touched " class="text text-danger mt-1">Caste required</div>
                                         </div>
                                     </div>
                                     <div  class="row">
@@ -406,6 +406,7 @@
                                             <td>{{record.user_type}}</td>
                                             <td>{{record.email}}</td>
                                             <td>
+
                                                 <a *ngIf="record.status == 1">
                                                     <button class="btn btn-primary me-1" type="submit" (click)="changeStatus(record.id)">Disable</button>
                                                 </a>

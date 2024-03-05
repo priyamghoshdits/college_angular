@@ -80,7 +80,16 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
-                                        <th scope="col">Attendance</th>
+                                        <th scope="col">Attendance
+                                            (<input style="margin-left: 15px" type="radio" id="age1" name="age10" (change)="markForAll('present')" [checked]="markAllAsPresent">
+                                            <label for="age1">  Present</label>
+                                            <input style="margin-left: 15px" type="radio" id="age1" name="age10" (change)="markForAll('absent')" [checked]="markAllAsAbsent">
+                                            <label for="age1">  Absent</label>
+                                            <input style="margin-left: 15px" type="radio" id="age1" name="age10" (change)="markForAll('late')" [checked]="markAllAsLate">
+                                            <label for="age1">  Late</label>
+                                            <input style="margin-left: 15px" type="radio" id="age1" name="age10" (change)="markForAll('half day')" [checked]="markAllAsHalfDay">
+                                            <label for="age1">  Half day</label>)
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -92,16 +101,10 @@
                                             <label for="age1">Present</label>
                                             <input style="margin-left: 15px" type="radio" id="age1" name="age{{indexOfElement}}" [(ngModel)]="record.attendance" [checked]="record.attendance == 'absent'" value="absent">
                                             <label for="age1">Absent</label>
-<!--                                            <div class="form-group m-t-15 m-checkbox-inline mb-0 custom-radio-ml">-->
-<!--                                                <div class="radio radio-primary">-->
-<!--                                                    <input type="radio" name="radio3" id="radioinline3" [(ngModel)]="record.attendance" value="present" [checked]="record.attendance == 'present'">-->
-<!--                                                    <label for="radioinline1" class="mb-0">Present</label>-->
-<!--                                                </div>-->
-<!--                                                <div class="radio radio-primary">-->
-<!--                                                    <input type="radio" name="radio4" id="radioinline4" [(ngModel)]="record.attendance" value="absent" [checked]="record.attendance == 'absent'">-->
-<!--                                                    <label for="radioinline2" class="mb-0">Absent</label>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
+                                            <input style="margin-left: 15px" type="radio" id="age1" name="age{{indexOfElement}}" [(ngModel)]="record.attendance" [checked]="record.attendance == 'late'" value="late">
+                                            <label for="age1">Late</label>
+                                            <input style="margin-left: 15px" type="radio" id="age1" name="age{{indexOfElement}}" [(ngModel)]="record.attendance" [checked]="record.attendance == 'half day'" value="half day">
+                                            <label for="age1">Half Day</label>
                                         </td>
                                     </tr>
                                     <button class="btn btn-primary me-1" (click)="saveAttendance()">Submit</button>

@@ -135,7 +135,7 @@ export class MemberService {
               // @ts-ignore
               const index = this.memberList.findIndex(x => x.id === response.data.id);
               // @ts-ignore
-              this.memberList.splice(index,1);
+              this.memberList[index] = response.data;
               this.memberListSubject.next([...this.memberList]);
             }
         }));

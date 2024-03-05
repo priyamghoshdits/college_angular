@@ -31,6 +31,10 @@ export class PeriodAttendanceComponent {
   sessionList: any[];
   studentList: any[] = [];
   p: number;
+  markAllAsPresent = false;
+  markAllAsAbsent = true;
+  markAllAsLate = false;
+  markAllAsHalfDay = false
 
   constructor(private subjectService: SubjectService, private studentService:StudentService
               , private sessionService: SessionService, public datepipe: DatePipe) {
@@ -59,6 +63,12 @@ export class PeriodAttendanceComponent {
       // @ts-ignore
       this.semesterList = response.data;
     })
+  }
+
+  markForAll(status){
+    this.studentList.forEach(function (value){
+      value.attendance = status;
+    });
   }
 
   getSubject(){

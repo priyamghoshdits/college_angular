@@ -28,6 +28,55 @@
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
                         </div>
                         <div class="card-body">
+                            <ng-template #content let-modal>
+
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Leave</h5><span>Apply Leave</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <form class="theme-form" [formGroup]="applyLeaveForm">
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label>Name</label>
+                                                    <input readonly type="text" class="form-control" formControlName="user_name" placeholder="User Name">
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>Leave Type Name</label>
+                                                    <input readonly type="text" class="form-control" formControlName="leave_type_name" placeholder="Leave Type name">
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>Total Days</label>
+                                                    <input readonly type="text" class="form-control" formControlName="total_days" placeholder="Total days count">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label>From Date</label>
+                                                    <input type="date" (change)="calculateNoOFDate()" class="form-control" formControlName="from_date" placeholder="From Date" required>
+                                                    <div *ngIf="applyLeaveForm.controls['from_date'].errors?.['required'] && applyLeaveForm.controls['from_date'].touched " class="text text-danger mt-1">From Date required</div>
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label>To Date</label>
+                                                    <input type="date" (change)="calculateNoOFDate()" class="form-control" formControlName="to_date" placeholder="To Date" required>
+                                                    <div *ngIf="applyLeaveForm.controls['to_date'].errors?.['required'] && applyLeaveForm.controls['to_date'].touched " class="text text-danger mt-1">To Date required</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 mb-3">
+                                                    <label>Reason</label>
+                                                    <input readonly type="text" class="form-control" formControlName="reason" placeholder="Reason" required>
+                                                    <div *ngIf="applyLeaveForm.controls['reason'].errors?.['required'] && applyLeaveForm.controls['reason'].touched " class="text text-danger mt-1">Reaon required</div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button class="btn btn-primary me-1" (click)="updateAndApprove(modal)">Update and approve</button>
+                                    </div>
+                                </div>
+
+                            </ng-template>
                             <div [hidden]="active != 1">
                                 <div class="row">
                                     <div class="col-3"></div>
@@ -60,8 +109,12 @@
                                         <td>{{record.total_days}}</td>
                                         <td>{{record.reason}}</td>
                                         <td>
-                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,1)">Approve</button>
-                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,2)">Reject</button>
+                                            <a class="me-1" style="cursor: pointer;" (click)="leaveAction(record,1)"><mat-icon>check_circle</mat-icon></a>
+                                            <a class="me-1" style="cursor: pointer;" (click)="leaveAction(record,2)"><mat-icon>clear</mat-icon></a>
+                                            <a class="me-1" style="cursor: pointer;" (click)="openCustomModal(content);approveWithModification(record)"><mat-icon>update</mat-icon></a>
+<!--                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,1)">Approve</button>-->
+<!--                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,2)">Reject</button>-->
+<!--                                            <button class="btn btn-primary me-1" (click)="leaveAction(record,2)">Modification</button>-->
                                         </td>
                                     </tr>
                                     </tbody>
@@ -92,6 +145,8 @@
                                         <th scope="col">Total Days</th>
                                         <th scope="col">Reason</th>
                                         <th scope="col">Status</th>
+                                        <th scope="col">Action</th>
+
                                     </tr>
                                     </thead>
                                     <tbody *ngIf="approvedLeaveList.length > 0">
@@ -104,6 +159,7 @@
                                         <td>{{record.total_days}}</td>
                                         <td>{{record.reason}}</td>
                                         <td>Approved</td>
+                                        <td><button class="btn btn-primary me-1" (click)="leaveAction(record,2)">Reject</button></td>
                                     </tr>
                                     </tbody>
                                 </table>
