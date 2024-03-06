@@ -10,11 +10,40 @@
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="libraryForm">
                                 <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
+                                    <div class="col-md-6 mb-3">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Book Title</label>
                                             <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
-                                                   placeholder="Enter Name">
+                                                   placeholder="Enter Book Title">
                                         <div *ngIf="libraryForm.controls['name'].errors?.['required'] && libraryForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <option *ngFor="let data of courseList" [value]="data.id">
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="libraryForm.controls['course_id'].errors?.['required'] && libraryForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" (change)="getSubject()">
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="libraryForm.controls['semester_id'].errors?.['required'] && libraryForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Subject</label>
+                                        <select style="width: 100%" formControlName="subject_id" class="form-select">
+                                            <option *ngFor="let data of subjectList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="libraryForm.controls['subject_id'].errors?.['required'] && libraryForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -32,6 +61,62 @@
                                             <input class="form-control" formControlName="remaining" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Remaining">
                                             <div *ngIf="libraryForm.controls['remaining'].errors?.['required'] && libraryForm.controls['remaining'].touched " class="text text-danger mt-1">Remaining Quantity required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">ISBN No.</label>
+                                            <input class="form-control" formControlName="isbn_no" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter ISBN No.">
+                                            <div *ngIf="libraryForm.controls['isbn_no'].errors?.['required'] && libraryForm.controls['isbn_no'].touched " class="text text-danger mt-1">ISBN NO. required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Publisher Name</label>
+                                            <input class="form-control" formControlName="publisher_name" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Publisher Name">
+                                            <div *ngIf="libraryForm.controls['publisher_name'].errors?.['required'] && libraryForm.controls['publisher_name'].touched " class="text text-danger mt-1">Publisher Name required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Author Name</label>
+                                            <input class="form-control" formControlName="author_name" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Author name">
+                                            <div *ngIf="libraryForm.controls['author_name'].errors?.['required'] && libraryForm.controls['author_name'].touched " class="text text-danger mt-1">Author Name required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Rack Number</label>
+                                            <input class="form-control" formControlName="rack_number" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Rack Number">
+                                            <div *ngIf="libraryForm.controls['rack_number'].errors?.['required'] && libraryForm.controls['rack_number'].touched " class="text text-danger mt-1">Rack Number required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Book Price</label>
+                                            <input class="form-control" formControlName="book_price" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Book Price">
+                                            <div *ngIf="libraryForm.controls['book_price'].errors?.['required'] && libraryForm.controls['book_price'].touched " class="text text-danger mt-1">Book Price required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+                                            <input class="form-control" formControlName="description" id="exampleInputEmail1" type="text"
+                                                   placeholder="Enter Description">
+                                            <div *ngIf="libraryForm.controls['description'].errors?.['required'] && libraryForm.controls['description'].touched " class="text text-danger mt-1">Description required</div>
                                         </div>
                                     </div>
                                 </div>

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {LibraryItemStockComponent} from "./library-item-stock/library-item-stock.component";
 import {LibraryItemIssueComponent} from "./library-item-issue/library-item-issue.component";
 import {UploadDigitalBookComponent} from "./upload-digital-book/upload-digital-book.component";
+import {DownloadDigitalBookComponent} from "./download-digital-book/download-digital-book.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,14 @@ const routes: Routes = [
     data: {
       title: "Upload Digital Books",
       breadcrumb: "Upload Digital Books"
+    }
+  },
+  {
+    path: 'download-digital-book',
+    component: DownloadDigitalBookComponent,
+    data: {
+      title: "Download Digital Books",
+      breadcrumb: "Download Digital Books"
     }
   }
 ];

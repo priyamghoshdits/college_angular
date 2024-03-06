@@ -7,6 +7,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import * as XLSX from 'xlsx';
+import {SubjectService} from "../../../services/subject.service";
 
 @Component({
   selector: 'app-library-item-stock',
@@ -23,39 +24,77 @@ import * as XLSX from 'xlsx';
   styleUrl: './library-item-stock.component.scss'
 })
 export class LibraryItemStockComponent {
-  libraryItemList : any [];
+  libraryItemList: any [];
   libraryForm: FormGroup;
   isUpdatable = false;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
-  constructor(private libraryService: LibraryService, private roleAndPermissionService: RolesAndPermissionService) {
+  subjectList: any[];
+  courseList: any[];
+  semesterList: any[];
+
+  constructor(private libraryService: LibraryService, private roleAndPermissionService: RolesAndPermissionService
+      , private subjectService: SubjectService) {
     this.libraryForm = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
+      course_id: new FormControl(null, [Validators.required]),
+      semester_id: new FormControl(null, [Validators.required]),
+      subject_id: new FormControl(null, [Validators.required]),
+      isbn_no: new FormControl(null, [Validators.required]),
+      publisher_name: new FormControl(null, [Validators.required]),
+      author_name: new FormControl(null, [Validators.required]),
+      rack_number: new FormControl(null, [Validators.required]),
       quantity: new FormControl(null, [Validators.required]),
       remaining: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required]),
+      book_price: new FormControl(null, [Validators.required]),
     });
-    this.libraryService.getLibraryItemListener().subscribe((response) =>{
+    this.libraryService.getLibraryItemListener().subscribe((response) => {
       this.libraryItemList = response;
     });
     this.libraryItemList = this.libraryService.getLibraryItemList();
+
+    this.subjectService.getCourseListener().subscribe((response) => {
+      this.courseList = response;
+    });
+    this.courseList = this.subjectService.getCourses();
+
+    // this.subjectService.getSubjectListListener().subscribe((response) => {
+    //   this.subjectList = response;
+    // });
+    // this.subjectList = this.subjectService.getSubjectList();
 
     this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
       this.rolesAndPermission = response;
       this.permission = this.rolesAndPermission.find(x => x.name == 'ADD ITEM').permission;
     });
     this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
-    if(this.rolesAndPermission.length > 0){
+    if (this.rolesAndPermission.length > 0) {
       this.permission = this.rolesAndPermission.find(x => x.name == 'ADD ITEM').permission;
     }
   }
 
-  saveLibraryItem(){
-    if(!this.libraryForm.valid){
+  getSemester(){
+    this.subjectService.getSemesterByCourseId(this.libraryForm.value.course_id).subscribe((response: any) => {
+      this.semesterList = response.data;
+    })
+  }
+
+  getSubject(){
+    this.subjectService.getSubjects(this.libraryForm.value.course_id,this.libraryForm.value.semester_id).subscribe((response: any) => {
+      if(response.success == 1){
+        this.subjectList = response.data;
+      }
+    })
+  }
+
+  saveLibraryItem() {
+    if (!this.libraryForm.valid) {
       this.libraryForm.markAllAsTouched();
       return;
     }
-    if(this.libraryForm.value.remaining > this.libraryForm.value.quantity){
+    if (this.libraryForm.value.remaining > this.libraryForm.value.quantity) {
       Swal.fire({
         position: 'top-end',
         icon: 'error',
@@ -67,7 +106,7 @@ export class LibraryItemStockComponent {
     }
     this.libraryService.saveLibraryItems(this.libraryForm.value).subscribe((response) => {
       // @ts-ignore
-      if(response.success == 1){
+      if (response.success == 1) {
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -80,8 +119,8 @@ export class LibraryItemStockComponent {
     });
   }
 
-  exportExcel(){
-    if(this.libraryItemList.length == 0){
+  exportExcel() {
+    if (this.libraryItemList.length == 0) {
       Swal.fire({
         position: 'center',
         icon: 'info',
@@ -92,11 +131,11 @@ export class LibraryItemStockComponent {
       return;
     }
     // @ts-ignore
-    let x: [{ "Name": any;}] = [];
+    let x: [{ "Name": any; }] = [];
     let output = [];
-    this.libraryItemList.forEach(function (value){
-      x =[{
-        'Name' : value.name,
+    this.libraryItemList.forEach(function (value) {
+      x = [{
+        'Name': value.name,
       }];
       // @ts-ignore
       output.push(x[0]);
@@ -110,25 +149,25 @@ export class LibraryItemStockComponent {
     XLSX.writeFile(wb, 'Income-Report.xlsx');
   }
 
-  editItemStock(data){
-    this.libraryForm.patchValue({id: data.id, name:data.name ,quantity: data.quantity, remaining: data.remaining});
+  editItemStock(data) {
+    this.libraryForm.patchValue({id: data.id, name: data.name, quantity: data.quantity, remaining: data.remaining});
     this.isUpdatable = true;
   }
 
-  deleteItemStock(data){
+  deleteItemStock(data) {
     Swal.fire({
       title: 'Confirmation',
-      text: 'Please check once before saving',
+      text: 'Do you sure to delete ?',
       icon: 'info',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, save It!'
     }).then((result) => {
-      if(result.isConfirmed){
+      if (result.isConfirmed) {
         this.libraryService.deleteLibraryItem(data.id).subscribe((response) => {
           // @ts-ignore
-          if(response.success == 1) {
+          if (response.success == 1) {
             Swal.fire({
               position: 'center',
               icon: 'success',
@@ -142,14 +181,14 @@ export class LibraryItemStockComponent {
     });
   }
 
-  updateLibraryItem(){
-    if(!this.libraryForm.valid){
+  updateLibraryItem() {
+    if (!this.libraryForm.valid) {
       this.libraryForm.markAllAsTouched();
       return;
     }
     this.libraryService.updateLibraryItems(this.libraryForm.value).subscribe((response) => {
       // @ts-ignore
-      if(response.success == 1){
+      if (response.success == 1) {
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -162,9 +201,8 @@ export class LibraryItemStockComponent {
     })
   }
 
-  cancelUpdate(){
+  cancelUpdate() {
     this.libraryForm.reset();
     this.isUpdatable = false;
   }
-
 }

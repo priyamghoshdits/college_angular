@@ -95,7 +95,7 @@ export class PayrollComponent {
       total_present: new FormControl(null, [Validators.required]),
       total_absent: new FormControl(null, [Validators.required]),
       designation_name: new FormControl({value: '', disabled: true}),
-      working_days: new FormControl({value: '', disabled: true}),
+      working_days: new FormControl(null),
       total_approved_leave: new FormControl({value: '', disabled: true}),
       total_non_approved_leave: new FormControl({value: '', disabled: true}),
       total_holidays: new FormControl({value: '', disabled: true}),
@@ -144,6 +144,14 @@ export class PayrollComponent {
     document.body.innerHTML = printContents;
     window.print();
     document.body.innerHTML = originalContents;
+  }
+
+  checkAbsentDays(){
+    this.memberPayrollForm.patchValue({total_absent: (this.memberPayrollForm.value.working_days - this.memberPayrollForm.value.total_present)})
+  }
+
+  checkPresentDays(){
+    this.memberPayrollForm.patchValue({total_present: (this.memberPayrollForm.value.working_days - this.memberPayrollForm.value.total_absent)})
   }
 
   revertToProceedToPay(data){

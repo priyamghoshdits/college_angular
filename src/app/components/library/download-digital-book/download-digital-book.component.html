@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <div class="row" *ngIf="permission.length > 0">
-        <div class="col-sm-12 col-xl-5">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="libraryDigitalBookForm">
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <div class="form-group">
                                             <label>Select Course</label>
                                             <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
@@ -21,52 +21,30 @@
                                             <div *ngIf="libraryDigitalBookForm.controls['course_id'].errors?.['required'] && libraryDigitalBookForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <div class="form-group">
                                             <label>Select Semester</label>
-                                            <select style="width: 100%" formControlName="semester_id" class="form-select" required>
+                                            <select style="width: 100%" formControlName="semester_id" class="form-select">
                                                 <option *ngFor="let data of semesterList" [value]="data.semester_id" >
                                                     {{data.name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="libraryDigitalBookForm.controls['semester_id'].errors?.['required'] && libraryDigitalBookForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <div class="form-group">
-                                            <label>Select Book</label>
-                                            <select style="width: 100%" formControlName="book_id" class="form-select" required>
-                                                <option *ngFor="let data of libraryItemList" [value]="data.id" >
-                                                    {{data.name}}
-                                                </option>
-                                            </select>
-                                            <div *ngIf="libraryDigitalBookForm.controls['book_id'].errors?.['required'] && libraryDigitalBookForm.controls['book_id'].touched " class="text text-danger mt-1">Book required</div>
-                                        </div>
+                                    <div class="col-md-4 mb-3">
+                                        <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="searchDigitalBooks()">Submit</button>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12 mb-3">
-                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Upload File</label>
-                                        <input accept="application/pdf" class="form-control" formControlName="file_name" id="exampleInputEmail1" type="file" (change)="setFile($event)">
-                                    </div>
-                                </div>
-
                             </form>
-                        </div>
-                        <div class="card-footer">
-                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="uploadDigitalBooks()">Submit</button>
-                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateDigitalBooks()">Update</button>
-                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
-                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-xl-7">
-            <div class="row" *ngIf="permission[3].permission == 1">
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-xl-12" *ngIf="tempLibraryDigitalBookList.length > 0">
+            <div class="row">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <div class="card">
@@ -84,21 +62,16 @@
                                         <th scope="col">Semester</th>
                                         <th scope="col">Book</th>
                                         <th scope="col">Download</th>
-                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr *ngFor="let record of libraryDigitalBookList ;let indexOfElement=index">
+                                    <tr *ngFor="let record of tempLibraryDigitalBookList ;let indexOfElement=index">
                                         <td>{{indexOfElement+1}}</td>
                                         <td>{{record.course_name}}</td>
                                         <td>{{record.semester_name}}</td>
                                         <td>{{record.book_name}}</td>
                                         <td>
                                             <a href="{{FILE_URL}}/library_books/{{record.file_name}}">{{record.file_name}}</a>
-                                        </td>
-                                        <td>
-                                            <a *ngIf="permission[1].permission == 1" (click)="editDigitalBook(record)"><mat-icon>edit</mat-icon></a>
-                                            <a *ngIf="permission[2].permission == 1" (click)="deleteDigitalBook(record)"><mat-icon>delete</mat-icon></a>
                                         </td>
                                     </tr>
                                     </tbody>

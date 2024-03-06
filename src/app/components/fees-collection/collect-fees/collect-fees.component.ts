@@ -112,6 +112,14 @@ export class CollectFeesComponent {
     const printContents = document.getElementById('sectionToPrint').innerHTML;
     const originalContents = document.body.innerHTML;
     document.body.innerHTML = printContents;
+        // // Create a Blob from the HTML content
+        // let blob = new Blob([printContents], { type: 'text/html' });
+        //
+        // // Create a URL for the Blob
+        // let url = URL.createObjectURL(blob);
+        //
+        // // Open a new tab with the created URL
+        // window.open(url, '_blank');
     window.print();
     document.body.innerHTML = originalContents;
   }

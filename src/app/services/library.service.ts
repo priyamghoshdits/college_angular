@@ -12,13 +12,19 @@ export class LibraryService {
   private BASE_API_URL = environment.BASE_API_URL;
   libraryItemList  = [];
   libraryIssueItemList  = [];
+  libraryDigitalBookList  = [];
 
   libraryItemListSubject = new Subject<any[]>();
   libraryIssueItemListSubject = new Subject<any[]>();
+  libraryDigitalBookListSubject = new Subject<any[]>();
 
   getLibraryItemListener(){
     return this.libraryItemListSubject.asObservable();
   }
+
+    getLibraryDigitalBookListener(){
+        return this.libraryDigitalBookListSubject.asObservable();
+    }
 
   getLibraryIssueItemListener(){
       return this.libraryIssueItemListSubject.asObservable();
@@ -33,6 +39,11 @@ export class LibraryService {
           this.libraryIssueItemList = response.data;
           this.libraryIssueItemListSubject.next([...this.libraryIssueItemList]);
       });
+
+      this.http.get(this.BASE_API_URL + '/getLibraryDigitalBook').subscribe((response: any) =>{
+          this.libraryDigitalBookList = response.data;
+          this.libraryDigitalBookListSubject.next([...this.libraryDigitalBookList]);
+      });
   }
 
   getLibraryItemList(){
@@ -41,6 +52,10 @@ export class LibraryService {
 
     getLibraryIssueItemList(){
         return [...this.libraryIssueItemList];
+    }
+
+    getLibraryDigitalBooksList(){
+        return [...this.libraryDigitalBookList];
     }
 
   saveLibraryItems(data){
@@ -54,6 +69,45 @@ export class LibraryService {
           }
         }));
   }
+
+    saveLibraryDigitalBooks(data){
+        return this.http.post(this.BASE_API_URL + '/saveLibraryDigitalBook', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    this.libraryDigitalBookList.push(response.data);
+                    this.libraryDigitalBookListSubject.next([...this.libraryDigitalBookList]);
+                }
+            }));
+    }
+
+    updateLibraryDigitalBooks(data){
+        return this.http.post(this.BASE_API_URL + '/updateLibraryDigitalBook', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    const index = this.libraryDigitalBookList.findIndex(x => x.id === response.data.id);
+                    // @ts-ignore
+                    this.libraryDigitalBookList[index] = response.data;
+                    this.libraryDigitalBookListSubject.next([...this.libraryDigitalBookList]);
+                }
+            }));
+    }
+
+    deleteLibraryDigitalBooks(id){
+        return this.http.get(this.BASE_API_URL + '/deleteLibraryDigitalBook/' + id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    const index = this.libraryDigitalBookList.findIndex(x => x.id === response.data.id);
+                    this.libraryDigitalBookList.splice(index,1);
+                    this.libraryDigitalBookListSubject.next([...this.libraryDigitalBookList]);
+                }
+            }));
+    }
 
   updateLibraryItems(data){
     return this.http.post(this.BASE_API_URL + '/updateLibraryDetails', data)

@@ -203,11 +203,11 @@
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Total Working Days</label>
-                                        <input class="form-control" formControlName="working_days" id="exampleInputEmail1" type="text">
+                                        <input class="form-control" readonly formControlName="working_days" id="exampleInputEmail1" type="text">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Present Days</label>
-                                        <input class="form-control" formControlName="total_present" id="exampleInputEmail1" type="text">
+                                        <input class="form-control" (change)="checkAbsentDays()" formControlName="total_present" id="exampleInputEmail1" type="text">
                                     </div>
 
                                 </div>
@@ -215,7 +215,7 @@
                                 <div class="row">
                                     <div class="col-md-2 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Absent Days</label>
-                                        <input class="form-control" formControlName="total_absent" id="exampleInputEmail1" type="text">
+                                        <input class="form-control" (change)="checkPresentDays()" formControlName="total_absent" id="exampleInputEmail1" type="text">
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Gross Salary</label>
