@@ -5,11 +5,20 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Certificate</h5><span>Upload Certificate</span>
+                            <h5>Certificate</h5><span>Download Certificate</span>
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="uploadCertificateForm">
                                 <div  class="row">
+                                    <div class="col-md-3 mb-3" *ngIf="user.user_type_id == 1">
+                                        <label>Select Student</label>
+                                        <select style="width: 100%" formControlName="user_id" class="form-select">
+                                            <option *ngFor="let data of studentList" [value]="data.id">
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="uploadCertificateForm.controls['user_id'].errors?.['required'] && uploadCertificateForm.controls['user_id'].touched " class="text text-danger mt-1">User required</div>
+                                    </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Select Certificate Type</label>
                                         <select style="width: 100%" formControlName="certificate_type_id" class="form-select">
@@ -45,7 +54,6 @@
                                             <th scope="col">Date Of Birth</th>
                                             <th scope="col">Mobile No.</th>
                                             <th scope="col">Action</th>
-                                            <th scope="col">Status</th>
                                         </tr>
                                         </thead>
                                         <tbody>

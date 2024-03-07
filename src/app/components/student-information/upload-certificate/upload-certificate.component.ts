@@ -5,7 +5,6 @@ import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {SessionService} from "../../../services/session.service";
-import {StudentService} from "../../../services/student.service";
 import {CertificateService} from "../../../services/certificate.service";
 import Swal from "sweetalert2";
 import {environment} from "../../../../environments/environment";
@@ -38,7 +37,7 @@ export class UploadCertificateComponent {
   file: any;
   searchItem: string;
   constructor(private subjectService: SubjectService, private sessionService: SessionService
-              , private studentService: StudentService, private certificateService: CertificateService) {
+              , private certificateService: CertificateService) {
     this.uploadCertificateForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
@@ -54,10 +53,7 @@ export class UploadCertificateComponent {
       this.sessionList = response;
     })
     this.sessionList = this.sessionService.getSessionList();
-    this.studentService.getStudentListener().subscribe((response) => {
-      this.studentList = response;
-    });
-    this.studentList = this.studentService.getStudentLists();
+
     this.certificateService.getCertificateTypeListListener().subscribe((response) => {
       this.certificateTypeList = response;
     });

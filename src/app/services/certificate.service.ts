@@ -51,6 +51,12 @@ export class CertificateService {
         }));
   }
 
+  getUserWiseData(value){
+      return this.http.post(this.BASE_API_URL + '/getCertificateByUser', value)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+          }));
+  }
+
   getStudentForCertificate(value){
       return this.http.post(this.BASE_API_URL + '/getStudentForCertificate', value)
           .pipe(catchError(this.errorService.serverError), tap(response => {
