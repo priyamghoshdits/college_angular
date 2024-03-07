@@ -3,7 +3,6 @@ import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
-import {SessionService} from "../../../services/session.service";
 import {CertificateService} from "../../../services/certificate.service";
 import {environment} from "../../../../environments/environment";
 import {StudentService} from "../../../services/student.service";
