@@ -1,0 +1,75 @@
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Certificate</h5><span>Upload Certificate</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="uploadCertificateForm">
+                                <div  class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Certificate Type</label>
+                                        <select style="width: 100%" formControlName="certificate_type_id" class="form-select">
+                                            <option *ngFor="let data of certificateTypeList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="uploadCertificateForm.controls['certificate_type_id'].errors?.['required'] && uploadCertificateForm.controls['certificate_type_id'].touched " class="text text-danger mt-1">Certificate Type required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="getData()">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr>
+                            <h5 *ngIf="filteredStudentList.length > 0">Student List</h5>
+                            <div class="row" *ngIf="filteredStudentList.length > 0">
+                                <div class="row">
+                                    <div class="col-3"></div>
+                                    <div class="col-6">
+                                        <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                    </div>
+                                    <div class="col-3"></div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table" style="text-align: center">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Gender</th>
+                                            <th scope="col">Date Of Birth</th>
+                                            <th scope="col">Mobile No.</th>
+                                            <th scope="col">Action</th>
+                                            <th scope="col">Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of filteredStudentList| customFilter:searchItem ;let indexOfElement=index">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                            <td>{{record.gender}}</td>
+                                            <td>{{record.dob}}</td>
+                                            <td>{{record.mobile_no}}</td>
+                                            <td>
+                                                <a *ngIf="record.status" style="cursor: pointer" href="{{FILE_URL}}/certificate/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Container-fluid Ends-->

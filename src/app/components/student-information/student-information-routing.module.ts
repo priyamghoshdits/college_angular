@@ -1,14 +1,41 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {StudentAdmisssionComponent} from "./student-admisssion/student-admisssion.component";
+import {CertificateTypesComponent} from "./certificate-types/certificate-types.component";
+import {UploadCertificateComponent} from "./upload-certificate/upload-certificate.component";
+import {DownloadCertificatesComponent} from "./download-certificates/download-certificates.component";
 
 const routes: Routes = [
   {
-    path: 'studentAdmission',
+    path: 'student-admission',
     component: StudentAdmisssionComponent,
     data: {
       title: "Student Admission",
       breadcrumb: "Student Admission"
+    }
+  },
+  {
+    path: 'certificate-types',
+    component: CertificateTypesComponent,
+    data: {
+      title: "Certificate Types",
+      breadcrumb: "Certificate Types"
+    }
+  },
+  {
+    path: 'upload-certificates',
+    component: UploadCertificateComponent,
+    data: {
+      title: "Upload Certificate",
+      breadcrumb: "Upload Certificate"
+    }
+  },
+  {
+    path: 'download-certificates',
+    component: DownloadCertificatesComponent,
+    data: {
+      title: "Download Certificate",
+      breadcrumb: "Download Certificate"
     }
   }
 ];

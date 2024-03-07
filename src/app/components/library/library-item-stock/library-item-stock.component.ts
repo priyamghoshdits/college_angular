@@ -60,11 +60,6 @@ export class LibraryItemStockComponent {
     });
     this.courseList = this.subjectService.getCourses();
 
-    // this.subjectService.getSubjectListListener().subscribe((response) => {
-    //   this.subjectList = response;
-    // });
-    // this.subjectList = this.subjectService.getSubjectList();
-
     this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
       this.rolesAndPermission = response;
       this.permission = this.rolesAndPermission.find(x => x.name == 'ADD ITEM').permission;

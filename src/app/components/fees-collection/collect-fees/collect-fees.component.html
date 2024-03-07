@@ -236,8 +236,7 @@
                                                         <a href="{{FILE_URL}}/payment_receipt/{{record.file_name}}" target="_blank"><img class="img-60 rounded-circle" src='{{ FILE_URL + "payment_receipt/" + record.file_name }}' onerror="this.src='assets/images/user/1.jpg'" alt="#"></a>
                                                     </td>
                                                     <td [hidden]="record.file_name != null">
-                                                        <input (change)="setTransactionFile($event,record)" style="width: 150px" class="form-control col-2" type="file"
-                                                               placeholder="Enter Amount">
+                                                        <input (change)="setTransactionFile($event,record)" style="width: 150px" class="form-control col-2" type="file">
                                                     </td>
                                                     <td>
                                                         <a style="cursor: pointer" (click)="print_div()"><mat-icon>print</mat-icon></a>

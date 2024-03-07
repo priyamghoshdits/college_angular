@@ -123,7 +123,10 @@ export class NavService {
 		},
 		{
 			title: 'Student Information', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/student-information/studentAdmission', title: 'Student Admission', type: 'link' },
+				{ path: '/student-information/student-admission', title: 'Student Admission', type: 'link' },
+				{ path: '/student-information/certificate-types', title: 'Certificate Types', type: 'link' },
+				{ path: '/student-information/upload-certificates', title: 'Upload Certificate', type: 'link' },
+				{ path: '/student-information/download-certificates', title: 'Download Certificate', type: 'link' },
 			]
 		},
 		{

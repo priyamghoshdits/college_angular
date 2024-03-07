@@ -13,7 +13,7 @@ export class DepartmentService {
   departmentList = [];
 
 
-    departmentListSubject = new Subject<any[]>();
+  departmentListSubject = new Subject<any[]>();
   getDepartmentListListener(){
     return this.departmentListSubject.asObservable();
   }

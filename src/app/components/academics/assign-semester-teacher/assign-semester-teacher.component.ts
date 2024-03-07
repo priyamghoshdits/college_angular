@@ -72,8 +72,7 @@ export class AssignSemesterTeacherComponent {
     }
 
     getSemester(){
-        this.subjectService.getSemesterByCourseId(this.assignSemesterTeacherForm.value.course_id).subscribe((response) => {
-            // @ts-ignore
+        this.subjectService.getSemesterByCourseId(this.assignSemesterTeacherForm.value.course_id).subscribe((response: any) => {
             this.semesterList = response.data;
         })
     }

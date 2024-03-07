@@ -184,7 +184,7 @@ export class CollectFeesComponent {
       this.filteredStudentListForSearch = this.studentList.filter(x => x.course_id == this.searchTransactionForm.value.course_id);
     }
     if(this.searchTransactionForm.value.semester_id != null){
-      this.filteredStudentListForSearch = this.filteredStudentListForSearch.filter(x => x.semester_id == this.searchTransactionForm.value.semester_id);
+      this.filteredStudentListForSearch = this.filteredStudentListForSearch.filter(x => x.current_semester_id == this.searchTransactionForm.value.semester_id);
     }
   }
 
