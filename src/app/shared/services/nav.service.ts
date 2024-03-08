@@ -142,6 +142,11 @@ export class NavService {
 			]
 		},
 		{
+			title: 'Virtual Class Meeting', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/virtual-class-meeting/create-virtual-class', title: 'Create Virtual Class', type: 'link' },
+			]
+		},
+		{
 			title: 'Fees Collection', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/fees-collection/fees-type', title: 'Fees Type', type: 'link' },
 				{ path: '/fees-collection/fees-structure', title: 'Fees Structure', type: 'link' },

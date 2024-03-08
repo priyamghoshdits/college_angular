@@ -228,7 +228,6 @@ export class StudentAdmisssionComponent {
                     timer: 1000
                 });
                 this.studentCreationForm.reset();
-
             }
         })
     }

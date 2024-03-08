@@ -1,0 +1,216 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="card" *ngIf="(permission[0].permission == 1 || permission[1].permission == 1 || permission[2].permission == 1) && permission[3].permission == 1">
+            <div class="card-body">
+                <div class="tabbed-card">
+                    <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
+                        <li [ngbNavItem]="1" class="me-1">
+                            <a ngbNavLink (click)="activeTab(1)">Create Virtual Class</a>
+                        </li>
+                        <li [ngbNavItem]="2" class="me-1">
+                            <a ngbNavLink (click)="activeTab(2)">Show Virtual Class</a>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header" [hidden]="active != 1" *ngIf="permission[0].permission == 1 || permission[1].permission == 1 || permission[2].permission == 1">
+                            <h5>Virtual Class</h5><span>Create Virtual Class</span>
+                        </div>
+                        <div class="card-body" [hidden]="active != 1" *ngIf="permission[0].permission == 1 || permission[1].permission == 1 || permission[2].permission == 1">
+                            <form class="theme-form" [formGroup]="virtualClassForm">
+                                <div  class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="virtualClassForm.controls['course_id'].errors?.['required'] && virtualClassForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" (change)="getSubject()">
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="virtualClassForm.controls['semester_id'].errors?.['required'] && virtualClassForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                    </div>
+                                </div>
+                                <div  class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Subject</label>
+                                        <select style="width: 100%" formControlName="subject_id" class="form-select">
+                                            <option *ngFor="let data of subjectList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="virtualClassForm.controls['subject_id'].errors?.['required'] && virtualClassForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Teacher</label>
+                                        <select style="width: 100%" formControlName="teacher_id" class="form-select">
+                                            <option *ngFor="let data of teacherList" [value]="data.teacher_id">
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="virtualClassForm.controls['teacher_id'].errors?.['required'] && virtualClassForm.controls['teacher_id'].touched " class="text text-danger mt-1">Teacher required</div>
+                                    </div>
+                                </div>
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0">Topic</label>
+                                        <input class="form-control" formControlName="topic" type="text"
+                                               placeholder="Enter Topic">
+                                        <div *ngIf="virtualClassForm.controls['topic'].errors?.['required'] && virtualClassForm.controls['topic'].touched " class="text text-danger mt-1">Topic required</div>
+                                    </div>
+                                </div>
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0">Platform</label>
+                                        <input class="form-control" formControlName="platform" type="text"
+                                               placeholder="Enter Platform">
+                                        <div *ngIf="virtualClassForm.controls['platform'].errors?.['required'] && virtualClassForm.controls['platform'].touched " class="text text-danger mt-1">Platform required</div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label class="col-form-label pt-0">Link</label>
+                                            <input class="form-control" formControlName="link" type="text"
+                                                   placeholder="Enter Link">
+                                            <div *ngIf="virtualClassForm.controls['link'].errors?.['required'] && virtualClassForm.controls['link'].touched " class="text text-danger mt-1">Link required</div>
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="col-form-label pt-0">Date Of Class</label>
+                                            <input class="form-control" formControlName="date_of_class" type="date"
+                                                   placeholder="Enter Date Of Class">
+                                            <div *ngIf="virtualClassForm.controls['date_of_class'].errors?.['required'] && virtualClassForm.controls['date_of_class'].touched " class="text text-danger mt-1">Date Of Class required</div>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="col-form-label pt-0">Time Of Class</label>
+                                            <input class="form-control" formControlName="time_of_class" type="time"
+                                                   placeholder="Enter Time Of Class">
+                                            <div *ngIf="virtualClassForm.controls['time_of_class'].errors?.['required'] && virtualClassForm.controls['time_of_class'].touched " class="text text-danger mt-1">Time Of Class required</div>
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label class="col-form-label pt-0">Class Start Before</label>
+                                            <input class="form-control" formControlName="class_start_before" type="text"
+                                                   placeholder="Enter Class Start Before">
+                                            <div *ngIf="virtualClassForm.controls['class_start_before'].errors?.['required'] && virtualClassForm.controls['class_start_before'].touched " class="text text-danger mt-1">Class Start Before required</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer" [hidden]="active != 1">
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveVirtualClass()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateVirtualClass()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="col-sm-12 col-xl-7" [hidden]="active != 1" *ngIf="permission[0].permission == 1 || permission[1].permission == 1 || permission[2].permission == 1">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Virtual Class List</h5>
+                                        <span>Full Virtual Class List.</span>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table" style="text-align: center">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Course(Sem)</th>
+                                                <th scope="col">Subject(Teacher)</th>
+                                                <th scope="col">Platform</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Time</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let record of virtualMeetingList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                                <td>{{indexOfElement+1}}</td>
+                                                <td>{{record.course_name}}({{record.semester_name}})</td>
+                                                <td>{{record.subject_name}}({{record.teacher_name}})</td>
+                                                <td>{{record.platform}}</td>
+                                                <td>{{record.date_of_class}}</td>
+                                                <td>{{record.time_of_class}}</td>
+                                                <td>
+                                                    <a *ngIf="permission[1].permission == 1" (click)="editVirtualClassEdit(record)"><mat-icon>edit</mat-icon></a>
+                                                    <a *ngIf="permission[2].permission == 1" (click)="deleteVirtualClassEdit(record)"><mat-icon>delete</mat-icon></a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <pagination-controls *ngIf="virtualMeetingList.length > 8" (pageChange)="p = $event"></pagination-controls>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <div class="col-sm-12 col-xl-12" [hidden]="active != 2" *ngIf="permission[3].permission == 1">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Virtual Class List</h5>
+                                <span>Full Virtual Class List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Course(Sem)</th>
+                                        <th scope="col">Subject(Teacher)</th>
+                                        <th scope="col">Topic</th>
+                                        <th scope="col">Platform</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Class Start Before</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of virtualMeetingList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.course_name}}({{record.semester_name}})</td>
+                                        <td>{{record.subject_name}}({{record.teacher_name}})</td>
+                                        <td>{{record.topic}}</td>
+                                        <td>{{record.platform}}</td>
+                                        <td>{{record.date_of_class}}</td>
+                                        <td>{{record.time_of_class}}</td>
+                                        <td>{{record.class_start_before}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="virtualMeetingList.length > 8" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

@@ -23,6 +23,13 @@ export const content: Routes = [
     }
   },
   {
+    path: 'virtual-class-meeting',
+    loadChildren: () => import('../../components/virtual-class-meeting/virtual-class-meeting-routing.module').then(m => m.VirtualClassMeetingRoutingModule),
+    data: {
+      breadcrumb: "Virtual Class Meeting"
+    }
+  },
+  {
     path: 'income',
     loadChildren: () => import('../../components/income/income.module').then(m => m.IncomeModule),
     data: {
