@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {CreateVirtualClassComponent} from "./create-virtual-class/create-virtual-class.component";
+import {VirtualMeetingComponent} from "./virtual-meeting/virtual-meeting.component";
 
 const routes: Routes = [
   {
@@ -9,6 +10,14 @@ const routes: Routes = [
     data: {
       title: "Create Virtual Class",
       breadcrumb: "Create Virtual Class"
+    }
+  },
+  {
+    path: 'virtual-meeting',
+    component: VirtualMeetingComponent,
+    data: {
+      title: "Virtual Meeting",
+      breadcrumb: "Virtual Meeting"
     }
   },
 ];

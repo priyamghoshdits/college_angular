@@ -1,0 +1,198 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="card" *ngIf="(permission[0].permission == 1 || permission[1].permission == 1 || permission[2].permission == 1) && permission[3].permission == 1">
+            <div class="card-body">
+                <div class="tabbed-card">
+                    <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
+                        <li [ngbNavItem]="1" class="me-1">
+                            <a ngbNavLink (click)="activeTab(1)">Create Virtual Meeting</a>
+                        </li>
+                        <li [ngbNavItem]="2" class="me-1">
+                            <a ngbNavLink (click)="activeTab(2)">Show Virtual Meeting</a>
+                        </li>
+                    </ul>
+                    <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header" [hidden]="active != 1" *ngIf="permission[0].permission == 1 || permission[1].permission == 1 || permission[2].permission == 1">
+                            <h5>Virtual Meeting</h5><span>Add Virtual Meeting</span>
+                        </div>
+                        <div class="card-body" [hidden]="active != 1" *ngIf="permission[0].permission == 1 || permission[1].permission == 1 || permission[2].permission == 1">
+                            <form class="theme-form" [formGroup]="virtualMeetingForm">
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Select Member Type</label>
+                                        <select style="width: 100%" formControlName="user_type_id" class="form-select">
+                                            <option *ngFor="let data of userTypeList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="virtualMeetingForm.controls['user_type_id'].errors?.['required'] && virtualMeetingForm.controls['user_type_id'].touched " class="text text-danger mt-1">Member Type required</div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label class="col-form-label pt-0">Topic</label>
+                                            <input class="form-control" formControlName="topic" type="text"
+                                                   placeholder="Enter Topic">
+                                            <div *ngIf="virtualMeetingForm.controls['topic'].errors?.['required'] && virtualMeetingForm.controls['topic'].touched " class="text text-danger mt-1">Topic required</div>
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <label class="col-form-label pt-0">Platform</label>
+                                            <input class="form-control" formControlName="platform" type="text"
+                                                   placeholder="Enter Platform">
+                                            <div *ngIf="virtualMeetingForm.controls['platform'].errors?.['required'] && virtualMeetingForm.controls['platform'].touched " class="text text-danger mt-1">Platform required</div>
+                                        </div>
+                                        <div  class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label class="col-form-label pt-0">Link</label>
+                                                <input class="form-control" formControlName="link" type="text"
+                                                       placeholder="Enter Link">
+                                                <div *ngIf="virtualMeetingForm.controls['link'].errors?.['required'] && virtualMeetingForm.controls['link'].touched " class="text text-danger mt-1">Link required</div>
+                                            </div>
+                                        </div>
+                                        <div  class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="col-form-label pt-0">Date Of Class</label>
+                                                <input class="form-control" formControlName="date_of_meeting" type="date"
+                                                       placeholder="Enter Date Of Class">
+                                                <div *ngIf="virtualMeetingForm.controls['date_of_meeting'].errors?.['required'] && virtualMeetingForm.controls['date_of_meeting'].touched " class="text text-danger mt-1">Date Of Meeting required</div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="col-form-label pt-0">Time Of Class</label>
+                                                <input class="form-control" formControlName="time_of_meeting" type="time"
+                                                       placeholder="Enter Time Of Class">
+                                                <div *ngIf="virtualMeetingForm.controls['time_of_meeting'].errors?.['required'] && virtualMeetingForm.controls['time_of_meeting'].touched " class="text text-danger mt-1">Time Of Meeting required</div>
+                                            </div>
+                                        </div>
+                                        <div  class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label class="col-form-label pt-0">Meeting Duration</label>
+                                                <input class="form-control" formControlName="meeting_duration" type="text"
+                                                       placeholder="Enter Date Of Class">
+                                                <div *ngIf="virtualMeetingForm.controls['meeting_duration'].errors?.['required'] && virtualMeetingForm.controls['meeting_duration'].touched " class="text text-danger mt-1">Meeting Duration required</div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 mb-3">
+                                                <label class="col-form-label pt-0">Meeting Start Before</label>
+                                                <input class="form-control" formControlName="meeting_start_before" type="text"
+                                                       placeholder="Enter Meeting Start Before">
+                                                <div *ngIf="virtualMeetingForm.controls['meeting_start_before'].errors?.['required'] && virtualMeetingForm.controls['meeting_start_before'].touched " class="text text-danger mt-1">Meeting Start Before required</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer" [hidden]="active != 1">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveVirtualMeeting()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateVirtualMeeting()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7" [hidden]="active != 1" *ngIf="permission[0].permission == 1 || permission[1].permission == 1 || permission[2].permission == 1">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Virtual Meeting</h5>
+                                <span>Full Virtual Meeting List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Member Type</th>
+                                        <th scope="col">Topic</th>
+                                        <th scope="col">Platform</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of virtualMeetingList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.user_type_name}}</td>
+                                        <td>{{record.topic}}</td>
+                                        <td>{{record.platform}}</td>
+                                        <td>{{record.date_of_meeting}}</td>
+                                        <td>{{record.time_of_meeting}}</td>
+                                        <td>
+                                            <a (click)="editVirtualMeeting(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteVirtualMeeting(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="virtualMeetingList.length > 8" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-xl-12" [hidden]="active != 2" *ngIf="permission[3].permission == 1">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Virtual Meeting</h5>
+                                <span>Full Virtual Meeting List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Member Type</th>
+                                        <th scope="col">Topic</th>
+                                        <th scope="col">Platform</th>
+                                        <th scope="col">Link</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Duration</th>
+                                        <th scope="col">Start Before</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of virtualMeetingList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.user_type_name}}</td>
+                                        <td>{{record.topic}}</td>
+                                        <td>{{record.platform}}</td>
+                                        <td><a target="_blank" href="{{record.link}}">{{record.link}}</a></td>
+                                        <td>{{record.date_of_meeting}}</td>
+                                        <td>{{record.time_of_meeting}}</td>
+                                        <td>{{record.meeting_duration}}</td>
+                                        <td>{{record.meeting_start_before}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="virtualMeetingList.length > 8" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

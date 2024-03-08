@@ -31,7 +31,6 @@
                             <button *ngIf="permission[0].permission === 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCourse()">Submit</button>
                             <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
-                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
                         </div>
                     </div>
                 </div>

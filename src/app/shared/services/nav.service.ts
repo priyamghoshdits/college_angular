@@ -143,7 +143,8 @@ export class NavService {
 		},
 		{
 			title: 'Virtual Class Meeting', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/virtual-class-meeting/create-virtual-class', title: 'Create Virtual Class', type: 'link' },
+				{ path: '/virtual-class-meeting/create-virtual-class', title: 'Virtual Class', type: 'link' },
+				{ path: '/virtual-class-meeting/virtual-meeting', title: 'Virtual Meeting', type: 'link' },
 			]
 		},
 		{

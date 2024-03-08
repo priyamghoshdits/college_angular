@@ -63,7 +63,7 @@ export class CreateVirtualClassComponent {
         this.virtualClassMeetingService.getVirtualClassListListener().subscribe((response) => {
             this.virtualMeetingList = response;
         });
-        this.virtualMeetingList = this.virtualClassMeetingService.getVirtualClassLink();
+        this.virtualMeetingList = this.virtualClassMeetingService.getVirtualClassList();
 
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;
@@ -108,7 +108,7 @@ export class CreateVirtualClassComponent {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Virtual meeting created',
+                    title: 'Virtual class created',
                     showConfirmButton: false,
                     timer: 1000
                 });
@@ -157,7 +157,7 @@ export class CreateVirtualClassComponent {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Virtual meeting updated',
+                    title: 'Virtual class updated',
                     showConfirmButton: false,
                     timer: 1000
                 });
@@ -187,7 +187,7 @@ export class CreateVirtualClassComponent {
                        Swal.fire({
                            position: 'center',
                            icon: 'success',
-                           title: 'Virtual meeting deleted',
+                           title: 'Virtual class deleted',
                            showConfirmButton: false,
                            timer: 1000
                        });
