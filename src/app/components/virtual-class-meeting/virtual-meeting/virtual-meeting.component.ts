@@ -46,8 +46,8 @@ export class VirtualMeetingComponent {
             link: new FormControl(null, [Validators.required]),
             date_of_meeting: new FormControl(null, [Validators.required]),
             time_of_meeting: new FormControl(null, [Validators.required]),
-            meeting_duration: new FormControl(null, [Validators.required]),
-            meeting_start_before: new FormControl(null, [Validators.required]),
+            meeting_duration: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
+            meeting_start_before: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
         });
         this.userTypeService.getUserTypeListener().subscribe((response) => {
             this.userTypeList = response;
@@ -77,6 +77,10 @@ export class VirtualMeetingComponent {
     }
 
     saveVirtualMeeting(){
+        if(!this.virtualMeetingForm.valid){
+            this.virtualMeetingForm.markAllAsTouched();
+            return;
+        }
         this.virtualClassMeetingService.saveVirtualMeeting(this.virtualMeetingForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 Swal.fire({
@@ -92,6 +96,10 @@ export class VirtualMeetingComponent {
     }
 
     updateVirtualMeeting(){
+        if(!this.virtualMeetingForm.valid){
+            this.virtualMeetingForm.markAllAsTouched();
+            return;
+        }
         this.virtualClassMeetingService.updateVirtualMeeting(this.virtualMeetingForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 Swal.fire({
@@ -121,7 +129,29 @@ export class VirtualMeetingComponent {
     }
 
     deleteVirtualMeeting(data){
-
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if(result.isConfirmed){
+                this.virtualClassMeetingService.deleteVirtualMeeting(data.id).subscribe((response: any) => {
+                    if(response.success == 1){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Virtual meeting deleted',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }
+                })
+            }
+        });
     }
 
 }

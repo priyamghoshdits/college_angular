@@ -103,6 +103,15 @@
                                     </div>
                                     <div  class="row">
                                         <div class="col-md-12 mb-3">
+                                            <label class="col-form-label pt-0">Class Duration</label>
+                                            <input class="form-control" formControlName="class_duration" type="text"
+                                                   placeholder="Enter Class Duration">
+                                            <div *ngIf="virtualClassForm.controls['class_duration'].errors?.['required'] && virtualClassForm.controls['class_duration'].touched " class="text text-danger mt-1">Class Duration required</div>
+                                            <div *ngIf="virtualClassForm.controls['class_duration'].errors?.['pattern']" class="text text-danger mt-1">Invalid Meeting Duration</div>
+                                        </div>
+                                    </div>
+                                    <div  class="row">
+                                        <div class="col-md-12 mb-3">
                                             <label class="col-form-label pt-0">Class Start Before</label>
                                             <input class="form-control" formControlName="class_start_before" type="text"
                                                    placeholder="Enter Class Start Before">
@@ -185,8 +194,10 @@
                                         <th scope="col">Subject(Teacher)</th>
                                         <th scope="col">Topic</th>
                                         <th scope="col">Platform</th>
+                                        <th scope="col">Link</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Time</th>
+                                        <th scope="col">Class Duration</th>
                                         <th scope="col">Class Start Before</th>
                                     </tr>
                                     </thead>
@@ -196,9 +207,11 @@
                                         <td>{{record.course_name}}({{record.semester_name}})</td>
                                         <td>{{record.subject_name}}({{record.teacher_name}})</td>
                                         <td>{{record.topic}}</td>
+                                        <td><a target="_blank" href="{{record.link}}">{{record.link}}</a></td>
                                         <td>{{record.platform}}</td>
                                         <td>{{record.date_of_class}}</td>
                                         <td>{{record.time_of_class}}</td>
+                                        <td>{{record.class_duration}}</td>
                                         <td>{{record.class_start_before}}</td>
                                     </tr>
                                     </tbody>

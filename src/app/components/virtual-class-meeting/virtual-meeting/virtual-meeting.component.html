@@ -65,7 +65,7 @@
                                                 <div *ngIf="virtualMeetingForm.controls['date_of_meeting'].errors?.['required'] && virtualMeetingForm.controls['date_of_meeting'].touched " class="text text-danger mt-1">Date Of Meeting required</div>
                                             </div>
                                             <div class="col-md-6 mb-3">
-                                                <label class="col-form-label pt-0">Time Of Class</label>
+                                                <label class="col-form-label pt-0">Time Of Meeting</label>
                                                 <input class="form-control" formControlName="time_of_meeting" type="time"
                                                        placeholder="Enter Time Of Class">
                                                 <div *ngIf="virtualMeetingForm.controls['time_of_meeting'].errors?.['required'] && virtualMeetingForm.controls['time_of_meeting'].touched " class="text text-danger mt-1">Time Of Meeting required</div>
@@ -75,8 +75,9 @@
                                             <div class="col-md-12 mb-3">
                                                 <label class="col-form-label pt-0">Meeting Duration</label>
                                                 <input class="form-control" formControlName="meeting_duration" type="text"
-                                                       placeholder="Enter Date Of Class">
+                                                       placeholder="Enter Meeting Duration">
                                                 <div *ngIf="virtualMeetingForm.controls['meeting_duration'].errors?.['required'] && virtualMeetingForm.controls['meeting_duration'].touched " class="text text-danger mt-1">Meeting Duration required</div>
+                                                <div *ngIf="virtualMeetingForm.controls['meeting_duration'].errors?.['pattern']" class="text text-danger mt-1">Invalid Meeting Duration</div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -85,6 +86,7 @@
                                                 <input class="form-control" formControlName="meeting_start_before" type="text"
                                                        placeholder="Enter Meeting Start Before">
                                                 <div *ngIf="virtualMeetingForm.controls['meeting_start_before'].errors?.['required'] && virtualMeetingForm.controls['meeting_start_before'].touched " class="text text-danger mt-1">Meeting Start Before required</div>
+                                                <div *ngIf="virtualMeetingForm.controls['meeting_start_before'].errors?.['pattern']" class="text text-danger mt-1">Invalid Meeting Start Before</div>
                                             </div>
                                         </div>
                                     </div>

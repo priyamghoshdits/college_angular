@@ -53,7 +53,8 @@ export class CreateVirtualClassComponent {
             link: new FormControl(null, [Validators.required]),
             date_of_class: new FormControl(null, [Validators.required]),
             time_of_class: new FormControl(null, [Validators.required]),
-            class_start_before: new FormControl(null, [Validators.required]),
+            class_duration: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
+            class_start_before: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
         });
         this.subjectService.getCourseListener().subscribe((response) => {
             this.courseList = response;

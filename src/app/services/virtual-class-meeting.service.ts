@@ -106,4 +106,17 @@ export class VirtualClassMeetingService {
         }));
   }
 
+    deleteVirtualMeeting(id){
+        return this.http.get(this.BASE_API_URL + '/deleteVirtualMeeting/' + id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    const index = this.virtualMeetingList.findIndex(x => x.id === response.data.id);
+                    this.virtualMeetingList.splice(index,1);
+                    this.virtualMeetingListSubject.next([...this.virtualMeetingList]);
+                }
+            }));
+    }
+
 }
