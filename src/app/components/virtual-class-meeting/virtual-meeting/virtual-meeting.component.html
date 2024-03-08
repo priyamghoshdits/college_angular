@@ -134,8 +134,8 @@
                                         <td>{{record.date_of_meeting}}</td>
                                         <td>{{record.time_of_meeting}}</td>
                                         <td>
-                                            <a (click)="editVirtualMeeting(record)"><mat-icon>edit</mat-icon></a>
-                                            <a (click)="deleteVirtualMeeting(record)"><mat-icon>delete</mat-icon></a>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editVirtualMeeting(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteVirtualMeeting(record)"><mat-icon>delete</mat-icon></a>
                                         </td>
                                     </tr>
                                     </tbody>
