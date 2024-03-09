@@ -7,6 +7,7 @@ import {SessionService} from "../../../services/session.service";
 import {ReportService} from "../../../services/report.service";
 import * as XLSX from "xlsx";
 import Swal from "sweetalert2";
+import {NgxPrintDirective} from "ngx-print";
 
 @Component({
   selector: 'app-examination-report',
@@ -16,12 +17,27 @@ import Swal from "sweetalert2";
         MatIconModule,
         NgForOf,
         NgIf,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxPrintDirective
     ],
   templateUrl: './examination-report.component.html',
   styleUrl: './examination-report.component.scss'
 })
 export class ExaminationReportComponent {
+    settings = {
+        table: {
+            'width': '100%',
+            'border-spacing': '0',
+            'border-collapse': 'collapse',
+            'border': '1px solid #000',
+        },
+        th: {
+            'border': '1px solid #000',
+        },
+        td: {
+            'border': '1px solid #000',
+        }
+    }
     examinationReportForm: FormGroup;
     courseList: any[];
     sessionList: any[];

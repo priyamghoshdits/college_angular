@@ -4,6 +4,7 @@ import {StudentAdmisssionComponent} from "./student-admisssion/student-admisssio
 import {CertificateTypesComponent} from "./certificate-types/certificate-types.component";
 import {UploadCertificateComponent} from "./upload-certificate/upload-certificate.component";
 import {DownloadCertificatesComponent} from "./download-certificates/download-certificates.component";
+import {PreAdmissionComponent} from "./pre-admission/pre-admission.component";
 
 const routes: Routes = [
   {
@@ -12,6 +13,14 @@ const routes: Routes = [
     data: {
       title: "Student Admission",
       breadcrumb: "Student Admission"
+    }
+  },
+  {
+    path: 'pre-admission',
+    component: PreAdmissionComponent,
+    data: {
+      title: "Pre Admission",
+      breadcrumb: "Pre Admission"
     }
   },
   {

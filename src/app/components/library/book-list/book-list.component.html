@@ -1,0 +1,48 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="row">
+                                <div class="col-8">
+                                    <div class="card-header">
+                                        <h5>Books List</h5>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <a class="pull-right" style="margin-top: 22px;margin-right: 40px;cursor: pointer;" (click)="download_pdf()"><mat-icon>cloud_download</mat-icon></a>
+                                </div>
+                            </div>
+                            <div class="table-responsive" id="sectionToPrint">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Book Name</th>
+                                        <th scope="col">Author Name</th>
+                                        <th scope="col">Publisher Name</th>
+                                        <th scope="col">SBIN NO.</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of libraryItemList ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.author_name}}</td>
+                                        <td>{{record.publisher_name}}</td>
+                                        <td>{{record.isbn_no}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

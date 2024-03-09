@@ -5,6 +5,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {ReportService} from "../../../services/report.service";
 import Swal from "sweetalert2";
 import * as XLSX from 'xlsx';
+import {NgxPrintDirective} from "ngx-print";
 
 @Component({
   selector: 'app-admission-report',
@@ -14,12 +15,27 @@ import * as XLSX from 'xlsx';
     MatIconModule,
     NgForOf,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPrintDirective
   ],
   templateUrl: './admission-report.component.html',
   styleUrl: './admission-report.component.scss'
 })
 export class AdmissionReportComponent {
+  settings = {
+    table: {
+      'width': '100%',
+      'border-spacing': '0',
+      'border-collapse': 'collapse',
+      'border': '1px solid #000',
+    },
+    th: {
+      'border': '1px solid #000',
+    },
+    td: {
+      'border': '1px solid #000',
+    }
+  }
   admissionReportForm: FormGroup;
   admissionReport: any[] = [];
   constructor(private reportService: ReportService) {

@@ -19,6 +19,7 @@ import {environment} from "../../../../environments/environment";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {SessionService} from "../../../services/session.service";
+import {NgxPrintDirective} from "ngx-print";
 
 @Component({
   selector: 'app-collect-fees',
@@ -37,7 +38,8 @@ import {SessionService} from "../../../services/session.service";
     NgbNavLinkBase,
     NgbNavItem,
     NgbNavOutlet,
-    NgOptimizedImage
+    NgOptimizedImage,
+    NgxPrintDirective
   ],
   templateUrl: './collect-fees.component.html',
   styleUrl: './collect-fees.component.scss'
@@ -64,6 +66,7 @@ export class CollectFeesComponent {
   rolesAndPermission: any[] = [];
   permission: any[] = [];
   sessionList: any[] = [];
+  advancePayment: number;
   constructor(private toastrService: ToastrService,private subjectService: SubjectService
               , private feesService: FeesService ,private studentService: StudentService
               , private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService
@@ -181,7 +184,7 @@ export class CollectFeesComponent {
 
   getStudents(){
     if(this.searchTransactionForm.value.course_id){
-      this.filteredStudentListForSearch = this.studentList.filter(x => x.course_id == this.searchTransactionForm.value.course_id);
+      this.filteredStudentListForSearch = this.filteredStudentListForSearch.filter(x => x.course_id == this.searchTransactionForm.value.course_id);
     }
     if(this.searchTransactionForm.value.semester_id != null){
       this.filteredStudentListForSearch = this.filteredStudentListForSearch.filter(x => x.current_semester_id == this.searchTransactionForm.value.semester_id);
@@ -189,9 +192,9 @@ export class CollectFeesComponent {
   }
 
   getFeesDetails(id){
-    this.feesService.getFeesDetails(id).subscribe((response) => {
-      // @ts-ignore
+    this.feesService.getFeesDetails(id).subscribe((response: any) => {
       this.feesDetailsData = response.data;
+      this.advancePayment = response.advance_payment;
       this.tempStudentId = id;
       // this.collectFees = true;
     })
@@ -291,8 +294,9 @@ export class CollectFeesComponent {
       this.collectFeesForm.markAllAsTouched();
       return;
     }
+    this.filteredStudentList = this.studentList.filter(x => x.admission_status == 1);
     if(this.collectFeesForm.value.course_id){
-      this.filteredStudentList = this.studentList.filter(x => x.course_id == this.collectFeesForm.value.course_id);
+      this.filteredStudentList = this.filteredStudentList.filter(x => x.course_id == this.collectFeesForm.value.course_id);
     }
     if(this.collectFeesForm.value.semester_id != null){
       this.filteredStudentList = this.filteredStudentList.filter(x => x.semester_id == this.collectFeesForm.value.semester_id);

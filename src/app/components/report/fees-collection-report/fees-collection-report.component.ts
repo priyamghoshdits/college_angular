@@ -6,6 +6,7 @@ import {SubjectService} from "../../../services/subject.service";
 import {ReportService} from "../../../services/report.service";
 import Swal from "sweetalert2";
 import * as XLSX from "xlsx";
+import {NgxPrintDirective} from "ngx-print";
 
 @Component({
   selector: 'app-fees-collection-report',
@@ -15,12 +16,27 @@ import * as XLSX from "xlsx";
     MatIconModule,
     NgForOf,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPrintDirective
   ],
   templateUrl: './fees-collection-report.component.html',
   styleUrl: './fees-collection-report.component.scss'
 })
 export class FeesCollectionReportComponent {
+  settings = {
+    table: {
+      'width': '100%',
+      'border-spacing': '0',
+      'border-collapse': 'collapse',
+      'border': '1px solid #000',
+    },
+    th: {
+      'border': '1px solid #000',
+    },
+    td: {
+      'border': '1px solid #000',
+    }
+  }
   feesCollectionReportForm: FormGroup;
   courseList: any[];
   semesterList: any[];

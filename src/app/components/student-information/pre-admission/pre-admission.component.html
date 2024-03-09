@@ -5,30 +5,18 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header" [hidden]="active != 1">
-                            <h5>Student Admission</h5>
-                        </div>
-                        <div *ngIf="permission[3].permission == 1" class="card-header" [hidden]="active != 2">
-                            <h5>Show All Students</h5>
+                            <h5>Student Pre Admission</h5>
                         </div>
                         <div *ngIf="permission[3].permission == 1" class="card-header" [hidden]="active != 3">
-                            <h5>Non Admitted Students</h5>
-                        </div>
-                        <div *ngIf="permission[3].permission == 1" class="card-header" [hidden]="active != 4">
-                            <h5>Disabled Students</h5>
+                            <h5>Show Pre-Admitted Students</h5>
                         </div>
                         <div class="tabbed-card">
                             <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
                                 <li [ngbNavItem]="1">
                                     <a ngbNavLink (click)="activeTab(1)">Add Student</a>
                                 </li>
-                                <li *ngIf="permission[3].permission == 1" [ngbNavItem]="2">
-                                    <a ngbNavLink (click)="activeTab(2)">Show Students</a>
-                                </li>
                                 <li *ngIf="permission[3].permission == 1" [ngbNavItem]="3">
-                                    <a ngbNavLink (click)="activeTab(3)">Non Admitted Students</a>
-                                </li>
-                                <li *ngIf="permission[3].permission == 1" [ngbNavItem]="4">
-                                    <a ngbNavLink (click)="activeTab(4)">Disabled Students</a>
+                                    <a ngbNavLink (click)="activeTab(3)">Show Pre-Admitted Students</a>
                                 </li>
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
@@ -224,6 +212,38 @@
                                     </div>
 
                                     <hr>
+                                    <h3>Payment Details</h3>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Payment Date</label>
+                                            <input type="date" class="form-control" formControlName="payment_date" placeholder="Pre-Admission Amount">
+                                            <div *ngIf="studentCreationForm.controls['payment_date'].errors?.['required'] && studentCreationForm.controls['payment_date'].touched " class="text text-danger mt-1">Payment Date required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Payment Mode</label>
+                                            <select style="width: 100%" formControlName="mode_of_payment" class="form-select">
+                                                <option value="Cash"> Cash </option>
+                                                <option value="Cheque"> Cheque </option>
+                                                <option value="Transfer To Bank"> Transfer To Bank </option>
+                                                <option value="Others"> Others </option>
+                                            </select>
+                                            <div *ngIf="studentCreationForm.controls['mode_of_payment'].errors?.['required'] && studentCreationForm.controls['mode_of_payment'].touched " class="text text-danger mt-1">Mode Of Payment required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Transaction Id</label>
+                                            <input type="text" class="form-control" formControlName="transaction_id" placeholder="Pre-Admission Amount">
+                                            <div *ngIf="studentCreationForm.controls['transaction_id'].errors?.['required'] && studentCreationForm.controls['transaction_id'].touched " class="text text-danger mt-1">Transaction Id required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Amount</label>
+                                            <input type="text" class="form-control" formControlName="amount" placeholder="Pre-Admission Amount">
+                                            <div *ngIf="studentCreationForm.controls['amount'].errors?.['required'] && studentCreationForm.controls['amount'].touched " class="text text-danger mt-1">Amount required</div>
+                                        </div>
+                                    </div>
+
+
+                                    <hr>
                                     <h3>Guardian Details</h3>
                                     <hr>
 
@@ -351,16 +371,16 @@
                                 </div>
                             </div>
                             <div class="card">
-                                <div class="table-responsive" style="text-align: center">
-                                    <table class="table">
+                                <div class="table-responsive">
+                                    <table class="table" style="text-align: center;">
                                         <thead>
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
                                             <th scope="col">Type</th>
                                             <th scope="col">Email</th>
+                                            <th scope="col">Amount</th>
                                             <th scope="col">Refund</th>
-                                            <th scope="col">Admit</th>
                                             <th scope="col" *ngIf="permission[0].permission == 1 && permission[1].permission == 1">Action</th>
                                         </tr>
                                         </thead>
@@ -370,18 +390,14 @@
                                             <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
                                             <td>{{record.user_type}}</td>
                                             <td>{{record.email}}</td>
+                                            <td>{{record.amount}}</td>
                                             <td *ngIf="record.refund == 0">
                                                 <button class="btn btn-primary me-1" type="submit" (click)="refundAmount(record)">Refund</button>
                                             </td>
                                             <td *ngIf="record.refund == 1">
                                                 Refunded
                                             </td>
-                                            <td *ngIf="record.refund == 0">
-                                                <button class="btn btn-primary me-1" type="submit" (click)="editStudent(record)">Admit</button>
-                                            </td>
-                                            <td *ngIf="record.refund == 1">
 
-                                            </td>
                                             <td>
                                                 <a *ngIf="permission[1].permission == 1" (click)="editStudent(record)"><mat-icon>edit</mat-icon></a>
                                                 <a *ngIf="permission[2].permission == 1" (click)="deleteStudent(record)"><mat-icon>delete</mat-icon></a>

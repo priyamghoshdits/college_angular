@@ -1,40 +1,41 @@
 import { Component } from '@angular/core';
-import {MatIcon, MatIconModule} from "@angular/material/icon";
+import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
 import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MemberService} from "../../../services/member.service";
 import {SubjectService} from "../../../services/subject.service";
 import {SessionService} from "../../../services/session.service";
 import {StudentService} from "../../../services/student.service";
-import Swal from "sweetalert2";
 import {ImageService} from "../../../services/image.service";
 import {AgentService} from "../../../services/agent.service";
-import {CustomFilterPipe} from "custom-filter.pipe";
 import {CommonService} from "../../../services/common.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {FranchiseService} from "../../../services/franchise.service";
+import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-student-admisssion',
+  selector: 'app-pre-admission',
   standalone: true,
     imports: [
+        CustomFilterPipe,
+        FormsModule,
         MatIconModule,
         NgForOf,
+        NgIf,
         NgbNav,
         NgbNavLink,
         NgbNavLinkBase,
         ReactiveFormsModule,
         NgbNavOutlet,
-        NgbNavItem,
-        FormsModule,
-        CustomFilterPipe,
-        NgIf
+        NgbNavItem
     ],
-  templateUrl: './student-admisssion.component.html',
-  styleUrl: './student-admisssion.component.scss'
+  templateUrl: './pre-admission.component.html',
+  styleUrl: './pre-admission.component.scss'
 })
-export class StudentAdmisssionComponent {
+export class PreAdmissionComponent {
+
     studentCreationForm: FormGroup;
     public active = 1;
     categoryList: any[];
@@ -53,7 +54,6 @@ export class StudentAdmisssionComponent {
     user: {
         user_type_id: number;
     };
-
     constructor(private memberService: MemberService, private subjectService: SubjectService
         , private sessionService: SessionService, private studentService: StudentService
         , private imageService: ImageService, private agentService: AgentService
@@ -106,7 +106,12 @@ export class StudentAdmisssionComponent {
             guardian_occupation: new FormControl(null),
             guardian_address: new FormControl(null),
             franchise_id: new FormControl(null),
+            amount: new FormControl(null, [Validators.required]),
+            refund: new FormControl(0),
             session_id: new FormControl(null, [Validators.required]),
+            payment_date: new FormControl(null, [Validators.required]),
+            mode_of_payment: new FormControl(null, [Validators.required]),
+            transaction_id: new FormControl(null, [Validators.required]),
         });
 
         this.franchiseService.getFranchiseListener().subscribe((response) => {
@@ -211,7 +216,7 @@ export class StudentAdmisssionComponent {
             });
             return;
         }
-        this.studentCreationForm.patchValue({admission_status: 1});
+        this.studentCreationForm.patchValue({admission_status: 0});
         Swal.fire({
             title: 'Please Wait !',
             html: 'Saving ...', // add html attribute if you want or remove
@@ -232,9 +237,19 @@ export class StudentAdmisssionComponent {
                     timer: 1000
                 });
                 this.studentCreationForm.reset();
+            }else{
+                Swal.close();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Student Saving Error',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
             }
         })
     }
+
     refundAmount(data){
         Swal.fire({
             title: 'Confirmation',
@@ -245,22 +260,21 @@ export class StudentAdmisssionComponent {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, Refund!'
         }).then((result) => {
-            if(result.isConfirmed){
-                this.studentService.refundStudent(data.id).subscribe((response: any) => {
-                    if(response.success == 1){
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Student Refunded',
-                            showConfirmButton: false,
-                            timer: 1000
-                        });
-                    }
-                })
-            }
+           if(result.isConfirmed){
+               this.studentService.refundStudent(data.id).subscribe((response: any) => {
+                   if(response.success == 1){
+                       Swal.fire({
+                           position: 'center',
+                           icon: 'success',
+                           title: 'Student Refunded',
+                           showConfirmButton: false,
+                           timer: 1000
+                       });
+                   }
+               })
+           }
         });
     }
-
 
     updateStudent() {
         if (!this.studentCreationForm.valid) {
@@ -272,7 +286,7 @@ export class StudentAdmisssionComponent {
             });
             return;
         }
-        this.studentCreationForm.patchValue({admission_status: 1});
+        this.studentCreationForm.patchValue({admission_status: 0});
         this.studentService.updateStudent(this.studentCreationForm.value).subscribe((response) => {
             // @ts-ignore
             if (response.success == 1) {
@@ -287,6 +301,8 @@ export class StudentAdmisssionComponent {
             }
         })
     }
+
+
 
     cancelUpdate() {
         this.studentCreationForm.reset();

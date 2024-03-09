@@ -82,6 +82,7 @@ export class NavService {
 			title: 'Library', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/library/item-stock', title: 'Add Item', type: 'link' },
 				{ path: '/library/issue-item', title: 'Issue Book', type: 'link' },
+				{ path: '/library/book-list', title: 'Book List', type: 'link' },
 				{ path: '/library/upload-digital-book', title: 'Upload Digital Book', type: 'link' },
 				{ path: '/library/download-digital-book', title: 'Download Digital Book', type: 'link' },
 			]
@@ -124,6 +125,7 @@ export class NavService {
 		{
 			title: 'Student Information', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/student-information/student-admission', title: 'Student Admission', type: 'link' },
+				{ path: '/student-information/pre-admission', title: 'Pre Admission', type: 'link' },
 				{ path: '/student-information/certificate-types', title: 'Certificate Types', type: 'link' },
 				{ path: '/student-information/upload-certificates', title: 'Upload Certificate', type: 'link' },
 				{ path: '/student-information/download-certificates', title: 'Download Certificate', type: 'link' },

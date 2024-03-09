@@ -27,12 +27,15 @@
                         <div [hidden]="active != 1">
                             <div class="card-body">
                                 <ng-template #content let-modal>
-                                    <div class="modal-content" style="margin-left:-40px;">
+                                    <div class="modal-content" style="margin-left:-85px;">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="modal-basic-title">Student Payment</h4>
                                             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
                                         </div>
                                         <div class="modal-body">
+                                            <div *ngIf="advancePayment > 0" style="color: red">
+                                                <b>***Note: Student Paid {{advancePayment}} in pre-admission***</b>
+                                            </div>
                                             <table class="table" *ngIf="feesDetailsData.length>0" style="text-align: center;">
                                                 <thead>
                                                 <tr>
@@ -147,7 +150,7 @@
                                                 <tr *ngFor="let record of filteredStudentList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
                                                     <td>{{indexOfElement+1}}</td>
                                                     <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
-                                                    <td>{{record.gender}}</td>
+                                                    <td>{{record.gender}} {{record.id}}</td>
                                                     <td>{{record.dob}}</td>
                                                     <td>{{record.mobile_no}}</td>
                                                     <td>{{record.email}}</td>
@@ -239,7 +242,9 @@
                                                         <input (change)="setTransactionFile($event,record)" style="width: 150px" class="form-control col-2" type="file">
                                                     </td>
                                                     <td>
-                                                        <a style="cursor: pointer" (click)="print_div()"><mat-icon>print</mat-icon></a>
+<!--                                                        <a style="cursor: pointer" (click)="print_div()"><mat-icon>print</mat-icon></a>-->
+                                                        <a class="pull-right" (click)="print.click()" style="margin-top: 2px;margin-right: 40px;cursor: pointer;"><mat-icon>print</mat-icon></a>
+                                                        <button [hidden]="true" #print printSectionId="sectionToPrint"  ngxPrint [useExistingCss]="true">print</button>
                                                     </td>
                                                     <td>
                                                         <a *ngIf="permission[2].permission == 1" (click)="deleteTransaction(record)" ><mat-icon>delete</mat-icon></a>
@@ -282,13 +287,13 @@
 
                                     </div>
                                 </form>
-                                <div id="sectionToPrint" >
+                                <div id="sectionToPrint" [hidden]="true">
 
 
 
                                     <div style="">
                                         <!-- =====================code section===================== -->
-                                        <div style="margin: 40px 0px 0px -8px; width:100%; ">
+                                        <div style="margin: 40px 0px 0px -60px; width:100%; ">
                                             <table style="width: 100%;">
                                                 <tr>
                                                     <td style="text-align: center; font-weight: 500; font-size: 30px">
@@ -345,7 +350,7 @@
                                             <table cellspacing="0" border="0" width="96%" style="width:100%;margin: 0 auto;margin-top: 0px;">
                                                 <tr>
                                                     <th style="">
-                                                        <h2 style="margin: 10px 0px 0px 30px;font-size: 15px;font-weight: 500;padding: 10px 0px 0px 0px; ">
+                                                        <h2 style="margin: 10px 0px 0px 100px;font-size: 15px;font-weight: 500;padding: 10px 0px 0px 0px; ">
                                                             Lorem Ipsum is simply dummy text of the printing and typesetting industry
                                                         </h2>
 

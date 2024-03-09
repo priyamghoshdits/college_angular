@@ -4,6 +4,7 @@ import {LibraryItemStockComponent} from "./library-item-stock/library-item-stock
 import {LibraryItemIssueComponent} from "./library-item-issue/library-item-issue.component";
 import {UploadDigitalBookComponent} from "./upload-digital-book/upload-digital-book.component";
 import {DownloadDigitalBookComponent} from "./download-digital-book/download-digital-book.component";
+import {BookListComponent} from "./book-list/book-list.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,14 @@ const routes: Routes = [
     data: {
       title: "Download Digital Books",
       breadcrumb: "Download Digital Books"
+    }
+  },
+  {
+    path: 'book-list',
+    component: BookListComponent,
+    data: {
+      title: "Book List",
+      breadcrumb: "Book List"
     }
   }
 ];

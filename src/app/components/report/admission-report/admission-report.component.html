@@ -41,7 +41,9 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <a class="pull-right" style="margin-top: 22px;margin-right: 95px;cursor: pointer;" (click)="print_div()"><mat-icon>print</mat-icon></a>
+<!--                                <a class="pull-right" style="margin-top: 22px;margin-right: 95px;cursor: pointer;" (click)="print_div()"><mat-icon>print</mat-icon></a>-->
+                                <a class="pull-right" (click)="print.click()" style="margin-top: 22px;margin-right: 95px;cursor: pointer;"><mat-icon>print</mat-icon></a>
+                                <button [hidden]="true" #print printSectionId="sectionToPrint"  ngxPrint [printStyle]="settings">print</button>
                                 <a class="pull-right" style="margin-top: 22px;margin-right: 40px;cursor: pointer;" (click)="exportExcel()"><mat-icon>cloud_download</mat-icon></a>
                             </div>
                         </div>

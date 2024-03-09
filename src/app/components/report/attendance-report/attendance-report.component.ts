@@ -9,6 +9,7 @@ import {MatIconModule} from "@angular/material/icon";
 import jspdf from 'jspdf';
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
+import {NgxPrintDirective} from "ngx-print";
 
 @Component({
   selector: 'app-attendance-report',
@@ -19,12 +20,27 @@ import Swal from "sweetalert2";
     NgIf,
     NgxPaginationModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    NgxPrintDirective
   ],
   templateUrl: './attendance-report.component.html',
   styleUrl: './attendance-report.component.scss'
 })
 export class AttendanceReportComponent {
+  settings = {
+    table: {
+      'width': '100%',
+      'border-spacing': '0',
+      'border-collapse': 'collapse',
+      'border': '1px solid #000',
+    },
+    th: {
+      'border': '1px solid #000',
+    },
+    td: {
+      'border': '1px solid #000',
+    }
+  }
   attendanceReportForm: FormGroup;
   courseList: any[];
   semesterList: any[];
