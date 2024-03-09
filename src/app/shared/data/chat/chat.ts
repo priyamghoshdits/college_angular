@@ -11,10 +11,10 @@ export class ChatDB {
       online: true,
       typing: false,
       authenticate: 1,
-      call: {
-        status: '',
-        date_time: ''
-      }
+      // call: {
+      //   status: '',
+      //   date_time: ''
+      // }
     },
     {
       id: 1,
@@ -25,10 +25,10 @@ export class ChatDB {
       online: true,
       typing: false,
       authenticate: 0,
-      call: {
-        status: 'incoming',
-        date_time: '5 May, 4:40 PM'
-      }
+      // call: {
+      //   status: 'incoming',
+      //   date_time: '5 May, 4:40 PM'
+      // }
     },
     {
       id: 2,
@@ -39,10 +39,10 @@ export class ChatDB {
       online: false,
       typing: false,
       authenticate: 0,
-      call: {
-        status: 'incoming',
-        date_time: '6 May, 1:50 PM'
-      }
+      // call: {
+      //   status: 'incoming',
+      //   date_time: '6 May, 1:50 PM'
+      // }
     },
     {
       id: 3,
@@ -53,10 +53,10 @@ export class ChatDB {
       online: true,
       typing: false,
       authenticate: 0,
-      call: {
-        status: 'outgoing',
-        date_time: '7 May, 9:40 PM'
-      }
+      // call: {
+      //   status: 'outgoing',
+      //   date_time: '7 May, 9:40 PM'
+      // }
     },
     {
       id: 4,
@@ -67,10 +67,10 @@ export class ChatDB {
       online: true,
       typing: false,
       authenticate: 0,
-      call: {
-        status: 'incoming',
-        date_time: '7 May, 10:50 PM'
-      }
+      // call: {
+      //   status: 'incoming',
+      //   date_time: '7 May, 10:50 PM'
+      // }
     },
     {
       id: 5,
@@ -81,10 +81,10 @@ export class ChatDB {
       online: false,
       typing: false,
       authenticate: 0,
-      call: {
-        status: 'outgoing',
-        date_time: '7 May, 11:40 PM'
-      }
+      // call: {
+      //   status: 'outgoing',
+      //   date_time: '7 May, 11:40 PM'
+      // }
     },
     {
       id: 6,
@@ -95,10 +95,10 @@ export class ChatDB {
       online: true,
       typing: false,
       authenticate: 0,
-      call: {
-        status: 'outgoing',
-        date_time: '8 May, 9:15 AM'
-      }
+      // call: {
+      //   status: 'outgoing',
+      //   date_time: '8 May, 9:15 AM'
+      // }
     },
     {
       id: 7,
@@ -109,10 +109,10 @@ export class ChatDB {
       online: false,
       typing: false,
       authenticate: 0,
-      call: {
-        status: 'incoming',
-        date_time: '8 May, 10:50 Am'
-      }
+      // call: {
+      //   status: 'incoming',
+      //   date_time: '8 May, 10:50 Am'
+      // }
     },
     {
       id: 8,
@@ -123,10 +123,10 @@ export class ChatDB {
       online: false,
       typing: false,
       authenticate: 0,
-      call: {
-        status: 'incoming',
-        date_time: '9 May, 11:50 PM'
-      }
+      // call: {
+      //   status: 'incoming',
+      //   date_time: '9 May, 11:50 PM'
+      // }
     },
   ]
 
@@ -159,7 +159,28 @@ export class ChatDB {
     },
     {
       id: 2,
-      message: []
+      message: [
+        {
+          sender: 1,
+          time: '10:12 am',
+          text: 'Are we gghh Project has been already finished and I have results to show you.'
+        },
+        {
+          sender: 0,
+          time: '10:14 am',
+          text: 'Well I am not sure. The rest of the team is not here yet. Maybe in an hour or so?.'
+        },
+        {
+          sender: 0,
+          time: '10:14 am',
+          text: 'Well I ayyy  sure. The rest of the team.'
+        },
+        {
+          sender: 0,
+          time: '10:20 am',
+          text: 'Actually everything was fine. I am very excited to show this to our team.'
+        }
+      ]
     },
     {
       id: 3,
