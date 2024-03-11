@@ -33,6 +33,14 @@ export class ChatService {
     });
   }
 
+  getChatList(){
+    return [...this.chat];
+  }
+
+  getUserList(){
+    return [...this.users];
+  }
+
   getUpdatedMessages(){
     this.http.get(this.BASE_API_URL + '/getChat').subscribe((response: any) =>{
       this.chat = response.data;

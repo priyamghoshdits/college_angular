@@ -5,7 +5,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Study Material</h5><span>Download Study Material</span>
+                            <h5>Syllabus</h5><span>Download Syllabus</span>
                         </div>
                         <div class="table-responsive" style="text-align: center">
                             <table class="table">
@@ -13,15 +13,19 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Title</th>
-                                    <th scope="col">Subject Name</th>
+                                    <th scope="col">Course</th>
+                                    <th scope="col">Semester</th>
+                                    <th scope="col">Subject</th>
                                     <th scope="col">Upload Date</th>
                                     <th scope="col">Download</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr *ngFor="let record of studyMaterialList;let indexOfElement=index">
+                                <tr *ngFor="let record of syllabusList;let indexOfElement=index">
                                     <td>{{indexOfElement+1}}</td>
                                     <td>{{record.title}}</td>
+                                    <td>{{record.course_name}}</td>
+                                    <td>{{record.semester_name}}</td>
                                     <td>{{record.subject_name}}</td>
                                     <td>{{record.upload_date}}</td>
                                     <td ngbTooltip="Download">

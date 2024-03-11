@@ -34,9 +34,9 @@ export class ChatComponent implements OnInit {
     this.chatService.getUsersListener().subscribe((response) => {
       this.searchUsers = response;
       this.users = response;
-      // @ts-ignore
-      // this.interval = setInterval(this.chatService.getUpdatedMessages(),10000);
     });
+    this.searchUsers = this.chatService.getUserList();
+    this.users = this.chatService.getUserList();
     // this.interval = setInterval(()=> { this.chatService.getUpdatedMessages() }, 10000);
 
     // this.start_interval();

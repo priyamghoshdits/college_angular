@@ -51,6 +51,7 @@
                                         <select style="width: 100%" formControlName="type" class="form-select" required (click)="checkType()">
                                             <option value="assignment"> Assignment </option>
                                             <option value="study-material"> Study Material </option>
+                                            <option value="syllabus"> Syllabus </option>
                                         </select>
                                         <div *ngIf="uploadContentForm.controls['type'].errors?.['required'] && uploadContentForm.controls['type'].touched " class="text text-danger mt-1">Type required</div>
                                     </div>

@@ -32,7 +32,6 @@ export class AssignmentComponent {
       this.assignmentList = response;
     });
     this.assignmentList = this.downloadCenterService.getAssignmentList();
-
   }
 
 }

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {AssignmentComponent} from "./assignment/assignment.component";
 import {UploadContentComponent} from "./upload-content/upload-content.component";
 import {StudyMaterialComponent} from "./study-material/study-material.component";
+import {SyllabusComponent} from "./syllabus/syllabus.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,14 @@ const routes: Routes = [
     data: {
       title: "Study Material",
       breadcrumb: "Study Material"
+    }
+  },
+  {
+    path: 'syllabus',
+    component: SyllabusComponent,
+    data: {
+      title: "Syllabus",
+      breadcrumb: "Syllabus"
     }
   }
 ];

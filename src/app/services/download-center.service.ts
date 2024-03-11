@@ -13,14 +13,20 @@ export class DownloadCenterService {
   assignmentList = [];
   contentList = [];
   studyMaterialList = [];
+  syllabusList = [];
 
 
   assignmentListSubject = new Subject<any[]>();
   contentListSubject = new Subject<any[]>();
   studyMaterialListSubject = new Subject<any[]>();
+  syllabusListSubject = new Subject<any[]>();
 
   getStudyMaterialListListener(){
     return this.studyMaterialListSubject.asObservable();
+  }
+
+  getSyllabusListListener(){
+    return this.syllabusListSubject.asObservable();
   }
 
   getAssignmentListListener(){
@@ -44,6 +50,14 @@ export class DownloadCenterService {
       this.studyMaterialList = response.data;
       this.studyMaterialListSubject.next([...this.studyMaterialList]);
     });
+    this.http.get(this.BASE_API_URL + '/getSyllabus').subscribe((response: any) =>{
+      this.syllabusList = response.data;
+      this.syllabusListSubject.next([...this.syllabusList]);
+    });
+  }
+
+  getSyllabusList(){
+    return [...this.syllabusList];
   }
 
   getAssignmentList(){
@@ -71,10 +85,15 @@ export class DownloadCenterService {
               // @ts-ignore
               this.assignmentList.unshift(response.data);
               this.assignmentListSubject.next([...this.assignmentList]);
-            }else{
+              // @ts-ignore
+            }else if(response.data.type == 'study-material'){
               // @ts-ignore
               this.studyMaterialList.unshift(response.data);
               this.studyMaterialListSubject.next([...this.studyMaterialList]);
+            }else{
+              // @ts-ignore
+              this.syllabusList.unshift(response.data);
+              this.syllabusListSubject.next([...this.syllabusList]);
             }
           }
         }));
@@ -98,12 +117,17 @@ export class DownloadCenterService {
               // @ts-ignore
               this.assignmentList[index] = response.data;
               this.assignmentListSubject.next([...this.assignmentList]);
-            }else{
+              // @ts-ignore
+            }else if(response.data.type == 'study-material'){
               // @ts-ignore
               const index = this.studyMaterialList.findIndex(x => x.id == response.data.id);
               // @ts-ignore
               this.studyMaterialList[index] = response.data;
               this.studyMaterialListSubject.next([...this.studyMaterialList]);
+            }else{
+              // @ts-ignore
+              this.syllabusList[index] = response.data;
+              this.syllabusListSubject.next([...this.syllabusList]);
             }
           }
 

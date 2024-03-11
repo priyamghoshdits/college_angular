@@ -183,6 +183,7 @@ export class NavService {
 				{ path: '/download-center/upload-content', title: 'Upload Content', type: 'link' },
 				{ path: '/download-center/assignment', title: 'Assignment', type: 'link' },
 				{ path: '/download-center/study-material', title: 'Study Material', type: 'link' },
+				{ path: '/download-center/syllabus', title: 'Syllabus', type: 'link' },
 			]
 		},
 		// {
