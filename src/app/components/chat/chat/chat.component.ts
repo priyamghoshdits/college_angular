@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatUsers } from '../../../shared/model/chat.model';
 import { ChatService } from '../../../shared/services/chat.service';
+import {map} from "rxjs/operators";
+import {Subscription, timer} from "rxjs";
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss']
+  styleUrls: ['./chat.component.scss'],
+  providers: [ChatService]
 })
 export class ChatComponent implements OnInit {
   
@@ -19,18 +22,48 @@ export class ChatComponent implements OnInit {
   public notFound: boolean=false
   public id : any;
   public searchText : string
+  interval : any;
+  timerSubscription: Subscription;
 
   constructor(private chatService: ChatService) {   
-    this.chatService.getUsers().subscribe(users => { 
-      this.searchUsers = users
-      this.users = users
-    })
+    // this.chatService.getUsers().subscribe(users => {
+    //   this.searchUsers = users
+    //   this.users = users
+    //     console.log(this.users);
+    // })
+    this.chatService.getUsersListener().subscribe((response) => {
+      this.searchUsers = response;
+      this.users = response;
+      // @ts-ignore
+      // this.interval = setInterval(this.chatService.getUpdatedMessages(),10000);
+    });
+    // this.interval = setInterval(()=> { this.chatService.getUpdatedMessages() }, 10000);
+
+    // this.start_interval();
+
   }
 
   ngOnInit() {  
     this.userChat(this.id)
-    this.getProfile()
+    this.getProfile();
+    // @ts-ignore
+    // this.interval = setInterval(this.getUpdatedChats,2000);
+
+    // this.timerSubscription = timer(0, 1000).pipe(
+    //     map(() => {
+    //       this.getUpdatedChats(); // load data contains the http request
+    //     })
+    // ).subscribe();
   }
+
+  // start_interval(){
+  //   this.interval = setInterval(()=> { this.chatService.getUpdatedMessages() }, 10000);
+  // }
+
+  // ngOnDestroy(): void {
+  //   clearInterval(this.interval);
+  // }
+
 
   public tabbed(val) {
   	this.openTab = val
@@ -49,6 +82,7 @@ export class ChatComponent implements OnInit {
   
   // Send Message to User
   public sendMessage(form) {
+    // clearInterval(this.interval);
     if(!form.value.message){
       this.error = true
       return false
@@ -64,6 +98,7 @@ export class ChatComponent implements OnInit {
     this.chatText = ''
     this.chatUser.seen = 'online'
     this.chatUser.online = true
+    // this.start_interval();
     return
   }
 
