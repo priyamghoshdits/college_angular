@@ -5,6 +5,7 @@ import {LibraryItemIssueComponent} from "./library-item-issue/library-item-issue
 import {UploadDigitalBookComponent} from "./upload-digital-book/upload-digital-book.component";
 import {DownloadDigitalBookComponent} from "./download-digital-book/download-digital-book.component";
 import {BookListComponent} from "./book-list/book-list.component";
+import {ReturnPeriodOverComponent} from "./return-period-over/return-period-over.component";
 
 const routes: Routes = [
   {
@@ -45,6 +46,14 @@ const routes: Routes = [
     data: {
       title: "Book List",
       breadcrumb: "Book List"
+    }
+  },
+  {
+    path: 'return-over-period',
+    component: ReturnPeriodOverComponent,
+    data: {
+      title: "Return Over Period",
+      breadcrumb: "Return Over Period"
     }
   }
 ];

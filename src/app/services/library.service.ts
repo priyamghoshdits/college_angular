@@ -13,14 +13,20 @@ export class LibraryService {
   libraryItemList  = [];
   libraryIssueItemList  = [];
   libraryDigitalBookList  = [];
+  returnPeriodOverList  = [];
 
   libraryItemListSubject = new Subject<any[]>();
   libraryIssueItemListSubject = new Subject<any[]>();
   libraryDigitalBookListSubject = new Subject<any[]>();
+  returnPeriodOverListSubject = new Subject<any[]>();
 
   getLibraryItemListener(){
     return this.libraryItemListSubject.asObservable();
   }
+
+    getReturnPeriodOverListener(){
+        return this.returnPeriodOverListSubject.asObservable();
+    }
 
     getLibraryDigitalBookListener(){
         return this.libraryDigitalBookListSubject.asObservable();
@@ -34,6 +40,11 @@ export class LibraryService {
       this.libraryItemList = response.data;
       this.libraryItemListSubject.next([...this.libraryItemList]);
     });
+
+      this.http.get(this.BASE_API_URL + '/getReturnOverPeriod').subscribe((response: any) =>{
+          this.returnPeriodOverList = response.data;
+          this.returnPeriodOverListSubject.next([...this.returnPeriodOverList]);
+      });
 
       this.http.get(this.BASE_API_URL + '/getIssuedBooks').subscribe((response: any) =>{
           this.libraryIssueItemList = response.data;
@@ -49,6 +60,10 @@ export class LibraryService {
   getLibraryItemList(){
     return [...this.libraryItemList];
   }
+
+    getReturnOverPeriodList(){
+        return [...this.returnPeriodOverList];
+    }
 
     getLibraryIssueItemList(){
         return [...this.libraryIssueItemList];

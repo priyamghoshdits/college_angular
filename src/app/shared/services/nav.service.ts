@@ -83,6 +83,7 @@ export class NavService {
 				{ path: '/library/item-stock', title: 'Add Item', type: 'link' },
 				{ path: '/library/issue-item', title: 'Issue Book', type: 'link' },
 				{ path: '/library/book-list', title: 'Book List', type: 'link' },
+				{ path: '/library/return-over-period', title: 'Return Over Period', type: 'link' },
 				{ path: '/library/upload-digital-book', title: 'Upload Digital Book', type: 'link' },
 				{ path: '/library/download-digital-book', title: 'Download Digital Book', type: 'link' },
 			]
