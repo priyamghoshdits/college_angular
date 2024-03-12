@@ -180,10 +180,8 @@ export class LibraryService {
                   this.libraryIssueItemListSubject.next([...this.libraryIssueItemList]);
                   // @ts-ignore
                   const index2 = this.libraryItemList.findIndex(x => x.id === book_id);
-                  console.log(index2);
                   // @ts-ignore
                   this.libraryItemList[index2].remaining = this.libraryItemList[index2].remaining + quantity;
-                  console.log(this.libraryItemList);
                   this.libraryItemListSubject.next([...this.libraryItemList]);
               }
           }));
@@ -202,6 +200,31 @@ export class LibraryService {
               }
           }));
   }
+
+    updateItemIssueDiscount(data){
+        return this.http.post(this.BASE_API_URL + '/updateIssuedBooksDiscount', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    const index = this.libraryIssueItemList.findIndex(x => x.id === response.data.id);
+                    // @ts-ignore
+                    this.libraryIssueItemList[index] = response.data;
+                    this.libraryIssueItemListSubject.next([...this.libraryIssueItemList]);
+
+                    // @ts-ignore
+                    const index1 = this.returnPeriodOverList.findIndex(x => x.id === response.data.id);
+                    // @ts-ignore
+                    this.returnPeriodOverList[index1] = response.data;
+                    this.returnPeriodOverListSubject.next([...this.returnPeriodOverList]);
+
+                    // @ts-ignore
+                    // const index1 = this.returnPeriodOverList.findIndex(x => x.id === response.data.id);
+                    // this.returnPeriodOverList.splice(index,1);
+                    // this.returnPeriodOverListSubject.next([...this.returnPeriodOverList]);
+                }
+            }));
+    }
 
   deleteIssueItem(id){
       return this.http.get(this.BASE_API_URL + '/deleteIssuedBooks/' + id)

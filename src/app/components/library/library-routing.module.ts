@@ -6,6 +6,7 @@ import {UploadDigitalBookComponent} from "./upload-digital-book/upload-digital-b
 import {DownloadDigitalBookComponent} from "./download-digital-book/download-digital-book.component";
 import {BookListComponent} from "./book-list/book-list.component";
 import {ReturnPeriodOverComponent} from "./return-period-over/return-period-over.component";
+import {DiscountComponent} from "./discount/discount.component";
 
 const routes: Routes = [
   {
@@ -54,6 +55,14 @@ const routes: Routes = [
     data: {
       title: "Return Over Period",
       breadcrumb: "Return Over Period"
+    }
+  },
+  {
+    path: 'discount-fine',
+    component: DiscountComponent,
+    data: {
+      title: "Discount Fine",
+      breadcrumb: "Discount Fine"
     }
   }
 ];

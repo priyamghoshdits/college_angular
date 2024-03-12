@@ -101,12 +101,20 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <div class="form-group">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Book Price</label>
                                             <input class="form-control" formControlName="book_price" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Book Price">
                                             <div *ngIf="libraryForm.controls['book_price'].errors?.['required'] && libraryForm.controls['book_price'].touched " class="text text-danger mt-1">Book Price required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">Fine(Per Day)</label>
+                                            <input class="form-control" formControlName="fine" type="text"
+                                                   placeholder="Enter Fine(Per Day)">
+                                            <div *ngIf="libraryForm.controls['fine'].errors?.['required'] && libraryForm.controls['fine'].touched " class="text text-danger mt-1">Fine required</div>
                                         </div>
                                     </div>
                                 </div>
@@ -144,6 +152,13 @@
                                         <h5>Library</h5>
                                         <span>Books List.</span>
                                     </div>
+                                    <div class="row" style="text-align: center;">
+                                        <div class="col-1"></div>
+                                        <div style="margin-top: 4px" class="col-3"><h4>Search</h4></div>
+                                        <div class="col-8">
+                                            <input style="width: 140%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-4">
 <!--                                    <a class="pull-right" style="margin-top: 22px;margin-right: 40px;cursor: pointer;" (click)="exportExcel()">Export Books<mat-icon>cloud_download</mat-icon></a>-->
@@ -161,7 +176,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr *ngFor="let record of libraryItemList ;let indexOfElement=index">
+                                    <tr *ngFor="let record of libraryItemList | customFilter:searchItem ;let indexOfElement=index">
                                         <td>{{indexOfElement+1}}</td>
                                         <td>{{record.name}}</td>
                                         <td>{{record.quantity}}</td>

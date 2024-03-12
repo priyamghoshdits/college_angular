@@ -84,6 +84,7 @@ export class NavService {
 				{ path: '/library/issue-item', title: 'Issue Book', type: 'link' },
 				{ path: '/library/book-list', title: 'Book List', type: 'link' },
 				{ path: '/library/return-over-period', title: 'Return Over Period', type: 'link' },
+				{ path: '/library/discount-fine', title: 'Discount Book Fine', type: 'link' },
 				{ path: '/library/upload-digital-book', title: 'Upload Digital Book', type: 'link' },
 				{ path: '/library/download-digital-book', title: 'Download Digital Book', type: 'link' },
 			]

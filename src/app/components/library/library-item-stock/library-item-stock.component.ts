@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import * as XLSX from 'xlsx';
 import {SubjectService} from "../../../services/subject.service";
+import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
 
 @Component({
   selector: 'app-library-item-stock',
@@ -18,7 +19,8 @@ import {SubjectService} from "../../../services/subject.service";
     NgForOf,
     NgxPaginationModule,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    CustomFilterPipe
   ],
   templateUrl: './library-item-stock.component.html',
   styleUrl: './library-item-stock.component.scss'
@@ -32,6 +34,7 @@ export class LibraryItemStockComponent {
   subjectList: any[];
   courseList: any[];
   semesterList: any[];
+  searchItem: string;
 
   constructor(private libraryService: LibraryService, private roleAndPermissionService: RolesAndPermissionService
       , private subjectService: SubjectService) {
@@ -49,6 +52,7 @@ export class LibraryItemStockComponent {
       remaining: new FormControl(null, [Validators.required]),
       description: new FormControl(null, [Validators.required]),
       book_price: new FormControl(null, [Validators.required]),
+      fine: new FormControl(null, [Validators.required]),
     });
     this.libraryService.getLibraryItemListener().subscribe((response) => {
       this.libraryItemList = response;

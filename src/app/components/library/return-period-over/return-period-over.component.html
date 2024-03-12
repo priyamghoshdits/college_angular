@@ -1,1 +1,54 @@
-<p>return-period-over works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Return Over Period</h5>
+                        </div>
+                        <div class="row" style="text-align: center;">
+                            <div style="margin-top: 4px" class="col-3"><h4>Search</h4></div>
+                            <div class="col-6">
+                                <input style="width: 90%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                            </div>
+                        </div>
+                        <div class="table-responsive" style="text-align: center">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">User Name</th>
+                                    <th scope="col">Book Name</th>
+                                    <th scope="col">Publisher</th>
+                                    <th scope="col">Author</th>
+                                    <th scope="col">Issued On</th>
+                                    <th scope="col">Return Date</th>
+                                    <th scope="col">Late Fine</th>
+                                    <th scope="col">Discount</th>
+                                    <th scope="col">Total Fine</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let record of returnPeriodList | customFilter:searchItem;let indexOfElement=index">
+                                    <td>{{indexOfElement+1}}</td>
+                                    <td>{{record.user_name}}</td>
+                                    <td>{{record.book_name}}</td>
+                                    <td>{{record.publisher_name}}</td>
+                                    <td>{{record.author_name}}</td>
+                                    <td>{{record.issued_on}}</td>
+                                    <td>{{record.return_date}}</td>
+                                    <td>{{record.fine}}</td>
+                                    <td>{{record.discount}}</td>
+                                    <td>{{record.amount}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
