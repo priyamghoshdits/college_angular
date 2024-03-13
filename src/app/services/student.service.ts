@@ -33,8 +33,20 @@ export class StudentService {
       });
   }
 
+  getSessionWiseStudent(data){
+      return this.http.post(this.BASE_API_URL + '/getStudentsBySession', data)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+          }));
+  }
+
   getStudentLists(){
     return [...this.studentList];
+  }
+
+  sendLoginCredentials(id){
+      return this.http.get(this.BASE_API_URL + '/sendLoginCredentials/'+id)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+          }));
   }
 
   saveStudent(data){

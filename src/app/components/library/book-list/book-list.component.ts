@@ -6,6 +6,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import Swal from "sweetalert2";
 import html2canvas from "html2canvas";
 import jspdf from "jspdf";
+import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
 
 @Component({
   selector: 'app-book-list',
@@ -15,17 +16,18 @@ import jspdf from "jspdf";
     MatIconModule,
     NgForOf,
     NgIf,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CustomFilterPipe
   ],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss'
 })
 export class BookListComponent {
   libraryItemList: any[];
+  searchItem: string;
   constructor(private libraryService: LibraryService) {
     this.libraryService.getLibraryItemListener().subscribe((response) => {
       this.libraryItemList = response;
-      console.log(this.libraryItemList);
     });
     this.libraryItemList = this.libraryService.getLibraryItemList();
   }

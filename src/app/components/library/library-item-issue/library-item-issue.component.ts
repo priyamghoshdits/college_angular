@@ -3,11 +3,12 @@ import {LibraryService} from "../../../services/library.service";
 import {StudentService} from "../../../services/student.service";
 import {MatIconModule} from "@angular/material/icon";
 import {DatePipe, NgForOf, NgIf} from "@angular/common";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
 import { Pipe, PipeTransform } from '@angular/core'
 import {SubjectService} from "../../../services/subject.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
 
 @Component({
   selector: 'app-library-item-issue',
@@ -16,7 +17,9 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
     MatIconModule,
     NgForOf,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    FormsModule,
+    CustomFilterPipe
 
   ],
   templateUrl: './library-item-issue.component.html',
@@ -33,6 +36,7 @@ export class LibraryItemIssueComponent {
   isUpdatable = false;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
+  searchItem: string;
   constructor(private libraryService: LibraryService, private studentService: StudentService
               , private subjectService:SubjectService, private roleAndPermissionService: RolesAndPermissionService) {
 

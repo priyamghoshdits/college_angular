@@ -4,6 +4,7 @@ import {AttendanceReportComponent} from "./attendance-report/attendance-report.c
 import {ExaminationReportComponent} from "./examination-report/examination-report.component";
 import {FeesCollectionReportComponent} from "./fees-collection-report/fees-collection-report.component";
 import {AdmissionReportComponent} from "./admission-report/admission-report.component";
+import {FeesDueReportComponent} from "./fees-due-report/fees-due-report.component";
 
 const routes: Routes = [
   {
@@ -36,6 +37,14 @@ const routes: Routes = [
     data: {
       title: "Fees Collection Report",
       breadcrumb: "Fees Collection Report"
+    }
+  },
+  {
+    path: 'fees-due-report',
+    component: FeesDueReportComponent,
+    data: {
+      title: "Fees Due Report",
+      breadcrumb: "Fees Due Report"
     }
   }
 ];

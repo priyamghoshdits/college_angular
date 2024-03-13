@@ -131,6 +131,7 @@ export class NavService {
 				{ path: '/student-information/certificate-types', title: 'Certificate Types', type: 'link' },
 				{ path: '/student-information/upload-certificates', title: 'Upload Certificate', type: 'link' },
 				{ path: '/student-information/download-certificates', title: 'Download Certificate', type: 'link' },
+				{ path: '/student-information/send-login-credentials', title: 'Send Login Credential', type: 'link' },
 			]
 		},
 		{
@@ -165,6 +166,7 @@ export class NavService {
 				{ path: '/report/attendance-report', title: 'Attendance report', type: 'link' },
 				{ path: '/report/examination-report', title: 'Examination report', type: 'link' },
 				{ path: '/report/fees-collection-report', title: 'Fees Collection report', type: 'link' },
+				{ path: '/report/fees-due-report', title: 'Fees Due report', type: 'link' },
 				{ path: '/report/admission-report', title: 'Admission report', type: 'link' },
 			]
 		},

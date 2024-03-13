@@ -1,0 +1,137 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Fees Collection Report</h5>
+                            <label style="color: red; padding-top: 10px">NOTE:- IF ALL STUDENT DATA NEEDED JUST CLICK ON SEARCH WITHOUT SELECTING THE FIELDS</label>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="feesDueReportForm">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="feesDueReportForm.controls['course_id'].errors?.['required'] && feesDueReportForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="feesDueReportForm.controls['semester_id'].errors?.['required'] && feesDueReportForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudents()">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="feesDueReportForm.controls['session_id'].errors?.['required'] && feesDueReportForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="user_id" class="form-select">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of studentList" [value]="data.id" >
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="feesDueReportForm.controls['user_id'].errors?.['required'] && feesDueReportForm.controls['user_id'].touched " class="text text-danger mt-1">Student required</div>
+                                    </div>
+<!--                                    <div class="col-md-3 mb-3">-->
+<!--                                        <label>From Date</label>-->
+<!--                                        <input type="date" class="form-control" formControlName="from_date" placeholder="From Date">-->
+<!--                                        <div *ngIf="feesDueReportForm.controls['from_date'].errors?.['required'] && feesDueReportForm.controls['from_date'].touched " class="text text-danger mt-1">From Date required</div>-->
+<!--                                    </div>-->
+<!--                                    <div class="col-md-3 mb-3">-->
+<!--                                        <label>To Date</label>-->
+<!--                                        <input type="date" class="form-control" formControlName="to_date" placeholder="To Date">-->
+<!--                                        <div *ngIf="feesDueReportForm.controls['to_date'].errors?.['required'] && feesDueReportForm.controls['to_date'].touched " class="text text-danger mt-1">To Date required</div>-->
+<!--                                    </div>-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <button style="margin-top: 25px;" class="btn btn-primary me-1" (click)="getDueFees()">Search</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div >
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-8">
+                                        <div class="card-header">
+                                            <h5>Due Fees List</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <a class="pull-right" style="margin-top: 22px;margin-right: 40px;cursor: pointer;" (click)="download_pdf()"><mat-icon>cloud_download</mat-icon></a>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table" id="sectionToPrint">
+                                        <thead style="text-align: center">
+                                        <tr>
+                                            <th colspan="2">#</th>
+                                            <th colspan="2">User Name</th>
+                                            <th colspan="2">Course</th>
+                                            <th>Semester - Amount - Discount - Paid</th>
+                                            <th>Book Fine</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of dueFeesList;let indexOfElement=index">
+                                            <td colspan="2">{{indexOfElement+1}}</td>
+                                            <td colspan="2">{{record.user_name}}</td>
+                                            <td colspan="2">{{record.course_name}}</td>
+                                            <td>
+                                                <p style="width: 100%" *ngFor="let record1 of record.payment_details">
+                                                    {{record1.name}} - Total => {{record1.amount}}, Discount => {{record1.discount}}  Paid => {{record1.total_paid}}
+                                                </p>
+                                            </td>
+                                            <td>{{record.book_fine}}</td>
+                                        </tr>
+<!--                                        <tr style="background-color: lightgray">-->
+<!--                                            <td style="background-color: lightgray"></td>-->
+<!--                                            <td style="background-color: lightgray"></td>-->
+<!--                                            <td style="background-color: lightgray"></td>-->
+<!--                                            <td style="background-color: lightgray"></td>-->
+<!--                                            <td style="background-color: lightgray">Grand Total</td>-->
+<!--                                            <td style="background-color: lightgray">{{total}}</td>-->
+<!--                                            <td style="background-color: lightgray"></td>-->
+<!--                                        </tr>-->
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--&lt;!&ndash; Container-fluid Ends&ndash;&gt;-->

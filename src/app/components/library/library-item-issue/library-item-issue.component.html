@@ -7,6 +7,13 @@
                         <div class="card-header">
                             <h5>Library</h5><span>Issue Books</span>
                         </div>
+                        <div class="row" style="text-align: center;">
+                            <div class="col-1"></div>
+                            <div style="margin-top: 4px" class="col-3"><h4>Search</h4></div>
+                            <div class="col-8">
+                                <input style="width: 140%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                            </div>
+                        </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="libraryIssueForm">
                                 <div class="row">
@@ -124,7 +131,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr *ngFor="let record of libraryIssueItemList ;let indexOfElement=index">
+                                    <tr *ngFor="let record of libraryIssueItemList | customFilter:searchItem ;let indexOfElement=index">
                                         <td>{{indexOfElement+1}}</td>
                                         <td>{{record.book_name}}</td>
                                         <td>{{record.user_name}}</td>
