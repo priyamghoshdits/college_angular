@@ -1,0 +1,130 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Visitor Book</h5><span>Add Visitor Book</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="visitorForm">
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Purpose</label>
+                                        <input class="form-control" formControlName="purpose" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Purpose">
+                                        <div *ngIf="visitorForm.controls['purpose'].errors?.['required'] && visitorForm.controls['purpose'].touched " class="text text-danger mt-1">Purpose required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
+                                        <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Name">
+                                        <div *ngIf="visitorForm.controls['name'].errors?.['required'] && visitorForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Phone Number</label>
+                                        <input class="form-control" formControlName="phone" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Phone Number">
+                                        <div *ngIf="visitorForm.controls['phone'].errors?.['required'] && visitorForm.controls['phone'].touched " class="text text-danger mt-1">Phone required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Icard</label>
+                                        <input class="form-control" formControlName="icard" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Name">
+                                        <div *ngIf="visitorForm.controls['icard'].errors?.['required'] && visitorForm.controls['icard'].touched " class="text text-danger mt-1">Icard required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Date</label>
+                                        <input class="form-control" formControlName="date" id="exampleInputEmail1" type="date"
+                                               placeholder="Enter Date">
+                                        <div *ngIf="visitorForm.controls['date'].errors?.['required'] && visitorForm.controls['date'].touched " class="text text-danger mt-1">Date required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Time In</label>
+                                        <input class="form-control" formControlName="time_in" id="exampleInputEmail1" type="time"
+                                               placeholder="Enter Time In">
+                                        <div *ngIf="visitorForm.controls['time_in'].errors?.['required'] && visitorForm.controls['time_in'].touched " class="text text-danger mt-1">Time In required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Time Out</label>
+                                        <input class="form-control" formControlName="time_out" id="exampleInputEmail1" type="time"
+                                               placeholder="Enter Time Out">
+                                        <div *ngIf="visitorForm.controls['time_out'].errors?.['required'] && visitorForm.controls['time_out'].touched " class="text text-danger mt-1">Time Out required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Note</label>
+                                        <input class="form-control" formControlName="note" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Note">
+                                        <div *ngIf="visitorForm.controls['note'].errors?.['required'] && visitorForm.controls['note'].touched " class="text text-danger mt-1">Note required</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveVisitor()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateVisitorBook()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Visitor Book List</h5>
+                                <span>Full Visitor Book List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Purpose</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of visitorList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.purpose}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.phone}}</td>
+                                        <td>{{record.date}}</td>
+                                        <td>
+                                            <a><mat-icon (click)="editVisitorBook(record)">edit</mat-icon></a>
+                                            <a><mat-icon (click)="deleteVisitorBook(record)">delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="visitorList.length > 8" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

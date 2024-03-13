@@ -16,6 +16,13 @@ export const content: Routes = [
     }
   },
   {
+    path: 'front-desk',
+    loadChildren: () => import('../../components/front-desk/front-desk-routing.module').then(m => m.FrontDeskRoutingModule),
+    data: {
+      breadcrumb: "Front Desk"
+    }
+  },
+  {
     path: 'report',
     loadChildren: () => import('../../components/report/report-routing.module').then(m => m.ReportRoutingModule),
     data: {

@@ -1,0 +1,118 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Postal Dispatch</h5><span>Add Postal Dispatch</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="postalDispatchForm">
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">To Title</label>
+                                        <input class="form-control" formControlName="to_title" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter To Title">
+                                        <div *ngIf="postalDispatchForm.controls['to_title'].errors?.['required'] && postalDispatchForm.controls['to_title'].touched " class="text text-danger mt-1">To Title required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Reference No</label>
+                                        <input class="form-control" formControlName="reference_no" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Reference No">
+                                        <div *ngIf="postalDispatchForm.controls['reference_no'].errors?.['required'] && postalDispatchForm.controls['reference_no'].touched " class="text text-danger mt-1">Reference No required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Address</label>
+                                        <input class="form-control" formControlName="address" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Address">
+                                        <div *ngIf="postalDispatchForm.controls['address'].errors?.['required'] && postalDispatchForm.controls['address'].touched " class="text text-danger mt-1">Address required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">From Title</label>
+                                        <input class="form-control" formControlName="from_title" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter From Title">
+                                        <div *ngIf="postalDispatchForm.controls['from_title'].errors?.['required'] && postalDispatchForm.controls['from_title'].touched " class="text text-danger mt-1">From Title required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Note</label>
+                                        <input class="form-control" formControlName="note" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Note">
+                                        <div *ngIf="postalDispatchForm.controls['note'].errors?.['required'] && postalDispatchForm.controls['note'].touched " class="text text-danger mt-1">Note required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Date</label>
+                                        <input class="form-control" formControlName="date" id="exampleInputEmail1" type="date"
+                                               placeholder="Enter Date">
+                                        <div *ngIf="postalDispatchForm.controls['date'].errors?.['required'] && postalDispatchForm.controls['date'].touched " class="text text-danger mt-1">Date required</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="savePostalDispatch()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updatePostalDispatch()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Postal Dispatch List</h5>
+                                <span>Full Postal Dispatch List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">From Title</th>
+                                        <th scope="col">Reference No</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">To Title</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of postalDispatchList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.from_title}}</td>
+                                        <td>{{record.reference_no}}</td>
+                                        <td>{{record.address}}</td>
+                                        <td>{{record.to_title}}</td>
+                                        <td>{{record.date}}</td>
+                                        <td>
+                                            <a><mat-icon (click)="editPostalDispatch(record)">edit</mat-icon></a>
+                                            <a><mat-icon (click)="deletePostalDispatch(record)">delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="postalDispatchList.length > 8" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

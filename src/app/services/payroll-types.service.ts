@@ -11,7 +11,7 @@ import {catchError, tap} from "rxjs/operators";
 export class PayrollTypesService {
   private BASE_API_URL = environment.BASE_API_URL;
 
-  payrolltypeList = [];
+  payrollTypeList = [];
 
   payrollTypeListSubject = new Subject<any[]>();
 
@@ -20,13 +20,13 @@ export class PayrollTypesService {
     }
   constructor(private  http: HttpClient, private errorService: ErrorService) {
     this.http.get(this.BASE_API_URL + '/getPayrollTypes').subscribe((response: any) =>{
-      this.payrolltypeList = response.data;
-      this.payrollTypeListSubject.next([...this.payrolltypeList]);
+      this.payrollTypeList = response.data;
+      this.payrollTypeListSubject.next([...this.payrollTypeList]);
     });
   }
 
   getPayrollTypes(){
-    return [...this.payrolltypeList];
+    return [...this.payrollTypeList];
   }
 
   savePayrollType(data){
@@ -35,8 +35,8 @@ export class PayrollTypesService {
           // @ts-ignore
           if(response.success == 1){
             // @ts-ignore
-            this.payrolltypeList.push(response.data);
-            this.payrollTypeListSubject.next([...this.payrolltypeList]);
+            this.payrollTypeList.push(response.data);
+            this.payrollTypeListSubject.next([...this.payrollTypeList]);
           }
         }));
   }
@@ -47,10 +47,10 @@ export class PayrollTypesService {
           // @ts-ignore
           if(response.success == 1){
             // @ts-ignore
-            const index = this.payrolltypeList.findIndex(x => x.id === response.data.id);
+            const index = this.payrollTypeList.findIndex(x => x.id === response.data.id);
             // @ts-ignore
-            this.payrolltypeList[index] = response.data;
-            this.payrollTypeListSubject.next([...this.payrolltypeList]);
+            this.payrollTypeList[index] = response.data;
+            this.payrollTypeListSubject.next([...this.payrollTypeList]);
           }
         }));
   }
@@ -60,9 +60,9 @@ export class PayrollTypesService {
           // @ts-ignore
           if(response.success == 1){
             // @ts-ignore
-            const index = this.payrolltypeList.findIndex(x => x.id === response.data.id);
-            this.payrolltypeList.splice(index,1);
-            this.payrollTypeListSubject.next([...this.payrolltypeList]);
+            const index = this.payrollTypeList.findIndex(x => x.id === response.data.id);
+            this.payrollTypeList.splice(index,1);
+            this.payrollTypeListSubject.next([...this.payrollTypeList]);
           }
         }));
   }

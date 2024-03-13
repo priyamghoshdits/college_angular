@@ -153,6 +153,13 @@ export class NavService {
 			]
 		},
 		{
+			title: 'Front Desk', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/front-desk/visitor-book', title: 'Virtual Book', type: 'link' },
+				{ path: '/front-desk/postal-dispatch', title: 'Postal Dispatch', type: 'link' },
+				{ path: '/front-desk/postal-receive', title: 'Postal Receive', type: 'link' },
+			]
+		},
+		{
 			title: 'Fees Collection', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/fees-collection/fees-type', title: 'Fees Type', type: 'link' },
 				{ path: '/fees-collection/fees-structure', title: 'Fees Structure', type: 'link' },
