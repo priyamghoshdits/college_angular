@@ -1,0 +1,124 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Call Log</h5><span>Add Call Log</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="callLogForm">
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
+                                        <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Name">
+                                        <div *ngIf="callLogForm.controls['name'].errors?.['required'] && callLogForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Phone Number</label>
+                                        <input class="form-control" formControlName="phone" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Phone">
+                                        <div *ngIf="callLogForm.controls['phone'].errors?.['required'] && callLogForm.controls['phone'].touched " class="text text-danger mt-1">Phone required</div>
+                                        <div *ngIf="callLogForm.controls['phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone Number</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Date</label>
+                                        <input class="form-control" formControlName="date" id="exampleInputEmail1" type="date"
+                                               placeholder="Enter Date">
+                                        <div *ngIf="callLogForm.controls['date'].errors?.['required'] && callLogForm.controls['date'].touched " class="text text-danger mt-1">Date required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+                                        <input class="form-control" formControlName="description" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Description">
+                                        <div *ngIf="callLogForm.controls['description'].errors?.['required'] && callLogForm.controls['description'].touched " class="text text-danger mt-1">Description required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Next Follow Up Date</label>
+                                        <input class="form-control" formControlName="next_follow_up_date" id="exampleInputEmail1" type="date"
+                                               placeholder="Enter Next Follow Up Date">
+                                        <div *ngIf="callLogForm.controls['next_follow_up_date'].errors?.['required'] && callLogForm.controls['next_follow_up_date'].touched " class="text text-danger mt-1">Next Follow Up Date required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Call Duration</label>
+                                        <input class="form-control" formControlName="call_duration" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Call Duration">
+                                        <div *ngIf="callLogForm.controls['call_duration'].errors?.['required'] && callLogForm.controls['call_duration'].touched " class="text text-danger mt-1">Call Duration required</div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Note</label>
+                                        <input class="form-control" formControlName="note" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Note">
+                                        <div *ngIf="callLogForm.controls['note'].errors?.['required'] && callLogForm.controls['note'].touched " class="text text-danger mt-1">Note required</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCallLog()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCallLog()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Call Log List</h5>
+                                <span>Full Call Log List.</span>
+                            </div>
+                            <div class="table-responsive" style="text-align: center">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Next Follow Up Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of callLogList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.phone}}</td>
+                                        <td>{{record.date}}</td>
+                                        <td>{{record.next_follow_up_date}}</td>
+                                        <td>
+                                            <a><mat-icon (click)="editCallLog(record)">edit</mat-icon></a>
+                                            <a><mat-icon (click)="deleteCallLog(record)">delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="callLogList.length > 8" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

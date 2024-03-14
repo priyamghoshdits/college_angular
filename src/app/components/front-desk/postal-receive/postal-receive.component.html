@@ -11,10 +11,10 @@
                             <form class="theme-form" [formGroup]="postalReceiveForm">
                                 <div  class="row">
                                     <div class="col-md-12 mb-3">
-                                        <label class="col-form-label pt-0" for="exampleInputEmail1">To Title</label>
-                                        <input class="form-control" formControlName="to_title" id="exampleInputEmail1" type="text"
-                                               placeholder="Enter To Title">
-                                        <div *ngIf="postalReceiveForm.controls['to_title'].errors?.['required'] && postalReceiveForm.controls['to_title'].touched " class="text text-danger mt-1">To Title required</div>
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">From Title</label>
+                                        <input class="form-control" formControlName="from_title" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter From Title">
+                                        <div *ngIf="postalReceiveForm.controls['from_title'].errors?.['required'] && postalReceiveForm.controls['from_title'].touched " class="text text-danger mt-1">From Title required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -35,10 +35,10 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
-                                        <label class="col-form-label pt-0" for="exampleInputEmail1">From Title</label>
-                                        <input class="form-control" formControlName="from_title" id="exampleInputEmail1" type="text"
-                                               placeholder="Enter From Title">
-                                        <div *ngIf="postalReceiveForm.controls['from_title'].errors?.['required'] && postalReceiveForm.controls['from_title'].touched " class="text text-danger mt-1">From Title required</div>
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">To Title</label>
+                                        <input class="form-control" formControlName="to_title" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter To Title">
+                                        <div *ngIf="postalReceiveForm.controls['to_title'].errors?.['required'] && postalReceiveForm.controls['to_title'].touched " class="text text-danger mt-1">To Title required</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -91,7 +91,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr *ngFor="let record of postalDispatchList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                    <tr *ngFor="let record of postalReceiveList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
                                         <td>{{indexOfElement+1}}</td>
                                         <td>{{record.from_title}}</td>
                                         <td>{{record.reference_no}}</td>
@@ -105,7 +105,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <pagination-controls *ngIf="postalDispatchList.length > 8" (pageChange)="p = $event"></pagination-controls>
+                                <pagination-controls *ngIf="postalReceiveList.length > 8" (pageChange)="p = $event"></pagination-controls>
 
                             </div>
                         </div>

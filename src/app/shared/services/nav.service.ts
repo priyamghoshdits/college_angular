@@ -155,6 +155,8 @@ export class NavService {
 		{
 			title: 'Front Desk', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/front-desk/visitor-book', title: 'Virtual Book', type: 'link' },
+				{ path: '/front-desk/admission-enquiry', title: 'Admission Enquiry', type: 'link' },
+				{ path: '/front-desk/call-log', title: 'Call Log', type: 'link' },
 				{ path: '/front-desk/postal-dispatch', title: 'Postal Dispatch', type: 'link' },
 				{ path: '/front-desk/postal-receive', title: 'Postal Receive', type: 'link' },
 			]

@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {VisitorBookComponent} from "./visitor-book/visitor-book.component";
 import {PostalDispatchComponent} from "./postal-dispatch/postal-dispatch.component";
 import {PostalReceiveComponent} from "./postal-receive/postal-receive.component";
+import {CallLogComponent} from "./call-log/call-log.component";
+import {AdmissionEnquiryComponent} from "./admission-enquiry/admission-enquiry.component";
 
 const routes: Routes = [
   {
@@ -27,6 +29,22 @@ const routes: Routes = [
     data: {
       title: "Postal Receive",
       breadcrumb: "Postal Receive"
+    }
+  },
+  {
+    path: 'call-log',
+    component: CallLogComponent,
+    data: {
+      title: "Call Log",
+      breadcrumb: "Call Log"
+    }
+  },
+  {
+    path: 'admission-enquiry',
+    component: AdmissionEnquiryComponent,
+    data: {
+      title: "Admission Enquiry",
+      breadcrumb: "Admission Enquiry"
     }
   }
 ];

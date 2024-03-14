@@ -84,6 +84,29 @@ export class PostalDispatchComponent {
     }
 
     deletePostalDispatch(record){
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+           if(result.isConfirmed){
+               this.postalService.deletePostal(record.id).subscribe((response: any) => {
+                   if(response.success == 1){
+                       Swal.fire({
+                           position: 'center',
+                           icon: 'success',
+                           title: 'Postal Dispatch Deleted',
+                           showConfirmButton: false,
+                           timer: 1000
+                       });
+                   }
+               })
+           }
+        });
 
     }
 

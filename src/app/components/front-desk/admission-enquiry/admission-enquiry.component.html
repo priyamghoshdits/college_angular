@@ -1,0 +1,142 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Admission Enquiry</h5><span>Add Admission Enquiry</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="admissionEnquiryForm">
+                                <div  class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Name</label>
+                                        <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Name">
+                                        <div *ngIf="admissionEnquiryForm.controls['name'].errors?.['required'] && admissionEnquiryForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Phone</label>
+                                        <input class="form-control" formControlName="phone" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Phone">
+                                        <div *ngIf="admissionEnquiryForm.controls['phone'].errors?.['required'] && admissionEnquiryForm.controls['phone'].touched " class="text text-danger mt-1">Phone required</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Email</label>
+                                        <input class="form-control" formControlName="email" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Email">
+                                        <div *ngIf="admissionEnquiryForm.controls['email'].errors?.['required'] && admissionEnquiryForm.controls['email'].touched " class="text text-danger mt-1">Email required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Address</label>
+                                        <input class="form-control" formControlName="address" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Address">
+                                        <div *ngIf="admissionEnquiryForm.controls['address'].errors?.['required'] && admissionEnquiryForm.controls['address'].touched " class="text text-danger mt-1">Address required</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Date</label>
+                                        <input class="form-control" formControlName="date" id="exampleInputEmail1" type="date"
+                                               placeholder="Enter Description">
+                                        <div *ngIf="admissionEnquiryForm.controls['date'].errors?.['required'] && admissionEnquiryForm.controls['date'].touched " class="text text-danger mt-1">Date required</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Reference</label>
+                                        <input class="form-control" formControlName="reference" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Reference">
+                                        <div *ngIf="admissionEnquiryForm.controls['reference'].errors?.['required'] && admissionEnquiryForm.controls['reference'].touched " class="text text-danger mt-1">Reference required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Source</label>
+                                        <input class="form-control" formControlName="source" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Source">
+                                        <div *ngIf="admissionEnquiryForm.controls['source'].errors?.['required'] && admissionEnquiryForm.controls['source'].touched " class="text text-danger mt-1">Source required</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Course</label>
+                                        <input class="form-control" formControlName="course" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Course">
+                                        <div *ngIf="admissionEnquiryForm.controls['course'].errors?.['required'] && admissionEnquiryForm.controls['course'].touched " class="text text-danger mt-1">Course required</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Follow Up Date</label>
+                                        <input class="form-control" formControlName="follow_up_date" id="exampleInputEmail1" type="date"
+                                               placeholder="Enter Follow Up Date">
+                                        <div *ngIf="admissionEnquiryForm.controls['follow_up_date'].errors?.['required'] && admissionEnquiryForm.controls['follow_up_date'].touched " class="text text-danger mt-1">Follow Up Date required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+                                        <input class="form-control" formControlName="reference" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Description">
+                                        <div *ngIf="admissionEnquiryForm.controls['description'].errors?.['required'] && admissionEnquiryForm.controls['description'].touched " class="text text-danger mt-1">Description required</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Note</label>
+                                        <input class="form-control" formControlName="note" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Note">
+                                        <div *ngIf="admissionEnquiryForm.controls['note'].errors?.['required'] && admissionEnquiryForm.controls['note'].touched " class="text text-danger mt-1">Note required</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveStudentEnquiry()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateStudentEnquiry()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="col-sm-12 col-xl-7">-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <div class="col-sm-12">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-header">-->
+<!--                                <h5>Admission Enquiry List</h5>-->
+<!--                                <span>Full Admission Enquiry List.</span>-->
+<!--                            </div>-->
+<!--                            <div class="table-responsive" style="text-align: center">-->
+<!--                                <table class="table" >-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th scope="col">#</th>-->
+<!--                                        <th scope="col">Name</th>-->
+<!--                                        <th scope="col">Phone</th>-->
+<!--                                        <th scope="col">Date</th>-->
+<!--                                        <th scope="col">Next Follow Up Date</th>-->
+<!--                                        <th scope="col">Action</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                    <tr *ngFor="let record of callLogList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+<!--                                        <td>{{indexOfElement+1}}</td>-->
+<!--                                        <td>{{record.name}}</td>-->
+<!--                                        <td>{{record.phone}}</td>-->
+<!--                                        <td>{{record.date}}</td>-->
+<!--                                        <td>{{record.next_follow_up_date}}</td>-->
+<!--                                        <td>-->
+<!--                                            <a><mat-icon (click)="editCallLog(record)">edit</mat-icon></a>-->
+<!--                                            <a><mat-icon (click)="deleteCallLog(record)">delete</mat-icon></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                                <pagination-controls *ngIf="callLogList.length > 8" (pageChange)="p = $event"></pagination-controls>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->
