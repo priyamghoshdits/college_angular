@@ -23,6 +23,13 @@ export const content: Routes = [
     }
   },
   {
+    path: 'homework',
+    loadChildren: () => import('../../components/homework/homework-routing.module').then(m => m.HomeworkRoutingModule),
+    data: {
+      breadcrumb: "Homework"
+    }
+  },
+  {
     path: 'report',
     loadChildren: () => import('../../components/report/report-routing.module').then(m => m.ReportRoutingModule),
     data: {

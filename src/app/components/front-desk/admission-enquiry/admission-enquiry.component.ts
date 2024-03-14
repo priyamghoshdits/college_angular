@@ -55,6 +55,10 @@ export class AdmissionEnquiryComponent {
     }
 
     saveStudentEnquiry(){
+        if(!this.admissionEnquiryForm.valid){
+            this.admissionEnquiryForm.markAllAsTouched();
+            return;
+        }
         this.admissionEnquiryService.saveStudentEnquiry(this.admissionEnquiryForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 Swal.fire({
@@ -80,6 +84,10 @@ export class AdmissionEnquiryComponent {
     }
 
     updateStudentEnquiry(){
+        if(!this.admissionEnquiryForm.valid){
+            this.admissionEnquiryForm.markAllAsTouched();
+            return;
+        }
         this.admissionEnquiryService.updateStudentEnquiry(this.admissionEnquiryForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 Swal.fire({

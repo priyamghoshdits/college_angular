@@ -1,0 +1,130 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Home Work</h5><span>Add Home Work</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="homeworkForm">
+                                <div  class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="homeworkForm.controls['course_id'].errors?.['required'] && homeworkForm.controls['course_id'].touched " class="text text-danger mt-1">Home Work required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" (change)="getSubject()">
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="homeworkForm.controls['semester_id'].errors?.['required'] && homeworkForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label>Select Subject</label>
+                                        <select style="width: 100%" formControlName="subject_id" class="form-select">
+                                            <option *ngFor="let data of subjectList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="homeworkForm.controls['subject_id'].errors?.['required'] && homeworkForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Homework Date</label>
+                                        <input class="form-control" formControlName="homework_date" id="exampleInputEmail1" type="date"
+                                               placeholder="Enter Homework Date">
+                                        <div *ngIf="homeworkForm.controls['homework_date'].errors?.['required'] && homeworkForm.controls['homework_date'].touched " class="text text-danger mt-1">Homework Date required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Submission Date</label>
+                                        <input class="form-control" formControlName="submission_date" id="exampleInputEmail1" type="date"
+                                               placeholder="Enter Submission Date">
+                                        <div *ngIf="homeworkForm.controls['submission_date'].errors?.['required'] && homeworkForm.controls['submission_date'].touched " class="text text-danger mt-1">Submission Date required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Upload File</label>
+                                        <input class="form-control" type="file" formControlName="file" (change)="setFile($event)"
+                                               placeholder="File">
+<!--                                        <div *ngIf="homeworkForm.controls['file'].errors?.['required'] && homeworkForm.controls['file'].touched " class="text text-danger mt-1">File required</div>-->
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveHomework()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateHomework()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Home Work List</h5>
+                                <span>Full Home Work List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Course</th>
+                                        <th scope="col">Semester</th>
+                                        <th scope="col">Subject</th>
+                                        <th scope="col">Homework date</th>
+                                        <th scope="col">Submission date</th>
+                                        <th scope="col">File</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of homeworkList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.course_name}}</td>
+                                        <td>{{record.semester_name}}</td>
+                                        <td>{{record.subject_name}}</td>
+                                        <td>{{record.homework_date}}</td>
+                                        <td>{{record.submission_date}}</td>
+                                        <td>
+                                            <a data-placement="left" target="_blank" href="{{FILE_URL}}/homework/{{record.file_name}}">
+                                                <mat-icon>download</mat-icon>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a (click)="editHomework(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteHomework(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

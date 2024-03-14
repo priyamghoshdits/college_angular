@@ -162,6 +162,11 @@ export class NavService {
 			]
 		},
 		{
+			title: 'Homework', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/homework/add-homework', title: 'Add Homework', type: 'link' },
+			]
+		},
+		{
 			title: 'Fees Collection', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/fees-collection/fees-type', title: 'Fees Type', type: 'link' },
 				{ path: '/fees-collection/fees-structure', title: 'Fees Structure', type: 'link' },
