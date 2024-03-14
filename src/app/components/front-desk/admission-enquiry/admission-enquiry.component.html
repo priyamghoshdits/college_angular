@@ -4,10 +4,24 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header" [hidden]="active != 1">
                             <h5>Admission Enquiry</h5><span>Add Admission Enquiry</span>
                         </div>
-                        <div class="card-body">
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>Show Admission Enquiry</h5>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Add Admission Enquiry</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Show Admission Enquiry</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+                        <div class="card-body" [hidden]="active != 1">
                             <form class="theme-form" [formGroup]="admissionEnquiryForm">
                                 <div  class="row">
                                     <div class="col-md-4 mb-3">
@@ -85,16 +99,49 @@
                                 </div>
                             </form>
                         </div>
-                        <div class="card-footer">
+                        <div class="card-footer" [hidden]="active != 1">
                             <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveStudentEnquiry()">Submit</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateStudentEnquiry()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                        <div [hidden]="active != 2">
+                            <div class="table-responsive" style="text-align: center">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Follow Up Date</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of admissionEnquiryList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.name}}</td>
+                                        <td>{{record.phone}}</td>
+                                        <td>{{record.email}}</td>
+                                        <td>{{record.date}}</td>
+                                        <td>{{record.follow_up_date}}</td>
+                                        <td>
+                                            <a><mat-icon (click)="editAdmissionComponent(record)">edit</mat-icon></a>
+                                            <a><mat-icon (click)="deleteAdmissionComponent(record)">delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="admissionEnquiryList.length > 8" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-<!--        <div class="col-sm-12 col-xl-7">-->
+<!--        <div class="col-sm-12 col-xl-12" [hidden]="active != 2">-->
 <!--            <div class="row">-->
 <!--                <div class="col-sm-12">-->
 <!--                    <div class="col-sm-12">-->
@@ -103,35 +150,7 @@
 <!--                                <h5>Admission Enquiry List</h5>-->
 <!--                                <span>Full Admission Enquiry List.</span>-->
 <!--                            </div>-->
-<!--                            <div class="table-responsive" style="text-align: center">-->
-<!--                                <table class="table" >-->
-<!--                                    <thead>-->
-<!--                                    <tr>-->
-<!--                                        <th scope="col">#</th>-->
-<!--                                        <th scope="col">Name</th>-->
-<!--                                        <th scope="col">Phone</th>-->
-<!--                                        <th scope="col">Date</th>-->
-<!--                                        <th scope="col">Next Follow Up Date</th>-->
-<!--                                        <th scope="col">Action</th>-->
-<!--                                    </tr>-->
-<!--                                    </thead>-->
-<!--                                    <tbody>-->
-<!--                                    <tr *ngFor="let record of callLogList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
-<!--                                        <td>{{indexOfElement+1}}</td>-->
-<!--                                        <td>{{record.name}}</td>-->
-<!--                                        <td>{{record.phone}}</td>-->
-<!--                                        <td>{{record.date}}</td>-->
-<!--                                        <td>{{record.next_follow_up_date}}</td>-->
-<!--                                        <td>-->
-<!--                                            <a><mat-icon (click)="editCallLog(record)">edit</mat-icon></a>-->
-<!--                                            <a><mat-icon (click)="deleteCallLog(record)">delete</mat-icon></a>-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
-<!--                                    </tbody>-->
-<!--                                </table>-->
-<!--                                <pagination-controls *ngIf="callLogList.length > 8" (pageChange)="p = $event"></pagination-controls>-->
-
-<!--                            </div>-->
+<!--                            -->
 <!--                        </div>-->
 <!--                    </div>-->
 <!--                </div>-->
