@@ -54,4 +54,18 @@ export class HomeworkService {
         }));
   }
 
+  updateHomework(value){
+    return this.http.post(this.BASE_API_URL + '/updateHomework', value)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+          // @ts-ignore
+          if(response.success == 1){
+            // @ts-ignore
+            const index = this.homeworkList.findIndex(x => x.id === response.data.id);
+            // @ts-ignore
+            this.homeworkList[index] = response.data;
+            this.homeworkListSubject.next([...this.homeworkList]);
+          }
+        }));
+  }
+
 }

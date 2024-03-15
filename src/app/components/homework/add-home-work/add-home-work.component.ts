@@ -136,21 +136,53 @@ export class AddHomeWorkComponent {
   }
 
   updateHomework(){
-
+      const formData = new FormData();
+      formData.append("id", this.homeworkForm.value.id);
+      formData.append("course_id", this.homeworkForm.value.course_id);
+      formData.append("semester_id", this.homeworkForm.value.semester_id);
+      formData.append("subject_id", this.homeworkForm.value.subject_id);
+      formData.append("homework_date", this.homeworkForm.value.homework_date);
+      formData.append("submission_date", this.homeworkForm.value.submission_date);
+      formData.append("file_name", this.file['name']);
+      formData.append("file", this.file);
+      this.homeworkService.updateHomework(formData).subscribe((response: any) => {
+          if(response.success == 1){
+              Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Homework Updated',
+                  showConfirmButton: false,
+                  timer: 1000
+              });
+              this.cancelUpdate();
+          }
+      })
   }
 
   deleteHomework(data){
-    this.homeworkService.deleteHomework(data.id).subscribe((response: any) => {
-      if(response.success == 1){
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: 'Homework Deleted',
-          showConfirmButton: false,
-          timer: 1000
-        });
-      }
-    })
+      Swal.fire({
+          title: 'Confirmation',
+          text: 'Do you sure to delete ?',
+          icon: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete It!'
+      }).then((result) => {
+          if(result.isConfirmed){
+              this.homeworkService.deleteHomework(data.id).subscribe((response: any) => {
+                  if(response.success == 1){
+                      Swal.fire({
+                          position: 'center',
+                          icon: 'success',
+                          title: 'Homework Deleted',
+                          showConfirmButton: false,
+                          timer: 1000
+                      });
+                  }
+              })
+          }
+      });
   }
 
   cancelUpdate(){
