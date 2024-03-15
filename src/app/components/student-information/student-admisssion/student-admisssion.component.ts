@@ -107,6 +107,10 @@ export class StudentAdmisssionComponent {
             guardian_address: new FormControl(null),
             franchise_id: new FormControl(null),
             session_id: new FormControl(null, [Validators.required]),
+            payment_date: new FormControl(null, [Validators.required]),
+            mode_of_payment: new FormControl(null, [Validators.required]),
+            transaction_id: new FormControl(null, [Validators.required]),
+            caution_money: new FormControl(0, [Validators.required]),
         });
 
         this.franchiseService.getFranchiseListener().subscribe((response) => {

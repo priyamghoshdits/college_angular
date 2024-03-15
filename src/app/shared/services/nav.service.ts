@@ -132,6 +132,7 @@ export class NavService {
 				{ path: '/student-information/upload-certificates', title: 'Upload Certificate', type: 'link' },
 				{ path: '/student-information/download-certificates', title: 'Download Certificate', type: 'link' },
 				{ path: '/student-information/send-login-credentials', title: 'Send Login Credential', type: 'link' },
+				{ path: '/student-information/caution-money', title: 'Caution Money', type: 'link' },
 			]
 		},
 		{

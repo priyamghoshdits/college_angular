@@ -221,7 +221,44 @@
                                             <input type="text" class="form-control" formControlName="permanent_address" placeholder="Permanent Address">
                                             <div *ngIf="studentCreationForm.controls['permanent_address'].errors?.['required'] && studentCreationForm.controls['permanent_address'].touched " class="text text-danger mt-1">Permanent Address required</div>
                                         </div>
+<!--                                        <div class="col-md-3 mb-3">-->
+<!--                                            <label>Caution Money</label>-->
+<!--                                            <input type="text" class="form-control" formControlName="caution_money" placeholder="Caution Money">-->
+<!--                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['required'] && studentCreationForm.controls['caution_money'].touched " class="text text-danger mt-1">Caution Money required</div>-->
+<!--                                        </div>-->
                                     </div>
+
+                                    <hr>
+                                    <h3>Caution Money Payment Details</h3>
+                                    <hr>
+                                    <div  class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Payment Date</label>
+                                            <input type="date" class="form-control" formControlName="payment_date" placeholder="Pre-Admission Amount">
+                                            <div *ngIf="studentCreationForm.controls['payment_date'].errors?.['required'] && studentCreationForm.controls['payment_date'].touched " class="text text-danger mt-1">Payment Date required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Payment Mode</label>
+                                            <select style="width: 100%" formControlName="mode_of_payment" class="form-select">
+                                                <option value="Cash"> Cash </option>
+                                                <option value="Cheque"> Cheque </option>
+                                                <option value="Transfer To Bank"> Transfer To Bank </option>
+                                                <option value="Others"> Others </option>
+                                            </select>
+                                            <div *ngIf="studentCreationForm.controls['mode_of_payment'].errors?.['required'] && studentCreationForm.controls['mode_of_payment'].touched " class="text text-danger mt-1">Mode Of Payment required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Transaction Id</label>
+                                            <input type="text" class="form-control" formControlName="transaction_id" placeholder="Transaction Id">
+                                            <div *ngIf="studentCreationForm.controls['transaction_id'].errors?.['required'] && studentCreationForm.controls['transaction_id'].touched " class="text text-danger mt-1">Transaction Id required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Caution Money Amount</label>
+                                            <input type="text" class="form-control" formControlName="caution_money" placeholder="Caution Money Amount">
+                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['required'] && studentCreationForm.controls['caution_money'].touched " class="text text-danger mt-1">Caution Money Amount required</div>
+                                        </div>
+                                    </div>
+
 
                                     <hr>
                                     <h3>Guardian Details</h3>

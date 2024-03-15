@@ -1,0 +1,174 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Caution Money</h5><span>Add Caution Money</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="cautionMoneyForm">
+                                <div  class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="cautionMoneyForm.controls['course_id'].errors?.['required'] && cautionMoneyForm.controls['course_id'].touched " class="text text-danger mt-1">Course Name required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="cautionMoneyForm.controls['semester_id'].errors?.['required'] && cautionMoneyForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="session_id" class="form-select">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="cautionMoneyForm.controls['session_id'].errors?.['required'] && cautionMoneyForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <button class="btn btn-primary me-1" style="margin-top: 30px" (click)="getCautionMoney()">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div *ngIf="studentList.length > 0">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Email</th>
+                                        <th scope="col">Caution Money</th>
+                                        <th scope="col">Deduction</th>
+                                        <th scope="col">Refunded Amount</th>
+                                        <th scope="col">Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of studentList | customFilter:searchItem;let indexOfElement=index">
+                                        <td>{{indexOfElement + 1}}</td>
+                                        <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                        <td>{{record.email}}</td>
+                                        <td>{{record.caution_money?record.caution_money:0}}</td>
+                                        <td>{{record.caution_money_deduction?record.caution_money_deduction:0}}</td>
+                                        <td>{{record.refunded_amount?record.refunded_amount:0}}</td>
+                                        <td *ngIf="record.caution_money_refund == 0">
+                                            <button class="btn btn-primary me-1" (click)="openCustomModal(content,record)">Refund</button>
+                                        </td>
+                                        <td *ngIf="record.caution_money_refund == 1">
+                                            <button class="btn btn-primary me-1" (click)="revertCautionMoneyPayment(record)">Revert</button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <ng-template #content let-modal>
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="modal-basic-title">Refund Caution Money</h4>
+                                        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                        <form [formGroup]="cautionMoneyRefundForm">
+                                            <div  class="row">
+                                                <div class="col-md-3 mb-3">
+                                                    <label>Payment Date</label>
+                                                    <input type="date" class="form-control" formControlName="refund_payment_date" placeholder="Pre-Admission Amount">
+                                                    <div *ngIf="cautionMoneyRefundForm.controls['refund_payment_date'].errors?.['required'] && cautionMoneyRefundForm.controls['refund_payment_date'].touched " class="text text-danger mt-1">Payment Date required</div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label>Select Payment Mode</label>
+                                                    <select style="width: 100%" formControlName="refund_mode_of_payment" class="form-select">
+                                                        <option value="Cash"> Cash </option>
+                                                        <option value="Cheque"> Cheque </option>
+                                                        <option value="Transfer To Bank"> Transfer To Bank </option>
+                                                        <option value="Others"> Others </option>
+                                                    </select>
+                                                    <div *ngIf="cautionMoneyRefundForm.controls['refund_mode_of_payment'].errors?.['required'] && cautionMoneyRefundForm.controls['refund_mode_of_payment'].touched " class="text text-danger mt-1">Mode Of Payment required</div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label>Transaction Id</label>
+                                                    <input type="text" class="form-control" formControlName="refund_transaction_id" placeholder="Transaction Id">
+                                                    <div *ngIf="cautionMoneyRefundForm.controls['refund_transaction_id'].errors?.['required'] && cautionMoneyRefundForm.controls['refund_transaction_id'].touched " class="text text-danger mt-1">Transaction Id required</div>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label>Deduction Amount</label>
+                                                    <input type="text" class="form-control" formControlName="caution_money_deduction" placeholder="Caution Money Amount">
+                                                    <div *ngIf="cautionMoneyRefundForm.controls['caution_money_deduction'].errors?.['required'] && cautionMoneyRefundForm.controls['caution_money_deduction'].touched " class="text text-danger mt-1">Deduction Amount required</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <button class="btn btn-primary me-1" style="margin-top: 30px" (click)="refundCaution(modal)">Submit</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </div>
+<!--                        <div class="card-footer">-->
+<!--                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCertificateType()">Submit</button>-->
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCertificateType()">Update</button>-->
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="col-sm-12 col-xl-6">-->
+<!--            <div class="row">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <div class="col-sm-12">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-header">-->
+<!--                                <h5>Caution Money List</h5>-->
+<!--                                &lt;!&ndash;                                <span>Full Course List.</span>&ndash;&gt;-->
+<!--                            </div>-->
+<!--                            <div class="table-responsive">-->
+<!--                                <table class="table" style="text-align: center">-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th scope="col">#</th>-->
+<!--                                        <th scope="col">Caution Money Name</th>-->
+<!--                                        <th scope="col">Action</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                    <tr *ngFor="let record of certificateTypeList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+<!--                                        <td>{{indexOfElement+1}}</td>-->
+<!--                                        <td>{{record.name}}</td>-->
+<!--                                        <td>-->
+<!--                                            <a (click)="editCertificateType(record)"><mat-icon>edit</mat-icon></a>-->
+<!--                                            <a (click)="deleteCertificateType(record)"><mat-icon>delete</mat-icon></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                                <pagination-controls *ngIf="certificateTypeList.length > 8" (pageChange)="p = $event"></pagination-controls>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->

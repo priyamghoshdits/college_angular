@@ -243,13 +243,11 @@ export class CreateSemesterTimetableComponent {
 
     getSubject(){
         this.subjectService.getSubjects(this.semesterTimeTableForm.value.course_id, this.semesterTimeTableForm.value.semester_id)
-            .subscribe((response) => {
-                // @ts-ignore
+            .subscribe((response: any) => {
                 this.subjectList = response.data;
             });
         this.subjectService.getTeacherList(this.semesterTimeTableForm.value.course_id, this.semesterTimeTableForm.value.semester_id)
-            .subscribe((response) => {
-                // @ts-ignore
+            .subscribe((response: any) => {
                this.teacherList = response.data;
             });
     }
