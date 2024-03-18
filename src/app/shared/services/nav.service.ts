@@ -171,6 +171,7 @@ export class NavService {
 			title: 'Transport', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/transport/routes', title: 'Routes', type: 'link' },
 				{ path: '/transport/vehicle', title: 'Vehicle', type: 'link' },
+				{ path: '/transport/assign-vehicle', title: 'Assign Vehicle', type: 'link' },
 			]
 		},
 		{
