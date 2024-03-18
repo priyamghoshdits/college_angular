@@ -5,6 +5,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {PostalService} from "../../../services/postal.service";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-postal-receive',
@@ -24,8 +25,10 @@ export class PostalReceiveComponent {
   isUpdatable = false;
   postalReceiveList: any[] = [];
   p: number;
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
 
-  constructor(private postalService: PostalService) {
+  constructor(private postalService: PostalService, private roleAndPermissionService: RolesAndPermissionService) {
     this.postalReceiveForm = new FormGroup({
       id: new FormControl(null),
       postal_type: new FormControl('postal receive'),
@@ -41,6 +44,15 @@ export class PostalReceiveComponent {
         this.postalReceiveList = response;
     });
     this.postalReceiveList = this.postalService.getPostalReceiveList();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'POSTAL RECEIVE').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'POSTAL RECEIVE').permission;
+    }
 
   }
 

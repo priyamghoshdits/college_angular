@@ -5,6 +5,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {VisitorBookService} from "../../../services/visitor-book.service";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-visitor-book',
@@ -24,7 +25,9 @@ export class VisitorBookComponent {
     isUpdatable = false;
     visitorList: any[];
     p: number;
-    constructor(private visitorService: VisitorBookService) {
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
+    constructor(private visitorService: VisitorBookService, private roleAndPermissionService: RolesAndPermissionService) {
         this.visitorForm = new FormGroup({
             id: new FormControl(null),
             purpose: new FormControl(null, [Validators.required]),
@@ -41,6 +44,15 @@ export class VisitorBookComponent {
             this.visitorList = response;
         });
         this.visitorList = this.visitorService.getVisitorList();
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'VISITOR BOOK').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'VISITOR BOOK').permission;
+        }
     }
 
     saveVisitor(){

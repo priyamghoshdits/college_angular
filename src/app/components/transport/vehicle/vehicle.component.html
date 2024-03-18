@@ -1,0 +1,129 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Vehicle</h5><span>Add Vehicle</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="vehicleForm">
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Vehicle Number</label>
+                                        <input class="form-control" formControlName="number" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Vehicle Number">
+                                        <div *ngIf="vehicleForm.controls['number'].errors?.['required'] && vehicleForm.controls['number'].touched " class="text text-danger mt-1">Vehicle Number required</div>
+                                    </div>
+                                </div>
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Vehicle Model</label>
+                                        <input class="form-control" formControlName="model" type="text"
+                                               placeholder="Enter Vehicle Model">
+                                        <div *ngIf="vehicleForm.controls['model'].errors?.['required'] && vehicleForm.controls['model'].touched " class="text text-danger mt-1">Vehicle Model required</div>
+                                    </div>
+                                </div>
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Year Made</label>
+                                        <input class="form-control" formControlName="year_made" type="text"
+                                               placeholder="Enter Year Made">
+                                        <div *ngIf="vehicleForm.controls['year_made'].errors?.['required'] && vehicleForm.controls['year_made'].touched " class="text text-danger mt-1">Year Made required</div>
+                                    </div>
+                                </div>
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Driver Name</label>
+                                        <input class="form-control" formControlName="driver_name" type="text"
+                                               placeholder="Enter Driver Name">
+                                        <div *ngIf="vehicleForm.controls['driver_name'].errors?.['required'] && vehicleForm.controls['driver_name'].touched " class="text text-danger mt-1">Driver Name required</div>
+                                    </div>
+                                </div>
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Driver Licence</label>
+                                        <input class="form-control" formControlName="driver_licence" type="text"
+                                               placeholder="Enter Driver Licence">
+                                        <div *ngIf="vehicleForm.controls['driver_licence'].errors?.['required'] && vehicleForm.controls['driver_licence'].touched " class="text text-danger mt-1">Driver Licence required</div>
+                                    </div>
+                                </div>
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Driver Contact</label>
+                                        <input class="form-control" formControlName="driver_contact" type="text"
+                                               placeholder="Enter Driver Contact">
+                                        <div *ngIf="vehicleForm.controls['driver_contact'].errors?.['required'] && vehicleForm.controls['driver_contact'].touched " class="text text-danger mt-1">Driver Contact required</div>
+                                    </div>
+                                </div>
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Note</label>
+                                        <input class="form-control" formControlName="note" type="text"
+                                               placeholder="Enter Note">
+                                        <div *ngIf="vehicleForm.controls['note'].errors?.['required'] && vehicleForm.controls['note'].touched " class="text text-danger mt-1">Note required</div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveVehicle()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateVehicle()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Vehicle List</h5>
+                                <span>Full Vehicle List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Vehicle Number</th>
+                                        <th scope="col">Vehicle Model</th>
+                                        <th scope="col">Year Made</th>
+                                        <th scope="col">Driver Name</th>
+                                        <th scope="col">Driver Licence</th>
+                                        <th scope="col">Driver Contact</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of vehicleList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.number}}</td>
+                                        <td>{{record.model}}</td>
+                                        <td>{{record.year_made}}</td>
+                                        <td>{{record.driver_name}}</td>
+                                        <td>{{record.driver_licence}}</td>
+                                        <td>{{record.driver_contact}}</td>
+                                        <td>
+                                            <a (click)="editVehicle(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteVehicle(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="vehicleList.length > 8" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

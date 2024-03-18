@@ -5,6 +5,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import {CallLogService} from "../../../services/call-log.service";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-call-log',
@@ -25,7 +26,9 @@ export class CallLogComponent {
     isUpdatable = false;
     callLogList: any[] = [];
     p: number;
-    constructor(private callLogService: CallLogService) {
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
+    constructor(private callLogService: CallLogService, private roleAndPermissionService: RolesAndPermissionService) {
         this.callLogForm = new FormGroup({
             id: new FormControl(null),
             name: new FormControl(null, [Validators.required]),
@@ -41,6 +44,16 @@ export class CallLogComponent {
             this.callLogList = response;
         });
         this.callLogList = this.callLogService.getCallLogList();
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'CALL LOG').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'CALL LOG').permission;
+        }
+
     }
 
     saveCallLog(){

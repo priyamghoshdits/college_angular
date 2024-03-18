@@ -5,6 +5,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {PostalService} from "../../../services/postal.service";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-postal-dispatch',
@@ -24,7 +25,9 @@ export class PostalDispatchComponent {
     isUpdatable = false;
     postalDispatchList: any[];
     p: number;
-    constructor(private postalService: PostalService) {
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
+    constructor(private postalService: PostalService, private roleAndPermissionService: RolesAndPermissionService) {
         this.postalDispatchForm = new FormGroup({
             id: new FormControl(null),
             postal_type: new FormControl('postal dispatch'),
@@ -40,6 +43,15 @@ export class PostalDispatchComponent {
             this.postalDispatchList =response;
         });
         this.postalDispatchList = this.postalService.getPostalDispatchList();
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'POSTAL DISPATCH').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'POSTAL DISPATCH').permission;
+        }
 
     }
 

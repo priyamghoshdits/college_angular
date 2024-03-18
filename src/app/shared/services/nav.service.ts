@@ -155,7 +155,7 @@ export class NavService {
 		},
 		{
 			title: 'Front Desk', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/front-desk/visitor-book', title: 'Virtual Book', type: 'link' },
+				{ path: '/front-desk/visitor-book', title: 'Visitor Book', type: 'link' },
 				{ path: '/front-desk/admission-enquiry', title: 'Admission Enquiry', type: 'link' },
 				{ path: '/front-desk/call-log', title: 'Call Log', type: 'link' },
 				{ path: '/front-desk/postal-dispatch', title: 'Postal Dispatch', type: 'link' },
@@ -165,6 +165,12 @@ export class NavService {
 		{
 			title: 'Homework', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/homework/add-homework', title: 'Add Homework', type: 'link' },
+			]
+		},
+		{
+			title: 'Transport', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/transport/routes', title: 'Routes', type: 'link' },
+				{ path: '/transport/vehicle', title: 'Vehicle', type: 'link' },
 			]
 		},
 		{

@@ -1,0 +1,82 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Routes</h5><span>Add Routes</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="routeForm">
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Routes Title</label>
+                                        <input class="form-control" formControlName="title" id="exampleInputEmail1" type="text"
+                                               placeholder="Enter Routes Name">
+                                        <div *ngIf="routeForm.controls['title'].errors?.['required'] && routeForm.controls['title'].touched " class="text text-danger mt-1">Routes Title required</div>
+                                    </div>
+                                </div>
+                                <div  class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Fare</label>
+                                        <input class="form-control" formControlName="fare" type="text"
+                                               placeholder="Enter Fare">
+                                        <div *ngIf="routeForm.controls['fare'].errors?.['required'] && routeForm.controls['fare'].touched " class="text text-danger mt-1">Fare required</div>
+                                        <div *ngIf="routeForm.controls['fare'].errors?.['pattern']" class="text text-danger mt-1">Invalid Fare</div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveRoute()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateRoute()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Routes List</h5>
+                                <span>Full Routes List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Route Title</th>
+                                        <th scope="col">Fare</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of routesList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.title}}</td>
+                                        <td>₹{{record.fare}}</td>
+                                        <td>
+                                            <a (click)="editRoute(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="deleteRoute(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="routesList.length > 8" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

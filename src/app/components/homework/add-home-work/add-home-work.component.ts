@@ -8,6 +8,7 @@ import {SubjectService} from "../../../services/subject.service";
 import Swal from "sweetalert2";
 import {HomeworkService} from "../../../services/homework.service";
 import {environment} from "../../../../environments/environment";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-add-home-work',
@@ -39,7 +40,10 @@ export class AddHomeWorkComponent {
   isUpdatable = false;
   file: File;
   p: number;
-  constructor(private subjectService: SubjectService, public homeworkService: HomeworkService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private subjectService: SubjectService, public homeworkService: HomeworkService
+              , private roleAndPermissionService: RolesAndPermissionService) {
     this.homeworkForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
@@ -59,6 +63,15 @@ export class AddHomeWorkComponent {
       this.courseList = response;
     });
     this.courseList = this.subjectService.getCourses();
+
+      this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+          this.rolesAndPermission = response;
+          this.permission = this.rolesAndPermission.find(x => x.name == 'HOMEWORK').permission;
+      });
+      this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+      if(this.rolesAndPermission.length > 0){
+          this.permission = this.rolesAndPermission.find(x => x.name == 'HOMEWORK').permission;
+      }
   }
 
   getSemester(){

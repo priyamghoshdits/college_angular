@@ -54,7 +54,6 @@ export class DownloadDigitalBookComponent {
   };
 
   searchDigitalBooks(){
-    console.log(this.libraryDigitalBookForm.controls['semester_id'].errors);
     if(!this.libraryDigitalBookForm.valid){
       this.libraryDigitalBookForm.markAllAsTouched();
       return;
