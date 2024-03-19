@@ -6,6 +6,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import Swal from "sweetalert2";
 
+
 @Component({
   selector: 'app-vehicle',
   standalone: true,
@@ -14,7 +15,7 @@ import Swal from "sweetalert2";
     NgForOf,
     NgIf,
     NgxPaginationModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './vehicle.component.html',
   styleUrl: './vehicle.component.scss'

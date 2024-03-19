@@ -66,7 +66,6 @@ export class CourseComponent {
 
     editCourse(data){
         this.courseForm.patchValue({'id': data.id, 'name': data.course_name});
-        // this.tempSem = data.semester;
         let temp = [];
         data.semester.forEach(function (key,value){
             let sem;
