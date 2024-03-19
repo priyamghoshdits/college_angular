@@ -5,6 +5,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 
 @Component({
@@ -25,7 +26,9 @@ export class VehicleComponent {
   vehicleList: any[];
   isUpdatable = false;
   p: number;
-  constructor(private transportService: TransportService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private transportService: TransportService, private roleAndPermissionService: RolesAndPermissionService) {
     this.vehicleForm = new FormGroup({
       id: new FormControl(null),
       number: new FormControl(null, [Validators.required]),
@@ -36,6 +39,16 @@ export class VehicleComponent {
       driver_contact: new FormControl(null, [Validators.required]),
       note: new FormControl(null),
     });
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'VEHICLE').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'VEHICLE').permission;
+    }
+
     this.transportService.getVehicleListListener().subscribe((response) => {
       this.vehicleList = response;
     });

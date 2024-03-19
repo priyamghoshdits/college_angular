@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-5">
             <div class="row">
                 <div class="col-sm-12">
@@ -69,8 +69,8 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveVehicle()">Submit</button>
-                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateVehicle()">Update</button>
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveVehicle()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateVehicle()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-xl-7">
-            <div class="row">
+            <div class="row" *ngIf="permission[3].permission == 1">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <div class="card">
@@ -97,7 +97,7 @@
                                         <th scope="col">Driver Name</th>
                                         <th scope="col">Driver Licence</th>
                                         <th scope="col">Driver Contact</th>
-                                        <th scope="col">Action</th>
+                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -110,8 +110,8 @@
                                         <td>{{record.driver_licence}}</td>
                                         <td>{{record.driver_contact}}</td>
                                         <td>
-                                            <a (click)="editVehicle(record)"><mat-icon>edit</mat-icon></a>
-                                            <a (click)="deleteVehicle(record)"><mat-icon>delete</mat-icon></a>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editVehicle(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteVehicle(record)"><mat-icon>delete</mat-icon></a>
                                         </td>
                                     </tr>
                                     </tbody>

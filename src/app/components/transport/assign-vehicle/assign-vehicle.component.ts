@@ -6,6 +6,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {TransportService} from "../../../services/transport.service";
 import {cloneDeep} from 'lodash';
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-assign-vehicle',
@@ -29,8 +30,10 @@ export class AssignVehicleComponent {
   isUpdatable = false;
   cloneVehicleList: any[];
   p: number;
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
 
-  constructor(private transportService: TransportService) {
+  constructor(private transportService: TransportService, private roleAndPermissionService: RolesAndPermissionService) {
     this.assignVehicleForm = new FormGroup({
       id: new FormControl(null),
       route_id: new FormControl(null, [Validators.required]),
@@ -46,6 +49,15 @@ export class AssignVehicleComponent {
     this.vehicleList = this.transportService.getVehicleList();
     if(this.vehicleList.length > 0){
       this.cloneVehicleList = cloneDeep(this.vehicleList);
+    }
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'ASSIGN VEHICLE').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'ASSIGN VEHICLE').permission;
     }
 
     this.transportService.getAssignVehicleListener().subscribe((response) => {

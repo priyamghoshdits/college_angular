@@ -3,6 +3,9 @@ import {environment} from "../../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {ErrorService} from "../../../services/error.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {catchError, tap} from "rxjs/operators";
+import {MemberService} from "../../../services/member.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-user-edit',
@@ -12,13 +15,14 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class UserEditComponent implements OnInit {
   private BASE_API_URL = environment.BASE_API_URL;
   studentCreationForm: FormGroup;
+  categoryList: any[];
 
   user = JSON.parse(localStorage.getItem('user') || '{}');
   // @ts-ignore
   userDetails: {
+    category_id: any;
     permanent_address: any;
     material_status: any;
-    category_name: any;
     religion: any;
     blood_group: any;
     mobile_no: any;
@@ -33,7 +37,7 @@ export class UserEditComponent implements OnInit {
     middle_name: any;
     first_name: any;
   } = {};
-  constructor(private  http: HttpClient, private errorService: ErrorService) {
+  constructor(private  http: HttpClient, private errorService: ErrorService, private memberService: MemberService) {
     this.studentCreationForm = new FormGroup({
       id: new FormControl(null),
       identification_no: new FormControl(null),
@@ -50,7 +54,6 @@ export class UserEditComponent implements OnInit {
       religion: new FormControl(null),
       blood_group: new FormControl(null),
       category_id: new FormControl(null),
-      category_name: new FormControl(null),
       email: new FormControl(null),
       course_name: new FormControl(null),
       semester_name: new FormControl(null),
@@ -70,28 +73,47 @@ export class UserEditComponent implements OnInit {
       franchise_id: new FormControl(null),
       session_id: new FormControl(null),
     });
+    this.memberService.getCategoryListener().subscribe((response) => {
+      this.categoryList = response;
+    });
+    this.categoryList = this.memberService.getCategoryList();
   }
 
   getUserDetails(){
     this.http.get(this.BASE_API_URL + '/getLoggedInUserData').subscribe((response: any) =>{
       if(response.success == 1){
         this.userDetails = response.data;
-        console.log(this.userDetails);
         this.studentCreationForm.patchValue({email: this.userDetails.email
           , course_name: this.userDetails.course_name
           , semester_name: this.userDetails.current_semester
           , permanent_address: this.userDetails.permanent_address
           , gender: this.userDetails.gender
           , dob: this.userDetails.dob
+          , category_id: this.userDetails.category_id
           , mobile_no: this.userDetails.mobile_no
           , blood_group: this.userDetails.blood_group
           , religion: this.userDetails.religion
-          , category_name: this.userDetails.category_name
           , material_status: this.userDetails.material_status
           , identification_no: this.userDetails.identification_no
         })
       }
     });
+  }
+
+  updateProfile(){
+    return this.http.post(this.BASE_API_URL + '/updateMemberOwn', this.studentCreationForm.value)
+        .subscribe(response => {
+          // @ts-ignore
+          if(response.success == 1){
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Profile Updated',
+              showConfirmButton: false,
+              timer: 1000
+            });
+          }
+        });
   }
 
   ngOnInit() {

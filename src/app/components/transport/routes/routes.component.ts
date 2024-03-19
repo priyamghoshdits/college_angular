@@ -5,6 +5,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
 import Swal from "sweetalert2";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-routes',
@@ -26,12 +27,23 @@ export class RoutesComponent {
   routesList: any[];
   isUpdatable = false;
   p: number;
-  constructor(private transportService: TransportService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+  constructor(private transportService: TransportService, private roleAndPermissionService: RolesAndPermissionService) {
     this.routeForm = new FormGroup({
       id: new FormControl(null),
       title: new FormControl(null, [Validators.required]),
       fare: new FormControl(null, [Validators.required,Validators.pattern("^[0-9]*$")]),
     });
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'ROUTES').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'ROUTES').permission;
+    }
 
     this.transportService.getRoutesListListener().subscribe((response) => {
       this.routesList = response;
