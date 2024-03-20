@@ -115,7 +115,6 @@ export class ExamComponent {
   saveAnswerSheet(){
     let flag = 0;
     this.tempQuestion.forEach(function (value){
-      console.log(value.student_answer);
       if (!value.student_answer){
         flag = 1;
       }
@@ -125,14 +124,72 @@ export class ExamComponent {
     });
 
     if(flag == 1){
+      // Swal.fire({
+      //   position: 'center',
+      //   icon: 'error',
+      //   title: 'Please ans all questions',
+      //   showConfirmButton: false,
+      //   timer: 1000
+      // });
+      // return;
+
       Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Please ans all questions',
-        showConfirmButton: false,
-        timer: 1000
+        title: 'Confirmation',
+        text: 'You have not answer to all questions still save ?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: "Yes, Submit!",
+        cancelButtonText: "No, Please Wait!"
+      }).then((result) => {
+        if(result.isConfirmed){
+
+          this.tempQuestion.forEach(function (value){
+            if (!value.student_answer){
+              value.student_answer = 0;
+            }
+            if(parseInt(value.student_answer) != value.answer){
+              value.marks = 0;
+            }
+          });
+
+          Swal.fire({
+            title: "Alert!",
+            html: "Answer sheet will submit and auto redirect please wait do not press anything!",
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: () => {
+              Swal.showLoading();
+            },
+          }).then((result) => {
+            this.examinationService.saveAnswerSheet(this.tempQuestion).subscribe((response) => {
+              // @ts-ignore
+              if(response.success == 1){
+                Swal.fire({
+                  position: 'center',
+                  icon: 'success',
+                  title: 'Answer Sheet Submitted',
+                  showConfirmButton: false,
+                  timer: 1000
+                });
+                window.location.reload();
+              }else{
+                Swal.fire({
+                  position: 'center',
+                  icon: 'error',
+                  title: 'Please attend all questions',
+                  showConfirmButton: false,
+                  timer: 1000
+                });
+              }
+            })
+          });
+        }
       });
+
       return;
+
     }
 
     Swal.fire({

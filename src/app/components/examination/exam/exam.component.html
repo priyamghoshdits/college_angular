@@ -78,7 +78,7 @@
                                                         <div class="col">4.{{record.option_4}}</div>
                                                     </div>
                                                 </td>
-                                                <td style="text-align: center">{{ record.student_answer == 1 ? record.option_1 : (record.student_answer == 2 ? record.option_2 : (record.student_answer == 3 ? record.option_3 : (record.student_answer == 4 ? record.option_4 : ''))) }}</td>
+                                                <td style="text-align: center">{{ record.student_answer == 1 ? record.option_1 : (record.student_answer == 2 ? record.option_2 : (record.student_answer == 3 ? record.option_3 : (record.student_answer == 4 ? record.option_4 : record.student_answer == 0 ? 'Not Answered': ''))) }}</td>
                                                 <td style="text-align: center">{{ record.answer == 1 ? record.option_1 : (record.answer == 2 ? record.option_2 : (record.answer == 3 ? record.option_3 : (record.answer == 4 ? record.option_4 : ''))) }}</td>
                                                 <td style="text-align: center">{{record.marks_obtained}}</td>
 <!--                                                <td>{{record.questions.length}}</td>-->
