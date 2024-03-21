@@ -15,6 +15,7 @@ import {AuthInterceptorInterceptor} from './services/auth-interceptor.intercepto
 import "hammerjs";
 import "mousetrap";
 import {MatIconModule} from "@angular/material/icon";
+import {NgxCaptchaModule} from "ngx-captcha";
 
 // @ts-ignore
 @NgModule({
@@ -29,6 +30,7 @@ import {MatIconModule} from "@angular/material/icon";
         HttpClientModule,
         ToastrModule.forRoot(),
         HttpClientModule,
+        NgxCaptchaModule,
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,

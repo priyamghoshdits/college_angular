@@ -4,7 +4,6 @@ import { FormBuilder, Validators, FormGroup } from "@angular/forms";
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import Swal from "sweetalert2";
-import {TimeInterval} from "rxjs/internal/operators/timeInterval";
 
 type UserFields = "email" | "password";
 type FormErrors = { [u in UserFields]: string };
@@ -15,6 +14,7 @@ type FormErrors = { [u in UserFields]: string };
   styleUrls: ["./login.component.scss"],
 })
 export class LoginComponent implements OnInit {
+  siteKey = "6LfZFp8pAAAAADd6vXQG8oWC7iM4LGVKJh1vomdN";
   public newUser = false;
   // public user: firebase.User;
   public loginForm: FormGroup;
@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       email: ["admin@admin.com", [Validators.required, Validators.email]],
       password: ["12345678", Validators.required],
+      // recaptcha: ['', Validators.required]
     });
 
     this.forgotPasswordForm = this.fb.group({
