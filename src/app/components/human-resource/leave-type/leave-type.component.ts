@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {LeaveService} from "../../../services/leave.service";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
 
 @Component({
   selector: 'app-leave-type',
@@ -15,7 +16,9 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
         NgForOf,
         NgxPaginationModule,
         ReactiveFormsModule,
-        NgIf
+        NgIf,
+        FormsModule,
+        CustomFilterPipe
     ],
   templateUrl: './leave-type.component.html',
   styleUrl: './leave-type.component.scss'
@@ -27,6 +30,7 @@ export class LeaveTypeComponent {
     isUpdatable = false;
     rolesAndPermission: any[] = [];
     permission: any[] = [];
+    searchItem: string;
     constructor(private leaveService: LeaveService, private roleAndPermissionService: RolesAndPermissionService) {
         this.leaveTypeForm = new FormGroup({
             id: new FormControl(null),

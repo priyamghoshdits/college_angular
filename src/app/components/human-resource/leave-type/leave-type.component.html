@@ -33,6 +33,13 @@
                                 <h5>Leave Type  List</h5>
                                 <span>Leave Type List.</span>
                             </div>
+                            <div class="row" style="text-align: center;">
+                                <div class="col-1"></div>
+                                <div style="margin-top: 4px" class="col-3"><h4>Search</h4></div>
+                                <div class="col-5">
+                                    <input style="width: 140%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                </div>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -43,7 +50,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr *ngFor="let record of leaveTypeList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
+                                    <tr *ngFor="let record of leaveTypeList| customFilter:searchItem  | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
                                         <td>{{indexOfElement+1}}</td>
                                         <td>{{record.name}}</td>
                                         <td>
@@ -53,7 +60,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                <pagination-controls *ngIf="leaveTypeList.length>4" (pageChange)="p = $event"></pagination-controls>
 
                             </div>
                         </div>

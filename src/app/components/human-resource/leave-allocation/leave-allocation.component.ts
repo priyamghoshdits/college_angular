@@ -4,9 +4,10 @@ import {MemberService} from "../../../services/member.service";
 import {MatIcon, MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
 
 @Component({
   selector: 'app-leave-allocation',
@@ -16,7 +17,9 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
     NgForOf,
     NgxPaginationModule,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    CustomFilterPipe,
+    FormsModule
   ],
   templateUrl: './leave-allocation.component.html',
   styleUrl: './leave-allocation.component.scss'
@@ -31,6 +34,7 @@ export class LeaveAllocationComponent {
   rolesAndPermission: any[] = [];
   permission: any[] = [];
   editAbleData : any[] = [];
+  searchItem: string;
 
   constructor(private leaveService: LeaveService,private memberService: MemberService, private roleAndPermissionService: RolesAndPermissionService) {
     this.leaveAllocationForm = new FormGroup({
