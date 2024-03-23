@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "RUDKARSH": {
+    "RUDRAKSH": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -58,7 +58,7 @@
               "rfdc",
               "leaflet"
             ],
-            "outputPath": "dist/RUDKARSH",
+            "outputPath": "dist/RUDRAKSH",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -120,10 +120,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "RUDKARSH:build:production"
+              "buildTarget": "RUDRAKSH:build:production"
             },
             "development": {
-              "buildTarget": "RUDKARSH:build:development"
+              "buildTarget": "RUDRAKSH:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -131,7 +131,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "RUDKARSH:build"
+            "buildTarget": "RUDRAKSH:build"
           }
         },
         "test": {

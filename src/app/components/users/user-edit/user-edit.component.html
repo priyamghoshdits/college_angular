@@ -50,22 +50,17 @@
           <div class="card-body">
             <form [formGroup]="studentCreationForm">
             <div class="row">
-              <div class="col-md-4">
-                <div class="form-group">
-                  <label class="form-label">Gender</label>
-                  <input class="form-control" formControlName="gender" type="text" placeholder="Company">
-                </div>
-              </div>
-              <div class="col-sm-6 col-md-4">
+              <div class="col-sm-6 col-md-6">
                 <div class="form-group">
                   <label class="form-label">Date Of Birth</label>
                   <input class="form-control" formControlName="dob" type="date" placeholder="Date Of Birth">
                 </div>
               </div>
-              <div class="col-sm-6 col-md-4">
+              <div class="col-sm-6 col-md-6">
                 <div class="form-group">
                   <label class="form-label">Phone Number</label>
                   <input class="form-control" formControlName="mobile_no" type="mobile_no" placeholder="Phone Number">
+                  <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone Number</div>
                 </div>
               </div>
               <div class="col-sm-6 col-md-6">
@@ -145,6 +140,8 @@
             </form>
           </div>
           <div class="card-footer text-end">
+<!--            <label><mat-icon>done_outline</mat-icon>Profile Updated</label>-->
+<!--            <button [hidden]="showPopup" disabled class="btn btn-primary" style="border-radius: 61%;margin-right: 20px;padding: 12px;"><mat-icon>done_outline</mat-icon>Profile Updated</button>-->
             <button class="btn btn-primary" type="submit" (click)="updateProfile()">Update Profile</button>
           </div>
         </form>

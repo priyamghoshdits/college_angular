@@ -327,6 +327,12 @@ export class CreateSemesterTimetableComponent {
         this.semesterTimeTableForm.controls['time_from'].reset();
         this.semesterTimeTableForm.controls['time_to'].reset();
         this.tableArray.push(temp[0]);
+
+        window.scroll({
+            top: document.documentElement.scrollHeight,
+            left: 0,
+            behavior: 'smooth'
+        });
     }
 
     removeRecord(index){

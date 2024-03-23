@@ -34,6 +34,7 @@ export class AssignSemesterTeacherComponent {
     assignedTeacher: any[];
     p: number;
     isUpdatable = false;
+    disableSave = false;
     rolesAndPermission: any[] = [];
     permission: any[] = [];
     constructor(private subjectService: SubjectService, private memberService: MemberService, private semesterService: SemesterService, private roleAndPermissionService: RolesAndPermissionService) {
@@ -78,8 +79,10 @@ export class AssignSemesterTeacherComponent {
     }
 
     saveAssignSemesterTeacher(){
+        this.disableSave = true;
         if(!this.assignSemesterTeacherForm.valid){
             this.assignSemesterTeacherForm.markAllAsTouched();
+            this.disableSave = false;
             return;
         }
         if(this.tempTeacher.length == 0){
@@ -114,7 +117,15 @@ export class AssignSemesterTeacherComponent {
                 // });
                 this.tempTeacher = [];
                 this.cancelUpdate();
-                this.teachers = cloneDeep(this.cloneTeacher);
+                this.disableSave = false;
+            }else{
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Course already exists please update',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
             }
         });
     }
@@ -192,15 +203,15 @@ export class AssignSemesterTeacherComponent {
                     showConfirmButton: false,
                     timer: 1000
                 });
+                this.tempTeacher = [];
+                this.cancelUpdate();
             }
         });
     }
 
     cancelUpdate(){
         this.assignSemesterTeacherForm.reset();
-        this.teachers.forEach(function (value){
-            value.checked = false;
-        });
+        this.teachers = cloneDeep(this.cloneTeacher);
         this.isUpdatable = false;
     }
 

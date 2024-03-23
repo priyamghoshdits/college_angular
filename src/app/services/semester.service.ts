@@ -34,9 +34,24 @@ export class SemesterService {
         .pipe(catchError(this.errorService.serverError), tap(response => {
           // @ts-ignore
           if(response.success == 1){
-            // @ts-ignore
-            this.assignedTeacher.push(response.data);
-            this.assignedTeacherSubject.next([...this.assignedTeacher]);
+            // // @ts-ignore
+            // this.assignedTeacher.push(response.data);
+            // this.assignedTeacherSubject.next([...this.assignedTeacher]);
+              // @ts-ignore
+              if(response.success == 1){
+                  // @ts-ignore
+                  // const index = this.assignedTeacher.findIndex(x => x.course_id === response.data[].course_id);
+                  // if(index == -1){
+                  //     // @ts-ignore
+                  //     this.assignedTeacher[index] = response.data;
+                  //     this.assignedTeacherSubject.next([...this.assignedTeacher]);
+                  // }else{
+                      // @ts-ignore
+                      this.assignedTeacher.push(response.data);
+                      this.assignedTeacherSubject.next([...this.assignedTeacher]);
+                  // }
+
+              }
           }
         }));
   }

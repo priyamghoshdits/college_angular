@@ -65,8 +65,8 @@ const routes: Routes = [
         path: 'assign-semester-teacher',
         component: AssignSemesterTeacherComponent,
         data: {
-          title: "Semester Timetable",
-          breadcrumb: "Semester Timetable"
+          title: "Assign Semester Teacher",
+          breadcrumb: "Assign Semester Teacher"
         }
       },
       {

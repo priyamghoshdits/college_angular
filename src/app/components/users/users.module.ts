@@ -10,6 +10,7 @@ import { UsersProfileComponent } from './users-profile/users-profile.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserCardsComponent } from './user-cards/user-cards.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatIconModule} from "@angular/material/icon";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
         UsersRoutingModule,
         GalleryModule,
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatIconModule
     ]
 })
 export class UsersModule { }

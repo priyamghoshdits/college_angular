@@ -16,6 +16,7 @@ export class UserEditComponent implements OnInit {
   private BASE_API_URL = environment.BASE_API_URL;
   studentCreationForm: FormGroup;
   categoryList: any[];
+  showPopup = true;
 
   user = JSON.parse(localStorage.getItem('user') || '{}');
   // @ts-ignore
@@ -45,7 +46,7 @@ export class UserEditComponent implements OnInit {
       dob: new FormControl(null),
       admission_date: new FormControl(null),
       image: new FormControl(null),
-      mobile_no: new FormControl(null),
+      mobile_no: new FormControl(null, [Validators.pattern("[0-9 ]{10}")]),
       emergency_phone_number: new FormControl(null),
       material_status: new FormControl(null),
       admission_status: new FormControl(null),
@@ -95,7 +96,9 @@ export class UserEditComponent implements OnInit {
           , religion: this.userDetails.religion
           , material_status: this.userDetails.material_status
           , identification_no: this.userDetails.identification_no
-        })
+        });
+        // @ts-ignore
+        // setTimeout(this.showPopup = false,2000);
       }
     });
   }
@@ -105,12 +108,17 @@ export class UserEditComponent implements OnInit {
         .subscribe(response => {
           // @ts-ignore
           if(response.success == 1){
+            // Swal.fire({
+            //   position: 'center',
+            //   icon: 'success',
+            //   title: 'Profile Updated',
+            //   showConfirmButton: false,
+            //   timer: 1000
+            // });
             Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Profile Updated',
-              showConfirmButton: false,
-              timer: 1000
+              title: "Well Done!!",
+              text: "Profile Updated",
+              icon: "success"
             });
           }
         });
