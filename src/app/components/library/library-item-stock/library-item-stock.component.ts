@@ -82,9 +82,7 @@ export class LibraryItemStockComponent {
 
   getSubject(){
     this.subjectService.getSubjects(this.libraryForm.value.course_id,this.libraryForm.value.semester_id).subscribe((response: any) => {
-      if(response.success == 1){
         this.subjectList = response.data;
-      }
     })
   }
 
@@ -149,8 +147,26 @@ export class LibraryItemStockComponent {
   }
 
   editItemStock(data) {
-    this.libraryForm.patchValue({id: data.id, name: data.name, quantity: data.quantity, remaining: data.remaining});
-    this.isUpdatable = true;
+    Swal.fire({
+      title: 'Please Wait !',
+      html: 'Editing ...', // add html attribute if you want or remove
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
+    // this.libraryForm.patchValue({id: data.id, name: data.name, quantity: data.quantity, remaining: data.remaining});
+    this.libraryForm.patchValue(data);
+    this.subjectService.getSemesterByCourseId(this.libraryForm.value.course_id).subscribe((response: any) => {
+      this.semesterList = response.data;
+      this.libraryForm.patchValue(data);
+      this.subjectService.getSubjects(this.libraryForm.value.course_id,this.libraryForm.value.semester_id).subscribe((response: any) => {
+        this.subjectList = response.data;
+        this.libraryForm.patchValue(data);
+        Swal.close();
+        this.isUpdatable = true;
+      })
+    })
   }
 
   deleteItemStock(data) {
