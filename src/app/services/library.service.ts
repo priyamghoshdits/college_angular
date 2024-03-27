@@ -164,6 +164,10 @@ export class LibraryService {
                   // @ts-ignore
                   this.libraryIssueItemList.push(response.data);
                   this.libraryIssueItemListSubject.next([...this.libraryIssueItemList]);
+                  this.http.get(this.BASE_API_URL + '/getReturnOverPeriod').subscribe((response: any) =>{
+                      this.returnPeriodOverList = response.data;
+                      this.returnPeriodOverListSubject.next([...this.returnPeriodOverList]);
+                  });
               }
           }));
   }

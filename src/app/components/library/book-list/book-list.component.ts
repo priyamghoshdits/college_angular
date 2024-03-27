@@ -55,7 +55,7 @@ export class BookListComponent {
       let position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
       Swal.close();
-      pdf.save('payslip.pdf'); // Generated PDF
+      pdf.save('book_list.pdf'); // Generated PDF
     })
     //   let doc = new jsPDF('p', 'mm', 'a4');
     //   doc.addHTML(document.getElementById("sectionToPrint"), function() {

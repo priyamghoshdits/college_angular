@@ -55,6 +55,20 @@ export class IncomeAndExpenseServiceService {
       });
   }
 
+  getUpdatedIncome(){
+      this.http.get(this.BASE_API_URL + '/getIncome').subscribe((response: any) =>{
+          this.incomeList = response.data;
+          this.incomeSubject.next([...this.incomeList]);
+      });
+  }
+
+  getUpdatedExpense(){
+      this.http.get(this.BASE_API_URL + '/getExpense').subscribe((response: any) =>{
+          this.expenseList = response.data;
+          this.expenseSubject.next([...this.expenseList]);
+      });
+  }
+
   getExpense(){
       return [...this.expenseList];
   }

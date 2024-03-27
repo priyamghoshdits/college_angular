@@ -118,6 +118,7 @@ export class IncomeHeadComponent {
                             showConfirmButton: false,
                             timer: 1000
                         });
+                        this.incomeService.getUpdatedIncome();
                     }
                 })
             }

@@ -115,6 +115,7 @@ export class ExpenseHeadComponent {
               showConfirmButton: false,
               timer: 1000
             });
+            this.expenseService.getUpdatedExpense();
           }
         })
       }

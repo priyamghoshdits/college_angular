@@ -87,6 +87,16 @@ export class LibraryItemIssueComponent {
       this.libraryIssueForm.markAllAsTouched();
       return;
     }
+    if(this.libraryIssueForm.value.temp_remaining < this.libraryIssueForm.value.quantity){
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Enter valid remaining quantity',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      return;
+    }
     this.libraryService.updateItemIssue(this.libraryIssueForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

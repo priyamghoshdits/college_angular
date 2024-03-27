@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-12 col-xl-6">
+        <div class="col-sm-12 col-xl-12" *ngIf="discountBookForm.value.book_name != null">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -64,13 +64,13 @@
                         <div class="card-footer">
                             <button class="btn btn-primary me-1" (click)="updateDiscount()">Submit</button>
 <!--                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
-<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
+                            <button class="btn btn-primary me-1" (click)="clearData()">Clear</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-xl-6">
+        <div class="col-sm-12 col-xl-12" *ngIf="discountBookForm.value.book_name == null">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -80,9 +80,10 @@
                         <div class="row" style="text-align: center;">
                             <div class="col-1"></div>
                             <div style="margin-top: 4px" class="col-3"><h4>Search</h4></div>
-                            <div class="col-8">
+                            <div class="col-6">
                                 <input style="width: 90%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
                             </div>
+                            <div class="col-2"></div>
                         </div>
                         <div class="table-responsive" style="text-align: center">
                             <table class="table">
@@ -91,27 +92,25 @@
                                     <th scope="col">#</th>
                                     <th scope="col">User Name</th>
                                     <th scope="col">Book Name</th>
-<!--                                    <th scope="col">Issued On</th>-->
                                     <th scope="col">Return Date</th>
                                     <th scope="col">Late Fine</th>
                                     <th scope="col">Discount</th>
                                     <th scope="col">Total Fine</th>
-                                    <th scope="col">Action</th>
+<!--                                    <th scope="col">Action</th>-->
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr *ngFor="let record of returnPeriodList | customFilter:searchItem;let indexOfElement=index">
-                                    <td>{{indexOfElement+1}}</td>
-                                    <td>{{record.user_name}}</td>
-                                    <td>{{record.book_name}}</td>
-<!--                                    <td>{{record.issued_on}}</td>-->
-                                    <td>{{record.return_date}}</td>
-                                    <td>{{record.fine}}</td>
-                                    <td>{{record.discount}}</td>
-                                    <td>{{record.amount}}</td>
-                                    <td>
-                                        <a (click)="editDiscount(record)"><mat-icon>edit</mat-icon></a>
-                                    </td>
+                                    <td style="cursor: pointer;" (click)="editDiscount(record)">{{indexOfElement+1}}</td>
+                                    <td style="cursor: pointer;" (click)="editDiscount(record)">{{record.user_name}}</td>
+                                    <td style="cursor: pointer;" (click)="editDiscount(record)">{{record.book_name}}</td>
+                                    <td style="cursor: pointer;" (click)="editDiscount(record)">{{record.return_date}}</td>
+                                    <td style="cursor: pointer;" (click)="editDiscount(record)">{{record.fine}}</td>
+                                    <td style="cursor: pointer;" (click)="editDiscount(record)">{{record.discount}}</td>
+                                    <td style="cursor: pointer;" (click)="editDiscount(record)">{{record.amount}}</td>
+<!--                                    <td>-->
+<!--                                        <a (click)="editDiscount(record)"><mat-icon>edit</mat-icon></a>-->
+<!--                                    </td>-->
                                 </tr>
                                 </tbody>
                             </table>

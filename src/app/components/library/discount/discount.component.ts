@@ -61,4 +61,8 @@ export class DiscountComponent {
     })
   }
 
+  clearData(){
+    this.discountBookForm.reset();
+  }
+
 }
