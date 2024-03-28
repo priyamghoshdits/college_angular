@@ -53,7 +53,7 @@
                                         <input class="form-control" formControlName="contact_person_phone" type="text"
                                                placeholder="Enter Contact Person Phone">
                                         <div *ngIf="itemSupplierForm.controls['contact_person_phone'].errors?.['required'] && itemSupplierForm.controls['contact_person_phone'].touched " class="text text-danger mt-1">Contact Person Phone required</div>
-                                        <div *ngIf="itemSupplierForm.controls['contact_person_phone'].touched && itemSupplierForm.controls['contact_person_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone Number</div>
+                                        <div *ngIf="itemSupplierForm.controls['contact_person_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone Number</div>
                                     </div>
                                 </div>
                                 <div class="row">

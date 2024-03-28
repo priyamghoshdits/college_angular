@@ -82,6 +82,7 @@
                                             <label>Phone Number</label>
                                             <input type="text" class="form-control" formControlName="mobile_no" placeholder="Phone Number">
                                             <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['required'] && studentCreationForm.controls['mobile_no'].touched " class="text text-danger mt-1">Mobile Number required</div>
+                                            <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']" class="text text-danger mt-1">Invalid Mobile Number</div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -89,9 +90,10 @@
                                             <label>Emergency Contact Number</label>
                                             <input type="text" class="form-control" formControlName="emergency_phone_number" placeholder="Emergency Contact Number">
                                             <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['required'] && studentCreationForm.controls['emergency_phone_number'].touched " class="text text-danger mt-1">Emergency phone required</div>
+                                            <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['pattern']" class="text text-danger mt-1">Invalid Emergency Contact</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
-                                            <label>Material Status</label>
+                                            <label>Marital Status</label>
                                             <select style="width: 100%" formControlName="material_status" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option value="Single"> Single </option>
@@ -272,6 +274,7 @@
                                         <div class="col-md-4 mb-3">
                                             <label>Father Phone no.</label>
                                             <input type="text" class="form-control" formControlName="father_phone">
+                                            <div *ngIf="studentCreationForm.controls['father_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone no.</div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Father Occupation</label>
@@ -287,6 +290,7 @@
                                         <div class="col-md-4 mb-3">
                                             <label>Mother Phone no.</label>
                                             <input type="text" class="form-control" formControlName="mother_phone">
+                                            <div *ngIf="studentCreationForm.controls['mother_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone no.</div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Mother Occupation</label>
@@ -302,6 +306,7 @@
                                         <div class="col-md-4 mb-3">
                                             <label>Guardian Phone no.</label>
                                             <input type="text" class="form-control" formControlName="guardian_phone">
+                                            <div *ngIf="studentCreationForm.controls['guardian_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone no.</div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Guardian Email</label>

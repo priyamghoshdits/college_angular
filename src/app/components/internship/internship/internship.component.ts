@@ -110,6 +110,10 @@ export class InternshipComponent {
     });
   }
   updateInternshipDetails(){
+    if(!this.internshipDetailsForm.valid){
+      this.internshipDetailsForm.markAllAsTouched();
+      return;
+    }
     this.internshipService.updateInternshipDetails(this.internshipDetailsForm.value).subscribe((response) => {
       // @ts-ignore
       if(response.success == 1){

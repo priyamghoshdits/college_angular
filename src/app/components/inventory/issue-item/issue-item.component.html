@@ -36,7 +36,7 @@
                                             <div *ngIf="issueItemsForm.controls['user_type_id'].errors?.['required'] && issueItemsForm.controls['user_type_id'].touched " class="text text-danger mt-1">User Type required</div>
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <label>Issue To</label>
+                                            <label>Issued To</label>
                                             <select style="width: 100%" formControlName="issue_to" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of userList" [value]="data.id" >
@@ -46,7 +46,7 @@
                                             <div *ngIf="issueItemsForm.controls['issue_to'].errors?.['required'] && issueItemsForm.controls['issue_to'].touched " class="text text-danger mt-1">Issue To required</div>
                                         </div>
                                         <div *ngIf="user.user_type_id == 1" class="col-md-4 mb-3">
-                                            <label>Issue By</label>
+                                            <label>Issued By</label>
                                             <select style="width: 100%" formControlName="issue_by" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of staffList" [value]="data.id" >
