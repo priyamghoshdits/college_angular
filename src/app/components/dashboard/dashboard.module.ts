@@ -18,6 +18,7 @@ import { BitcoinComponent } from "./bitcoin/bitcoin.component";
 import { ServerComponent } from "./server/server.component";
 import { ProjectComponent } from "./project/project.component";
 import { NgApexchartsModule } from "ng-apexcharts";
+import {NgIdleKeepaliveModule} from "@ng-idle/keepalive";
 
 @NgModule({
   declarations: [DefaultComponent, ECommerceComponent, UniversityComponent, BitcoinComponent, ServerComponent, ProjectComponent],
@@ -33,7 +34,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
     Ng2GoogleChartsModule,
     SharedModule,
     NgApexchartsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    NgIdleKeepaliveModule.forRoot()
   ],
 })
 export class DashboardModule {}

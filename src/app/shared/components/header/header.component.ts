@@ -9,6 +9,7 @@ import {environment} from "../../../../environments/environment";
 import {NgbModal, NgbModalConfig} from "@ng-bootstrap/ng-bootstrap";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import Swal from "sweetalert2";
+import {AuthService} from "../../../services/auth.service";
 
 var body = document.getElementsByTagName("body")[0];
 
@@ -39,6 +40,7 @@ export class HeaderComponent implements OnInit {
     public navServices: NavService,
     public router: Router,
     private  http: HttpClient,
+    private authService: AuthService,
     config: NgbModalConfig, private modalService: NgbModal,
     @Inject(DOCUMENT) private document: any,
     private translate: TranslateService) {
@@ -136,11 +138,12 @@ export class HeaderComponent implements OnInit {
   }
 
   SignOut(){
-    this.http.get(this.BASE_API_URL + '/logout',).subscribe((response: any) =>{
-    });
-    localStorage.removeItem('user');
-    this.router.navigate(["/auth/login"]);
-    window.location.reload();
+    this.authService.logout();
+    // this.http.get(this.BASE_API_URL + '/logout',).subscribe((response: any) =>{
+    // });
+    // localStorage.removeItem('user');
+    // this.router.navigate(["/auth/login"]);
+    // window.location.reload();
   }
 
   toggleFullScreen() {
