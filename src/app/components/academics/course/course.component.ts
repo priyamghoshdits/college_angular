@@ -5,7 +5,6 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {SubjectService} from "../../../services/subject.service";
 import { MatIconModule } from '@angular/material/icon';
 import Swal from "sweetalert2";
-import {CommonService} from "../../../services/common.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {cloneDeep} from 'lodash';
 
