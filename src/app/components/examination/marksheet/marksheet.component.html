@@ -1,0 +1,137 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Subject Marks</h5><span>Update Subject Marks</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="subjectMarksForm">
+                                <div  class="row mb-3">
+                                    <div class="col-md-6 mb-12">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="subjectMarksForm.controls['course_id'].errors?.['required'] && subjectMarksForm.controls['course_id'].touched " class="text text-danger mt-1">Course Name required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-12">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" (change)="getSubject()">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="subjectMarksForm.controls['semester_id'].errors?.['required'] && subjectMarksForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester Name required</div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-12">
+                                        <label>Select Session</label>
+                                        <select style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudent()">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="subjectMarksForm.controls['session_id'].errors?.['required'] && subjectMarksForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-12">
+                                        <label>Select Student</label>
+                                        <select style="width: 100%" formControlName="session_id" class="form-select">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of studentList" [value]="data.id" >
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="subjectMarksForm.controls['session_id'].errors?.['required'] && subjectMarksForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-12 mb-12">
+                                        <label>Select Subject</label>
+                                        <select style="width: 100%" formControlName="subject_id" class="form-select">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of subjectList" [value]="data.id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="subjectMarksForm.controls['subject_id'].errors?.['required'] && subjectMarksForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject required</div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Marks</label>
+                                        <input class="form-control" formControlName="marks" type="text"
+                                               placeholder="Enter Marks">
+                                        <div *ngIf="subjectMarksForm.controls['marks'].errors?.['required'] && subjectMarksForm.controls['marks'].touched " class="text text-danger mt-1">Marks required</div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Full Marks</label>
+                                        <input class="form-control" formControlName="full_marks" type="text"
+                                               placeholder="Enter Full Marks">
+                                        <div *ngIf="subjectMarksForm.controls['full_marks'].errors?.['required'] && subjectMarksForm.controls['full_marks'].touched " class="text text-danger mt-1">Full Marks required</div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="addMarksheet()">Add</button>
+<!--                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="col-sm-12 col-xl-6">-->
+<!--            <div class="row" *ngIf="permission[3].permission === 1">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <div class="col-sm-12">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-header">-->
+<!--                                <h5>Course List</h5>-->
+<!--                                <span>Full Course List.</span>-->
+<!--                            </div>-->
+<!--                            <div class="table-responsive" >-->
+<!--                                <table class="table" >-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th scope="col">#</th>-->
+<!--                                        <th scope="col">Name</th>-->
+<!--                                        <th scope="col">Course Name</th>-->
+<!--                                        <th scope="col" *ngIf="permission[1].permission === 1 || permission[2].permission === 1">Action</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+<!--                                        <td>{{indexOfElement+1}}</td>-->
+<!--                                        <td>{{record.course_name}}</td>-->
+<!--                                        <td>-->
+<!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
+<!--                                        </td>-->
+<!--                                        <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">-->
+<!--                                            <a *ngIf="permission[1].permission === 1" (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
+<!--                                            <a *ngIf="permission[2].permission === 1" (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->

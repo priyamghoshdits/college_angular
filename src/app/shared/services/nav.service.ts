@@ -145,6 +145,7 @@ export class NavService {
 				{ path: '/examination/subject-details', title: 'Subject Details', type: 'link' },
 				{ path: '/examination/subject-questions', title: 'Subject Question', type: 'link' },
 				{ path: '/examination/exam', title: 'Exam', type: 'link' },
+				{ path: '/examination/marksheet', title: 'Update Marks', type: 'link' },
 			]
 		},
 		{

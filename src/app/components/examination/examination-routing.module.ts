@@ -4,6 +4,7 @@ import {CreateStaffComponent} from "../human-resource/create-staff/create-staff.
 import {SubjectDetailsComponent} from "./subject-details/subject-details.component";
 import {SubjectQuestionsComponent} from "./subject-questions/subject-questions.component";
 import {ExamComponent} from "./exam/exam.component";
+import {MarksheetComponent} from "./marksheet/marksheet.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,14 @@ const routes: Routes = [
     data: {
       title: "Exam",
       breadcrumb: "Exam"
+    }
+  },
+  {
+    path: 'marksheet',
+    component: MarksheetComponent,
+    data: {
+      title: "Mark Sheet",
+      breadcrumb: "Mark Sheet"
     }
   }
 ];
