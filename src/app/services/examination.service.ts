@@ -145,4 +145,10 @@ export class ExaminationService {
           }));
   }
 
+  saveMarksheet(value){
+      return this.http.post(this.BASE_API_URL + '/saveMarksheet', value)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+          }));
+  }
+
 }
