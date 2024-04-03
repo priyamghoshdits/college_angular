@@ -34,6 +34,7 @@ export class CautionMoneyComponent {
   sessionList: any[];
   studentList: any[] = [];
   searchItem: string;
+  selectedCautionMoney = 0;
   constructor(private subjectService: SubjectService, private sessionService: SessionService
               ,private cautionMoneyService: CautionMoneyService, private modalService: NgbModal) {
     this.cautionMoneyForm = new FormGroup({
@@ -49,7 +50,7 @@ export class CautionMoneyComponent {
       refund_payment_date: new FormControl(null, [Validators.required]),
       refund_mode_of_payment: new FormControl(null, [Validators.required]),
       refund_transaction_id: new FormControl(null, [Validators.required]),
-      caution_money_deduction: new FormControl(null, [Validators.required]),
+      caution_money_deduction: new FormControl(null, [Validators.required,Validators.pattern("^[0-9]*$")]),
     });
 
     this.subjectService.getCourseListener().subscribe((response) => {
@@ -72,6 +73,7 @@ export class CautionMoneyComponent {
   openCustomModal(content,record) {
     this.modalService.open(content,{ size: 'xl'});
     this.cautionMoneyRefundForm.patchValue({user_id: record.id});
+    this.selectedCautionMoney = record.caution_money ?? 0;
   }
 
   getCautionMoney(){
@@ -83,6 +85,20 @@ export class CautionMoneyComponent {
   }
 
   refundCaution(modal){
+    if(!this.cautionMoneyRefundForm.valid){
+      this.cautionMoneyRefundForm.markAllAsTouched();
+      return;
+    }
+    if(this.cautionMoneyRefundForm.value.caution_money_deduction > this.selectedCautionMoney){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Deduction cannot be greater than caution money',
+        showConfirmButton: false,
+        timer: 1500
+      });
+      return;
+    }
     this.cautionMoneyService.refundCautionMoney(this.cautionMoneyRefundForm.value).subscribe((response: any) => {
       if(response.success == 1){
         this.getCautionMoney();
@@ -94,6 +110,7 @@ export class CautionMoneyComponent {
           timer: 1000
         });
         modal.close();
+        this.cautionMoneyRefundForm.reset();
       }
     })
   }

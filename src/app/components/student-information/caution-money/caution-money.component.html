@@ -109,7 +109,8 @@
                                                 <div class="col-md-3 mb-3">
                                                     <label>Deduction Amount</label>
                                                     <input type="text" class="form-control" formControlName="caution_money_deduction" placeholder="Caution Money Amount">
-                                                    <div *ngIf="cautionMoneyRefundForm.controls['caution_money_deduction'].errors?.['required'] && cautionMoneyRefundForm.controls['caution_money_deduction'].touched " class="text text-danger mt-1">Deduction Amount required</div>
+                                                    <div *ngIf="cautionMoneyRefundForm.controls['caution_money_deduction'].errors?.['required'] && cautionMoneyRefundForm.controls['caution_money_deduction'].touched" class="text text-danger mt-1">Deduction Amount required</div>
+                                                    <div *ngIf="cautionMoneyRefundForm.controls['caution_money_deduction'].errors?.['pattern']" class="text text-danger mt-1">Invalid Amount</div>
                                                 </div>
                                             </div>
                                             <div class="row">
