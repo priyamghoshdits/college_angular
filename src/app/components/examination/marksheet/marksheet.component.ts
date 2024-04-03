@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import {StudentService} from "../../../services/student.service";
 import {SessionService} from "../../../services/session.service";
 import {ExaminationService} from "../../../services/examination.service";
+import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-marksheet',
@@ -18,7 +19,12 @@ import {ExaminationService} from "../../../services/examination.service";
         NgForOf,
         NgIf,
         NgxPaginationModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgbNav,
+        NgbNavLink,
+        NgbNavLinkBase,
+        NgbNavItem,
+        NgbNavOutlet
     ],
   templateUrl: './marksheet.component.html',
   styleUrl: './marksheet.component.scss'
@@ -33,6 +39,7 @@ export class MarksheetComponent {
     sessionList: any[];
     studentList: any[];
     tempMarkSheet: any[] = [];
+    active = 1;
 
     constructor(private subjectService: SubjectService,private studentSubject: StudentService
                 , private sessionSubject: SessionService, private examinationService: ExaminationService) {
@@ -54,6 +61,10 @@ export class MarksheetComponent {
             this.sessionList = response;
         });
         this.sessionList = this.sessionSubject.getSessionList();
+    }
+
+    activeTab(data) {
+        this.active = data;
     }
 
     getSemester(){
