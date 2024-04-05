@@ -1,6 +1,21 @@
 <div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="tabbed-card">
+                <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
+                    <li [ngbNavItem]="1">
+                        <a ngbNavLink (click)="activeTab(1)">Update Marks</a>
+                    </li>
+                    <li [ngbNavItem]="2">
+                        <a ngbNavLink (click)="activeTab(2)">Generated marksheets</a>
+                    </li>
+                </ul>
+                <div [ngbNavOutlet]="nav" class="mt-2"></div>
+            </div>
+        </div>
+    </div>
     <div class="row">
-        <div class="col-sm-12 col-xl-6">
+        <div class="col-sm-12 col-xl-5">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
@@ -93,35 +108,15 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-xl-6">
+        <div class="col-sm-12 col-xl-7" [hidden]="active != 1">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <div class="card">
-<!--                            <div class="card-header">-->
-<!--                                <h5>Marksheet</h5>-->
-<!--                                <span>Marksheet Details</span>-->
-<!--                            </div>-->
-
-                            <div class="card-header" [hidden]="active != 1">
+                            <div class="card-header">
                                 <h5>Subject Marks</h5><span>Update Subject Marks</span>
                             </div>
-                            <div class="card-header" [hidden]="active != 2">
-                                <h5>Show All Students</h5>
-                            </div>
-                            <div class="tabbed-card">
-                                <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
-                                    <li [ngbNavItem]="1">
-                                        <a ngbNavLink (click)="activeTab(1)">Add Student</a>
-                                    </li>
-                                    <li [ngbNavItem]="2">
-                                        <a ngbNavLink (click)="activeTab(2)">Show Students</a>
-                                    </li>
-                                </ul>
-                                <div [ngbNavOutlet]="nav" class="mt-2"></div>
-                            </div>
-
-                            <div class="table-responsive" >
+                            <div class="table-responsive">
                                 <table class="table" style="text-align: center">
                                     <thead>
                                     <tr>
@@ -148,6 +143,88 @@
                             <div class="card-footer">
                                 <button [disabled]="tempMarkSheet.length == 0" class="btn btn-primary me-1" (click)="saveMarkSheet()">Save</button>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-12" [hidden]="active != 2">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Subject Marks</h5><span>Update Subject Marks</span>
+                            </div>
+                            <div class="card-body">
+                                <form class="theme-form" [formGroup]="subjectMarksSearchForm">
+                                    <div  class="row mb-3">
+                                        <div class="col-md-3 mb-12">
+                                            <label>Select Course</label>
+                                            <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                                <option value="null">Select</option>
+                                                <option *ngFor="let data of courseList" [value]="data.id" >
+                                                    {{data.course_name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="subjectMarksSearchForm.controls['course_id'].errors?.['required'] && subjectMarksSearchForm.controls['course_id'].touched " class="text text-danger mt-1">Course Name required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-12">
+                                            <label>Select Semester</label>
+                                            <select style="width: 100%" formControlName="semester_id" class="form-select" (change)="getSubject()">
+                                                <option value="null">Select</option>
+                                                <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="subjectMarksSearchForm.controls['semester_id'].errors?.['required'] && subjectMarksSearchForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester Name required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-12">
+                                            <label>Select Session</label>
+                                            <select style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudent()">
+                                                <option value="null">Select</option>
+                                                <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="subjectMarksSearchForm.controls['session_id'].errors?.['required'] && subjectMarksSearchForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-12">
+                                            <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="getMarkSheet()">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Student Name</th>
+                                        <th scope="col">Subject - Full Marks - Marks</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of markSheetList;let indexOfElement=index">
+                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.student_name}}</td>
+                                        <td>
+                                            <p *ngFor="let record1 of record.subject_details">
+                                                {{record1.name}} - {{record1.full_marks}} - {{record1.marks}}
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <a (click)="editMarksheet(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="removeFromArray(indexOfElement,record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+<!--                            <div class="card-footer">-->
+<!--                                <button [disabled]="tempMarkSheet.length == 0" class="btn btn-primary me-1" (click)="saveMarkSheet()">Save</button>-->
+<!--                            </div>-->
                         </div>
                     </div>
                 </div>

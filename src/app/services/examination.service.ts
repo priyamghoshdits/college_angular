@@ -151,4 +151,10 @@ export class ExaminationService {
           }));
   }
 
+  getMarkSheet(value){
+      return this.http.post(this.BASE_API_URL + '/getMarksheet', value)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+          }));
+  }
+
 }

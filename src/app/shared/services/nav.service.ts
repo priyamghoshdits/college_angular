@@ -146,6 +146,7 @@ export class NavService {
 				{ path: '/examination/subject-questions', title: 'Subject Question', type: 'link' },
 				{ path: '/examination/exam', title: 'Exam', type: 'link' },
 				{ path: '/examination/marksheet', title: 'Update Marks', type: 'link' },
+				{ path: '/examination/generate-mark-sheet', title: 'Generate Mark Sheet', type: 'link' },
 			]
 		},
 		{

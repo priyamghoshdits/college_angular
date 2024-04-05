@@ -32,6 +32,7 @@ import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-
 export class MarksheetComponent {
     isUpdatable = false;
     subjectMarksForm: FormGroup;
+    subjectMarksSearchForm: FormGroup;
     courseList: any[];
     semesterList: any[];
     subjectList: any[];
@@ -40,9 +41,10 @@ export class MarksheetComponent {
     studentList: any[];
     tempMarkSheet: any[] = [];
     active = 1;
+    markSheetList: any[];
 
     constructor(private subjectService: SubjectService,private studentSubject: StudentService
-                , private sessionSubject: SessionService, private examinationService: ExaminationService) {
+        , private sessionSubject: SessionService, private examinationService: ExaminationService) {
         this.subjectMarksForm = new FormGroup({
             id: new FormControl(null),
             course_id: new FormControl(null, [Validators.required]),
@@ -52,6 +54,12 @@ export class MarksheetComponent {
             student_id: new FormControl(null, [Validators.required]),
             marks: new FormControl(null, [Validators.required]),
             full_marks: new FormControl(null, [Validators.required]),
+        });
+        this.subjectMarksSearchForm = new FormGroup({
+            id: new FormControl(null),
+            course_id: new FormControl(null, [Validators.required]),
+            semester_id: new FormControl(null, [Validators.required]),
+            session_id: new FormControl(null, [Validators.required]),
         });
         this.subjectService.getCourseListener().subscribe((response) => {
             this.courseList = response;
@@ -68,7 +76,7 @@ export class MarksheetComponent {
     }
 
     getSemester(){
-        this.subjectService.getSemesterByCourseId(this.subjectMarksForm.value.course_id).subscribe((response: any) => {
+        this.subjectService.getSemesterByCourseId(this.subjectMarksForm.value.course_id ?? this.subjectMarksSearchForm.value.course_id).subscribe((response: any) => {
             this.semesterList = response.data;
         })
     }
@@ -89,12 +97,20 @@ export class MarksheetComponent {
         })
     }
 
+    getMarkSheet(){
+        this.examinationService.getMarkSheet(this.subjectMarksSearchForm.value).subscribe((response: any) => {
+            if(response.success == 1){
+                this.markSheetList = response.data;
+            }
+        })
+    }
+
     addMarksheet(){
         if(!this.subjectMarksForm.valid){
             this.subjectMarksForm.markAllAsTouched();
             return;
         }
-        if(this.subjectMarksForm.value.full_marks < this.subjectMarksForm.value.marks){
+        if(parseInt(this.subjectMarksForm.value.full_marks) < parseInt(this.subjectMarksForm.value.marks)){
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -121,7 +137,46 @@ export class MarksheetComponent {
         this.subjectMarksForm.controls['marks'].reset();
     }
 
+    editMarksheet(record){
+        this.subjectMarksForm.patchValue(record);
+        this.studentSubject.getSessionWiseStudent(this.subjectMarksForm.value).subscribe((response: any) => {
+            if(response.success == 1){
+                this.studentList = response.data;
+                this.subjectService.getSubjects(this.subjectMarksForm.value.course_id, this.subjectMarksForm.value.semester_id)
+                    .subscribe((response: any) => {
+                        // this.subjectMarksForm.patchValue(record);
+                        this.subjectList = response.data;
+                        this.copySubjectList = [...this.subjectList];
+                        const temp : [] = [];
+                        const subjectList = [...this.subjectList];
+                        this.subjectMarksForm.patchValue(record);
+                        record.subject_details.forEach(function (value){
+                            let a = [{
+                                'course_id': record.course_id,
+                                'semester_id': record.semester_id,
+                                'subject_id': value.subject_id,
+                                'subject_name': subjectList.find(x => x.id == value.subject_id).name,
+                                'session_id': record.session_id,
+                                'student_id': record.student_id,
+                                'marks': value.marks,
+                                'full_marks': value.full_marks
+                            }];
+                            // @ts-ignore
+                            temp.push(a[0]);
+                            const index = subjectList.findIndex(x => x.id == value.subject_id);
+                            subjectList.splice(index,1);
+                        });
+                        this.subjectList = subjectList;
+                        this.tempMarkSheet = temp;
+                    });
+            }
+        })
+        this.active = 1;
+    }
+
     removeFromArray(index,record){
+        // console.log(record);
+        // console.log(this.copySubjectList);
         this.tempMarkSheet.splice(index,1);
         this.subjectList.push(this.copySubjectList.find(x => x.id == record.subject_id));
     }

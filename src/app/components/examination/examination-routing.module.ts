@@ -5,6 +5,7 @@ import {SubjectDetailsComponent} from "./subject-details/subject-details.compone
 import {SubjectQuestionsComponent} from "./subject-questions/subject-questions.component";
 import {ExamComponent} from "./exam/exam.component";
 import {MarksheetComponent} from "./marksheet/marksheet.component";
+import {GenerateMarkSheetComponent} from "./generate-mark-sheet/generate-mark-sheet.component";
 
 const routes: Routes = [
   {
@@ -37,6 +38,14 @@ const routes: Routes = [
     data: {
       title: "Mark Sheet",
       breadcrumb: "Mark Sheet"
+    }
+  },
+  {
+    path: 'generate-mark-sheet',
+    component: GenerateMarkSheetComponent,
+    data: {
+      title: "Generate Mark Sheet",
+      breadcrumb: "Generate Mark Sheet"
     }
   }
 ];
