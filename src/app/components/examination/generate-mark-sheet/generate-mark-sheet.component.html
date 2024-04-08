@@ -62,7 +62,8 @@
                                             <td>{{record.course_name}}</td>
                                             <td>{{record.semester_name}}</td>
                                             <td>
-                                                <button class="btn btn-primary me-1" [useExistingCss]="true" #print printSectionId="sectionToPrint" (click)="generateMarksheet(record)" ngxPrint >print</button>
+                                                <button class="btn btn-primary me-1" (click)="generateMarksheet(record)" >print</button>
+                                                <button [hidden]="true" #divClick class="btn btn-primary me-1" [useExistingCss]="true" #print printSectionId="sectionToPrint" ngxPrint >print</button>
 <!--                                                <button class="btn btn-primary me-1" (click)="generateMarksheet()">Generate</button>-->
 <!--                                                <a (click)="editMarksheet(record)"><mat-icon>edit</mat-icon></a>-->
 <!--                                                <a (click)="removeFromArray(indexOfElement,record)"><mat-icon>delete</mat-icon></a>-->
@@ -88,7 +89,7 @@
                                         <table style="margin:0px 0px 0px 0px;width:100%;position: relative;">
                                             <tr>
                                                 <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;width:100px;">Name of Student</th>
-                                                <td style="padding:0px 0px 7px 0px;font-size: 11px;width: 240px;">: {{subjectDetailsPrintData}}</td>
+                                                <td style="padding:0px 0px 7px 0px;font-size: 11px;width: 240px;">: {{subjectDetailsPrintData.student_name}}</td>
                                                 <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;width: 140px;">Registration No.</th>
                                                 <td style="padding:0px 0px 7px 0px;font-size: 11px;">: APMEST25041</td>
                                             </tr>
@@ -110,7 +111,7 @@
                                             </tr>
                                             <tr>
                                                 <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;">Session</th>
-                                                <td style="padding:0px 0px 7px 0px;font-size: 11px;">: 2021 - 2022</td>
+                                                <td style="padding:0px 0px 7px 0px;font-size: 11px;">: {{subjectDetailsPrintData.session_name}}</td>
                                                 <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;">Program</th>
                                                 <td style="padding:0px 0px 7px 0px;font-size: 11px;">:
                                                     DMLT

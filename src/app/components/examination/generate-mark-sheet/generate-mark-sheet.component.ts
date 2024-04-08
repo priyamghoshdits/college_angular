@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
@@ -24,13 +24,14 @@ import {NgxPrintDirective} from "ngx-print";
   styleUrl: './generate-mark-sheet.component.scss'
 })
 export class GenerateMarkSheetComponent {
+  @ViewChild('divClick') divClick: ElementRef;
   subjectMarksSearchForm: FormGroup;
   courseList: any[];
   semesterList: any[];
   sessionList: any[];
   markSheetList: any[];
   subjectDetails: any[] = [];
-  subjectDetailsPrintData: any;
+  subjectDetailsPrintData: any = {};
   constructor(private subjectService: SubjectService, private sessionSubject: SessionService, public examinationService: ExaminationService) {
     this.subjectMarksSearchForm = new FormGroup({
       id: new FormControl(null),
@@ -66,7 +67,9 @@ export class GenerateMarkSheetComponent {
   generateMarksheet(data){
     this.subjectDetails = data.subject_details;
     this.subjectDetailsPrintData = data;
-    console.log(this.subjectDetailsPrintData);
+    setTimeout(() => {
+      this.divClick.nativeElement.click();
+    }, 300);
   }
 
 }
