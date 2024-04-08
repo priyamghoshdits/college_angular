@@ -5,6 +5,7 @@ import {environment} from "../../../../environments/environment";
 import {CommonService} from "../../../services/common.service";
 import {HttpClient} from "@angular/common/http";
 import {ErrorService} from "../../../services/error.service";
+import {SessionService} from "../../../services/session.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -20,15 +21,23 @@ export class SidebarComponent {
   public url: any;
   public fileurl: any;
   menuManagement : any[];
+  sessionList: any[];
 
   user : { id, first_name, middle_name, last_name, user_type_id, user_type_name,email, image, token};
 
-  constructor(private router: Router, public navServices: NavService, private commonService: CommonService,private  http: HttpClient) {
+  constructor(private router: Router, public navServices: NavService
+              , private commonService: CommonService
+              ,private  http: HttpClient, private sessionService: SessionService) {
     // @ts-ignore
     this.user = JSON.parse(localStorage.getItem('user'));
     if(this.user){
       this.url = this.FILE_URL + '/user_image/' + this.user.image;
     }
+
+    this.sessionService.getSessionListener().subscribe((response) => {
+      this.sessionList = response;
+    });
+    this.sessionList = this.sessionService.getSessionList();
 
     this.http.get(this.BASE_API_URL + '/getMenuManagement').subscribe((response: any) =>{
 
