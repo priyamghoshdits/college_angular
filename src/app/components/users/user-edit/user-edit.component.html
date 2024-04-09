@@ -14,10 +14,10 @@
             <form [formGroup]="studentCreationForm">
               <div class="row mb-2">
                 <div class="col-auto"><img class="img-70 rounded-circle" alt="" src="assets/images/user/7.jpg"></div>
-                <div class="col">
-                  <h3 class="mb-1">{{userDetails.first_name}} {{userDetails.middle_name}} {{userDetails.last_name}}</h3>
-                  <p class="mb-4">{{userDetails.user_type}}</p>
-                </div>
+<!--                <div class="col">-->
+<!--                  <h3 class="mb-1">{{userDetails.first_name}} {{userDetails.middle_name}} {{userDetails.last_name}}</h3>-->
+<!--                  <p class="mb-4">{{userDetails.user_type}}</p>-->
+<!--                </div>-->
               </div>
               <div class="form-group">
                 <label class="form-label">Student Id</label>
@@ -50,6 +50,24 @@
           <div class="card-body">
             <form [formGroup]="studentCreationForm">
             <div class="row">
+              <div class="col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label class="form-label">First Name</label>
+                  <input class="form-control" formControlName="first_name" type="text" placeholder="Date Of Birth">
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label class="form-label">Middle Name</label>
+                  <input class="form-control" formControlName="middle_name" type="text" placeholder="Date Of Birth">
+                </div>
+              </div>
+              <div class="col-sm-4 col-md-4">
+                <div class="form-group">
+                  <label class="form-label">Last Name</label>
+                  <input class="form-control" formControlName="last_name" type="text" placeholder="Date Of Birth">
+                </div>
+              </div>
               <div class="col-sm-6 col-md-6">
                 <div class="form-group">
                   <label class="form-label">Date Of Birth</label>

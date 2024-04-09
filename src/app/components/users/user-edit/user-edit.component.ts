@@ -41,6 +41,9 @@ export class UserEditComponent implements OnInit {
   constructor(private  http: HttpClient, private errorService: ErrorService, private memberService: MemberService) {
     this.studentCreationForm = new FormGroup({
       id: new FormControl(null),
+      first_name: new FormControl(null),
+      middle_name: new FormControl(null),
+      last_name: new FormControl(null),
       identification_no: new FormControl(null),
       gender: new FormControl(null),
       dob: new FormControl(null),
@@ -85,6 +88,9 @@ export class UserEditComponent implements OnInit {
       if(response.success == 1){
         this.userDetails = response.data;
         this.studentCreationForm.patchValue({email: this.userDetails.email
+          , first_name: this.userDetails.first_name
+          , middle_name: this.userDetails.middle_name
+          , last_name: this.userDetails.last_name
           , course_name: this.userDetails.course_name
           , semester_name: this.userDetails.current_semester
           , permanent_address: this.userDetails.permanent_address
@@ -97,6 +103,7 @@ export class UserEditComponent implements OnInit {
           , material_status: this.userDetails.material_status
           , identification_no: this.userDetails.identification_no
         });
+        console.log(this.userDetails);
         // @ts-ignore
         // setTimeout(this.showPopup = false,2000);
       }
