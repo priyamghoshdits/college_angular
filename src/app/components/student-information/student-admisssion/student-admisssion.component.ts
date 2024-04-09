@@ -73,6 +73,8 @@ export class StudentAdmisssionComponent {
         this.studentCreationForm = new FormGroup({
             id: new FormControl(null),
             identification_no: new FormControl(null),
+            roll_no: new FormControl(null),
+            registration_no: new FormControl(null),
             first_name: new FormControl(null, [Validators.required]),
             middle_name: new FormControl(null),
             last_name: new FormControl(null, [Validators.required]),

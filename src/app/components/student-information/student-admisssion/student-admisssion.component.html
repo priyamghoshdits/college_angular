@@ -223,11 +223,16 @@
                                             <input type="text" class="form-control" formControlName="permanent_address" placeholder="Permanent Address">
                                             <div *ngIf="studentCreationForm.controls['permanent_address'].errors?.['required'] && studentCreationForm.controls['permanent_address'].touched " class="text text-danger mt-1">Permanent Address required</div>
                                         </div>
-<!--                                        <div class="col-md-3 mb-3">-->
-<!--                                            <label>Caution Money</label>-->
-<!--                                            <input type="text" class="form-control" formControlName="caution_money" placeholder="Caution Money">-->
-<!--                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['required'] && studentCreationForm.controls['caution_money'].touched " class="text text-danger mt-1">Caution Money required</div>-->
-<!--                                        </div>-->
+                                        <div class="col-md-3 mb-3">
+                                            <label>Roll No</label>
+                                            <input type="text" class="form-control" formControlName="roll_no" placeholder="Roll No">
+                                            <div *ngIf="studentCreationForm.controls['roll_no'].errors?.['required'] && studentCreationForm.controls['roll_no'].touched " class="text text-danger mt-1">Roll No required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Registration No</label>
+                                            <input type="text" class="form-control" formControlName="registration_no" placeholder="Registration No">
+                                            <div *ngIf="studentCreationForm.controls['registration_no'].errors?.['required'] && studentCreationForm.controls['registration_no'].touched " class="text text-danger mt-1">Registration No required</div>
+                                        </div>
                                     </div>
 
                                     <hr>
