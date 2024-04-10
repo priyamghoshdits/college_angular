@@ -67,6 +67,7 @@ export class GenerateMarkSheetComponent {
   generateMarksheet(data){
     this.subjectDetails = data.subject_details;
     this.subjectDetailsPrintData = data;
+    console.log(this.subjectDetailsPrintData);
     setTimeout(() => {
       this.divClick.nativeElement.click();
     }, 300);
