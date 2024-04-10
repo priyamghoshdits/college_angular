@@ -52,7 +52,11 @@ export class MarksheetComponent {
             subject_id: new FormControl(null, [Validators.required]),
             session_id: new FormControl(null, [Validators.required]),
             student_id: new FormControl(null, [Validators.required]),
+            division: new FormControl(null, [Validators.required]),
+            date_of_issue: new FormControl(null, [Validators.required]),
+            result_status: new FormControl(null, [Validators.required]),
             marks: new FormControl(null, [Validators.required]),
+            min_marks: new FormControl(null, [Validators.required]),
             full_marks: new FormControl(null, [Validators.required]),
         });
         this.subjectMarksSearchForm = new FormGroup({
@@ -127,7 +131,11 @@ export class MarksheetComponent {
             'subject_name': this.subjectList.find(x => x.id == this.subjectMarksForm.value.subject_id).name,
             'session_id': this.subjectMarksForm.value.session_id,
             'student_id': this.subjectMarksForm.value.student_id,
+            'date_of_issue': this.subjectMarksForm.value.date_of_issue,
+            'division': this.subjectMarksForm.value.division,
+            'result_status': this.subjectMarksForm.value.result_status,
             'marks': this.subjectMarksForm.value.marks,
+            'min_marks': this.subjectMarksForm.value.min_marks,
             'full_marks': this.subjectMarksForm.value.full_marks
         }];
         this.tempMarkSheet.push(a[0]);

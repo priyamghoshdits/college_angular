@@ -68,6 +68,7 @@
     "ngx-swiper-wrapper": "^10.0.0",
     "ngx-tabset": "^2.2.0",
     "ngx-toastr": "^18.0.0",
+    "num-words": "^1.2.3",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.10.3",
     "tslib": "^2.3.0",

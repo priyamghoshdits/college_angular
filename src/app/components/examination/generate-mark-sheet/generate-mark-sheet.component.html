@@ -5,7 +5,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Course</h5><span>Add Course</span>
+                            <h5>Generate Marksheet</h5>
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="subjectMarksSearchForm">
@@ -62,7 +62,9 @@
                                             <td>{{record.course_name}}</td>
                                             <td>{{record.semester_name}}</td>
                                             <td>
-                                                <button class="btn btn-primary me-1" (click)="generateMarksheet(record)" >print</button>
+<!--                                                <button class="btn btn-primary me-1" (click)="generateMarksheet(record)" ><mat-icon>print</mat-icon></button>-->
+
+                                                <a style="cursor: pointer;" (click)="generateMarksheet(record)"> <mat-icon>print</mat-icon> </a>
                                                 <button [hidden]="true" #divClick class="btn btn-primary me-1" [useExistingCss]="true" #print printSectionId="sectionToPrint" ngxPrint >print</button>
 <!--                                                <button class="btn btn-primary me-1" (click)="generateMarksheet()">Generate</button>-->
 <!--                                                <a (click)="editMarksheet(record)"><mat-icon>edit</mat-icon></a>-->
@@ -73,7 +75,7 @@
                                     </table>
                                 </div>
                             </form>
-                            <div id="sectionToPrint">
+                            <div id="sectionToPrint" [hidden]="true">
                                 <div style=" background-color:#f9fbf8;width:100%;">
                                     <!-- =====================code section===================== -->
                                     <div style="width: 85%; margin: 0px 10px 0px 60px;">
@@ -89,13 +91,13 @@
                                         <table style="margin:0px 0px 0px 0px;width:100%;position: relative;">
                                             <tr>
                                                 <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;width:100px;">Name of Student</th>
-                                                <td style="padding:0px 0px 7px 0px;font-size: 11px;width: 240px;">: {{subjectDetailsPrintData.student_name}}</td>
+                                                <td style="padding:0px 0px 7px 0px;font-size: 11px;width: 240px;">: {{subjectDetailsPrintData.student_name | uppercase}}</td>
                                                 <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;width: 140px;">Registration No.</th>
                                                 <td style="padding:0px 0px 7px 0px;font-size: 11px;">: {{subjectDetailsPrintData.registration_no}}</td>
                                             </tr>
                                             <tr>
                                                 <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;">Father Name</th>
-                                                <td style="padding:0px 0px 7px 0px;font-size: 11px;">: Takke Santosh</td>
+                                                <td style="padding:0px 0px 7px 0px;font-size: 11px;">: {{subjectDetailsPrintData.father_name}}</td>
                                                 <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;">Roll No.</th>
                                                 <td style="padding:0px 0px 7px 0px;font-size: 11px;">:
                                                     {{subjectDetailsPrintData.roll_no}}
@@ -103,18 +105,18 @@
                                             </tr>
                                             <tr>
                                                 <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;">Mother Name</th>
-                                                <td style="padding:0px 0px 7px 0px;font-size: 11px;">: SUMAN</td>
-                                                <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;">DMC No.</th>
+                                                <td style="padding:0px 0px 7px 0px;font-size: 11px;">: {{subjectDetailsPrintData.mother_name}} </td>
+                                                <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;">Course</th>
                                                 <td style="padding:0px 0px 7px 0px;font-size: 11px;">:
-                                                    11126828
+                                                    {{subjectDetailsPrintData.course_name | uppercase}}
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;">Session</th>
                                                 <td style="padding:0px 0px 7px 0px;font-size: 11px;">: {{subjectDetailsPrintData.session_name}}</td>
-                                                <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;">Program</th>
+                                                <th style="padding:0px 0px 7px 0px;text-align:left;font-size: 11px;">Sem</th>
                                                 <td style="padding:0px 0px 7px 0px;font-size: 11px;">:
-                                                    DMLT
+                                                    {{subjectDetailsPrintData.semester_name | uppercase}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -126,7 +128,7 @@
                                         <table cellspacing="0" border="0" width="100%" style="text-align:center;width:100%;margin: 0 auto;margin-top: 7px;">
                                             <tr>
                                                 <td colspan="5" class="yearheading" style="background: #063c83 !important; color: #FFF !important; padding: 5px 0px 5px 0px; font-size: 15px;font-weight: 600;letter-spacing: 1px;">
-                                                    1ST YEAR
+                                                    Marks
                                                 </td>
                                             </tr>
                                             <tr style="font-size: 13px;font-weight:900;line-height:normal;color: black;">
@@ -143,24 +145,24 @@
                                                     <span>Minimum Mark</span>
                                                 </td>
                                                 <td style="padding: 5px 0px 5px 0px;border-bottom: 1px solid #000;border-right: 1px solid #000;">
-                                                    <span>Maximum Mark</span>
+                                                    <span>Full Marks</span>
                                                 </td>
                                             </tr>
                                             <tr style="font-size: 12px;font-weight:normal;line-height:normal;color: black;" *ngFor="let record of subjectDetails">
                                                 <td style="text-align: left;padding: 3px 0px 3px 7px;font-size: 11px;border-left: 1px solid #000;border-right: 1px solid #000;">
-                                                    <span>Code10</span>
+                                                    <span>{{record.subject_code | uppercase}}</span>
                                                 </td>
                                                 <td style="text-align: left;padding: 3px 0px 3px 7px;font-size: 11px;border-right: 1px solid #000;">
-                                                    <span>{{record.name}}</span>
+                                                    <span>{{record.name | uppercase}}</span>
                                                 </td>
                                                 <td style="padding: 3px 0px 3px 0px;font-size: 11px;border-right: 1px solid #000;">
-                                                    <span>65</span>
+                                                    <span>{{record.marks}}</span>
                                                 </td>
                                                 <td style="padding: 3px 0px 3px 0px;font-size: 11px;border-right: 1px solid #000;">
-                                                    <span>45</span>
+                                                    <span>{{record.min_marks}}</span>
                                                 </td>
                                                 <td style="padding: 3px 0px 3px 0px;font-size: 11px;border-right: 1px solid #000;">
-                                                    <span>100</span>
+                                                    <span>{{record.full_marks}}</span>
                                                 </td>
                                             </tr>
 <!--                                            <tr style="font-size: 12px;font-weight:normal;line-height:normal;color: black;">-->
@@ -287,7 +289,7 @@
                                                     <span>Result</span>
                                                 </td>
                                                 <td colspan="3" style="text-align: center;padding: 3px 0px 3px 7px;border-right:1px solid #000;border-bottom:1px solid #000;">
-                                                    <span>Pass</span>
+                                                    <span>{{subjectDetailsPrintData.result_status}}</span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -314,10 +316,10 @@
                                                     <span>800</span>
                                                  </td> -->
                                                 <td style="padding: 5px 0px 5px 0px;font-size: 11px;">
-                                                    <span>541</span>
+                                                    <span>{{grandTotal}}</span>
                                                 </td>
                                                 <td rowspan="2" style="padding: 5px 0px 5px 0px;font-size: 11px;">
-                                                    <span>First</span>
+                                                    <span>{{subjectDetailsPrintData.division}}</span>
                                                 </td>
                                             </tr>
                                             <tr style="font-size: 13px;font-weight:normal;line-height:normal;color: black;">
@@ -328,7 +330,7 @@
                                                    <span>541</span>
                                                 </td> -->
                                                 <td style="padding: 5px 0px 5px 0px;font-size: 11px;">
-                                                    <span>67.63%</span>
+                                                    <span>{{percentageObtained.toFixed(2)}}%</span>
                                                 </td>
                                             </tr>
                                         </table>
@@ -338,7 +340,7 @@
                                                     Mark in Words :
                                                 </th>
                                                 <td style="text-align: left;font-size: 12px; padding: 7px 10px 5px 0px;font-weight: 900;">
-                                                    FIVE HUNDRED AND FOURTY ONE ONLY
+                                                    {{numWords(grandTotal) | uppercase}}
                                                 </td>
                                             </tr>
                                             <tr>
@@ -346,7 +348,7 @@
                                                     Date of Issue :
                                                 </th>
                                                 <td style="text-align: left;font-size: 12px; padding: 7px 10px 5px 0px;">
-                                                    1/05/22
+                                                    {{subjectDetailsPrintData.date_of_issue}}
                                                 </td>
                                             </tr>
 

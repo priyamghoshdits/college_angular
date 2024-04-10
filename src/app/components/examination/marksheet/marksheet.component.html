@@ -27,7 +27,7 @@
                                 <div  class="row mb-3">
                                     <div class="col-md-6 mb-12">
                                         <label>Select Course</label>
-                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
                                             <option [disabled]="tempMarkSheet.length>0" value="null">Select</option>
                                             <option [disabled]="tempMarkSheet.length>0" *ngFor="let data of courseList" [value]="data.id" >
                                                 {{data.course_name}}
@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="col-md-6 mb-12">
                                         <label>Select Semester</label>
-                                        <select style="width: 100%" formControlName="semester_id" class="form-select" (change)="getSubject()">
+                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="semester_id" class="form-select" (change)="getSubject()">
                                             <option [disabled]="tempMarkSheet.length>0" value="null">Select</option>
                                             <option [disabled]="tempMarkSheet.length>0" *ngFor="let data of semesterList" [value]="data.semester_id" >
                                                 {{data.name}}
@@ -49,7 +49,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6 mb-12">
                                         <label>Select Session</label>
-                                        <select style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudent()">
+                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudent()">
                                             <option [disabled]="tempMarkSheet.length>0" value="null">Select</option>
                                             <option [disabled]="tempMarkSheet.length>0" *ngFor="let data of sessionList" [value]="data.id" >
                                                 {{data.name}}
@@ -59,7 +59,7 @@
                                     </div>
                                     <div class="col-md-6 mb-12">
                                         <label>Select Student</label>
-                                        <select style="width: 100%" formControlName="student_id" class="form-select">
+                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="student_id" class="form-select">
                                             <option [disabled]="tempMarkSheet.length>0" value="null">Select</option>
                                             <option [disabled]="tempMarkSheet.length>0" *ngFor="let data of studentList" [value]="data.id" >
                                                 {{data.first_name}} {{data.middle_name}} {{data.last_name}}
@@ -69,14 +69,47 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Result</label>
+                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="result_status" class="form-select">
+                                            <option value="null">Select</option>
+                                            <option value="Pass"> Pass </option>
+                                            <option value="Fail"> Fail </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Division</label>
+                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="division" class="form-select">
+                                            <option value="null">Select</option>
+                                            <option value="First"> First </option>
+                                            <option value="Second"> Second </option>
+                                            <option value="Third"> Third </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
                                     <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0">Date Of Issue</label>
+                                        <input class="form-control" formControlName="date_of_issue" type="date"
+                                               placeholder="Enter Date">
+                                        <div *ngIf="subjectMarksForm.controls['date_of_issue'].errors?.['required'] && subjectMarksForm.controls['date_of_issue'].touched " class="text text-danger mt-1">Date Of Issue required</div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row mb-3">
+                                    <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Full Marks</label>
                                         <input class="form-control" formControlName="full_marks" type="text"
                                                placeholder="Enter Full Marks">
                                         <div *ngIf="subjectMarksForm.controls['full_marks'].errors?.['required'] && subjectMarksForm.controls['full_marks'].touched " class="text text-danger mt-1">Full Marks required</div>
                                     </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Min Marks</label>
+                                        <input class="form-control" formControlName="min_marks" type="text"
+                                               placeholder="Enter Min Marks">
+                                        <div *ngIf="subjectMarksForm.controls['min_marks'].errors?.['required'] && subjectMarksForm.controls['min_marks'].touched " class="text text-danger mt-1">Min Marks required</div>
+                                    </div>
                                 </div>
-                                <hr>
                                 <div class="row mb-3">
                                     <div class="col-md-12 mb-3">
                                         <label>Select Subject</label>
@@ -123,6 +156,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Subject Name</th>
                                         <th scope="col">Marks</th>
+                                        <th scope="col">Min Marks</th>
                                         <th scope="col">Full Marks</th>
                                         <th scope="col">Action</th>
                                     </tr>
@@ -132,6 +166,7 @@
                                         <td>{{indexOfElement+1}}</td>
                                         <td>{{record.subject_name}}</td>
                                         <td>{{record.marks}}</td>
+                                        <td>{{record.min_marks}}</td>
                                         <td>{{record.full_marks}}</td>
                                         <td>
                                             <a (click)="removeFromArray(indexOfElement,record)"><mat-icon>delete</mat-icon></a>
