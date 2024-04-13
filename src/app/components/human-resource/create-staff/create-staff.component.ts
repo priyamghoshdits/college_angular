@@ -176,6 +176,14 @@ export class CreateStaffComponent {
             this.staffCreationForm.markAllAsTouched();
             return;
         }
+        Swal.fire({
+            title: 'Please Wait !',
+            html: 'Saving ...', // add html attribute if you want or remove
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
         this.memberService.saveMember(this.staffCreationForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 Swal.fire({
@@ -185,6 +193,7 @@ export class CreateStaffComponent {
                     showConfirmButton: false,
                     timer: 1000
                 });
+                Swal.close();
                 this.staffCreationForm.reset();
             }
         })
