@@ -22,6 +22,7 @@ export class SidebarComponent {
   public fileurl: any;
   menuManagement : any[];
   sessionList: any[];
+  session_id= null;
 
   user : { id, first_name, middle_name, last_name, user_type_id, user_type_name,email, image, token};
 
@@ -33,6 +34,12 @@ export class SidebarComponent {
     if(this.user){
       this.url = this.FILE_URL + '/user_image/' + this.user.image;
     }
+     // @ts-ignore
+    const session_data= JSON.parse(localStorage.getItem('session_id'));
+    if(session_data)
+      {
+        this.session_id=session_data;
+      }
 
     this.sessionService.getSessionListener().subscribe((response) => {
       this.sessionList = response;
@@ -90,6 +97,11 @@ export class SidebarComponent {
 
     });
 
+  }
+  selectSession()
+  {
+    localStorage.removeItem("session_id");
+    localStorage.setItem("session_id", JSON.stringify(this.session_id));
   }
 
   // Active Nave state

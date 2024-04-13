@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   BASE_API_URL: 'http://127.0.0.1:8000/api',
-  FILE_URL: 'http://127.0.0.1:/college_api/public/',
+  FILE_URL: 'http://127.0.0.1/college_api/public/',
 };
 
 /*

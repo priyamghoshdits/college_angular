@@ -28,6 +28,11 @@ import {UserTypeService} from "../../../services/user-type.service";
 import {CommonService} from "../../../services/common.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {FranchiseService} from "../../../services/franchise.service";
+import {
+    ModalDismissReasons,
+    NgbModal,
+    NgbTooltip
+  } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-create-staff',
@@ -53,7 +58,7 @@ import {FranchiseService} from "../../../services/franchise.service";
         NgxPaginationModule,
         NgxDropzoneModule,
         CustomFilterPipe,
-        NgIf
+        NgIf,
     ],
   templateUrl: './create-staff.component.html',
   styleUrl: './create-staff.component.scss'
@@ -73,11 +78,12 @@ export class CreateStaffComponent {
     rolesAndPermission: any[] = [];
     permission: any[] = [];
     franchiseList: any[];
+    showProfile: any = null;
     user: {
         user_type_id: number;
     };
 
-    constructor(private departmentService: DepartmentService
+    constructor(private departmentService: DepartmentService, private modalService: NgbModal
                 , private calendar: NgbCalendar, private memberService: MemberService
                 , private imageService: ImageService, private designationService: DesignationService
                 , private userTypeService: UserTypeService, private commonService: CommonService
@@ -159,6 +165,14 @@ export class CreateStaffComponent {
     }
     activeTab(data){
         this.active = data;
+    }
+
+    openCustomModal(content) {
+        this.modalService.open(content,{ size: 'xl'});
+      }
+
+    showMember(data){
+        this.showProfile = data;
     }
 
     onSelect1(event) {

@@ -276,6 +276,20 @@
                                 </div>
                             </div>
                             <div class="card">
+                                <ng-template #content let-modal>
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="modal-basic-title">Student Payment</h4>
+                                            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div  style="color: red">
+                                                {{showProfile.gender}}
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </ng-template>
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -302,6 +316,7 @@
                                             <td>
                                                 <a *ngIf="permission[1].permission == 1" (click)="editMember(record)"><mat-icon>edit</mat-icon></a>
                                                 <a *ngIf="permission[2].permission == 1" (click)="deleteMember(record)"><mat-icon>delete</mat-icon></a>
+                                                <a (click)="openCustomModal(content);showMember(record)"><mat-icon>home</mat-icon></a>
                                             </td>
                                         </tr>
                                         </tbody>

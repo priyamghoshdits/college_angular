@@ -1,23 +1,23 @@
 import { Component } from '@angular/core';
-import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MemberService} from "../../../services/member.service";
-import {SubjectService} from "../../../services/subject.service";
-import {SessionService} from "../../../services/session.service";
-import {StudentService} from "../../../services/student.service";
+import { MatIcon, MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MemberService } from "../../../services/member.service";
+import { SubjectService } from "../../../services/subject.service";
+import { SessionService } from "../../../services/session.service";
+import { StudentService } from "../../../services/student.service";
 import Swal from "sweetalert2";
-import {ImageService} from "../../../services/image.service";
-import {AgentService} from "../../../services/agent.service";
-import {CustomFilterPipe} from "custom-filter.pipe";
-import {CommonService} from "../../../services/common.service";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
-import {FranchiseService} from "../../../services/franchise.service";
+import { ImageService } from "../../../services/image.service";
+import { AgentService } from "../../../services/agent.service";
+import { CustomFilterPipe } from "custom-filter.pipe";
+import { CommonService } from "../../../services/common.service";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
+import { FranchiseService } from "../../../services/franchise.service";
 
 @Component({
-  selector: 'app-student-admisssion',
-  standalone: true,
+    selector: 'app-student-admisssion',
+    standalone: true,
     imports: [
         MatIconModule,
         NgForOf,
@@ -31,8 +31,8 @@ import {FranchiseService} from "../../../services/franchise.service";
         CustomFilterPipe,
         NgIf
     ],
-  templateUrl: './student-admisssion.component.html',
-  styleUrl: './student-admisssion.component.scss'
+    templateUrl: './student-admisssion.component.html',
+    styleUrl: './student-admisssion.component.scss'
 })
 export class StudentAdmisssionComponent {
     studentCreationForm: FormGroup;
@@ -50,6 +50,7 @@ export class StudentAdmisssionComponent {
     rolesAndPermission: any[] = [];
     permission: any[] = [];
     franchiseList: any[];
+    session_id = null;
     user: {
         user_type_id: number;
     };
@@ -82,8 +83,8 @@ export class StudentAdmisssionComponent {
             dob: new FormControl(null, [Validators.required]),
             admission_date: new FormControl(null, [Validators.required]),
             image: new FormControl(null),
-            mobile_no: new FormControl(null, [Validators.required,Validators.pattern("[0-9]{10}")]),
-            emergency_phone_number: new FormControl(null, [Validators.required,Validators.pattern("[0-9]{10}")]),
+            mobile_no: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
+            emergency_phone_number: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
             material_status: new FormControl(null),
             admission_status: new FormControl(null),
             current_address: new FormControl(null, [Validators.required]),
@@ -114,6 +115,7 @@ export class StudentAdmisssionComponent {
             transaction_id: new FormControl(null, [Validators.required]),
             caution_money: new FormControl(0, [Validators.required]),
         });
++
 
         this.franchiseService.getFranchiseListener().subscribe((response) => {
             this.franchiseList = response;
@@ -189,7 +191,7 @@ export class StudentAdmisssionComponent {
         // @ts-ignore
         formData.append("p_image", this.studentCreationForm.value.id ? this.studentCreationForm.value.id : null);
         this.imageService.uploadProfilePic(formData).subscribe();
-        this.studentCreationForm.patchValue({image: file['name']});
+        this.studentCreationForm.patchValue({ image: file['name'] });
     }
 
     activeTab(data) {
@@ -208,6 +210,10 @@ export class StudentAdmisssionComponent {
     }
 
     saveStudent() {
+        // @ts-ignore
+        this.session_id = JSON.parse(localStorage.getItem('session_id'));
+        this.studentCreationForm.patchValue({session_id: this.session_id});
+
         if (!this.studentCreationForm.valid) {
             this.studentCreationForm.markAllAsTouched();
             window.scroll({
@@ -217,7 +223,7 @@ export class StudentAdmisssionComponent {
             });
             return;
         }
-        this.studentCreationForm.patchValue({admission_status: 1});
+        this.studentCreationForm.patchValue({ admission_status: 1 });
         Swal.fire({
             title: 'Please Wait !',
             html: 'Saving ...', // add html attribute if you want or remove
@@ -241,7 +247,7 @@ export class StudentAdmisssionComponent {
             }
         })
     }
-    refundAmount(data){
+    refundAmount(data) {
         Swal.fire({
             title: 'Confirmation',
             text: 'Confirm Refund ?',
@@ -251,9 +257,9 @@ export class StudentAdmisssionComponent {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, Refund!'
         }).then((result) => {
-            if(result.isConfirmed){
+            if (result.isConfirmed) {
                 this.studentService.refundStudent(data.id).subscribe((response: any) => {
-                    if(response.success == 1){
+                    if (response.success == 1) {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -269,6 +275,9 @@ export class StudentAdmisssionComponent {
 
 
     updateStudent() {
+          // @ts-ignore
+          this.session_id = JSON.parse(localStorage.getItem('session_id'));
+          this.studentCreationForm.patchValue({session_id: this.session_id});
         if (!this.studentCreationForm.valid) {
             this.studentCreationForm.markAllAsTouched();
             window.scroll({
@@ -278,7 +287,7 @@ export class StudentAdmisssionComponent {
             });
             return;
         }
-        this.studentCreationForm.patchValue({admission_status: 1});
+        this.studentCreationForm.patchValue({ admission_status: 1 });
         this.studentService.updateStudent(this.studentCreationForm.value).subscribe((response) => {
             // @ts-ignore
             if (response.success == 1) {
