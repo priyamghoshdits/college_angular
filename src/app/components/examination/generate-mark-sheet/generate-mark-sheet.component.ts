@@ -81,7 +81,6 @@ export class GenerateMarkSheetComponent {
   generateMarksheet(data){
     this.subjectDetails = data.subject_details;
     this.subjectDetailsPrintData = data;
-    console.log(this.subjectDetailsPrintData);
     this.subjectDetails.map(data => {
       return this.grandTotal += parseFloat(data.marks);
     });
