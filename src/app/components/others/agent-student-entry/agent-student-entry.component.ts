@@ -56,7 +56,7 @@ export class AgentStudentEntryComponent {
             first_name: new FormControl(null, [Validators.required]),
             middle_name: new FormControl(null),
             last_name: new FormControl(null, [Validators.required]),
-            mobile_no: new FormControl(null, [Validators.required]),
+            mobile_no: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
             admission_status: new FormControl(null),
             current_address: new FormControl(null, [Validators.required]),
             permanent_address: new FormControl(null, [Validators.required]),

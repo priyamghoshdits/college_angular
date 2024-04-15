@@ -150,7 +150,6 @@ export class PreAdmissionComponent {
             this.nonAdmittedStudents = this.studentList.filter(x => x.admission_status == 0);
             this.disabledStudents = this.studentList.filter(x => x.status == 0);
         }
-
     }
 
     getSemester() {
