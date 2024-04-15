@@ -29,6 +29,7 @@
                                             <input class="form-control" formControlName="mobile_no" id="exampleInputEmail1" type="text"
                                                    placeholder="Enter Mobile Number">
                                         <div *ngIf="agentForm.controls['mobile_no'].errors?.['required'] && agentForm.controls['mobile_no'].touched " class="text text-danger mt-1">Mobile Number required</div>
+                                        <div *ngIf="agentForm.controls['mobile_no'].errors?.['pattern']" class="text text-danger mt-1">Invalid Mobile Number</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Category</label>

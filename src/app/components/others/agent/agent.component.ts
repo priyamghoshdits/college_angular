@@ -42,7 +42,7 @@ export class AgentComponent {
       id: new FormControl(null),
       first_name: new FormControl(null, [Validators.required]),
       last_name: new FormControl(null, [Validators.required]),
-      mobile_no: new FormControl(null, [Validators.required]),
+      mobile_no: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
       category_id: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       commission_percentage: new FormControl(null),
