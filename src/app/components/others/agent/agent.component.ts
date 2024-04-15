@@ -45,8 +45,8 @@ export class AgentComponent {
       mobile_no: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
       category_id: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
-      commission_percentage: new FormControl(null),
-      commission_flat: new FormControl(null),
+      commission_percentage: new FormControl(null,[Validators.pattern("^[0-9]*$")]),
+      commission_flat: new FormControl(null,[Validators.pattern("^[0-9]*$")]),
     });
 
     let user = JSON.parse(localStorage.getItem('user') || '{}');
