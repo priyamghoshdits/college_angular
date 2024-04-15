@@ -46,7 +46,7 @@
                                         </select>
                                         <div *ngIf="attendanceForm.controls['subject_id'].errors?.['required'] && attendanceForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject required</div>
                                     </div>
-                                    <div class="col-md-2 mb-3">
+                                    <!-- <div class="col-md-2 mb-3">
                                         <label>Select Session</label>
                                         <select style="width: 100%" formControlName="session_id" class="form-select" required>
                                             <option value="null">Select</option>
@@ -55,7 +55,7 @@
                                             </option>
                                         </select>
                                         <div *ngIf="attendanceForm.controls['session_id'].errors?.['required'] && attendanceForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
-                                    </div>
+                                    </div> -->
                                     <div>
                                         <button class="btn btn-primary me-1" (click)="getStudentAttendanceList()">Search</button>
                                     </div>

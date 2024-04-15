@@ -46,6 +46,7 @@ export class PreAdmissionComponent {
     studentList: any[];
     nonAdmittedStudents: any[];
     disabledStudents: any[];
+    session_id = null;
     agentList: any[];
     searchItem: string;
     rolesAndPermission: any[] = [];
@@ -207,6 +208,20 @@ export class PreAdmissionComponent {
     }
 
     saveStudent() {
+           // @ts-ignore
+    this.session_id = JSON.parse(localStorage.getItem('session_id'));
+    this.studentCreationForm.patchValue({ session_id: this.session_id });
+
+    if (!this.session_id) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Session',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
         if (!this.studentCreationForm.valid) {
             this.studentCreationForm.markAllAsTouched();
             window.scroll({

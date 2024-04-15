@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import {SubjectService} from "../../../services/subject.service";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatIconModule} from "@angular/material/icon";
-import {DatePipe, NgForOf, NgIf} from "@angular/common";
-import {NgxPaginationModule} from "ngx-pagination";
-import {StudentService} from "../../../services/student.service";
+import { SubjectService } from "../../../services/subject.service";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { DatePipe, NgForOf, NgIf } from "@angular/common";
+import { NgxPaginationModule } from "ngx-pagination";
+import { StudentService } from "../../../services/student.service";
 import Swal from "sweetalert2";
-import {SessionService} from "../../../services/session.service";
+import { SessionService } from "../../../services/session.service";
 
 @Component({
   selector: 'app-period-attendance',
@@ -30,14 +30,15 @@ export class PeriodAttendanceComponent {
   subjectList: any[];
   sessionList: any[];
   studentList: any[] = [];
+  session_id = null;
   p: number;
   markAllAsPresent = false;
   markAllAsAbsent = true;
   markAllAsLate = false;
   markAllAsHalfDay = false
 
-  constructor(private subjectService: SubjectService, private studentService:StudentService
-              , private sessionService: SessionService, public datepipe: DatePipe) {
+  constructor(private subjectService: SubjectService, private studentService: StudentService
+    , private sessionService: SessionService, public datepipe: DatePipe) {
     this.attendanceForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
@@ -46,7 +47,7 @@ export class PeriodAttendanceComponent {
       subject_id: new FormControl(null, [Validators.required]),
       session_id: new FormControl(null, [Validators.required]),
     });
-    this.attendanceForm.patchValue({date: this.datepipe.transform(new Date(), 'yyyy-MM-dd')});
+    this.attendanceForm.patchValue({ date: this.datepipe.transform(new Date(), 'yyyy-MM-dd') });
     this.subjectService.getCourseListener().subscribe((response) => {
       this.courseList = response;
     })
@@ -58,91 +59,111 @@ export class PeriodAttendanceComponent {
     this.sessionList = this.sessionService.getSessionList();
   }
 
-  getSemester(){
+  getSemester() {
     this.subjectService.getSemesterByCourseId(this.attendanceForm.value.course_id).subscribe((response) => {
       // @ts-ignore
       this.semesterList = response.data;
     })
   }
 
-  markForAll(status){
-    this.studentList.forEach(function (value){
+  markForAll(status) {
+    this.studentList.forEach(function (value) {
       value.attendance = status;
     });
   }
 
-  getSubject(){
+  getSubject() {
     this.subjectService.getSubjects(this.attendanceForm.value.course_id, this.attendanceForm.value.semester_id).subscribe((response) => {
       // @ts-ignore
       this.subjectList = response.data;
     });
   }
 
-  getStudentAttendanceList(){
-    if(!this.attendanceForm.valid){
+  getStudentAttendanceList() {
+    // @ts-ignore
+    this.session_id = JSON.parse(localStorage.getItem('session_id'));
+    this.attendanceForm.patchValue({ session_id: this.session_id });
+
+    if (!this.attendanceForm.valid) {
       this.attendanceForm.markAllAsTouched();
       return;
     }
     this.studentList = [];
     this.studentService.getStudentAttendance(this.attendanceForm.value.course_id
-        ,this.attendanceForm.value.semester_id, this.attendanceForm.value.date
-        , this.attendanceForm.value.subject_id
-        , this.attendanceForm.value.session_id).subscribe((response: any) => {
+      , this.attendanceForm.value.semester_id, this.attendanceForm.value.date
+      , this.attendanceForm.value.subject_id
+      , this.attendanceForm.value.session_id).subscribe((response: any) => {
 
-          if(response.semester_time_table == 0){
-            Swal.fire({
-              title: 'Confirmation',
-              text: 'This subject class is not assigned today still want to give attendance ?',
-              icon: 'info',
-              showCancelButton: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Yes!'
-            }).then((result) => {
-              if(result.isConfirmed){
-                this.studentList = response.data;
-                if(this.studentList.length == 0){
-                  Swal.fire({
-                    position: 'center',
-                    icon: 'info',
-                    title: 'No Student Found',
-                    showConfirmButton: false,
-                    timer: 1000
-                  });
-                }
+        if (response.semester_time_table == 0) {
+          Swal.fire({
+            title: 'Confirmation',
+            text: 'This subject class is not assigned today still want to give attendance ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.studentList = response.data;
+              if (this.studentList.length == 0) {
+                Swal.fire({
+                  position: 'center',
+                  icon: 'info',
+                  title: 'No Student Found',
+                  showConfirmButton: false,
+                  timer: 1000
+                });
               }
-            });
-          }else{
-            this.studentList = response.data;
-            if(this.studentList.length == 0){
-              Swal.fire({
-                position: 'center',
-                icon: 'info',
-                title: 'No Student Found',
-                showConfirmButton: false,
-                timer: 1000
-              });
             }
+          });
+        } else {
+          this.studentList = response.data;
+          if (this.studentList.length == 0) {
+            Swal.fire({
+              position: 'center',
+              icon: 'info',
+              title: 'No Student Found',
+              showConfirmButton: false,
+              timer: 1000
+            });
           }
-    });
+        }
+      });
   }
 
-  saveAttendance(){
+  saveAttendance() {
+    // @ts-ignore
+    this.session_id = JSON.parse(localStorage.getItem('session_id'));
+    this.attendanceForm.patchValue({ session_id: this.session_id });
+
+    if (!this.session_id) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Session',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
     let date = this.attendanceForm.value.date;
     let subject_id = this.attendanceForm.value.subject_id;
     let course_id = this.attendanceForm.value.course_id;
     let semester_id = this.attendanceForm.value.semester_id;
-    let session_id = this.attendanceForm.value.session_id;
-    this.studentList.forEach(function (value){
+    // let session_id = this.attendanceForm.value.session_id;
+
+
+    this.studentList.forEach(function (value) {
       value.date = date;
       value.subject_id = subject_id;
       value.course_id = course_id;
       value.semester_id = semester_id;
-      value.session_id = session_id;
+      value.session_id = this.session_id;
     })
     this.studentService.saveStudentAttendance(this.studentList).subscribe((response) => {
       // @ts-ignore
-      if(response.success == 1){
+      if (response.success == 1) {
         Swal.fire({
           position: 'center',
           icon: 'success',
