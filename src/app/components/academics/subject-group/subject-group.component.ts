@@ -39,6 +39,7 @@ export class SubjectGroupComponent {
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
       course_id: new FormControl(null, [Validators.required]),
+      old_semester_id: new FormControl(null),
       semester_id: new FormControl(null, [Validators.required]),
       subject_id: new FormControl(null),
     });
@@ -160,7 +161,7 @@ export class SubjectGroupComponent {
     this.subjectService.getSemesterByCourseId(this.subjectGroupForm.value.course_id).subscribe((response: any) => {
       if(response.success == 1){
         this.semesterList = response.data;
-        this.subjectGroupForm.patchValue(data);
+        this.subjectGroupForm.patchValue({semester_id: data.semester[0].semester_id, old_semester_id: data.semester[0].semester_id});
         // this.subjectGroupForm.patchValue({'course_id' :data.course_id, 'name': data.name, 'semester_id': data.semester_id});
         // this.semesterList.forEach(function (value){
         //   value.checked = data.semester.findIndex(x => x.semester_id === value.semester_id) != -1;
@@ -169,7 +170,7 @@ export class SubjectGroupComponent {
         data.semester.forEach(function (value){
           let sem;
           sem = [
-            {id: value.semester_id}
+            {id: value.semester_id, old: value.semester_id}
           ];
           // @ts-ignore
           tempSem.push(sem[0]);
@@ -192,7 +193,7 @@ export class SubjectGroupComponent {
           value.checked = data.subject.findIndex(x => x.subject_id === value.id) != -1;
         });
         this.isUpdatable = true;
-        this.editSubjectGroup(this.subjectGroupForm.value.course_id);
+        // this.editSubjectGroup(this.subjectGroupForm.value.course_id);
 
       }
     });
@@ -243,12 +244,14 @@ export class SubjectGroupComponent {
       {
         name: this.subjectGroupForm.value.name,
         course_id : this.subjectGroupForm.value.course_id,
-        semester: this.tempSem,
+        semester: this.subjectGroupForm.value.semester_id,
+        old_semester: this.subjectGroupForm.value.old_semester_id,
         subject: this.tempSub
       }
     ];
 
     // console.log(arr[0]);
+    // return;
 
     this.subjectService.updateSubjectGroup(arr[0]).subscribe((response) => {
       // @ts-ignore

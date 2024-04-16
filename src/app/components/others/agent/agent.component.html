@@ -64,7 +64,7 @@
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">Commission ₹ (Per Student)</label>
                                             <input class="form-control" formControlName="commission_flat" id="exampleInputEmail1" type="text"
                                                    placeholder="Commission ₹">
-                                            <div *ngIf="agentForm.controls['commission_percentage'].errors?.['pattern']" class="text text-danger mt-1">Invalid Comission</div>
+                                            <div *ngIf="agentForm.controls['commission_flat'].errors?.['pattern']" class="text text-danger mt-1">Invalid Comission</div>
                                         </div>
                                     </div>
                                 </div>
