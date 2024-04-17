@@ -315,14 +315,10 @@ export class PreAdmissionComponent {
             }
         })
     }
-
-
-
     cancelUpdate() {
         this.studentCreationForm.reset();
         this.isUpdateable = false;
     }
-
     deleteStudent(data) {
         Swal.fire({
             title: 'Confirmation',
