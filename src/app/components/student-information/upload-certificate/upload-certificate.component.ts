@@ -36,6 +36,7 @@ export class UploadCertificateComponent {
   certificateTypeList: any[];
   file: any;
   searchItem: string;
+  session_id = null;
   constructor(private subjectService: SubjectService, private sessionService: SessionService
               , private certificateService: CertificateService) {
     this.uploadCertificateForm = new FormGroup({
@@ -49,10 +50,10 @@ export class UploadCertificateComponent {
       this.courseList = response;
     });
     this.courseList = this.subjectService.getCourses();
-    this.sessionService.getSessionListener().subscribe((response) => {
-      this.sessionList = response;
-    })
-    this.sessionList = this.sessionService.getSessionList();
+    // this.sessionService.getSessionListener().subscribe((response) => {
+    //   this.sessionList = response;
+    // })
+    // this.sessionList = this.sessionService.getSessionList();
 
     this.certificateService.getCertificateTypeListListener().subscribe((response) => {
       this.certificateTypeList = response;
@@ -68,10 +69,27 @@ export class UploadCertificateComponent {
   }
 
   searchStudents(){
+
+    // @ts-ignore
+    this.session_id = JSON.parse(localStorage.getItem('session_id'));
+    this.uploadCertificateForm.patchValue({session_id: this.session_id});
+
+    if(!this.session_id){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Session',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+
     if(!this.uploadCertificateForm.valid){
       this.uploadCertificateForm.markAllAsTouched();
       return;
     }
+
     this.certificateService.getStudentForCertificate(this.uploadCertificateForm.value).subscribe((response:any) => {
       this.filteredStudentList = response.data;
     })
@@ -87,11 +105,26 @@ export class UploadCertificateComponent {
   }
 
   uploadCertificate(event,record){
+
+    // @ts-ignore
+    this.session_id = JSON.parse(localStorage.getItem('session_id'));
+
+    if(!this.session_id){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Session',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+
     const formData = new FormData();
     formData.append("id", record.certificate_id?record.certificate_id:null);
     formData.append("course_id", this.uploadCertificateForm.value.course_id);
     formData.append("semester_id", this.uploadCertificateForm.value.semester_id);
-    formData.append("session_id", this.uploadCertificateForm.value.session_id);
+    formData.append("session_id", this.session_id);
     formData.append("certificate_type_id", this.uploadCertificateForm.value.certificate_type_id);
     formData.append("user_id", record.id);
     formData.append("file_name", event.target.files[0]['name']);

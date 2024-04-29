@@ -36,6 +36,7 @@ export class SubjectDetailsComponent {
   p:number;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
+  session_id = null;
   constructor(private subjectService: SubjectService, private sessionService: SessionService
               , private examinationService: ExaminationService , private roleAndPermissionService: RolesAndPermissionService) {
     this.subjectDetailsForm = new FormGroup({
@@ -90,6 +91,22 @@ export class SubjectDetailsComponent {
   }
 
   saveSubjectDetails(){
+
+    // @ts-ignore
+    this.session_id = JSON.parse(localStorage.getItem('session_id'));
+    this.subjectDetailsForm.patchValue({session_id: this.session_id});
+
+    if(!this.session_id){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Session',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+
     if(!this.subjectDetailsForm.valid){
       this.subjectDetailsForm.markAllAsTouched();
       return;
@@ -150,6 +167,22 @@ export class SubjectDetailsComponent {
   }
 
   updateSubjectDetails(){
+
+    // @ts-ignore
+    this.session_id = JSON.parse(localStorage.getItem('session_id'));
+    this.subjectDetailsForm.patchValue({session_id: this.session_id});
+
+    if(!this.session_id){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Session',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+
     // @ts-ignore
     this.examinationService.updateSubjectDetails(this.subjectDetailsForm.value).subscribe((response) => {
       // @ts-ignore

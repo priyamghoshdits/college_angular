@@ -28,6 +28,7 @@ export class SendStudentLoginCredentialComponent {
     semesterList: any[];
     sessionList: any[];
     studentList: any[] = [];
+    session_id = null;
     constructor(private subjectService: SubjectService, private sessionService:SessionService, private studentService:StudentService) {
         this.examinationReportForm = new FormGroup({
             id: new FormControl(null),
@@ -36,10 +37,10 @@ export class SendStudentLoginCredentialComponent {
             session_id: new FormControl(null, [Validators.required]),
         });
 
-        this.sessionService.getSessionListener().subscribe((response) => {
-            this.sessionList = response;
-        });
-        this.sessionList = this.sessionService.getSessionList();
+        // this.sessionService.getSessionListener().subscribe((response) => {
+        //     this.sessionList = response;
+        // });
+        // this.sessionList = this.sessionService.getSessionList();
 
         this.subjectService.getCourseListener().subscribe((response) => {
             this.courseList = response;
@@ -54,6 +55,21 @@ export class SendStudentLoginCredentialComponent {
     }
 
     getStudents(){
+        // @ts-ignore
+        this.session_id = JSON.parse(localStorage.getItem('session_id'));
+        this.examinationReportForm.patchValue({session_id: this.session_id});
+
+        if(!this.session_id){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select Session',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            return;
+        }
+
         this.studentService.getSessionWiseStudent(this.examinationReportForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 this.studentList = response.data;

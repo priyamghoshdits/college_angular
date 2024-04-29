@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="uploadCertificateForm">
                                 <div  class="row">
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label>Select Course</label>
                                         <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
                                             <option *ngFor="let data of courseList" [value]="data.id" >
@@ -19,7 +19,7 @@
                                         </select>
                                         <div *ngIf="uploadCertificateForm.controls['course_id'].errors?.['required'] && uploadCertificateForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-3 mb-3">
                                         <label>Select Semester</label>
                                         <select style="width: 100%" formControlName="semester_id" class="form-select">
                                             <option *ngFor="let data of semesterList" [value]="data.semester_id" >
@@ -28,15 +28,15 @@
                                         </select>
                                         <div *ngIf="uploadCertificateForm.controls['semester_id'].errors?.['required'] && uploadCertificateForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
-                                    <div class="col-md-2 mb-3">
-                                        <label>Select Session</label>
-                                        <select style="width: 100%" formControlName="session_id" class="form-select">
-                                            <option *ngFor="let data of sessionList" [value]="data.id">
-                                                {{data.name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="uploadCertificateForm.controls['session_id'].errors?.['required'] && uploadCertificateForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
-                                    </div>
+<!--                                    <div class="col-md-2 mb-3">-->
+<!--                                        <label>Select Session</label>-->
+<!--                                        <select style="width: 100%" formControlName="session_id" class="form-select">-->
+<!--                                            <option *ngFor="let data of sessionList" [value]="data.id">-->
+<!--                                                {{data.name}}-->
+<!--                                            </option>-->
+<!--                                        </select>-->
+<!--                                        <div *ngIf="uploadCertificateForm.controls['session_id'].errors?.['required'] && uploadCertificateForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+<!--                                    </div>-->
                                     <div class="col-md-3 mb-3">
                                         <label>Select Certificate Type</label>
                                         <select style="width: 100%" formControlName="certificate_type_id" class="form-select">

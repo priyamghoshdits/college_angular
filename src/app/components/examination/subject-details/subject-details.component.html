@@ -47,14 +47,21 @@
                                         </select>
                                         <div *ngIf="subjectDetailsForm.controls['subject_id'].errors?.['required'] && subjectDetailsForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject required</div>
                                     </div>
+<!--                                    <div class="col-md-6 mb-3">-->
+<!--                                        <label>Select Session</label>-->
+<!--                                        <select style="width: 100%" formControlName="session_id" class="form-select" required (change)="getSemester()">-->
+<!--                                            <option *ngFor="let data of sessionList" [value]="data.id" >-->
+<!--                                                {{data.name}}-->
+<!--                                            </option>-->
+<!--                                        </select>-->
+<!--                                        <div *ngIf="subjectDetailsForm.controls['session_id'].errors?.['required'] && subjectDetailsForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+<!--                                    </div>-->
+
                                     <div class="col-md-6 mb-3">
-                                        <label>Select Session</label>
-                                        <select style="width: 100%" formControlName="session_id" class="form-select" required (change)="getSemester()">
-                                            <option *ngFor="let data of sessionList" [value]="data.id" >
-                                                {{data.name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="subjectDetailsForm.controls['session_id'].errors?.['required'] && subjectDetailsForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
+                                        <label>Full Marks</label>
+                                        <input type="text" class="form-control" formControlName="full_marks" placeholder="Enter full marks" required>
+                                        <div *ngIf="subjectDetailsForm.controls['full_marks'].errors?.['required'] && subjectDetailsForm.controls['full_marks'].touched " class="text text-danger mt-1">Full marks required</div>
+                                        <div *ngIf="subjectDetailsForm.controls['full_marks'].errors?.['pattern']" class="text text-danger mt-1">Invalid input</div>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -83,14 +90,14 @@
                                         <div *ngIf="subjectDetailsForm.controls['publish_date'].errors?.['required'] && subjectDetailsForm.controls['publish_date'].touched " class="text text-danger mt-1">Published Date required</div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label>Full Marks</label>
-                                        <input type="text" class="form-control" formControlName="full_marks" placeholder="Enter full marks" required>
-                                        <div *ngIf="subjectDetailsForm.controls['full_marks'].errors?.['required'] && subjectDetailsForm.controls['full_marks'].touched " class="text text-danger mt-1">Full marks required</div>
-                                        <div *ngIf="subjectDetailsForm.controls['full_marks'].errors?.['pattern']" class="text text-danger mt-1">Invalid input</div>
-                                    </div>
-                                </div>
+<!--                                <div class="row">-->
+<!--                                    <div class="col-md-6 mb-3">-->
+<!--                                        <label>Full Marks</label>-->
+<!--                                        <input type="text" class="form-control" formControlName="full_marks" placeholder="Enter full marks" required>-->
+<!--                                        <div *ngIf="subjectDetailsForm.controls['full_marks'].errors?.['required'] && subjectDetailsForm.controls['full_marks'].touched " class="text text-danger mt-1">Full marks required</div>-->
+<!--                                        <div *ngIf="subjectDetailsForm.controls['full_marks'].errors?.['pattern']" class="text text-danger mt-1">Invalid input</div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </form>
                         </div>
                         <div class="card-footer">

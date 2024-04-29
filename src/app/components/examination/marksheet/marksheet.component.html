@@ -47,16 +47,16 @@
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-                                    <div class="col-md-6 mb-12">
-                                        <label>Select Session</label>
-                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudent()">
-                                            <option [disabled]="tempMarkSheet.length>0" value="null">Select</option>
-                                            <option [disabled]="tempMarkSheet.length>0" *ngFor="let data of sessionList" [value]="data.id" >
-                                                {{data.name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="subjectMarksForm.controls['session_id'].errors?.['required'] && subjectMarksForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
-                                    </div>
+<!--                                    <div class="col-md-6 mb-12">-->
+<!--                                        <label>Select Session</label>-->
+<!--                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudent()">-->
+<!--                                            <option [disabled]="tempMarkSheet.length>0" value="null">Select</option>-->
+<!--                                            <option [disabled]="tempMarkSheet.length>0" *ngFor="let data of sessionList" [value]="data.id" >-->
+<!--                                                {{data.name}}-->
+<!--                                            </option>-->
+<!--                                        </select>-->
+<!--                                        <div *ngIf="subjectMarksForm.controls['session_id'].errors?.['required'] && subjectMarksForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+<!--                                    </div>-->
                                     <div class="col-md-6 mb-12">
                                         <label>Select Student</label>
                                         <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="student_id" class="form-select">
@@ -66,6 +66,12 @@
                                             </option>
                                         </select>
                                         <div *ngIf="subjectMarksForm.controls['student_id'].errors?.['required'] && subjectMarksForm.controls['student_id'].touched " class="text text-danger mt-1">Student required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-12">
+                                        <label class="col-form-label pt-0">Marks</label>
+                                        <input class="form-control" formControlName="marks" type="text"
+                                               placeholder="Enter Marks">
+                                        <div *ngIf="subjectMarksForm.controls['marks'].errors?.['required'] && subjectMarksForm.controls['marks'].touched " class="text text-danger mt-1">Marks required</div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">

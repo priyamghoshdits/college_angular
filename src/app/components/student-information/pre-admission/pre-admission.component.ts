@@ -207,7 +207,7 @@ export class PreAdmissionComponent {
     }
 
     saveStudent() {
-           // @ts-ignore
+        // @ts-ignore
     this.session_id = JSON.parse(localStorage.getItem('session_id'));
     this.studentCreationForm.patchValue({ session_id: this.session_id });
 

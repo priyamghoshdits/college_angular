@@ -35,6 +35,7 @@ export class CautionMoneyComponent {
   studentList: any[] = [];
   searchItem: string;
   selectedCautionMoney = 0;
+  session_id = null;
   constructor(private subjectService: SubjectService, private sessionService: SessionService
               ,private cautionMoneyService: CautionMoneyService, private modalService: NgbModal) {
     this.cautionMoneyForm = new FormGroup({
@@ -77,6 +78,21 @@ export class CautionMoneyComponent {
   }
 
   getCautionMoney(){
+    // @ts-ignore
+    this.session_id = JSON.parse(localStorage.getItem('session_id'));
+    this.cautionMoneyForm.patchValue({session_id: this.session_id});
+
+    if(!this.session_id){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Session',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+
     this.cautionMoneyService.getStudentsForCautionMoney(this.cautionMoneyForm.value).subscribe((response: any) => {
       if(response.success == 1){
         this.studentList = response.data;

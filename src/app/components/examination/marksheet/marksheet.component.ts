@@ -42,6 +42,7 @@ export class MarksheetComponent {
     tempMarkSheet: any[] = [];
     active = 1;
     markSheetList: any[];
+    session_id = null;
 
     constructor(private subjectService: SubjectService,private studentSubject: StudentService
         , private sessionSubject: SessionService, private examinationService: ExaminationService) {
@@ -110,6 +111,22 @@ export class MarksheetComponent {
     }
 
     addMarksheet(){
+
+        // @ts-ignore
+        this.session_id = JSON.parse(localStorage.getItem('session_id'));
+        this.subjectMarksForm.patchValue({ session_id: this.session_id });
+
+        if (!this.session_id) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select Session',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            return;
+        }
+
         if(!this.subjectMarksForm.valid){
             this.subjectMarksForm.markAllAsTouched();
             return;
