@@ -132,8 +132,7 @@ export class SubjectGroupComponent {
     ];
     // console.log(arr[0]);
     // return;
-    this.subjectService.saveSubjectGroup(arr[0]).subscribe((response) => {
-      // @ts-ignore
+    this.subjectService.saveSubjectGroup(arr[0]).subscribe((response: any) => {
         if(response.success == 1){
           Swal.fire({
             position: 'center',
@@ -152,6 +151,14 @@ export class SubjectGroupComponent {
           this.tempSub = [];
           this.tempSem = [];
           this.semesterList = [];
+        }else if(response.success == 2){
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Subject group already exists please update it',
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
     });
   }
