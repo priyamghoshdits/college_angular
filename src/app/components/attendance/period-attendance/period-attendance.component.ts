@@ -151,7 +151,7 @@ export class PeriodAttendanceComponent {
     let subject_id = this.attendanceForm.value.subject_id;
     let course_id = this.attendanceForm.value.course_id;
     let semester_id = this.attendanceForm.value.semester_id;
-    // let session_id = this.attendanceForm.value.session_id;
+    let session_id = this.attendanceForm.value.session_id;
 
 
     this.studentList.forEach(function (value) {
@@ -159,7 +159,7 @@ export class PeriodAttendanceComponent {
       value.subject_id = subject_id;
       value.course_id = course_id;
       value.semester_id = semester_id;
-      value.session_id = this.session_id;
+      value.session_id = session_id;
     })
     this.studentService.saveStudentAttendance(this.studentList).subscribe((response) => {
       // @ts-ignore

@@ -28,15 +28,15 @@
                                         </select>
                                         <div *ngIf="attendanceReportForm.controls['semester_id'].errors?.['required'] && attendanceReportForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>Select Session</label>
-                                        <select style="width: 100%" formControlName="session_id" class="form-select">
-                                            <option *ngFor="let data of sessionList" [value]="data.id" >
-                                                {{data.name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="attendanceReportForm.controls['session_id'].errors?.['required'] && attendanceReportForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
-                                    </div>
+<!--                                    <div class="col-md-3 mb-3">-->
+<!--                                        <label>Select Session</label>-->
+<!--                                        <select style="width: 100%" formControlName="session_id" class="form-select">-->
+<!--                                            <option *ngFor="let data of sessionList" [value]="data.id" >-->
+<!--                                                {{data.name}}-->
+<!--                                            </option>-->
+<!--                                        </select>-->
+<!--                                        <div *ngIf="attendanceReportForm.controls['session_id'].errors?.['required'] && attendanceReportForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+<!--                                    </div>-->
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
@@ -93,7 +93,7 @@
                                         <tbody>
                                         <tr *ngFor="let record of studentAttendanceList;let indexOfElement=index">
                                             <td>{{indexOfElement+1}}</td>
-                                            <td>{{record.name}}</td>
+                                            <td (click)="getAttendanceReport()">{{record.name}}</td>
                                             <td>{{record.total_classes}}</td>
                                             <td>{{record.present}}</td>
                                             <td>{{record.absent}}</td>

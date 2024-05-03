@@ -348,14 +348,14 @@ export class NavService {
 		// 		{ path: '/timeline/timeline1', title: 'Timeline', type: 'link' }
 		// 	]
 		// },
-		// {
-		// 	title: 'Charts', icon: 'bar-chart', type: 'sub', active: false, children: [
-		// 		{ path: '/chart/google', title: 'Google Chart', type: 'link' },
-		// 		{ path: '/chart/chartjs', title: 'Chartjs', type: 'link' },
-		// 		{ path: '/chart/chartist', title: 'Chartist', type: 'link' },
-		// 		{ path: '/chart/ngx-chart', title: 'Ngx-Chart', type: 'link' }
-		// 	]
-		// },
+		{
+			title: 'Charts', icon: 'bar-chart', type: 'sub', active: false, children: [
+				{ path: '/chart/google', title: 'Google Chart', type: 'link' },
+				{ path: '/chart/chartjs', title: 'Chartjs', type: 'link' },
+				{ path: '/chart/chartist', title: 'Chartist', type: 'link' },
+				{ path: '/chart/ngx-chart', title: 'Ngx-Chart', type: 'link' }
+			]
+		},
 		// {
 		// 	title: 'Map', icon: 'map', type: 'sub', active: false, children: [
 		// 		{ path: '/map/google', title: 'Google Map', type: 'link' },

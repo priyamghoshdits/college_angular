@@ -41,4 +41,10 @@ export class ReportService {
         .pipe(catchError(this.errorService.serverError), tap(response => {
         }));
   }
+
+    getStudentPerDayAttendance(){
+        return this.http.get(this.BASE_API_URL + '/getStudentPerDayAttendance')
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+            }));
+    }
 }

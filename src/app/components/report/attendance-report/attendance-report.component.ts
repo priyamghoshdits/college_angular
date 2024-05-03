@@ -75,6 +75,21 @@ export class AttendanceReportComponent {
   }
 
   getAttendance(){
+    // @ts-ignore
+    const session_id = JSON.parse(localStorage.getItem('session_id'));
+    this.attendanceReportForm.patchValue({ session_id: session_id });
+
+    if (!session_id) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Session',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+
     if(!this.attendanceReportForm.valid){
       this.attendanceReportForm.markAllAsTouched();
       return;
@@ -92,6 +107,12 @@ export class AttendanceReportComponent {
           });
         }
       }
+    })
+  }
+
+  getAttendanceReport(){
+    this.reportService.getStudentPerDayAttendance().subscribe((response: any) => {
+
     })
   }
 

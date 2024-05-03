@@ -6,6 +6,10 @@ import {ReportService} from "../../../services/report.service";
 import Swal from "sweetalert2";
 import * as XLSX from 'xlsx';
 import {NgxPrintDirective} from "ngx-print";
+import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
+import {ChartistModule} from "ng-chartist";
+import * as chartData from "../../../shared/data/chart/chartist";
+import {Chart} from "../../../shared/data/chart/chartist";
 
 @Component({
   selector: 'app-admission-report',
@@ -16,7 +20,13 @@ import {NgxPrintDirective} from "ngx-print";
     NgForOf,
     NgIf,
     ReactiveFormsModule,
-    NgxPrintDirective
+    NgxPrintDirective,
+    NgbNav,
+    NgbNavLink,
+    NgbNavLinkBase,
+    NgbNavItem,
+    NgbNavOutlet,
+    ChartistModule
   ],
   templateUrl: './admission-report.component.html',
   styleUrl: './admission-report.component.scss'
@@ -38,12 +48,34 @@ export class AdmissionReportComponent {
   }
   admissionReportForm: FormGroup;
   admissionReport: any[] = [];
+  active = 1;
+  monthNames = ["January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+  public chart7 : Chart = {
+    type: "Bar",
+    data: {
+      labels: [],
+      series: [
+        [],
+      ],
+    },
+    options: {
+      stackBars: true,
+      scaleMinSpace: 90,
+      height: 450,
+    },
+  };
   constructor(private reportService: ReportService) {
     this.admissionReportForm = new FormGroup({
       id: new FormControl(null),
       from_date: new FormControl(null, [Validators.required]),
       to_date: new FormControl(null, [Validators.required]),
     });
+  }
+
+  activeTab(data) {
+    this.active = data;
   }
 
   getStudentReport(){
@@ -54,6 +86,8 @@ export class AdmissionReportComponent {
     this.reportService.getStudentReport(this.admissionReportForm.value).subscribe((response:any) => {
       if(response.success == 1){
         this.admissionReport = response.data;
+        // console.log(this.admissionReport);
+        // admission_date
         if(this.admissionReport.length == 0){
           Swal.fire({
             position: 'center',
@@ -62,6 +96,21 @@ export class AdmissionReportComponent {
             showConfirmButton: false,
             timer: 1000
           });
+        }else{
+          const temp = [];
+          const temp_dd = [];
+          // console.log(this.admissionReport.filter(x => new Date(x.admission_date).getMonth() == 3));
+          const from_date = new Date(this.admissionReportForm.value.from_date).getMonth();
+          const to_date = new Date(this.admissionReportForm.value.to_date).getMonth();
+          for(let i = from_date; i <= to_date; i++){
+            // @ts-ignore
+            temp_dd.push((this.admissionReport.filter(x => new Date(x.admission_date).getMonth() == i)).length);
+            console.log(i);
+            // @ts-ignore
+            temp.push(this.monthNames[i]);
+          }
+          this.chart7.data.labels =  temp;
+          this.chart7.data.series =  temp_dd;
         }
       }
     })

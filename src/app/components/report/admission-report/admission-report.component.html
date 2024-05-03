@@ -4,9 +4,25 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
+<!--                        <div class="card-header">-->
+<!--                            <h5>Admission Report</h5>-->
+<!--                        </div>-->
+
                         <div class="card-header">
-                            <h5>Admission Report</h5>
+                            <h5>Student Admission</h5>
                         </div>
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Data</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Graph</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="admissionReportForm">
                                 <div class="row">
@@ -34,7 +50,7 @@
                 <div class="col-sm-12">
                     <div class="card">
 
-                        <div class="row">
+                        <div class="row" *ngIf="active == 1">
                             <div class="col-8">
                                 <div class="card-header">
                                     <h5>Student Admission Report ({{admissionReportForm.value.from_date}} - {{admissionReportForm.value.to_date}})</h5>
@@ -47,7 +63,7 @@
                                 <a class="pull-right" style="margin-top: 22px;margin-right: 40px;cursor: pointer;" (click)="exportExcel()"><mat-icon>cloud_download</mat-icon></a>
                             </div>
                         </div>
-                        <div id="sectionToPrint">
+                        <div id="sectionToPrint" *ngIf="active == 1">
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table" style="text-align: center">
@@ -77,6 +93,20 @@
                                 </div>
                             </div>
                         </div>
+
+
+                        <div class="col-xl-12 col-md-12 col-sm-12" *ngIf="active == 2">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Stacked bar chart</h5>
+                                </div>
+                                <div class="card-body">
+
+                                    <x-chartist [configuration]="chart7"></x-chartist>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
