@@ -160,27 +160,28 @@ export class AssignSemesterTeacherComponent {
     }
 
     editAssignTeacher(data){
-        this.assignSemesterTeacherForm.patchValue({'id': data.id, 'course_id': data.course_id});
-        this.getSemester();
-        this.assignSemesterTeacherForm.patchValue({'semester_id': data.semester_id});
-        this.assignSemesterTeacherForm.patchValue(data);
-        let temp = [];
-        data.teacher.forEach(function (value){
-            let teacher;
-            teacher = [
-                {"id": value.id}
-            ];
-            // @ts-ignore
-            temp.push(teacher[0]);
-        });
-        this.tempTeacher = temp;
+        // this.assignSemesterTeacherForm.patchValue({'id': data.id, 'course_id': data.course_id});
+        this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
+            this.semesterList = response.data;
 
-        this.teachers.forEach(function (value){
-            value.checked = data.teacher.findIndex(x => x.id === value.id) != -1;
+            this.assignSemesterTeacherForm.patchValue(data);
+            // this.assignSemesterTeacherForm.patchValue(data);
+            let temp = [];
+            data.teacher.forEach(function (value){
+                let teacher;
+                teacher = [
+                    {"id": value.id}
+                ];
+                // @ts-ignore
+                temp.push(teacher[0]);
+            });
+            this.tempTeacher = temp;
+            this.teachers.forEach(function (value){
+                value.checked = data.teacher.findIndex(x => x.id === value.id) != -1;
+            });
+            this.isUpdatable = true;
         });
 
-        console.log(this.assignSemesterTeacherForm.value);
-        this.isUpdatable = true;
     }
 
     updateAssignSemesterTeacher(){

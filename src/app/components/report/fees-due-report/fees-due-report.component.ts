@@ -45,11 +45,7 @@ export class FeesDueReportComponent {
     this.subjectService.getCourseListener().subscribe((response) => {
       this.courseList = response;
     });
-
-    this.sessionService.getSessionListener().subscribe((response) => {
-      this.sessionList = response;
-    })
-
+    this.courseList = this.subjectService.getCourses();
   }
 
   getSemester(){
