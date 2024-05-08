@@ -17,7 +17,7 @@
                                         <div *ngIf="subjectGroupForm.controls['name'].errors?.['required'] && subjectGroupForm.controls['name'].touched " class="text text-danger mt-1">Subject Group name required</div>
                                     </div>
                                     <div class="col-md-6">
-                                            <label>Select Course</label>
+                                            <label>Course <span style="color: red">*</span></label>
                                             <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
                                                 <option value="null">--Select--</option>
                                                 <option *ngFor="let data of courseList" [value]="data.id" >
@@ -30,7 +30,7 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label>Select Semester</label>
+                                        <label>Semester <span style="color: red">*</span></label>
                                         <select style="width: 100%" formControlName="semester_id" class="form-select" required>
                                             <option value="null">--Select--</option>
                                             <option *ngFor="let data of semesterList" [value]="data.semester_id" >
