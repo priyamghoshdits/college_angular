@@ -116,7 +116,7 @@ export class UniversityComponent implements OnInit {
 
   openModal(data){
     console.log(data);
-    // const new_date_create =
-    // console.log(this.datePick);
+    const new_date_create = data.year + '-' + data.month + '-' + data.day;
+    console.log(new_date_create);
   }
 }
