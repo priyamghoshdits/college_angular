@@ -203,11 +203,12 @@ export class NavService {
 		},
 		{
 			title: 'Report', hidden:false , icon: 'file', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/report/admission-report', title: 'Admission report', type: 'link' },
 				{ path: '/report/attendance-report', title: 'Attendance report', type: 'link' },
 				{ path: '/report/examination-report', title: 'Examination report', type: 'link' },
 				{ path: '/report/fees-collection-report', title: 'Fees Collection report', type: 'link' },
 				{ path: '/report/fees-due-report', title: 'Fees Due report', type: 'link' },
-				{ path: '/report/admission-report', title: 'Admission report', type: 'link' },
+				
 			]
 		},
 		{
@@ -358,14 +359,14 @@ export class NavService {
 		// 		{ path: '/timeline/timeline1', title: 'Timeline', type: 'link' }
 		// 	]
 		// },
-		{
-			title: 'Charts', icon: 'bar-chart', type: 'sub', active: false, children: [
-				{ path: '/chart/google', title: 'Google Chart', type: 'link' },
-				{ path: '/chart/chartjs', title: 'Chartjs', type: 'link' },
-				{ path: '/chart/chartist', title: 'Chartist', type: 'link' },
-				{ path: '/chart/ngx-chart', title: 'Ngx-Chart', type: 'link' }
-			]
-		},
+		// {
+		// 	title: 'Charts', icon: 'bar-chart', type: 'sub', active: false, children: [
+		// 		{ path: '/chart/google', title: 'Google Chart', type: 'link' },
+		// 		{ path: '/chart/chartjs', title: 'Chartjs', type: 'link' },
+		// 		{ path: '/chart/chartist', title: 'Chartist', type: 'link' },
+		// 		{ path: '/chart/ngx-chart', title: 'Ngx-Chart', type: 'link' }
+		// 	]
+		// },
 		// {
 		// 	title: 'Map', icon: 'map', type: 'sub', active: false, children: [
 		// 		{ path: '/map/google', title: 'Google Map', type: 'link' },
