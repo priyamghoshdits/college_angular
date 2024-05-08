@@ -11,8 +11,9 @@
                             <form class="theme-form" [formGroup]="attendanceReportForm">
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                        <label>Select Course</label>
+                                        <label>Course</label>
                                         <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <option value="null">--Select--</option>
                                             <option *ngFor="let data of courseList" [value]="data.id" >
                                                 {{data.course_name}}
                                             </option>
@@ -20,8 +21,9 @@
                                         <div *ngIf="attendanceReportForm.controls['course_id'].errors?.['required'] && attendanceReportForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
-                                        <label>Select Semester</label>
+                                        <label>Semester</label>
                                         <select style="width: 100%" formControlName="semester_id" class="form-select">
+                                            <option value="null">--Select--</option>
                                             <option *ngFor="let data of semesterList" [value]="data.semester_id" >
                                                 {{data.name}}
                                             </option>
