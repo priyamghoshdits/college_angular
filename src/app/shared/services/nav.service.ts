@@ -214,16 +214,17 @@ export class NavService {
 				{ path: '/download-center/syllabus', title: 'Syllabus', type: 'link' },
 			]
 		},
-		// {
-		// 	title: 'Dashboard', icon: 'home', type: 'sub', badgeType: 'primary', badgeValue: 'new', active: true, children: [
-		// 		{ path: '/dashboard/default', title: 'Default', type: 'link' },
-		// 		{ path: '/dashboard/e-commerce', title: 'E-Commerce', type: 'link', },
-		// 		{ path: '/dashboard/university', title: 'University', type: 'link' },
-		// 		{ path: '/dashboard/bitcoin', title: 'Crypto', type: 'link' },
-		// 		{ path: '/dashboard/server', title: 'Server', type: 'link' },
-		// 		{ path: '/dashboard/project', title: 'Project', type: 'link' }
-		// 	]
-		// },
+		// { path: '/dashboard/default', title: 'Default', type: 'link',badgeType: 'primary' },
+		{
+			title: 'Dashboard', icon: 'home', type: 'sub', badgeType: 'primary', badgeValue: 'new', active: true, children: [
+				{ path: '/dashboard/default', title: 'Default', type: 'link' },
+				{ path: '/dashboard/e-commerce', title: 'E-Commerce', type: 'link', },
+				{ path: '/dashboard/university', title: 'University', type: 'link' },
+				{ path: '/dashboard/bitcoin', title: 'Crypto', type: 'link' },
+				{ path: '/dashboard/server', title: 'Server', type: 'link' },
+				{ path: '/dashboard/project', title: 'Project', type: 'link' }
+			]
+		},
 		// {
 		// 	title: 'Widgets', icon: 'airplay', type: 'sub', active: false, children: [
 		// 		{ path: '/widgets/general', title: 'General', type: 'link' },
@@ -348,14 +349,14 @@ export class NavService {
 		// 		{ path: '/timeline/timeline1', title: 'Timeline', type: 'link' }
 		// 	]
 		// },
-		{
-			title: 'Charts', icon: 'bar-chart', type: 'sub', active: false, children: [
-				{ path: '/chart/google', title: 'Google Chart', type: 'link' },
-				{ path: '/chart/chartjs', title: 'Chartjs', type: 'link' },
-				{ path: '/chart/chartist', title: 'Chartist', type: 'link' },
-				{ path: '/chart/ngx-chart', title: 'Ngx-Chart', type: 'link' }
-			]
-		},
+		// {
+		// 	title: 'Charts', icon: 'bar-chart', type: 'sub', active: false, children: [
+		// 		{ path: '/chart/google', title: 'Google Chart', type: 'link' },
+		// 		{ path: '/chart/chartjs', title: 'Chartjs', type: 'link' },
+		// 		{ path: '/chart/chartist', title: 'Chartist', type: 'link' },
+		// 		{ path: '/chart/ngx-chart', title: 'Ngx-Chart', type: 'link' }
+		// 	]
+		// },
 		// {
 		// 	title: 'Map', icon: 'map', type: 'sub', active: false, children: [
 		// 		{ path: '/map/google', title: 'Google Map', type: 'link' },

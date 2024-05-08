@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
       if(response.success == 1){
         localStorage.setItem("user", JSON.stringify(response.data));
         // @ts-ignore
-        this.router.navigate(["/dashboard/default"]);
+        this.router.navigate(["/dashboard/university"]);
       }else{
           this.checked = true;
       }

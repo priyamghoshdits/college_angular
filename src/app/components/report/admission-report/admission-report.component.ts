@@ -109,8 +109,6 @@ export class AdmissionReportComponent {
             // @ts-ignore
             temp.push(this.monthNames[i]);
           }
-          console.log(temp);
-          console.log(temp_dd);
           this.chart7.data.labels =  temp;
           this.chart7.data.series =  [temp_dd];
           // this.chart7.data.series =  [[3, 3, 0, 2, 0, 3, 0]];
