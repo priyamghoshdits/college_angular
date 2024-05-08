@@ -43,8 +43,9 @@ export class NavService {
 	}
 
 	MENUITEMS: Menu[] = [
+		{ path: '/dashboard/university', title: 'Dashboard', type: 'link', hidden: false, icon: 'home' },
 		{
-			title: 'Academics', hidden: false, icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Academics', hidden: false, icon: 'layers', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/academics/subject-group', title: 'Subject Group', type: 'link', hidden: false },
 				{ path: '/academics/assign-semester-teacher', title: 'Assign Semester Teacher', type: 'link', hidden: false  },
 				{ path: '/academics/create-semester-timeTable', title: 'Create Semester Timetable', type: 'link', hidden: false  },
@@ -57,7 +58,70 @@ export class NavService {
 			]
 		},
 		{
-			title: 'Human Resource', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Student Information', hidden:false , icon: 'users', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/student-information/student-admission', title: 'Student Admission', type: 'link' },
+				{ path: '/student-information/pre-admission', title: 'Pre Admission', type: 'link' },
+				{ path: '/student-information/certificate-types', title: 'Certificate Types', type: 'link' },
+				{ path: '/student-information/upload-certificates', title: 'Upload Certificate', type: 'link' },
+				{ path: '/student-information/download-certificates', title: 'Download Certificate', type: 'link' },
+				{ path: '/student-information/send-login-credentials', title: 'Send Login Credential', type: 'link' },
+				{ path: '/student-information/caution-money', title: 'Caution Money', type: 'link' },
+			]
+		},
+		{
+			title: 'Attendance', hidden:false , icon: 'file-text', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/attendance/period-attendance', title: 'Period Attendance', type: 'link' },
+				{ path: '/attendance/show-attendance', title: 'Show Attendance', type: 'link' },
+			]
+		},
+		{
+			title: 'Library', hidden:false , icon: 'book', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/library/item-stock', title: 'Add Item', type: 'link' },
+				{ path: '/library/issue-item', title: 'Issue Book', type: 'link' },
+				{ path: '/library/book-list', title: 'Book List', type: 'link' },
+				{ path: '/library/return-over-period', title: 'Return Over Period', type: 'link' },
+				{ path: '/library/discount-fine', title: 'Discount Book Fine', type: 'link' },
+				{ path: '/library/upload-digital-book', title: 'Upload Digital Book', type: 'link' },
+				{ path: '/library/download-digital-book', title: 'Download Digital Book', type: 'link' },
+			]
+		},
+		{
+			title: 'Hostel', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/hostel/hostel', title: 'Add Hostel', type: 'link' },
+				{ path: '/hostel/roomType', title: 'Room Type', type: 'link' },
+				{ path: '/hostel/addHostelRooms', title: 'Add Hostel Room', type: 'link' },
+			]
+		},
+		{
+			title: 'Internship', hidden:false , icon: 'briefcase', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/internship/internshipProvider', title: 'Internship Provider', type: 'link' },
+				{ path: '/internship/internship', title: 'Internship Details', type: 'link' },
+			]
+		},
+		{
+			title: 'Homework', hidden:false , icon: 'file', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/homework/add-homework', title: 'Add Homework', type: 'link' },
+			]
+		},
+		{
+			title: 'Examination', hidden:false , icon: 'file', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/examination/subject-details', title: 'Subject Details', type: 'link' },
+				{ path: '/examination/subject-questions', title: 'Subject Question', type: 'link' },
+				{ path: '/examination/exam', title: 'Exam', type: 'link' },
+				{ path: '/examination/marksheet', title: 'Update Marks', type: 'link' },
+				{ path: '/examination/generate-mark-sheet', title: 'Generate Mark Sheet', type: 'link' },
+			]
+		},
+		{
+			title: 'Download Center', hidden:false , icon: 'layers', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/download-center/upload-content', title: 'Upload Content', type: 'link' },
+				{ path: '/download-center/assignment', title: 'Assignment', type: 'link' },
+				{ path: '/download-center/study-material', title: 'Study Material', type: 'link' },
+				{ path: '/download-center/syllabus', title: 'Syllabus', type: 'link' },
+			]
+		},
+		{
+			title: 'Human Resource', hidden:false , icon: 'users', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/human-resource/add-staff', title: 'Staff', type: 'link' },
 				{ path: '/human-resource/staff-attendance', title: 'Staff Attendance', type: 'link' }, // need to be added
 				{ path: '/human-resource/leave-type', title: 'Leave Type', type: 'link' },
@@ -72,44 +136,23 @@ export class NavService {
 				{ path: '/human-resource/payroll-types', title: 'Payroll Types', type: 'link' },
 			]
 		},
+		
+		
 		{
-			title: 'Attendance', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/attendance/period-attendance', title: 'Period Attendance', type: 'link' },
-				{ path: '/attendance/show-attendance', title: 'Show Attendance', type: 'link' },
-			]
-		},
-		{
-			title: 'Library', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/library/item-stock', title: 'Add Item', type: 'link' },
-				{ path: '/library/issue-item', title: 'Issue Book', type: 'link' },
-				{ path: '/library/book-list', title: 'Book List', type: 'link' },
-				{ path: '/library/return-over-period', title: 'Return Over Period', type: 'link' },
-				{ path: '/library/discount-fine', title: 'Discount Book Fine', type: 'link' },
-				{ path: '/library/upload-digital-book', title: 'Upload Digital Book', type: 'link' },
-				{ path: '/library/download-digital-book', title: 'Download Digital Book', type: 'link' },
-			]
-		},
-		{
-			title: 'Income', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Income', hidden:false , icon: 'dollar-sign', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/income/income-head', title: 'Income Head', type: 'link' },
 				{ path: '/income/add-income', title: 'Add Income', type: 'link' },
 			]
 		},
 		{
-			title: 'Expense', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Expense', hidden:false , icon: 'dollar-sign', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/expense/expense-head', title: 'Expense Head', type: 'link' },
 				{ path: '/expense/add-expense', title: 'Add Expense', type: 'link' },
 			]
 		},
+		
 		{
-			title: 'Hostel', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/hostel/hostel', title: 'Add Hostel', type: 'link' },
-				{ path: '/hostel/roomType', title: 'Room Type', type: 'link' },
-				{ path: '/hostel/addHostelRooms', title: 'Add Hostel Room', type: 'link' },
-			]
-		},
-		{
-			title: 'Inventory', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Inventory', hidden:false , icon: 'database', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/inventory/inventory-item', title: 'Item Category', type: 'link' },
 				{ path: '/inventory/add-item', title: 'Add Item', type: 'link' },
 				{ path: '/inventory/item-supplier', title: 'Item Supplier', type: 'link' },
@@ -118,45 +161,22 @@ export class NavService {
 				{ path: '/inventory/issue-item', title: 'Issue Item', type: 'link' },
 			]
 		},
+		
+		
 		{
-			title: 'Internship', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/internship/internshipProvider', title: 'Internship Provider', type: 'link' },
-				{ path: '/internship/internship', title: 'Internship Details', type: 'link' },
-			]
-		},
-		{
-			title: 'Student Information', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/student-information/student-admission', title: 'Student Admission', type: 'link' },
-				{ path: '/student-information/pre-admission', title: 'Pre Admission', type: 'link' },
-				{ path: '/student-information/certificate-types', title: 'Certificate Types', type: 'link' },
-				{ path: '/student-information/upload-certificates', title: 'Upload Certificate', type: 'link' },
-				{ path: '/student-information/download-certificates', title: 'Download Certificate', type: 'link' },
-				{ path: '/student-information/send-login-credentials', title: 'Send Login Credential', type: 'link' },
-				{ path: '/student-information/caution-money', title: 'Caution Money', type: 'link' },
-			]
-		},
-		{
-			title: 'Communication', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Communication', hidden:false , icon: 'file', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/communication/notice', title: 'Notice', type: 'link' },
 			]
 		},
+		
 		{
-			title: 'Examination', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/examination/subject-details', title: 'Subject Details', type: 'link' },
-				{ path: '/examination/subject-questions', title: 'Subject Question', type: 'link' },
-				{ path: '/examination/exam', title: 'Exam', type: 'link' },
-				{ path: '/examination/marksheet', title: 'Update Marks', type: 'link' },
-				{ path: '/examination/generate-mark-sheet', title: 'Generate Mark Sheet', type: 'link' },
-			]
-		},
-		{
-			title: 'Virtual Class Meeting', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Virtual Class Meeting', hidden:false , icon: 'message-square', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/virtual-class-meeting/create-virtual-class', title: 'Virtual Class', type: 'link' },
 				{ path: '/virtual-class-meeting/virtual-meeting', title: 'Virtual Meeting', type: 'link' },
 			]
 		},
 		{
-			title: 'Front Desk', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Front Desk', hidden:false , icon: 'help-circle', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/front-desk/visitor-book', title: 'Visitor Book', type: 'link' },
 				{ path: '/front-desk/admission-enquiry', title: 'Admission Enquiry', type: 'link' },
 				{ path: '/front-desk/call-log', title: 'Call Log', type: 'link' },
@@ -164,20 +184,16 @@ export class NavService {
 				{ path: '/front-desk/postal-receive', title: 'Postal Receive', type: 'link' },
 			]
 		},
+		
 		{
-			title: 'Homework', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/homework/add-homework', title: 'Add Homework', type: 'link' },
-			]
-		},
-		{
-			title: 'Transport', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Transport', hidden:false , icon: 'layers', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/transport/routes', title: 'Routes', type: 'link' },
 				{ path: '/transport/vehicle', title: 'Vehicle', type: 'link' },
 				{ path: '/transport/assign-vehicle', title: 'Assign Vehicle', type: 'link' },
 			]
 		},
 		{
-			title: 'Fees Collection', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Fees Collection', hidden:false , icon: 'file-text', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/fees-collection/fees-type', title: 'Fees Type', type: 'link' },
 				{ path: '/fees-collection/fees-structure', title: 'Fees Structure', type: 'link' },
 				{ path: '/fees-collection/collect-fees', title: 'Collect Fees', type: 'link' },
@@ -186,7 +202,7 @@ export class NavService {
 			]
 		},
 		{
-			title: 'Report', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Report', hidden:false , icon: 'file', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/report/attendance-report', title: 'Attendance report', type: 'link' },
 				{ path: '/report/examination-report', title: 'Examination report', type: 'link' },
 				{ path: '/report/fees-collection-report', title: 'Fees Collection report', type: 'link' },
@@ -195,7 +211,7 @@ export class NavService {
 			]
 		},
 		{
-			title: 'Others', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
+			title: 'Others', hidden:false , icon: 'folder-plus', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/others/agent', title: 'Agent', type: 'link' },
 				{ path: '/others/roles-and-permission', title: 'Roles And Permission', type: 'link' },
 				{ path: '/others/user-types', title: 'Add User Type', type: 'link' },
@@ -206,25 +222,18 @@ export class NavService {
 				{ path: '/others/agent-payment', title: 'Agent Payment', type: 'link' },
 			]
 		},
-		{
-			title: 'Download Center', hidden:false , icon: 'home', type: 'sub', badgeType: 'primary', active: false, children: [
-				{ path: '/download-center/upload-content', title: 'Upload Content', type: 'link' },
-				{ path: '/download-center/assignment', title: 'Assignment', type: 'link' },
-				{ path: '/download-center/study-material', title: 'Study Material', type: 'link' },
-				{ path: '/download-center/syllabus', title: 'Syllabus', type: 'link' },
-			]
-		},
+		
 		// { path: '/dashboard/default', title: 'Default', type: 'link',badgeType: 'primary' },
-		{
-			title: 'Dashboard', icon: 'home', type: 'sub', badgeType: 'primary', badgeValue: 'new', active: true, children: [
-				{ path: '/dashboard/default', title: 'Default', type: 'link' },
-				{ path: '/dashboard/e-commerce', title: 'E-Commerce', type: 'link', },
-				{ path: '/dashboard/university', title: 'University', type: 'link' },
-				{ path: '/dashboard/bitcoin', title: 'Crypto', type: 'link' },
-				{ path: '/dashboard/server', title: 'Server', type: 'link' },
-				{ path: '/dashboard/project', title: 'Project', type: 'link' }
-			]
-		},
+		// {
+		// 	title: 'Dashboard', icon: 'home', type: 'sub', badgeType: 'primary', badgeValue: 'new', active: true, children: [
+		// 		{ path: '/dashboard/default', title: 'Default', type: 'link' },
+		// 		{ path: '/dashboard/e-commerce', title: 'E-Commerce', type: 'link', },
+		// 		{ path: '/dashboard/university', title: 'University', type: 'link' },
+		// 		{ path: '/dashboard/bitcoin', title: 'Crypto', type: 'link' },
+		// 		{ path: '/dashboard/server', title: 'Server', type: 'link' },
+		// 		{ path: '/dashboard/project', title: 'Project', type: 'link' }
+		// 	]
+		// },
 		// {
 		// 	title: 'Widgets', icon: 'airplay', type: 'sub', active: false, children: [
 		// 		{ path: '/widgets/general', title: 'General', type: 'link' },
