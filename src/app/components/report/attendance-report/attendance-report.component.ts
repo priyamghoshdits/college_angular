@@ -51,12 +51,12 @@ export class AttendanceReportComponent {
   public pieChart2 = {
     chartType: 'PieChart',
     dataTable: [
-      ['Task', 'Hours per Day'],
-      ['Work', 5],
-      ['Eat', 10],
-      ['Commute', 15],
-      ['Watch TV', 20],
-      ['Sleep', 25]
+      // ['Task', 'Hours per Day'],
+      // ['Work', 5],
+      // ['Eat', 10],
+      // ['Commute', 15],
+      // ['Watch TV', 20],
+      // ['Sleep', 25]
     ],
     options: {
       // title: 'Attendance Graph',
@@ -135,6 +135,19 @@ export class AttendanceReportComponent {
   }
 
   showPieChart(content, data){
+    this.pieChart2.dataTable = [];
+    // const present = ['Present',((data.present/data.total_classes)*100)];
+    const present = ['Present', data.present];
+    // const total = ['Total',data.total_classes];
+    // const absent = ['Absent',((data.absent/data.total_classes)*100)];
+    const absent = ['Absent',data.absent];
+    // @ts-ignore
+    this.pieChart2.dataTable.push(['Attendance', 'Present per class']);
+    // @ts-ignore
+    this.pieChart2.dataTable.push(present);
+    // @ts-ignore
+    this.pieChart2.dataTable.push(absent);
+    console.log(this.pieChart2.dataTable);
     this.modalService.open(content,{ size: 'xl'});
   }
 

@@ -7,6 +7,7 @@ import {MatSelectModule} from "@angular/material/select";
 import {SubjectService} from "../../../services/subject.service";
 import {MatTabsModule} from "@angular/material/tabs";
 import {SessionService} from "../../../services/session.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-semester-timetable',
@@ -84,6 +85,15 @@ export class SemesterTimetableComponent {
               this.week7 = x.filter(x => x.week_id === 7);
               // @ts-ignore
               this.semesterTimeTableList = response.data;
+              if(this.semesterTimeTableList.length == 0){
+                Swal.fire({
+                  position: 'center',
+                  icon: 'info',
+                  title: 'No Data Found',
+                  showConfirmButton: false,
+                  timer: 1000
+                });
+              }
             }
         });
   }

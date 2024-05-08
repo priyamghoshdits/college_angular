@@ -163,6 +163,7 @@ export class AssignSemesterTeacherComponent {
         this.assignSemesterTeacherForm.patchValue({'id': data.id, 'course_id': data.course_id});
         this.getSemester();
         this.assignSemesterTeacherForm.patchValue({'semester_id': data.semester_id});
+        this.assignSemesterTeacherForm.patchValue(data);
         let temp = [];
         data.teacher.forEach(function (value){
             let teacher;
@@ -178,6 +179,7 @@ export class AssignSemesterTeacherComponent {
             value.checked = data.teacher.findIndex(x => x.id === value.id) != -1;
         });
 
+        console.log(this.assignSemesterTeacherForm.value);
         this.isUpdatable = true;
     }
 
