@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Select Semester</label>
-                                        <select style="width: 100%" formControlName="semester_id" class="form-select">
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" (change)="getStudents()">
                                             <option value="null">Select</option>
                                             <option *ngFor="let data of semesterList" [value]="data.semester_id" >
                                                 {{data.name}}
@@ -31,18 +31,18 @@
                                         </select>
                                         <div *ngIf="feesDueReportForm.controls['semester_id'].errors?.['required'] && feesDueReportForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
+<!--                                    <div class="col-md-3 mb-3">-->
+<!--                                        <label>Select Session</label>-->
+<!--                                        <select style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudents()">-->
+<!--                                            <option value="null">Select</option>-->
+<!--                                            <option *ngFor="let data of sessionList" [value]="data.id" >-->
+<!--                                                {{data.name}}-->
+<!--                                            </option>-->
+<!--                                        </select>-->
+<!--                                        <div *ngIf="feesDueReportForm.controls['session_id'].errors?.['required'] && feesDueReportForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+<!--                                    </div>-->
                                     <div class="col-md-3 mb-3">
-                                        <label>Select Session</label>
-                                        <select style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudents()">
-                                            <option value="null">Select</option>
-                                            <option *ngFor="let data of sessionList" [value]="data.id" >
-                                                {{data.name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="feesDueReportForm.controls['session_id'].errors?.['required'] && feesDueReportForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>Select Session</label>
+                                        <label>Select Student</label>
                                         <select style="width: 100%" formControlName="user_id" class="form-select">
                                             <option value="null">Select</option>
                                             <option *ngFor="let data of studentList" [value]="data.id" >
@@ -99,7 +99,7 @@
                                             <th>Book Fine</th>
                                         </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody style="text-align: center">
                                         <tr *ngFor="let record of dueFeesList;let indexOfElement=index">
                                             <td colspan="2">{{indexOfElement+1}}</td>
                                             <td colspan="2">{{record.user_name}}</td>

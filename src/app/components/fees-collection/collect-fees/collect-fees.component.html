@@ -115,16 +115,16 @@
                                             </select>
                                             <div *ngIf="collectFeesForm.controls['semester_id'].errors?.['required'] && collectFeesForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                         </div>
-                                        <div class="col-4">
-                                            <label>Select Session</label>
-                                            <select formControlName="session_id" class="form-select" required style="width: 100%">
-                                                <option value="null">Select</option>
-                                                <option *ngFor="let data of sessionList" [value]="data.id" >
-                                                    {{data.name}}
-                                                </option>
-                                            </select>
-                                            <div *ngIf="collectFeesForm.controls['session_id'].errors?.['required'] && collectFeesForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
-                                        </div>
+<!--                                        <div class="col-4">-->
+<!--                                            <label>Select Session</label>-->
+<!--                                            <select formControlName="session_id" class="form-select" required style="width: 100%">-->
+<!--                                                <option value="null">Select</option>-->
+<!--                                                <option *ngFor="let data of sessionList" [value]="data.id" >-->
+<!--                                                    {{data.name}}-->
+<!--                                                </option>-->
+<!--                                            </select>-->
+<!--                                            <div *ngIf="collectFeesForm.controls['session_id'].errors?.['required'] && collectFeesForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+<!--                                        </div>-->
                                         <div class="col-4">
                                             <button style="margin-top: 10%" class="btn btn-primary me-1" (click)="searchStudents()">Search</button>
                                         </div>

@@ -35,6 +35,8 @@ export class UniversityComponent implements OnInit {
   public admissionChartLegend = chartData.admissionChartLegend;
   public smallColumnChart1 = chart.smallColumnChart1;
 
+  public datePick = null;
+
   public RankerRatio : any= {
     series: [25],
     chart: {
@@ -111,4 +113,10 @@ export class UniversityComponent implements OnInit {
 
     labels: ["TOTAL Student"],
   };
+
+  openModal(data){
+    console.log(data);
+    // const new_date_create =
+    // console.log(this.datePick);
+  }
 }

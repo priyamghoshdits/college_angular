@@ -59,6 +59,20 @@ export class FeesDueReportComponent {
   }
 
   getStudents(){
+    // @ts-ignore
+    const session = JSON.parse(localStorage.getItem('session_id'));
+    this.feesDueReportForm.patchValue({session_id: session});
+
+    if(!session){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Session',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
     this.studentService.getSessionWiseStudent(this.feesDueReportForm.value).subscribe((response: any) => {
       this.studentList = response.data;
     })
@@ -69,7 +83,6 @@ export class FeesDueReportComponent {
       if(response.success == 1){
         if(this.feesDueReportForm.valid){
           this.dueFeesList = response.data.filter(x => x.user_id == this.feesDueReportForm.value.user_id);
-          console.log(this.dueFeesList);
         }else{
           this.dueFeesList = response.data;
         }

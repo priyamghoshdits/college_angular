@@ -70,6 +70,21 @@ export class ExaminationReportComponent {
     }
 
     getExaminationReport(){
+        // @ts-ignore
+        const session = JSON.parse(localStorage.getItem('session_id'));
+        this.examinationReportForm.patchValue({session_id: session});
+
+        if(!session){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select Session',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            return;
+        }
+
         if(!this.examinationReportForm.valid){
             this.examinationReportForm.markAllAsTouched();
             return;

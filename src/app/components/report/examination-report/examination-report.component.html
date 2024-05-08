@@ -28,15 +28,15 @@
                                         </select>
                                         <div *ngIf="examinationReportForm.controls['semester_id'].errors?.['required'] && examinationReportForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>Select Session</label>
-                                        <select style="width: 100%" formControlName="session_id" class="form-select">
-                                            <option *ngFor="let data of sessionList" [value]="data.id" >
-                                                {{data.name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="examinationReportForm.controls['session_id'].errors?.['required'] && examinationReportForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
-                                    </div>
+<!--                                    <div class="col-md-3 mb-3">-->
+<!--                                        <label>Select Session</label>-->
+<!--                                        <select style="width: 100%" formControlName="session_id" class="form-select">-->
+<!--                                            <option *ngFor="let data of sessionList" [value]="data.id" >-->
+<!--                                                {{data.name}}-->
+<!--                                            </option>-->
+<!--                                        </select>-->
+<!--                                        <div *ngIf="examinationReportForm.controls['session_id'].errors?.['required'] && examinationReportForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+<!--                                    </div>-->
                                     <div class="col-md-3 mb-3">
                                         <button style="margin-top: 30px;" class="btn btn-primary me-1" (click)="getExaminationReport()">Search</button>
                                     </div>

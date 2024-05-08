@@ -532,8 +532,9 @@
       </div>
     </div>
     <div class="col-xl-4 xl-50">
-      <ngb-datepicker #dp class="custom-datepicker university-datepicker" (navigate)="date = $event.next">
+      <ngb-datepicker #dp class="custom-datepicker university-datepicker" (dateSelect)="openModal($event)" [ngModel]="datePick" (navigate)="date = $event.next">
       </ngb-datepicker>
+        <input type="date" [(ngModel)]="datePick">
     </div>
     <div class="col-xl-8 xl-50">
       <div class="card">
