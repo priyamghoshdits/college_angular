@@ -20,8 +20,8 @@ const routes: Routes = [
         path: 'show-profile',
         component: UserEditComponent,
         data: {
-          title: "Show Profile",
-          breadcrumb: "Show Profile"
+          title: "Profile",
+          breadcrumb: "Profile"
         }
       },
       {

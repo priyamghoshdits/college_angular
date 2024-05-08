@@ -12,8 +12,9 @@
                                 <h5 style="margin-bottom: 23px">Promote From:-</h5>
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
-                                        <label>Select Course</label>
+                                        <label>Course <span style="color: red">*</span></label>
                                         <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                            <option value="null">--Select--</option>
                                             <option *ngFor="let data of courseList" [value]="data.id" >
                                                 {{data.course_name}}
                                             </option>
@@ -21,8 +22,9 @@
                                         <div *ngIf="promotionForm.controls['course_id'].errors?.['required'] && promotionForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label>Select Semester</label>
+                                        <label>Semester <span style="color: red">*</span></label>
                                         <select style="width: 100%" formControlName="semester_id" class="form-select" required>
+                                            <option value="null">--Select--</option>
                                             <option *ngFor="let data of semesterList" [value]="data.semester_id" >
                                                 {{data.name}}
                                             </option>
@@ -30,8 +32,9 @@
                                         <div *ngIf="promotionForm.controls['semester_id'].errors?.['required'] && promotionForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label>Select Session</label>
+                                        <label>Session <span style="color: red">*</span></label>
                                         <select style="width: 100%" formControlName="session_id" class="form-select" required>
+                                            <option value="null">--Select--</option>
                                             <option *ngFor="let data of sessionList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>
@@ -42,8 +45,9 @@
                                 <h5 style="margin-bottom: 23px">Promote To:-</h5>
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
-                                        <label>Select Semester</label>
+                                        <label>Semester <span style="color: red">*</span></label>
                                         <select style="width: 100%" formControlName="promote_semester_id" class="form-select" required>
+                                            <option value="null">--Select--</option>
                                             <option *ngFor="let data of semesterList" [value]="data.semester_id" >
                                                 {{data.name}}
                                             </option>
@@ -51,8 +55,9 @@
                                         <div *ngIf="promotionForm.controls['promote_semester_id'].errors?.['required'] && promotionForm.controls['promote_semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <label>Select Session</label>
+                                        <label>Session <span style="color: red">*</span></label>
                                         <select style="width: 100%" formControlName="promote_session_id" class="form-select" required>
+                                            <option value="null">--Select--</option>
                                             <option *ngFor="let data of sessionList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>
