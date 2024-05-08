@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
-import { NgbDateStruct, NgbDate, NgbCalendar, NgbDatepickerConfig } from "@ng-bootstrap/ng-bootstrap";
+import {NgbDateStruct, NgbDate, NgbCalendar, NgbDatepickerConfig, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import { ChartComponent, ChartOptions } from "chart.js";
 import * as chartData from "./../../../shared/data/dashboard/university";
 declare var require: any;
 import * as chart from "../../../shared/data/chart/chartist";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {DatePipe} from "@angular/common";
 
 // var Knob = require('knob') // browserify require
 
@@ -17,8 +19,18 @@ var secondary = localStorage.getItem("secondary_color") || "#1ea6ec";
   encapsulation: ViewEncapsulation.None,
 })
 export class UniversityComponent implements OnInit {
+  universityFormCalender: FormGroup;
   public date: any;
-  constructor() {}
+  constructor(private modalService: NgbModal,public datepipe: DatePipe) {
+    this.universityFormCalender = new FormGroup({
+      id: new FormControl(null),
+      event_title: new FormControl(null, [Validators.required]),
+      description: new FormControl(null),
+      event_from: new FormControl(null),
+      event_to: new FormControl(null),
+      event_type: new FormControl(null),
+    });
+  }
 
   ngOnInit() {}
 
@@ -114,9 +126,10 @@ export class UniversityComponent implements OnInit {
     labels: ["TOTAL Student"],
   };
 
-  openModal(data){
-    console.log(data);
-    const new_date_create = data.year + '-' + data.month + '-' + data.day;
-    console.log(new_date_create);
+  openModal(data, content){
+    const new_date_create =new Date(data.year + '-'+data.month +'-'+data.day);
+    const new_date_create4 =this.datepipe.transform(new_date_create, 'yyyy-MM-dd');
+    this.modalService.open(content,{ size: 'xl'});
+    this.universityFormCalender.patchValue({event_from: new_date_create4, event_to: new_date_create4});
   }
 }

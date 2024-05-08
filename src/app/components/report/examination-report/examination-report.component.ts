@@ -91,6 +91,7 @@ export class ExaminationReportComponent {
         }
         this.reportService.getExaminationReport(this.examinationReportForm.value).subscribe((response: any) => {
             if(response.success == 1){
+                // this.examinationReportList = response.data;
                 if(response.data[0].name == null){
                     Swal.fire({
                         position: 'center',

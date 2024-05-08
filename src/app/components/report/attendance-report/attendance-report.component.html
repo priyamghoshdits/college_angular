@@ -94,8 +94,8 @@
                                         </thead>
                                         <tbody>
                                         <tr *ngFor="let record of studentAttendanceList;let indexOfElement=index">
-                                            <td>{{indexOfElement+1}}</td>
-                                            <td (click)="getAttendanceReport()">{{record.name}}</td>
+                                            <td (click)="showPieChart(content,record)">{{indexOfElement+1}}</td>
+                                            <td>{{record.name}}</td>
                                             <td>{{record.total_classes}}</td>
                                             <td>{{record.present}}</td>
                                             <td>{{record.absent}}</td>
@@ -109,6 +109,21 @@
 
                             </div>
                         </div>
+
+                        <ng-template #content let-modal>
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="modal-basic-title">Add New Event</h4>
+                                    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card-body chart-block">
+                                        <google-chart [data]="pieChart2"></google-chart>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+
                     </div>
                 </div>
             </div>

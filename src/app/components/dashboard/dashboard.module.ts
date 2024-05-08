@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { FormsModule } from "@angular/forms";
+import {CommonModule, DatePipe} from "@angular/common";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { ChartistModule } from "ng-chartist";
@@ -19,23 +19,27 @@ import { ServerComponent } from "./server/server.component";
 import { ProjectComponent } from "./project/project.component";
 import { NgApexchartsModule } from "ng-apexcharts";
 import {NgIdleKeepaliveModule} from "@ng-idle/keepalive";
+import {NgxPaginationModule} from "ngx-pagination";
 
 @NgModule({
   declarations: [DefaultComponent, ECommerceComponent, UniversityComponent, BitcoinComponent, ServerComponent, ProjectComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    CarouselModule,
-    NgbModule,
-    ChartistModule,
-    NgChartsModule,
-    DashboardRoutingModule,
-    NgxChartsModule,
-    Ng2GoogleChartsModule,
-    SharedModule,
-    NgApexchartsModule,
-    NgxDatatableModule,
-    NgIdleKeepaliveModule.forRoot()
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        CarouselModule,
+        NgbModule,
+        ChartistModule,
+        NgChartsModule,
+        DashboardRoutingModule,
+        NgxChartsModule,
+        Ng2GoogleChartsModule,
+        SharedModule,
+        NgApexchartsModule,
+        NgxDatatableModule,
+        NgIdleKeepaliveModule.forRoot(),
+        NgxPaginationModule,
+        ReactiveFormsModule
+    ],
+    providers: [DatePipe],
 })
 export class DashboardModule {}

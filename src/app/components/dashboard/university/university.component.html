@@ -79,8 +79,8 @@
               <div class="media chart-university">
                 <div class="media-body">
                   <h3 class="mb-0">
-                    <app-feather-icons [icon]="'dollar-sign'"></app-feather-icons>
-                    <span class="counter">5683</span>
+<!--                    <app-feather-icons [icon]="'dollar-sign'"></app-feather-icons>-->
+                    <span class="counter">₹5683</span>
                   </h3>
                   <p>Html Course</p>
                 </div>
@@ -96,8 +96,9 @@
             <div class="card-body">
               <div class="d-flex chart-university">
                 <div class="flex-grow-1">
-                  <h3 class="mb-0"><app-feather-icons [icon]="'dollar-sign'"></app-feather-icons><span
-                      class="counter">7243</span></h3>
+                  <h3 class="mb-0">
+<!--                    <app-feather-icons [icon]="'dollar-sign'"></app-feather-icons>-->
+                    <span class="counter">₹7243</span></h3>
                   <p>PHP Course</p>
                 </div>
                 <div class="small-bar">
@@ -532,9 +533,9 @@
       </div>
     </div>
     <div class="col-xl-4 xl-50">
-      <ngb-datepicker #dp class="custom-datepicker university-datepicker" (dateSelect)="openModal($event)" [ngModel]="datePick" (navigate)="date = $event.next">
+      <ngb-datepicker #dp class="custom-datepicker university-datepicker" (dateSelect)="openModal($event,content)" [ngModel]="datePick" (navigate)="date = $event.next">
       </ngb-datepicker>
-        <input type="date" [(ngModel)]="datePick">
+<!--        <input type="date" [(ngModel)]="datePick">-->
     </div>
     <div class="col-xl-8 xl-50">
       <div class="card">
@@ -551,3 +552,67 @@
   </div>
 </div>
 <!-- Container-fluid Ends-->
+
+<ng-template #content let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add New Event</h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
+    </div>
+    <div class="modal-body">
+      <form class="theme-form" [formGroup]="universityFormCalender">
+        <div  class="row">
+          <div class="col-md-12 mb-3">
+            <label class="col-form-label pt-0" for="exampleInputEmail1">Event Title <span style="color: red">*</span></label>
+            <input class="form-control" formControlName="event_title" id="exampleInputEmail1" type="text"
+                   placeholder="Enter Event Title">
+            <div *ngIf="universityFormCalender.controls['event_title'].errors?.['required'] && universityFormCalender.controls['event_title'].touched " class="text text-danger mt-1">Event Title required</div>
+          </div>
+        </div>
+        <div  class="row">
+          <div class="col-md-12 mb-3">
+            <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+            <textarea class="form-control" formControlName="description" id="exampleInputEmail1" type="text"
+                   placeholder="Enter Description"></textarea>
+            <div *ngIf="universityFormCalender.controls['description'].errors?.['required'] && universityFormCalender.controls['description'].touched " class="text text-danger mt-1">Description required</div>
+          </div>
+        </div>
+        <div  class="row">
+          <div class="col-md-6 mb-3">
+            <label class="col-form-label pt-0" for="exampleInputEmail1">Event From</label>
+            <input class="form-control" formControlName="event_from" id="exampleInputEmail1" type="date"
+                      placeholder="Event From">
+            <div *ngIf="universityFormCalender.controls['event_from'].errors?.['required'] && universityFormCalender.controls['event_from'].touched " class="text text-danger mt-1">Event From required</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="col-form-label pt-0" for="exampleInputEmail1">Event To</label>
+            <input class="form-control" formControlName="event_to" id="exampleInputEmail1" type="date"
+                      placeholder="Enter Event To">
+            <div *ngIf="universityFormCalender.controls['event_to'].errors?.['required'] && universityFormCalender.controls['event_to'].touched " class="text text-danger mt-1">Event To required</div>
+          </div>
+        </div>
+        <div  class="row">
+          <div class="col-md-6 mb-3">
+            <label class="col-form-label pt-0" for="exampleInputEmail1">Event Type</label>
+            <select style="width: 100%" formControlName="event_type" class="form-select">
+              <option value="null">Select</option>
+              <option value="public"> Public </option>
+              <option value="private"> Private </option>
+              <option value="all super admin"> All Super Admin </option>
+              <option value="Protected}"> Seperated </option>
+            </select>
+            <div *ngIf="universityFormCalender.controls['event_type'].errors?.['required'] && universityFormCalender.controls['event_type'].touched " class="text text-danger mt-1">Event Type required</div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label class="col-form-label pt-0" for="exampleInputEmail1">Upload Image</label>
+            <input class="form-control" accept="image/jpg, image/jpeg" formControlName="event_to" type="file" placeholder="Enter Event To">
+            <div *ngIf="universityFormCalender.controls['event_type'].errors?.['required'] && universityFormCalender.controls['event_type'].touched " class="text text-danger mt-1">Event Type required</div>
+          </div>
+        </div>
+        <div class="col-md-12 mb-3">
+          <button style="margin-top: 30px; float: right" class="btn btn-primary me-1">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

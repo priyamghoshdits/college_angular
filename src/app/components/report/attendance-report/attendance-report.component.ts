@@ -10,6 +10,10 @@ import jspdf from 'jspdf';
 import * as XLSX from 'xlsx';
 import Swal from "sweetalert2";
 import {NgxPrintDirective} from "ngx-print";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {Ng2GoogleChartsModule} from "ng2-google-charts";
+import * as chartData from "../../../shared/data/chart/google-chart";
+import {pieChart2} from "../../../shared/data/chart/google-chart";
 
 @Component({
   selector: 'app-attendance-report',
@@ -21,7 +25,8 @@ import {NgxPrintDirective} from "ngx-print";
     NgxPaginationModule,
     ReactiveFormsModule,
     MatIconModule,
-    NgxPrintDirective
+    NgxPrintDirective,
+    Ng2GoogleChartsModule
   ],
   templateUrl: './attendance-report.component.html',
   styleUrl: './attendance-report.component.scss'
@@ -43,11 +48,30 @@ export class AttendanceReportComponent {
   }
   attendanceReportForm: FormGroup;
   courseList: any[];
+  public pieChart2 = {
+    chartType: 'PieChart',
+    dataTable: [
+      ['Task', 'Hours per Day'],
+      ['Work', 5],
+      ['Eat', 10],
+      ['Commute', 15],
+      ['Watch TV', 20],
+      ['Sleep', 25]
+    ],
+    options: {
+      // title: 'Attendance Graph',
+      is3D: true,
+      width: '100%',
+      height: 400,
+      colors: ["#4466f2", "#1ea6ec", "#22af47", "#007bff", "#FF5370"],
+      backgroundColor:'transparent'
+    },
+  };
   semesterList: any[];
   sessionList: any[];
   studentAttendanceList: any[] = [];
   constructor(private subjectService:SubjectService, private sessionService: SessionService
-              ,private reportService: ReportService) {
+              ,private reportService: ReportService, private modalService: NgbModal) {
     this.attendanceReportForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
@@ -110,11 +134,15 @@ export class AttendanceReportComponent {
     })
   }
 
-  getAttendanceReport(){
-    this.reportService.getStudentPerDayAttendance().subscribe((response: any) => {
-
-    })
+  showPieChart(content, data){
+    this.modalService.open(content,{ size: 'xl'});
   }
+
+  // getAttendanceReport(){
+  //   this.reportService.getStudentPerDayAttendance().subscribe((response: any) => {
+  //
+  //   })
+  // }
 
   print_div(){
     // @ts-ignore
@@ -148,5 +176,4 @@ export class AttendanceReportComponent {
         /* save to file */
         XLSX.writeFile(wb, 'Attendance-Report.xlsx');
     }
-
 }
