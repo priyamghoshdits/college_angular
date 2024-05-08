@@ -105,12 +105,15 @@ export class AdmissionReportComponent {
           for(let i = from_date; i <= to_date; i++){
             // @ts-ignore
             temp_dd.push((this.admissionReport.filter(x => new Date(x.admission_date).getMonth() == i)).length);
-            console.log(i);
+            // console.log(i);
             // @ts-ignore
             temp.push(this.monthNames[i]);
           }
+          console.log(temp);
+          console.log(temp_dd);
           this.chart7.data.labels =  temp;
-          this.chart7.data.series =  temp_dd;
+          this.chart7.data.series =  [temp_dd];
+          // this.chart7.data.series =  [[3, 3, 0, 2, 0, 3, 0]];
         }
       }
     })
