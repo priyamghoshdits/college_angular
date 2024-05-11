@@ -24,7 +24,7 @@
                                     <label>Select Semester</label>
                                     <select style="width: 100%" formControlName="semester_id" class="form-select" required>
                                         <option value="null">Select</option>
-                                        <option [disabled]="isUpdatable == true" *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                        <option *ngFor="let data of semesterList" [value]="data.semester_id" >
                                             {{data.name}}
                                         </option>
                                     </select>

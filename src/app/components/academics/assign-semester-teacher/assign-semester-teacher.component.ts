@@ -9,6 +9,7 @@ import {SemesterService} from "../../../services/semester.service";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {cloneDeep} from 'lodash';
+import {delay} from "rxjs/operators";
 
 @Component({
   selector: 'app-assign-semester-teacher',
@@ -161,27 +162,58 @@ export class AssignSemesterTeacherComponent {
 
     editAssignTeacher(data){
         // this.assignSemesterTeacherForm.patchValue({'id': data.id, 'course_id': data.course_id});
-        this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
-            this.semesterList = response.data;
+        // this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
+        //     if(response.success == 1){
+        //         this.semesterList = response.data;
+        //         console.log(this.semesterList);
+        //         // delay(100);
+        //         // this.assignSemesterTeacherForm.patchValue(data);
+        //         this.assignSemesterTeacherForm.patchValue({semester_id: 1})
+        //         // console.log(this.assignSemesterTeacherForm.value);
+        //         // this.assignSemesterTeacherForm.patchValue(data);
+        //         let temp = [];
+        //         data.teacher.forEach(function (value){
+        //             let teacher;
+        //             teacher = [
+        //                 {"id": value.id}
+        //             ];
+        //             // @ts-ignore
+        //             temp.push(teacher[0]);
+        //         });
+        //         this.tempTeacher = temp;
+        //         this.teachers.forEach(function (value){
+        //             value.checked = data.teacher.findIndex(x => x.id === value.id) != -1;
+        //         });
+        //         this.isUpdatable = true;
+        //     }
+        //
+        // });
 
+        if(this.semesterList){
             this.assignSemesterTeacherForm.patchValue(data);
-            // this.assignSemesterTeacherForm.patchValue(data);
-            let temp = [];
-            data.teacher.forEach(function (value){
-                let teacher;
-                teacher = [
-                    {"id": value.id}
-                ];
-                // @ts-ignore
-                temp.push(teacher[0]);
+        }else{
+            this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
+                if(response.success == 1){
+                    this.semesterList = response.data;
+                    this.assignSemesterTeacherForm.patchValue(data);
+                }
             });
-            this.tempTeacher = temp;
-            this.teachers.forEach(function (value){
-                value.checked = data.teacher.findIndex(x => x.id === value.id) != -1;
-            });
-            this.isUpdatable = true;
-        });
+        }
 
+        let temp = [];
+        data.teacher.forEach(function (value){
+            let teacher;
+            teacher = [
+                {"id": value.id}
+            ];
+            // @ts-ignore
+            temp.push(teacher[0]);
+        });
+        this.tempTeacher = temp;
+        this.teachers.forEach(function (value){
+            value.checked = data.teacher.findIndex(x => x.id === value.id) != -1;
+        });
+        this.isUpdatable = true;
     }
 
     updateAssignSemesterTeacher(){
