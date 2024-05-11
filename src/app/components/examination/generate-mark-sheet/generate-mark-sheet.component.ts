@@ -62,6 +62,26 @@ export class GenerateMarkSheetComponent {
   }
 
   getMarkSheet(){
+
+    // @ts-ignore
+    const session_id = JSON.parse(localStorage.getItem('session_id'));
+    this.subjectMarksSearchForm.patchValue({ session_id: session_id });
+
+    if (!session_id) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Session',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+
+    if(!this.subjectMarksSearchForm.valid){
+      this.subjectMarksSearchForm.markAllAsTouched();
+    }
+
     this.examinationService.getMarkSheet(this.subjectMarksSearchForm.value).subscribe((response: any) => {
       if(response.success == 1){
         this.markSheetList = response.data;

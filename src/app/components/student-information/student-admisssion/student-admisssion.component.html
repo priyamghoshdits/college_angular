@@ -262,7 +262,8 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Caution Money Amount</label>
                                             <input type="text" class="form-control" formControlName="caution_money" placeholder="Caution Money Amount">
-                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['required'] && studentCreationForm.controls['caution_money'].touched " class="text text-danger mt-1">Caution Money Amount required</div>
+                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['required'] && studentCreationForm.controls['caution_money'].touched " class="text text-danger mt-1">Amount required</div>
+                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['pattern']" class="text text-danger mt-1">Invalid Amount</div>
                                         </div>
                                     </div>
 

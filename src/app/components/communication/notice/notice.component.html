@@ -19,7 +19,7 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <div class="form-group mb-0">
-                                            <label for="exampleFormControlTextarea4">Message</label>
+                                            <label>Message</label>
 <!--                                            <textarea class="form-control" formControlName="body" id="exampleFormControlTextarea4" rows="10"></textarea>-->
                                             <ckeditor style="min-height: 350px" [editor]="editor" formControlName="body" [config]="config" [data]="data"></ckeditor>
                                             <div *ngIf="noticeForm.controls['body'].errors?.['required'] && noticeForm.controls['body'].touched " class="text text-danger mt-1">Message required</div>
@@ -82,7 +82,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                <pagination-controls *ngif="noticeList.length >9" (pageChange)="p = $event"></pagination-controls>
 
                             </div>
                         </div>

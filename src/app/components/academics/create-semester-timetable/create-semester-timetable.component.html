@@ -49,16 +49,16 @@
                                         </select>
                                         <div *ngIf="semesterTimeTableForm.controls['semester_id'].errors?.['required'] && semesterTimeTableForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
-                                    <div class="col-4">
-                                        <label>Select Session</label>
-                                        <select style="width: 100%" formControlName="session_id" class="form-select">
-                                            <option value="null">Select</option>
-                                            <option *ngFor="let data of sessionList" [value]="data.id" >
-                                                {{data.name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="semesterTimeTableForm.controls['session_id'].errors?.['required'] && semesterTimeTableForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
-                                    </div>
+<!--                                    <div class="col-4">-->
+<!--                                        <label>Select Session</label>-->
+<!--                                        <select style="width: 100%" formControlName="session_id" class="form-select">-->
+<!--                                            <option value="null">Select</option>-->
+<!--                                            <option *ngFor="let data of sessionList" [value]="data.id" >-->
+<!--                                                {{data.name}}-->
+<!--                                            </option>-->
+<!--                                        </select>-->
+<!--                                        <div *ngIf="semesterTimeTableForm.controls['session_id'].errors?.['required'] && semesterTimeTableForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+<!--                                    </div>-->
                                 </div>
                                 <hr>
                                 <div class="row">

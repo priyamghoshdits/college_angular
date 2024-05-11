@@ -66,6 +66,21 @@ export class SemesterTimetableComponent {
   }
 
   searchTimeTable(){
+    // @ts-ignore
+    const session = JSON.parse(localStorage.getItem('session_id'));
+    this.semesterTimeTableForm.patchValue({session_id: session});
+
+    if(!session){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select Session',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+
     if(!this.semesterTimeTableForm.valid){
       this.semesterTimeTableForm.markAllAsTouched();
       return;

@@ -81,8 +81,8 @@ export class PreAdmissionComponent {
             dob: new FormControl(null, [Validators.required]),
             admission_date: new FormControl(null, [Validators.required]),
             image: new FormControl(null),
-            mobile_no: new FormControl(null, [Validators.required]),
-            emergency_phone_number: new FormControl(null, [Validators.required]),
+            mobile_no: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
+            emergency_phone_number: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
             material_status: new FormControl(null),
             admission_status: new FormControl(null),
             current_address: new FormControl(null, [Validators.required]),
@@ -107,7 +107,7 @@ export class PreAdmissionComponent {
             guardian_occupation: new FormControl(null),
             guardian_address: new FormControl(null),
             franchise_id: new FormControl(null),
-            amount: new FormControl(null, [Validators.required]),
+            amount: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
             refund: new FormControl(0),
             session_id: new FormControl(null, [Validators.required]),
             payment_date: new FormControl(null, [Validators.required]),
@@ -208,19 +208,19 @@ export class PreAdmissionComponent {
 
     saveStudent() {
         // @ts-ignore
-    this.session_id = JSON.parse(localStorage.getItem('session_id'));
-    this.studentCreationForm.patchValue({ session_id: this.session_id });
+        this.session_id = JSON.parse(localStorage.getItem('session_id'));
+        this.studentCreationForm.patchValue({ session_id: this.session_id });
 
-    if (!this.session_id) {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: 'Select Session',
-        showConfirmButton: false,
-        timer: 1000
-      });
-      return;
-    }
+        if (!this.session_id) {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Select Session',
+            showConfirmButton: false,
+            timer: 1000
+          });
+          return;
+        }
         if (!this.studentCreationForm.valid) {
             this.studentCreationForm.markAllAsTouched();
             window.scroll({

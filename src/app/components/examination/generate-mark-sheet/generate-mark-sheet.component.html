@@ -30,16 +30,16 @@
                                         </select>
                                         <div *ngIf="subjectMarksSearchForm.controls['semester_id'].errors?.['required'] && subjectMarksSearchForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester Name required</div>
                                     </div>
-                                    <div class="col-md-3 mb-12">
-                                        <label>Select Session</label>
-                                        <select style="width: 100%" formControlName="session_id" class="form-select" >
-                                            <option value="null">Select</option>
-                                            <option *ngFor="let data of sessionList" [value]="data.id" >
-                                                {{data.name}}
-                                            </option>
-                                        </select>
-                                        <div *ngIf="subjectMarksSearchForm.controls['session_id'].errors?.['required'] && subjectMarksSearchForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
-                                    </div>
+<!--                                    <div class="col-md-3 mb-12">-->
+<!--                                        <label>Select Session</label>-->
+<!--                                        <select style="width: 100%" formControlName="session_id" class="form-select" >-->
+<!--                                            <option value="null">Select</option>-->
+<!--                                            <option *ngFor="let data of sessionList" [value]="data.id" >-->
+<!--                                                {{data.name}}-->
+<!--                                            </option>-->
+<!--                                        </select>-->
+<!--                                        <div *ngIf="subjectMarksSearchForm.controls['session_id'].errors?.['required'] && subjectMarksSearchForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+<!--                                    </div>-->
                                     <div class="col-md-3 mb-12">
                                         <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="getMarkSheet()">Search</button>
                                     </div>

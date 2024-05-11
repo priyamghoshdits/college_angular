@@ -70,6 +70,7 @@
                                             <label>Phone Number</label>
                                             <input type="text" class="form-control" formControlName="mobile_no" placeholder="Phone Number">
                                             <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['required'] && studentCreationForm.controls['mobile_no'].touched " class="text text-danger mt-1">Mobile Number required</div>
+                                            <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']" class="text text-danger mt-1">Invalid Mobile Number</div>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -77,6 +78,7 @@
                                             <label>Emergency Contact Number</label>
                                             <input type="text" class="form-control" formControlName="emergency_phone_number" placeholder="Emergency Contact Number">
                                             <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['required'] && studentCreationForm.controls['emergency_phone_number'].touched " class="text text-danger mt-1">Emergency phone required</div>
+                                            <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['pattern']" class="text text-danger mt-1">Invalid Mobile Number</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Material Status</label>
@@ -239,6 +241,7 @@
                                             <label>Amount</label>
                                             <input type="text" class="form-control" formControlName="amount" placeholder="Pre-Admission Amount">
                                             <div *ngIf="studentCreationForm.controls['amount'].errors?.['required'] && studentCreationForm.controls['amount'].touched " class="text text-danger mt-1">Amount required</div>
+                                            <div *ngIf="studentCreationForm.controls['amount'].errors?.['pattern']" class="text text-danger mt-1">Invalid Amount</div>
                                         </div>
                                     </div>
 

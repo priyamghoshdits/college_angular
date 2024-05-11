@@ -28,15 +28,15 @@
                                     </select>
                                 <div *ngIf="semesterTimeTableForm.controls['semester_id'].errors?.['required'] && semesterTimeTableForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                             </div>
-                            <div class="col-md-4 mb-3">
-                                <label>Select Session</label>
-                                <select style="width: 100%;" formControlName="session_id" class="form-select" required>
-                                    <option *ngFor="let data of sessionList" [value]="data.id">
-                                        {{data.name}}
-                                    </option>
-                                </select>
-                                <div *ngIf="semesterTimeTableForm.controls['session_id'].errors?.['required'] && semesterTimeTableForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
-                            </div>
+<!--                            <div class="col-md-4 mb-3">-->
+<!--                                <label>Select Session</label>-->
+<!--                                <select style="width: 100%;" formControlName="session_id" class="form-select" required>-->
+<!--                                    <option *ngFor="let data of sessionList" [value]="data.id">-->
+<!--                                        {{data.name}}-->
+<!--                                    </option>-->
+<!--                                </select>-->
+<!--                                <div *ngIf="semesterTimeTableForm.controls['session_id'].errors?.['required'] && semesterTimeTableForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+<!--                            </div>-->
                         </div>
                         <button class="btn btn-primary" (click)="searchTimeTable()" type="submit">Search</button>
                     </form>

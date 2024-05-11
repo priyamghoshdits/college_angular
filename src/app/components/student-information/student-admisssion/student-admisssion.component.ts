@@ -113,7 +113,7 @@ export class StudentAdmisssionComponent {
             payment_date: new FormControl(null, [Validators.required]),
             mode_of_payment: new FormControl(null, [Validators.required]),
             transaction_id: new FormControl(null, [Validators.required]),
-            caution_money: new FormControl(0, [Validators.required]),
+            caution_money: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
         });
 +
 
