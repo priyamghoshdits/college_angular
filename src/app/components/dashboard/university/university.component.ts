@@ -2,10 +2,14 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from "@angular/core";
 import {NgbDateStruct, NgbDate, NgbCalendar, NgbDatepickerConfig, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import { ChartComponent, ChartOptions } from "chart.js";
 import * as chartData from "./../../../shared/data/dashboard/university";
+import * as chartDatas from '../../../shared/data/widgets-chart/chart-widget';
 declare var require: any;
 import * as chart from "../../../shared/data/chart/chartist";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {DatePipe} from "@angular/common";
+import { barChartSingle, pieChart, multiData, single } from '../../../shared/data/chart/ngx-chart';
+import * as graphoptions from '../../../shared/data/chart/config';
+import { monthlydoughnutData, dailydoughnutData } from '../../../shared/data/widgets-chart/chart-widget';
 
 // var Knob = require('knob') // browserify require
 
@@ -17,11 +21,19 @@ var secondary = localStorage.getItem("secondary_color") || "#1ea6ec";
   templateUrl: "./university.component.html",
   styleUrls: ["./university.component.scss"],
   encapsulation: ViewEncapsulation.None,
+  
 })
 export class UniversityComponent implements OnInit {
+  public barChartsingle = barChartSingle;
+  public multiData = multiData;
   universityFormCalender: FormGroup;
   public date: any;
+  public dailydoughnutChartColorScheme = chartDatas.dailydoughnutChartcolorScheme;
+  public dailydoughnutChartShowLabels = chartDatas.dailydoughnutChartShowLabels;
+  public dailydoughnutChartGradient = chartDatas.dailydoughnutChartGradient;
   constructor(private modalService: NgbModal,public datepipe: DatePipe) {
+    Object.assign(this, { multiData, barChartSingle, pieChart, single });
+    Object.assign(this, { monthlydoughnutData, dailydoughnutData })
     this.universityFormCalender = new FormGroup({
       id: new FormControl(null),
       event_title: new FormControl(null, [Validators.required]),
@@ -31,6 +43,8 @@ export class UniversityComponent implements OnInit {
       event_type: new FormControl(null),
     });
   }
+
+  public dailydoughnutData = dailydoughnutData;
 
   ngOnInit() {}
 
@@ -46,6 +60,16 @@ export class UniversityComponent implements OnInit {
   public admissionChartColors = chartData.admissionChartColors;
   public admissionChartLegend = chartData.admissionChartLegend;
   public smallColumnChart1 = chart.smallColumnChart1;
+  public barChartShowYAxis = graphoptions.barChartShowYAxis;
+  public barChartShowXAxis = graphoptions.barChartShowXAxis;
+  public barChartGradient = graphoptions.barChartGradient;
+  public barChartShowLegend = graphoptions.barChartShowLegend;
+  public barChartShowXAxisLabel = graphoptions.barChartShowXAxisLabel;
+  public barChartXAxisLabel = graphoptions.barChartXAxisLabel;
+  public barChartShowYAxisLabel = graphoptions.barChartShowYAxisLabel;
+  public barChartYAxisLabel = graphoptions.barChartYAxisLabel;
+  public barChartColorScheme = graphoptions.barChartColorScheme;
+  public barChartshowGridLines = graphoptions.barChartshowGridLines;
 
   public datePick = null;
 
@@ -132,4 +156,6 @@ export class UniversityComponent implements OnInit {
     this.modalService.open(content,{ size: 'xl'});
     this.universityFormCalender.patchValue({event_from: new_date_create4, event_to: new_date_create4});
   }
+
+  public onSelect(e) {  }
 }

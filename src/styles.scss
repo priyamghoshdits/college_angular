@@ -1,2 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 @import 'material-icons/iconfont/material-icons.css';
+body 
+{
+  font-family: "Roboto", sans-serif;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar 
+{
+    width: 5px;
+} 
+/* Track */
+::-webkit-scrollbar-track 
+{
+    background: #FFF;
+}
+/* Handle */
+::-webkit-scrollbar-thumb 
+{
+    background: #f91d48; 
+}

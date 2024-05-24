@@ -100,9 +100,12 @@
   .page-body-wrapper{
     .sidebar{
       //height: calc(120vh - 80px);
+      // height: calc(100vh - 80px);
+      // overflow: auto;
+      // box-shadow: $sidebar-shadow;
       height: calc(100vh - 80px);
       overflow: auto;
-      box-shadow: $sidebar-shadow;
+      border-top: 1px solid rgba(0, 0, 0, 0.0588235294);
       &.custom-scrollbar {
         &::-webkit-scrollbar-track {
           -webkit-box-shadow: inset 0 0 6px $transparent-color;
@@ -126,7 +129,8 @@
     .page-sidebar{
       width: $sidebar-width;
       position: $sidebar-position;
-      background: $sidebar-background-color;
+      // background: $sidebar-background-color;
+      background: #FFF;
       top: 0;
       height: calc(100vh);
       z-index: $sidebar-z-index;
@@ -279,9 +283,11 @@
         }
       }
       .sidebar-user{
-        padding: $sidebar-user-section-padding;
-        box-shadow: $sidebar-user-section-shadow;
+        // padding: $sidebar-user-section-padding;
+        // box-shadow: $sidebar-user-section-shadow;
+        padding: 5px 5px;
         position: relative;
+        border-bottom: 1px solid #0000000f;
         .profile-edit{
           opacity: 0;
           transition: $sidebar-transition;
@@ -331,7 +337,8 @@
       .sidebar-menu {
         list-style: $sidebar-menu-list-style;
         margin: $sidebar-menu-list-margin;
-        padding: $sidebar-menu-padding;
+        // padding: $sidebar-menu-padding;
+        padding: 0px 10px 0px 10px;
         .sidebar-header{
           font-size: $sidebar-font-size;
           letter-spacing: $sidebar-letter-specing;
@@ -339,14 +346,28 @@
           padding-top: $sidebar-padding-top;
           text-transform: $sidebar-txt-transform;
           font-weight: $sidebar-font-weight;
-          color: $sidebar-font-color;
+          // color: $sidebar-font-color;
+          color: #000;
           font-family: $sidebar-font-family;
           svg{
-            width: $sidebar-icon-size;
-            height: $sidebar-icon-size;
-            margin-right: $sidebar-icon-margin;
-            stroke-width: $sidebar-icon-stroke-width;
-            vertical-align: sub;
+            // width: $sidebar-icon-size;
+            // height: $sidebar-icon-size;
+            // margin-right: $sidebar-icon-margin;
+            // stroke-width: $sidebar-icon-stroke-width;
+            // vertical-align: sub;
+            width: 32px;
+            height: 32px;
+            margin-right: 14px;
+            stroke-width: 3px;
+            color: #f98866;
+            box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+            background-color: #FFF;
+            border-radius: 50%;
+            padding: 0px 8px 0px 8px;
+            vertical-align: middle;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
           }
         }
         .sidebar-submenu{
@@ -369,7 +390,8 @@
             display: block;
             transition: $sidebar-transition;
             &.active{
-              color: $sidebar-hover-txt-color;
+              // color: $sidebar-hover-txt-color;
+              color: #000;
               transition: $sidebar-transition;
               text-shadow: 0px 0px 0px $white;
               background-color: rgb(255, 255, 255, 0.06);
@@ -459,10 +481,10 @@
           }
           > li {
             > a {
-              padding-bottom: 7px;
-              padding-top: 7px;
-              font-size: 14px;
-              color: rgba($white , 0.7);
+              padding-bottom: 4px;
+              padding-top: 4px;
+              font-size: 13px;
+              color: #444;
               transition: $sidebar-transition;
               text-transform: $sidebar-text-transform;
               position: relative;

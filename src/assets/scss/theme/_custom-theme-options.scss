@@ -40,12 +40,14 @@ $i:1;
 							(light, $light-color),
 							(dark, #2f3c4e){
 				&.#{$sidebar-name}-sidebar{
-					background-color: $sidebar-color;
+					// background-color: $sidebar-color;
+					background-color: #FFF;
 					.sidebar-menu {
 						> li {
 							> a {
 								&:hover {
-									color: $white;
+									// color: $white;
+									color: #000;
 								}
 							}
 						}
@@ -53,7 +55,8 @@ $i:1;
 							> li{
 								> a{
 									&:hover,&.active{
-										color: $white;
+										// color: $white;
+										color: #444;
 									}
 								}
 								&.active {

@@ -10,7 +10,8 @@ $header-size: 80px;
 }
 
 %common {
-  color: $white;
+  // color: $white;
+  color: #444;
   border-left-color: $white;
   transition: $sidebar-transition;
 }

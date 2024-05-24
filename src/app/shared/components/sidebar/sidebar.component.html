@@ -1,8 +1,8 @@
 <!--<div class="main-header-left d-none d-lg-block">-->
 <!--  <div class="logo-wrapper"><a href="javascript:void(0)"><img src="assets/images/endless-logo.png" alt=""></a></div>-->
 <!--</div>-->
-<div class="col-md-10 mb-3" style="text-align: center; margin-left: auto; margin-right: auto">
- <label style="color: white">Select Session</label>
+<div class="col-md-10 sselect_sectionout">
+ <label class="sdlectfst_dropdwntext">Select Session</label>
   <select style="width: 100%" class="form-select" [(ngModel)]="session_id" (change)="selectSession()">
   <option value="null">Select</option>
    <option *ngFor="let data of sessionList" [value]="data.id" >
@@ -13,12 +13,12 @@
 <div class="sidebar custom-scrollbar">
   <div class="sidebar-user text-center">
 <!--    <div><img class="img-60 rounded-circle" src="assets/images/user/1.jpg" onerror="this.src='assets/images/user/2.png'" alt="#">-->
-    <div><img class="img-60 rounded-circle" loading="lazy" [src]="url" onerror="this.src='assets/images/user/1.jpg'" alt="#">
+    <div><img class="sitelogoimg_design" loading="lazy" [src]="url" onerror="this.src='assets/images/user/1.jpg'" alt="#">
       <div class="profile-edit"><a>
           <i class="icofont icofont-pencil-alt-5"><input class="upload" type="file" (change)="readUrl($event)" /></i>
         </a></div>
     </div>
-    <h6 class="mt-3 f-14">{{user.first_name}} {{user.middle_name}} {{user.last_name}}</h6>
+    <h6 class="clgname_txtdesign">{{user.first_name}} {{user.middle_name}} {{user.last_name}}</h6>
     <p>{{user.user_type_name}}</p>
   </div>
   <ul class="sidebar-menu">
