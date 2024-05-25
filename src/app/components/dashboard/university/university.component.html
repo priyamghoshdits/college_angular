@@ -28,8 +28,8 @@
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="vwjhbox_outsecion">
-                                        <a href="#" class="yhxcv">
-                                          <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                        <a class="yhxcv" href="#">
+                                            <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -58,8 +58,8 @@
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="vwjhbox_outsecion">
-                                        <a href="#" class="yhxcv">
-                                          <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                        <a class="yhxcv" href="#">
+                                            <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -88,8 +88,8 @@
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="vwjhbox_outsecion">
-                                        <a routerLink="/fees-collection/collect-fees" class="yhxcv">
-                                          <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                        <a class="yhxcv" routerLink="/fees-collection/collect-fees">
+                                            <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -118,8 +118,8 @@
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="vwjhbox_outsecion">
-                                        <a routerLink="/library/book-list" class="yhxcv">
-                                          <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                        <a class="yhxcv" routerLink="/library/book-list">
+                                            <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -147,11 +147,15 @@
                         <div class="card-body">
                             <div class="flot-chart-container">
                                 <div class="flot-chart-placeholder ngx-chart-direction" id="github-issues">
-                                    <ngx-charts-bar-vertical-2d [scheme]="barChartColorScheme" [results]="multiData"
-                                        [gradient]="barChartGradient" [xAxis]="barChartShowXAxis" [yAxis]="barChartShowYAxis"
-                                        [legend]="barChartShowLegend" [showXAxisLabel]="barChartShowXAxisLabel"
-                                        [showYAxisLabel]="barChartShowYAxisLabel" [xAxisLabel]="barChartXAxisLabel"
-                                        [yAxisLabel]="barChartYAxisLabel" [roundEdges]="false" (select)="onSelect($event)">
+                                    <ngx-charts-bar-vertical-2d (select)="onSelect($event)" [gradient]="barChartGradient"
+                                                                [legend]="barChartShowLegend"
+                                                                [results]="multiData" [roundEdges]="false"
+                                                                [scheme]="barChartColorScheme"
+                                                                [showXAxisLabel]="barChartShowXAxisLabel"
+                                                                [showYAxisLabel]="barChartShowYAxisLabel"
+                                                                [xAxisLabel]="barChartXAxisLabel"
+                                                                [xAxis]="barChartShowXAxis" [yAxisLabel]="barChartYAxisLabel"
+                                                                [yAxis]="barChartShowYAxis">
                                     </ngx-charts-bar-vertical-2d>
                                 </div>
                             </div>
@@ -201,7 +205,7 @@
                                             Student
                                         </span>
                                         <span class="info_box_number">
-                                            312
+                                            {{total_student}}
                                         </span>
                                     </div>
                                 </div>
@@ -216,7 +220,7 @@
                                             Teacher
                                         </span>
                                         <span class="info_box_number">
-                                            50
+                                            {{total_teacher}}
                                         </span>
                                     </div>
                                 </div>
@@ -253,72 +257,87 @@
                 <i class="fa-solid fa-calendar-days swsft_icondesign"></i>
                 <span class="swsft_textdesign">Calender</span>
             </div>
-            <ngb-datepicker #dp class="custom-datepicker university-datepicker" (dateSelect)="openModal($event,content)" [ngModel]="datePick" (navigate)="date = $event.next">
+            <ngb-datepicker #dp (dateSelect)="openModal($event,content)" (navigate)="date = $event.next"
+                            [ngModel]="datePick" class="custom-datepicker university-datepicker">
             </ngb-datepicker>
-        </div>    
+        </div>
     </div>
 </div>
 <ng-template #content let-modal>
     <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Add New Event</h4>
-        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">  </button>
-      </div>
-      <div class="modal-body">
-        <form class="theme-form" [formGroup]="universityFormCalender">
-          <div  class="row">
-            <div class="col-md-12 mb-3">
-              <label class="col-form-label pt-0" for="exampleInputEmail1">Event Title <span style="color: red">*</span></label>
-              <input class="form-control" formControlName="event_title" id="exampleInputEmail1" type="text"
-                     placeholder="Enter Event Title">
-              <div *ngIf="universityFormCalender.controls['event_title'].errors?.['required'] && universityFormCalender.controls['event_title'].touched " class="text text-danger mt-1">Event Title required</div>
-            </div>
-          </div>
-          <div  class="row">
-            <div class="col-md-12 mb-3">
-              <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
-              <textarea class="form-control" formControlName="description" id="exampleInputEmail1" type="text"
-                     placeholder="Enter Description"></textarea>
-              <div *ngIf="universityFormCalender.controls['description'].errors?.['required'] && universityFormCalender.controls['description'].touched " class="text text-danger mt-1">Description required</div>
-            </div>
-          </div>
-          <div  class="row">
-            <div class="col-md-6 mb-3">
-              <label class="col-form-label pt-0" for="exampleInputEmail1">Event From</label>
-              <input class="form-control" formControlName="event_from" id="exampleInputEmail1" type="date"
-                        placeholder="Event From">
-              <div *ngIf="universityFormCalender.controls['event_from'].errors?.['required'] && universityFormCalender.controls['event_from'].touched " class="text text-danger mt-1">Event From required</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label class="col-form-label pt-0" for="exampleInputEmail1">Event To</label>
-              <input class="form-control" formControlName="event_to" id="exampleInputEmail1" type="date"
-                        placeholder="Enter Event To">
-              <div *ngIf="universityFormCalender.controls['event_to'].errors?.['required'] && universityFormCalender.controls['event_to'].touched " class="text text-danger mt-1">Event To required</div>
-            </div>
-          </div>
-          <div  class="row">
-            <div class="col-md-6 mb-3">
-              <label class="col-form-label pt-0" for="exampleInputEmail1">Event Type</label>
-              <select style="width: 100%" formControlName="event_type" class="form-select">
-                <option value="null">Select</option>
-                <option value="public"> Public </option>
-                <option value="private"> Private </option>
-                <option value="all super admin"> All Super Admin </option>
-                <option value="Protected}"> Seperated </option>
-              </select>
-              <div *ngIf="universityFormCalender.controls['event_type'].errors?.['required'] && universityFormCalender.controls['event_type'].touched " class="text text-danger mt-1">Event Type required</div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <label class="col-form-label pt-0" for="exampleInputEmail1">Upload Image</label>
-              <input class="form-control" accept="image/jpg, image/jpeg" formControlName="event_to" type="file" placeholder="Enter Event To">
-              <div *ngIf="universityFormCalender.controls['event_type'].errors?.['required'] && universityFormCalender.controls['event_type'].touched " class="text text-danger mt-1">Event Type required</div>
-            </div>
-          </div>
-          <div class="col-md-12 mb-3">
-            <button style="margin-top: 30px; float: right" class="btn btn-primary me-1">Save</button>
-          </div>
-        </form>
-      </div>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Add New Event</h4>
+            <button (click)="modal.dismiss('Cross click')" aria-label="Close" class="btn-close" type="button"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="universityFormCalender" class="theme-form">
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="col-form-label pt-0" for="exampleInputEmail1">Event Title <span
+                                style="color: red">*</span></label>
+                        <input class="form-control" formControlName="event_title" id="exampleInputEmail1" placeholder="Enter Event Title"
+                               type="text">
+                        <div *ngIf="universityFormCalender.controls['event_title'].errors?.['required'] && universityFormCalender.controls['event_title'].touched "
+                             class="text text-danger mt-1">Event Title required
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                        <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+                        <textarea class="form-control" formControlName="description" id="exampleInputEmail1" placeholder="Enter Description"
+                                  type="text"></textarea>
+                        <div *ngIf="universityFormCalender.controls['description'].errors?.['required'] && universityFormCalender.controls['description'].touched "
+                             class="text text-danger mt-1">Description required
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="col-form-label pt-0" for="exampleInputEmail1">Event From</label>
+                        <input class="form-control" formControlName="event_from" id="exampleInputEmail1" placeholder="Event From"
+                               type="date">
+                        <div *ngIf="universityFormCalender.controls['event_from'].errors?.['required'] && universityFormCalender.controls['event_from'].touched "
+                             class="text text-danger mt-1">Event From required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="col-form-label pt-0" for="exampleInputEmail1">Event To</label>
+                        <input class="form-control" formControlName="event_to" id="exampleInputEmail1" placeholder="Enter Event To"
+                               type="date">
+                        <div *ngIf="universityFormCalender.controls['event_to'].errors?.['required'] && universityFormCalender.controls['event_to'].touched "
+                             class="text text-danger mt-1">Event To required
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="col-form-label pt-0" for="exampleInputEmail1">Event Type</label>
+                        <select class="form-select" formControlName="event_type" style="width: 100%">
+                            <option value="null">Select</option>
+                            <option value="public"> Public</option>
+                            <option value="private"> Private</option>
+                            <option value="all super admin"> All Super Admin</option>
+                            <option value="Protected}"> Seperated</option>
+                        </select>
+                        <div *ngIf="universityFormCalender.controls['event_type'].errors?.['required'] && universityFormCalender.controls['event_type'].touched "
+                             class="text text-danger mt-1">Event Type required
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="col-form-label pt-0" for="exampleInputEmail1">Upload Image</label>
+                        <input accept="image/jpg, image/jpeg" class="form-control" formControlName="event_to"
+                               placeholder="Enter Event To" type="file">
+                        <div *ngIf="universityFormCalender.controls['event_type'].errors?.['required'] && universityFormCalender.controls['event_type'].touched "
+                             class="text text-danger mt-1">Event Type required
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <button class="btn btn-primary me-1" style="margin-top: 30px; float: right">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
 </ng-template>
 <!-- ================================dashboard third area end======================================= -->
@@ -336,50 +355,51 @@
                         </div>
                         <div class="card-body ugbdy_outsectionxz">
                             <div class="upcoming-event">
-                              <div class="upcoming-innner d-flex">
-                                <div class="ikxz_areasection left m-r-20">
-                                  <app-feather-icons [icon]="'help-circle'"></app-feather-icons>
+                                <div class="upcoming-innner d-flex">
+                                    <div class="ikxz_areasection left m-r-20">
+                                        <app-feather-icons [icon]="'help-circle'"></app-feather-icons>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="mb-0">Demo Content <span class="pull-right">Mar 18</span></p>
+                                        <h6 class="f-w-600">Quiz Competition</h6>
+                                        <p class="mb-0">A math quiz competition will be held on 15.05.2024
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="flex-grow-1">
-                                  <p class="mb-0">Demo Content <span class="pull-right">Mar 18</span></p>
-                                  <h6 class="f-w-600">Quiz Competition</h6>
-                                  <p class="mb-0">A math quiz competition will be held on 15.05.2024
-                                  </p>
+                                <div class="upcoming-innner d-flex">
+                                    <div class="ikxz_areasection left m-r-20">
+                                        <app-feather-icons [icon]="'mic'"></app-feather-icons>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="mb-0">Demo Content <span class="pull-right">Sep 18</span></p>
+                                        <h6 class="f-w-600">Singing Competition</h6>
+                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024
+                                        </p>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="upcoming-innner d-flex">
-                                <div class="ikxz_areasection left m-r-20">
-                                  <app-feather-icons [icon]="'mic'"></app-feather-icons>
+                                <div class="upcoming-innner d-flex">
+                                    <div class="ikxz_areasection left m-r-20">
+                                        <app-feather-icons [icon]="'zap'"></app-feather-icons>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="mb-0">Demo Content <span class="pull-right">Dec 18</span></p>
+                                        <h6 class="f-w-600">Diwali Celebration</h6>
+                                        <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting
+                                            industry. lorem ipsum
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="flex-grow-1">
-                                  <p class="mb-0">Demo Content <span class="pull-right">Sep 18</span></p>
-                                  <h6 class="f-w-600">Singing Competition</h6>
-                                  <p class="mb-0">A singing quiz competition will be held on 14.05.2024
-                                  </p>
+                                <div class="upcoming-innner d-flex">
+                                    <div class="ikxz_areasection left m-r-20">
+                                        <app-feather-icons [icon]="'mic'"></app-feather-icons>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="mb-0">Demo Content <span class="pull-right">Sep 18</span></p>
+                                        <h6 class="f-w-600">Singing Competition</h6>
+                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024
+                                        </p>
+                                    </div>
                                 </div>
-                              </div>
-                              <div class="upcoming-innner d-flex">
-                                <div class="ikxz_areasection left m-r-20">
-                                  <app-feather-icons [icon]="'zap'"></app-feather-icons>
-                                </div>
-                                <div class="flex-grow-1">
-                                  <p class="mb-0">Demo Content <span class="pull-right">Dec 18</span></p>
-                                  <h6 class="f-w-600">Diwali Celebration</h6>
-                                  <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting industry. lorem ipsum
-                                  </p>
-                                </div>
-                              </div>
-                              <div class="upcoming-innner d-flex">
-                                <div class="ikxz_areasection left m-r-20">
-                                  <app-feather-icons [icon]="'mic'"></app-feather-icons>
-                                </div>
-                                <div class="flex-grow-1">
-                                  <p class="mb-0">Demo Content <span class="pull-right">Sep 18</span></p>
-                                  <h6 class="f-w-600">Singing Competition</h6>
-                                  <p class="mb-0">A singing quiz competition will be held on 14.05.2024
-                                  </p>
-                                </div>
-                              </div>
                             </div>
                         </div>
                     </div>
@@ -392,9 +412,11 @@
                         </div>
                         <div class="card-body">
                             <div class="flot-chart-placeholder" id="website-visiter-chart">
-                                <ngx-charts-pie-chart [scheme]="dailydoughnutChartColorScheme" [results]="dailydoughnutData"
-                                  [explodeSlices]="true" [labels]="dailydoughnutChartShowLabels" [arcWidth]=0.30 [doughnut]="true"
-                                  [gradient]="dailydoughnutChartGradient">
+                                <ngx-charts-pie-chart [arcWidth]=0.30
+                                                      [doughnut]="true"
+                                                      [explodeSlices]="true" [gradient]="dailydoughnutChartGradient"
+                                                      [labels]="dailydoughnutChartShowLabels" [results]="dailydoughnutData22"
+                                                      [scheme]="dailydoughnutChartColorScheme">
                                 </ngx-charts-pie-chart>
                             </div>
                             <!-- <canvas baseChart class="chart flot-chart-placeholder" id="myLineCharts" [legend]="admissionChartLegend"
@@ -405,13 +427,13 @@
                             <div class="col-lg-6">
                                 <div class="mfstudent_outsection">
                                     <h4 class="item-title">Female Students</h4>
-                                    <div class="item-number">45,000</div>
+                                    <div class="item-number">{{total_female_student}}</div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="mfstudent_outsectionmu">
                                     <h4 class="item-title">Male Students</h4>
-                                    <div class="item-number">1,05,000</div>
+                                    <div class="item-number">{{total_male_student}}</div>
                                 </div>
                             </div>
                         </div>

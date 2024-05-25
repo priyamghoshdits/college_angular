@@ -33,12 +33,27 @@ export class UniversityComponent implements OnInit {
   public dailydoughnutChartShowLabels = chartDatas.dailydoughnutChartShowLabels;
   public dailydoughnutChartGradient = chartDatas.dailydoughnutChartGradient;
 
+  dailydoughnutData22 = [
+    {
+      value: 0,
+      name: "Male"
+
+    },
+    {
+      value: 0,
+      name: "Female"
+    }
+  ];
 
   //variable declaration
   total_books = 0;
   no_of_fees_received = 0;
   total_fees_received = 0;
   total_expense = 0;
+  total_student = 0;
+  total_teacher = 0;
+  total_male_student = 0;
+  total_female_student = 0;
 
   constructor(private modalService: NgbModal,public datepipe: DatePipe, public dashboardService: DashboardService) {
     Object.assign(this, { multiData, barChartSingle, pieChart, single });
@@ -56,10 +71,27 @@ export class UniversityComponent implements OnInit {
       this.no_of_fees_received = response.data.no_of_fees_received;
       this.total_fees_received = response.data.total_fees_received;
       this.total_expense = response.data.total_expense;
+      this.total_student = response.data.total_student;
+      this.total_teacher = response.data.total_teacher;
+      this.total_male_student = response.data.total_male_student;
+      this.total_female_student = response.data.total_female_student;
+      this.dailydoughnutData22 = [
+        {
+          value: this.total_male_student,
+          name: "Male"
+
+        },
+        {
+          value: this.total_female_student,
+          name: "Female"
+        }
+      ];
     })
   }
 
-  public dailydoughnutData = dailydoughnutData;
+
+
+  // public dailydoughnutData = dailydoughnutData;
 
   ngOnInit() {}
 
