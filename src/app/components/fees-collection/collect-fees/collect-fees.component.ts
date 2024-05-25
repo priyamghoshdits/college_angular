@@ -183,6 +183,7 @@ export class CollectFeesComponent {
   }
 
   getStudents(){
+    console.log(this.filteredStudentListForSearch);
     if(this.searchTransactionForm.value.course_id){
       this.filteredStudentListForSearch = this.filteredStudentListForSearch.filter(x => x.course_id == this.searchTransactionForm.value.course_id);
     }

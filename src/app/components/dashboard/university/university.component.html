@@ -72,7 +72,7 @@
                         <div class="swfstbox_outarea3">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
-                                    5
+                                    {{no_of_fees_received}}
                                 </h1>
                                 <h3 class="afomtext_hdesign">
                                     Fees Received
@@ -88,7 +88,7 @@
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="vwjhbox_outsecion">
-                                        <a href="#" class="yhxcv">
+                                        <a routerLink="/fees-collection/collect-fees" class="yhxcv">
                                           <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
                                         </a>
                                     </div>
@@ -102,10 +102,10 @@
                         <div class="swfstbox_outarea4">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
-                                    50
+                                    {{total_books}}
                                 </h1>
                                 <h3 class="afomtext_hdesign">
-                                    Library Overview
+                                    Library Books
                                 </h3>
                             </div>
                             <div class="row">
@@ -118,7 +118,7 @@
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="vwjhbox_outsecion">
-                                        <a href="#" class="yhxcv">
+                                        <a routerLink="/library/book-list" class="yhxcv">
                                           <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
                                         </a>
                                     </div>
@@ -171,7 +171,7 @@
                                             Monthly Fees Collection
                                         </span>
                                         <span class="info_box_number">
-                                            ₹0
+                                            ₹{{total_fees_received}}
                                         </span>
                                     </div>
                                 </div>
@@ -186,7 +186,7 @@
                                             Monthly Expenses
                                         </span>
                                         <span class="info_box_number">
-                                            ₹0
+                                            ₹{{total_expense}}
                                         </span>
                                     </div>
                                 </div>

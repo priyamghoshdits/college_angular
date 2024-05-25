@@ -10,6 +10,7 @@ import {DatePipe} from "@angular/common";
 import { barChartSingle, pieChart, multiData, single } from '../../../shared/data/chart/ngx-chart';
 import * as graphoptions from '../../../shared/data/chart/config';
 import { monthlydoughnutData, dailydoughnutData } from '../../../shared/data/widgets-chart/chart-widget';
+import {DashboardService} from "../../../services/dashboard.service";
 
 // var Knob = require('knob') // browserify require
 
@@ -31,7 +32,15 @@ export class UniversityComponent implements OnInit {
   public dailydoughnutChartColorScheme = chartDatas.dailydoughnutChartcolorScheme;
   public dailydoughnutChartShowLabels = chartDatas.dailydoughnutChartShowLabels;
   public dailydoughnutChartGradient = chartDatas.dailydoughnutChartGradient;
-  constructor(private modalService: NgbModal,public datepipe: DatePipe) {
+
+
+  //variable declaration
+  total_books = 0;
+  no_of_fees_received = 0;
+  total_fees_received = 0;
+  total_expense = 0;
+
+  constructor(private modalService: NgbModal,public datepipe: DatePipe, public dashboardService: DashboardService) {
     Object.assign(this, { multiData, barChartSingle, pieChart, single });
     Object.assign(this, { monthlydoughnutData, dailydoughnutData })
     this.universityFormCalender = new FormGroup({
@@ -42,6 +51,12 @@ export class UniversityComponent implements OnInit {
       event_to: new FormControl(null),
       event_type: new FormControl(null),
     });
+    this.dashboardService.getDashboardData().subscribe((response: any) => {
+      this.total_books = response.data.total_books;
+      this.no_of_fees_received = response.data.no_of_fees_received;
+      this.total_fees_received = response.data.total_fees_received;
+      this.total_expense = response.data.total_expense;
+    })
   }
 
   public dailydoughnutData = dailydoughnutData;
