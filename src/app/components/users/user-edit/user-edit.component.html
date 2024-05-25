@@ -52,121 +52,142 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form [formGroup]="studentCreationForm">
-                            <div class="row">
-                                <div class="col-sm-4 col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label">First Name</label>
-                                        <input class="form-control" formControlName="first_name"
-                                               placeholder="First Name" type="text">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="leftuser_imgoutsection">
+                                    <div class="jshadow_area">
+                                        <img src="assets/images/student.jpg" class="huimg_designs">
                                     </div>
+                                    <h1 class="studentimgdwnarea">
+                                        Course:
+                                        <span class="studentimgdwnarea1">Diploma Engineering</span>
+                                    </h1>
+                                    <h1 class="studentimgdwnarea">
+                                        Semester:
+                                        <span class="studentimgdwnarea1">1st Semester</span>
+                                    </h1>
                                 </div>
-                                <div class="col-sm-4 col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Middle Name</label>
-                                        <input class="form-control" formControlName="middle_name"
-                                               placeholder="Middle Name" type="text">
-                                    </div>
-                                </div>
-                                <div class="col-sm-4 col-md-4">
-                                    <div class="form-group">
-                                        <label class="form-label">Last Name</label>
-                                        <input class="form-control" formControlName="last_name" placeholder="Last Name"
-                                               type="text">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Date Of Birth</label>
-                                        <input class="form-control" formControlName="dob" placeholder="Date Of Birth"
-                                               type="date">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        <label class="form-label">Phone Number</label>
-                                        <input class="form-control" formControlName="mobile_no"
-                                               placeholder="Phone Number" type="mobile_no">
-                                        <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']"
-                                             class="text text-danger mt-1">Invalid Phone Number
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6">
-                                    <label>Blood Group</label>
-                                    <select class="form-select" formControlName="blood_group" style="width: 100%">
-                                        <option value="null">Select</option>
-                                        <option value="A+"> A+</option>
-                                        <option value="A-"> A-</option>
-                                        <option value="B+"> B+</option>
-                                        <option value="B-"> B-</option>
-                                        <option value="AB+"> AB+</option>
-                                        <option value="AB-"> AB-</option>
-                                        <option value="O+"> O+</option>
-                                        <option value="O-"> O-</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-6 col-md-6">
-                                    <label>Religion</label>
-                                    <select class="form-select" formControlName="religion" style="width: 100%">
-                                        <option value="null">Select</option>
-                                        <option value="Hinduism"> Hinduism</option>
-                                        <option value="Buddhism"> Buddhism</option>
-                                        <option value="Christianity"> Christianity</option>
-                                        <option value="Confucianism"> Confucianism</option>
-                                        <option value="Islam"> Islam</option>
-                                        <option value="Jainism"> Jainism</option>
-                                        <option value="Judaism"> Judaism</option>
-                                        <option value="Shinto"> Shinto</option>
-                                        <option value="Sikhism"> Sikhism</option>
-                                        <option value="Taoism"> Taoism</option>
-                                        <option value="Zoroastrianism"> Zoroastrianism</option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-6 col-md-6 mt-3">
-                                    <label>Caste</label>
-                                    <select class="form-select" formControlName="category_id" style="width: 100%">
-                                        <option value="null">Select</option>
-                                        <option *ngFor="let data of categoryList" [value]="data.id">
-                                            {{data.name}}
-                                        </option>
-                                    </select>
-                                </div>
-                                <div class="col-sm-6 col-md-6 mt-3">
-                                    <label>Gender</label>
-                                    <select class="form-select" formControlName="gender" style="width: 100%">
-                                        <option value="null">Select</option>
-                                        <option value="Male"> Male</option>
-                                        <option value="Female"> Female</option>
-                                    </select>
-                                </div>
-
-                                <!--              <div class="col-sm-12 mt-2">-->
-                                <!--                <div class="form-group">-->
-                                <!--                  <label class="form-label">Address</label>-->
-                                <!--                  <input class="form-control" formControlName="permanent_address" type="text" placeholder="Address">-->
-                                <!--                </div>-->
-                                <!--              </div>-->
-                                <!--              <div class="col-md-5">-->
-                                <!--                <div class="form-group">-->
-                                <!--                  <label class="form-label">Country</label>-->
-                                <!--                  <select class="form-control btn-square">-->
-                                <!--                    <option value="0">&#45;&#45;Select&#45;&#45;</option>-->
-                                <!--                    <option value="1">Germany</option>-->
-                                <!--                    <option value="2">Canada</option>-->
-                                <!--                    <option value="3">Usa</option>-->
-                                <!--                    <option value="4">Aus</option>-->
-                                <!--                  </select>-->
-                                <!--                </div>-->
-                                <!--              </div>-->
-                                <!--              <div class="col-md-12">-->
-                                <!--                <div class="form-group mb-0">-->
-                                <!--                  <label class="form-label">About Me</label>-->
-                                <!--                  <textarea class="form-control" rows="5" placeholder="Enter About your description"></textarea>-->
-                                <!--                </div>-->
-                                <!--              </div>-->
                             </div>
-                        </form>
+                            <div class="col-lg-9">
+                                <div class="rightuser_udetailsoutsection">
+                                    <form [formGroup]="studentCreationForm">
+                                        <div class="row">
+                                            <div class="col-sm-4 col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-label">First Name</label>
+                                                    <input class="form-control" formControlName="first_name"
+                                                           placeholder="First Name" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-label">Middle Name</label>
+                                                    <input class="form-control" formControlName="middle_name"
+                                                           placeholder="Middle Name" type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-md-4">
+                                                <div class="form-group">
+                                                    <label class="form-label">Last Name</label>
+                                                    <input class="form-control" formControlName="last_name" placeholder="Last Name"
+                                                           type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">Date Of Birth</label>
+                                                    <input class="form-control" formControlName="dob" placeholder="Date Of Birth"
+                                                           type="date">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6">
+                                                <div class="form-group">
+                                                    <label class="form-label">Phone Number</label>
+                                                    <input class="form-control" formControlName="mobile_no"
+                                                           placeholder="Phone Number" type="mobile_no">
+                                                    <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']"
+                                                         class="text text-danger mt-1">Invalid Phone Number
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6">
+                                                <label>Blood Group</label>
+                                                <select class="form-select" formControlName="blood_group" style="width: 100%">
+                                                    <option value="null">Select</option>
+                                                    <option value="A+"> A+</option>
+                                                    <option value="A-"> A-</option>
+                                                    <option value="B+"> B+</option>
+                                                    <option value="B-"> B-</option>
+                                                    <option value="AB+"> AB+</option>
+                                                    <option value="AB-"> AB-</option>
+                                                    <option value="O+"> O+</option>
+                                                    <option value="O-"> O-</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6">
+                                                <label>Religion</label>
+                                                <select class="form-select" formControlName="religion" style="width: 100%">
+                                                    <option value="null">Select</option>
+                                                    <option value="Hinduism"> Hinduism</option>
+                                                    <option value="Buddhism"> Buddhism</option>
+                                                    <option value="Christianity"> Christianity</option>
+                                                    <option value="Confucianism"> Confucianism</option>
+                                                    <option value="Islam"> Islam</option>
+                                                    <option value="Jainism"> Jainism</option>
+                                                    <option value="Judaism"> Judaism</option>
+                                                    <option value="Shinto"> Shinto</option>
+                                                    <option value="Sikhism"> Sikhism</option>
+                                                    <option value="Taoism"> Taoism</option>
+                                                    <option value="Zoroastrianism"> Zoroastrianism</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 mt-3">
+                                                <label>Caste</label>
+                                                <select class="form-select" formControlName="category_id" style="width: 100%">
+                                                    <option value="null">Select</option>
+                                                    <option *ngFor="let data of categoryList" [value]="data.id">
+                                                        {{data.name}}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-sm-6 col-md-6 mt-3">
+                                                <label>Gender</label>
+                                                <select class="form-select" formControlName="gender" style="width: 100%">
+                                                    <option value="null">Select</option>
+                                                    <option value="Male"> Male</option>
+                                                    <option value="Female"> Female</option>
+                                                </select>
+                                            </div>
+            
+                                            <!--              <div class="col-sm-12 mt-2">-->
+                                            <!--                <div class="form-group">-->
+                                            <!--                  <label class="form-label">Address</label>-->
+                                            <!--                  <input class="form-control" formControlName="permanent_address" type="text" placeholder="Address">-->
+                                            <!--                </div>-->
+                                            <!--              </div>-->
+                                            <!--              <div class="col-md-5">-->
+                                            <!--                <div class="form-group">-->
+                                            <!--                  <label class="form-label">Country</label>-->
+                                            <!--                  <select class="form-control btn-square">-->
+                                            <!--                    <option value="0">&#45;&#45;Select&#45;&#45;</option>-->
+                                            <!--                    <option value="1">Germany</option>-->
+                                            <!--                    <option value="2">Canada</option>-->
+                                            <!--                    <option value="3">Usa</option>-->
+                                            <!--                    <option value="4">Aus</option>-->
+                                            <!--                  </select>-->
+                                            <!--                </div>-->
+                                            <!--              </div>-->
+                                            <!--              <div class="col-md-12">-->
+                                            <!--                <div class="form-group mb-0">-->
+                                            <!--                  <label class="form-label">About Me</label>-->
+                                            <!--                  <textarea class="form-control" rows="5" placeholder="Enter About your description"></textarea>-->
+                                            <!--                </div>-->
+                                            <!--              </div>-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer text-end">
                         <!--            <label><mat-icon>done_outline</mat-icon>Profile Updated</label>-->
