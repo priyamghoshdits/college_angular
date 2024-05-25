@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  BASE_API_URL: 'http://127.0.0.1:8000/api',
-  FILE_URL: 'http://127.0.0.1:8000/public',
+  BASE_API_URL: 'https://rgoi.in/college_api/public/api',
+  FILE_URL: 'https://rgoi.in/college_api/public',
 };
 
 /*
