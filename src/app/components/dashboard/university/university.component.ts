@@ -57,6 +57,7 @@ export class UniversityComponent implements OnInit {
   total_study_material = 0;
   total_assignment = 0;
   noticeList: any[] = [];
+  session_id = null;
 
   constructor(private modalService: NgbModal,public datepipe: DatePipe, public dashboardService: DashboardService) {
     Object.assign(this, { multiData, barChartSingle, pieChart, single });
@@ -69,6 +70,10 @@ export class UniversityComponent implements OnInit {
       event_to: new FormControl(null),
       event_type: new FormControl(null),
     });
+
+    // @ts-ignore
+    this.session_id = JSON.parse(localStorage.getItem('session_id'));
+
     this.dashboardService.getDashboardData().subscribe((response: any) => {
       this.total_books = response.data.total_books;
       this.no_of_fees_received = response.data.no_of_fees_received;
@@ -105,14 +110,6 @@ export class UniversityComponent implements OnInit {
   public chart2 = chartData.chart2;
   public chart3 = chartData.chart3;
   public chart4 = chartData.chart4;
-  public chart5 = chartData.chart5;
-  public admissionChartType = chartData.admissionChartType;
-  public admissionChartLabels = chartData.admissionChartLabels;
-  public admissionChartData = chartData.admissionChartData;
-  public admissionChartOptions = chartData.admissionChartOptions;
-  public admissionChartColors = chartData.admissionChartColors;
-  public admissionChartLegend = chartData.admissionChartLegend;
-  public smallColumnChart1 = chart.smallColumnChart1;
   public barChartShowYAxis = graphoptions.barChartShowYAxis;
   public barChartShowXAxis = graphoptions.barChartShowXAxis;
   public barChartGradient = graphoptions.barChartGradient;
@@ -122,86 +119,8 @@ export class UniversityComponent implements OnInit {
   public barChartShowYAxisLabel = graphoptions.barChartShowYAxisLabel;
   public barChartYAxisLabel = graphoptions.barChartYAxisLabel;
   public barChartColorScheme = graphoptions.barChartColorScheme;
-  public barChartshowGridLines = graphoptions.barChartshowGridLines;
 
   public datePick = null;
-
-  public RankerRatio : any= {
-    series: [25],
-    chart: {
-      type: "radialBar",
-      offsetY: -20,
-      sparkline: {
-        enabled: true,
-      },
-    },
-    plotOptions: {
-      radialBar: {
-        startAngle: -135,
-        endAngle: 135,
-        track: {
-          background: "#e7e7e7",
-          // strokeWidth: "60%",
-          margin: 5, // margin is in pixels
-        },
-        hollow: {
-          margin: 15,
-          size: "60%",
-        },
-        dataLabels: {
-          name: {
-            show: false,
-          },
-          value: {
-            offsetY: 64,
-            fontSize: "22px",
-          },
-        },
-      },
-    },
-    grid: {
-      padding: {
-        top: -10,
-      },
-    },
-    stroke: {
-      lineCap: "round",
-    },
-    labels: ["Average Results"],
-  };
-
-  TotalProfit: any = {
-    series: [85],
-    chart: {
-      height: 300,
-      type: "radialBar",
-    },
-    plotOptions: {
-      radialBar: {
-        hollow: {
-          size: "80%",
-        },
-        track: {
-          background: "#4466F2",
-        },
-      },
-    },
-    stroke: {
-      lineCap: "round",
-    },
-    fill: {
-      colors: ["#fff"],
-    },
-    dataLabels: {
-      name: {
-        show: true,
-        color: "#fff",
-        offsetY: -10,
-      },
-    },
-
-    labels: ["TOTAL Student"],
-  };
 
   openModal(data, content){
     const new_date_create =new Date(data.year + '-'+data.month +'-'+data.day);
