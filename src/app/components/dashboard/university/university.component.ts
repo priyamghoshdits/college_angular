@@ -54,6 +54,9 @@ export class UniversityComponent implements OnInit {
   total_teacher = 0;
   total_male_student = 0;
   total_female_student = 0;
+  total_study_material = 0;
+  total_assignment = 0;
+  noticeList: any[] = [];
 
   constructor(private modalService: NgbModal,public datepipe: DatePipe, public dashboardService: DashboardService) {
     Object.assign(this, { multiData, barChartSingle, pieChart, single });
@@ -75,6 +78,9 @@ export class UniversityComponent implements OnInit {
       this.total_teacher = response.data.total_teacher;
       this.total_male_student = response.data.total_male_student;
       this.total_female_student = response.data.total_female_student;
+      this.noticeList = response.data.notice;
+      this.total_study_material = response.data.studyMaterial;
+      this.total_assignment = response.data.total_assignment;
       this.dailydoughnutData22 = [
         {
           value: this.total_male_student,

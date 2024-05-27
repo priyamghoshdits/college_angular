@@ -56,6 +56,9 @@ export class AssignSemesterTeacherComponent {
             this.cloneTeacher = cloneDeep(this.teachers);
         })
         this.teachers = this.memberService.getTeacherList();
+        if(this.teachers.length>0){
+            this.cloneTeacher = cloneDeep(this.teachers);
+        }
 
         this.semesterService.assignedTeacherListener().subscribe((response) => {
             this.assignedTeacher = response;
@@ -214,6 +217,11 @@ export class AssignSemesterTeacherComponent {
             value.checked = data.teacher.findIndex(x => x.id === value.id) != -1;
         });
         this.isUpdatable = true;
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
     }
 
     updateAssignSemesterTeacher(){
@@ -248,6 +256,12 @@ export class AssignSemesterTeacherComponent {
         this.assignSemesterTeacherForm.reset();
         this.teachers = cloneDeep(this.cloneTeacher);
         this.isUpdatable = false;
+
+        window.scroll({
+            top: 0,
+            left: 0,
+            behavior: 'smooth'
+        });
     }
 
     importTeacher(data, event){

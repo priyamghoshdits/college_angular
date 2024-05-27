@@ -12,10 +12,10 @@
                         <div class="swfstbox_outarea1">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
-                                    2
+                                    {{total_assignment}}
                                 </h1>
                                 <h3 class="afomtext_hdesign">
-                                    Application From
+                                    Assignment
                                 </h3>
                             </div>
                             <div class="row">
@@ -28,7 +28,7 @@
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="vwjhbox_outsecion">
-                                        <a class="yhxcv" href="#">
+                                        <a class="yhxcv" routerLink="/download-center/assignment">
                                             <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
                                         </a>
                                     </div>
@@ -42,10 +42,10 @@
                         <div class="swfstbox_outarea2">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
-                                    1
+                                    {{total_study_material}}
                                 </h1>
                                 <h3 class="afomtext_hdesign">
-                                    Online Exam
+                                    Study Material
                                 </h3>
                             </div>
                             <div class="row">
@@ -58,7 +58,7 @@
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="vwjhbox_outsecion">
-                                        <a class="yhxcv" href="#">
+                                        <a class="yhxcv" routerLink="/download-center/study-material">
                                             <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
                                         </a>
                                     </div>
@@ -355,51 +355,51 @@
                         </div>
                         <div class="card-body ugbdy_outsectionxz">
                             <div class="upcoming-event ucnxsd_outarea">
-                                <div class="upcoming-innner d-flex">
+                                <div *ngFor="let record of noticeList" class="upcoming-innner d-flex">
                                     <div class="ikxz_areasection left m-r-20">
                                         <app-feather-icons [icon]="'book'"></app-feather-icons>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <p class="mb-0"><span class="pull-right">Mar 18</span></p>
-                                        <h6 class="f-w-600">Quiz Competition</h6>
-                                        <p class="mb-0">A math quiz competition will be held on 15.05.2024
+                                        <p class="mb-0"><span class="pull-right">{{record.published_on | date:'fullDate' }}</span></p>
+                                        <h6 class="f-w-600">{{record.subject}}</h6>
+                                        <p class="mb-0" [innerHTML]="record.body">A math quiz competition will be held on 15.05.2024
                                         </p>
                                     </div>
                                 </div>
-                                <div class="upcoming-innner d-flex">
-                                    <div class="ikxz_areasection left m-r-20">
-                                        <app-feather-icons [icon]="'book'"></app-feather-icons>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <p class="mb-0"><span class="pull-right">Sep 18</span></p>
-                                        <h6 class="f-w-600">Singing Competition</h6>
-                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="upcoming-innner d-flex">
-                                    <div class="ikxz_areasection left m-r-20">
-                                        <app-feather-icons [icon]="'book'"></app-feather-icons>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <p class="mb-0"><span class="pull-right">Dec 18</span></p>
-                                        <h6 class="f-w-600">Diwali Celebration</h6>
-                                        <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                            industry. lorem ipsum
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="upcoming-innner d-flex">
-                                    <div class="ikxz_areasection left m-r-20">
-                                        <app-feather-icons [icon]="'book'"></app-feather-icons>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <p class="mb-0"><span class="pull-right">Sep 18</span></p>
-                                        <h6 class="f-w-600">Singing Competition</h6>
-                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024
-                                        </p>
-                                    </div>
-                                </div>
+<!--                                <div class="upcoming-innner d-flex">-->
+<!--                                    <div class="ikxz_areasection left m-r-20">-->
+<!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
+<!--                                    </div>-->
+<!--                                    <div class="flex-grow-1">-->
+<!--                                        <p class="mb-0"><span class="pull-right">Sep 18</span></p>-->
+<!--                                        <h6 class="f-w-600">Singing Competition</h6>-->
+<!--                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="upcoming-innner d-flex">-->
+<!--                                    <div class="ikxz_areasection left m-r-20">-->
+<!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
+<!--                                    </div>-->
+<!--                                    <div class="flex-grow-1">-->
+<!--                                        <p class="mb-0"><span class="pull-right">Dec 18</span></p>-->
+<!--                                        <h6 class="f-w-600">Diwali Celebration</h6>-->
+<!--                                        <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting-->
+<!--                                            industry. lorem ipsum-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="upcoming-innner d-flex">-->
+<!--                                    <div class="ikxz_areasection left m-r-20">-->
+<!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
+<!--                                    </div>-->
+<!--                                    <div class="flex-grow-1">-->
+<!--                                        <p class="mb-0"><span class="pull-right">Sep 18</span></p>-->
+<!--                                        <h6 class="f-w-600">Singing Competition</h6>-->
+<!--                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </div>
                         </div>
                     </div>

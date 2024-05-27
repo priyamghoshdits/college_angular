@@ -6,6 +6,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {SubjectService} from "../../../services/subject.service";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {cloneDeep} from 'lodash';
 
 @Component({
   selector: 'app-subject-group',
@@ -26,6 +27,7 @@ export class SubjectGroupComponent {
   courseList: any[];
   semesterList: any[] = [];
   subjectList: any[];
+  cloneSubjectList: any[];
   subjectGroupList: any[];
   tempSem = [];
   tempSub = [];
@@ -51,8 +53,12 @@ export class SubjectGroupComponent {
 
     this.subjectService.getSubjectListListener().subscribe((response) => {
       this.subjectList = response;
+      this.cloneSubjectList = cloneDeep(this.subjectList);
     });
     this.subjectList = this.subjectService.getSubjectList();
+    if(this.subjectList.length > 0){
+      this.cloneSubjectList = cloneDeep(this.subjectList);
+    }
 
     this.subjectService.subjectGroupListener().subscribe((response) => {
       this.subjectGroupList = response;
@@ -130,8 +136,6 @@ export class SubjectGroupComponent {
         subject: this.tempSub
       }
     ];
-    // console.log(arr[0]);
-    // return;
     this.subjectService.saveSubjectGroup(arr[0]).subscribe((response: any) => {
         if(response.success == 1){
           Swal.fire({
@@ -160,6 +164,12 @@ export class SubjectGroupComponent {
             timer: 1500
           });
         }
+
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
     });
   }
 
@@ -200,6 +210,12 @@ export class SubjectGroupComponent {
           value.checked = data.subject.findIndex(x => x.subject_id === value.id) != -1;
         });
         this.isUpdatable = true;
+
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: 'smooth'
+        });
         // this.editSubjectGroup(this.subjectGroupForm.value.course_id);
 
       }
@@ -276,17 +292,25 @@ export class SubjectGroupComponent {
   }
 
   cancelUpdate(){
-    this.subjectList.forEach(function (value){
-      value.checked = false;
-    });
-    this.semesterList.forEach(function (value){
-      value.checked = false;
-    });
+    // this.subjectList.forEach(function (value){
+    //   value.checked = false;
+    // });
+    // this.semesterList.forEach(function (value){
+    //   value.checked = false;
+    // });
+    this.subjectList = cloneDeep(this.cloneSubjectList);
+
     this.tempSem = [];
     this.tempSub = [];
     this.semesterList = [];
     this.subjectGroupForm.reset();
     this.isUpdatable = false;
+
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
 }

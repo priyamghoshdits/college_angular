@@ -23,6 +23,5 @@ export class StudyMaterialComponent {
             this.studyMaterialList = response;
         });
         this.studyMaterialList = this.downloadCenterService.getStudyMaterialList();
-
     }
 }
