@@ -13,6 +13,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label>Select User Type</label>
                                         <select style="width: 100%" formControlName="user_type_id" class="form-select" required>
+                                            <option value="null"> Select </option>
                                             <option *ngFor="let data of userTypeList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>
@@ -22,6 +23,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label>Select Month</label>
                                         <select style="width: 100%" formControlName="month" class="form-select" required>
+                                            <option value="null"> Select </option>
                                             <option value="01"> January </option>
                                             <option value="02"> February </option>
                                             <option value="03"> March </option>
@@ -40,6 +42,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label>Select Year</label>
                                         <select style="width: 100%" formControlName="year" class="form-select" required>
+                                            <option value="null"> Select </option>
                                             <option *ngFor="let data of year" [value]="data.year" >
                                                 {{data.year}}
                                             </option>

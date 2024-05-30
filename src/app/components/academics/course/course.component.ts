@@ -145,6 +145,11 @@ export class CourseComponent {
                 this.courseForm.reset();
                 this.semesterList= cloneDeep(this.cloneSemesterList);
                 this.tempSem = [];
+                window.scroll({
+                    top: 0,
+                    left: 0,
+                    behavior: 'smooth'
+                });
             }
         });
     }

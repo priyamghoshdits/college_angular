@@ -89,7 +89,8 @@
                                         <td>{{record.name}}</td>
                                         <td>{{record.course_name}}</td>
                                         <td>
-                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>
+<!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
+                                            {{record.semester_name}}
                                         </td>
 
                                         <td>
@@ -102,7 +103,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                <pagination-controls *ngIf="subjectGroupList.length > 4" (pageChange)="p = $event"></pagination-controls>
 
                             </div>
                         </div>

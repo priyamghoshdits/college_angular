@@ -8,31 +8,34 @@
                             <h5>Library</h5><span>Upload Digital Books</span>
                         </div>
                         <div class="card-body">
-                            <form class="theme-form" [formGroup]="libraryDigitalBookForm">
+                            <form [formGroup]="libraryDigitalBookForm" class="theme-form">
                                 <div class="row">
                                     <div class="col-md-4 mb-3">
-                                        <div class="form-group">
-                                            <label>Select Course</label>
-                                            <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
-                                                <option *ngFor="let data of courseList" [value]="data.id" >
-                                                    {{data.course_name}}
-                                                </option>
-                                            </select>
-                                            <div *ngIf="libraryDigitalBookForm.controls['course_id'].errors?.['required'] && libraryDigitalBookForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                        <label>Select Course</label>
+                                        <select (change)="getSemester()" class="form-select" formControlName="course_id"
+                                                required style="width: 100%">
+                                            <option value="null"> Select </option>
+                                            <option *ngFor="let data of courseList" [value]="data.id">
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="libraryDigitalBookForm.controls['course_id'].errors?.['required'] && libraryDigitalBookForm.controls['course_id'].touched "
+                                             class="text text-danger mt-1">Course required
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <div class="form-group">
-                                            <label>Select Semester</label>
-                                            <select style="width: 100%" formControlName="semester_id" class="form-select">
-                                                <option *ngFor="let data of semesterList" [value]="data.semester_id" >
-                                                    {{data.name}}
-                                                </option>
-                                            </select>
-                                        </div>
+                                        <label>Select Semester</label>
+                                        <select class="form-select" formControlName="semester_id" style="width: 100%">
+                                            <option value="null"> Select </option>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="searchDigitalBooks()">Submit</button>
+                                        <button (click)="searchDigitalBooks()" class="btn btn-primary me-1"
+                                                style="margin-top: 30px">Submit
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -43,7 +46,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 col-xl-12" *ngIf="tempLibraryDigitalBookList.length > 0">
+        <div *ngIf="tempLibraryDigitalBookList.length > 0" class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
@@ -66,7 +69,7 @@
                                     </thead>
                                     <tbody>
                                     <tr *ngFor="let record of tempLibraryDigitalBookList ;let indexOfElement=index">
-                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{indexOfElement + 1}}</td>
                                         <td>{{record.course_name}}</td>
                                         <td>{{record.semester_name}}</td>
                                         <td>{{record.book_name}}</td>

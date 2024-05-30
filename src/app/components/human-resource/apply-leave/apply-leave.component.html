@@ -13,6 +13,7 @@
                                     <div *ngIf="user.user_type_id == 1" class="col-md-6 mb-3">
                                         <label>Select Member</label>
                                         <select style="width: 100%" formControlName="user_id" class="form-select" required>
+                                            <option value="null"> Select </option>
                                             <option *ngFor="let data of memberList" [value]="data.id" >
                                                 {{data.first_name}} {{data.middlename}} {{data.last_name}}
                                             </option>
@@ -22,6 +23,7 @@
                                     <div class="col-md-6 mb-3">
                                         <label>Leave Type</label>
                                         <select style="width: 100%" formControlName="leave_type_id" class="form-select" (change)="getRemainingLeaves()" required>
+                                            <option value="null"> Select </option>
                                             <option *ngFor="let data of leaveTypeList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>

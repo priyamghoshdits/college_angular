@@ -50,6 +50,7 @@
                                         <div class="form-group">
                                             <label class="col-form-label pt-0">Select Date</label>
                                             <select style="width: 100%" formControlName="week_name" class="form-select" required>
+                                                <option value="null"> Select </option>
                                                 <option *ngFor="let data of weekDays" [value]="data.name" >
                                                     {{data.name}}
                                                 </option>
@@ -93,6 +94,7 @@
                                             <div class="form-group">
                                                 <label>Select Month</label>
                                                 <select style="width: 100%" formControlName="month_id" class="form-select" required>
+                                                    <option value="null"> Select </option>
                                                     <option value="1"> January </option>
                                                     <option value="2"> February </option>
                                                     <option value="3"> March </option>

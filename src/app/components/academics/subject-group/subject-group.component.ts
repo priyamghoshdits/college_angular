@@ -174,25 +174,53 @@ export class SubjectGroupComponent {
   }
 
   editSubjectGroup(data){
+    if(this.semesterList.findIndex(x => x.semester_id === data.semester_id) != -1){
+      this.subjectGroupForm.patchValue({semester_id: data.semester_id, old_semester_id: data.semester_id});
+
+      let tempSub =[];
+      data.subject.forEach(function (value){
+        let sub;
+        sub = [
+          {id: value.subject_id}
+        ];
+        // @ts-ignore
+        tempSub.push(sub[0]);
+      });
+      this.tempSub = tempSub;
+
+      this.subjectList.forEach(function (value){
+        value.checked = data.subject.findIndex(x => x.subject_id === value.id) != -1;
+      });
+      this.isUpdatable = true;
+
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+
+      return;
+    }
+
     this.subjectGroupForm.patchValue(data);
     this.subjectService.getSemesterByCourseId(this.subjectGroupForm.value.course_id).subscribe((response: any) => {
       if(response.success == 1){
         this.semesterList = response.data;
-        this.subjectGroupForm.patchValue({semester_id: data.semester[0].semester_id, old_semester_id: data.semester[0].semester_id});
+        this.subjectGroupForm.patchValue({semester_id: data.semester_id, old_semester_id: data.semester_id});
         // this.subjectGroupForm.patchValue({'course_id' :data.course_id, 'name': data.name, 'semester_id': data.semester_id});
         // this.semesterList.forEach(function (value){
         //   value.checked = data.semester.findIndex(x => x.semester_id === value.semester_id) != -1;
         // });
-        let tempSem = [];
-        data.semester.forEach(function (value){
-          let sem;
-          sem = [
-            {id: value.semester_id, old: value.semester_id}
-          ];
-          // @ts-ignore
-          tempSem.push(sem[0]);
-        });
-        this.tempSem = tempSem;
+        // let tempSem = [];
+        // data.semester.forEach(function (value){
+        //   let sem;
+        //   sem = [
+        //     {id: value.semester_id, old: value.semester_id}
+        //   ];
+        //   // @ts-ignore
+        //   tempSem.push(sem[0]);
+        // });
+        // this.tempSem = tempSem;
 
 
         let tempSub =[];
@@ -216,8 +244,6 @@ export class SubjectGroupComponent {
           left: 0,
           behavior: 'smooth'
         });
-        // this.editSubjectGroup(this.subjectGroupForm.value.course_id);
-
       }
     });
 
@@ -233,7 +259,7 @@ export class SubjectGroupComponent {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete It!'
     }).then((result) => {
-      this.subjectService.deleteSubjectGroup(data.course_id).subscribe((response) => {
+      this.subjectService.deleteSubjectGroup(data.course_id,data.semester_id).subscribe((response) => {
         // @ts-ignore
         if(response.success == 1){
           Swal.fire({

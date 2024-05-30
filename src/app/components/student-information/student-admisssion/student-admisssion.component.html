@@ -177,7 +177,7 @@
                                             <input type="email" class="form-control" formControlName="email"
                                                    placeholder="name@example.com">
                                             <div *ngIf="studentCreationForm.controls['email'].errors?.['required'] && studentCreationForm.controls['email'].touched " class="text text-danger mt-1">Email is required</div>
-                                            <div *ngIf="studentCreationForm.controls['email'].touched && studentCreationForm.controls['email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
+                                            <div *ngIf="studentCreationForm.controls['email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Course</label>
@@ -247,6 +247,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Select Payment Mode</label>
                                             <select style="width: 100%" formControlName="mode_of_payment" class="form-select">
+                                                <option value="null"> Select </option>
                                                 <option value="Cash"> Cash </option>
                                                 <option value="Cheque"> Cheque </option>
                                                 <option value="Transfer To Bank"> Transfer To Bank </option>
@@ -317,6 +318,7 @@
                                         <div class="col-md-4 mb-3">
                                             <label>Guardian Email</label>
                                             <input type="text" class="form-control" formControlName="guardian_email">
+                                            <div *ngIf="studentCreationForm.controls['guardian_email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
                                         </div>
                                     </div>
                                     <div  class="row">

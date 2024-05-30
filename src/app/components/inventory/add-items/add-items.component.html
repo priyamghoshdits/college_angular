@@ -21,6 +21,7 @@
                                     <div class="col-md-6 mb-3">
                                             <label>Select Type</label>
                                             <select style="width: 100%" formControlName="item_type_id" class="form-select">
+                                                <option value="null"> Select </option>
                                                 <option *ngFor="let data of itemCategoryList" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>

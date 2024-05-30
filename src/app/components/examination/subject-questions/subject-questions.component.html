@@ -28,6 +28,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Select Subject Details</label>
                                             <select style="width: 100%" formControlName="subject_details_id" class="form-select" required (change)="selectDetails()">
+                                                <option value="null"> Select </option>
                                                 <option *ngFor="let data of subjectDetailsList" [value]="data.id" >
                                                     {{data.name}}
                                                 </option>

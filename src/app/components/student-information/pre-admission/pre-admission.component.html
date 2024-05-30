@@ -225,6 +225,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Select Payment Mode</label>
                                             <select style="width: 100%" formControlName="mode_of_payment" class="form-select">
+                                                <option value="null"> Select </option>
                                                 <option value="Cash"> Cash </option>
                                                 <option value="Cheque"> Cheque </option>
                                                 <option value="Transfer To Bank"> Transfer To Bank </option>
@@ -258,6 +259,7 @@
                                         <div class="col-md-4 mb-3">
                                             <label>Father Phone no.</label>
                                             <input type="text" class="form-control" formControlName="father_phone">
+                                            <div *ngIf="studentCreationForm.controls['father_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone no.</div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Father Occupation</label>
@@ -273,6 +275,7 @@
                                         <div class="col-md-4 mb-3">
                                             <label>Mother Phone no.</label>
                                             <input type="text" class="form-control" formControlName="mother_phone">
+                                            <div *ngIf="studentCreationForm.controls['mother_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone no.</div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Mother Occupation</label>
@@ -288,10 +291,12 @@
                                         <div class="col-md-4 mb-3">
                                             <label>Guardian Phone no.</label>
                                             <input type="text" class="form-control" formControlName="guardian_phone">
+                                            <div *ngIf="studentCreationForm.controls['guardian_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone no.</div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Guardian Email</label>
                                             <input type="text" class="form-control" formControlName="guardian_email">
+                                            <div *ngIf="studentCreationForm.controls['guardian_email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
                                         </div>
                                     </div>
                                     <div  class="row">

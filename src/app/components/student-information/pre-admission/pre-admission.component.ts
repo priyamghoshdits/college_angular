@@ -95,14 +95,14 @@ export class PreAdmissionComponent {
             semester_id: new FormControl(null, [Validators.required]),
             agent_id: new FormControl(null, [Validators.required]),
             father_name: new FormControl(null),
-            father_phone: new FormControl(null),
+            father_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
             father_occupation: new FormControl(null),
             mother_name: new FormControl(null),
-            mother_phone: new FormControl(null),
+            mother_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
             mother_occupation: new FormControl(null),
             guardian_name: new FormControl(null),
-            guardian_phone: new FormControl(null),
-            guardian_email: new FormControl(null),
+            guardian_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
+            guardian_email: new FormControl(null,[Validators.email]),
             guardian_relation: new FormControl(null),
             guardian_occupation: new FormControl(null),
             guardian_address: new FormControl(null),
@@ -261,6 +261,12 @@ export class PreAdmissionComponent {
                     timer: 1000
                 });
             }
+
+            window.scroll({
+                top: 0,
+                left: 0,
+                behavior: 'smooth'
+            });
         })
     }
 
@@ -312,6 +318,11 @@ export class PreAdmissionComponent {
                     timer: 1000
                 });
                 this.cancelUpdate();
+                window.scroll({
+                    top: 0,
+                    left: 0,
+                    behavior: 'smooth'
+                });
             }
         })
     }

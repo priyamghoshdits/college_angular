@@ -13,6 +13,7 @@
                                     <div class="col-md-12 mb-3">
                                         <label>Select Route</label>
                                         <select style="width: 100%" formControlName="route_id" class="form-select" required>
+                                            <option value="null"> Select </option>
                                             <option *ngFor="let data of routeList" [value]="data.id" >
                                                 {{data.title}}
                                             </option>

@@ -21,7 +21,7 @@
                                 <div>
                                     <div *ngFor="let record of semesterList">
                                         <input [checked]="record.checked" id="checkbox-primary-1" (change)="importSemester(record, $event)" type="checkbox">
-                                        <label for="checkbox-primary-1">{{record.name}}</label>
+                                        <label for="checkbox-primary-1" style="margin-left: 10px">{{record.name}}</label>
                                     </div>
                                 </div>
 

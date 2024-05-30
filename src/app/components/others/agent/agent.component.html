@@ -34,6 +34,7 @@
                                     <div class="col-md-6 mb-3">
                                         <label>Category</label>
                                         <select style="width: 100%" formControlName="category_id" class="form-select" required>
+                                            <option value="null"> Select </option>
                                             <option *ngFor="let data of categoryList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>

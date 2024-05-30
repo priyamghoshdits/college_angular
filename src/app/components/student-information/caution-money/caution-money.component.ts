@@ -96,6 +96,15 @@ export class CautionMoneyComponent {
     this.cautionMoneyService.getStudentsForCautionMoney(this.cautionMoneyForm.value).subscribe((response: any) => {
       if(response.success == 1){
         this.studentList = response.data;
+        if(this.studentList.length == 0){
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'No data found',
+            showConfirmButton: false,
+            timer: 1000
+          });
+        }
       }
     })
   }

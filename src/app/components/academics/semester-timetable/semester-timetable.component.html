@@ -13,6 +13,7 @@
                             <div class="col-md-4 mb-3">
                                     <label>Select Course</label>
                                     <select style="width: 100%;" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                        <option value="null">Select</option>
                                         <option *ngFor="let data of courseList" [value]="data.id" >
                                             {{data.course_name}}
                                         </option>
@@ -22,6 +23,7 @@
                             <div class="col-md-4 mb-3">
                                     <label>Select Semester</label>
                                     <select style="width: 100%;" formControlName="semester_id" class="form-select" required>
+                                        <option value="null">Select</option>
                                         <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                             {{data.name}}
                                         </option>

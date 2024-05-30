@@ -54,6 +54,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label>Category</label>
                                         <select style="width: 100%" formControlName="category_id" class="form-select" required>
+                                            <option value="null"> Select </option>
                                             <option *ngFor="let data of categoryList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>
@@ -63,6 +64,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label>Select Course</label>
                                         <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                            <option value="null"> Select </option>
                                             <option *ngFor="let data of courseList" [value]="data.id" >
                                                 {{data.course_name}}
                                             </option>
@@ -72,6 +74,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label>Select Semester</label>
                                         <select style="width: 100%" formControlName="semester_id" class="form-select" required>
+                                            <option value="null"> Select </option>
                                             <option *ngFor="let data of semesterList" [value]="data.semester_id" >
                                                 {{data.name}}
                                             </option>
@@ -81,6 +84,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label>Select Session</label>
                                         <select style="width: 100%" formControlName="session_id" class="form-select" required>
+                                            <option value="null"> Select </option>
                                             <option *ngFor="let data of sessionList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>
@@ -92,6 +96,7 @@
                                     <div class="col-md-3 mb-3">
                                         <label>Gender</label>
                                         <select style="width: 100%" formControlName="gender" class="form-select" required>
+                                            <option value="null"> Select </option>
                                             <option value="Male"> Male </option>
                                             <option value="Female"> Female </option>
                                         </select>

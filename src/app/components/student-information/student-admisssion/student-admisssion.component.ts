@@ -104,7 +104,7 @@ export class StudentAdmisssionComponent {
             mother_occupation: new FormControl(null),
             guardian_name: new FormControl(null),
             guardian_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
-            guardian_email: new FormControl(null),
+            guardian_email: new FormControl(null,[Validators.email]),
             guardian_relation: new FormControl(null),
             guardian_occupation: new FormControl(null),
             guardian_address: new FormControl(null),

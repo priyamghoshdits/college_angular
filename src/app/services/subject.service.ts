@@ -276,8 +276,8 @@ export class SubjectService {
           }));
   }
 
-  deleteSubjectGroup(course_id){
-      return this.http.get(this.BASE_API_URL + '/deleteSubjectGroup/' + course_id)
+  deleteSubjectGroup(course_id,semester_id){
+      return this.http.get(this.BASE_API_URL + '/deleteSubjectGroup/' + course_id + '/' + semester_id)
           .pipe(catchError(this.errorService.serverError), tap(response => {
               // @ts-ignore
               if(response.success ==1){

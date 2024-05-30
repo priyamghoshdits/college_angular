@@ -59,6 +59,11 @@ export class SendStudentLoginCredentialComponent {
         this.session_id = JSON.parse(localStorage.getItem('session_id'));
         this.examinationReportForm.patchValue({session_id: this.session_id});
 
+        if(!this.examinationReportForm.valid){
+            this.examinationReportForm.markAllAsTouched();
+            return;
+        }
+
         if(!this.session_id){
             Swal.fire({
                 position: 'center',
@@ -73,6 +78,15 @@ export class SendStudentLoginCredentialComponent {
         this.studentService.getSessionWiseStudent(this.examinationReportForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 this.studentList = response.data;
+                if(this.studentList.length == 0){
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: 'No Data Found',
+                        showConfirmButton: false,
+                        timer: 1000
+                    });
+                }
             }
         })
     }
