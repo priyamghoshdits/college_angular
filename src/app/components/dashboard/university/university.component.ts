@@ -55,6 +55,7 @@ export class UniversityComponent implements OnInit {
   total_male_student = 0;
   total_female_student = 0;
   total_study_material = 0;
+  total_accountant = 0;
   total_assignment = 0;
   noticeList: any[] = [];
   session_id = null;
@@ -86,6 +87,7 @@ export class UniversityComponent implements OnInit {
       this.noticeList = response.data.notice;
       this.total_study_material = response.data.studyMaterial;
       this.total_assignment = response.data.total_assignment;
+      this.total_accountant = response.data.total_accountant;
       this.dailydoughnutData22 = [
         {
           value: this.total_male_student,
