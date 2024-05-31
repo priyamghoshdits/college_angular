@@ -147,14 +147,16 @@
                         <div class="card-body">
                             <div class="flot-chart-container">
                                 <div class="flot-chart-placeholder ngx-chart-direction" id="github-issues">
-                                    <ngx-charts-bar-vertical-2d (select)="onSelect($event)" [gradient]="barChartGradient"
+                                    <ngx-charts-bar-vertical-2d (select)="onSelect($event)"
+                                                                [gradient]="barChartGradient"
                                                                 [legend]="barChartShowLegend"
-                                                                [results]="multiData" [roundEdges]="false"
+                                                                [results]="studentChart" [roundEdges]="false"
                                                                 [scheme]="barChartColorScheme"
                                                                 [showXAxisLabel]="barChartShowXAxisLabel"
                                                                 [showYAxisLabel]="barChartShowYAxisLabel"
                                                                 [xAxisLabel]="barChartXAxisLabel"
-                                                                [xAxis]="barChartShowXAxis" [yAxisLabel]="barChartYAxisLabel"
+                                                                [xAxis]="barChartShowXAxis"
+                                                                [yAxisLabel]="barChartYAxisLabel"
                                                                 [yAxis]="barChartShowYAxis">
                                     </ngx-charts-bar-vertical-2d>
                                 </div>
@@ -275,7 +277,8 @@
                     <div class="col-md-12 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Event Title <span
                                 style="color: red">*</span></label>
-                        <input class="form-control" formControlName="event_title" id="exampleInputEmail1" placeholder="Enter Event Title"
+                        <input class="form-control" formControlName="event_title" id="exampleInputEmail1"
+                               placeholder="Enter Event Title"
                                type="text">
                         <div *ngIf="universityFormCalender.controls['event_title'].errors?.['required'] && universityFormCalender.controls['event_title'].touched "
                              class="text text-danger mt-1">Event Title required
@@ -285,7 +288,8 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
-                        <textarea class="form-control" formControlName="description" id="exampleInputEmail1" placeholder="Enter Description"
+                        <textarea class="form-control" formControlName="description" id="exampleInputEmail1"
+                                  placeholder="Enter Description"
                                   type="text"></textarea>
                         <div *ngIf="universityFormCalender.controls['description'].errors?.['required'] && universityFormCalender.controls['description'].touched "
                              class="text text-danger mt-1">Description required
@@ -295,7 +299,8 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Event From</label>
-                        <input class="form-control" formControlName="event_from" id="exampleInputEmail1" placeholder="Event From"
+                        <input class="form-control" formControlName="event_from" id="exampleInputEmail1"
+                               placeholder="Event From"
                                type="date">
                         <div *ngIf="universityFormCalender.controls['event_from'].errors?.['required'] && universityFormCalender.controls['event_from'].touched "
                              class="text text-danger mt-1">Event From required
@@ -303,7 +308,8 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Event To</label>
-                        <input class="form-control" formControlName="event_to" id="exampleInputEmail1" placeholder="Enter Event To"
+                        <input class="form-control" formControlName="event_to" id="exampleInputEmail1"
+                               placeholder="Enter Event To"
                                type="date">
                         <div *ngIf="universityFormCalender.controls['event_to'].errors?.['required'] && universityFormCalender.controls['event_to'].touched "
                              class="text text-danger mt-1">Event To required
@@ -360,46 +366,48 @@
                                         <app-feather-icons [icon]="'book'"></app-feather-icons>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <p class="mb-0"><span class="pull-right">{{record.published_on | date:'fullDate' }}</span></p>
+                                        <p class="mb-0"><span
+                                                class="pull-right">{{record.published_on | date:'fullDate' }}</span></p>
                                         <h6 class="f-w-600">{{record.subject}}</h6>
-                                        <p class="mb-0" [innerHTML]="record.body">A math quiz competition will be held on 15.05.2024
+                                        <p [innerHTML]="record.body" class="mb-0">A math quiz competition will be held
+                                            on 15.05.2024
                                         </p>
                                     </div>
                                 </div>
-<!--                                <div class="upcoming-innner d-flex">-->
-<!--                                    <div class="ikxz_areasection left m-r-20">-->
-<!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
-<!--                                    </div>-->
-<!--                                    <div class="flex-grow-1">-->
-<!--                                        <p class="mb-0"><span class="pull-right">Sep 18</span></p>-->
-<!--                                        <h6 class="f-w-600">Singing Competition</h6>-->
-<!--                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024-->
-<!--                                        </p>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="upcoming-innner d-flex">-->
-<!--                                    <div class="ikxz_areasection left m-r-20">-->
-<!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
-<!--                                    </div>-->
-<!--                                    <div class="flex-grow-1">-->
-<!--                                        <p class="mb-0"><span class="pull-right">Dec 18</span></p>-->
-<!--                                        <h6 class="f-w-600">Diwali Celebration</h6>-->
-<!--                                        <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting-->
-<!--                                            industry. lorem ipsum-->
-<!--                                        </p>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                                <div class="upcoming-innner d-flex">-->
-<!--                                    <div class="ikxz_areasection left m-r-20">-->
-<!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
-<!--                                    </div>-->
-<!--                                    <div class="flex-grow-1">-->
-<!--                                        <p class="mb-0"><span class="pull-right">Sep 18</span></p>-->
-<!--                                        <h6 class="f-w-600">Singing Competition</h6>-->
-<!--                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024-->
-<!--                                        </p>-->
-<!--                                    </div>-->
-<!--                                </div>-->
+                                <!--                                <div class="upcoming-innner d-flex">-->
+                                <!--                                    <div class="ikxz_areasection left m-r-20">-->
+                                <!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
+                                <!--                                    </div>-->
+                                <!--                                    <div class="flex-grow-1">-->
+                                <!--                                        <p class="mb-0"><span class="pull-right">Sep 18</span></p>-->
+                                <!--                                        <h6 class="f-w-600">Singing Competition</h6>-->
+                                <!--                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024-->
+                                <!--                                        </p>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="upcoming-innner d-flex">-->
+                                <!--                                    <div class="ikxz_areasection left m-r-20">-->
+                                <!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
+                                <!--                                    </div>-->
+                                <!--                                    <div class="flex-grow-1">-->
+                                <!--                                        <p class="mb-0"><span class="pull-right">Dec 18</span></p>-->
+                                <!--                                        <h6 class="f-w-600">Diwali Celebration</h6>-->
+                                <!--                                        <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting-->
+                                <!--                                            industry. lorem ipsum-->
+                                <!--                                        </p>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
+                                <!--                                <div class="upcoming-innner d-flex">-->
+                                <!--                                    <div class="ikxz_areasection left m-r-20">-->
+                                <!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
+                                <!--                                    </div>-->
+                                <!--                                    <div class="flex-grow-1">-->
+                                <!--                                        <p class="mb-0"><span class="pull-right">Sep 18</span></p>-->
+                                <!--                                        <h6 class="f-w-600">Singing Competition</h6>-->
+                                <!--                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024-->
+                                <!--                                        </p>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -415,7 +423,8 @@
                                 <ngx-charts-pie-chart [arcWidth]=0.30
                                                       [doughnut]="true"
                                                       [explodeSlices]="true" [gradient]="dailydoughnutChartGradient"
-                                                      [labels]="dailydoughnutChartShowLabels" [results]="dailydoughnutData22"
+                                                      [labels]="dailydoughnutChartShowLabels"
+                                                      [results]="dailydoughnutData22"
                                                       [scheme]="dailydoughnutChartColorScheme">
                                 </ngx-charts-pie-chart>
                             </div>

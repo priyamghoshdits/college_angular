@@ -59,6 +59,7 @@ export class UniversityComponent implements OnInit {
   total_assignment = 0;
   noticeList: any[] = [];
   session_id = null;
+  studentChart: any[] = [];
 
   constructor(private modalService: NgbModal,public datepipe: DatePipe, public dashboardService: DashboardService) {
     Object.assign(this, { multiData, barChartSingle, pieChart, single });
@@ -99,6 +100,9 @@ export class UniversityComponent implements OnInit {
           name: "Female"
         }
       ];
+      this.studentChart = response.data.student_chart;
+      console.log(this.studentChart);
+      console.log(this.multiData);
     })
   }
 
