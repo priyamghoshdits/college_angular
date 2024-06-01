@@ -101,8 +101,6 @@ export class UniversityComponent implements OnInit {
         }
       ];
       this.studentChart = response.data.student_chart;
-      console.log(this.studentChart);
-      console.log(this.multiData);
     })
   }
 
