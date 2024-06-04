@@ -53,6 +53,10 @@ export class CompanyComponent {
     }
 
     saveCompanyDetails(){
+        if(!this.companyDetailsForm.valid){
+            this.companyDetailsForm.markAllAsTouched();
+            return;
+        }
         this.jobService.saveCompanyDetails(this.companyDetailsForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 Swal.fire({
@@ -73,6 +77,10 @@ export class CompanyComponent {
     }
 
     updateCompanyDetails(){
+        if(!this.companyDetailsForm.valid){
+            this.companyDetailsForm.markAllAsTouched();
+            return;
+        }
         this.jobService.updateCompanyDetails(this.companyDetailsForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 Swal.fire({

@@ -1,1 +1,155 @@
-<p>placement works!</p>
+<div class="container-fluid">
+    <div *ngIf="permission.length > 0" class="row">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Internship Details</h5><span>Add Internship Details</span>
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="placementDetailsForm" class="theme-form">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Course</label>
+                                        <select (click)="getSemester()" class="form-select" formControlName="course_id"
+                                                required style="width: 100%">
+                                            <option value="null"> Select</option>
+                                            <option *ngFor="let data of courseList" [value]="data.id">
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="placementDetailsForm.controls['course_id'].errors?.['required'] && placementDetailsForm.controls['course_id'].touched "
+                                             class="text text-danger mt-1">Course required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Semester</label>
+                                        <select (click)="getStudentList()" class="form-select"
+                                                formControlName="semester_id"
+                                                required style="width: 100%">
+                                            <option value="null"> Select</option>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="placementDetailsForm.controls['semester_id'].errors?.['required'] && placementDetailsForm.controls['semester_id'].touched "
+                                             class="text text-danger mt-1">Semester required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Company</label>
+                                        <select class="form-select" formControlName="company_id" required
+                                                style="width: 100%">
+                                            <option value="null"> Select</option>
+                                            <option *ngFor="let data of companyDetailsList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="placementDetailsForm.controls['company_id'].errors?.['required'] && placementDetailsForm.controls['company_id'].touched "
+                                             class="text text-danger mt-1">Company required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label>Select Student</label>
+                                        <select class="form-select" formControlName="user_id" required
+                                                style="width: 100%">
+                                            <option value="null"> Select</option>
+                                            <option *ngFor="let data of filteredStudent" [value]="data.id">
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="placementDetailsForm.controls['user_id'].errors?.['required'] && placementDetailsForm.controls['user_id'].touched "
+                                             class="text text-danger mt-1">Student required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0">Date</label>
+                                        <input class="form-control" formControlName="placement_date" placeholder="Date"
+                                               type="date">
+                                        <div *ngIf="placementDetailsForm.controls['placement_date'].errors?.['required'] && placementDetailsForm.controls['placement_date'].touched "
+                                             class="text text-danger mt-1">From Date required
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0">Description</label>
+                                        <input class="form-control" formControlName="description"
+                                               placeholder="Description"
+                                               type="text">
+                                        <div *ngIf="placementDetailsForm.controls['description'].errors?.['required'] && placementDetailsForm.controls['description'].touched "
+                                             class="text text-danger mt-1">From Date required
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button (click)="savePlacementDetails()" *ngIf="permission[0].permission == 1"
+                                    [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
+                            </button>
+                            <button (click)="updatePlacementDetails()" *ngIf="permission[1].permission == 1"
+                                    [hidden]="isUpdatable == false" class="btn btn-primary me-1">Update
+                            </button>
+                            <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
+                                    class="btn btn-primary me-1">Cancel
+                            </button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        <div class="col-sm-12 col-xl-7">-->
+        <!--            <div class="row" *ngIf="permission[3].permission == 1">-->
+        <!--                <div class="col-sm-12">-->
+        <!--                    <div class="col-sm-12">-->
+        <!--                        <div class="card">-->
+        <!--                            <div class="card-header">-->
+        <!--                                <h5>Internship</h5>-->
+        <!--                                <span>Internship Details</span>-->
+        <!--                            </div>-->
+        <!--                            <div class="table-responsive">-->
+        <!--                                <table class="table" style="text-align: center">-->
+        <!--                                    <thead>-->
+        <!--                                    <tr>-->
+        <!--                                        <th colspan="2">#</th>-->
+        <!--                                        <th colspan="2">Provider Name</th>-->
+        <!--                                        <th colspan="2">Student Name</th>-->
+        <!--                                        <th colspan="2">From Date</th>-->
+        <!--                                        <th colspan="2">To Date</th>-->
+        <!--                                        <th colspan="2" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>-->
+        <!--                                    </tr>-->
+        <!--                                    </thead>-->
+        <!--                                    <tbody>-->
+        <!--                                    <tr *ngFor="let record of internshipDetailsList | paginate: { itemsPerPage: 10, currentPage: p }  ;let indexOfElement=index">-->
+        <!--                                        <td colspan="2">{{indexOfElement+1}}</td>-->
+        <!--                                        <td colspan="2">{{record.internship_provider_name}}</td>-->
+        <!--                                        <td colspan="2">{{record.user_name}}</td>-->
+        <!--                                        <td colspan="2">{{record.from_date}}</td>-->
+        <!--                                        <td colspan="2">{{record.to_date}}</td>-->
+        <!--                                        <td colspan="2">-->
+        <!--                                            <a *ngIf="permission[1].permission == 1" (click)="editInternshipDetails(record)"><mat-icon>edit</mat-icon></a>-->
+        <!--                                            <a *ngIf="permission[2].permission == 1" (click)="deleteInternshipDetails(record)"><mat-icon>delete</mat-icon></a>-->
+        <!--                                        </td>-->
+        <!--                                    </tr>-->
+        <!--                                    </tbody>-->
+        <!--                                </table>-->
+        <!--                                <pagination-controls [hidden]="internshipDetailsList.length<9" (pageChange)="p = $event"></pagination-controls>-->
+
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->

@@ -79,8 +79,7 @@ export class InternshipComponent {
   }
 
   getSemester(){
-    this.subjectService.getSemesterByCourseId(this.internshipDetailsForm.value.course_id).subscribe((response) => {
-      // @ts-ignore
+    this.subjectService.getSemesterByCourseId(this.internshipDetailsForm.value.course_id).subscribe((response: any) => {
       this.semesterList = response.data;
     })
   };

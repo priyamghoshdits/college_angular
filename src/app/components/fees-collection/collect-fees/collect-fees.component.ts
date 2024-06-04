@@ -52,7 +52,7 @@ export class CollectFeesComponent {
   semesterList: any[];
   studentList: any[];
   filteredStudentList: any[];
-  filteredStudentListForSearch: any[];
+  filteredStudentListForSearch: any[] = [];
   p: number;
   closeResult: string;
   feesDetailsData: any[] = [];
@@ -141,13 +141,11 @@ export class CollectFeesComponent {
 
   getSemester(data){
     if(data == 1){
-      this.subjectService.getSemesterByCourseId(this.collectFeesForm.value.course_id).subscribe((response) => {
-        // @ts-ignore
+      this.subjectService.getSemesterByCourseId(this.collectFeesForm.value.course_id).subscribe((response: any) => {
         this.semesterList = response.data;
       })
     }else{
-      this.subjectService.getSemesterByCourseId(this.searchTransactionForm.value.course_id).subscribe((response) => {
-        // @ts-ignore
+      this.subjectService.getSemesterByCourseId(this.searchTransactionForm.value.course_id).subscribe((response: any) => {
         this.semesterList = response.data;
       })
     }
@@ -183,9 +181,8 @@ export class CollectFeesComponent {
   }
 
   getStudents(){
-    console.log(this.filteredStudentListForSearch);
     if(this.searchTransactionForm.value.course_id){
-      this.filteredStudentListForSearch = this.filteredStudentListForSearch.filter(x => x.course_id == this.searchTransactionForm.value.course_id);
+      this.filteredStudentListForSearch = this.studentList.filter(x => x.course_id == this.searchTransactionForm.value.course_id);
     }
     if(this.searchTransactionForm.value.semester_id != null){
       this.filteredStudentListForSearch = this.filteredStudentListForSearch.filter(x => x.current_semester_id == this.searchTransactionForm.value.semester_id);
