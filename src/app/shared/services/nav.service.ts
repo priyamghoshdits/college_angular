@@ -101,7 +101,7 @@ export class NavService {
 		{
 			title: 'Job', hidden:false , icon: 'briefcase', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/job/add-company', title: 'Add Company Details', type: 'link' },
-				// { path: '/internship/internship', title: 'Internship Details', type: 'link' },
+				{ path: '/job/placement', title: 'Placement', type: 'link' },
 			]
 		},
 		{
