@@ -93,6 +93,13 @@ export const content: Routes = [
     }
   },
   {
+    path: 'job',
+    loadChildren: () => import('../../components/job/job-routing.module').then(m => m.JobRoutingModule),
+    data: {
+      breadcrumb: "Job"
+    }
+  },
+  {
     path: 'student-information',
     loadChildren: () => import('../../components/student-information/student-information.module').then(m => m.StudentInformationModule),
     data: {

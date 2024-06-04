@@ -99,6 +99,12 @@ export class NavService {
 			]
 		},
 		{
+			title: 'Job', hidden:false , icon: 'briefcase', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/job/add-company', title: 'Add Company Details', type: 'link' },
+				// { path: '/internship/internship', title: 'Internship Details', type: 'link' },
+			]
+		},
+		{
 			title: 'Homework', hidden:false , icon: 'file', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/homework/add-homework', title: 'Add Homework', type: 'link' },
 			]

@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-5">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Company Details</h5><span>Add Company Details</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="companyDetailsForm">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Company Name</label>
+                                        <input class="form-control" formControlName="name" id="exampleInputEmail1" type="text"
+                                               placeholder="Company Name">
+                                        <div *ngIf="companyDetailsForm.controls['name'].errors?.['required'] && companyDetailsForm.controls['name'].touched " class="text text-danger mt-1">Name required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Phone</label>
+                                        <input class="form-control" formControlName="phone" id="exampleInputEmail1" type="tel" [maxlength]="10"
+                                               placeholder="Phone">
+                                        <div *ngIf="companyDetailsForm.controls['phone'].errors?.['required'] && companyDetailsForm.controls['phone'].touched " class="text text-danger mt-1">Name required</div>
+                                        <div *ngIf="companyDetailsForm.controls['phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Contact person name</label>
+                                        <input class="form-control" formControlName="contact_person_name" id="exampleInputEmail1" type="text"
+                                               placeholder="Contact person name">
+                                        <div *ngIf="companyDetailsForm.controls['contact_person_name'].errors?.['required'] && companyDetailsForm.controls['contact_person_name'].touched " class="text text-danger mt-1">Name required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Address</label>
+                                        <input class="form-control" formControlName="address" id="exampleInputEmail1" type="text"
+                                               placeholder="Address">
+                                        <div *ngIf="companyDetailsForm.controls['address'].errors?.['required'] && companyDetailsForm.controls['address'].touched " class="text text-danger mt-1">Name required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+                                        <input class="form-control" formControlName="description" id="exampleInputEmail1" type="text"
+                                               placeholder="Description">
+                                        <div *ngIf="companyDetailsForm.controls['description'].errors?.['required'] && companyDetailsForm.controls['description'].touched " class="text text-danger mt-1">Name required</div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCompanyDetails()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCompanyDetails()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-7">
+            <div class="row" *ngIf="permission[3].permission == 1">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Company Details</h5>
+                                <span>Company Details List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">#</th>
+                                        <th colspan="2">Company Name</th>
+                                        <th colspan="2">Phone</th>
+                                        <th colspan="2" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of companyDetailsList| paginate: { itemsPerPage: 10, currentPage: p }  ;let indexOfElement=index">
+                                        <td colspan="2">{{indexOfElement+1}}</td>
+                                        <td colspan="2">{{record.name}}</td>
+                                        <td colspan="2">{{record.phone}}</td>
+                                        <td colspan="2">
+                                            <a *ngIf="permission[1].permission == 1" (click)="editCompanyDetails(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteCompanyDetails(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls [hidden]="companyDetailsList.length<9" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
