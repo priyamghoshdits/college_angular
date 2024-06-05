@@ -11,23 +11,38 @@ import {catchError, tap} from "rxjs/operators";
 export class JobService {
   private BASE_API_URL = environment.BASE_API_URL;
   companyDetailsList = [];
+  placementDetailsList = [];
 
   companyDetailsListSubject = new Subject<any[]>();
+  placementDetailsListSubject = new Subject<any[]>();
 
 
   getCompanyDetailsListListener(){
     return this.companyDetailsListSubject.asObservable();
   }
 
+    getPlacementDetailsListSubjectListener(){
+        return this.placementDetailsListSubject.asObservable();
+    }
+
   constructor(private  http: HttpClient, private errorService: ErrorService) {
     this.http.get(this.BASE_API_URL + '/getCompanyDetails').subscribe((response: any) =>{
       this.companyDetailsList = response.data;
       this.companyDetailsListSubject.next([...this.companyDetailsList]);
     });
+
+      this.http.get(this.BASE_API_URL + '/getPlacementDetails').subscribe((response: any) =>{
+          this.placementDetailsList = response.data;
+          this.placementDetailsListSubject.next([...this.placementDetailsList]);
+      });
   }
 
   getCompanyDetails(){
     return [...this.companyDetailsList];
+  }
+
+  getPlacementDetails(){
+      return [...this.placementDetailsList];
   }
 
   saveCompanyDetails(data){
@@ -41,6 +56,18 @@ export class JobService {
           }
         }));
   }
+
+    savePlacementDetails(data){
+        return this.http.post(this.BASE_API_URL + '/savePlacementDetails', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    this.placementDetailsList.push(response.data);
+                    this.placementDetailsListSubject.next([...this.placementDetailsList]);
+                }
+            }));
+    }
 
   updateCompanyDetails(data){
     return this.http.post(this.BASE_API_URL + '/updateCompanyDetails', data)
@@ -56,6 +83,20 @@ export class JobService {
         }));
   }
 
+    updatePlacementDetails(data){
+        return this.http.post(this.BASE_API_URL + '/updatePlacementDetails', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    const index = this.placementDetailsList.findIndex(x => x.id === response.data.id);
+                    // @ts-ignore
+                    this.placementDetailsList[index] = response.data;
+                    this.placementDetailsListSubject.next([...this.placementDetailsList]);
+                }
+            }));
+    }
+
   deleteCompanyDetails(id){
     return this.http.get(this.BASE_API_URL + '/deleteCompanyDetails/' + id)
         .pipe(catchError(this.errorService.serverError), tap(response => {
@@ -68,5 +109,18 @@ export class JobService {
           }
         }));
   }
+
+    deletePlacementDetails(id){
+        return this.http.get(this.BASE_API_URL + '/deletePlacementDetails/' + id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    const index = this.placementDetailsList.findIndex(x => x.id === response.data.id);
+                    this.placementDetailsList.splice(index,1);
+                    this.placementDetailsListSubject.next([...this.placementDetailsList]);
+                }
+            }));
+    }
 
 }

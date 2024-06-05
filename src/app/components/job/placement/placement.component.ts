@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
@@ -10,8 +10,8 @@ import {JobService} from "../../../services/job.service";
 import Swal from "sweetalert2";
 
 @Component({
-  selector: 'app-placement',
-  standalone: true,
+    selector: 'app-placement',
+    standalone: true,
     imports: [
         FormsModule,
         MatIconModule,
@@ -20,12 +20,13 @@ import Swal from "sweetalert2";
         NgxPaginationModule,
         ReactiveFormsModule
     ],
-  templateUrl: './placement.component.html',
-  styleUrl: './placement.component.scss'
+    templateUrl: './placement.component.html',
+    styleUrl: './placement.component.scss'
 })
 export class PlacementComponent {
     placementDetailsForm: FormGroup;
     companyDetailsList: any[];
+    placementDetailsList: any[];
     studentList: any[];
     courseList: any[];
     semesterList: any[];
@@ -34,6 +35,7 @@ export class PlacementComponent {
     isUpdatable = false;
     p: number;
     filteredStudent: any[];
+
     constructor(private studentService: StudentService, private jobService: JobService,
                 private subjectService: SubjectService, private roleAndPermissionService: RolesAndPermissionService) {
         this.placementDetailsForm = new FormGroup({
@@ -41,8 +43,8 @@ export class PlacementComponent {
             company_id: new FormControl(null, [Validators.required]),
             user_id: new FormControl(null, [Validators.required]),
             placement_date: new FormControl(null, [Validators.required]),
-            course_id: new FormControl(null,[Validators.required]),
-            session_id: new FormControl(null,[Validators.required]),
+            course_id: new FormControl(null, [Validators.required]),
+            session_id: new FormControl(null, [Validators.required]),
             semester_id: new FormControl(null, [Validators.required]),
             description: new FormControl(null),
         });
@@ -62,21 +64,26 @@ export class PlacementComponent {
         });
         this.studentList = this.studentService.getStudentLists();
 
+        this.jobService.getPlacementDetailsListSubjectListener().subscribe((response) => {
+            this.placementDetailsList = response;
+        });
+        this.placementDetailsList = this.jobService.getPlacementDetails();
+
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;
             this.permission = this.rolesAndPermission.find(x => x.name == 'INTERNSHIP DETAILS').permission;
         });
         this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
-        if(this.rolesAndPermission.length > 0){
+        if (this.rolesAndPermission.length > 0) {
             this.permission = this.rolesAndPermission.find(x => x.name == 'INTERNSHIP DETAILS').permission;
         }
     }
 
-    getSemester(){
+    getSemester() {
         // @ts-ignore
         const session_id = JSON.parse(localStorage.getItem('session_id'));
 
-        if(!session_id){
+        if (!session_id) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -92,21 +99,21 @@ export class PlacementComponent {
         })
     };
 
-    getStudentList(){
+    getStudentList() {
         // @ts-ignore
         const session_id = JSON.parse(localStorage.getItem('session_id'));
 
         let x = this.studentList.filter(x => x.course_id == this.placementDetailsForm.value.course_id);
         this.filteredStudent = x.filter(x => x.current_semester_id == this.placementDetailsForm.value.semester_id);
-        if(session_id){
+        if (session_id) {
             this.filteredStudent = this.filteredStudent.filter(x => x.session_id == session_id);
         }
     }
 
-    savePlacementDetails(){
+    savePlacementDetails() {
         // @ts-ignore
         const session_id = JSON.parse(localStorage.getItem('session_id'));
-        if(!session_id){
+        if (!session_id) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -118,19 +125,30 @@ export class PlacementComponent {
         }
         this.placementDetailsForm.patchValue({session_id: session_id});
 
-        if(!this.placementDetailsForm.valid){
+        if (!this.placementDetailsForm.valid) {
             this.placementDetailsForm.markAllAsTouched();
             return;
         }
 
-
+        this.jobService.savePlacementDetails(this.placementDetailsForm.value).subscribe((response: any) => {
+            if (response.success == 1) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Placement Details Saved Successfully',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                this.placementDetailsForm.reset();
+            }
+        })
 
     }
 
-    updatePlacementDetails(){
+    updatePlacementDetails() {
         // @ts-ignore
         const session_id = JSON.parse(localStorage.getItem('session_id'));
-        if(!session_id){
+        if (!session_id) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -142,18 +160,62 @@ export class PlacementComponent {
         }
         this.placementDetailsForm.patchValue({session_id: session_id});
 
-        if(!this.placementDetailsForm.valid){
+        if (!this.placementDetailsForm.valid) {
             this.placementDetailsForm.markAllAsTouched();
             return;
         }
 
+        this.jobService.updatePlacementDetails(this.placementDetailsForm.value).subscribe((response: any) => {
+            if (response.success == 1) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Placement Details Updated Successfully',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                this.cancelUpdate();
+            }
+        })
+
     }
 
 
-    cancelUpdate(){
+    cancelUpdate() {
         this.placementDetailsForm.reset();
         this.isUpdatable = false;
     }
 
+    editPlacementDetails(data) {
+        this.placementDetailsForm.patchValue(data);
+        this.isUpdatable = true;
+    }
+
+    deletePlacementDetails(data) {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+           if(result.isConfirmed){
+               this.jobService.deletePlacementDetails(data.id).subscribe((response: any) => {
+                   if(response.success == 1){
+                       Swal.fire({
+                           position: 'center',
+                           icon: 'success',
+                           title: 'Placement Details Updated Successfully',
+                           showConfirmButton: false,
+                           timer: 1000
+                       });
+                   }
+               });
+           }
+        });
+
+    }
 
 }

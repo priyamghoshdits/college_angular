@@ -5,7 +5,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Internship Details</h5><span>Add Internship Details</span>
+                            <h5>Placement Details</h5><span>Add Placement Details</span>
                         </div>
                         <div class="card-body">
                             <form [formGroup]="placementDetailsForm" class="theme-form">
@@ -107,49 +107,57 @@
                 </div>
             </div>
         </div>
-        <!--        <div class="col-sm-12 col-xl-7">-->
-        <!--            <div class="row" *ngIf="permission[3].permission == 1">-->
-        <!--                <div class="col-sm-12">-->
-        <!--                    <div class="col-sm-12">-->
-        <!--                        <div class="card">-->
-        <!--                            <div class="card-header">-->
-        <!--                                <h5>Internship</h5>-->
-        <!--                                <span>Internship Details</span>-->
-        <!--                            </div>-->
-        <!--                            <div class="table-responsive">-->
-        <!--                                <table class="table" style="text-align: center">-->
-        <!--                                    <thead>-->
-        <!--                                    <tr>-->
-        <!--                                        <th colspan="2">#</th>-->
-        <!--                                        <th colspan="2">Provider Name</th>-->
-        <!--                                        <th colspan="2">Student Name</th>-->
-        <!--                                        <th colspan="2">From Date</th>-->
-        <!--                                        <th colspan="2">To Date</th>-->
-        <!--                                        <th colspan="2" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>-->
-        <!--                                    </tr>-->
-        <!--                                    </thead>-->
-        <!--                                    <tbody>-->
-        <!--                                    <tr *ngFor="let record of internshipDetailsList | paginate: { itemsPerPage: 10, currentPage: p }  ;let indexOfElement=index">-->
-        <!--                                        <td colspan="2">{{indexOfElement+1}}</td>-->
-        <!--                                        <td colspan="2">{{record.internship_provider_name}}</td>-->
-        <!--                                        <td colspan="2">{{record.user_name}}</td>-->
-        <!--                                        <td colspan="2">{{record.from_date}}</td>-->
-        <!--                                        <td colspan="2">{{record.to_date}}</td>-->
-        <!--                                        <td colspan="2">-->
-        <!--                                            <a *ngIf="permission[1].permission == 1" (click)="editInternshipDetails(record)"><mat-icon>edit</mat-icon></a>-->
-        <!--                                            <a *ngIf="permission[2].permission == 1" (click)="deleteInternshipDetails(record)"><mat-icon>delete</mat-icon></a>-->
-        <!--                                        </td>-->
-        <!--                                    </tr>-->
-        <!--                                    </tbody>-->
-        <!--                                </table>-->
-        <!--                                <pagination-controls [hidden]="internshipDetailsList.length<9" (pageChange)="p = $event"></pagination-controls>-->
+        <div class="col-sm-12 col-xl-7">
+            <div *ngIf="permission[3].permission == 1" class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Placement</h5>
+                                <span>Placement Details</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">#</th>
+                                        <th colspan="2">Company Name</th>
+                                        <th colspan="2">Student Name</th>
+                                        <th colspan="2">Placement Date</th>
+                                        <th *ngIf="permission[1].permission == 1 && permission[2].permission == 1"
+                                            colspan="2">
+                                            Action
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of placementDetailsList | paginate: { itemsPerPage: 10, currentPage: p }  ;let indexOfElement=index">
+                                        <td colspan="2">{{indexOfElement + 1}}</td>
+                                        <td colspan="2">{{record.company_name}}</td>
+                                        <td colspan="2">{{record.user_name}}</td>
+                                        <td colspan="2">{{record.placement_date}}</td>
+                                        <td colspan="2">
+                                            <a (click)="editPlacementDetails(record)"
+                                               *ngIf="permission[1].permission == 1">
+                                                <mat-icon>edit</mat-icon>
+                                            </a>
+                                            <a (click)="deletePlacementDetails(record)"
+                                               *ngIf="permission[2].permission == 1">
+                                                <mat-icon>delete</mat-icon>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"
+                                                     [hidden]="placementDetailsList.length<9"></pagination-controls>
 
-        <!--                            </div>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- Container-fluid Ends-->
