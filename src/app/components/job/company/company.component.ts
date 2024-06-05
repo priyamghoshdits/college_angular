@@ -39,11 +39,11 @@ export class CompanyComponent {
 
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;
-            this.permission = this.rolesAndPermission.find(x => x.name == 'COURSE').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'ADD COMPANY DETAILS').permission;
         });
         this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
         if(this.rolesAndPermission.length > 0){
-            this.permission = this.rolesAndPermission.find(x => x.name == 'COURSE').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'ADD COMPANY DETAILS').permission;
         }
 
         this.jobService.getCompanyDetailsListListener().subscribe((response) => {
