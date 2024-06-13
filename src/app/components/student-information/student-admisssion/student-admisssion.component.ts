@@ -156,8 +156,7 @@ export class StudentAdmisssionComponent {
     }
 
     getSemester() {
-        this.subjectService.getSemesterByCourseId(this.studentCreationForm.value.course_id).subscribe((response) => {
-            // @ts-ignore
+        this.subjectService.getSemesterByCourseId(this.studentCreationForm.value.course_id).subscribe((response: any) => {
             this.semesterList = response.data;
         })
     }

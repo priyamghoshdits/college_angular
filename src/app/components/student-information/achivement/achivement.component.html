@@ -1,0 +1,144 @@
+<div class="container-fluid">
+    <div *ngIf="permission.length > 0" class="row">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Achievement/Awards</h5><span>Add Achievement/Awards</span>
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="achievementForm" class="theme-form">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Select Course</label>
+                                        <select (change)="getSemester()" class="form-select" formControlName="course_id"
+                                                required style="width: 100%">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of courseList" [value]="data.id">
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="achievementForm.controls['course_id'].errors?.['required'] && achievementForm.controls['course_id'].touched "
+                                             class="text text-danger mt-1">Course required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Select Semester</label>
+                                        <select (change)="getStudent()" class="form-select"
+                                                formControlName="semester_id"
+                                                style="width: 100%">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="achievementForm.controls['semester_id'].errors?.['required'] && achievementForm.controls['semester_id'].touched "
+                                             class="text text-danger mt-1">Semester required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Select Student</label>
+                                        <select (change)="getSemester()" class="form-select"
+                                                formControlName="student_id"
+                                                required style="width: 100%">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of filteredStudent" [value]="data.id">
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="achievementForm.controls['student_id'].errors?.['required'] && achievementForm.controls['student_id'].touched "
+                                             class="text text-danger mt-1">Student required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Date</label>
+                                        <input class="form-control" formControlName="award_date" type="date">
+                                        <div *ngIf="achievementForm.controls['award_date'].errors?.['required'] && achievementForm.controls['award_date'].touched "
+                                             class="text text-danger mt-1">Date required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Award Name</label>
+                                        <input class="form-control" formControlName="award_name"
+                                               placeholder="Enter award name"
+                                               type="text">
+                                        <div *ngIf="achievementForm.controls['award_name'].errors?.['required'] && achievementForm.controls['award_name'].touched "
+                                             class="text text-danger mt-1">Award required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Upload File</label>
+                                        <input class="form-control" formControlName="file_name" type="file" (change)="selectedFile()">
+                                        <div *ngIf="achievementForm.controls['file_name'].errors?.['required'] && achievementForm.controls['file_name'].touched"
+                                             class="text text-danger mt-1">File required
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button (click)="saveAchievement()" *ngIf="permission[0].permission === 1"
+                                    [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
+                            </button>
+<!--                            <button (click)="updateCourse()" *ngIf="permission[1].permission === 1"-->
+<!--                                    [hidden]="isUpdatable == false" class="btn btn-primary me-1">Update-->
+<!--                            </button>-->
+<!--                            <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"-->
+<!--                                    class="btn btn-primary me-1">Cancel-->
+<!--                            </button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--        <div class="col-sm-12 col-xl-6">-->
+        <!--            <div class="row" *ngIf="permission[3].permission === 1">-->
+        <!--                <div class="col-sm-12">-->
+        <!--                    <div class="col-sm-12">-->
+        <!--                        <div class="card">-->
+        <!--                            <div class="card-header">-->
+        <!--                                <h5>Course List</h5>-->
+        <!--                                <span>Full Course List.</span>-->
+        <!--                            </div>-->
+        <!--                            <div class="table-responsive" >-->
+        <!--                                <table class="table" >-->
+        <!--                                    <thead>-->
+        <!--                                    <tr>-->
+        <!--                                        <th scope="col">#</th>-->
+        <!--                                        <th scope="col">Name</th>-->
+        <!--                                        <th scope="col">Semester</th>-->
+        <!--                                        <th scope="col" *ngIf="permission[1].permission === 1 || permission[2].permission === 1">Action</th>-->
+        <!--                                    </tr>-->
+        <!--                                    </thead>-->
+        <!--                                    <tbody>-->
+        <!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+        <!--                                        <td>{{indexOfElement+1}}</td>-->
+        <!--                                        <td>{{record.course_name}}</td>-->
+        <!--                                        <td>-->
+        <!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
+        <!--                                        </td>-->
+        <!--                                        <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">-->
+        <!--                                            <a *ngIf="permission[1].permission === 1" (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
+        <!--                                            <a *ngIf="permission[2].permission === 1" (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
+        <!--                                        </td>-->
+        <!--                                    </tr>-->
+        <!--                                    </tbody>-->
+        <!--                                </table>-->
+        <!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->
