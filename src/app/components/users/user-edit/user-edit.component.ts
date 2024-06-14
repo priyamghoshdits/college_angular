@@ -103,7 +103,6 @@ export class UserEditComponent implements OnInit {
           , material_status: this.userDetails.material_status
           , identification_no: this.userDetails.identification_no
         });
-        console.log(this.userDetails);
         // @ts-ignore
         // setTimeout(this.showPopup = false,2000);
       }

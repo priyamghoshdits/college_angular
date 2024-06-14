@@ -41,7 +41,7 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Select Student</label>
-                                        <select (change)="getSemester()" class="form-select"
+                                        <select class="form-select"
                                                 formControlName="student_id"
                                                 required style="width: 100%">
                                             <option value="null">Select</option>
@@ -73,72 +73,83 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Upload File</label>
-                                        <input class="form-control" formControlName="file_name" type="file" (change)="selectedFile()">
+                                        <input (change)="selectedFile($event)" class="form-control"
+                                               formControlName="file_name"
+                                               type="file">
                                         <div *ngIf="achievementForm.controls['file_name'].errors?.['required'] && achievementForm.controls['file_name'].touched"
                                              class="text text-danger mt-1">File required
                                         </div>
                                     </div>
                                 </div>
-
-
                             </form>
                         </div>
                         <div class="card-footer">
                             <button (click)="saveAchievement()" *ngIf="permission[0].permission === 1"
                                     [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
                             </button>
-<!--                            <button (click)="updateCourse()" *ngIf="permission[1].permission === 1"-->
-<!--                                    [hidden]="isUpdatable == false" class="btn btn-primary me-1">Update-->
-<!--                            </button>-->
-<!--                            <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"-->
-<!--                                    class="btn btn-primary me-1">Cancel-->
-<!--                            </button>-->
+                            <button (click)="updateAchievement()" *ngIf="permission[1].permission === 1"
+                                    [hidden]="isUpdatable == false" class="btn btn-primary me-1">Update
+                            </button>
+                            <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
+                                    class="btn btn-primary me-1">Cancel
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--        <div class="col-sm-12 col-xl-6">-->
-        <!--            <div class="row" *ngIf="permission[3].permission === 1">-->
-        <!--                <div class="col-sm-12">-->
-        <!--                    <div class="col-sm-12">-->
-        <!--                        <div class="card">-->
-        <!--                            <div class="card-header">-->
-        <!--                                <h5>Course List</h5>-->
-        <!--                                <span>Full Course List.</span>-->
-        <!--                            </div>-->
-        <!--                            <div class="table-responsive" >-->
-        <!--                                <table class="table" >-->
-        <!--                                    <thead>-->
-        <!--                                    <tr>-->
-        <!--                                        <th scope="col">#</th>-->
-        <!--                                        <th scope="col">Name</th>-->
-        <!--                                        <th scope="col">Semester</th>-->
-        <!--                                        <th scope="col" *ngIf="permission[1].permission === 1 || permission[2].permission === 1">Action</th>-->
-        <!--                                    </tr>-->
-        <!--                                    </thead>-->
-        <!--                                    <tbody>-->
-        <!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
-        <!--                                        <td>{{indexOfElement+1}}</td>-->
-        <!--                                        <td>{{record.course_name}}</td>-->
-        <!--                                        <td>-->
-        <!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
-        <!--                                        </td>-->
-        <!--                                        <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">-->
-        <!--                                            <a *ngIf="permission[1].permission === 1" (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
-        <!--                                            <a *ngIf="permission[2].permission === 1" (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
-        <!--                                        </td>-->
-        <!--                                    </tr>-->
-        <!--                                    </tbody>-->
-        <!--                                </table>-->
-        <!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+        <div class="col-sm-12 col-xl-6">
+            <div *ngIf="permission[3].permission === 1" class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Achievement List</h5>
+                                <span>Full Achievement List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Semester</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Student Name</th>
+                                        <th *ngIf="permission[1].permission === 1 || permission[2].permission === 1"
+                                            scope="col">
+                                            Action
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of achievementList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement + 1}}</td>
+                                        <td>{{record.course_name}}</td>
+                                        <td>{{record.semester_name}}</td>
+                                        <td>{{record.award_date}}</td>
+                                        <td>{{record.student_name}}</td>
 
-        <!--                            </div>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
+                                        <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">
+                                            <a (click)="editAchievement(record)" *ngIf="permission[1].permission === 1">
+                                                <mat-icon>edit</mat-icon>
+                                            </a>
+                                            <a (click)="deleteAchievement(record)"
+                                               *ngIf="permission[2].permission === 1">
+                                                <mat-icon>delete</mat-icon>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event" *ngIf="achievementList.length >9"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- Container-fluid Ends-->

@@ -154,12 +154,10 @@ export class SubjectDetailsComponent {
   }
 
   editSubjectDetails(data){
-    this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response) => {
-        // @ts-ignore
+    this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
         this.semesterList = response.data;
     });
-    this.subjectService.getSubjects(data.course_id, data.semester_id).subscribe((response) => {
-      // @ts-ignore
+    this.subjectService.getSubjects(data.course_id, data.semester_id).subscribe((response: any) => {
       this.subjectList = response.data;
     });
     this.subjectDetailsForm.patchValue(data);

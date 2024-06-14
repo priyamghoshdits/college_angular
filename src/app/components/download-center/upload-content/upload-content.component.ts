@@ -71,15 +71,13 @@ export class UploadContentComponent {
   }
 
   getSemester(){
-    this.subjectService.getSemesterByCourseId(this.uploadContentForm.value.course_id).subscribe((response) => {
-      // @ts-ignore
+    this.subjectService.getSemesterByCourseId(this.uploadContentForm.value.course_id).subscribe((response: any) => {
       this.semesterList = response.data;
     })
   }
 
   getSubject(){
-    this.subjectService.getSubjects(this.uploadContentForm.value.course_id, this.uploadContentForm.value.semester_id).subscribe((response) => {
-      // @ts-ignore
+    this.subjectService.getSubjects(this.uploadContentForm.value.course_id, this.uploadContentForm.value.semester_id).subscribe((response: any) => {
       this.subjectList = response.data;
     })
   }

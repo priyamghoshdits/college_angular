@@ -66,8 +66,8 @@ export class CreateSemesterTimetableComponent {
                 ,private sessionService: SessionService){
         this.semesterTimeTableForm = new FormGroup({
             id: new FormControl(null),
-            course_id: new FormControl({ value: null, disabled: false }, [Validators.required]),
-            semester_id: new FormControl({ value: null, disabled: false }, [Validators.required]),
+            course_id: new FormControl(null, [Validators.required]),
+            semester_id: new FormControl(null, [Validators.required]),
             session_id: new FormControl(null, [Validators.required]),
             teacher_id: new FormControl(null),
             subject_id: new FormControl(null),
@@ -344,10 +344,10 @@ export class CreateSemesterTimetableComponent {
         this.semesterTimeTableForm.controls['time_to'].reset();
         this.tableArray.push(temp[0]);
 
-        if(this.tableArray.length > 0){
-            this.semesterTimeTableForm.get('course_id')?.disable();
-            this.semesterTimeTableForm.get('semester_id')?.disable();
-        }
+        // if(this.tableArray.length > 0){
+        //     this.semesterTimeTableForm.get('course_id')?.disable();
+        //     this.semesterTimeTableForm.get('semester_id')?.disable();
+        // }
 
         window.scroll({
             top: document.documentElement.scrollHeight,
@@ -367,10 +367,10 @@ export class CreateSemesterTimetableComponent {
             confirmButtonText: 'Yes, remove It!'
         }).then((result) => {
             this.tableArray.splice(index,1);
-            if(this.tableArray.length == 0){
-                this.semesterTimeTableForm.get('course_id')?.enable();
-                this.semesterTimeTableForm.get('semester_id')?.enable();
-            }
+            // if(this.tableArray.length == 0){
+            //     this.semesterTimeTableForm.get('course_id')?.enable();
+            //     this.semesterTimeTableForm.get('semester_id')?.enable();
+            // }
         });
     }
 
