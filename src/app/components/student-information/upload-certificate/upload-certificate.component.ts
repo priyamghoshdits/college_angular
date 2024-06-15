@@ -129,7 +129,7 @@ export class UploadCertificateComponent {
         }
 
         const formData = new FormData();
-        formData.append("id", record.certificate_id ? record.certificate_id : null);
+        formData.append("id", record.certificate_id ?? null);
         formData.append("course_id", this.uploadCertificateForm.value.course_id);
         formData.append("semester_id", this.uploadCertificateForm.value.semester_id);
         formData.append("session_id", this.session_id);

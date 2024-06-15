@@ -242,7 +242,56 @@ export class StudentAdmisssionComponent {
                 Swal.showLoading();
             }
         });
-        this.studentService.saveStudent(this.studentCreationForm.value).subscribe((response) => {
+
+        //     mode_of_payment: new FormControl(null, [Validators.required]),
+        //     transaction_id: new FormControl(null, [Validators.required]),
+        //     caution_money: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+
+        const formData = new FormData();
+        formData.append("id", this.studentCreationForm.value.id);
+        formData.append("identification_no", this.studentCreationForm.value.identification_no);
+        formData.append("roll_no", this.studentCreationForm.value.roll_no);
+        formData.append("registration_no", this.studentCreationForm.value.registration_no);
+        formData.append("first_name", this.studentCreationForm.value.first_name);
+        formData.append("middle_name", this.studentCreationForm.value.middle_name);
+        formData.append("last_name", this.studentCreationForm.value.last_name);
+        formData.append("gender", this.studentCreationForm.value.gender);
+        formData.append("dob", this.studentCreationForm.value.dob);
+        formData.append("admission_date", this.studentCreationForm.value.admission_date);
+        formData.append("mobile_no", this.studentCreationForm.value.mobile_no);
+        formData.append("emergency_phone_number", this.studentCreationForm.value.emergency_phone_number);
+        formData.append("material_status", this.studentCreationForm.value.material_status);
+        formData.append("admission_status", this.studentCreationForm.value.admission_status);
+        formData.append("current_address", this.studentCreationForm.value.current_address);
+        formData.append("permanent_address", this.studentCreationForm.value.permanent_address);
+        formData.append("religion", this.studentCreationForm.value.religion);
+        formData.append("blood_group", this.studentCreationForm.value.blood_group);
+        formData.append("category_id", this.studentCreationForm.value.category_id);
+        formData.append("email", this.studentCreationForm.value.email);
+        formData.append("course_id", this.studentCreationForm.value.course_id);
+        formData.append("semester_id", this.studentCreationForm.value.semester_id);
+        formData.append("agent_id", this.studentCreationForm.value.agent_id);
+        formData.append("father_name", this.studentCreationForm.value.father_name);
+        formData.append("father_phone", this.studentCreationForm.value.father_phone);
+        formData.append("father_occupation", this.studentCreationForm.value.father_occupation);
+        formData.append("mother_name", this.studentCreationForm.value.mother_name);
+        formData.append("mother_phone", this.studentCreationForm.value.mother_phone);
+        formData.append("mother_occupation", this.studentCreationForm.value.mother_occupation);
+        formData.append("guardian_name", this.studentCreationForm.value.guardian_name);
+        formData.append("guardian_phone", this.studentCreationForm.value.guardian_phone);
+        formData.append("guardian_email", this.studentCreationForm.value.guardian_email);
+        formData.append("guardian_relation", this.studentCreationForm.value.guardian_relation);
+        formData.append("guardian_occupation", this.studentCreationForm.value.guardian_occupation);
+        formData.append("guardian_address", this.studentCreationForm.value.guardian_address);
+        formData.append("franchise_id", this.studentCreationForm.value.franchise_id);
+        formData.append("session_id", this.studentCreationForm.value.session_id);
+        formData.append("payment_date", this.studentCreationForm.value.payment_date);
+        formData.append("mode_of_payment", this.studentCreationForm.value.mode_of_payment);
+        formData.append("transaction_id", this.studentCreationForm.value.transaction_id);
+        formData.append("caution_money", this.studentCreationForm.value.caution_money);
+
+
+        this.studentService.saveStudent(formData).subscribe((response) => {
             // @ts-ignore
             if (response.success == 1) {
                 Swal.close();
@@ -298,6 +347,50 @@ export class StudentAdmisssionComponent {
             return;
         }
         this.studentCreationForm.patchValue({ admission_status: 1 });
+
+        const formData = new FormData();
+        formData.append("id", this.studentCreationForm.value.id);
+        formData.append("identification_no", this.studentCreationForm.value.identification_no);
+        formData.append("roll_no", this.studentCreationForm.value.roll_no);
+        formData.append("registration_no", this.studentCreationForm.value.registration_no);
+        formData.append("first_name", this.studentCreationForm.value.first_name);
+        formData.append("middle_name", this.studentCreationForm.value.middle_name);
+        formData.append("last_name", this.studentCreationForm.value.last_name);
+        formData.append("gender", this.studentCreationForm.value.gender);
+        formData.append("dob", this.studentCreationForm.value.dob);
+        formData.append("admission_date", this.studentCreationForm.value.admission_date);
+        formData.append("mobile_no", this.studentCreationForm.value.mobile_no);
+        formData.append("emergency_phone_number", this.studentCreationForm.value.emergency_phone_number);
+        formData.append("material_status", this.studentCreationForm.value.material_status);
+        formData.append("admission_status", this.studentCreationForm.value.admission_status);
+        formData.append("current_address", this.studentCreationForm.value.current_address);
+        formData.append("permanent_address", this.studentCreationForm.value.permanent_address);
+        formData.append("religion", this.studentCreationForm.value.religion);
+        formData.append("blood_group", this.studentCreationForm.value.blood_group);
+        formData.append("category_id", this.studentCreationForm.value.category_id);
+        formData.append("email", this.studentCreationForm.value.email);
+        formData.append("course_id", this.studentCreationForm.value.course_id);
+        formData.append("semester_id", this.studentCreationForm.value.semester_id);
+        formData.append("agent_id", this.studentCreationForm.value.agent_id);
+        formData.append("father_name", this.studentCreationForm.value.father_name);
+        formData.append("father_phone", this.studentCreationForm.value.father_phone);
+        formData.append("father_occupation", this.studentCreationForm.value.father_occupation);
+        formData.append("mother_name", this.studentCreationForm.value.mother_name);
+        formData.append("mother_phone", this.studentCreationForm.value.mother_phone);
+        formData.append("mother_occupation", this.studentCreationForm.value.mother_occupation);
+        formData.append("guardian_name", this.studentCreationForm.value.guardian_name);
+        formData.append("guardian_phone", this.studentCreationForm.value.guardian_phone);
+        formData.append("guardian_email", this.studentCreationForm.value.guardian_email);
+        formData.append("guardian_relation", this.studentCreationForm.value.guardian_relation);
+        formData.append("guardian_occupation", this.studentCreationForm.value.guardian_occupation);
+        formData.append("guardian_address", this.studentCreationForm.value.guardian_address);
+        formData.append("franchise_id", this.studentCreationForm.value.franchise_id);
+        formData.append("session_id", this.studentCreationForm.value.session_id);
+        formData.append("payment_date", this.studentCreationForm.value.payment_date);
+        formData.append("mode_of_payment", this.studentCreationForm.value.mode_of_payment);
+        formData.append("transaction_id", this.studentCreationForm.value.transaction_id);
+        formData.append("caution_money", this.studentCreationForm.value.caution_money);
+
         this.studentService.updateStudent(this.studentCreationForm.value).subscribe((response) => {
             // @ts-ignore
             if (response.success == 1) {
