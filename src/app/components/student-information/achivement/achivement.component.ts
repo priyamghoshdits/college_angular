@@ -8,6 +8,7 @@ import {SubjectService} from "../../../services/subject.service";
 import {StudentService} from "../../../services/student.service";
 import Swal from "sweetalert2";
 import {AchievementService} from "../../../services/achievement.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
     selector: 'app-achivement',
@@ -23,17 +24,19 @@ import {AchievementService} from "../../../services/achievement.service";
     styleUrl: './achivement.component.scss'
 })
 export class AchivementComponent {
+    public FILE_URL = environment.FILE_URL;
+
     achievementForm: FormGroup;
     rolesAndPermission: any[] = [];
     permission: any[] = [];
     courseList: any[];
-    semesterList: any[];
+    semesterList: any[] = [];
     achievementList: any[];
     studentList: any[];
     filteredStudent: any[];
     isUpdatable = false;
     file: any;
-    p:number;
+    p: number;
 
     constructor(private roleAndPermissionService: RolesAndPermissionService, private subjectService: SubjectService
         , private studentService: StudentService, private achievementService: AchievementService) {
@@ -50,7 +53,6 @@ export class AchivementComponent {
 
         this.achievementService.getAchievementListListener().subscribe((response) => {
             this.achievementList = response;
-            console.log(this.achievementList);
         });
         this.achievementList = this.achievementService.getAchievementList();
 
@@ -77,7 +79,7 @@ export class AchivementComponent {
     getSemester() {
         this.subjectService.getSemesterByCourseId(this.achievementForm.value.course_id).subscribe((response: any) => {
             this.semesterList = response.data;
-        })
+        });
     }
 
     getStudent() {
@@ -177,7 +179,7 @@ export class AchivementComponent {
         formData.append("file_name", this.file['name']);
         formData.append("file", this.file);
 
-        this.achievementService.saveAchievement(formData).subscribe((response: any) => {
+        this.achievementService.updateAchievement(formData).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
@@ -192,17 +194,59 @@ export class AchivementComponent {
         })
     }
 
-    cancelUpdate(){
+    cancelUpdate() {
         this.achievementForm.reset();
         this.isUpdatable = false;
     }
 
-    editAchievement(data){
-        this.achievementForm.patchValue(data);
+    async editAchievement(data) {
+        // @ts-ignore
+        const session_id = JSON.parse(localStorage.getItem('session_id'));
+        this.achievementForm.patchValue({
+            id: data.id,
+            course_id: data.course_id,
+            session_id: session_id,
+            award_date: data.award_date,
+            award_name: data.award_name
+        });
+        if (this.semesterList.findIndex(x => x.semester_id == data.semester_id) == -1) {
+            await this.subjectService.getSemesterByCourseId(this.achievementForm.value.course_id).subscribe((response: any) => {
+                this.semesterList = response.data;
+            });
+        }
+
+        await this.achievementForm.patchValue({semester_id: data.semester_id});
+        let x = this.studentList.filter(x => x.course_id == this.achievementForm.value.course_id);
+        this.filteredStudent = x.filter(x => x.current_semester_id == this.achievementForm.value.semester_id);
+        this.filteredStudent = this.filteredStudent.filter(x => x.session_id == session_id);
+        this.achievementForm.patchValue({student_id: data.student_id});
         this.isUpdatable = true;
     }
 
-    deleteAchievement(data){
+    deleteAchievement(data) {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.achievementService.deleteAchievement(data.id).subscribe((response: any) => {
+                    if (response.success == 1) {
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Achievement Deleted',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }
+                });
+            }
+        })
 
     }
 

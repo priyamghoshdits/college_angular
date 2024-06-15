@@ -107,7 +107,7 @@
                                 <h5>Achievement List</h5>
                                 <span>Full Achievement List.</span>
                             </div>
-                            <div class="table-responsive">
+                            <div class="table-responsive text-center">
                                 <table class="table">
                                     <thead>
                                     <tr>
@@ -116,6 +116,7 @@
                                         <th scope="col">Semester</th>
                                         <th scope="col">Date</th>
                                         <th scope="col">Student Name</th>
+                                        <th scope="col">Download</th>
                                         <th *ngIf="permission[1].permission === 1 || permission[2].permission === 1"
                                             scope="col">
                                             Action
@@ -129,6 +130,7 @@
                                         <td>{{record.semester_name}}</td>
                                         <td>{{record.award_date}}</td>
                                         <td>{{record.student_name}}</td>
+                                        <td><a href="{{FILE_URL}}/achievement/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a></td>
 
                                         <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">
                                             <a (click)="editAchievement(record)" *ngIf="permission[1].permission === 1">

@@ -2,12 +2,12 @@
     <div class="card">
         <div class="card-body">
             <div class="tabbed-card">
-                <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
+                <ul #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary" ngbNav>
                     <li [ngbNavItem]="1">
-                        <a ngbNavLink (click)="activeTab(1)">Update Marks</a>
+                        <a (click)="activeTab(1)" ngbNavLink>Update Marks</a>
                     </li>
                     <li [ngbNavItem]="2">
-                        <a ngbNavLink (click)="activeTab(2)">Generated marksheets</a>
+                        <a (click)="activeTab(2)" ngbNavLink>Generated marksheets</a>
                     </li>
                 </ul>
                 <div [ngbNavOutlet]="nav" class="mt-2"></div>
@@ -19,135 +19,169 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header" [hidden]="active != 1">
+                        <div [hidden]="active != 1" class="card-header">
                             <h5>Subject Marks</h5><span>Update Subject Marks</span>
                         </div>
-                        <div class="card-body" [hidden]="active != 1">
-                            <form class="theme-form" [formGroup]="subjectMarksForm">
-                                <div  class="row mb-3">
+                        <div [hidden]="active != 1" class="card-body">
+                            <form [formGroup]="subjectMarksForm" class="theme-form">
+                                <div class="row mb-3">
                                     <div class="col-md-6 mb-12">
                                         <label>Select Course</label>
-                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                        <select (change)="getSemester()" [disabled]="tempMarkSheet.length > 0"
+                                                class="form-select" formControlName="course_id"
+                                                style="width: 100%">
                                             <option [disabled]="tempMarkSheet.length>0" value="null">Select</option>
-                                            <option [disabled]="tempMarkSheet.length>0" *ngFor="let data of courseList" [value]="data.id" >
+                                            <option *ngFor="let data of courseList" [disabled]="tempMarkSheet.length>0"
+                                                    [value]="data.id">
                                                 {{data.course_name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="subjectMarksForm.controls['course_id'].errors?.['required'] && subjectMarksForm.controls['course_id'].touched " class="text text-danger mt-1">Course Name required</div>
+                                        <div *ngIf="subjectMarksForm.controls['course_id'].errors?.['required'] && subjectMarksForm.controls['course_id'].touched "
+                                             class="text text-danger mt-1">Course Name required
+                                        </div>
                                     </div>
                                     <div class="col-md-6 mb-12">
                                         <label>Select Semester</label>
-                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="semester_id" class="form-select" (change)="getSubject()">
+                                        <select (change)="getSubject()" [disabled]="tempMarkSheet.length > 0"
+                                                class="form-select" formControlName="semester_id"
+                                                style="width: 100%">
                                             <option [disabled]="tempMarkSheet.length>0" value="null">Select</option>
-                                            <option [disabled]="tempMarkSheet.length>0" *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                            <option *ngFor="let data of semesterList"
+                                                    [disabled]="tempMarkSheet.length>0" [value]="data.semester_id">
                                                 {{data.name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="subjectMarksForm.controls['semester_id'].errors?.['required'] && subjectMarksForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester Name required</div>
+                                        <div *ngIf="subjectMarksForm.controls['semester_id'].errors?.['required'] && subjectMarksForm.controls['semester_id'].touched "
+                                             class="text text-danger mt-1">Semester Name required
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
-<!--                                    <div class="col-md-6 mb-12">-->
-<!--                                        <label>Select Session</label>-->
-<!--                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudent()">-->
-<!--                                            <option [disabled]="tempMarkSheet.length>0" value="null">Select</option>-->
-<!--                                            <option [disabled]="tempMarkSheet.length>0" *ngFor="let data of sessionList" [value]="data.id" >-->
-<!--                                                {{data.name}}-->
-<!--                                            </option>-->
-<!--                                        </select>-->
-<!--                                        <div *ngIf="subjectMarksForm.controls['session_id'].errors?.['required'] && subjectMarksForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
-<!--                                    </div>-->
+                                    <!--                                    <div class="col-md-6 mb-12">-->
+                                    <!--                                        <label>Select Session</label>-->
+                                    <!--                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudent()">-->
+                                    <!--                                            <option [disabled]="tempMarkSheet.length>0" value="null">Select</option>-->
+                                    <!--                                            <option [disabled]="tempMarkSheet.length>0" *ngFor="let data of sessionList" [value]="data.id" >-->
+                                    <!--                                                {{data.name}}-->
+                                    <!--                                            </option>-->
+                                    <!--                                        </select>-->
+                                    <!--                                        <div *ngIf="subjectMarksForm.controls['session_id'].errors?.['required'] && subjectMarksForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+                                    <!--                                    </div>-->
                                     <div class="col-md-6 mb-12">
                                         <label>Select Student</label>
-                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="student_id" class="form-select">
+                                        <select [disabled]="tempMarkSheet.length > 0" class="form-select"
+                                                formControlName="student_id" style="width: 100%">
                                             <option [disabled]="tempMarkSheet.length>0" value="null">Select</option>
-                                            <option [disabled]="tempMarkSheet.length>0" *ngFor="let data of studentList" [value]="data.id" >
+                                            <option *ngFor="let data of studentList" [disabled]="tempMarkSheet.length>0"
+                                                    [value]="data.id">
                                                 {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="subjectMarksForm.controls['student_id'].errors?.['required'] && subjectMarksForm.controls['student_id'].touched " class="text text-danger mt-1">Student required</div>
+                                        <div *ngIf="subjectMarksForm.controls['student_id'].errors?.['required'] && subjectMarksForm.controls['student_id'].touched "
+                                             class="text text-danger mt-1">Student required
+                                        </div>
                                     </div>
-                                    <div class="col-md-6 mb-12">
-                                        <label class="col-form-label pt-0">Marks</label>
-                                        <input class="form-control" formControlName="marks" type="text"
-                                               placeholder="Enter Marks">
-                                        <div *ngIf="subjectMarksForm.controls['marks'].errors?.['required'] && subjectMarksForm.controls['marks'].touched " class="text text-danger mt-1">Marks required</div>
+                                    <!--                                    <div class="col-md-6 mb-12">-->
+                                    <!--                                        <label class="col-form-label pt-0">Marks</label>-->
+                                    <!--                                        <input class="form-control" formControlName="marks" type="text"-->
+                                    <!--                                               placeholder="Enter Marks">-->
+                                    <!--                                        <div *ngIf="subjectMarksForm.controls['marks'].errors?.['required'] && subjectMarksForm.controls['marks'].touched " class="text text-danger mt-1">Marks required</div>-->
+                                    <!--                                    </div>-->
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Date Of Issue</label>
+                                        <input class="form-control" formControlName="date_of_issue" placeholder="Enter Date"
+                                               type="date">
+                                        <div *ngIf="subjectMarksForm.controls['date_of_issue'].errors?.['required'] && subjectMarksForm.controls['date_of_issue'].touched "
+                                             class="text text-danger mt-1">Date Of Issue required
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-6 mb-3">
                                         <label>Result</label>
-                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="result_status" class="form-select">
+                                        <select [disabled]="tempMarkSheet.length > 0" class="form-select"
+                                                formControlName="result_status" style="width: 100%">
                                             <option value="null">Select</option>
-                                            <option value="Pass"> Pass </option>
-                                            <option value="Fail"> Fail </option>
+                                            <option value="Pass"> Pass</option>
+                                            <option value="Fail"> Fail</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Division</label>
-                                        <select [disabled]="tempMarkSheet.length > 0" style="width: 100%" formControlName="division" class="form-select">
+                                        <select [disabled]="tempMarkSheet.length > 0" class="form-select"
+                                                formControlName="division" style="width: 100%">
                                             <option value="null">Select</option>
-                                            <option value="First"> First </option>
-                                            <option value="Second"> Second </option>
-                                            <option value="Third"> Third </option>
+                                            <option value="First"> First</option>
+                                            <option value="Second"> Second</option>
+                                            <option value="Third"> Third</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-12 mb-3">
-                                        <label class="col-form-label pt-0">Date Of Issue</label>
-                                        <input class="form-control" formControlName="date_of_issue" type="date"
-                                               placeholder="Enter Date">
-                                        <div *ngIf="subjectMarksForm.controls['date_of_issue'].errors?.['required'] && subjectMarksForm.controls['date_of_issue'].touched " class="text text-danger mt-1">Date Of Issue required</div>
-                                    </div>
-                                </div>
+                                <!--                                <div class="row mb-3">-->
+                                <!--                                    <div class="col-md-12 mb-3">-->
+                                <!--                                        <label class="col-form-label pt-0">Date Of Issue</label>-->
+                                <!--                                        <input class="form-control" formControlName="date_of_issue" type="date"-->
+                                <!--                                               placeholder="Enter Date">-->
+                                <!--                                        <div *ngIf="subjectMarksForm.controls['date_of_issue'].errors?.['required'] && subjectMarksForm.controls['date_of_issue'].touched " class="text text-danger mt-1">Date Of Issue required</div>-->
+                                <!--                                    </div>-->
+                                <!--                                </div>-->
                                 <hr>
                                 <div class="row mb-3">
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Full Marks</label>
-                                        <input class="form-control" formControlName="full_marks" type="text"
-                                               placeholder="Enter Full Marks">
-                                        <div *ngIf="subjectMarksForm.controls['full_marks'].errors?.['required'] && subjectMarksForm.controls['full_marks'].touched " class="text text-danger mt-1">Full Marks required</div>
+                                        <input class="form-control" formControlName="full_marks" placeholder="Enter Full Marks"
+                                               type="text">
+                                        <div *ngIf="subjectMarksForm.controls['full_marks'].errors?.['required'] && subjectMarksForm.controls['full_marks'].touched "
+                                             class="text text-danger mt-1">Full Marks required
+                                        </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Min Marks</label>
-                                        <input class="form-control" formControlName="min_marks" type="text"
-                                               placeholder="Enter Min Marks">
-                                        <div *ngIf="subjectMarksForm.controls['min_marks'].errors?.['required'] && subjectMarksForm.controls['min_marks'].touched " class="text text-danger mt-1">Min Marks required</div>
+                                        <input class="form-control" formControlName="min_marks" placeholder="Enter Min Marks"
+                                               type="text">
+                                        <div *ngIf="subjectMarksForm.controls['min_marks'].errors?.['required'] && subjectMarksForm.controls['min_marks'].touched "
+                                             class="text text-danger mt-1">Min Marks required
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-12 mb-3">
                                         <label>Select Subject</label>
-                                        <select style="width: 100%" formControlName="subject_id" class="form-select">
+                                        <select class="form-select" formControlName="subject_id" style="width: 100%">
                                             <option value="null">Select</option>
-                                            <option *ngFor="let data of subjectList" [value]="data.id" >
+                                            <option *ngFor="let data of subjectList" [value]="data.id">
                                                 {{data.name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="subjectMarksForm.controls['subject_id'].errors?.['required'] && subjectMarksForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject required</div>
+                                        <div *ngIf="subjectMarksForm.controls['subject_id'].errors?.['required'] && subjectMarksForm.controls['subject_id'].touched "
+                                             class="text text-danger mt-1">Subject required
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <div class="col-md-12 mb-3">
                                         <label class="col-form-label pt-0">Marks</label>
-                                        <input class="form-control" formControlName="marks" type="text"
-                                               placeholder="Enter Marks">
-                                        <div *ngIf="subjectMarksForm.controls['marks'].errors?.['required'] && subjectMarksForm.controls['marks'].touched " class="text text-danger mt-1">Marks required</div>
+                                        <input class="form-control" formControlName="marks" placeholder="Enter Marks"
+                                               type="text">
+                                        <div *ngIf="subjectMarksForm.controls['marks'].errors?.['required'] && subjectMarksForm.controls['marks'].touched "
+                                             class="text text-danger mt-1">Marks required
+                                        </div>
                                     </div>
                                 </div>
                             </form>
                         </div>
-                        <div class="card-footer" [hidden]="active != 1">
-                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="addMarksheet()">Add</button>
-<!--                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
-<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
+                        <div [hidden]="active != 1" class="card-footer">
+                            <button (click)="addMarksheet()" [hidden]="isUpdatable == true"
+                                    class="btn btn-primary me-1">Add
+                            </button>
+                            <!--                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
+                            <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-xl-7" [hidden]="active != 1">
+        <div [hidden]="active != 1" class="col-sm-12 col-xl-7">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
@@ -169,27 +203,31 @@
                                     </thead>
                                     <tbody>
                                     <tr *ngFor="let record of tempMarkSheet;let indexOfElement=index">
-                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{indexOfElement + 1}}</td>
                                         <td>{{record.subject_name}}</td>
                                         <td>{{record.marks}}</td>
                                         <td>{{record.min_marks}}</td>
                                         <td>{{record.full_marks}}</td>
                                         <td>
-                                            <a (click)="removeFromArray(indexOfElement,record)"><mat-icon>delete</mat-icon></a>
+                                            <a (click)="removeFromArray(indexOfElement,record)">
+                                                <mat-icon>delete</mat-icon>
+                                            </a>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                             <div class="card-footer">
-                                <button [disabled]="tempMarkSheet.length == 0" class="btn btn-primary me-1" (click)="saveMarkSheet()">Save</button>
+                                <button (click)="saveMarkSheet()" [disabled]="tempMarkSheet.length == 0"
+                                        class="btn btn-primary me-1">Save
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-12 col-xl-12" [hidden]="active != 2">
+        <div [hidden]="active != 2" class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
@@ -198,40 +236,51 @@
                                 <h5>Subject Marks</h5><span>Update Subject Marks</span>
                             </div>
                             <div class="card-body">
-                                <form class="theme-form" [formGroup]="subjectMarksSearchForm">
-                                    <div  class="row mb-3">
+                                <form [formGroup]="subjectMarksSearchForm" class="theme-form">
+                                    <div class="row mb-3">
                                         <div class="col-md-3 mb-12">
                                             <label>Select Course</label>
-                                            <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                            <select (change)="getSemester()" class="form-select" formControlName="course_id"
+                                                    style="width: 100%">
                                                 <option value="null">Select</option>
-                                                <option *ngFor="let data of courseList" [value]="data.id" >
+                                                <option *ngFor="let data of courseList" [value]="data.id">
                                                     {{data.course_name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="subjectMarksSearchForm.controls['course_id'].errors?.['required'] && subjectMarksSearchForm.controls['course_id'].touched " class="text text-danger mt-1">Course Name required</div>
+                                            <div *ngIf="subjectMarksSearchForm.controls['course_id'].errors?.['required'] && subjectMarksSearchForm.controls['course_id'].touched "
+                                                 class="text text-danger mt-1">Course Name required
+                                            </div>
                                         </div>
                                         <div class="col-md-3 mb-12">
                                             <label>Select Semester</label>
-                                            <select style="width: 100%" formControlName="semester_id" class="form-select" (change)="getSubject()">
+                                            <select (change)="getSubject()" class="form-select"
+                                                    formControlName="semester_id" style="width: 100%">
                                                 <option value="null">Select</option>
-                                                <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                                     {{data.name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="subjectMarksSearchForm.controls['semester_id'].errors?.['required'] && subjectMarksSearchForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester Name required</div>
+                                            <div *ngIf="subjectMarksSearchForm.controls['semester_id'].errors?.['required'] && subjectMarksSearchForm.controls['semester_id'].touched "
+                                                 class="text text-danger mt-1">Semester Name required
+                                            </div>
                                         </div>
                                         <div class="col-md-3 mb-12">
                                             <label>Select Session</label>
-                                            <select style="width: 100%" formControlName="session_id" class="form-select" (change)="getStudent()">
+                                            <select (change)="getStudent()" class="form-select" formControlName="session_id"
+                                                    style="width: 100%">
                                                 <option value="null">Select</option>
-                                                <option *ngFor="let data of sessionList" [value]="data.id" >
+                                                <option *ngFor="let data of sessionList" [value]="data.id">
                                                     {{data.name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="subjectMarksSearchForm.controls['session_id'].errors?.['required'] && subjectMarksSearchForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
+                                            <div *ngIf="subjectMarksSearchForm.controls['session_id'].errors?.['required'] && subjectMarksSearchForm.controls['session_id'].touched "
+                                                 class="text text-danger mt-1">Session required
+                                            </div>
                                         </div>
                                         <div class="col-md-3 mb-12">
-                                            <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="getMarkSheet()">Search</button>
+                                            <button (click)="getMarkSheet()" class="btn btn-primary me-1"
+                                                    style="margin-top: 30px">Search
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -248,7 +297,7 @@
                                     </thead>
                                     <tbody>
                                     <tr *ngFor="let record of markSheetList;let indexOfElement=index">
-                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{indexOfElement + 1}}</td>
                                         <td>{{record.student_name}}</td>
                                         <td>
                                             <p *ngFor="let record1 of record.subject_details">
@@ -256,16 +305,20 @@
                                             </p>
                                         </td>
                                         <td>
-                                            <a (click)="editMarksheet(record)"><mat-icon>edit</mat-icon></a>
-                                            <a (click)="removeFromArray(indexOfElement,record)"><mat-icon>delete</mat-icon></a>
+                                            <a (click)="editMarksheet(record)">
+                                                <mat-icon>edit</mat-icon>
+                                            </a>
+                                            <a (click)="removeFromArray(indexOfElement,record)">
+                                                <mat-icon>delete</mat-icon>
+                                            </a>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
-<!--                            <div class="card-footer">-->
-<!--                                <button [disabled]="tempMarkSheet.length == 0" class="btn btn-primary me-1" (click)="saveMarkSheet()">Save</button>-->
-<!--                            </div>-->
+                            <!--                            <div class="card-footer">-->
+                            <!--                                <button [disabled]="tempMarkSheet.length == 0" class="btn btn-primary me-1" (click)="saveMarkSheet()">Save</button>-->
+                            <!--                            </div>-->
                         </div>
                     </div>
                 </div>

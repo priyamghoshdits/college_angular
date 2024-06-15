@@ -87,10 +87,14 @@ export class MarksheetComponent {
     }
 
     getSubject(){
+        // @ts-ignore
+        const session_id = JSON.parse(localStorage.getItem('session_id'));
+        this.subjectMarksForm.patchValue({session_id: session_id});
         this.subjectService.getSubjects(this.subjectMarksForm.value.course_id, this.subjectMarksForm.value.semester_id)
             .subscribe((response: any) => {
                 this.subjectList = response.data;
                 this.copySubjectList = [...this.subjectList];
+                this.getStudent();
             });
     }
 

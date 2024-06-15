@@ -47,7 +47,23 @@ export class AchievementService {
                 // @ts-ignore
                 if(response.success == 1){
                     // @ts-ignore
-                    this.achievementList.push(response.data);
+                    const index = this.achievementList.findIndex(x => x.id === response.data.id);
+                    // @ts-ignore
+                    this.achievementList[index] = response.data;
+                    this.achievementListSubject.next([...this.achievementList]);
+                }
+            }));
+    }
+
+    deleteAchievement(id){
+        return this.http.get(this.BASE_API_URL + '/deleteAchievement/' + id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if(response.success == 1){
+                    // @ts-ignore
+                    const index = this.achievementList.findIndex(x => x.id === response.data.id);
+                    // @ts-ignore
+                    this.achievementList.splice(index,1);
                     this.achievementListSubject.next([...this.achievementList]);
                 }
             }));
