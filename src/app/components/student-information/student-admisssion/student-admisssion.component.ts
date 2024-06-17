@@ -51,6 +51,12 @@ export class StudentAdmisssionComponent {
     permission: any[] = [];
     franchiseList: any[];
     session_id = null;
+    profile_image = null;
+    dob_proof: null;
+    blood_group_proof: null;
+    aadhaar_card_proof: null;
+    registration_no_proof: null;
+    admission_slip: null;
     user: {
         user_type_id: number;
     };
@@ -193,6 +199,30 @@ export class StudentAdmisssionComponent {
         this.studentCreationForm.patchValue({ image: file['name'] });
     }
 
+    selectProfilePic(event){
+        this.profile_image = event.target.files[0];
+    }
+
+    selectAdmissionSlip(event){
+        this.admission_slip = event.target.files[0];
+    }
+
+    selectRegistrationFile(event){
+        this.registration_no_proof = event.target.files[0];
+    }
+
+    uploadAadhaarCard(event){
+        this.aadhaar_card_proof = event.target.files[0];
+    }
+
+    uploadLabReport(event){
+        this.blood_group_proof = event.target.files[0];
+    }
+
+    uploadDateOfBirthProof(event){
+        this.dob_proof = event.target.files[0];
+    }
+
     activeTab(data) {
         this.active = data;
     }
@@ -290,6 +320,34 @@ export class StudentAdmisssionComponent {
         formData.append("transaction_id", this.studentCreationForm.value.transaction_id);
         formData.append("caution_money", this.studentCreationForm.value.caution_money);
 
+        //Images or document upload
+        // @ts-ignore
+        formData.append("image", this.profile_image);
+        // @ts-ignore
+        formData.append("dob_proof", this.dob_proof);
+        // @ts-ignore
+        formData.append("blood_group_proof", this.blood_group_proof);
+        // @ts-ignore
+        formData.append("aadhaar_card_proof", this.aadhaar_card_proof);
+        // @ts-ignore
+        formData.append("admission_slip", this.admission_slip);
+
+
+        // dob_proof: null;
+        // blood_group_proof: null;
+        // aadhaar_card_proof: null;
+        // registration_no_proof: null;
+        // admission_slip: null;
+
+
+        // let file;
+        // file = event.target.files[0];
+        // const formData = new FormData();
+        // formData.append("image", file);
+        // // @ts-ignore
+        // formData.append("p_image", this.studentCreationForm.value.id ? this.studentCreationForm.value.id : null);
+        // this.imageService.uploadProfilePic(formData).subscribe();
+        // this.studentCreationForm.patchValue({ image: file['name'] });
 
         this.studentService.saveStudent(formData).subscribe((response) => {
             // @ts-ignore
