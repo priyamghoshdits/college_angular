@@ -209,6 +209,7 @@ export class AchivementComponent {
             award_date: data.award_date,
             award_name: data.award_name
         });
+
         if (this.semesterList.findIndex(x => x.semester_id == data.semester_id) == -1) {
             await this.subjectService.getSemesterByCourseId(this.achievementForm.value.course_id).subscribe((response: any) => {
                 this.semesterList = response.data;
@@ -247,7 +248,6 @@ export class AchivementComponent {
                 });
             }
         })
-
     }
 
 

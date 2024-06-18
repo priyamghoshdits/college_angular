@@ -29,7 +29,7 @@ import { FranchiseService } from "../../../services/franchise.service";
         NgbNavItem,
         FormsModule,
         CustomFilterPipe,
-        NgIf
+        NgIf,
     ],
     templateUrl: './student-admisssion.component.html',
     styleUrl: './student-admisssion.component.scss'
