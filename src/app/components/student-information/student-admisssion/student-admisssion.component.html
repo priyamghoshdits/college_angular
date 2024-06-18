@@ -31,7 +31,6 @@
                                     <a ngbNavLink (click)="activeTab(4)">Disabled Students</a>
                                 </li>
                             </ul>
-                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
                         </div>
                         <div [hidden]="active != 1">
                             <div class="card-body">
@@ -295,18 +294,22 @@
                                     <hr>
 
                                     <div  class="row">
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Father Name</label>
                                             <input type="text" class="form-control" formControlName="father_name">
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Father Phone no.</label>
                                             <input type="text" class="form-control" formControlName="father_phone">
                                             <div *ngIf="studentCreationForm.controls['father_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone no.</div>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Father Occupation</label>
                                             <input type="text" class="form-control" formControlName="father_occupation">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Upload Admission Slip</label>
+                                            <input type="file" class="form-control" [multiple]="false" (change)="selectAdmissionSlip($event)">
                                         </div>
                                     </div>
 

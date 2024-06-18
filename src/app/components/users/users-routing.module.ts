@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UsersProfileComponent } from './users-profile/users-profile.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserCardsComponent } from './user-cards/user-cards.component';
+import {StudentProfileComponent} from "./student-profile/student-profile.component";
 
 const routes: Routes = [
   {
@@ -30,6 +31,14 @@ const routes: Routes = [
         data: {
           title: "Cards",
           breadcrumb: "Cards"
+        }
+      },
+      {
+        path: 'student-profile',
+        component: StudentProfileComponent,
+        data: {
+          title: "Student Profile",
+          breadcrumb: "Student Profile"
         }
       }
     ]
