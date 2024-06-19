@@ -131,6 +131,7 @@ export class NavService {
 			title: 'Human Resource', hidden:false , icon: 'users', type: 'sub', badgeType: 'primary', active: false, children: [
 				{ path: '/human-resource/add-staff', title: 'Staff', type: 'link' },
 				{ path: '/human-resource/staff-attendance', title: 'Staff Attendance', type: 'link' }, // need to be added
+				{ path: '/human-resource/staff-experience', title: 'Staff Experience', type: 'link' },
 				{ path: '/human-resource/leave-type', title: 'Leave Type', type: 'link' },
 				{ path: '/human-resource/allocate-leave', title: 'Allocate Leave', type: 'link' },
 				{ path: '/human-resource/apply-leave', title: 'Apply Leave', type: 'link' },

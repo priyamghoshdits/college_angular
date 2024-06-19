@@ -13,6 +13,7 @@ import {StaffAttendanceComponent} from "./staff-attendance/staff-attendance.comp
 import {PayrollComponent} from "./payroll/payroll.component";
 import {ApproveLeaveComponent} from "./approve-leave/approve-leave.component";
 import {PayrollTypesComponent} from "./payroll-types/payroll-types.component";
+import {StaffExperienceComponent} from "./staff-experience/staff-experience.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,14 @@ const routes: Routes = [
     data: {
       title: "Add Staff",
       breadcrumb: "Add Staff"
+    }
+  },
+  {
+    path: 'staff-experience',
+    component: StaffExperienceComponent,
+    data: {
+      title: "Staff Experience",
+      breadcrumb: "Staff Experience"
     }
   },
   {
