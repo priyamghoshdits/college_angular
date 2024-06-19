@@ -14,6 +14,7 @@ import {CustomFilterPipe} from "custom-filter.pipe";
 import {CommonService} from "../../../services/common.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {FranchiseService} from "../../../services/franchise.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
     selector: 'app-student-admisssion',
@@ -30,6 +31,7 @@ import {FranchiseService} from "../../../services/franchise.service";
         FormsModule,
         CustomFilterPipe,
         NgIf,
+        RouterLink,
     ],
     templateUrl: './student-admisssion.component.html',
     styleUrl: './student-admisssion.component.scss'

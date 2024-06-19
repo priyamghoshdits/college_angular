@@ -34,7 +34,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'student-profile',
+        path: 'student-profile/:id',
         component: StudentProfileComponent,
         data: {
           title: "Student Profile",
