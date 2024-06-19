@@ -1,1 +1,207 @@
-<p>education works!</p>
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Education Qualification</h5><span>Add Education Qualification</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="educationQualificationForm">
+                                <div  class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="educationQualificationForm.controls['course_id'].errors?.['required'] && educationQualificationForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label>Select Semester</label>
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select" required (change)="getStudent()">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="educationQualificationForm.controls['semester_id'].errors?.['required'] && educationQualificationForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label>Select Student</label>
+                                        <select style="width: 100%" formControlName="student_id" class="form-select" required>
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of filteredStudentList" [value]="data.id" >
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="educationQualificationForm.controls['student_id'].errors?.['required'] && educationQualificationForm.controls['student_id'].touched " class="text text-danger mt-1">Student required</div>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h4 class="mt-2 mb-4 text-center">Class 10th/M.P./It's Equivalent</h4>
+                                <div  class="row">
+                                    <div class="col-md-2 mb-3">
+                                        <label>Board/Counsil</label>
+                                        <input type="text" class="form-control" formControlName="board_ten" placeholder="Board/counsil">
+                                        <div *ngIf="educationQualificationForm.controls['board_ten'].errors?.['required'] && educationQualificationForm.controls['board_ten'].touched " class="text text-danger mt-1">Board required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Marks Obtained</label>
+                                        <input type="text" class="form-control" formControlName="marks_obtained_ten" placeholder="Marks Obtained">
+                                        <div *ngIf="educationQualificationForm.controls['marks_obtained_ten'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_ten'].touched " class="text text-danger mt-1">Marks Obtained required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Percentage</label>
+                                        <input type="text" class="form-control" formControlName="percentage_ten" placeholder="Percentage">
+                                        <div *ngIf="educationQualificationForm.controls['percentage_ten'].errors?.['required'] && educationQualificationForm.controls['percentage_ten'].touched " class="text text-danger mt-1">Percentage required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Division/Class</label>
+                                        <input type="text" class="form-control" formControlName="division_ten" placeholder="Division/Class">
+                                        <div *ngIf="educationQualificationForm.controls['division_ten'].errors?.['required'] && educationQualificationForm.controls['division_ten'].touched " class="text text-danger mt-1">Division/Class required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Main Subject</label>
+                                        <input type="text" class="form-control" formControlName="main_subject_ten" placeholder="Main Subject">
+                                        <div *ngIf="educationQualificationForm.controls['main_subject_ten'].errors?.['required'] && educationQualificationForm.controls['main_subject_ten'].touched " class="text text-danger mt-1">Main Subject required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Year Of Passing</label>
+                                        <input type="text" class="form-control" formControlName="year_of_passing_ten" placeholder="Year of passing">
+                                        <div *ngIf="educationQualificationForm.controls['year_of_passing_ten'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_ten'].touched " class="text text-danger mt-1">Year of passing required</div>
+                                    </div>
+                                </div>
+
+
+
+                                <hr>
+                                <h4 class="mt-2 mb-4 text-center">10+2/H.S./Equivalent</h4>
+                                <div  class="row">
+                                    <div class="col-md-2 mb-3">
+                                        <label>Board/Counsil</label>
+                                        <input type="text" class="form-control" formControlName="board_twelve" placeholder="Board/counsil">
+                                        <div *ngIf="educationQualificationForm.controls['board_twelve'].errors?.['required'] && educationQualificationForm.controls['board_twelve'].touched " class="text text-danger mt-1">Board required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Marks Obtained</label>
+                                        <input type="text" class="form-control" formControlName="marks_obtained_twelve" placeholder="Marks Obtained">
+                                        <div *ngIf="educationQualificationForm.controls['marks_obtained_twelve'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_twelve'].touched " class="text text-danger mt-1">Marks Obtained required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Percentage</label>
+                                        <input type="text" class="form-control" formControlName="percentage_twelve" placeholder="Percentage">
+                                        <div *ngIf="educationQualificationForm.controls['percentage_twelve'].errors?.['required'] && educationQualificationForm.controls['percentage_twelve'].touched " class="text text-danger mt-1">Percentage required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Division/Class</label>
+                                        <input type="text" class="form-control" formControlName="division_twelve" placeholder="Division/Class">
+                                        <div *ngIf="educationQualificationForm.controls['division_twelve'].errors?.['required'] && educationQualificationForm.controls['division_twelve'].touched " class="text text-danger mt-1">Division/Class required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Main Subject</label>
+                                        <input type="text" class="form-control" formControlName="main_subject_twelve" placeholder="Main Subject">
+                                        <div *ngIf="educationQualificationForm.controls['main_subject_twelve'].errors?.['required'] && educationQualificationForm.controls['main_subject_twelve'].touched " class="text text-danger mt-1">Main Subject required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Year Of Passing</label>
+                                        <input type="text" class="form-control" formControlName="year_of_passing_twelve" placeholder="Year of passing">
+                                        <div *ngIf="educationQualificationForm.controls['year_of_passing_twelve'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_twelve'].touched " class="text text-danger mt-1">Year of passing required</div>
+                                    </div>
+                                </div>
+
+
+                                <hr>
+                                <h4 class="mt-2 mb-4 text-center">Graduation </h4>
+                                <div  class="row">
+                                    <div class="col-md-2 mb-3">
+                                        <label>Board/Counsil</label>
+                                        <input type="text" class="form-control" formControlName="board_graduation" placeholder="Board/counsil">
+                                        <div *ngIf="educationQualificationForm.controls['board_graduation'].errors?.['required'] && educationQualificationForm.controls['board_graduation'].touched " class="text text-danger mt-1">Board required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Marks Obtained</label>
+                                        <input type="text" class="form-control" formControlName="marks_obtained_graduation" placeholder="Marks Obtained">
+                                        <div *ngIf="educationQualificationForm.controls['marks_obtained_graduation'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_graduation'].touched " class="text text-danger mt-1">Marks Obtained required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Percentage</label>
+                                        <input type="text" class="form-control" formControlName="percentage_graduation" placeholder="Percentage">
+                                        <div *ngIf="educationQualificationForm.controls['percentage_graduation'].errors?.['required'] && educationQualificationForm.controls['percentage_graduation'].touched " class="text text-danger mt-1">Percentage required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Division/Class</label>
+                                        <input type="text" class="form-control" formControlName="division_graduation" placeholder="Division/Class">
+                                        <div *ngIf="educationQualificationForm.controls['division_graduation'].errors?.['required'] && educationQualificationForm.controls['division_graduation'].touched " class="text text-danger mt-1">Division/Class required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Main Subject</label>
+                                        <input type="text" class="form-control" formControlName="main_subject_graduation" placeholder="Main Subject">
+                                        <div *ngIf="educationQualificationForm.controls['main_subject_graduation'].errors?.['required'] && educationQualificationForm.controls['main_subject_graduation'].touched " class="text text-danger mt-1">Main Subject required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Year Of Passing</label>
+                                        <input type="text" class="form-control" formControlName="year_of_passing_graduation" placeholder="Year of passing">
+                                        <div *ngIf="educationQualificationForm.controls['year_of_passing_graduation'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_graduation'].touched " class="text text-danger mt-1">Year of passing required</div>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+<!--                        <div class="card-footer">-->
+<!--                            <button *ngIf="permission[0].permission === 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCourse()">Submit</button>-->
+<!--                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
+<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
+<!--                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+<!--        <div class="col-sm-12 col-xl-6">-->
+<!--            <div class="row" *ngIf="permission[3].permission === 1">-->
+<!--                <div class="col-sm-12">-->
+<!--                    <div class="col-sm-12">-->
+<!--                        <div class="card">-->
+<!--                            <div class="card-header">-->
+<!--                                <h5>Course List</h5>-->
+<!--                                <span>Full Course List.</span>-->
+<!--                            </div>-->
+<!--                            <div class="table-responsive" >-->
+<!--                                <table class="table" >-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th scope="col">#</th>-->
+<!--                                        <th scope="col">Name</th>-->
+<!--                                        <th scope="col">Semester</th>-->
+<!--                                        <th scope="col" *ngIf="permission[1].permission === 1 || permission[2].permission === 1">Action</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    <tbody>-->
+<!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+<!--                                        <td>{{indexOfElement+1}}</td>-->
+<!--                                        <td>{{record.course_name}}</td>-->
+<!--                                        <td>-->
+<!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
+<!--                                        </td>-->
+<!--                                        <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">-->
+<!--                                            <a *ngIf="permission[1].permission === 1" (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
+<!--                                            <a *ngIf="permission[2].permission === 1" (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    </tbody>-->
+<!--                                </table>-->
+<!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->

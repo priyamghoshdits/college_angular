@@ -125,11 +125,10 @@ export class StudentAdmisssionComponent {
             transaction_id: new FormControl(null, [Validators.required]),
             caution_money: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
         });
-        +
 
-            this.franchiseService.getFranchiseListener().subscribe((response) => {
-                this.franchiseList = response;
-            });
+        this.franchiseService.getFranchiseListener().subscribe((response) => {
+            this.franchiseList = response;
+        });
         this.franchiseList = this.franchiseService.getFranchiseList();
 
         this.memberService.getCategoryListener().subscribe((response) => {

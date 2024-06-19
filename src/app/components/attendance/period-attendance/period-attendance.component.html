@@ -8,43 +8,55 @@
                             <h5>Attendance</h5><span>Student period Attendance</span>
                         </div>
                         <div class="card-body">
-                            <form class="theme-form" [formGroup]="attendanceForm">
+                            <form [formGroup]="attendanceForm" class="theme-form">
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
-                                            <label>Select Course</label>
-                                            <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
-                                                <option value="null">Select</option>
-                                                <option *ngFor="let data of courseList" [value]="data.id" >
-                                                    {{data.course_name}}
-                                                </option>
-                                            </select>
-                                        <div *ngIf="attendanceForm.controls['course_id'].errors?.['required'] && attendanceForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                            <label>Select Semester</label>
-                                            <select style="width: 100%" formControlName="semester_id" class="form-select" required (change)="getSubject()">
-                                                <option value="null">Select</option>
-                                                <option *ngFor="let data of semesterList" [value]="data.semester_id" >
-                                                    {{data.name}}
-                                                </option>
-                                            </select>
-                                        <div *ngIf="attendanceForm.controls['semester_id'].errors?.['required'] && attendanceForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>Select Date</label>
-                                        <input class="form-control" formControlName="date" type="date"
-                                               placeholder="Select date">
-                                        <div *ngIf="attendanceForm.controls['date'].errors?.['required'] && attendanceForm.controls['date'].touched " class="text text-danger mt-1">Date required</div>
-                                    </div>
-                                    <div class="col-md-3 mb-3">
-                                        <label>Select Subject</label>
-                                        <select style="width: 100%" formControlName="subject_id" class="form-select" required>
+                                        <label>Select Course</label>
+                                        <select (change)="getSemester()" class="form-select" formControlName="course_id"
+                                                required style="width: 100%">
                                             <option value="null">Select</option>
-                                            <option *ngFor="let data of subjectList" [value]="data.id" >
+                                            <option *ngFor="let data of courseList" [value]="data.id">
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="attendanceForm.controls['course_id'].errors?.['required'] && attendanceForm.controls['course_id'].touched "
+                                             class="text text-danger mt-1">Course required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Semester</label>
+                                        <select (change)="getSubject()" class="form-select"
+                                                formControlName="semester_id"
+                                                required style="width: 100%">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                                 {{data.name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="attendanceForm.controls['subject_id'].errors?.['required'] && attendanceForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject required</div>
+                                        <div *ngIf="attendanceForm.controls['semester_id'].errors?.['required'] && attendanceForm.controls['semester_id'].touched "
+                                             class="text text-danger mt-1">Semester required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Date</label>
+                                        <input class="form-control" formControlName="date" placeholder="Select date"
+                                               type="date">
+                                        <div *ngIf="attendanceForm.controls['date'].errors?.['required'] && attendanceForm.controls['date'].touched "
+                                             class="text text-danger mt-1">Date required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Subject</label>
+                                        <select class="form-select" formControlName="subject_id" required
+                                                style="width: 100%">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of subjectList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="attendanceForm.controls['subject_id'].errors?.['required'] && attendanceForm.controls['subject_id'].touched "
+                                             class="text text-danger mt-1">Subject required
+                                        </div>
                                     </div>
                                     <!-- <div class="col-md-2 mb-3">
                                         <label>Select Session</label>
@@ -57,7 +69,9 @@
                                         <div *ngIf="attendanceForm.controls['session_id'].errors?.['required'] && attendanceForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
                                     </div> -->
                                     <div>
-                                        <button class="btn btn-primary me-1" (click)="getStudentAttendanceList()">Search</button>
+                                        <button (click)="getStudentAttendanceList()" class="btn btn-primary me-1">
+                                            Search
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -65,35 +79,53 @@
                     </div>
                 </div>
             </div>
-<!--            <div [hidden]="showList">-->
-            <div class="row" [hidden]="!(studentList.length == 0 || classStatus !== null) || showList">
+            <!--            <div [hidden]="showList">-->
+            <div [hidden]="!(studentList.length == 0 || classStatus !== null) || showList" class="row">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <h5>Class Status</h5>
                         </div>
-                        <div class="card-body" *ngIf="classStatus">
-<!--                            {{classStatus.started_by}}-->
-                            <div class="row">
-                                <div class="col-12 mb-3">
-                                    Class Started By: {{classStatus.time_on}}
+                        <div *ngIf="classStatus" class="card-body">
+                            <!--                            {{classStatus.started_by}}-->
+                            <div class="row" style="text-align: center; font-size: 18px;">
+                                <div class="col-6">
+                                    <div class="newadd">
+                                        <div class="col-12 mb-3">
+                                            Class Started On: {{classStatus.time_on}}
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            Class Started By: {{classStatus.started_by_name}}
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            Start Class:
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <button (click)="updateClassStart()"
+                                                    [disabled]="classStatus.started_by !== null"
+                                                    class="btn btn-primary me-1" style="padding: 8px 38px; font-size: 17px;">Start
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-12 mb-3">
-                                    Class Started By: {{classStatus.started_by_name}}
-                                </div>
-                                <div class="col-12 mb-3">
-                                    Class started: <button [disabled]="classStatus.started_by !== null" (click)="updateClassStart()" class="btn btn-primary me-1">Start</button>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12 mb-3">
-                                    Class Started By: {{classStatus.ended_on}}
-                                </div>
-                                <div class="col-12 mb-3">
-                                    Class Ended By: {{classStatus.ended_by_name}}
-                                </div>
-                                <div class="col-12 mb-3">
-                                    Class Ended: <button [disabled]="classStatus.ended_by !== null" (click)="updateClassEnd()" class="btn btn-primary me-1">Ended</button>
+                                <div class="col-6">
+                                    <div class="newadd">
+                                        <div class="col-12 mb-3">
+                                            Class Ended On: {{classStatus.ended_on}}
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            Class Ended By: {{classStatus.ended_by_name}}
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            End Class:
+                                        </div>
+                                        <div class="col-12 mb-3">
+                                            <button (click)="updateClassEnd()"
+                                                    [disabled]="classStatus.ended_by !== null"
+                                                    class="btn btn-primary me-1" style="padding: 8px 38px; font-size: 17px;">Ended
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -102,7 +134,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row" [hidden]="(studentList.length == 0 || classStatus != null)">
+            <div [hidden]="(studentList.length == 0 || classStatus != null)" class="row">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
@@ -116,33 +148,53 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Name</th>
                                         <th scope="col">Attendance
-                                            (<input style="margin-left: 15px" type="radio" id="age1" name="age10" (change)="markForAll('present')" [checked]="markAllAsPresent">
-                                            <label for="age1">  Present</label>
-                                            <input style="margin-left: 15px" type="radio" id="age1" name="age10" (change)="markForAll('absent')" [checked]="markAllAsAbsent">
-                                            <label for="age1">  Absent</label>
-                                            <input style="margin-left: 15px" type="radio" id="age1" name="age10" (change)="markForAll('late')" [checked]="markAllAsLate">
-                                            <label for="age1">  Late</label>
-                                            <input style="margin-left: 15px" type="radio" id="age1" name="age10" (change)="markForAll('half day')" [checked]="markAllAsHalfDay">
-                                            <label for="age1">  Half day</label>)
+                                            (<input (change)="markForAll('present')" [checked]="markAllAsPresent"
+                                                    id="age1" name="age10"
+                                                    style="margin-left: 15px" type="radio">
+                                            <label for="age1"> Present</label>
+                                            <input (change)="markForAll('absent')" [checked]="markAllAsAbsent" id="age1"
+                                                   name="age10"
+                                                   style="margin-left: 15px" type="radio">
+                                            <label for="age1"> Absent</label>
+                                            <input (change)="markForAll('late')" [checked]="markAllAsLate" id="age1"
+                                                   name="age10"
+                                                   style="margin-left: 15px" type="radio">
+                                            <label for="age1"> Late</label>
+                                            <input (change)="markForAll('half day')" [checked]="markAllAsHalfDay"
+                                                   id="age1" name="age10"
+                                                   style="margin-left: 15px" type="radio">
+                                            <label for="age1"> Half day</label>)
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr *ngFor="let record of studentList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
-                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{indexOfElement + 1}}</td>
                                         <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
                                         <td>
-                                            <input style="margin-left: 15px" type="radio" id="age1" name="age{{indexOfElement}}" [(ngModel)]="record.attendance" [checked]="record.attendance == 'present'" value="present">
+                                            <input [(ngModel)]="record.attendance"
+                                                   [checked]="record.attendance == 'present'" id="age1"
+                                                   name="age{{indexOfElement}}" style="margin-left: 15px"
+                                                   type="radio" value="present">
                                             <label for="age1">Present</label>
-                                            <input style="margin-left: 15px" type="radio" id="age1" name="age{{indexOfElement}}" [(ngModel)]="record.attendance" [checked]="record.attendance == 'absent'" value="absent">
+                                            <input [(ngModel)]="record.attendance"
+                                                   [checked]="record.attendance == 'absent'" id="age1"
+                                                   name="age{{indexOfElement}}" style="margin-left: 15px"
+                                                   type="radio" value="absent">
                                             <label for="age1">Absent</label>
-                                            <input style="margin-left: 15px" type="radio" id="age1" name="age{{indexOfElement}}" [(ngModel)]="record.attendance" [checked]="record.attendance == 'late'" value="late">
+                                            <input [(ngModel)]="record.attendance"
+                                                   [checked]="record.attendance == 'late'" id="age1"
+                                                   name="age{{indexOfElement}}" style="margin-left: 15px"
+                                                   type="radio" value="late">
                                             <label for="age1">Late</label>
-                                            <input style="margin-left: 15px" type="radio" id="age1" name="age{{indexOfElement}}" [(ngModel)]="record.attendance" [checked]="record.attendance == 'half day'" value="half day">
+                                            <input [(ngModel)]="record.attendance"
+                                                   [checked]="record.attendance == 'half day'" id="age1"
+                                                   name="age{{indexOfElement}}" style="margin-left: 15px"
+                                                   type="radio" value="half day">
                                             <label for="age1">Half Day</label>
                                         </td>
                                     </tr>
-                                    <button class="btn btn-primary me-1" (click)="saveAttendance()">Submit</button>
+                                    <button (click)="saveAttendance()" class="btn btn-primary me-1">Submit</button>
                                     </tbody>
                                 </table>
                             </div>
@@ -152,49 +204,49 @@
                     </div>
                 </div>
             </div>
-<!--            </div>-->
+            <!--            </div>-->
         </div>
-<!--        <div class="col-sm-12 col-xl-6">-->
-<!--            <div class="row">-->
-<!--                <div class="col-sm-12">-->
-<!--                    <div class="col-sm-12">-->
-<!--                        <div class="card">-->
-<!--                            <div class="card-header">-->
-<!--                                <h5>Course List</h5>-->
-<!--                                <span>Full Course List.</span>-->
-<!--                            </div>-->
-<!--                            <div class="table-responsive">-->
-<!--                                <table class="table">-->
-<!--                                    <thead>-->
-<!--                                    <tr>-->
-<!--                                        <th scope="col">#</th>-->
-<!--                                        <th scope="col">Name</th>-->
-<!--                                        <th scope="col">Course Name</th>-->
-<!--                                        <th scope="col">Action</th>-->
-<!--                                    </tr>-->
-<!--                                    </thead>-->
-<!--                                    <tbody>-->
-<!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
-<!--                                        <td>{{indexOfElement+1}}</td>-->
-<!--                                        <td>{{record.course_name}}</td>-->
-<!--                                        <td>-->
-<!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
-<!--                                        </td>-->
-<!--                                        <td>-->
-<!--                                            <a (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
-<!--                                            <a (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
-<!--                                    </tbody>-->
-<!--                                </table>-->
-<!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+        <!--        <div class="col-sm-12 col-xl-6">-->
+        <!--            <div class="row">-->
+        <!--                <div class="col-sm-12">-->
+        <!--                    <div class="col-sm-12">-->
+        <!--                        <div class="card">-->
+        <!--                            <div class="card-header">-->
+        <!--                                <h5>Course List</h5>-->
+        <!--                                <span>Full Course List.</span>-->
+        <!--                            </div>-->
+        <!--                            <div class="table-responsive">-->
+        <!--                                <table class="table">-->
+        <!--                                    <thead>-->
+        <!--                                    <tr>-->
+        <!--                                        <th scope="col">#</th>-->
+        <!--                                        <th scope="col">Name</th>-->
+        <!--                                        <th scope="col">Course Name</th>-->
+        <!--                                        <th scope="col">Action</th>-->
+        <!--                                    </tr>-->
+        <!--                                    </thead>-->
+        <!--                                    <tbody>-->
+        <!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+        <!--                                        <td>{{indexOfElement+1}}</td>-->
+        <!--                                        <td>{{record.course_name}}</td>-->
+        <!--                                        <td>-->
+        <!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
+        <!--                                        </td>-->
+        <!--                                        <td>-->
+        <!--                                            <a (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
+        <!--                                            <a (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
+        <!--                                        </td>-->
+        <!--                                    </tr>-->
+        <!--                                    </tbody>-->
+        <!--                                </table>-->
+        <!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
 
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
     </div>
 </div>
 <!-- Container-fluid Ends-->

@@ -160,8 +160,7 @@ export class CollectFeesComponent {
       this.searchTransactionForm.markAllAsTouched();
       return;
     }
-    this.feesService.getTransactionDetails(this.searchTransactionForm.value.user_id).subscribe((response) => {
-      // @ts-ignore
+    this.feesService.getTransactionDetails(this.searchTransactionForm.value.user_id).subscribe((response: any) => {
       this.transactionList = response.data;
     })
   }
