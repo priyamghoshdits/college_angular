@@ -72,10 +72,18 @@
                         <div class="card-header">
                             <h5>Class Status</h5>
                         </div>
-                        <div class="card-body">
+                        <div class="card-body" *ngIf="classStatus">
 <!--                            {{classStatus.started_by}}-->
-                            Class started: <button  class="btn btn-primary me-1">Start</button>
-                            Class Ended: <button  class="btn btn-primary me-1">Ended</button>
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    Class started: <button [disabled]="classStatus.started_by !== null" (click)="updateStarted()" class="btn btn-primary me-1">Start</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    Class Ended: <button [disabled]="classStatus.started_by == null" class="btn btn-primary me-1">Ended</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer">
                         </div>

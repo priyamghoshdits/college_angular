@@ -31,7 +31,7 @@ export class PeriodAttendanceComponent {
     sessionList: any[];
     studentList: any[] = [];
     session_id = null;
-    classStatus: any[];
+    classStatus: any;
     p: number;
     markAllAsPresent = false;
     markAllAsAbsent = true;
@@ -108,7 +108,7 @@ export class PeriodAttendanceComponent {
                     if (result.isConfirmed) {
                         this.studentList = response.data;
                         this.classStatus = response.class_status;
-                        console.log(this.classStatus);
+                        // console.log(this.classStatus);
                         this.showList = false;
                         if (this.studentList.length == 0) {
                             Swal.fire({
@@ -133,6 +133,12 @@ export class PeriodAttendanceComponent {
                     });
                 }
             }
+        });
+    }
+
+    updateStarted(){
+        this.studentService.updateClassStarted(this.attendanceForm.value).subscribe(() => {
+
         });
     }
 
@@ -165,8 +171,7 @@ export class PeriodAttendanceComponent {
             value.semester_id = semester_id;
             value.session_id = session_id;
         })
-        this.studentService.saveStudentAttendance(this.studentList).subscribe((response) => {
-            // @ts-ignore
+        this.studentService.saveStudentAttendance(this.studentList).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
@@ -175,7 +180,8 @@ export class PeriodAttendanceComponent {
                     showConfirmButton: false,
                     timer: 1000
                 });
-                this.attendanceForm.reset();
+                this.classStatus = response.class_status;
+                // this.attendanceForm.reset();
                 this.studentList = [];
             }
         })

@@ -130,6 +130,12 @@ export class StudentService {
           }));
   }
 
+  updateClassStarted(data){
+      return this.http.post(this.BASE_API_URL + '/saveAttendance',data)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+          }));
+  }
+
   refundStudent(id){
       return this.http.get(this.BASE_API_URL + '/refundPayment/' + id)
           .pipe(catchError(this.errorService.serverError), tap(response => {
