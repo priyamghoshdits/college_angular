@@ -76,12 +76,24 @@
 <!--                            {{classStatus.started_by}}-->
                             <div class="row">
                                 <div class="col-12 mb-3">
-                                    Class started: <button [disabled]="classStatus.started_by !== null" (click)="updateStarted()" class="btn btn-primary me-1">Start</button>
+                                    Class Started By: {{classStatus.time_on}}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    Class Started By: {{classStatus.started_by_name}}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    Class started: <button [disabled]="classStatus.started_by !== null" (click)="updateClassStart()" class="btn btn-primary me-1">Start</button>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-12 mb-3">
-                                    Class Ended: <button [disabled]="classStatus.started_by == null" class="btn btn-primary me-1">Ended</button>
+                                    Class Started By: {{classStatus.ended_on}}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    Class Ended By: {{classStatus.ended_by_name}}
+                                </div>
+                                <div class="col-12 mb-3">
+                                    Class Ended: <button [disabled]="classStatus.ended_by !== null" (click)="updateClassEnd()" class="btn btn-primary me-1">Ended</button>
                                 </div>
                             </div>
                         </div>

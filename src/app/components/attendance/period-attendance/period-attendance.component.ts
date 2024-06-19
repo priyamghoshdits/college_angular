@@ -136,9 +136,33 @@ export class PeriodAttendanceComponent {
         });
     }
 
-    updateStarted(){
-        this.studentService.updateClassStarted(this.attendanceForm.value).subscribe(() => {
+    updateClassStart(){
+        this.studentService.updateClassStart(this.classStatus.id).subscribe((response: any) => {
+            if(response.success == 1){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Class Started',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                this.classStatus = response.class_status;
+            }
+        });
+    }
 
+    updateClassEnd(){
+        this.studentService.updateClassEnd(this.classStatus.id).subscribe((response: any) => {
+            if(response.success == 1){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Class Ended',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                this.classStatus = response.class_status;
+            }
         });
     }
 
