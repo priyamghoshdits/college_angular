@@ -1,1 +1,140 @@
-<p>staff-experience works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Experience</h5><span>Staff Experience</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="staffExperienceForm">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1"> Select
+                                            Staff</label>
+
+                                        <select style="width: 100%" formControlName="staff_id" class="form-select"
+                                            required>
+                                            <option value="null"> Select </option>
+                                            <option *ngFor="let data of memberList" [value]="data.id">
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+
+                                        <div *ngIf="staffExperienceForm.controls['staff_id'].errors?.['required'] && staffExperienceForm.controls['staff_id'].touched "
+                                            class="text text-danger mt-1">Staff required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Designation</label>
+                                        <input class="form-control" formControlName="designation" type="text"
+                                            placeholder="Enter Designation">
+                                        <div *ngIf="staffExperienceForm.controls['designation'].errors?.['required'] && staffExperienceForm.controls['designation'].touched "
+                                            class="text text-danger mt-1">Designation required</div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">From Date</label>
+                                        <input class="form-control" formControlName="from_date" type="date">
+                                        <div *ngIf="staffExperienceForm.controls['from_date'].errors?.['required'] && staffExperienceForm.controls['from_date'].touched "
+                                            class="text text-danger mt-1">From Date required</div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">To Date</label>
+                                        <input class="form-control" formControlName="to_date" type="date">
+                                        <div *ngIf="staffExperienceForm.controls['to_date'].errors?.['required'] && staffExperienceForm.controls['to_date'].touched "
+                                            class="text text-danger mt-1">To Date required</div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Organization</label>
+                                        <input class="form-control" formControlName="organization" type="text"
+                                            placeholder="Enter Organization">
+                                        <div *ngIf="staffExperienceForm.controls['organization'].errors?.['required'] && staffExperienceForm.controls['organization'].touched "
+                                            class="text text-danger mt-1">Organization required</div>
+                                    </div>
+
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Experience(Year and
+                                            Month)</label>
+                                        <input class="form-control" formControlName="experience" type="text"
+                                            placeholder="Enter Experience">
+                                        <div *ngIf="staffExperienceForm.controls['experience'].errors?.['required'] && staffExperienceForm.controls['experience'].touched "
+                                            class="text text-danger mt-1">Experience required</div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0">Upload Experience Proof</label>
+                                        <input class="form-control" formControlName="experience_proof" type="file"
+                                            (change)="uploadExperienceProof($event)">
+                                        <div *ngIf="staffExperienceForm.controls['experience_proof'].errors?.['required'] && staffExperienceForm.controls['experience_proof'].touched "
+                                            class="text text-danger mt-1">Experience Proof required</div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary me-1" [hidden]="isUpdatable == true"
+                                (click)="saveStaffExperience()">Submit</button>
+                            <button class="btn btn-primary me-1" [hidden]="isUpdatable == false"
+                                (click)="updateStaffExperience()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                (click)="cancelUpdate()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-sm-12 col-xl-6">
+            <div class="row" *ngIf="permission[3].permission == 1">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Department List</h5>
+                                <span>Full Department List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+
+                                            <th scope="col"
+                                                *ngIf="permission[1].permission == 1 && permission[2].permission == 1">
+                                                Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let record of departmentList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{record.name}}</td>
+
+                                            <td>
+                                                <a *ngIf="permission[1].permission == 1"
+                                                    (click)="editDepartment(record)"><mat-icon>edit</mat-icon></a>
+                                                <a *ngIf="permission[2].permission == 1"
+                                                    (click)="deleteDepartment(record)"><mat-icon>delete</mat-icon></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="departmentList.length > 8"
+                                    (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>

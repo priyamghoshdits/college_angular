@@ -14,14 +14,21 @@ export class MemberService {
   teacherList = [];
   memberList = [];
   categoryList = [];
+  staffExperienceList = [];
 
   teacherListSubject = new Subject<any[]>();
   memberListSubject = new Subject<any[]>();
   CategoryListSubject = new Subject<any[]>();
   staffAttendanceSubject = new Subject<any[]>();
   generatedPayrollSubject = new Subject<any[]>();
+  staffExperienceListSubject = new Subject<any[]>();
+
   getTeacherListener(){
     return this.teacherListSubject.asObservable();
+  }
+
+  getStaffExperienceListener(){
+    return this.staffExperienceListSubject.asObservable();
   }
 
   getGeneratedPayrollListener(){
@@ -120,6 +127,19 @@ export class MemberService {
           }
         }));
   }
+
+  saveStaffExperience(value){
+    return this.http.post(this.BASE_API_URL + '/saveExperience', value)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+            // @ts-ignore
+          if(response.success == 1){
+              // @ts-ignore
+            this.staffExperienceList.push(response.data);
+            this.staffExperienceListSubject.next([...this.staffExperienceList]);
+          }
+        }));
+  }
+
 
   saveGeneratedPayroll(value){
     return this.http.post(this.BASE_API_URL + '/savePayroll', value)
