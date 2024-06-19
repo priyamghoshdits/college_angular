@@ -65,15 +65,38 @@
                     </div>
                 </div>
             </div>
-            <div class="row" [hidden]="studentList.length == 0">
+<!--            <div [hidden]="showList">-->
+            <div class="row" [hidden]="!(studentList.length == 0 || classStatus !== null) || showList">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Class Status</h5>
+                        </div>
+                        <div class="card-body" *ngIf="classStatus">
+<!--                            {{classStatus.started_by}}-->
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    Class started: <button [disabled]="classStatus.started_by !== null" (click)="updateStarted()" class="btn btn-primary me-1">Start</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mb-3">
+                                    Class Ended: <button [disabled]="classStatus.started_by == null" class="btn btn-primary me-1">Ended</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" [hidden]="(studentList.length == 0 || classStatus != null)">
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
                             <h5>Student List</h5>
                         </div>
                         <div class="card-body">
-
-
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -110,16 +133,14 @@
                                     <button class="btn btn-primary me-1" (click)="saveAttendance()">Submit</button>
                                     </tbody>
                                 </table>
-
                             </div>
-
-
                         </div>
                         <div class="card-footer">
                         </div>
                     </div>
                 </div>
             </div>
+<!--            </div>-->
         </div>
 <!--        <div class="col-sm-12 col-xl-6">-->
 <!--            <div class="row">-->
