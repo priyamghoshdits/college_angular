@@ -62,6 +62,7 @@ export class NavService {
 				{ path: '/student-information/student-admission', title: 'Student Admission', type: 'link' },
 				{ path: '/student-information/pre-admission', title: 'Pre Admission', type: 'link' },
 				{ path: '/student-information/achievement', title: 'Achievement', type: 'link' },
+				{ path: '/student-information/education-qualification', title: 'Education Qualification', type: 'link' },
 				{ path: '/student-information/certificate-types', title: 'Certificate Types', type: 'link' },
 				{ path: '/student-information/upload-certificates', title: 'Upload Certificate', type: 'link' },
 				{ path: '/student-information/download-certificates', title: 'Download Certificate', type: 'link' },

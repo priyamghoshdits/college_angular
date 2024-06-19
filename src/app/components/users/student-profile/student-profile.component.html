@@ -3,305 +3,315 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                <div class="card-body">
-                    <div class="warpper">
-                        <input class="radio" id="one" name="group" type="radio" checked>
-                        <input class="radio" id="two" name="group" type="radio">
-                        <input class="radio" id="three" name="group" type="radio">
-                        <input class="radio" id="four" name="group" type="radio">
-                        <div class="tabs">
-                        <label class="tab" id="one-tab" for="one">Profile</label>
-                        <label class="tab" id="two-tab" for="two">Achivements</label>
-                        <label class="tab" id="three-tab" for="three">Placement</label>
-                        <label class="tab" id="four-tab" for="four">Fees</label>
-                          </div>
-                        <div class="panels">
-                        <div class="panel" id="one-panel">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="leftuser_imgoutsection">
-                                        <div class="jshadow_area">
-                                            <img src="assets/images/student.jpg" class="huimg_designs">
-                                        </div>
-                                        <div class="newadd">
-                                        <h1 class="studentimgdwnarea">
-                                            Course:
-                                            <span class="studentimgdwnarea1">Diploma Engineering</span>
-                                        </h1>
-                                        <h1 class="studentimgdwnarea">
-                                            Semester:
-                                            <span class="studentimgdwnarea1">1st Semester</span>
-                                        </h1>
-                                        <h1 class="studentimgdwnarea">
-                                           Admission Date:
-                                            <span class="studentimgdwnarea1">12/01/2024</span>
-                                        </h1> 
-                                        <h1 class="studentimgdwnarea">
-                                          Email No:
-                                             <span class="studentimgdwnarea1">abcgmail.com</span>
-                                         </h1> 
-                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                                    <div class="rightuser_udetailsoutsection">
-                                        <form >
-                                            <div class="row">
-                                                <div class="col-sm-4 col-md-4">
-                                                    <div class="form-group">
-                                                        <label class="form-label">First Name</label>
-                                                        <input class="form-control" formControlName="first_name"
-                                                               placeholder="First Name" type="text">
-                                                    </div>
+                    <div class="card-body">
+                        <div class="warpper">
+                            <input checked class="radio" id="one" name="group" type="radio">
+                            <input class="radio" id="two" name="group" type="radio">
+                            <input class="radio" id="three" name="group" type="radio">
+                            <input class="radio" id="four" name="group" type="radio">
+                            <div class="tabs">
+                                <label class="tab" for="one" id="one-tab">Profile</label>
+                                <label class="tab" for="two" id="two-tab">Achivements</label>
+                                <label class="tab" for="three" id="three-tab">Placement</label>
+                                <label class="tab" for="four" id="four-tab">Fees</label>
+                            </div>
+                            <div class="panels">
+                                <div class="panel" id="one-panel">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="leftuser_imgoutsection">
+                                                <div class="jshadow_area">
+                                                    <img class="huimg_designs" src="assets/images/student.jpg">
                                                 </div>
-                                                <div class="col-sm-4 col-md-4">
-                                                    <div class="form-group">
-                                                        <label class="form-label">Middle Name</label>
-                                                        <input class="form-control" formControlName="middle_name"
-                                                               placeholder="Middle Name" type="text">
-                                                    </div>
+                                                <div class="newadd">
+                                                    <h1 class="studentimgdwnarea">
+                                                        Course:
+                                                        <span class="studentimgdwnarea1">Diploma Engineering</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Semester:
+                                                        <span class="studentimgdwnarea1">1st Semester</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Admission Date:
+                                                        <span class="studentimgdwnarea1">12/01/2024</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Email No:
+                                                        <span class="studentimgdwnarea1">abcgmail.com</span>
+                                                    </h1>
                                                 </div>
-                                                <div class="col-sm-4 col-md-4">
-                                                    <div class="form-group">
-                                                        <label class="form-label">Last Name</label>
-                                                        <input class="form-control" formControlName="last_name" placeholder="Last Name"
-                                                               type="text">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="form-label">Date Of Birth</label>
-                                                        <input class="form-control" formControlName="dob" placeholder="Date Of Birth"
-                                                               type="date">
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6">
-                                                    <div class="form-group">
-                                                        <label class="form-label">Phone Number</label>
-                                                        <input class="form-control" formControlName="mobile_no"
-                                                               placeholder="Phone Number" type="mobile_no">
-                                                       
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6">
-                                                    <label>Blood Group</label>
-                                                    <select class="form-select" formControlName="blood_group" style="width: 100%">
-                                                        <option value="null">Select</option>
-                                                        <option value="A+"> A+</option>
-                                                        <option value="A-"> A-</option>
-                                                        <option value="B+"> B+</option>
-                                                        <option value="B-"> B-</option>
-                                                        <option value="AB+"> AB+</option>
-                                                        <option value="AB-"> AB-</option>
-                                                        <option value="O+"> O+</option>
-                                                        <option value="O-"> O-</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6">
-                                                    <label>Religion</label>
-                                                    <select class="form-select" formControlName="religion" style="width: 100%">
-                                                        <option value="null">Select</option>
-                                                        <option value="Hinduism"> Hinduism</option>
-                                                        <option value="Buddhism"> Buddhism</option>
-                                                        <option value="Christianity"> Christianity</option>
-                                                        <option value="Confucianism"> Confucianism</option>
-                                                        <option value="Islam"> Islam</option>
-                                                        <option value="Jainism"> Jainism</option>
-                                                        <option value="Judaism"> Judaism</option>
-                                                        <option value="Shinto"> Shinto</option>
-                                                        <option value="Sikhism"> Sikhism</option>
-                                                        <option value="Taoism"> Taoism</option>
-                                                        <option value="Zoroastrianism"> Zoroastrianism</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 mt-3">
-                                                    <label>Caste</label>
-                                                    <select class="form-select" formControlName="category_id" style="width: 100%">
-                                                        <option value="">Select</option>
-                                                        
-                                                    </select>
-                                                </div>
-                                                <div class="col-sm-6 col-md-6 mt-3">
-                                                    <label>Gender</label>
-                                                    <select class="form-select" formControlName="gender" style="width: 100%">
-                                                        <option value="null">Select</option>
-                                                        <option value="Male"> Male</option>
-                                                        <option value="Female"> Female</option>
-                                                    </select>
-                                                </div>
-                
-                                              
                                             </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                </div>
-                                </div>
-                        <div class="panel" id="two-panel">
-
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="leftuser_imgoutsection">
-                                        <div class="jshadow_area">
-                                            <img src="assets/images/student.jpg" class="huimg_designs">
                                         </div>
-                                        <div class="newadd">
-                                        <h1 class="studentimgdwnarea">
-                                            Course:
-                                            <span class="studentimgdwnarea1">Diploma Engineering</span>
-                                        </h1>
-                                        <h1 class="studentimgdwnarea">
-                                            Semester:
-                                            <span class="studentimgdwnarea1">1st Semester</span>
-                                        </h1>
-                                        <h1 class="studentimgdwnarea">
-                                           Admission Date:
-                                            <span class="studentimgdwnarea1">12/01/2024</span>
-                                        </h1> 
-                                        <h1 class="studentimgdwnarea">
-                                          Email No:
-                                             <span class="studentimgdwnarea1">abcgmail.com</span>
-                                         </h1> 
-                                         </div>
+                                        <div class="col-lg-9">
+                                            <div class="rightuser_udetailsoutsection">
+                                                <form>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">First Name</label>
+                                                                <input class="form-control" formControlName="first_name"
+                                                                       placeholder="First Name" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Middle Name</label>
+                                                                <input class="form-control"
+                                                                       formControlName="middle_name"
+                                                                       placeholder="Middle Name" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Last Name</label>
+                                                                <input class="form-control" formControlName="last_name"
+                                                                       placeholder="Last Name"
+                                                                       type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Date Of Birth</label>
+                                                                <input class="form-control" formControlName="dob"
+                                                                       placeholder="Date Of Birth"
+                                                                       type="date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Phone Number</label>
+                                                                <input class="form-control" formControlName="mobile_no"
+                                                                       placeholder="Phone Number" type="mobile_no">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6">
+                                                            <label>Blood Group</label>
+                                                            <select class="form-select" formControlName="blood_group"
+                                                                    style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="A+"> A+</option>
+                                                                <option value="A-"> A-</option>
+                                                                <option value="B+"> B+</option>
+                                                                <option value="B-"> B-</option>
+                                                                <option value="AB+"> AB+</option>
+                                                                <option value="AB-"> AB-</option>
+                                                                <option value="O+"> O+</option>
+                                                                <option value="O-"> O-</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6">
+                                                            <label>Religion</label>
+                                                            <select class="form-select" formControlName="religion"
+                                                                    style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="Hinduism"> Hinduism</option>
+                                                                <option value="Buddhism"> Buddhism</option>
+                                                                <option value="Christianity"> Christianity</option>
+                                                                <option value="Confucianism"> Confucianism</option>
+                                                                <option value="Islam"> Islam</option>
+                                                                <option value="Jainism"> Jainism</option>
+                                                                <option value="Judaism"> Judaism</option>
+                                                                <option value="Shinto"> Shinto</option>
+                                                                <option value="Sikhism"> Sikhism</option>
+                                                                <option value="Taoism"> Taoism</option>
+                                                                <option value="Zoroastrianism"> Zoroastrianism</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 mt-3">
+                                                            <label>Caste</label>
+                                                            <select class="form-select" formControlName="category_id"
+                                                                    style="width: 100%">
+                                                                <option value="">Select</option>
+
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-6 col-md-6 mt-3">
+                                                            <label>Gender</label>
+                                                            <select class="form-select" formControlName="gender"
+                                                                    style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="Male"> Male</option>
+                                                                <option value="Female"> Female</option>
+                                                            </select>
+                                                        </div>
+
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-9">
-                            <div class="table-responsive" >
-                                <table class="table" >
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">1</th>
-                                        <th scope="col">2</th>
-                                        <th scope="col">3</th>
-                                        <th scope="col" >4</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr >
-                                        <td>Table1</td>
-                                        <td>Table2</td>
-                                        <td>Table3</td>
-                                        <td>Table4</td>
-                                      
-                                    </tr>
-                                    </tbody>
-                                </table>
-                        
+                                <div class="panel" id="two-panel">
 
-                            </div>
-                            </div>
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="leftuser_imgoutsection">
+                                                <div class="jshadow_area">
+                                                    <img class="huimg_designs" src="assets/images/student.jpg">
+                                                </div>
+                                                <div class="newadd">
+                                                    <h1 class="studentimgdwnarea">
+                                                        Course:
+                                                        <span class="studentimgdwnarea1">Diploma Engineering</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Semester:
+                                                        <span class="studentimgdwnarea1">1st Semester</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Admission Date:
+                                                        <span class="studentimgdwnarea1">12/01/2024</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Email No:
+                                                        <span class="studentimgdwnarea1">abcgmail.com</span>
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">1</th>
+                                                        <th scope="col">2</th>
+                                                        <th scope="col">3</th>
+                                                        <th scope="col">4</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Table1</td>
+                                                        <td>Table2</td>
+                                                        <td>Table3</td>
+                                                        <td>Table4</td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel" id="three-panel">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="leftuser_imgoutsection">
+                                                <div class="jshadow_area">
+                                                    <img class="huimg_designs" src="assets/images/student.jpg">
+                                                </div>
+                                                <div class="newadd">
+                                                    <h1 class="studentimgdwnarea">
+                                                        Course:
+                                                        <span class="studentimgdwnarea1">Diploma Engineering</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Semester:
+                                                        <span class="studentimgdwnarea1">1st Semester</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Admission Date:
+                                                        <span class="studentimgdwnarea1">12/01/2024</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Email No:
+                                                        <span class="studentimgdwnarea1">abcgmail.com</span>
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">1</th>
+                                                        <th scope="col">2</th>
+                                                        <th scope="col">3</th>
+                                                        <th scope="col">4</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Table1</td>
+                                                        <td>Table2</td>
+                                                        <td>Table3</td>
+                                                        <td>Table4</td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel" id="four-panel">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="leftuser_imgoutsection">
+                                                <div class="jshadow_area">
+                                                    <img class="huimg_designs" src="assets/images/student.jpg">
+                                                </div>
+                                                <div class="newadd">
+                                                    <h1 class="studentimgdwnarea">
+                                                        Course:
+                                                        <span class="studentimgdwnarea1">Diploma Engineering</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Semester:
+                                                        <span class="studentimgdwnarea1">1st Semester</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Admission Date:
+                                                        <span class="studentimgdwnarea1">12/01/2024</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Email No:
+                                                        <span class="studentimgdwnarea1">abcgmail.com</span>
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th scope="col">1</th>
+                                                        <th scope="col">2</th>
+                                                        <th scope="col">3</th>
+                                                        <th scope="col">4</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Table1</td>
+                                                        <td>Table2</td>
+                                                        <td>Table3</td>
+                                                        <td>Table4</td>
+
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="panel" id="three-panel">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="leftuser_imgoutsection">
-                                        <div class="jshadow_area">
-                                            <img src="assets/images/student.jpg" class="huimg_designs">
-                                        </div>
-                                        <div class="newadd">
-                                        <h1 class="studentimgdwnarea">
-                                            Course:
-                                            <span class="studentimgdwnarea1">Diploma Engineering</span>
-                                        </h1>
-                                        <h1 class="studentimgdwnarea">
-                                            Semester:
-                                            <span class="studentimgdwnarea1">1st Semester</span>
-                                        </h1>
-                                        <h1 class="studentimgdwnarea">
-                                           Admission Date:
-                                            <span class="studentimgdwnarea1">12/01/2024</span>
-                                        </h1> 
-                                        <h1 class="studentimgdwnarea">
-                                          Email No:
-                                             <span class="studentimgdwnarea1">abcgmail.com</span>
-                                         </h1> 
-                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                            <div class="table-responsive" >
-                                <table class="table" >
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">1</th>
-                                        <th scope="col">2</th>
-                                        <th scope="col">3</th>
-                                        <th scope="col" >4</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr >
-                                        <td>Table1</td>
-                                        <td>Table2</td>
-                                        <td>Table3</td>
-                                        <td>Table4</td>
-                                      
-                                    </tr>
-                                    </tbody>
-                                </table>
-                        
-
-                            </div>
-                            </div>
-                            </div>
-                        </div>
-                        <div class="panel" id="four-panel">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="leftuser_imgoutsection">
-                                        <div class="jshadow_area">
-                                            <img src="assets/images/student.jpg" class="huimg_designs">
-                                        </div>
-                                        <div class="newadd">
-                                        <h1 class="studentimgdwnarea">
-                                            Course:
-                                            <span class="studentimgdwnarea1">Diploma Engineering</span>
-                                        </h1>
-                                        <h1 class="studentimgdwnarea">
-                                            Semester:
-                                            <span class="studentimgdwnarea1">1st Semester</span>
-                                        </h1>
-                                        <h1 class="studentimgdwnarea">
-                                           Admission Date:
-                                            <span class="studentimgdwnarea1">12/01/2024</span>
-                                        </h1> 
-                                        <h1 class="studentimgdwnarea">
-                                          Email No:
-                                             <span class="studentimgdwnarea1">abcgmail.com</span>
-                                         </h1> 
-                                         </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-9">
-                            <div class="table-responsive" >
-                                <table class="table" >
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">1</th>
-                                        <th scope="col">2</th>
-                                        <th scope="col">3</th>
-                                        <th scope="col" >4</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr >
-                                        <td>Table1</td>
-                                        <td>Table2</td>
-                                        <td>Table3</td>
-                                        <td>Table4</td>
-                                      
-                                    </tr>
-                                    </tbody>
-                                </table>
-                        
-
-                            </div>
-                            </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                    </div>
+                </div>
             </div>
-            </div>
-            </div>
+        </div>
+    </div>
+</div>

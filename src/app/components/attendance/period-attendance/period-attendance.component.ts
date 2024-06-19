@@ -136,9 +136,9 @@ export class PeriodAttendanceComponent {
         });
     }
 
-    updateClassStart(){
+    updateClassStart() {
         this.studentService.updateClassStart(this.classStatus.id).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -151,9 +151,9 @@ export class PeriodAttendanceComponent {
         });
     }
 
-    updateClassEnd(){
+    updateClassEnd() {
         this.studentService.updateClassEnd(this.classStatus.id).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',

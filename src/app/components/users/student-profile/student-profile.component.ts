@@ -12,7 +12,7 @@ export class StudentProfileComponent {
 
   constructor(private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
-       console.log(params['id']); // Access the 'id' parameter from the URL
+       console.log(params['id']);
     });
   }
 }

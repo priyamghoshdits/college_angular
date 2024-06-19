@@ -8,6 +8,7 @@ import {PreAdmissionComponent} from "./pre-admission/pre-admission.component";
 import {SendStudentLoginCredentialComponent} from "./send-student-login-credential/send-student-login-credential.component";
 import {CautionMoneyComponent} from "./caution-money/caution-money.component";
 import {AchivementComponent} from "./achivement/achivement.component";
+import {EducationComponent} from "./education/education.component";
 
 const routes: Routes = [
   {
@@ -40,6 +41,14 @@ const routes: Routes = [
     data: {
       title: "Certificate Types",
       breadcrumb: "Certificate Types"
+    }
+  },
+  {
+    path: 'education-qualification',
+    component: EducationComponent,
+    data: {
+      title: "Education Qualification",
+      breadcrumb: "Education Qualification"
     }
   },
   {
