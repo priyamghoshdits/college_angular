@@ -15,6 +15,7 @@ import {ApproveLeaveComponent} from "./approve-leave/approve-leave.component";
 import {PayrollTypesComponent} from "./payroll-types/payroll-types.component";
 import {StaffExperienceComponent} from "./staff-experience/staff-experience.component";
 import { PaperSetterComponent } from './paper-setter/paper-setter.component';
+import {JournalPublicationComponent} from "./journal-publication/journal-publication.component";
 
 const routes: Routes = [
   {
@@ -23,6 +24,14 @@ const routes: Routes = [
     data: {
       title: "Add Staff",
       breadcrumb: "Add Staff"
+    }
+  },
+  {
+    path: 'journal-publication',
+    component: JournalPublicationComponent,
+    data: {
+      title: "Journal Publication",
+      breadcrumb: "Journal Publication"
     }
   },
   {
