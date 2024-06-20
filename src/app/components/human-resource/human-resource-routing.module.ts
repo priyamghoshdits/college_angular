@@ -14,6 +14,7 @@ import {PayrollComponent} from "./payroll/payroll.component";
 import {ApproveLeaveComponent} from "./approve-leave/approve-leave.component";
 import {PayrollTypesComponent} from "./payroll-types/payroll-types.component";
 import {StaffExperienceComponent} from "./staff-experience/staff-experience.component";
+import { PaperSetterComponent } from './paper-setter/paper-setter.component';
 
 const routes: Routes = [
   {
@@ -30,6 +31,14 @@ const routes: Routes = [
     data: {
       title: "Staff Experience",
       breadcrumb: "Staff Experience"
+    }
+  },
+  {
+    path: 'paper-setter',
+    component: PaperSetterComponent,
+    data: {
+      title: "Paper Setter",
+      breadcrumb: "Paper Setter"
     }
   },
   {
