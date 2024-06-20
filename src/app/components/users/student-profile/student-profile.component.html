@@ -21,7 +21,7 @@
                                 <div class="panel" id="one-panel">
                                     <div class="row">
                                         <div class="col-lg-3">
-                                            <div class="leftuser_imgoutsection" *ngIf="student_details">
+                                            <div *ngIf="student_details" class="leftuser_imgoutsection">
                                                 <div class="jshadow_area">
                                                     <img class="huimg_designs" src="assets/images/student.jpg">
                                                 </div>
@@ -110,26 +110,28 @@
                                                             <span class="studentimgdwnarea3">{{student_details.material_status}}</span>
                                                         </h1>
                                                         <h1 class="studentimgdwnarea2">
-                                                            <i class="fa-solid fa-download"></i> Upload date of birth
+                                                            <i class="fa-solid fa-download"></i> Date of birth
                                                             proof:
                                                             <span class="studentimgdwnarea3" style="color: blue;"><a
-                                                                    href="">Download Here</a></span>
+                                                                    href="{{student_details.dob_proof_file}}">Download Here</a></span>
                                                         </h1>
                                                         <h1 class="studentimgdwnarea2">
-                                                            <i class="fa-solid fa-download"></i> Upload Admission Slip:
+                                                            <i class="fa-solid fa-download"></i> Admission Slip:
                                                             <span class="studentimgdwnarea3" style="color: blue;"><a
-                                                                    href="">Download Here</a></span>
+                                                                    href="{{student_details.admission_slip_file}}">Download Here</a></span>
                                                         </h1>
                                                         <h1 class="studentimgdwnarea2">
-                                                            <i class="fa-solid fa-download"></i> Upload aadhaar Card:
+                                                            <i class="fa-solid fa-download"></i> Aadhaar Card:
                                                             <span class="studentimgdwnarea3" style="color: blue;"><a
-                                                                    href="">Download Here</a></span>
+                                                                    href="{{student_details.aadhaar_card_file}}">Download Here</a></span>
                                                         </h1>
                                                         <h1 class="studentimgdwnarea2">
-                                                            <i class="fa-solid fa-download"></i> Upload registration
+                                                            <i class="fa-solid fa-download"></i> Registration
                                                             certificate:
+<!--                                                            <span class="studentimgdwnarea3" style="color: blue;"><a-->
+<!--                                                                    href="{{FILE_URL}}/aadhaar_card_proof/{{student_details.aadhaar_card_file}}">Download Here</a></span>-->
                                                             <span class="studentimgdwnarea3" style="color: blue;"><a
-                                                                    href="">Download Here</a></span>
+                                                                    href="{{student_details.aadhaar_card_file}}">Download Here</a></span>
                                                         </h1>
                                                     </div>
                                                 </div>
@@ -142,24 +144,24 @@
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
-                                                    <tr>
-                                                        <th scope="col">Board/Council/Others</th>
-                                                        <th scope="col">Marks Obtained</th>
-                                                        <th scope="col">Percentage</th>
-                                                        <th scope="col">Division/Class</th>
-                                                        <th scope="col">Main Subjects</th>
-                                                        <th scope="col">Yeras Of Passing</th>
-                                                    </tr>
+                                                <tr>
+                                                    <th scope="col">Board/Council/Others</th>
+                                                    <th scope="col">Marks Obtained</th>
+                                                    <th scope="col">Percentage</th>
+                                                    <th scope="col">Division/Class</th>
+                                                    <th scope="col">Main Subjects</th>
+                                                    <th scope="col">Yeras Of Passing</th>
+                                                </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>{{education_qualification.board_ten}}</td>
-                                                        <td>{{education_qualification.marks_obtained_ten}}</td>
-                                                        <td>{{education_qualification.percentage_ten}}</td>
-                                                        <td>{{education_qualification.division_ten}}</td>
-                                                        <td>{{education_qualification.main_subject_ten}}</td>
-                                                        <td>{{education_qualification.year_of_passing_ten}}</td>
-                                                    </tr>
+                                                <tr>
+                                                    <td>{{education_qualification.board_ten}}</td>
+                                                    <td>{{education_qualification.marks_obtained_ten}}</td>
+                                                    <td>{{education_qualification.percentage_ten}}</td>
+                                                    <td>{{education_qualification.division_ten}}</td>
+                                                    <td>{{education_qualification.main_subject_ten}}</td>
+                                                    <td>{{education_qualification.year_of_passing_ten}}</td>
+                                                </tr>
                                                 </tbody>
                                             </table>
 
@@ -169,24 +171,24 @@
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
-                                                    <tr>
-                                                        <th scope="col">Board/Council/Others</th>
-                                                        <th scope="col">Marks Obtained</th>
-                                                        <th scope="col">Percentage</th>
-                                                        <th scope="col">Division/Class</th>
-                                                        <th scope="col">Main Subjects</th>
-                                                        <th scope="col">Yeras Of Passing</th>
-                                                    </tr>
+                                                <tr>
+                                                    <th scope="col">Board/Council/Others</th>
+                                                    <th scope="col">Marks Obtained</th>
+                                                    <th scope="col">Percentage</th>
+                                                    <th scope="col">Division/Class</th>
+                                                    <th scope="col">Main Subjects</th>
+                                                    <th scope="col">Yeras Of Passing</th>
+                                                </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>{{education_qualification.board_twelve}}</td>
-                                                        <td>{{education_qualification.marks_obtained_twelve}}</td>
-                                                        <td>{{education_qualification.percentage_twelve}}</td>
-                                                        <td>{{education_qualification.division_twelve}}</td>
-                                                        <td>{{education_qualification.main_subject_twelve}}</td>
-                                                        <td>{{education_qualification.year_of_passing_twelve}}</td>
-                                                    </tr>
+                                                <tr>
+                                                    <td>{{education_qualification.board_twelve}}</td>
+                                                    <td>{{education_qualification.marks_obtained_twelve}}</td>
+                                                    <td>{{education_qualification.percentage_twelve}}</td>
+                                                    <td>{{education_qualification.division_twelve}}</td>
+                                                    <td>{{education_qualification.main_subject_twelve}}</td>
+                                                    <td>{{education_qualification.year_of_passing_twelve}}</td>
+                                                </tr>
                                                 </tbody>
                                             </table>
 
@@ -196,24 +198,24 @@
                                         <div class="table-responsive">
                                             <table class="table">
                                                 <thead>
-                                                    <tr>
-                                                        <th scope="col">Board/Council/Others</th>
-                                                        <th scope="col">Marks Obtained</th>
-                                                        <th scope="col">Percentage</th>
-                                                        <th scope="col">Division/Class</th>
-                                                        <th scope="col">Main Subjects</th>
-                                                        <th scope="col">Yeras Of Passing</th>
-                                                    </tr>
+                                                <tr>
+                                                    <th scope="col">Board/Council/Others</th>
+                                                    <th scope="col">Marks Obtained</th>
+                                                    <th scope="col">Percentage</th>
+                                                    <th scope="col">Division/Class</th>
+                                                    <th scope="col">Main Subjects</th>
+                                                    <th scope="col">Yeras Of Passing</th>
+                                                </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td>{{education_qualification.board_graduation}}</td>
-                                                        <td>{{education_qualification.marks_obtained_graduation}}</td>
-                                                        <td>{{education_qualification.percentage_graduation}}</td>
-                                                        <td>{{education_qualification.division_graduation}}</td>
-                                                        <td>{{education_qualification.main_subject_graduation}}</td>
-                                                        <td>{{education_qualification.year_of_passing_graduation}}</td>
-                                                    </tr>
+                                                <tr>
+                                                    <td>{{education_qualification.board_graduation}}</td>
+                                                    <td>{{education_qualification.marks_obtained_graduation}}</td>
+                                                    <td>{{education_qualification.percentage_graduation}}</td>
+                                                    <td>{{education_qualification.division_graduation}}</td>
+                                                    <td>{{education_qualification.main_subject_graduation}}</td>
+                                                    <td>{{education_qualification.year_of_passing_graduation}}</td>
+                                                </tr>
                                                 </tbody>
                                             </table>
 
@@ -272,7 +274,9 @@
                                                             <td>{{record.student_name}}</td>
                                                             <td>{{record.award_date}}</td>
                                                             <td>{{record.award_name}}</td>
-                                                            <td><a href="{{FILE_URL}}/achievement/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a></td>
+                                                            <td><a href="{{FILE_URL}}/achievement/{{record.file_name}}">
+                                                                <mat-icon>cloud_download</mat-icon>
+                                                            </a></td>
                                                         </tr>
                                                         </tbody>
                                                     </table>

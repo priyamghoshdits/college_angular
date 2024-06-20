@@ -346,6 +346,8 @@ export class StudentAdmisssionComponent {
         formData.append("father_income_proof", this.father_income_proof);
         // @ts-ignore
         formData.append("mother_income_proof", this.mother_income_proof);
+        // @ts-ignore
+        formData.append("registration_proof", this.registration_no_proof);
 
 
         // dob_proof: null;
