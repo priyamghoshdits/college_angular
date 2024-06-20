@@ -2,19 +2,23 @@ import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {StudentService} from "../../../services/student.service";
 import {NgForOf, NgIf} from "@angular/common";
+import {MatIconModule} from "@angular/material/icon";
+import {environment} from "../../../../environments/environment";
 
 @Component({
     selector: 'app-student-profile',
     standalone: true,
     imports: [
         NgIf,
-        NgForOf
+        NgForOf,
+        MatIconModule
     ],
     templateUrl: './student-profile.component.html',
     styleUrl: './student-profile.component.scss'
 })
 export class StudentProfileComponent {
 
+    public FILE_URL = environment.FILE_URL;
     student_details: any = null;
     achievement: any[];
     placement: any[];
