@@ -26,6 +26,12 @@ export class StudentService {
         });
     }
 
+    getSingleStudentFullDetails(student_id){
+        return this.http.get(this.BASE_API_URL + '/getStudentFullDetails/' + student_id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
 
     saveEducationQualification(data){
         return this.http.post(this.BASE_API_URL + '/saveEducationQualification', data)

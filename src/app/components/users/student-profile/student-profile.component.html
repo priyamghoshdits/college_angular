@@ -9,11 +9,13 @@
                             <input class="radio" id="two" name="group" type="radio">
                             <input class="radio" id="three" name="group" type="radio">
                             <input class="radio" id="four" name="group" type="radio">
+                            <input class="radio" id="five" name="group" type="radio">
                             <div class="tabs">
                                 <label class="tab" for="one" id="one-tab">Profile</label>
                                 <label class="tab" for="two" id="two-tab">Achivements</label>
                                 <label class="tab" for="three" id="three-tab">Placement</label>
                                 <label class="tab" for="four" id="four-tab">Fees</label>
+                                <label class="tab" for="five" id="five-tab">Result</label>
                             </div>
                             <div class="panels">
                                 <div class="panel" id="one-panel">
@@ -40,107 +42,182 @@
                                                         Email No:
                                                         <span class="studentimgdwnarea1">abcgmail.com</span>
                                                     </h1>
+
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-9">
-                                            <div class="rightuser_udetailsoutsection">
-                                                <form>
-                                                    <div class="row">
-                                                        <div class="col-sm-4 col-md-4">
-                                                            <div class="form-group">
-                                                                <label class="form-label">First Name</label>
-                                                                <input class="form-control" formControlName="first_name"
-                                                                       placeholder="First Name" type="text">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-4 col-md-4">
-                                                            <div class="form-group">
-                                                                <label class="form-label">Middle Name</label>
-                                                                <input class="form-control"
-                                                                       formControlName="middle_name"
-                                                                       placeholder="Middle Name" type="text">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-4 col-md-4">
-                                                            <div class="form-group">
-                                                                <label class="form-label">Last Name</label>
-                                                                <input class="form-control" formControlName="last_name"
-                                                                       placeholder="Last Name"
-                                                                       type="text">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label">Date Of Birth</label>
-                                                                <input class="form-control" formControlName="dob"
-                                                                       placeholder="Date Of Birth"
-                                                                       type="date">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <div class="form-group">
-                                                                <label class="form-label">Phone Number</label>
-                                                                <input class="form-control" formControlName="mobile_no"
-                                                                       placeholder="Phone Number" type="mobile_no">
-
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <label>Blood Group</label>
-                                                            <select class="form-select" formControlName="blood_group"
-                                                                    style="width: 100%">
-                                                                <option value="null">Select</option>
-                                                                <option value="A+"> A+</option>
-                                                                <option value="A-"> A-</option>
-                                                                <option value="B+"> B+</option>
-                                                                <option value="B-"> B-</option>
-                                                                <option value="AB+"> AB+</option>
-                                                                <option value="AB-"> AB-</option>
-                                                                <option value="O+"> O+</option>
-                                                                <option value="O-"> O-</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6">
-                                                            <label>Religion</label>
-                                                            <select class="form-select" formControlName="religion"
-                                                                    style="width: 100%">
-                                                                <option value="null">Select</option>
-                                                                <option value="Hinduism"> Hinduism</option>
-                                                                <option value="Buddhism"> Buddhism</option>
-                                                                <option value="Christianity"> Christianity</option>
-                                                                <option value="Confucianism"> Confucianism</option>
-                                                                <option value="Islam"> Islam</option>
-                                                                <option value="Jainism"> Jainism</option>
-                                                                <option value="Judaism"> Judaism</option>
-                                                                <option value="Shinto"> Shinto</option>
-                                                                <option value="Sikhism"> Sikhism</option>
-                                                                <option value="Taoism"> Taoism</option>
-                                                                <option value="Zoroastrianism"> Zoroastrianism</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6 mt-3">
-                                                            <label>Caste</label>
-                                                            <select class="form-select" formControlName="category_id"
-                                                                    style="width: 100%">
-                                                                <option value="">Select</option>
-
-                                                            </select>
-                                                        </div>
-                                                        <div class="col-sm-6 col-md-6 mt-3">
-                                                            <label>Gender</label>
-                                                            <select class="form-select" formControlName="gender"
-                                                                    style="width: 100%">
-                                                                <option value="null">Select</option>
-                                                                <option value="Male"> Male</option>
-                                                                <option value="Female"> Female</option>
-                                                            </select>
-                                                        </div>
-
+                                            <div *ngIf="student_details != null" class="rightuser_udetailsoutsection">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-user"></i> Name:
+                                                            <span class="studentimgdwnarea3">{{student_details.first_name}} {{student_details.middle_name}} {{student_details.last_name}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-calendar-days"></i> Date of birth:
+                                                            <span class="studentimgdwnarea3">{{student_details.dob}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-phone"></i> Phone No:
+                                                            <span class="studentimgdwnarea3">{{student_details.mobile_no}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-calendar-days"></i> Admission date:
+                                                            <span class="studentimgdwnarea3">{{student_details.admission_date}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-cube"></i> Regisatration No:
+                                                            <span class="studentimgdwnarea3">{{student_details.registration_no}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-graduation-cap"></i> Course:
+                                                            <span class="studentimgdwnarea3">{{student_details.course_name}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-graduation-cap"></i> Semester:
+                                                            <span class="studentimgdwnarea3">{{student_details.current_semester}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-cube"></i> Roll No:
+                                                            <span class="studentimgdwnarea3">{{student_details.roll_no}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-location-dot"></i> Address:
+                                                            <span class="studentimgdwnarea3">{{student_details.current_address}}</span>
+                                                        </h1>
 
                                                     </div>
-                                                </form>
+                                                    <div class="col-lg-6">
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-user"></i> Blood Group:
+                                                            <span class="studentimgdwnarea3">{{student_details.blood_group}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-cube"></i> Caste:
+                                                            <span class="studentimgdwnarea3">{{student_details.category_name}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-cube"></i> Religion:
+                                                            <span class="studentimgdwnarea3">{{student_details.religion}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-venus-mars"></i> Gender:
+                                                            <span class="studentimgdwnarea3">{{student_details.gender}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-cube"></i> Marital Status:
+                                                            <span class="studentimgdwnarea3">{{student_details.material_status}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-download"></i> Upload date of birth
+                                                            proof:
+                                                            <span class="studentimgdwnarea3" style="color: blue;"><a
+                                                                    href="">Download Here</a></span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-download"></i> Upload Admission Slip:
+                                                            <span class="studentimgdwnarea3" style="color: blue;"><a
+                                                                    href="">Download Here</a></span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-download"></i> Upload aadhaar Card:
+                                                            <span class="studentimgdwnarea3" style="color: blue;"><a
+                                                                    href="">Download Here</a></span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-download"></i> Upload registration
+                                                            certificate:
+                                                            <span class="studentimgdwnarea3" style="color: blue;"><a
+                                                                    href="">Download Here</a></span>
+                                                        </h1>
+                                                    </div>
+                                                </div>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="education_qualification" class="education_table text-center">
+                                        <h2 class="heading1">Educational Qualification</h2>
+                                        <h4 class="heading2">Class 10th/M.P</h4>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Board/Council/Others</th>
+                                                        <th scope="col">Marks Obtained</th>
+                                                        <th scope="col">Percentage</th>
+                                                        <th scope="col">Division/Class</th>
+                                                        <th scope="col">Main Subjects</th>
+                                                        <th scope="col">Yeras Of Passing</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{education_qualification.board_ten}}</td>
+                                                        <td>{{education_qualification.marks_obtained_ten}}</td>
+                                                        <td>{{education_qualification.percentage_ten}}</td>
+                                                        <td>{{education_qualification.division_ten}}</td>
+                                                        <td>{{education_qualification.main_subject_ten}}</td>
+                                                        <td>{{education_qualification.year_of_passing_ten}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                        <h4 class="heading2"> 10+2/H.S./Equivalent</h4>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Board/Council/Others</th>
+                                                        <th scope="col">Marks Obtained</th>
+                                                        <th scope="col">Percentage</th>
+                                                        <th scope="col">Division/Class</th>
+                                                        <th scope="col">Main Subjects</th>
+                                                        <th scope="col">Yeras Of Passing</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{education_qualification.board_twelve}}</td>
+                                                        <td>{{education_qualification.marks_obtained_twelve}}</td>
+                                                        <td>{{education_qualification.percentage_twelve}}</td>
+                                                        <td>{{education_qualification.division_twelve}}</td>
+                                                        <td>{{education_qualification.main_subject_twelve}}</td>
+                                                        <td>{{education_qualification.year_of_passing_twelve}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+
+                                        </div>
+                                        <h4 class="heading2"> Graduation</h4>
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Board/Council/Others</th>
+                                                        <th scope="col">Marks Obtained</th>
+                                                        <th scope="col">Percentage</th>
+                                                        <th scope="col">Division/Class</th>
+                                                        <th scope="col">Main Subjects</th>
+                                                        <th scope="col">Yeras Of Passing</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{{education_qualification.board_graduation}}</td>
+                                                        <td>{{education_qualification.marks_obtained_graduation}}</td>
+                                                        <td>{{education_qualification.percentage_graduation}}</td>
+                                                        <td>{{education_qualification.division_graduation}}</td>
+                                                        <td>{{education_qualification.main_subject_graduation}}</td>
+                                                        <td>{{education_qualification.year_of_passing_graduation}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -173,28 +250,33 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-9">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th scope="col">1</th>
-                                                        <th scope="col">2</th>
-                                                        <th scope="col">3</th>
-                                                        <th scope="col">4</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>Table1</td>
-                                                        <td>Table2</td>
-                                                        <td>Table3</td>
-                                                        <td>Table4</td>
+                                            <div class="ndiv text-center">
+                                                <h2 class="heading">Achivements</h2>
 
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">Course</th>
+                                                            <th scope="col">Semester</th>
+                                                            <th scope="col">Student</th>
+                                                            <th scope="col">Date</th>
+                                                            <th scope="col">Award Name</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr *ngFor="let record of achievement">
+                                                            <td>{{record.course_name}}</td>
+                                                            <td>{{record.semester_name}}</td>
+                                                            <td>{{record.student_name}}</td>
+                                                            <td>{{record.award_date}}</td>
+                                                            <td>{{record.award_name}}</td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
 
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -227,28 +309,31 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-9">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th scope="col">1</th>
-                                                        <th scope="col">2</th>
-                                                        <th scope="col">3</th>
-                                                        <th scope="col">4</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>Table1</td>
-                                                        <td>Table2</td>
-                                                        <td>Table3</td>
-                                                        <td>Table4</td>
+                                            <div class="ndiv">
+                                                <h2 class="heading">Placement</h2>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">1</th>
+                                                            <th scope="col">2</th>
+                                                            <th scope="col">3</th>
+                                                            <th scope="col">4</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>Table1</td>
+                                                            <td>Table2</td>
+                                                            <td>Table3</td>
+                                                            <td>Table4</td>
 
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
 
 
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -281,28 +366,88 @@
                                             </div>
                                         </div>
                                         <div class="col-lg-9">
-                                            <div class="table-responsive">
-                                                <table class="table">
-                                                    <thead>
-                                                    <tr>
-                                                        <th scope="col">1</th>
-                                                        <th scope="col">2</th>
-                                                        <th scope="col">3</th>
-                                                        <th scope="col">4</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    <tr>
-                                                        <td>Table1</td>
-                                                        <td>Table2</td>
-                                                        <td>Table3</td>
-                                                        <td>Table4</td>
+                                            <div class="ndiv">
+                                                <h2 class="heading">Fees</h2>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">1</th>
+                                                            <th scope="col">2</th>
+                                                            <th scope="col">3</th>
+                                                            <th scope="col">4</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>Table1</td>
+                                                            <td>Table2</td>
+                                                            <td>Table3</td>
+                                                            <td>Table4</td>
 
-                                                    </tr>
-                                                    </tbody>
-                                                </table>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
 
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel" id="five-panel">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="leftuser_imgoutsection">
+                                                <div class="jshadow_area">
+                                                    <img class="huimg_designs" src="assets/images/student.jpg">
+                                                </div>
+                                                <div class="newadd">
+                                                    <h1 class="studentimgdwnarea">
+                                                        Course:
+                                                        <span class="studentimgdwnarea1">Diploma Engineering</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Semester:
+                                                        <span class="studentimgdwnarea1">1st Semester</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Admission Date:
+                                                        <span class="studentimgdwnarea1">12/01/2024</span>
+                                                    </h1>
+                                                    <h1 class="studentimgdwnarea">
+                                                        Email No:
+                                                        <span class="studentimgdwnarea1">abcgmail.com</span>
+                                                    </h1>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="ndiv">
+                                                <h2 class="heading">Result</h2>
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col">1</th>
+                                                            <th scope="col">2</th>
+                                                            <th scope="col">3</th>
+                                                            <th scope="col">4</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>Table1</td>
+                                                            <td>Table2</td>
+                                                            <td>Table3</td>
+                                                            <td>Table4</td>
+
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+
+
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -312,6 +457,3 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
