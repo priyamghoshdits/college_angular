@@ -1,1 +1,188 @@
-<p>admin-attendance works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Attendance</h5><span>Student period Attendance</span>
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="attendanceForm" class="theme-form">
+                                <div class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Course</label>
+                                        <select (change)="getSemester()" class="form-select" formControlName="course_id"
+                                                required style="width: 100%">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of courseList" [value]="data.id">
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="attendanceForm.controls['course_id'].errors?.['required'] && attendanceForm.controls['course_id'].touched "
+                                             class="text text-danger mt-1">Course required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Semester</label>
+                                        <select (change)="getSubject()" class="form-select"
+                                                formControlName="semester_id"
+                                                required style="width: 100%">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="attendanceForm.controls['semester_id'].errors?.['required'] && attendanceForm.controls['semester_id'].touched "
+                                             class="text text-danger mt-1">Semester required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Date</label>
+                                        <input class="form-control" formControlName="date" placeholder="Select date"
+                                               type="date">
+                                        <div *ngIf="attendanceForm.controls['date'].errors?.['required'] && attendanceForm.controls['date'].touched "
+                                             class="text text-danger mt-1">Date required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Subject</label>
+                                        <select class="form-select" formControlName="subject_id" required
+                                                style="width: 100%">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of subjectList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="attendanceForm.controls['subject_id'].errors?.['required'] && attendanceForm.controls['subject_id'].touched "
+                                             class="text text-danger mt-1">Subject required
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button (click)="getStudentAttendanceList()" class="btn btn-primary me-1">
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--            <div [hidden]="showList">-->
+            <div [hidden]="studentList.length == 0" class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Student List</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Attendance
+                                            (<input (change)="markForAll('present')" [checked]="markAllAsPresent"
+                                                    id="age1" name="age10"
+                                                    style="margin-left: 15px" type="radio">
+                                            <label for="age1"> Present</label>
+                                            <input (change)="markForAll('absent')" [checked]="markAllAsAbsent" id="age1"
+                                                   name="age10"
+                                                   style="margin-left: 15px" type="radio">
+                                            <label for="age1"> Absent</label>
+                                            <input (change)="markForAll('late')" [checked]="markAllAsLate" id="age1"
+                                                   name="age10"
+                                                   style="margin-left: 15px" type="radio">
+                                            <label for="age1"> Late</label>
+                                            <input (change)="markForAll('half day')" [checked]="markAllAsHalfDay"
+                                                   id="age1" name="age10"
+                                                   style="margin-left: 15px" type="radio">
+                                            <label for="age1"> Half day</label>)
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of studentList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement + 1}}</td>
+                                        <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
+                                        <td>
+                                            <input [(ngModel)]="record.attendance"
+                                                   [checked]="record.attendance == 'present'" id="age1"
+                                                   name="age{{indexOfElement}}" style="margin-left: 15px"
+                                                   type="radio" value="present">
+                                            <label for="age1">Present</label>
+                                            <input [(ngModel)]="record.attendance"
+                                                   [checked]="record.attendance == 'absent'" id="age1"
+                                                   name="age{{indexOfElement}}" style="margin-left: 15px"
+                                                   type="radio" value="absent">
+                                            <label for="age1">Absent</label>
+                                            <input [(ngModel)]="record.attendance"
+                                                   [checked]="record.attendance == 'late'" id="age1"
+                                                   name="age{{indexOfElement}}" style="margin-left: 15px"
+                                                   type="radio" value="late">
+                                            <label for="age1">Late</label>
+                                            <input [(ngModel)]="record.attendance"
+                                                   [checked]="record.attendance == 'half day'" id="age1"
+                                                   name="age{{indexOfElement}}" style="margin-left: 15px"
+                                                   type="radio" value="half day">
+                                            <label for="age1">Half Day</label>
+                                        </td>
+                                    </tr>
+                                    <button (click)="saveAttendance()" class="btn btn-primary me-1">Submit</button>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--            </div>-->
+        </div>
+        <!--        <div class="col-sm-12 col-xl-6">-->
+        <!--            <div class="row">-->
+        <!--                <div class="col-sm-12">-->
+        <!--                    <div class="col-sm-12">-->
+        <!--                        <div class="card">-->
+        <!--                            <div class="card-header">-->
+        <!--                                <h5>Course List</h5>-->
+        <!--                                <span>Full Course List.</span>-->
+        <!--                            </div>-->
+        <!--                            <div class="table-responsive">-->
+        <!--                                <table class="table">-->
+        <!--                                    <thead>-->
+        <!--                                    <tr>-->
+        <!--                                        <th scope="col">#</th>-->
+        <!--                                        <th scope="col">Name</th>-->
+        <!--                                        <th scope="col">Course Name</th>-->
+        <!--                                        <th scope="col">Action</th>-->
+        <!--                                    </tr>-->
+        <!--                                    </thead>-->
+        <!--                                    <tbody>-->
+        <!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+        <!--                                        <td>{{indexOfElement+1}}</td>-->
+        <!--                                        <td>{{record.course_name}}</td>-->
+        <!--                                        <td>-->
+        <!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
+        <!--                                        </td>-->
+        <!--                                        <td>-->
+        <!--                                            <a (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
+        <!--                                            <a (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
+        <!--                                        </td>-->
+        <!--                                    </tr>-->
+        <!--                                    </tbody>-->
+        <!--                                </table>-->
+        <!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
+
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+    </div>
+</div>
+<!-- Container-fluid Ends-->

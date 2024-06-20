@@ -72,6 +72,7 @@ export class NavService {
 		},
 		{
 			title: 'Attendance', hidden:false , icon: 'file-text', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/attendance/admin-period-attendance', title: 'Admin Period Attendance', type: 'link' },
 				{ path: '/attendance/period-attendance', title: 'Period Attendance', type: 'link' },
 				{ path: '/attendance/show-attendance', title: 'Show Attendance', type: 'link' },
 			]
