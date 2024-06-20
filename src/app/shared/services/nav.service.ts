@@ -135,6 +135,7 @@ export class NavService {
 				{ path: '/human-resource/staff-experience', title: 'Staff Experience', type: 'link' },
 				{ path: '/human-resource/leave-type', title: 'Leave Type', type: 'link' },
 				{ path: '/human-resource/allocate-leave', title: 'Allocate Leave', type: 'link' },
+				{ path: '/human-resource/paper-setter', title: 'Paper Setter', type: 'link' },
 				{ path: '/human-resource/apply-leave', title: 'Apply Leave', type: 'link' },
 				{ path: '/human-resource/approve-leave', title: 'Approve Leave', type: 'link' },
 				{ path: '/human-resource/department', title: 'Department', type: 'link' },
