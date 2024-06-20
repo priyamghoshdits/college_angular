@@ -10,8 +10,14 @@ import {catchError, tap} from "rxjs/operators";
 })
 export class StudentService {
     studentList = [];
+    educationQualificationList = [];
+
     studentListSubject = new Subject<any[]>();
     private BASE_API_URL = environment.BASE_API_URL;
+
+    getStudentListener() {
+        return this.studentListSubject.asObservable();
+    }
 
     constructor(private http: HttpClient, private errorService: ErrorService) {
         this.http.get(this.BASE_API_URL + '/getStudents').subscribe((response: any) => {
@@ -20,8 +26,26 @@ export class StudentService {
         });
     }
 
-    getStudentListener() {
-        return this.studentListSubject.asObservable();
+
+    saveEducationQualification(data){
+        return this.http.post(this.BASE_API_URL + '/saveEducationQualification', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
+
+    updateEducationQualification(data){
+        return this.http.post(this.BASE_API_URL + '/updateEducationQualification', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
+
+    searchEducationQualification(student_id){
+        return this.http.get(this.BASE_API_URL + '/searchEducationQualification/'+ student_id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
     }
 
     getUpdatedStudentList() {
@@ -154,4 +178,5 @@ export class StudentService {
                 }
             }));
     }
+
 }
