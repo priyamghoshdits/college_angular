@@ -2,412 +2,775 @@
 <div class="container-fluid">
     <div class="edit-profile">
         <div class="row">
-            <!-- <div class="col-lg-4">-->
-            <!--                <div class="card">-->
-            <!--                    <div class="card-header">-->
-            <!--                        <h4 class="card-title mb-0">My Profile</h4>-->
-            <!--                        <div class="card-options"><a [routerLink]="[]" class="card-options-collapse"-->
-            <!--                                                     data-bs-toggle="card-collapse"><i-->
-            <!--                                class="fe fe-chevron-up"></i></a><a [routerLink]="[]" class="card-options-remove"-->
-            <!--                                                                    data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                    <div *ngIf="userDetails" class="card-body">-->
-            <!--                        <form [formGroup]="studentCreationForm">-->
-            <!--                            <div class="row mb-2">-->
-            <!--                                <div class="col-auto"><img alt="" class="img-70 rounded-circle"-->
-            <!--                                                           src="assets/images/user/7.jpg"></div>-->
 
-            <!--                            </div>-->
-            <!--                            <div class="form-group">-->
-            <!--                                <label class="form-label">Student Id</label>-->
-            <!--                                <input class="form-control" formControlName="identification_no"-->
-            <!--                                       placeholder="your-email@domain.com" readonly>-->
-            <!--                            </div>-->
-            <!--                            <div class="form-group">-->
-            <!--                                <label class="form-label">Email-Address</label>-->
-            <!--                                <input class="form-control" formControlName="email" placeholder="your-email@domain.com"-->
-            <!--                                       readonly>-->
-            <!--                            </div>-->
-            <!--                            <div class="form-group">-->
-            <!--                                <label class="form-label">Course</label>-->
-            <!--                                <input class="form-control" formControlName="course_name" readonly>-->
-            <!--                            </div>-->
-            <!--                            <div class="form-group">-->
-            <!--                                <label class="form-label">Semester</label>-->
-            <!--                                <input class="form-control" formControlName="semester_name" readonly>-->
-            <!--                            </div>-->
-            <!--                        </form>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div> -->
             <div class="col-lg-12">
-                <form class="card">
+                <div class="card">
                     <div class="card-header">
-                        <!--            <h4 class="card-title mb-0">Edit Profile</h4>-->
-                        <div class="card-options"><a [routerLink]="[]" class="card-options-collapse"
+
+                        <!-- <div class="card-options"><a [routerLink]="[]" class="card-options-collapse"
                                                      data-bs-toggle="card-collapse"><i
                                 class="fe fe-chevron-up"></i></a><a [routerLink]="[]" class="card-options-remove"
                                                                     data-bs-toggle="card-remove"><i class="fe fe-x"></i></a>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="leftuser_imgoutsection">
-                                    <div class="jshadow_area">
-                                        <img class="huimg_designs" src="assets/images/student.jpg">
-                                    </div>
-                                    <h1 class="studentimgdwnarea">
-                                        Course:
-                                        <span class="studentimgdwnarea1">{{studentCreationForm.value.course_name}}</span>
-                                    </h1>
-                                    <h1 class="studentimgdwnarea">
-                                        Semester:
-                                        <span class="studentimgdwnarea1">{{studentCreationForm.value.current_semester}}</span>
-                                    </h1>
-                                </div>
+
+                        <div class="warpper">
+                            <input checked class="radio" id="one" name="group" type="radio">
+                            <input class="radio" id="two" name="group" type="radio">
+                            <input class="radio" id="three" name="group" type="radio">
+                            <input class="radio" id="four" name="group" type="radio">
+
+                            <div class="tabs">
+                                <label class="tab" for="one" id="one-tab">Profile</label>
+                                <label class="tab" for="two" id="two-tab">Educational Qualification</label>
+                                <label class="tab" for="three" id="three-tab">Achivement</label>
+                                <label class="tab" for="four" id="four-tab">Placement</label>
+
                             </div>
-                            <div class="col-lg-9">
-                                <div class="rightuser_udetailsoutsection">
-                                    <form [formGroup]="studentCreationForm">
+                            <div class="panels">
+                                <div class="panel" id="one-panel">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="leftuser_imgoutsection">
+                                                <div class="jshadow_area">
+                                                    <img class="huimg_designs" src="assets/images/student.jpg">
+                                                </div>
+                                                <h1 class="studentimgdwnarea">
+                                                    Course:
+                                                    <span
+                                                        class="studentimgdwnarea1">{{studentCreationForm.value.course_name}}</span>
+                                                </h1>
+                                                <h1 class="studentimgdwnarea">
+                                                    Semester:
+                                                    <span
+                                                        class="studentimgdwnarea1">{{studentCreationForm.value.current_semester}}</span>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="rightuser_udetailsoutsection">
+                                                <form [formGroup]="studentCreationForm">
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">First Name</label>
+                                                                <input class="form-control" formControlName="first_name"
+                                                                    placeholder="First Name" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Middle Name</label>
+                                                                <input class="form-control"
+                                                                    formControlName="middle_name"
+                                                                    placeholder="Middle Name" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Last Name</label>
+                                                                <input class="form-control" formControlName="last_name"
+                                                                    placeholder="Last Name" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Date Of Birth</label>
+                                                                <input class="form-control" formControlName="dob"
+                                                                    placeholder="Date Of Birth" type="date">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Phone Number</label>
+                                                                <input class="form-control" formControlName="mobile_no"
+                                                                    placeholder="Phone Number" type="text">
+                                                                <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']"
+                                                                    class="text text-danger mt-1">Invalid Phone Number
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Emergency Contact
+                                                                    Number</label>
+                                                                <input class="form-control"
+                                                                    formControlName="emergency_phone_number"
+                                                                    placeholder="Phone Number" type="text">
+                                                                <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['pattern']"
+                                                                    class="text text-danger mt-1">Invalid Emergency
+                                                                    Contact Number
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Admission Date</label>
+                                                                <input class="form-control"
+                                                                    formControlName="admission_date"
+                                                                    placeholder="Admission Date" type="date">
+                                                                <div *ngIf="studentCreationForm.controls['admission_date'].errors?.['pattern']"
+                                                                    class="text text-danger mt-1">Invalid Phone Number
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Blood Group</label>
+                                                            <select class="form-select" formControlName="blood_group"
+                                                                style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="A+"> A+</option>
+                                                                <option value="A-"> A-</option>
+                                                                <option value="B+"> B+</option>
+                                                                <option value="B-"> B-</option>
+                                                                <option value="AB+"> AB+</option>
+                                                                <option value="AB-"> AB-</option>
+                                                                <option value="O+"> O+</option>
+                                                                <option value="O-"> O-</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Religion</label>
+                                                            <select class="form-select" formControlName="religion"
+                                                                style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="Hinduism"> Hinduism</option>
+                                                                <option value="Buddhism"> Buddhism</option>
+                                                                <option value="Christianity"> Christianity</option>
+                                                                <option value="Confucianism"> Confucianism</option>
+                                                                <option value="Islam"> Islam</option>
+                                                                <option value="Jainism"> Jainism</option>
+                                                                <option value="Judaism"> Judaism</option>
+                                                                <option value="Shinto"> Shinto</option>
+                                                                <option value="Sikhism"> Sikhism</option>
+                                                                <option value="Taoism"> Taoism</option>
+                                                                <option value="Zoroastrianism"> Zoroastrianism</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Caste</label>
+                                                            <select class="form-select" formControlName="category_id"
+                                                                style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option *ngFor="let data of categoryList"
+                                                                    [value]="data.id">
+                                                                    {{data.name}}
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Gender</label>
+                                                            <select class="form-select" formControlName="gender"
+                                                                style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="Male"> Male</option>
+                                                                <option value="Female"> Female</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Marital Status</label>
+                                                            <select class="form-select"
+                                                                formControlName="material_status" style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="Single"> Single</option>
+                                                                <option value="Married"> Married</option>
+                                                                <option value="Widowed"> Widowed</option>
+                                                                <option value="Seperated"> Seperated</option>
+                                                                <option value="Not Specified"> Not Specified</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Current Address</label>
+                                                            <input class="form-control"
+                                                                formControlName="current_address"
+                                                                placeholder="Current Address" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Permanent Address</label>
+                                                            <input class="form-control"
+                                                                formControlName="permanent_address"
+                                                                placeholder="Permanent Address" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Roll No</label>
+                                                            <input class="form-control" formControlName="roll_no"
+                                                                placeholder="Roll No" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Registration No</label>
+                                                            <input class="form-control"
+                                                                formControlName="registration_no"
+                                                                placeholder="Registration No" type="text">
+                                                        </div>
+
+                                                        <hr class="mt-4">
+                                                        <h4>Guardian Details</h4>
+                                                        <hr>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Father Name</label>
+                                                            <input class="form-control" formControlName="father_name"
+                                                                placeholder="Father Name" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Father Phone</label>
+                                                            <input class="form-control" formControlName="father_phone"
+                                                                placeholder="Father Phone" type="text">
+                                                            <div *ngIf="studentCreationForm.controls['father_phone'].errors?.['pattern']"
+                                                                class="text text-danger mt-1">Invalid Father Phone
+                                                                Number
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Father Occupation</label>
+                                                            <input class="form-control"
+                                                                formControlName="father_occupation"
+                                                                placeholder="Father Occupation" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Mother Name</label>
+                                                            <input class="form-control" formControlName="mother_name"
+                                                                placeholder="Father Name" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Mother Phone</label>
+                                                            <input class="form-control" formControlName="mother_phone"
+                                                                placeholder="Mother Phone" type="text">
+                                                            <div *ngIf="studentCreationForm.controls['mother_phone'].errors?.['pattern']"
+                                                                class="text text-danger mt-1">Invalid Mother Phone
+                                                                Number
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Mother Occupation</label>
+                                                            <input class="form-control"
+                                                                formControlName="mother_occupation"
+                                                                placeholder="Father Occupation" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Guardian Name</label>
+                                                            <input class="form-control" formControlName="guardian_name"
+                                                                placeholder="Father Name" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Guardian Phone</label>
+                                                            <input class="form-control" formControlName="guardian_phone"
+                                                                placeholder="Guardian Phone" type="text">
+                                                            <div *ngIf="studentCreationForm.controls['guardian_phone'].errors?.['pattern']"
+                                                                class="text text-danger mt-1">Invalid Guardian Phone
+                                                                Number
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Guardian Email</label>
+                                                            <input class="form-control" formControlName="guardian_email"
+                                                                placeholder="Father Occupation" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Guardian Relation</label>
+                                                            <input class="form-control"
+                                                                formControlName="guardian_relation"
+                                                                placeholder="Father Name" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Guardian Occupation</label>
+                                                            <input class="form-control"
+                                                                formControlName="guardian_occupation"
+                                                                placeholder="Father Phone" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Guardian Address</label>
+                                                            <input class="form-control"
+                                                                formControlName="guardian_address"
+                                                                placeholder="Father Occupation" type="text">
+                                                        </div>
+
+                                                        <!--              <div class="col-sm-12 mt-2">-->
+                                                        <!--                <div class="form-group">-->
+                                                        <!--                  <label class="form-label">Address</label>-->
+                                                        <!--                  <input class="form-control" formControlName="permanent_address" type="text" placeholder="Address">-->
+                                                        <!--                </div>-->
+                                                        <!--              </div>-->
+                                                        <!--              <div class="col-md-5">-->
+                                                        <!--                <div class="form-group">-->
+                                                        <!--                  <label class="form-label">Country</label>-->
+                                                        <!--                  <select class="form-control btn-square">-->
+                                                        <!--                    <option value="0">&#45;&#45;Select&#45;&#45;</option>-->
+                                                        <!--                    <option value="1">Germany</option>-->
+                                                        <!--                    <option value="2">Canada</option>-->
+                                                        <!--                    <option value="3">Usa</option>-->
+                                                        <!--                    <option value="4">Aus</option>-->
+                                                        <!--                  </select>-->
+                                                        <!--                </div>-->
+                                                        <!--              </div>-->
+                                                        <!--              <div class="col-md-12">-->
+                                                        <!--                <div class="form-group mb-0">-->
+                                                        <!--                  <label class="form-label">About Me</label>-->
+                                                        <!--                  <textarea class="form-control" rows="5" placeholder="Enter About your description"></textarea>-->
+                                                        <!--                </div>-->
+                                                        <!--              </div>-->
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer text-end">
+                                            <button (click)="updateProfile()" class="btn btn-primary"
+                                                type="submit">Update Profile</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="panel" id="two-panel">
+                                    <form [formGroup]="educationQualificationForm" class="theme-form">
+                                        <h4 class="mt-2 mb-4 text-center">Class 10th/M.P./It's Equivalent</h4>
                                         <div class="row">
-                                            <div class="col-sm-4 col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">First Name</label>
-                                                    <input class="form-control" formControlName="first_name"
-                                                           placeholder="First Name" type="text">
+                                            <div class="col-md-2 mb-3">
+                                                <label>Board/Counsil</label>
+                                                <input class="form-control" formControlName="board_ten"
+                                                    placeholder="Board/counsil" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['board_ten'].errors?.['required'] && educationQualificationForm.controls['board_ten'].touched "
+                                                    class="text text-danger mt-1">Board required
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">Middle Name</label>
-                                                    <input class="form-control" formControlName="middle_name"
-                                                           placeholder="Middle Name" type="text">
+                                            <div class="col-md-2 mb-3">
+                                                <label>Marks Obtained</label>
+                                                <input class="form-control" formControlName="marks_obtained_ten"
+                                                    placeholder="Marks Obtained" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['marks_obtained_ten'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_ten'].touched "
+                                                    class="text text-danger mt-1">Marks Obtained required
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">Last Name</label>
-                                                    <input class="form-control" formControlName="last_name"
-                                                           placeholder="Last Name"
-                                                           type="text">
+                                            <div class="col-md-2 mb-3">
+                                                <label>Percentage</label>
+                                                <input class="form-control" formControlName="percentage_ten"
+                                                    placeholder="Percentage" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['percentage_ten'].errors?.['required'] && educationQualificationForm.controls['percentage_ten'].touched "
+                                                    class="text text-danger mt-1">Percentage required
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">Date Of Birth</label>
-                                                    <input class="form-control" formControlName="dob"
-                                                           placeholder="Date Of Birth"
-                                                           type="date">
+                                            <div class="col-md-2 mb-3">
+                                                <label>Division/Class</label>
+                                                <input class="form-control" formControlName="division_ten"
+                                                    placeholder="Division/Class" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['division_ten'].errors?.['required'] && educationQualificationForm.controls['division_ten'].touched "
+                                                    class="text text-danger mt-1">Division/Class required
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">Phone Number</label>
-                                                    <input class="form-control" formControlName="mobile_no"
-                                                           placeholder="Phone Number" type="text">
-                                                    <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']"
-                                                         class="text text-danger mt-1">Invalid Phone Number
-                                                    </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label>Main Subject</label>
+                                                <input class="form-control" formControlName="main_subject_ten"
+                                                    placeholder="Main Subject" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['main_subject_ten'].errors?.['required'] && educationQualificationForm.controls['main_subject_ten'].touched "
+                                                    class="text text-danger mt-1">Main Subject required
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">Emergency Contact Number</label>
-                                                    <input class="form-control" formControlName="emergency_phone_number"
-                                                           placeholder="Phone Number" type="text">
-                                                    <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['pattern']"
-                                                         class="text text-danger mt-1">Invalid Emergency Contact Number
-                                                    </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label>Year Of Passing</label>
+                                                <input class="form-control" formControlName="year_of_passing_ten"
+                                                    placeholder="Year of passing" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['year_of_passing_ten'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_ten'].touched "
+                                                    class="text text-danger mt-1">Year of passing required
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <div class="form-group">
-                                                    <label class="form-label">Admission Date</label>
-                                                    <input class="form-control" formControlName="admission_date"
-                                                           placeholder="Admission Date" type="date">
-                                                    <div *ngIf="studentCreationForm.controls['admission_date'].errors?.['pattern']"
-                                                         class="text text-danger mt-1">Invalid Phone Number
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label>Blood Group</label>
-                                                <select class="form-select" formControlName="blood_group"
-                                                        style="width: 100%">
-                                                    <option value="null">Select</option>
-                                                    <option value="A+"> A+</option>
-                                                    <option value="A-"> A-</option>
-                                                    <option value="B+"> B+</option>
-                                                    <option value="B-"> B-</option>
-                                                    <option value="AB+"> AB+</option>
-                                                    <option value="AB-"> AB-</option>
-                                                    <option value="O+"> O+</option>
-                                                    <option value="O-"> O-</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label>Religion</label>
-                                                <select class="form-select" formControlName="religion"
-                                                        style="width: 100%">
-                                                    <option value="null">Select</option>
-                                                    <option value="Hinduism"> Hinduism</option>
-                                                    <option value="Buddhism"> Buddhism</option>
-                                                    <option value="Christianity"> Christianity</option>
-                                                    <option value="Confucianism"> Confucianism</option>
-                                                    <option value="Islam"> Islam</option>
-                                                    <option value="Jainism"> Jainism</option>
-                                                    <option value="Judaism"> Judaism</option>
-                                                    <option value="Shinto"> Shinto</option>
-                                                    <option value="Sikhism"> Sikhism</option>
-                                                    <option value="Taoism"> Taoism</option>
-                                                    <option value="Zoroastrianism"> Zoroastrianism</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label>Caste</label>
-                                                <select class="form-select" formControlName="category_id"
-                                                        style="width: 100%">
-                                                    <option value="null">Select</option>
-                                                    <option *ngFor="let data of categoryList" [value]="data.id">
-                                                        {{data.name}}
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label>Gender</label>
-                                                <select class="form-select" formControlName="gender"
-                                                        style="width: 100%">
-                                                    <option value="null">Select</option>
-                                                    <option value="Male"> Male</option>
-                                                    <option value="Female"> Female</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label>Marital Status</label>
-                                                <select class="form-select" formControlName="material_status"
-                                                        style="width: 100%">
-                                                    <option value="null">Select</option>
-                                                    <option value="Single"> Single</option>
-                                                    <option value="Married"> Married</option>
-                                                    <option value="Widowed"> Widowed</option>
-                                                    <option value="Seperated"> Seperated</option>
-                                                    <option value="Not Specified"> Not Specified</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Current Address</label>
-                                                <input class="form-control" formControlName="current_address"
-                                                       placeholder="Current Address" type="text">
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Permanent Address</label>
-                                                <input class="form-control" formControlName="permanent_address"
-                                                       placeholder="Permanent Address" type="text">
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Roll No</label>
-                                                <input class="form-control" formControlName="roll_no"
-                                                       placeholder="Roll No" type="text">
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Registration No</label>
-                                                <input class="form-control" formControlName="registration_no"
-                                                       placeholder="Registration No" type="text">
-                                            </div>
+                                        </div>
 
-                                            <hr class="mt-4">
-                                            <h4>Guardian Details</h4>
-                                            <hr>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Father Name</label>
-                                                <input class="form-control" formControlName="father_name"
-                                                       placeholder="Father Name" type="text">
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Father Phone</label>
-                                                <input class="form-control" formControlName="father_phone"
-                                                       placeholder="Father Phone" type="text">
-                                                <div *ngIf="studentCreationForm.controls['father_phone'].errors?.['pattern']"
-                                                     class="text text-danger mt-1">Invalid Father Phone Number
+                                        <hr>
+                                        <h4 class="mt-2 mb-4 text-center">10+2/H.S./Equivalent</h4>
+                                        <div class="row">
+                                            <div class="col-md-2 mb-3">
+                                                <label>Board/Counsil</label>
+                                                <input class="form-control" formControlName="board_twelve"
+                                                    placeholder="Board/counsil" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['board_twelve'].errors?.['required'] && educationQualificationForm.controls['board_twelve'].touched "
+                                                    class="text text-danger mt-1">Board required
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Father Occupation</label>
-                                                <input class="form-control" formControlName="father_occupation"
-                                                       placeholder="Father Occupation" type="text">
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Mother Name</label>
-                                                <input class="form-control" formControlName="mother_name"
-                                                       placeholder="Father Name" type="text">
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Mother Phone</label>
-                                                <input class="form-control" formControlName="mother_phone"
-                                                       placeholder="Father Phone" type="text">
-                                                <div *ngIf="studentCreationForm.controls['mother_phone'].errors?.['pattern']"
-                                                     class="text text-danger mt-1">Invalid Mother Phone Number
+                                            <div class="col-md-2 mb-3">
+                                                <label>Marks Obtained</label>
+                                                <input class="form-control" formControlName="marks_obtained_twelve"
+                                                    placeholder="Marks Obtained" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['marks_obtained_twelve'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_twelve'].touched "
+                                                    class="text text-danger mt-1">Marks Obtained required
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Mother Occupation</label>
-                                                <input class="form-control" formControlName="mother_occupation"
-                                                       placeholder="Father Occupation" type="text">
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Guardian Name</label>
-                                                <input class="form-control" formControlName="guardian_name"
-                                                       placeholder="Father Name" type="text">
-                                            </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Guardian Phone</label>
-                                                <input class="form-control" formControlName="guardian_phone"
-                                                       placeholder="Guardian Phone" type="text">
-                                                <div *ngIf="studentCreationForm.controls['guardian_phone'].errors?.['pattern']"
-                                                     class="text text-danger mt-1">Invalid Guardian Phone Number
+                                            <div class="col-md-2 mb-3">
+                                                <label>Percentage</label>
+                                                <input class="form-control" formControlName="percentage_twelve"
+                                                    placeholder="Percentage" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['percentage_twelve'].errors?.['required'] && educationQualificationForm.controls['percentage_twelve'].touched "
+                                                    class="text text-danger mt-1">Percentage required
                                                 </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Guardian Email</label>
-                                                <input class="form-control" formControlName="guardian_email"
-                                                       placeholder="Father Occupation" type="text">
+                                            <div class="col-md-2 mb-3">
+                                                <label>Division/Class</label>
+                                                <input class="form-control" formControlName="division_twelve"
+                                                    placeholder="Division/Class" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['division_twelve'].errors?.['required'] && educationQualificationForm.controls['division_twelve'].touched "
+                                                    class="text text-danger mt-1">Division/Class required
+                                                </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Guardian Relation</label>
-                                                <input class="form-control" formControlName="guardian_relation"
-                                                       placeholder="Father Name" type="text">
+                                            <div class="col-md-2 mb-3">
+                                                <label>Main Subject</label>
+                                                <input class="form-control" formControlName="main_subject_twelve"
+                                                    placeholder="Main Subject" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['main_subject_twelve'].errors?.['required'] && educationQualificationForm.controls['main_subject_twelve'].touched "
+                                                    class="text text-danger mt-1">Main Subject required
+                                                </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Guardian Occupation</label>
-                                                <input class="form-control" formControlName="guardian_occupation"
-                                                       placeholder="Father Phone" type="text">
+                                            <div class="col-md-2 mb-3">
+                                                <label>Year Of Passing</label>
+                                                <input class="form-control" formControlName="year_of_passing_twelve"
+                                                    placeholder="Year of passing" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['year_of_passing_twelve'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_twelve'].touched "
+                                                    class="text text-danger mt-1">Year of passing required
+                                                </div>
                                             </div>
-                                            <div class="col-sm-4 col-md-4">
-                                                <label class="form-label">Guardian Address</label>
-                                                <input class="form-control" formControlName="guardian_address"
-                                                       placeholder="Father Occupation" type="text">
-                                            </div>
+                                        </div>
 
-                                            <!--              <div class="col-sm-12 mt-2">-->
-                                            <!--                <div class="form-group">-->
-                                            <!--                  <label class="form-label">Address</label>-->
-                                            <!--                  <input class="form-control" formControlName="permanent_address" type="text" placeholder="Address">-->
-                                            <!--                </div>-->
-                                            <!--              </div>-->
-                                            <!--              <div class="col-md-5">-->
-                                            <!--                <div class="form-group">-->
-                                            <!--                  <label class="form-label">Country</label>-->
-                                            <!--                  <select class="form-control btn-square">-->
-                                            <!--                    <option value="0">&#45;&#45;Select&#45;&#45;</option>-->
-                                            <!--                    <option value="1">Germany</option>-->
-                                            <!--                    <option value="2">Canada</option>-->
-                                            <!--                    <option value="3">Usa</option>-->
-                                            <!--                    <option value="4">Aus</option>-->
-                                            <!--                  </select>-->
-                                            <!--                </div>-->
-                                            <!--              </div>-->
-                                            <!--              <div class="col-md-12">-->
-                                            <!--                <div class="form-group mb-0">-->
-                                            <!--                  <label class="form-label">About Me</label>-->
-                                            <!--                  <textarea class="form-control" rows="5" placeholder="Enter About your description"></textarea>-->
-                                            <!--                </div>-->
-                                            <!--              </div>-->
+
+                                        <hr>
+                                        <h4 class="mt-2 mb-4 text-center">Graduation </h4>
+                                        <div class="row">
+                                            <div class="col-md-2 mb-3">
+                                                <label>Board/Counsil</label>
+                                                <input class="form-control" formControlName="board_graduation"
+                                                    placeholder="Board/counsil" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['board_graduation'].errors?.['required'] && educationQualificationForm.controls['board_graduation'].touched "
+                                                    class="text text-danger mt-1">Board required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label>Marks Obtained</label>
+                                                <input class="form-control" formControlName="marks_obtained_graduation"
+                                                    placeholder="Marks Obtained" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['marks_obtained_graduation'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_graduation'].touched "
+                                                    class="text text-danger mt-1">Marks Obtained required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label>Percentage</label>
+                                                <input class="form-control" formControlName="percentage_graduation"
+                                                    placeholder="Percentage" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['percentage_graduation'].errors?.['required'] && educationQualificationForm.controls['percentage_graduation'].touched "
+                                                    class="text text-danger mt-1">Percentage required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label>Division/Class</label>
+                                                <input class="form-control" formControlName="division_graduation"
+                                                    placeholder="Division/Class" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['division_graduation'].errors?.['required'] && educationQualificationForm.controls['division_graduation'].touched "
+                                                    class="text text-danger mt-1">Division/Class required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label>Main Subject</label>
+                                                <input class="form-control" formControlName="main_subject_graduation"
+                                                    placeholder="Main Subject" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['main_subject_graduation'].errors?.['required'] && educationQualificationForm.controls['main_subject_graduation'].touched "
+                                                    class="text text-danger mt-1">Main Subject required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 mb-3">
+                                                <label>Year Of Passing</label>
+                                                <input class="form-control" formControlName="year_of_passing_graduation"
+                                                    placeholder="Year of passing" type="text">
+                                                <div *ngIf="educationQualificationForm.controls['year_of_passing_graduation'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_graduation'].touched "
+                                                    class="text text-danger mt-1">Year of passing required
+                                                </div>
+                                            </div>
                                         </div>
                                     </form>
+                                    <div _ngcontent-ng-c392870171="" class="card-footer text-end"><button
+                                            _ngcontent-ng-c392870171="" type="submit" class="btn btn-primary"
+                                            (click)="updateEducation()">Update</button></div>
+                                </div>
+
+                                <div class="panel" id="three-panel">
+
+                                    <!-- <form [formGroup]="achivementForm" class="theme-form">
+                                        <div class="row">
+                                            <div class="col-md-4 mb-3">
+                                                <label>Select Course</label>
+                                                <input type="text" class="form-control" formGroupName="name" placeholder="">
+                                                <div *ngIf="achivementForm.controls['name'].errors?.['required'] && achivementForm.controls['name'].touched "
+                                                    class="text text-danger mt-1">Course required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <hr> -->
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Achievement/Awards</h5><span>Add Achievement/Awards</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form [formGroup]="achievementForm" class="theme-form">
+                                                        <div class="row">
+                                                            <div class="col-md-4 mb-3">
+                                                                <label class="col-form-label pt-0">Date</label>
+                                                                <input class="form-control" formControlName="award_date"
+                                                                    type="date">
+                                                                <div *ngIf="achievementForm.controls['award_date'].errors?.['required'] && achievementForm.controls['award_date'].touched "
+                                                                    class="text text-danger mt-1">Date required
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3">
+                                                                <label class="col-form-label pt-0">Award Name</label>
+                                                                <input class="form-control" formControlName="award_name"
+                                                                    placeholder="Enter award name" type="text">
+                                                                <div *ngIf="achievementForm.controls['award_name'].errors?.['required'] && achievementForm.controls['award_name'].touched "
+                                                                    class="text text-danger mt-1">Award required
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3">
+                                                                <label class="col-form-label pt-0">Upload File</label>
+                                                                <input (change)="selectedAchievementFile($event)"
+                                                                    class="form-control" formControlName="file_name"
+                                                                    type="file">
+                                                                <div *ngIf="achievementForm.controls['file_name'].errors?.['required'] && achievementForm.controls['file_name'].touched"
+                                                                    class="text text-danger mt-1">File required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <button (click)="saveAchievement()"
+                                                        [hidden]="isAchievementFormUpdatable == true"
+                                                        class="btn btn-primary me-1">Submit
+                                                    </button>
+                                                    <button (click)="updateAchievement()"
+                                                        [hidden]="isAchievementFormUpdatable == false"
+                                                        class="btn btn-primary me-1">Update
+                                                    </button>
+                                                    <button (click)="cancelachievementFormUpdate()"
+                                                        [hidden]="isAchievementFormUpdatable == false"
+                                                        class="btn btn-primary me-1">Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Award Name</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Download</th>
+                                                    <th scope="col">Update</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let item of achievementList; let indexOfElement=index">
+                                                    <td>{{indexOfElement + 1}}</td>
+                                                    <td>{{item.award_name}}</td>
+                                                    <td>{{item.award_date}}</td>
+                                                    <td><a
+                                                            href="{{item.file_name}}"><mat-icon>cloud_download</mat-icon></a>
+                                                    </td>
+                                                    <td>
+                                                        <a (click)="editAchievement(item)">
+                                                            <mat-icon>edit</mat-icon>
+                                                        </a>
+                                                        <a (click)="deleteAchievement(item)">
+                                                            <mat-icon>delete</mat-icon>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="panel" id="four-panel">
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h5>Placement</h5><span>Add Placement</span>
+                                                </div>
+                                                <div class="card-body">
+                                                    <form [formGroup]="placementForm" class="theme-form">
+                                                        <div class="row">
+                                                            <div class="col-md-4 mb-3">
+                                                                <label class="col-form-label pt-0">Date</label>
+                                                                <input class="form-control"
+                                                                    formControlName="placement_date" type="date">
+                                                                <div *ngIf="placementForm.controls['placement_date'].errors?.['required'] && placementForm.controls['placement_date'].touched "
+                                                                    class="text text-danger mt-1">Date required
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3">
+                                                                <label class="col-form-label pt-0">Company</label>
+                                                                <select class="form-control"
+                                                                    formControlName="company_id">
+                                                                    <option value="null">Select Company</option>
+                                                                    <option *ngFor="let data of companyDetailsList"
+                                                                        [value]="data.id">
+                                                                        {{data.name}}
+                                                                    </option>
+                                                                </select>
+                                                                <div *ngIf="placementForm.controls['company_id'].errors?.['required'] && placementForm.controls['company_id'].touched "
+                                                                    class="text text-danger mt-1">Company required
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-4 mb-3">
+                                                                <label class="col-form-label pt-0">Deacription</label>
+                                                                <input class="form-control"
+                                                                    formControlName="description"
+                                                                    placeholder="Enter Description" type="text">
+                                                                <div *ngIf="placementForm.controls['description'].errors?.['required'] && placementForm.controls['description'].touched "
+                                                                    class="text text-danger mt-1">Description required
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <button (click)="savePlacementDetails()"
+                                                        [hidden]="isPlacementUpdatable == true"
+                                                        class="btn btn-primary me-1">Submit
+                                                    </button>
+                                                    <button (click)="updatePlacementDetails()"
+                                                        [hidden]="isPlacementUpdatable == false"
+                                                        class="btn btn-primary me-1">Update
+                                                    </button>
+                                                    <button (click)="cancelPlacementFormUpdate()"
+                                                        [hidden]="isPlacementUpdatable == false"
+                                                        class="btn btn-primary me-1">Cancel
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Company Name</th>
+                                                    <th scope="col">Description</th>
+                                                    <th scope="col">Update</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let place of placementList">
+                                                    <td>1</td>
+                                                    <td>{{place.placement_date}}</td>
+                                                    <td>{{place.company_name}}</td>
+                                                    <td>{{place.description}}</td>
+                                                    <td>
+                                                        <a (click)="editPlacementDetails(place)">
+                                                            <mat-icon>edit</mat-icon>
+                                                        </a>
+                                                        <a (click)="deletePlacementDetails(place)">
+                                                            <mat-icon>delete</mat-icon>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
-                    <div class="card-footer text-end">
-                        <!--            <label><mat-icon>done_outline</mat-icon>Profile Updated</label>-->
-                        <!--            <button [hidden]="showPopup" disabled class="btn btn-primary" style="border-radius: 61%;margin-right: 20px;padding: 12px;"><mat-icon>done_outline</mat-icon>Profile Updated</button>-->
-                        <button (click)="updateProfile()" class="btn btn-primary" type="submit">Update Profile</button>
-                    </div>
-                </form>
+                </div>
+
             </div>
-            <!--      <div class="col-md-12">-->
-            <!--        <div class="card">-->
-            <!--          <div class="card-header">-->
-            <!--            <h4 class="card-title mb-0">Add projects And Upload</h4>-->
-            <!--            <div class="card-options"><a class="card-options-collapse" [routerLink]="[]" data-bs-toggle="card-collapse"><i-->
-            <!--                  class="fe fe-chevron-up"></i></a><a class="card-options-remove" [routerLink]="[]"-->
-            <!--                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>-->
-            <!--          </div>-->
-            <!--          <div class="table-responsive card-body">-->
-            <!--            <table class="table card-table table-vcenter text-nowrap">-->
-            <!--              <thead>-->
-            <!--                <tr>-->
-            <!--                  <th>Project Name</th>-->
-            <!--                  <th>Date</th>-->
-            <!--                  <th>Status</th>-->
-            <!--                  <th>Price</th>-->
-            <!--                  <th></th>-->
-            <!--                </tr>-->
-            <!--              </thead>-->
-            <!--              <tbody>-->
-            <!--                <tr>-->
-            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents </a></td>-->
-            <!--                  <td>28 May 2018</td>-->
-            <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
-            <!--                  <td>$56,908</td>-->
-            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-            <!--                  <td>12 June 2018</td>-->
-            <!--                  <td><span class="status-icon bg-danger"></span> On going</td>-->
-            <!--                  <td>$45,087</td>-->
-            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-            <!--                  <td>12 July 2018</td>-->
-            <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
-            <!--                  <td>$60,123</td>-->
-            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-            <!--                  <td>14 June 2018</td>-->
-            <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
-            <!--                  <td>$70,435</td>-->
-            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-            <!--                  <td>25 June 2018</td>-->
-            <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
-            <!--                  <td>$15,987</td>-->
-            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-            <!--                </tr>-->
-            <!--              </tbody>-->
-            <!--            </table>-->
-            <!--          </div>-->
-            <!--        </div>-->
-            <!--      </div>-->
         </div>
+
+
+        <!--      <div class="col-md-12">-->
+        <!--        <div class="card">-->
+        <!--          <div class="card-header">-->
+        <!--            <h4 class="card-title mb-0">Add projects And Upload</h4>-->
+        <!--            <div class="card-options"><a class="card-options-collapse" [routerLink]="[]" data-bs-toggle="card-collapse"><i-->
+        <!--                  class="fe fe-chevron-up"></i></a><a class="card-options-remove" [routerLink]="[]"-->
+        <!--                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>-->
+        <!--          </div>-->
+        <!--          <div class="table-responsive card-body">-->
+        <!--            <table class="table card-table table-vcenter text-nowrap">-->
+        <!--              <thead>-->
+        <!--                <tr>-->
+        <!--                  <th>Project Name</th>-->
+        <!--                  <th>Date</th>-->
+        <!--                  <th>Status</th>-->
+        <!--                  <th>Price</th>-->
+        <!--                  <th></th>-->
+        <!--                </tr>-->
+        <!--              </thead>-->
+        <!--              <tbody>-->
+        <!--                <tr>-->
+        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents </a></td>-->
+        <!--                  <td>28 May 2018</td>-->
+        <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
+        <!--                  <td>$56,908</td>-->
+        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+        <!--                  <td>12 June 2018</td>-->
+        <!--                  <td><span class="status-icon bg-danger"></span> On going</td>-->
+        <!--                  <td>$45,087</td>-->
+        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+        <!--                  <td>12 July 2018</td>-->
+        <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
+        <!--                  <td>$60,123</td>-->
+        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+        <!--                  <td>14 June 2018</td>-->
+        <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
+        <!--                  <td>$70,435</td>-->
+        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+        <!--                  <td>25 June 2018</td>-->
+        <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
+        <!--                  <td>$15,987</td>-->
+        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+        <!--                </tr>-->
+        <!--              </tbody>-->
+        <!--            </table>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--      </div>-->
     </div>
 </div>
 <!-- Container-fluid Ends-->
