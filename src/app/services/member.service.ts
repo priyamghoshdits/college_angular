@@ -122,6 +122,20 @@ export class MemberService {
             }));
     }
 
+    savePaperSetter(value){
+        return this.http.post(this.BASE_API_URL + '/savePaperSetter', value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                
+            }));
+    }
+
+    saveUploadFile(value){
+        return this.http.post(this.BASE_API_URL + '/saveUploadFile', value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                
+            }));
+    }
+
     saveMember(value) {
         return this.http.post(this.BASE_API_URL + '/saveMember', value)
             .pipe(catchError(this.errorService.serverError), tap(response => {
