@@ -32,6 +32,7 @@ import {MemberService} from 'src/app/services/member.service';
 export class PaperSetterComponent {
     paperSettingForm: FormGroup;
     paperList: any[];
+    searchPaperList: any[];
     subjectDetailsList: any[];
     selected_details = null;
     total_question: any[] = [1];
@@ -53,7 +54,7 @@ export class PaperSetterComponent {
             id: new FormControl(null),
             from_date: new FormControl(null, [Validators.required]),
             to_date: new FormControl(null, [Validators.required]),
-            staff_id: new FormControl(null, [Validators.required]),
+            staff_id: new FormControl(null),
         });
 
         this.paperSetterArray = [
@@ -134,7 +135,11 @@ export class PaperSetterComponent {
     }
 
     getPaperSetting(){
-
+        this.memberService.searchPaperSetter(this.paperSettingForm.value).subscribe((response: any) => {
+            if(response.success == 1){
+                this.searchPaperList = response.data;
+            }
+        })
     }
 
 
@@ -207,7 +212,7 @@ export class PaperSetterComponent {
         })
     }
 
-    
+
 
     activeTab(data) {
         this.active = data;
