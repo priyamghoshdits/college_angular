@@ -120,7 +120,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <button class="btn btn-primary me-1" style="margin-top: 30px;"
-                                                    (click)="getPaperSetting()">Cancel</button>
+                                                    (click)="getPaperSetting()">Search</button>
                                         </div>
                                     </div>
                                 </form>
@@ -138,7 +138,7 @@
                                     </thead>
                                     <tbody>
                                         <tr
-                                            *ngFor="let record of paperList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
+                                            *ngFor="let record of searchPaperList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
                                             <td colspan="2">{{record.subject_name}}</td>
                                             <td colspan="2">{{record.course_name}}</td>
                                             <td colspan="7">

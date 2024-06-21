@@ -170,6 +170,12 @@ export class MemberService {
             }));
     }
 
+    searchPaperSetter(value){
+        return this.http.post(this.BASE_API_URL + '/searchPaperSetting', value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+            }));
+    }
+
     saveUploadFile(value) {
         return this.http.post(this.BASE_API_URL + '/saveUploadFile', value)
             .pipe(catchError(this.errorService.serverError), tap(response => {
