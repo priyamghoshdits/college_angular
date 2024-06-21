@@ -30,7 +30,7 @@ import { MemberService } from 'src/app/services/member.service';
   styleUrl: './paper-setter.component.scss'
 })
 export class PaperSetterComponent {
-  staffForm: FormGroup;
+  // staffForm: FormGroup;
   paperList: any[];
   subjectDetailsList: any[];
   selected_details = null;
@@ -43,25 +43,27 @@ export class PaperSetterComponent {
   p: number;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
+  filesArray: File[] = [];
 
   memberList: any[];
 
   constructor(private memberService: MemberService, private examinationService: ExaminationService, private roleAndPermissionService: RolesAndPermissionService) {
     this.paperSetterArray = [
       {
+        'staff_id': null,
         'examination_name': null,
         'subject_name': null,
         'university_name': null,
         'referance_no': null,
         'ref_date': null,
-        'upload_file': null,
+        'paper_file': null,
       }
     ];
 
-    this.staffForm = new FormGroup({
-      id: new FormControl(null),
-      staff_id: new FormControl(null, [Validators.required]),
-    });
+    // this.staffForm = new FormGroup({
+    //   id: new FormControl(null),
+    //   staff_id: new FormControl(null, [Validators.required]),
+    // });
 
     this.memberService.getMemberListener().subscribe((response) => {
       this.memberList = response;
@@ -90,17 +92,22 @@ export class PaperSetterComponent {
         'university_name': null,
         'referance_no': null,
         'ref_date': null,
-        'upload_file': null,
+        'paper_file': null,
       }
     ];
     this.counter = 0;
-    this.staffForm.reset();
+  }
+
+  fileUpload(event: any, index: number) {
+    const file = event.target.files[0];
+    if (file) {
+      this.filesArray[index] = file; // Store file in the files array
+    }
   }
 
   updateQuestionPaper() {
     let arr = [
       {
-        'staff_id': this.staffForm.value.staff_id,
         'questions': this.paperSetterArray
       }
     ];
@@ -152,25 +159,33 @@ export class PaperSetterComponent {
     this.totalMarks = this.paperSetterArray.reduce((accumulator, currentItem) => accumulator + parseInt(currentItem.marks), 0);
     let x = this.subjectDetailsList.find(x => x.id == data.subject_details_id);
     this.selected_details = x;
-    this.staffForm.patchValue(x);
-    this.staffForm.patchValue({ subject_details_id: data.subject_details_id });
     this.isUpdatable = true;
     this.counter = data.questions.length - 1;
   }
 
   savePaperSetter() {
-    if (!this.staffForm.valid) {
-      this.staffForm.markAllAsTouched();
-      return;
-    }
-    let arr = [
-      {
-        'staff_id': this.staffForm.value.staff_id,
-        'paper_array': this.paperSetterArray
-      }
-    ];
+    let arr = {
+      'paper_array': this.paperSetterArray
+    };
 
-    this.examinationService.saveQuestions(arr[0]).subscribe((response) => {
+    // this.filesArray.forEach((file, index) => {
+    //   if (file) {
+    //     const formData = new FormData();
+    //     formData.append('paper_file', file);
+
+    //     // Send the file to the server
+    //     this.memberService.saveUploadFile(formData).subscribe(response => {
+    //       console.log('File upload response:', response);
+    //       // Handle the response, e.g., store the file URL in paperSetterArray
+    //       this.paperSetterArray[index].paper_file = response.file_name;
+    //     }, error => {
+    //       console.error('File upload error:', error);
+    //     });
+    //   }
+    // });
+
+
+    this.memberService.savePaperSetter(arr).subscribe((response) => {
       // @ts-ignore
       if (response.success == 1) {
         Swal.fire({
@@ -180,20 +195,6 @@ export class PaperSetterComponent {
           showConfirmButton: false,
           timer: 1000
         });
-        this.total_question = [1];
-        this.totalMarks = 0;
-        this.paperSetterArray = [
-          {
-            'examination_name': null,
-            'subject_name': null,
-            'university_name': null,
-            'referance_no': null,
-            'ref_date': null,
-            'upload_file': null,
-          }
-        ];
-        this.counter = 0;
-        this.staffForm.reset();
       }
     })
   }
@@ -207,13 +208,13 @@ export class PaperSetterComponent {
     this.total_question[this.counter] = [];
     let arr = [
       {
-        'question': null,
-        'option_1': null,
-        'option_2': null,
-        'option_3': null,
-        'option_4': null,
-        'marks': null,
-        'answer': null
+        'staff_id': null,
+        'examination_name': null,
+        'subject_name': null,
+        'university_name': null,
+        'referance_no': null,
+        'ref_date': null,
+        'paper_file': null,
       }
     ];
     this.paperSetterArray.push(arr[0]);

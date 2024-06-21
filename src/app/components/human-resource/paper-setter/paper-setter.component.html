@@ -5,7 +5,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header" [hidden]="active != 1">
-                            <h5>Questions</h5><span>Add Questions</span>
+                            <h5>Papper Setter</h5><span>Papper Setter</span>
                         </div>
                         <div class="card-header" [hidden]="active != 2">
                             <h5>Show All Questions</h5>
@@ -13,17 +13,17 @@
                         <div class="tabbed-card">
                             <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
                                 <li [ngbNavItem]="1">
-                                    <a ngbNavLink (click)="activeTab(1)">Add Questions</a>
+                                    <a ngbNavLink (click)="activeTab(1)">Add Papper Setter</a>
                                 </li>
                                 <li [ngbNavItem]="2">
-                                    <a ngbNavLink (click)="activeTab(2)">Show Questions</a>
+                                    <a ngbNavLink (click)="activeTab(2)">Show Papper Setter</a>
                                 </li>
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
                         </div>
                         <div [hidden]="active != 1">
                             <div class="card-body" [hidden]="active != 1">
-                                <form class="theme-form" [formGroup]="staffForm">
+                                <!-- <form class="theme-form" [formGroup]="staffForm">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <label>Select Staff</label>
@@ -39,17 +39,27 @@
                                         </div>
                                     </div>
                                 </form>
-                                <hr>
-                                <h3>Add Questions</h3>
+                                <hr> -->
+                                <h3>Add Paper Setter</h3>
                                 <div *ngFor="let item of total_question ;let indexOfElement=index">
                                     <div class="row mt-5">
-                                        <div class="col-md-11 mb-3">
+                                        <div class="col-md-5 mb-3">
+                                            <label>Select Staff</label>
+                                            <select style="width: 100%" [(ngModel)]="paperSetterArray[indexOfElement].staff_id" class="form-select"
+                                                required>
+                                                <option value="null"> Select a Staff</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-5 mb-3">
                                             <label>Examination Name</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="paperSetterArray[indexOfElement].examination_name"
                                                 placeholder="Examination Name" required>
                                         </div>
-                                        <div class="col-md-1 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <a *ngIf="(indexOfElement + 1) == total_question.length"
                                                 (click)="addField()" style=""><mat-icon
                                                     style="font-size: 40px;height: 60px; width: 40px; line-height: 2">add_box</mat-icon>
@@ -80,14 +90,14 @@
                                         <div class="col-md-4 mb-3">
                                             <label>Date</label>
                                             <input type="date" class="form-control"
-                                                [(ngModel)]="paperSetterArray[indexOfElement].date" placeholder="Date"
-                                                required>
+                                                [(ngModel)]="paperSetterArray[indexOfElement].ref_date" required>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Upload File</label>
                                             <input type="file" class="form-control"
                                                 [(ngModel)]="paperSetterArray[indexOfElement].upload_file"
-                                                placeholder="Upload File" required>
+                                                (change)="fileUpload($event,indexOfElement)" placeholder="Upload File"
+                                                required>
                                         </div>
                                     </div>
                                 </div>
