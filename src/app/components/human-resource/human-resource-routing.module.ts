@@ -16,6 +16,7 @@ import {PayrollTypesComponent} from "./payroll-types/payroll-types.component";
 import {StaffExperienceComponent} from "./staff-experience/staff-experience.component";
 import { PaperSetterComponent } from './paper-setter/paper-setter.component';
 import {JournalPublicationComponent} from "./journal-publication/journal-publication.component";
+import { PromotionComponent } from './promotion/promotion.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,14 @@ const routes: Routes = [
     data: {
       title: "Staff Experience",
       breadcrumb: "Staff Experience"
+    }
+  },
+  {
+    path: 'promotion',
+    component: PromotionComponent,
+    data: {
+      title: "Promotion",
+      breadcrumb: "Promotion"
     }
   },
   {

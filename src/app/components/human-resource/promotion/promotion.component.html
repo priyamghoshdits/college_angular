@@ -1,0 +1,145 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Promotion</h5><span>Promotion</span>
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="promotionForm" class="theme-form">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0"> Select Staff</label>
+
+                                        <select class="form-select" formControlName="staff_id" required
+                                            style="width: 100%">
+                                            <option value="null"> Select Staff</option>
+                                            <option *ngFor="let data of memberList" [value]="data.id">
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+
+                                        <div *ngIf="promotionForm.controls['staff_id'].errors?.['required'] && promotionForm.controls['staff_id'].touched "
+                                            class="text text-danger mt-1">Staff required
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Date</label>
+                                        <input class="form-control" formControlName="promotion_date" type="date">
+                                        <div *ngIf="promotionForm.controls['promotion_date'].errors?.['required'] && promotionForm.controls['promotion_date'].touched "
+                                            class="text text-danger mt-1">Promotion Date required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Designation From</label>
+                                        <input class="form-control" formControlName="from" type="text"
+                                            placeholder="Enter Designation From">
+                                        <div *ngIf="promotionForm.controls['from'].errors?.['required'] && promotionForm.controls['from'].touched "
+                                            class="text text-danger mt-1">Designation From required
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Designation To</label>
+                                        <input class="form-control" formControlName="to"
+                                            placeholder="Enter Designation To" type="text">
+                                        <div *ngIf="promotionForm.controls['to'].errors?.['required'] && promotionForm.controls['to'].touched "
+                                            class="text text-danger mt-1">Designation To required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Upload Experience Proof</label>
+                                        <input (change)="uploadPromotionFile($event)" class="form-control"
+                                            formControlName="promotion_file" type="file">
+                                        <div *ngIf="promotionForm.controls['promotion_file'].errors?.['required'] && promotionForm.controls['promotion_file'].touched "
+                                            class="text text-danger mt-1">Promotion Proof required
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button (click)="savePromotionForm()" [hidden]="isUpdatable == true"
+                                class="btn btn-primary me-1">Submit
+                            </button>
+                            <button (click)="updatePromotionForm()" [hidden]="isUpdatable == false"
+                                class="btn btn-primary me-1">Update
+                            </button>
+                            <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
+                                class="btn btn-primary me-1">Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div *ngIf="permission[3].permission == 1" class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Staff Promotion</h5>
+                                <span>Full Staff Promotion List.</span>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Staff Name</th>
+                                            <th scope="col">From</th>
+                                            <th scope="col">To</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Download</th>
+
+                                            <th *ngIf="permission[1].permission == 1 && permission[2].permission == 1"
+                                                scope="col">
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let record of promotionList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                            <td>{{indexOfElement + 1}}</td>
+                                            <td>{{record.staff_name}}</td>
+                                            <td>{{record.from}}</td>
+                                            <td>{{record.to}}</td>
+                                            <td>{{record.promotion_date}}</td>
+                                            <td>
+                                                <a style="cursor: pointer" href="{{record.file}}" target="_blank" download><mat-icon>cloud_download</mat-icon></a>
+                                            </td>
+
+                                            <td>
+                                                <a (click)="editPromotion(record)"
+                                                    *ngIf="permission[1].permission == 1">
+                                                    <mat-icon>edit</mat-icon>
+                                                </a>
+                                                <a (click)="deletePromotion(record)"
+                                                    *ngIf="permission[2].permission == 1">
+                                                    <mat-icon>delete</mat-icon>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls (pageChange)="p = $event"
+                                    *ngIf="promotionList.length > 8"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

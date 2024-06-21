@@ -143,6 +143,7 @@ export class StaffExperienceComponent {
       }
 
       const formData = new FormData();
+      formData.append('id', this.staffExperienceForm.value.id);
       formData.append('staff_id', this.staffExperienceForm.value.staff_id);
       formData.append('designation', this.staffExperienceForm.value.designation);
       formData.append('experience', this.staffExperienceForm.value.experience);

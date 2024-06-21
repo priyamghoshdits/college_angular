@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {environment} from "../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {ErrorService} from "./error.service";
-import {Subject} from "rxjs";
-import {catchError, tap} from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { environment } from "../../environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { ErrorService } from "./error.service";
+import { Subject } from "rxjs";
+import { catchError, tap } from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -13,12 +13,15 @@ export class MemberService {
     memberList = [];
     categoryList = [];
     staffExperienceList = [];
+    promotionList = [];
     teacherListSubject = new Subject<any[]>();
     memberListSubject = new Subject<any[]>();
     CategoryListSubject = new Subject<any[]>();
     staffAttendanceSubject = new Subject<any[]>();
     generatedPayrollSubject = new Subject<any[]>();
     staffExperienceListSubject = new Subject<any[]>();
+    promotionListSubject = new Subject<any[]>();
+
     private BASE_API_URL = environment.BASE_API_URL;
 
     constructor(private http: HttpClient, private errorService: ErrorService) {
@@ -38,10 +41,18 @@ export class MemberService {
             this.staffExperienceList = response.data;
             this.staffExperienceListSubject.next([...this.staffExperienceList]);
         });
+        this.http.get(this.BASE_API_URL + '/getPromotion').subscribe((response: any) => {
+            this.promotionList = response.data;
+            this.promotionListSubject.next([...this.promotionList]);
+        });
     }
 
     getTeacherListener() {
         return this.teacherListSubject.asObservable();
+    }
+
+    getpromotionListListener() {
+        return this.promotionListSubject.asObservable();
     }
 
     getStaffExperienceListener() {
@@ -62,6 +73,10 @@ export class MemberService {
 
     getCategoryListener() {
         return this.CategoryListSubject.asObservable();
+    }
+
+    getPromotionList() {
+        return [...this.promotionList];
     }
 
     getStaffExperienceList() {
@@ -122,17 +137,43 @@ export class MemberService {
             }));
     }
 
-    savePaperSetter(value){
+    savePaperSetter(value) {
         return this.http.post(this.BASE_API_URL + '/savePaperSetter', value)
             .pipe(catchError(this.errorService.serverError), tap(response => {
-                
+
             }));
     }
 
-    saveUploadFile(value){
+    savePromotion(value) {
+        return this.http.post(this.BASE_API_URL + '/savePromotion', value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    // @ts-ignore
+                    this.promotionList.push(response.data);
+                    this.promotionListSubject.next([...this.promotionList]);
+                }
+            }));
+    }
+
+    updatePromotion(value) {
+        return this.http.post(this.BASE_API_URL + '/updatePromotion', value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    // @ts-ignore
+                    const index = this.promotionList.findIndex(x => x.id === response.data.id);
+                    // @ts-ignore
+                    this.promotionList[index] = response.data;
+                    this.promotionListSubject.next([...this.promotionList]);
+                }
+            }));
+    }
+
+    saveUploadFile(value) {
         return this.http.post(this.BASE_API_URL + '/saveUploadFile', value)
             .pipe(catchError(this.errorService.serverError), tap(response => {
-                
+
             }));
     }
 
@@ -174,18 +215,30 @@ export class MemberService {
             }));
     }
 
-  deleteStaffExperience(id) {
-    return this.http.get(this.BASE_API_URL + '/deleteExperience/' + id)
-        .pipe(catchError(this.errorService.serverError), tap(response => {
-          // @ts-ignore
-          if (response.success == 1) {
-            // @ts-ignore
-            const index = this.staffExperienceList.findIndex(x => x.id === response.data.id);
-            this.staffExperienceList.splice(index, 1);
-            this.staffExperienceListSubject.next([...this.staffExperienceList]);
-          }
-        }));
-  }
+    deleteStaffExperience(id) {
+        return this.http.get(this.BASE_API_URL + '/deleteExperience/' + id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    // @ts-ignore
+                    const index = this.staffExperienceList.findIndex(x => x.id === response.data.id);
+                    this.staffExperienceList.splice(index, 1);
+                    this.staffExperienceListSubject.next([...this.staffExperienceList]);
+                }
+            }));
+    }
+    deletePromotion(id) {
+        return this.http.get(this.BASE_API_URL + '/deletePromotion/' + id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    // @ts-ignore
+                    const index = this.promotionList.findIndex(x => x.id === response.data.id);
+                    this.promotionList.splice(index, 1);
+                    this.promotionListSubject.next([...this.promotionList]);
+                }
+            }));
+    }
 
 
     saveGeneratedPayroll(value) {
