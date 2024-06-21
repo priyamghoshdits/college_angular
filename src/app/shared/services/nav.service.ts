@@ -72,6 +72,7 @@ export class NavService {
 		},
 		{
 			title: 'Attendance', hidden:false , icon: 'file-text', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/attendance/admin-period-attendance', title: 'Admin Period Attendance', type: 'link' },
 				{ path: '/attendance/period-attendance', title: 'Period Attendance', type: 'link' },
 				{ path: '/attendance/show-attendance', title: 'Show Attendance', type: 'link' },
 			]
@@ -134,6 +135,7 @@ export class NavService {
 				{ path: '/human-resource/staff-attendance', title: 'Staff Attendance', type: 'link' }, // need to be added
 				{ path: '/human-resource/staff-experience', title: 'Staff Experience', type: 'link' },
 				{ path: '/human-resource/leave-type', title: 'Leave Type', type: 'link' },
+				{ path: '/human-resource/journal-publication', title: 'Journal Publication', type: 'link' },
 				{ path: '/human-resource/allocate-leave', title: 'Allocate Leave', type: 'link' },
 				{ path: '/human-resource/paper-setter', title: 'Paper Setter', type: 'link' },
 				{ path: '/human-resource/apply-leave', title: 'Apply Leave', type: 'link' },
