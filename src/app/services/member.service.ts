@@ -132,9 +132,11 @@ export class MemberService {
     saveUploadFile(value){
         return this.http.post(this.BASE_API_URL + '/saveUploadFile', value)
             .pipe(catchError(this.errorService.serverError), tap(response => {
-                
+
             }));
     }
+
+
 
     saveMember(value) {
         return this.http.post(this.BASE_API_URL + '/saveMember', value)
