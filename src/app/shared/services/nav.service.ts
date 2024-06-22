@@ -139,12 +139,9 @@ export class NavService {
 				{ path: '/human-resource/journal-publication', title: 'Journal Publication', type: 'link' },
 				{ path: '/human-resource/allocate-leave', title: 'Allocate Leave', type: 'link' },
 				{ path: '/human-resource/paper-setter', title: 'Paper Setter', type: 'link' },
-<<<<<<< HEAD
 				{ path: '/human-resource/promotion', title: 'Promotion', type: 'link' },
 				{ path: '/human-resource/book-publication', title: 'Book Publication', type: 'link' },
-=======
 				{ path: '/human-resource/promotion', title: 'Staff Promotion', type: 'link' },
->>>>>>> e07bcf4abc0aa44b28851e6163bf3091dbb88c65
 				{ path: '/human-resource/apply-leave', title: 'Apply Leave', type: 'link' },
 				{ path: '/human-resource/approve-leave', title: 'Approve Leave', type: 'link' },
 				{ path: '/human-resource/department', title: 'Department', type: 'link' },

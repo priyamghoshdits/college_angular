@@ -164,7 +164,6 @@ export class PaperSetterComponent {
         }
     }
 
-<<<<<<< HEAD
     updateQuestionPaper() {
         let arr = [
             {
@@ -185,8 +184,6 @@ export class PaperSetterComponent {
         })
     }
 
-=======
->>>>>>> e07bcf4abc0aa44b28851e6163bf3091dbb88c65
     getPaperSetting() {
         this.memberService.searchPaperSetter(this.paperSettingForm.value).subscribe((response: any) => {
             if (response.success == 1) {
