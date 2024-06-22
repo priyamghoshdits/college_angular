@@ -10,6 +10,7 @@ import {JournalPublicationServiceService} from "../../../services/journal-public
 import Swal from "sweetalert2";
 import {SubjectService} from "../../../services/subject.service";
 import {StudentService} from "../../../services/student.service";
+import {ConsultancyService} from "../../../services/consultancy.service";
 
 @Component({
     selector: 'app-consultancy',
@@ -32,7 +33,7 @@ import {StudentService} from "../../../services/student.service";
 })
 export class ConsultancyComponent {
     consultancyForm: FormGroup;
-    searchPaperList: any[];
+    consultationList: any[];
     total_question: any[] = [1];
     consultationArray: any[] = [];
     isUpdatable = false;
@@ -48,7 +49,7 @@ export class ConsultancyComponent {
     filteredStudentList: any[];
 
     constructor(private memberService: MemberService, private studentService: StudentService, private subjectService: SubjectService
-        , private roleAndPermissionService: RolesAndPermissionService, private journalPublicationService: JournalPublicationServiceService) {
+        , private roleAndPermissionService: RolesAndPermissionService, private consultancyService: ConsultancyService) {
 
         this.consultancyForm = new FormGroup({
             id: new FormControl(null),
@@ -58,7 +59,7 @@ export class ConsultancyComponent {
         this.consultationArray = [
             {
                 'id': null,
-                'staff': null,
+                'staff_id': null,
                 'project_consultancy': null,
                 'sponsored_by': null,
                 'consultant': null,
@@ -114,11 +115,11 @@ export class ConsultancyComponent {
         })
     }
 
-    updateJournalPublication() {
+    updateConsultancy() {
         let arr = {
-            'journal_publication_array': this.consultationArray
+            'consultationArray': this.consultationArray
         };
-        this.journalPublicationService.updateJournalPublication(arr).subscribe((response: any) => {
+        this.consultancyService.updateConsultancy(arr).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
@@ -131,22 +132,28 @@ export class ConsultancyComponent {
                 this.cancelUpdate();
             }
         })
-
     }
 
-    editJournalPublication(data) {
+    editConsultancy(data) {
         this.consultationArray[0].id = data.id;
         this.consultationArray[0].staff_id = data.staff_id;
-        this.consultationArray[0].journal_name = data.journal_name;
-        this.consultationArray[0].publication = data.publication;
-        this.consultationArray[0].ugc_affiliation = data.ugc_affiliation;
-        this.consultationArray[0].volume_page_number = data.volume_page_number;
-        this.consultationArray[0].university_name = data.university_name;
-        this.consultationArray[0].topic_name = data.topic_name;
-        this.consultationArray[0].issn_number = data.issn_number;
-        this.consultationArray[0].impact_factor = data.impact_factor;
+        this.consultationArray[0].project_consultancy = data.project_consultancy;
+        this.consultationArray[0].sponsored_by = data.sponsored_by;
+        this.consultationArray[0].consultant = data.consultant;
+        this.consultationArray[0].amount = data.amount;
+        this.consultationArray[0].duration = data.duration;
+        this.consultationArray[0].status = data.status;
         this.active = 1;
         this.isUpdatable = true;
+
+        // 'id': null,
+        //     'staff_id': null,
+        //     'project_consultancy': null,
+        //     'sponsored_by': null,
+        //     'consultant': null,
+        //     'amount': null,
+        //     'duration': null,
+        //     'status': null,
     }
 
 
@@ -161,11 +168,11 @@ export class ConsultancyComponent {
             confirmButtonText: 'Yes, delete It!'
         }).then((result) => {
             if (result.isConfirmed) {
-                this.journalPublicationService.deleteJournalPublication(data.id).subscribe((response: any) => {
-                    if (response.success == 1) {
-                        this.searchPaperList = response.data;
-                    }
-                })
+                // this.journalPublicationService.deleteJournalPublication(data.id).subscribe((response: any) => {
+                //     if (response.success == 1) {
+                //         this.searchPaperList = response.data;
+                //     }
+                // })
             }
         });
 
@@ -177,7 +184,7 @@ export class ConsultancyComponent {
         this.consultationArray = [
             {
                 'id': null,
-                'staff': null,
+                'staff_id': null,
                 'project_consultancy': null,
                 'sponsored_by': null,
                 'consultant': null,
@@ -189,20 +196,20 @@ export class ConsultancyComponent {
         // this.counter = 0;
     }
 
-    getJournalPublication() {
-        this.journalPublicationService.searchJournalPublication(this.consultancyForm.value.staff_id).subscribe((response: any) => {
+    getConsultancy() {
+        this.consultancyService.searchConsultancy(this.consultancyForm.value.staff_id).subscribe((response: any) => {
             if (response.success == 1) {
-                this.searchPaperList = response.data;
+                this.consultationList = response.data;
             }
         })
     }
 
     saveConsultancy() {
         let arr = {
-            'journal_publication_array': this.consultationArray
+            'consultationArray': this.consultationArray
         };
 
-        this.journalPublicationService.saveJournalPublication(arr).subscribe((response: any) => {
+        this.consultancyService.saveConsultation(arr).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
@@ -225,7 +232,7 @@ export class ConsultancyComponent {
         let arr = [
             {
                 'id': null,
-                'staff': null,
+                'staff_id': null,
                 'project_consultancy': null,
                 'sponsored_by': null,
                 'consultant': null,

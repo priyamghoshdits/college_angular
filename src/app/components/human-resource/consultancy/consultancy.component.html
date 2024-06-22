@@ -129,13 +129,13 @@
                                                    type="text">
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <label>Topic Name</label>
+                                            <label>Status</label>
                                             <select [(ngModel)]="consultationArray[indexOfElement].status"
                                                     class="form-select"
                                                     required style="width: 100%;">
                                                 <option value="null">Select</option>
-                                                <option value="yes">Ongoing</option>
-                                                <option value="no">Completed</option>
+                                                <option value="ongoing">Ongoing</option>
+                                                <option value="completed">Completed</option>
                                             </select>
                                         </div>
                                     </div>
@@ -145,7 +145,7 @@
                                 <button (click)="saveConsultancy()" *ngIf="permission[0].permission == 1"
                                         [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
                                 </button>
-                                <button (click)="updateJournalPublication()" [hidden]="isUpdatable == false"
+                                <button (click)="updateConsultancy()" [hidden]="isUpdatable == false"
                                         class="btn btn-primary me-1">Update
                                 </button>
                                 <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
@@ -172,7 +172,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3 mb-3">
-                                            <button (click)="getJournalPublication()" class="btn btn-primary me-1"
+                                            <button (click)="getConsultancy()" class="btn btn-primary me-1"
                                                     style="margin-top: 30px;">Search
                                             </button>
                                         </div>
@@ -186,30 +186,28 @@
                                     <tr>
                                         <th scope="col">#</th>
                                         <th>Staff Name</th>
-                                        <th>Journal Name</th>
-                                        <th>Publication</th>
-                                        <th>UGC Affiliation</th>
-                                        <th>Topic name</th>
-                                        <th>Volume Page number</th>
-                                        <th>Issn Number</th>
-                                        <th>Impact Factor</th>
+                                        <th>Project Consultancy</th>
+                                        <th>Sponsored By</th>
+                                        <th>Consultancy</th>
+                                        <th>Amount</th>
+                                        <th>Duration</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr
-                                            *ngFor="let record of searchPaperList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
+                                            *ngFor="let record of consultationList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
                                         <td>{{indexOfElement + 1}}</td>
                                         <td>{{record.staff_name}}</td>
-                                        <td>{{record.journal_name}}</td>
-                                        <td>{{record.publication}}</td>
-                                        <td>{{record.ugc_affiliation}}</td>
-                                        <td>{{record.topic_name}}</td>
-                                        <td>{{record.volume_page_number}}</td>
-                                        <td>{{record.issn_number}}</td>
-                                        <td>{{record.impact_factor}}</td>
+                                        <td>{{record.project_consultancy}}</td>
+                                        <td>{{record.sponsored_by}}</td>
+                                        <td>{{record.consultant}}</td>
+                                        <td>{{record.amount}}</td>
+                                        <td>{{record.duration}}</td>
+                                        <td>{{record.status}}</td>
                                         <td>
-                                            <a (click)="editJournalPublication(record)"
+                                            <a (click)="editConsultancy(record)"
                                                *ngIf="permission[1].permission == 1">
                                                 <mat-icon>edit</mat-icon>
                                             </a>
