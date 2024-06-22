@@ -1,0 +1,232 @@
+<div class="container-fluid">
+    <div *ngIf="permission.length > 0" class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div [hidden]="active != 1" class="card-header">
+                            <h5>Sponsored Project/Consultancy</h5><span>Sponsored Project/Consultancy</span>
+                        </div>
+                        <div [hidden]="active != 2" class="card-header">
+                            <h5>Show Sponsored Project/Consultancy</h5>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary" ngbNav>
+                                <li [ngbNavItem]="1">
+                                    <a (click)="activeTab(1)" ngbNavLink>Add Sponsored Project/Consultancy</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a (click)="activeTab(2)" ngbNavLink>Show Sponsored Project/Consultancy</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+                        <div [hidden]="active != 1">
+                            <div [hidden]="active != 1" class="card-body">
+                                <div *ngFor="let item of consultationArray ;let indexOfElement=index">
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-md-3 mb-3">-->
+<!--                                            <label>Select Course</label>-->
+<!--                                            <select [(ngModel)]="consultationArray[indexOfElement].course_id"-->
+<!--                                                    (change)="getSemester(indexOfElement)"-->
+<!--                                                    class="form-select"-->
+<!--                                                    required-->
+<!--                                                    style="width: 100%">-->
+<!--                                                <option value="null">Select</option>-->
+<!--                                                <option *ngFor="let data of courseList" [value]="data.id">-->
+<!--                                                    {{data.course_name}}-->
+<!--                                                </option>-->
+<!--                                            </select>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-md-3 mb-3">-->
+<!--                                            <label>Select Semester</label>-->
+<!--                                            <select [(ngModel)]="consultationArray[indexOfElement].semester_id"-->
+<!--                                                    (change)="getStudent(indexOfElement)"-->
+<!--                                                    class="form-select"-->
+<!--                                                    required-->
+<!--                                                    style="width: 100%">-->
+<!--                                                <option value="null">Select</option>-->
+<!--                                                <option *ngFor="let data of semesterList" [value]="data.semester_id">-->
+<!--                                                    {{data.name}}-->
+<!--                                                </option>-->
+<!--                                            </select>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-md-3 mb-3">-->
+<!--                                            <label>Select Student</label>-->
+<!--                                            <select [(ngModel)]="consultationArray[indexOfElement].student_id"-->
+<!--                                                    class="form-select"-->
+<!--                                                    required-->
+<!--                                                    style="width: 100%">-->
+<!--                                                <option value="null">Select</option>-->
+<!--                                                <option *ngFor="let data of filteredStudentList" [value]="data.id">-->
+<!--                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}-->
+<!--                                                </option>-->
+<!--                                            </select>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Staff</label>
+                                            <select [(ngModel)]="consultationArray[indexOfElement].staff_id"
+                                                    class="form-select"
+                                                    required
+                                                    style="width: 100%">
+                                                <option value="null"> Select a Staff</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Project/Consultancy</label>
+                                            <input [(ngModel)]="consultationArray[indexOfElement].project_consultancy"
+                                                   class="form-control"
+                                                   placeholder="Publication"
+                                                   required type="text">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Sponsored By</label>
+                                            <input [(ngModel)]="consultationArray[indexOfElement].sponsored_by"
+                                                   class="form-control"
+                                                   placeholder="Sponsored By"
+                                                   required type="text">
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 mb-3">
+                                            <label>Consultant</label>
+                                            <input [(ngModel)]="consultationArray[indexOfElement].consultant"
+                                                   class="form-control"
+                                                   placeholder="Consultant"
+                                                   required type="text">
+                                        </div>
+                                        <div class="col-md-5 mb-3">
+                                            <label>Amount</label>
+                                            <input [(ngModel)]="consultationArray[indexOfElement].amount"
+                                                   class="form-control"
+                                                   placeholder="Amount"
+                                                   required
+                                                   type="text">
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <a (click)="addField()"
+                                               *ngIf="(indexOfElement + 1) == consultationArray.length" style="">
+                                                <mat-icon
+                                                        style="font-size: 40px;height: 60px; width: 40px; line-height: 2">
+                                                    add_box
+                                                </mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Duration</label>
+                                            <input [(ngModel)]="consultationArray[indexOfElement].duration"
+                                                   class="form-control"
+                                                   placeholder="Duration"
+                                                   required
+                                                   type="text">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Status</label>
+                                            <select [(ngModel)]="consultationArray[indexOfElement].status"
+                                                    class="form-select"
+                                                    required style="width: 100%;">
+                                                <option value="null">Select</option>
+                                                <option value="ongoing">Ongoing</option>
+                                                <option value="completed">Completed</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button (click)="saveConsultancy()" *ngIf="permission[0].permission == 1"
+                                        [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
+                                </button>
+                                <button (click)="updateConsultancy()" [hidden]="isUpdatable == false"
+                                        class="btn btn-primary me-1">Update
+                                </button>
+                                <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
+                                        class="btn btn-primary me-1">Cancel
+                                </button>
+                                <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                            </div>
+                        </div>
+                        <div [hidden]="active != 2">
+                            <div class="card-body">
+                                <form [formGroup]="consultancyForm" class="theme-form">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label class="col-form-label pt-0">From
+                                                Date</label>
+                                            <select class="form-select"
+                                                    formControlName="staff_id"
+                                                    required
+                                                    style="width: 100%">
+                                                <option value="null"> Select a Staff</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <button (click)="getConsultancy()" class="btn btn-primary me-1"
+                                                    style="margin-top: 30px;">Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table text-center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th>Staff Name</th>
+                                        <th>Project Consultancy</th>
+                                        <th>Sponsored By</th>
+                                        <th>Consultancy</th>
+                                        <th>Amount</th>
+                                        <th>Duration</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr
+                                            *ngFor="let record of consultationList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement + 1}}</td>
+                                        <td>{{record.staff_name}}</td>
+                                        <td>{{record.project_consultancy}}</td>
+                                        <td>{{record.sponsored_by}}</td>
+                                        <td>{{record.consultant}}</td>
+                                        <td>{{record.amount}}</td>
+                                        <td>{{record.duration}}</td>
+                                        <td>{{record.status}}</td>
+                                        <td>
+                                            <a (click)="editConsultancy(record)"
+                                               *ngIf="permission[1].permission == 1">
+                                                <mat-icon>edit</mat-icon>
+                                            </a>
+                                            <a (click)="deleteJournalPublication(record)"
+                                               *ngIf="permission[2].permission == 1">
+                                                <mat-icon>delete</mat-icon>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!-- <pagination-controls *ngIf="paperList.length > 5"
+                                    (pageChange)="p = $event"></pagination-controls> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

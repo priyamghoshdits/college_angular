@@ -31,12 +31,8 @@ import { MemberService } from 'src/app/services/member.service';
 })
 export class PaperSetterComponent {
     paperSettingForm: FormGroup;
-    paperList: any[];
     searchPaperList: any[];
-    subjectDetailsList: any[];
-    selected_details = null;
     total_question: any[] = [1];
-    totalMarks = 0;
     paperSetterArray: any[] = [];
     isUpdatable = false;
     counter = 0;
@@ -59,6 +55,7 @@ export class PaperSetterComponent {
 
         this.paperSetterArray = [
             {
+                'id': null,
                 'staff_id': null,
                 'examination_name': null,
                 'subject_name': null,
@@ -68,11 +65,6 @@ export class PaperSetterComponent {
                 'paper_file': null,
             }
         ];
-
-        // this.staffForm = new FormGroup({
-        //   id: new FormControl(null),
-        //   staff_id: new FormControl(null, [Validators.required]),
-        // });
 
         this.memberService.getMemberListener().subscribe((response) => {
             this.memberList = response;
@@ -89,11 +81,69 @@ export class PaperSetterComponent {
         }
     }
 
+    updatePaperSetter() {
+        const formData = new FormData();
+        formData.append('id', this.paperSetterArray[0].id);
+        formData.append('staff_id', this.paperSetterArray[0].staff_id);
+        formData.append('examination_name', this.paperSetterArray[0].examination_name);
+        formData.append('subject_name', this.paperSetterArray[0].subject_name);
+        formData.append('university_name', this.paperSetterArray[0].university_name);
+        formData.append('referance_no', this.paperSetterArray[0].referance_no);
+        formData.append('ref_date', this.paperSetterArray[0].ref_date);
+        formData.append('file', this.filesArray[0]);
+
+        this.memberService.updatePaperSetter(formData).subscribe((response: any) => {
+            if (response.success == 1) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Paper Setter Updated',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                this.paperSettingForm.reset();
+                this.cancelUpdate();
+            }
+        })
+
+    }
+
+    editPaperSetter(data) {
+        this.paperSetterArray[0].id = data.id;
+        this.paperSetterArray[0].staff_id = data.staff_id;
+        this.paperSetterArray[0].examination_name = data.examination_name;
+        this.paperSetterArray[0].subject_name = data.subject_name;
+        this.paperSetterArray[0].university_name = data.university_name;
+        this.paperSetterArray[0].referance_no = data.referance_no;
+        this.paperSetterArray[0].ref_date = data.ref_date;
+        this.active = 1;
+        this.isUpdatable = true;
+    }
+
+    deletePaperSetter(data) {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete course ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.memberService.deletePaperSetter(data.id).subscribe((response: any) => {
+                    if (response.success == 1) {
+                        this.searchPaperList = response.data;
+                    }
+                })
+            }
+        });
+
+    }
+
 
     cancelUpdate() {
         this.isUpdatable = false;
-        this.total_question = [1];
-        this.totalMarks = 0;
         this.paperSetterArray = [
             {
                 'examination_name': null,
@@ -104,7 +154,7 @@ export class PaperSetterComponent {
                 'paper_file': null,
             }
         ];
-        this.counter = 0;
+        // this.counter = 0;
     }
 
     fileUpload(event: any, index: number) {
@@ -114,6 +164,7 @@ export class PaperSetterComponent {
         }
     }
 
+<<<<<<< HEAD
     updateQuestionPaper() {
         let arr = [
             {
@@ -134,50 +185,14 @@ export class PaperSetterComponent {
         })
     }
 
+=======
+>>>>>>> e07bcf4abc0aa44b28851e6163bf3091dbb88c65
     getPaperSetting() {
         this.memberService.searchPaperSetter(this.paperSettingForm.value).subscribe((response: any) => {
             if (response.success == 1) {
                 this.searchPaperList = response.data;
             }
         })
-    }
-
-
-    deleteQuestionPaper(data) {
-        Swal.fire({
-            title: 'Confirmation',
-            text: 'Do you sure to delete ?',
-            icon: 'info',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete It!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                this.examinationService.deleteQuestions(data).subscribe((response: any) => {
-                    if (response.success == 1) {
-                        Swal.fire({
-                            position: 'center',
-                            icon: 'success',
-                            title: 'Successfully deleted',
-                            showConfirmButton: false,
-                            timer: 1000
-                        });
-                    }
-                })
-            }
-        });
-    }
-
-    editQuestionPaper(data) {
-        this.paperSetterArray = data.questions;
-        this.total_question[data.questions.length - 1] = [];
-        this.active = 1;
-        this.totalMarks = this.paperSetterArray.reduce((accumulator, currentItem) => accumulator + parseInt(currentItem.marks), 0);
-        let x = this.subjectDetailsList.find(x => x.id == data.subject_details_id);
-        this.selected_details = x;
-        this.isUpdatable = true;
-        this.counter = data.questions.length - 1;
     }
 
     savePaperSetter() {
@@ -213,14 +228,12 @@ export class PaperSetterComponent {
     }
 
 
-
     activeTab(data) {
         this.active = data;
     }
 
     addField() {
-        this.counter = this.counter + 1;
-        this.total_question[this.counter] = [];
+        // this.counter = this.counter + 1;
         let arr = [
             {
                 'staff_id': null,
@@ -235,9 +248,4 @@ export class PaperSetterComponent {
         this.paperSetterArray.push(arr[0]);
     }
 
-    updateStatus(id) {
-        this.examinationService.updateSubjectStatus(id).subscribe((response) => {
-
-        })
-    }
 }

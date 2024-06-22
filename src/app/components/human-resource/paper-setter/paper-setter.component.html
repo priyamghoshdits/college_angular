@@ -8,10 +8,10 @@
                             <h5>Papper Setter</h5><span>Papper Setter</span>
                         </div>
                         <div class="card-header" [hidden]="active != 2">
-                            <h5>Show All Questions</h5>
+                            <h5>Show Paper Setter</h5>
                         </div>
                         <div class="tabbed-card">
-                            <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
+                            <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
                                 <li [ngbNavItem]="1">
                                     <a ngbNavLink (click)="activeTab(1)">Add Papper Setter</a>
                                 </li>
@@ -88,7 +88,7 @@
                                 <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true"
                                     class="btn btn-primary me-1" (click)="savePaperSetter()">Submit</button>
                                 <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
-                                    (click)="updateQuestionPaper()">Update</button>
+                                    (click)="updatePaperSetter()">Update</button>
                                 <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
                                     (click)="cancelUpdate()">Cancel</button>
                                 <!--                            <button class="btn btn-secondary">Cancel</button>-->
@@ -127,58 +127,34 @@
                             </div>
 
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table text-center">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">Subject Name</th>
-                                            <th colspan="2">Course Name</th>
-                                            <th colspan="7">Question</th>
-                                            <th colspan="1">Action</th>
+                                            <th scope="col">#</th>
+                                            <th>Staff Name</th>
+                                            <th >Examination Name</th>
+                                            <th >Subject Name</th>
+                                            <th >University Name</th>
+                                            <th >Reference Name</th>
+                                            <th>Date</th>
+                                            <th >Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr
                                             *ngFor="let record of searchPaperList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
-                                            <td colspan="2">{{record.subject_name}}</td>
-                                            <td colspan="2">{{record.course_name}}</td>
-                                            <td colspan="7">
-                                                <div *ngFor="let record of record.questions ;let indexOfElement1=index">
-                                                    <div class="row m-1">
-                                                        <div class="col-3">Question {{indexOfElement1 + 1}}</div>
-                                                        <div class="col">{{record.question}}</div>
-                                                    </div>
-
-                                                    <div class="row m-1">
-                                                        <div class="col-3">Options</div>
-                                                        <div class="col">{{record.option_1}}</div>
-                                                        <div class="col">{{record.option_2}}</div>
-                                                        <div class="col">{{record.option_3}}</div>
-                                                        <div class="col">{{record.option_4}}</div>
-                                                    </div>
-
-                                                    <div class="row m-1">
-                                                        <div class="col-3">Marks</div>
-                                                        <div class="col">{{record.marks}}</div>
-                                                    </div>
-
-                                                    <div class="row m-1">
-                                                        <div class="col-3">Status</div>
-                                                        <div class="col">
-                                                            <input (click)="updateStatus(record.id)"
-                                                                [checked]="record.status" id="checkbox-primary-1"
-                                                                type="checkbox">
-                                                        </div>
-                                                    </div>
-
-                                                    <br>
-                                                    <br>
-                                                </div>
-                                            </td>
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{record.staff_name}}</td>
+                                            <td>{{record.examination_name}}</td>
+                                            <td>{{record.subject_name}}</td>
+                                            <td>{{record.university_name}}</td>
+                                            <td>{{record.referance_no}}</td>
+                                            <td>{{record.ref_date}}</td>
                                             <td>
                                                 <a *ngIf="permission[1].permission == 1"
-                                                    (click)="editQuestionPaper(record)"><mat-icon>edit</mat-icon></a>
+                                                    (click)="editPaperSetter(record)"><mat-icon>edit</mat-icon></a>
                                                 <a *ngIf="permission[2].permission == 1"
-                                                    (click)="deleteQuestionPaper(record)"><mat-icon>delete</mat-icon></a>
+                                                    (click)="deletePaperSetter(record)"><mat-icon>delete</mat-icon></a>
                                             </td>
                                         </tr>
                                     </tbody>

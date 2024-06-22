@@ -144,6 +144,20 @@ export class MemberService {
             }));
     }
 
+    updatePaperSetter(value) {
+        return this.http.post(this.BASE_API_URL + '/updatePaperSetter', value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
+
+    deletePaperSetter(value) {
+        return this.http.get(this.BASE_API_URL + '/deletePaperSetter/' + value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
+
     savePromotion(value) {
         return this.http.post(this.BASE_API_URL + '/savePromotion', value)
             .pipe(catchError(this.errorService.serverError), tap(response => {

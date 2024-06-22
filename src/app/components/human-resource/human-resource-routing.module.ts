@@ -17,7 +17,11 @@ import { StaffExperienceComponent } from "./staff-experience/staff-experience.co
 import { PaperSetterComponent } from './paper-setter/paper-setter.component';
 import { JournalPublicationComponent } from "./journal-publication/journal-publication.component";
 import { PromotionComponent } from './promotion/promotion.component';
+<<<<<<< HEAD
 import { BookPublicationComponent } from './book-publication/book-publication.component';
+=======
+import {ConsultancyComponent} from "./consultancy/consultancy.component";
+>>>>>>> e07bcf4abc0aa44b28851e6163bf3091dbb88c65
 
 const routes: Routes = [
   {
@@ -26,6 +30,14 @@ const routes: Routes = [
     data: {
       title: "Add Staff",
       breadcrumb: "Add Staff"
+    }
+  },
+  {
+    path: 'sponsored-or-consultancy',
+    component: ConsultancyComponent,
+    data: {
+      title: "Sponsored Project/Consultancy",
+      breadcrumb: "Sponsored Project/Consultancy"
     }
   },
   {
