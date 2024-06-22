@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <form [formGroup]="attendanceForm" class="theme-form">
                                 <div class="row">
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label>Select Course</label>
                                         <select (change)="getSemester()" class="form-select" formControlName="course_id"
                                                 required style="width: 100%">
@@ -23,7 +23,7 @@
                                              class="text text-danger mt-1">Course required
                                         </div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label>Select Semester</label>
                                         <select (change)="getSubject()" class="form-select"
                                                 formControlName="semester_id"
@@ -37,7 +37,7 @@
                                              class="text text-danger mt-1">Semester required
                                         </div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label>Select Date</label>
                                         <input class="form-control" formControlName="date" placeholder="Select date"
                                                type="date">
@@ -45,9 +45,9 @@
                                              class="text text-danger mt-1">Date required
                                         </div>
                                     </div>
-                                    <div class="col-md-3 mb-3">
+                                    <div class="col-md-2 mb-3">
                                         <label>Select Subject</label>
-                                        <select class="form-select" formControlName="subject_id" required
+                                        <select class="form-select" formControlName="subject_id" required (change)="getClass()"
                                                 style="width: 100%">
                                             <option value="null">Select</option>
                                             <option *ngFor="let data of subjectList" [value]="data.id">
@@ -56,6 +56,21 @@
                                         </select>
                                         <div *ngIf="attendanceForm.controls['subject_id'].errors?.['required'] && attendanceForm.controls['subject_id'].touched "
                                              class="text text-danger mt-1">Subject required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Select class</label>
+                                        <select class="form-select" formControlName="class" required
+                                                style="width: 100%">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of classList" [value]="data.class">
+                                                {{data.class}}
+                                            </option>
+                                            <option value="new">New Class</option>
+
+                                        </select>
+                                        <div *ngIf="attendanceForm.controls['class'].errors?.['required'] && attendanceForm.controls['class'].touched "
+                                             class="text text-danger mt-1">Class required
                                         </div>
                                     </div>
                                     <div>

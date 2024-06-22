@@ -46,7 +46,7 @@ export class PeriodAttendanceComponent {
             id: new FormControl(null),
             course_id: new FormControl(null, [Validators.required]),
             semester_id: new FormControl(null, [Validators.required]),
-            class: new FormControl(null, [Validators.required]),
+            class: new FormControl(null),
             date: new FormControl(null, [Validators.required]),
             subject_id: new FormControl(null, [Validators.required]),
             session_id: new FormControl(null, [Validators.required]),
@@ -83,7 +83,9 @@ export class PeriodAttendanceComponent {
 
     getClass(){
         this.subjectService.getClass(this.attendanceForm.value.subject_id).subscribe((response: any) => {
-            console.log(response);
+            if(response.success == 1){
+                this.classList = response.data;
+            }
         })
     }
 
@@ -98,10 +100,11 @@ export class PeriodAttendanceComponent {
         }
 
         this.studentList = [];
-        this.studentService.getStudentAttendance(this.attendanceForm.value.course_id
+        this.studentService.getStudentAttendanceNew(this.attendanceForm.value.course_id
             , this.attendanceForm.value.semester_id, this.attendanceForm.value.date
             , this.attendanceForm.value.subject_id
-            , this.attendanceForm.value.session_id).subscribe((response: any) => {
+            , this.attendanceForm.value.session_id, this.attendanceForm.value.class
+        ).subscribe((response: any) => {
 
             if (response.semester_time_table == 0) {
                 Swal.fire({
@@ -196,6 +199,9 @@ export class PeriodAttendanceComponent {
         let session_id = this.attendanceForm.value.session_id;
         let _class = this.attendanceForm.value.class;
 
+        // console.log(_class);
+
+        // return;
 
         this.studentList.forEach(function (value) {
             value.date = date;

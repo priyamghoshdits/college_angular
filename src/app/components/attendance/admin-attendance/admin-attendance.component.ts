@@ -28,6 +28,7 @@ export class AdminAttendanceComponent {
     semesterList: any[];
     subjectList: any[];
     sessionList: any[];
+    classList: any[];
     studentList: any[] = [];
     session_id = null;
     p: number;
@@ -46,6 +47,7 @@ export class AdminAttendanceComponent {
             date: new FormControl(null, [Validators.required]),
             subject_id: new FormControl(null, [Validators.required]),
             session_id: new FormControl(null, [Validators.required]),
+            class: new FormControl(null, [Validators.required]),
         });
         this.attendanceForm.patchValue({date: this.datepipe.transform(new Date(), 'yyyy-MM-dd')});
         this.subjectService.getCourseListener().subscribe((response) => {
@@ -88,48 +90,60 @@ export class AdminAttendanceComponent {
         }
 
         this.studentList = [];
-        this.studentService.getStudentAttendance(this.attendanceForm.value.course_id
-            , this.attendanceForm.value.semester_id, this.attendanceForm.value.date
+        this.studentService.getStudentAttendanceNew(this.attendanceForm.value.course_id
+            , this.attendanceForm.value.semester_id
+            , this.attendanceForm.value.date
             , this.attendanceForm.value.subject_id
-            , this.attendanceForm.value.session_id).subscribe((response: any) => {
+            , this.attendanceForm.value.session_id
+            , this.attendanceForm.value.class
+        ).subscribe((response: any) => {
 
-            if (response.semester_time_table == 0) {
+            this.studentList = response.data;
+            this.showList = false;
+            if (this.studentList.length == 0) {
                 Swal.fire({
-                    title: 'Confirmation',
-                    text: 'This subject class is not assigned today still want to give attendance ?',
+                    position: 'center',
                     icon: 'info',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.studentList = response.data;
-                        this.showList = false;
-                        if (this.studentList.length == 0) {
-                            Swal.fire({
-                                position: 'center',
-                                icon: 'info',
-                                title: 'No Student Found',
-                                showConfirmButton: false,
-                                timer: 1000
-                            });
-                        }
-                    }
+                    title: 'No Student Found',
+                    showConfirmButton: false,
+                    timer: 1000
                 });
-            } else {
-                this.studentList = response.data;
-                if (this.studentList.length == 0) {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'info',
-                        title: 'No Student Found',
-                        showConfirmButton: false,
-                        timer: 1000
-                    });
-                }
             }
+            // if (response.semester_time_table == 0 ) {
+            //     Swal.fire({
+            //         title: 'Confirmation',
+            //         text: 'This subject class is not assigned today still want to give attendance ?',
+            //         icon: 'info',
+            //         showCancelButton: true,
+            //         confirmButtonColor: '#3085d6',
+            //         cancelButtonColor: '#d33',
+            //         confirmButtonText: 'Yes!'
+            //     }).then((result) => {
+            //         if (result.isConfirmed) {
+            //
+            //         }
+            //     });
+            // } else {
+            //     this.studentList = response.data;
+            //     if (this.studentList.length == 0) {
+            //         Swal.fire({
+            //             position: 'center',
+            //             icon: 'info',
+            //             title: 'No Student Found',
+            //             showConfirmButton: false,
+            //             timer: 1000
+            //         });
+            //     }
+            // }
         });
+    }
+
+    getClass(){
+        this.subjectService.getClass(this.attendanceForm.value.subject_id).subscribe((response: any) => {
+            if(response.success == 1){
+                this.classList = response.data;
+            }
+        })
     }
 
     saveAttendance() {
@@ -152,6 +166,7 @@ export class AdminAttendanceComponent {
         let course_id = this.attendanceForm.value.course_id;
         let semester_id = this.attendanceForm.value.semester_id;
         let session_id = this.attendanceForm.value.session_id;
+        let _class = this.attendanceForm.value.class;
 
 
         this.studentList.forEach(function (value) {
@@ -160,6 +175,7 @@ export class AdminAttendanceComponent {
             value.course_id = course_id;
             value.semester_id = semester_id;
             value.session_id = session_id;
+            value._class = _class;
         })
         this.studentService.saveStudentAttendance(this.studentList).subscribe((response: any) => {
             if (response.success == 1) {

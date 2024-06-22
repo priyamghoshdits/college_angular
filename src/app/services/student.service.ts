@@ -132,6 +132,12 @@ export class StudentService {
             }));
     }
 
+    getStudentAttendanceNew(course_id, semester_id, date, subject_id, session_id, _class) {
+        return this.http.get(this.BASE_API_URL + '/getStudentAttendance/' + course_id + '/' + semester_id + '/' + date + '/' + subject_id + '/' + session_id + '/' + _class)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+            }));
+    }
+
     getUserAttendance(course_id, semester_id, date, user_id) {
         return this.http.get(this.BASE_API_URL + '/getStudentOwnAttendance/' + course_id + '/' + semester_id + '/' + date + '/' + user_id)
             .pipe(catchError(this.errorService.serverError), tap(response => {
