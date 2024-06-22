@@ -164,25 +164,6 @@ export class PaperSetterComponent {
         }
     }
 
-    updateQuestionPaper() {
-        let arr = [
-            {
-                'questions': this.paperSetterArray
-            }
-        ];
-        this.examinationService.updateQuestions(arr[0]).subscribe((response: any) => {
-            if (response.success == 1) {
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Question paper updated',
-                    showConfirmButton: false,
-                    timer: 1000
-                });
-                this.cancelUpdate();
-            }
-        })
-    }
 
     getPaperSetting() {
         this.memberService.searchPaperSetter(this.paperSettingForm.value).subscribe((response: any) => {

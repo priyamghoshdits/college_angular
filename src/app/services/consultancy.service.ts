@@ -32,4 +32,10 @@ export class ConsultancyService {
         }));
   }
 
+  deleteConsultancy(value){
+    return this.http.get(this.BASE_API_URL + '/deleteConsultation/' + value)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+        }));
+  }
+
 }

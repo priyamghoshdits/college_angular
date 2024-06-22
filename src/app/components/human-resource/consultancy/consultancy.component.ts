@@ -124,12 +124,13 @@ export class ConsultancyComponent {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Paper Setter Updated',
+                    title: 'Updated Succesfully',
                     showConfirmButton: false,
                     timer: 1000
                 });
                 this.consultancyForm.reset();
                 this.cancelUpdate();
+                this.consultationList = [];
             }
         })
     }
@@ -145,15 +146,6 @@ export class ConsultancyComponent {
         this.consultationArray[0].status = data.status;
         this.active = 1;
         this.isUpdatable = true;
-
-        // 'id': null,
-        //     'staff_id': null,
-        //     'project_consultancy': null,
-        //     'sponsored_by': null,
-        //     'consultant': null,
-        //     'amount': null,
-        //     'duration': null,
-        //     'status': null,
     }
 
 
@@ -168,11 +160,18 @@ export class ConsultancyComponent {
             confirmButtonText: 'Yes, delete It!'
         }).then((result) => {
             if (result.isConfirmed) {
-                // this.journalPublicationService.deleteJournalPublication(data.id).subscribe((response: any) => {
-                //     if (response.success == 1) {
-                //         this.searchPaperList = response.data;
-                //     }
-                // })
+                this.consultancyService.deleteConsultancy(data.id).subscribe((response: any) => {
+                    if (response.success == 1) {
+                        this.consultationList = response.data;
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Deleted Succesfully',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                    }
+                })
             }
         });
 
