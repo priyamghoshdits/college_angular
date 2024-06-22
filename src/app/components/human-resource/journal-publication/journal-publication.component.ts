@@ -182,6 +182,7 @@ export class JournalPublicationComponent {
                     timer: 1000
                 });
                 this.cancelUpdate();
+
             }
         })
     }
