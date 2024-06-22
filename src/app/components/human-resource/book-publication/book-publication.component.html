@@ -5,18 +5,18 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header" [hidden]="active != 1">
-                            <h5>Papper Setter</h5><span>Papper Setter</span>
+                            <h5>Book Publication</h5><span>Book Publication</span>
                         </div>
                         <div class="card-header" [hidden]="active != 2">
-                            <h5>Show All Questions</h5>
+                            <h5>Show All Book Publication</h5>
                         </div>
                         <div class="tabbed-card">
                             <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
                                 <li [ngbNavItem]="1">
-                                    <a ngbNavLink (click)="activeTab(1)">Add Papper Setter</a>
+                                    <a ngbNavLink (click)="activeTab(1)">Add Book Publication</a>
                                 </li>
                                 <li [ngbNavItem]="2">
-                                    <a ngbNavLink (click)="activeTab(2)">Show Papper Setter</a>
+                                    <a ngbNavLink (click)="activeTab(2)">Show Book Publication</a>
                                 </li>
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
@@ -118,6 +118,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
+                                            <th colspan="2">Sl.NO</th>
                                             <th colspan="2">Staff Name</th>
                                             <th colspan="2">Book Name</th>
                                             <th colspan="2">ISBN Number</th>
@@ -130,6 +131,8 @@
                                     </thead>
                                     <tbody>
                                         <tr *ngFor="let record of bookPublicationList ;let indexOfElement=index">
+
+                                            <td colspan="2">{{indexOfElement + 1}}</td>
                                             <td colspan="2">{{record.staff_name}}</td>
                                             <td colspan="2">{{record.book_name}}</td>
                                             <td colspan="2">{{record.ISBN_number}}</td>

@@ -87,9 +87,6 @@ export class BookPublicationComponent {
       'book_publication_array': this.bookPublicationArray
     };
 
-    console.log(arr);
-
-
     this.BookPublicationService.saveBookPublicationArray(arr).subscribe((response: any) => {
       // @ts-ignore
       if (response.success == 1) {
@@ -100,13 +97,14 @@ export class BookPublicationComponent {
           showConfirmButton: false,
           timer: 1000
         });
+        this.cancelUpdate();
       }
     })
 
   }
 
   getBookPublicationSearch() {
-    this.BookPublicationService.getBookPublication().subscribe((response: any) => {
+    this.BookPublicationService.getBookPublication(this.searchForm.value.staff_id).subscribe((response: any) => {
       if (response.success == 1) {
         this.bookPublicationList = response.data;
       }
@@ -114,25 +112,78 @@ export class BookPublicationComponent {
   }
 
   updateBookPublication() {
+    let arr = {
+      'book_publication_array': this.bookPublicationArray
+    };
 
+    this.BookPublicationService.updateBookPublicationArray(arr).subscribe((response: any) => {
+      if (response.success == 1) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Book Publication Saved',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        this.cancelUpdate();
+        this.bookPublicationList = [];
+        this.active = 2;
+      }
+    })
   }
-  cancelUpdate() {
 
+  cancelUpdate() {
+    this.isUpdatable = false;
+    this.totalBookPublication = [1];
+    this.bookPublicationArray = [
+      {
+        'id': null,
+        'staff_id': null,
+        'book_name': null,
+        'ISBN_number': null,
+        'name_of_publisher': null,
+        'chapter_full_book': null,
+        'chapter_name': null,
+        'page_number': null,
+      }
+    ];
+    this.searchForm.reset();
+    this.active = 1;
   }
 
   editBookPublication(data) {
-    // this.totalBookPublication = data.questions;
-    // this.total_question[data.questions.length - 1] = [];
-    // this.active = 1;
-    // this.totalMarks = this.paperSetterArray.reduce((accumulator, currentItem) => accumulator + parseInt(currentItem.marks), 0);
-    // let x = this.subjectDetailsList.find(x => x.id == data.subject_details_id);
-    // this.selected_details = x;
-    // this.isUpdatable = true;
-    // this.counter = data.questions.length - 1;
+    this.totalBookPublication = [1];
+    this.bookPublicationArray[0].id = data.id;
+    this.bookPublicationArray[0].staff_id = data.staff_id;
+    this.bookPublicationArray[0].book_name = data.book_name;
+    this.bookPublicationArray[0].ISBN_number = data.ISBN_number;
+    this.bookPublicationArray[0].name_of_publisher = data.name_of_publisher;
+    this.bookPublicationArray[0].chapter_full_book = data.chapter_full_book;
+    this.bookPublicationArray[0].chapter_name = data.chapter_name;
+    this.bookPublicationArray[0].page_number = data.page_number;
+
+    this.active = 1;
+    this.isUpdatable = true;
   }
 
   deleteBookPublication(data) {
-
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Do you sure to delete course ?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete It!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.BookPublicationService.deleteBookPublication(data.id).subscribe((response: any) => {
+          if (response.success == 1) {
+            this.bookPublicationList = response.data;
+          }
+        })
+      }
+    });
   }
 
   activeTab(data) {

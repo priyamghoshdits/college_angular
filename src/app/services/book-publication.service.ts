@@ -20,14 +20,29 @@ export class BookPublicationService {
   saveBookPublicationArray(data) {
     return this.http.post(this.BASE_API_URL + '/saveBookPublication', data)
       .pipe(catchError(this.errorService.serverError), tap(response => {
-      
+
       }));
   }
 
-  getBookPublication() {
-    return this.http.get(this.BASE_API_URL + '/getBookPublication')
+  updateBookPublicationArray(data) {
+    return this.http.post(this.BASE_API_URL + '/updateBookPublication', data)
       .pipe(catchError(this.errorService.serverError), tap(response => {
-      
+
+      }));
+  }
+
+  getBookPublication(data) {
+    let paarm = data ? data : '';
+    return this.http.get(this.BASE_API_URL + '/getBookPublication/' + paarm)
+      .pipe(catchError(this.errorService.serverError), tap(response => {
+
+      }));
+  }
+
+  deleteBookPublication(data) {
+    return this.http.get(this.BASE_API_URL + '/deleteBookPublication/' + data)
+      .pipe(catchError(this.errorService.serverError), tap(response => {
+
       }));
   }
 }
