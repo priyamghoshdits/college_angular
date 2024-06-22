@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
-import {ExaminationService} from "../../../services/examination.service";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatIconModule} from "@angular/material/icon";
-import {JsonPipe, NgForOf, NgIf} from "@angular/common";
-import {NgxPaginationModule} from "ngx-pagination";
+import { Component } from '@angular/core';
+import { ExaminationService } from "../../../services/examination.service";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { JsonPipe, NgForOf, NgIf } from "@angular/common";
+import { NgxPaginationModule } from "ngx-pagination";
 import Swal from "sweetalert2";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
-import {MemberService} from 'src/app/services/member.service';
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
+import { MemberService } from 'src/app/services/member.service';
 
 @Component({
     selector: 'app-paper-setter',
@@ -134,9 +134,9 @@ export class PaperSetterComponent {
         })
     }
 
-    getPaperSetting(){
+    getPaperSetting() {
         this.memberService.searchPaperSetter(this.paperSettingForm.value).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 this.searchPaperList = response.data;
             }
         })

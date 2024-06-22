@@ -1,22 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {SubjectGroupComponent} from "../academics/subject-group/subject-group.component";
-import {CreateStaffComponent} from "./create-staff/create-staff.component";
-import {LeaveTypeComponent} from "./leave-type/leave-type.component";
-import {LeaveAllocationComponent} from "./leave-allocation/leave-allocation.component";
-import {ApplyLeaveComponent} from "./apply-leave/apply-leave.component";
-import {DepartmentComponent} from "./department/department.component";
-import {DesignationComponent} from "./designation/designation.component";
-import {CategoryComponent} from "./category/category.component";
-import {HolidayComponent} from "./holiday/holiday.component";
-import {StaffAttendanceComponent} from "./staff-attendance/staff-attendance.component";
-import {PayrollComponent} from "./payroll/payroll.component";
-import {ApproveLeaveComponent} from "./approve-leave/approve-leave.component";
-import {PayrollTypesComponent} from "./payroll-types/payroll-types.component";
-import {StaffExperienceComponent} from "./staff-experience/staff-experience.component";
+import { SubjectGroupComponent } from "../academics/subject-group/subject-group.component";
+import { CreateStaffComponent } from "./create-staff/create-staff.component";
+import { LeaveTypeComponent } from "./leave-type/leave-type.component";
+import { LeaveAllocationComponent } from "./leave-allocation/leave-allocation.component";
+import { ApplyLeaveComponent } from "./apply-leave/apply-leave.component";
+import { DepartmentComponent } from "./department/department.component";
+import { DesignationComponent } from "./designation/designation.component";
+import { CategoryComponent } from "./category/category.component";
+import { HolidayComponent } from "./holiday/holiday.component";
+import { StaffAttendanceComponent } from "./staff-attendance/staff-attendance.component";
+import { PayrollComponent } from "./payroll/payroll.component";
+import { ApproveLeaveComponent } from "./approve-leave/approve-leave.component";
+import { PayrollTypesComponent } from "./payroll-types/payroll-types.component";
+import { StaffExperienceComponent } from "./staff-experience/staff-experience.component";
 import { PaperSetterComponent } from './paper-setter/paper-setter.component';
-import {JournalPublicationComponent} from "./journal-publication/journal-publication.component";
+import { JournalPublicationComponent } from "./journal-publication/journal-publication.component";
 import { PromotionComponent } from './promotion/promotion.component';
+import { BookPublicationComponent } from './book-publication/book-publication.component';
 
 const routes: Routes = [
   {
@@ -49,6 +50,14 @@ const routes: Routes = [
     data: {
       title: "Promotion",
       breadcrumb: "Promotion"
+    }
+  },
+  {
+    path: 'book-publication',
+    component: BookPublicationComponent,
+    data: {
+      title: "Book Publication",
+      breadcrumb: "Book Publication"
     }
   },
   {
