@@ -19,6 +19,7 @@ import { JournalPublicationComponent } from "./journal-publication/journal-publi
 import { PromotionComponent } from './promotion/promotion.component';
 import { BookPublicationComponent } from './book-publication/book-publication.component';
 import {ConsultancyComponent} from "./consultancy/consultancy.component";
+import { PgPhdGuideComponent } from './pg-phd-guide/pg-phd-guide.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,14 @@ const routes: Routes = [
     data: {
       title: "Book Publication",
       breadcrumb: "Book Publication"
+    }
+  },
+  {
+    path: 'pg-phd-guide',
+    component: PgPhdGuideComponent,
+    data: {
+      title: "Pg Phd Guide",
+      breadcrumb: "Pg Phd Guide"
     }
   },
   {

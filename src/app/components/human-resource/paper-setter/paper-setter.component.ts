@@ -32,7 +32,7 @@ import { MemberService } from 'src/app/services/member.service';
 export class PaperSetterComponent {
     paperSettingForm: FormGroup;
     searchPaperList: any[];
-    total_question: any[] = [1];
+    paperField: any[] = [1];
     paperSetterArray: any[] = [];
     isUpdatable = false;
     counter = 0;
@@ -101,11 +101,12 @@ export class PaperSetterComponent {
                     showConfirmButton: false,
                     timer: 1000
                 });
+                this.paperField = [1];
                 this.paperSettingForm.reset();
                 this.cancelUpdate();
+                this.searchPaperList = [];
             }
         })
-
     }
 
     editPaperSetter(data) {
@@ -203,6 +204,20 @@ export class PaperSetterComponent {
                     showConfirmButton: false,
                     timer: 1000
                 });
+
+                this.paperField = [1];
+                this.paperSetterArray = [
+                    {
+                        'id': null,
+                        'staff_id': null,
+                        'examination_name': null,
+                        'subject_name': null,
+                        'university_name': null,
+                        'referance_no': null,
+                        'ref_date': null,
+                        'paper_file': null,
+                    }
+                ];
             }
         })
     }
@@ -213,7 +228,8 @@ export class PaperSetterComponent {
     }
 
     addField() {
-        // this.counter = this.counter + 1;
+        this.counter = this.counter + 1;
+        this.paperField[this.counter] = [];
         let arr = [
             {
                 'id': null,
