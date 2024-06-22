@@ -5,29 +5,69 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div [hidden]="active != 1" class="card-header">
-                            <h5>Journal Publication</h5><span>Journal Publication</span>
+                            <h5>Sponsored Project/Consultancy</h5><span>Sponsored Project/Consultancy</span>
                         </div>
                         <div [hidden]="active != 2" class="card-header">
-                            <h5>Show Journal Publication</h5>
+                            <h5>Show Sponsored Project/Consultancy</h5>
                         </div>
                         <div class="tabbed-card">
                             <ul #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary" ngbNav>
                                 <li [ngbNavItem]="1">
-                                    <a (click)="activeTab(1)" ngbNavLink>Add Journal Publication</a>
+                                    <a (click)="activeTab(1)" ngbNavLink>Add Sponsored Project/Consultancy</a>
                                 </li>
                                 <li [ngbNavItem]="2">
-                                    <a (click)="activeTab(2)" ngbNavLink>Show Journal Publication</a>
+                                    <a (click)="activeTab(2)" ngbNavLink>Show Sponsored Project/Consultancy</a>
                                 </li>
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
                         </div>
                         <div [hidden]="active != 1">
                             <div [hidden]="active != 1" class="card-body">
-                                <div *ngFor="let item of journalPublicationArray ;let indexOfElement=index">
+                                <div *ngFor="let item of consultationArray ;let indexOfElement=index">
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-md-3 mb-3">-->
+<!--                                            <label>Select Course</label>-->
+<!--                                            <select [(ngModel)]="consultationArray[indexOfElement].course_id"-->
+<!--                                                    (change)="getSemester(indexOfElement)"-->
+<!--                                                    class="form-select"-->
+<!--                                                    required-->
+<!--                                                    style="width: 100%">-->
+<!--                                                <option value="null">Select</option>-->
+<!--                                                <option *ngFor="let data of courseList" [value]="data.id">-->
+<!--                                                    {{data.course_name}}-->
+<!--                                                </option>-->
+<!--                                            </select>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-md-3 mb-3">-->
+<!--                                            <label>Select Semester</label>-->
+<!--                                            <select [(ngModel)]="consultationArray[indexOfElement].semester_id"-->
+<!--                                                    (change)="getStudent(indexOfElement)"-->
+<!--                                                    class="form-select"-->
+<!--                                                    required-->
+<!--                                                    style="width: 100%">-->
+<!--                                                <option value="null">Select</option>-->
+<!--                                                <option *ngFor="let data of semesterList" [value]="data.semester_id">-->
+<!--                                                    {{data.name}}-->
+<!--                                                </option>-->
+<!--                                            </select>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-md-3 mb-3">-->
+<!--                                            <label>Select Student</label>-->
+<!--                                            <select [(ngModel)]="consultationArray[indexOfElement].student_id"-->
+<!--                                                    class="form-select"-->
+<!--                                                    required-->
+<!--                                                    style="width: 100%">-->
+<!--                                                <option value="null">Select</option>-->
+<!--                                                <option *ngFor="let data of filteredStudentList" [value]="data.id">-->
+<!--                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}-->
+<!--                                                </option>-->
+<!--                                            </select>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
                                     <div class="row">
-                                        <div class="col-md-5 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Select Staff</label>
-                                            <select [(ngModel)]="journalPublicationArray[indexOfElement].staff_id"
+                                            <select [(ngModel)]="consultationArray[indexOfElement].staff_id"
                                                     class="form-select"
                                                     required
                                                     style="width: 100%">
@@ -37,35 +77,41 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <div class="col-md-5 mb-3">
-                                            <label>Journal Name</label>
-                                            <input [(ngModel)]="journalPublicationArray[indexOfElement].journal_name"
-                                                   class="form-control"
-                                                   placeholder="Journal Name"
-                                                   required type="text">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-5 mb-3">
-                                            <label>Publication</label>
-                                            <input [(ngModel)]="journalPublicationArray[indexOfElement].publication"
+                                        <div class="col-md-3 mb-3">
+                                            <label>Project/Consultancy</label>
+                                            <input [(ngModel)]="consultationArray[indexOfElement].project_consultancy"
                                                    class="form-control"
                                                    placeholder="Publication"
                                                    required type="text">
                                         </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Sponsored By</label>
+                                            <input [(ngModel)]="consultationArray[indexOfElement].sponsored_by"
+                                                   class="form-control"
+                                                   placeholder="Sponsored By"
+                                                   required type="text">
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
                                         <div class="col-md-5 mb-3">
-                                            <label>UGC Affliation</label>
-                                            <select [(ngModel)]="journalPublicationArray[indexOfElement].ugc_affiliation"
-                                                    class="form-select"
-                                                    required style="width: 100%;">
-                                                <option value="null">Select</option>
-                                                <option value="yes">Yes</option>
-                                                <option value="no">No</option>
-                                            </select>
+                                            <label>Consultant</label>
+                                            <input [(ngModel)]="consultationArray[indexOfElement].consultant"
+                                                   class="form-control"
+                                                   placeholder="Consultant"
+                                                   required type="text">
+                                        </div>
+                                        <div class="col-md-5 mb-3">
+                                            <label>Amount</label>
+                                            <input [(ngModel)]="consultationArray[indexOfElement].amount"
+                                                   class="form-control"
+                                                   placeholder="Amount"
+                                                   required
+                                                   type="text">
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <a (click)="addField()"
-                                               *ngIf="(indexOfElement + 1) == journalPublicationArray.length" style="">
+                                               *ngIf="(indexOfElement + 1) == consultationArray.length" style="">
                                                 <mat-icon
                                                         style="font-size: 40px;height: 60px; width: 40px; line-height: 2">
                                                     add_box
@@ -74,52 +120,29 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-5 mb-3">
-                                            <label>University Name</label>
-                                            <input [(ngModel)]="journalPublicationArray[indexOfElement].university_name"
-                                                   class="form-control"
-                                                   placeholder="University Name"
-                                                   required type="text">
-                                        </div>
-                                        <div class="col-md-5 mb-3">
-                                            <label>Volume and Page number</label>
-                                            <input [(ngModel)]="journalPublicationArray[indexOfElement].volume_page_number"
-                                                   class="form-control"
-                                                   placeholder="Volume and Page number"
-                                                   required
-                                                   type="text">
-                                        </div>
-                                    </div>
-                                    <div class="row">
                                         <div class="col-md-4 mb-3">
-                                            <label>ISSN Number</label>
-                                            <input [(ngModel)]="journalPublicationArray[indexOfElement].issn_number"
+                                            <label>Duration</label>
+                                            <input [(ngModel)]="consultationArray[indexOfElement].duration"
                                                    class="form-control"
-                                                   placeholder="ISSN Number"
+                                                   placeholder="Duration"
                                                    required
                                                    type="text">
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Topic Name</label>
-                                            <input [(ngModel)]="journalPublicationArray[indexOfElement].topic_name"
-                                                   class="form-control"
-                                                   placeholder="Topic Name"
-                                                   required
-                                                   type="text">
-                                        </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label>Imapct Number</label>
-                                            <input [(ngModel)]="journalPublicationArray[indexOfElement].impact_factor"
-                                                   class="form-control"
-                                                   placeholder="Impact Factor"
-                                                   required
-                                                   type="text">
+                                            <select [(ngModel)]="consultationArray[indexOfElement].status"
+                                                    class="form-select"
+                                                    required style="width: 100%;">
+                                                <option value="null">Select</option>
+                                                <option value="yes">Ongoing</option>
+                                                <option value="no">Completed</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button (click)="saveJournalPublication()" *ngIf="permission[0].permission == 1"
+                                <button (click)="saveConsultancy()" *ngIf="permission[0].permission == 1"
                                         [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
                                 </button>
                                 <button (click)="updateJournalPublication()" [hidden]="isUpdatable == false"
@@ -133,7 +156,7 @@
                         </div>
                         <div [hidden]="active != 2">
                             <div class="card-body">
-                                <form [formGroup]="journalPublicationForm" class="theme-form">
+                                <form [formGroup]="consultancyForm" class="theme-form">
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label class="col-form-label pt-0">From

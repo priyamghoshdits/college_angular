@@ -17,6 +17,7 @@ import {StaffExperienceComponent} from "./staff-experience/staff-experience.comp
 import { PaperSetterComponent } from './paper-setter/paper-setter.component';
 import {JournalPublicationComponent} from "./journal-publication/journal-publication.component";
 import { PromotionComponent } from './promotion/promotion.component';
+import {ConsultancyComponent} from "./consultancy/consultancy.component";
 
 const routes: Routes = [
   {
@@ -25,6 +26,14 @@ const routes: Routes = [
     data: {
       title: "Add Staff",
       breadcrumb: "Add Staff"
+    }
+  },
+  {
+    path: 'sponsored-or-consultancy',
+    component: ConsultancyComponent,
+    data: {
+      title: "Sponsored Project/Consultancy",
+      breadcrumb: "Sponsored Project/Consultancy"
     }
   },
   {
