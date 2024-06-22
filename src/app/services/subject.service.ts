@@ -176,6 +176,12 @@ export class SubjectService {
           }));
   }
 
+  getClass(subject_id){
+      return this.http.get(this.BASE_API_URL + '/getClass/' + subject_id)
+          .pipe(catchError(this.errorService.serverError), tap(response => {
+          }));
+  }
+
     getTeacherList(course_id, semester_id){
         return this.http.get(this.BASE_API_URL + '/getTeacherByCourseAndSem/' + course_id + '/' + semester_id)
             .pipe(catchError(this.errorService.serverError), tap(response => {

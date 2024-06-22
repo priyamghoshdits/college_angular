@@ -28,6 +28,7 @@ export class PeriodAttendanceComponent {
     courseList: any[];
     semesterList: any[];
     subjectList: any[];
+    classList: any[] = [];
     sessionList: any[];
     studentList: any[] = [];
     session_id = null;
@@ -45,6 +46,7 @@ export class PeriodAttendanceComponent {
             id: new FormControl(null),
             course_id: new FormControl(null, [Validators.required]),
             semester_id: new FormControl(null, [Validators.required]),
+            class: new FormControl(null, [Validators.required]),
             date: new FormControl(null, [Validators.required]),
             subject_id: new FormControl(null, [Validators.required]),
             session_id: new FormControl(null, [Validators.required]),
@@ -77,6 +79,12 @@ export class PeriodAttendanceComponent {
         this.subjectService.getSubjects(this.attendanceForm.value.course_id, this.attendanceForm.value.semester_id).subscribe((response: any) => {
             this.subjectList = response.data;
         });
+    }
+
+    getClass(){
+        this.subjectService.getClass(this.attendanceForm.value.subject_id).subscribe((response: any) => {
+            console.log(response);
+        })
     }
 
     getStudentAttendanceList() {
@@ -186,6 +194,7 @@ export class PeriodAttendanceComponent {
         let course_id = this.attendanceForm.value.course_id;
         let semester_id = this.attendanceForm.value.semester_id;
         let session_id = this.attendanceForm.value.session_id;
+        let _class = this.attendanceForm.value.class;
 
 
         this.studentList.forEach(function (value) {
@@ -194,6 +203,7 @@ export class PeriodAttendanceComponent {
             value.course_id = course_id;
             value.semester_id = semester_id;
             value.session_id = session_id;
+            value._class = _class;
         })
         this.studentService.saveStudentAttendance(this.studentList).subscribe((response: any) => {
             if (response.success == 1) {

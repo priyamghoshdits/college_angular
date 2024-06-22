@@ -56,7 +56,7 @@
                                                 placeholder="University Name" required>
                                         </div>
                                         <div class="col-md-2 mb-3" *ngIf="!isUpdatable">
-                                            <a *ngIf="(indexOfElement + 1) == total_question.length"
+                                            <a *ngIf="(indexOfElement + 1) == paperSetterArray.length"
                                                (click)="addField()" style=""><mat-icon
                                                     style="font-size: 40px;height: 60px; width: 40px; line-height: 2">add_box</mat-icon>
                                             </a>

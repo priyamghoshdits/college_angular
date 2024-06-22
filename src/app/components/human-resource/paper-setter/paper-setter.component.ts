@@ -146,6 +146,8 @@ export class PaperSetterComponent {
         this.isUpdatable = false;
         this.paperSetterArray = [
             {
+                'id': null,
+                'staff_id': null,
                 'examination_name': null,
                 'subject_name': null,
                 'university_name': null,
@@ -214,6 +216,7 @@ export class PaperSetterComponent {
         // this.counter = this.counter + 1;
         let arr = [
             {
+                'id': null,
                 'staff_id': null,
                 'examination_name': null,
                 'subject_name': null,
