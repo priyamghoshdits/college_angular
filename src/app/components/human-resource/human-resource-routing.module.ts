@@ -20,6 +20,8 @@ import { PromotionComponent } from './promotion/promotion.component';
 import { BookPublicationComponent } from './book-publication/book-publication.component';
 import {ConsultancyComponent} from "./consultancy/consultancy.component";
 import { PgPhdGuideComponent } from './pg-phd-guide/pg-phd-guide.component';
+import {ExaminerComponent} from "./examiner/examiner.component";
+import {AnswerScriptComponent} from "./answer-script/answer-script.component";
 
 const routes: Routes = [
   {
@@ -172,6 +174,22 @@ const routes: Routes = [
     data: {
       title: "Payroll Types",
       breadcrumb: "Payroll Types"
+    }
+  },
+  {
+    path: 'answer-script-evaluator',
+    component: AnswerScriptComponent,
+    data: {
+      title: "Answer Script Evaluator",
+      breadcrumb: "Answer Script Evaluator"
+    }
+  },
+  {
+    path: 'examiners',
+    component: ExaminerComponent,
+    data: {
+      title: "Examiners",
+      breadcrumb: "Examiners"
     }
   }
 ];

@@ -134,6 +134,8 @@ export class NavService {
 				{ path: '/human-resource/add-staff', title: 'Staff', type: 'link' },
 				{ path: '/human-resource/staff-attendance', title: 'Staff Attendance', type: 'link' }, // need to be added
 				{ path: '/human-resource/staff-experience', title: 'Staff Experience', type: 'link' },
+				{ path: '/human-resource/examiners', title: 'Examiners', type: 'link' },
+				{ path: '/human-resource/answer-script-evaluator', title: 'Answer Script Evaluator', type: 'link' },
 				{ path: '/human-resource/leave-type', title: 'Leave Type', type: 'link' },
 				{ path: '/human-resource/sponsored-or-consultancy', title: 'Sponsored project/Consultancy', type: 'link' },
 				{ path: '/human-resource/journal-publication', title: 'Journal Publication', type: 'link' },
