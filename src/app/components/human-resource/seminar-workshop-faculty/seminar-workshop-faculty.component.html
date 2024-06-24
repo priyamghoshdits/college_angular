@@ -1,0 +1,161 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header" [hidden]="active != 1">
+                            <h5>Seminar / Workshop / Faculty Development Programme</h5>
+                            <span>Seminar / Workshop / Faculty Development Programme</span>
+                        </div>
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>Show All</h5>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Add</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Show</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+                        <div [hidden]="active != 1">
+                            <div class="card-body" [hidden]="active != 1">
+                                <div *ngFor="let item of totalArray ;let indexOfElement=index">
+                                    <div class="row">
+                                        <div class="col-md-5 mb-3">
+                                            <label>Select Staff</label>
+                                            <select style="width: 100%"
+                                                    [(ngModel)]="seminarWorkshopArray[indexOfElement].staff_id"
+                                                    class="form-select" required>
+                                                <option value="null"> Select a Staff</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-5 mb-3">
+                                            <label>Book Name</label>
+                                            <input type="text" class="form-control"
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].book_name"
+                                                   placeholder="Book Name" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 mb-3">
+                                            <label>Publisher Name</label>
+                                            <input type="text" class="form-control"
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].name_of_publisher"
+                                                   placeholder="Publisher Name" required>
+                                        </div>
+                                        <div class="col-md-5 mb-3">
+                                            <label>ISBN Number</label>
+                                            <input type="text" class="form-control"
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].ISBN_number"
+                                                   placeholder="ISBN Number" required>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <a *ngIf="(indexOfElement + 1) == totalArray.length"
+                                               (click)="addField()" style=""><mat-icon
+                                                    style="font-size: 40px;height: 60px; width: 40px; line-height: 2">add_box</mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Chapter/Full Book</label>
+                                            <input type="text" class="form-control"
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].chapter_full_book"
+                                                   placeholder="Chapter/Full Book" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Chapter Name</label>
+                                            <input type="text" class="form-control"
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].chapter_name"
+                                                   placeholder="Chapter Name" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Page Number</label>
+                                            <input type="text" class="form-control" placeholder="Page Number"
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].page_number" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"
+                                            (click)="saveBookPublication()">Submit</button>
+                                    <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                            (click)="updateBookPublication()">Update</button>
+                                    <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                            (click)="cancelUpdate()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div [hidden]="active != 2">
+                            <div class="card-body">
+                                <form class="theme-form" [formGroup]="searchForm">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Staff</label>
+                                            <select style="width: 100%" formControlName="staff_id" class="form-select"
+                                                    required>
+                                                <option value="null"> Select a Staff</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <button class="btn btn-primary me-1" style="margin-top: 30px;"
+                                                    (click)="getBookPublicationSearch()">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">Sl.NO</th>
+                                        <th colspan="2">Staff Name</th>
+                                        <th colspan="2">Book Name</th>
+                                        <th colspan="2">ISBN Number</th>
+                                        <th colspan="2">Name of Publisher</th>
+                                        <th colspan="2">Chapter Full Book</th>
+                                        <th colspan="2">Chapter Name</th>
+                                        <th colspan="2">Page Number</th>
+                                        <th colspan="1">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of seminarWorkshopList ;let indexOfElement=index">
+
+                                        <td colspan="2">{{indexOfElement + 1}}</td>
+                                        <td colspan="2">{{record.staff_name}}</td>
+                                        <td colspan="2">{{record.book_name}}</td>
+                                        <td colspan="2">{{record.ISBN_number}}</td>
+                                        <td colspan="2">{{record.name_of_publisher}}</td>
+                                        <td colspan="2">{{record.chapter_full_book}}</td>
+                                        <td colspan="2">{{record.chapter_name}}</td>
+                                        <td colspan="2">{{record.page_number}}</td>
+                                        <td>
+                                            <a (click)="editBookPublication(record)"><mat-icon>edit</mat-icon></a>
+                                            <a
+                                                    (click)="deleteBookPublication(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!-- <pagination-controls *ngIf="paperList.length > 5"
+                                (pageChange)="p = $event"></pagination-controls> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->

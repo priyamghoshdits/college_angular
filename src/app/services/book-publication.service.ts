@@ -10,9 +10,6 @@ import { ErrorService } from './error.service';
 export class BookPublicationService {
   private BASE_API_URL = environment.BASE_API_URL;
 
-  bookPublication = [];
-  bookPublicationSubject = new Subject<any[]>()
-
   constructor(private http: HttpClient, private errorService: ErrorService) {
 
   }
@@ -32,8 +29,7 @@ export class BookPublicationService {
   }
 
   getBookPublication(data) {
-    let paarm = data ? data : '';
-    return this.http.get(this.BASE_API_URL + '/getBookPublication/' + paarm)
+    return this.http.get(this.BASE_API_URL + '/getBookPublication/' + data)
       .pipe(catchError(this.errorService.serverError), tap(response => {
 
       }));

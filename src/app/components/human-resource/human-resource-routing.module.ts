@@ -22,6 +22,7 @@ import {ConsultancyComponent} from "./consultancy/consultancy.component";
 import { PgPhdGuideComponent } from './pg-phd-guide/pg-phd-guide.component';
 import {ExaminerComponent} from "./examiner/examiner.component";
 import {AnswerScriptComponent} from "./answer-script/answer-script.component";
+import {SeminarWorkshopFacultyComponent} from "./seminar-workshop-faculty/seminar-workshop-faculty.component";
 
 const routes: Routes = [
   {
@@ -182,6 +183,14 @@ const routes: Routes = [
     data: {
       title: "Answer Script Evaluator",
       breadcrumb: "Answer Script Evaluator"
+    }
+  },
+  {
+    path: 'seminar-workshop-faculty',
+    component: SeminarWorkshopFacultyComponent,
+    data: {
+      title: "Seminar Workshop Faculty",
+      breadcrumb: "Seminar Workshop Faculty"
     }
   },
   {
