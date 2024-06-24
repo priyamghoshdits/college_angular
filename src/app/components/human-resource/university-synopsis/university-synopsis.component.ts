@@ -5,13 +5,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MemberService } from 'src/app/services/member.service';
-import { PgPhdGuideService } from 'src/app/services/pg-phd-guide.service';
 import { StudentService } from 'src/app/services/student.service';
 import { SubjectService } from 'src/app/services/subject.service';
+import { UniversitySynopsisService } from 'src/app/services/university-synopsis.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-pg-phd-guide',
+  selector: 'app-university-synopsis',
   standalone: true,
   imports: [
     FormsModule,
@@ -27,48 +27,47 @@ import Swal from 'sweetalert2';
     NgbNavOutlet,
     JsonPipe
   ],
-  templateUrl: './pg-phd-guide.component.html',
-  styleUrl: './pg-phd-guide.component.scss'
+  templateUrl: './university-synopsis.component.html',
+  styleUrl: './university-synopsis.component.scss'
 })
-export class PgPhdGuideComponent {
+export class UniversitySynopsisComponent {
   active: number = 1;
   counter: number = 0;
   memberList: any[];
   isUpdatable: boolean = false;
-  totalPgPhdGuide: any[] = [1];
-  pgPddhGuideArray: any[] = [];
+  totalUniversitySynopsis: any[] = [1];
+  universitySynopsisArray: any[] = [];
   semesterList: any[];
   courseList: any[];
   studentList: any[];
   filteredStudentList: any[];
   filesArray: File[] = [];
-  pgPhdGuideList: any[] = []
+  universitySynopsisList: any[] = []
   searchForm: FormGroup;
 
-  constructor(private memberService: MemberService, private studentService: StudentService, private subjectService: SubjectService, private PgPhdGuideService: PgPhdGuideService) {
+  constructor(private memberService: MemberService, private studentService: StudentService, private subjectService: SubjectService, private UniversitySynopsisService: UniversitySynopsisService) {
 
     this.searchForm = new FormGroup({
       staff_id: new FormControl(null),
     });
 
-
-    this.pgPddhGuideArray = [
+    this.universitySynopsisArray = [
       {
         'id': null,
         'course_id': null,
         'semester_id': null,
         'staff_id': null,
         'student_id': null,
+        'institute_name': null,
+        'title': null,
         'course': null,
-        'title_name': null,
-        'guide': null,
-        'co_guide': null,
         'referance_no': null,
         'ref_date ': null,
         'file_name ': null,
-        'status': null,
+        'date_evaluation': null,
       }
     ]
+
 
     this.memberService.getMemberListener().subscribe((response) => {
       this.memberList = response;
@@ -91,23 +90,24 @@ export class PgPhdGuideComponent {
     this.studentList = this.studentService.getStudentLists();
   }
 
+
   getStudent(indexOfElement) {
     // @ts-ignore
     // this.educationQualificationForm.patchValue({session_id: session_id});
-    this.pgPddhGuideArray[indexOfElement].session_id = JSON.parse(localStorage.getItem('session_id'));
-    if (this.pgPddhGuideArray[indexOfElement].course_id) {
-      this.filteredStudentList = this.studentList.filter(x => x.course_id == this.pgPddhGuideArray[indexOfElement].course_id);
+    this.universitySynopsisArray[indexOfElement].session_id = JSON.parse(localStorage.getItem('session_id'));
+    if (this.universitySynopsisArray[indexOfElement].course_id) {
+      this.filteredStudentList = this.studentList.filter(x => x.course_id == this.universitySynopsisArray[indexOfElement].course_id);
     }
-    if (this.pgPddhGuideArray[indexOfElement].semester_id != null) {
-      this.filteredStudentList = this.filteredStudentList.filter(x => x.current_semester_id == this.pgPddhGuideArray[indexOfElement].semester_id);
+    if (this.universitySynopsisArray[indexOfElement].semester_id != null) {
+      this.filteredStudentList = this.filteredStudentList.filter(x => x.current_semester_id == this.universitySynopsisArray[indexOfElement].semester_id);
     }
-    if (this.pgPddhGuideArray[indexOfElement].session_id != null) {
-      this.filteredStudentList = this.filteredStudentList.filter(x => x.session_id == this.pgPddhGuideArray[indexOfElement].session_id);
+    if (this.universitySynopsisArray[indexOfElement].session_id != null) {
+      this.filteredStudentList = this.filteredStudentList.filter(x => x.session_id == this.universitySynopsisArray[indexOfElement].session_id);
     }
   }
 
   getSemester(indexOfElement) {
-    this.subjectService.getSemesterByCourseId(this.pgPddhGuideArray[indexOfElement].course_id).subscribe((response: any) => {
+    this.subjectService.getSemesterByCourseId(this.universitySynopsisArray[indexOfElement].course_id).subscribe((response: any) => {
       this.semesterList = response.data;
     })
   }
@@ -116,13 +116,13 @@ export class PgPhdGuideComponent {
     const file = event.target.files[0];
     if (file) {
       this.filesArray[index] = file; // Store file in the files array
-      this.pgPddhGuideArray[index].file_name = file.name;
+      this.universitySynopsisArray[index].file_name = file.name;
     }
   }
 
-  savePgPhdGuide() {
+  saveUniversitySynopsis() {
     let arr = {
-      'pgphdguid_array': this.pgPddhGuideArray
+      'university_synopsis_array': this.universitySynopsisArray
     };
 
     const formData = new FormData();
@@ -134,19 +134,19 @@ export class PgPhdGuideComponent {
         formData.append('file_name', file);
 
         // Send the file to the server
-        this.PgPhdGuideService.savePgPhdGuideFile(formData).subscribe((response: any) => {
+        this.UniversitySynopsisService.saveuniversitySynopsisFile(formData).subscribe((response: any) => {
           // this.pgPddhGuideArray[index].file_name = response.file_name;
         });
       }
     });
 
-    this.PgPhdGuideService.savePgPhdGuideArray(arr).subscribe((response: any) => {
+    this.UniversitySynopsisService.saveuniversitySynopsisArray(arr).subscribe((response: any) => {
       // @ts-ignore
       if (response.success == 1) {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Pg Phd Guide Saved',
+          title: 'University Synopsis Saved',
           showConfirmButton: false,
           timer: 1000
         });
@@ -156,17 +156,17 @@ export class PgPhdGuideComponent {
   }
 
 
-  getPgPhdguideSearch() {
-    this.PgPhdGuideService.getPgPhdGuide(this.searchForm.value.staff_id).subscribe((response: any) => {
+  getUniversitySynopsis() {
+    this.UniversitySynopsisService.getuniversitySynopsis(this.searchForm.value.staff_id).subscribe((response: any) => {
       if (response.success == 1) {
-        this.pgPhdGuideList = response.data;
+        this.universitySynopsisList = response.data;
       }
     })
   }
 
-  updatePgPhdGuide() {
+  updateUniversitySynopsis() {
     let arr = {
-      'pgphdguid_array': this.pgPddhGuideArray
+      'university_synopsis_array': this.universitySynopsisArray
     };
 
     const formData = new FormData();
@@ -178,77 +178,31 @@ export class PgPhdGuideComponent {
         formData.append('file_name', file);
 
         // Send the file to the server
-        this.PgPhdGuideService.savePgPhdGuideFile(formData).subscribe((response: any) => {
+        this.UniversitySynopsisService.saveuniversitySynopsisFile(formData).subscribe((response: any) => {
           // this.pgPddhGuideArray[index].file_name = response.file_name;
         });
       }
     });
 
-    this.PgPhdGuideService.updatePgPhdGuideArray(arr).subscribe((response: any) => {
+    this.UniversitySynopsisService.updateuniversitySynopsisArray(arr).subscribe((response: any) => {
+      // @ts-ignore
       if (response.success == 1) {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Pg Phd Guide Updated',
+          title: 'University Synopsis Saved',
           showConfirmButton: false,
           timer: 1000
         });
         this.cancelUpdate();
-        this.pgPhdGuideList = [];
-        this.active = 2;
+        this.universitySynopsisList = [];
+        this.active = 1;
       }
     })
   }
 
-  cancelUpdate() {
-    this.isUpdatable = false;
-    this.totalPgPhdGuide = [1];
-    this.pgPddhGuideArray = [
-      {
-        'id': null,
-        'course_id': null,
-        'semester_id': null,
-        'staff_id': null,
-        'student_id': null,
-        'course': null,
-        'title_name': null,
-        'guide': null,
-        'co_guide': null,
-        'referance_no': null,
-        'ref_date ': null,
-        'file_name ': null,
-        'status': null,
-      }
-    ];
-    // this.searchForm.reset();
-    this.active = 1;
-  }
 
-  addField() {
-    this.counter = this.counter + 1;
-    this.totalPgPhdGuide[this.counter] = [];
-    let arr = [
-      {
-        'id': null,
-        'course_id': null,
-        'semester_id': null,
-        'staff_id': null,
-        'student_id': null,
-        'course': null,
-        'title_name': null,
-        'guide': null,
-        'co_guide': null,
-        'referance_no': null,
-        'ref_date ': null,
-        'file_name ': null,
-        'status': null,
-      }
-    ];
-    this.pgPddhGuideArray.push(arr[0]);
-  }
-
-  editPgPhdGuide(data) {
-
+  editUniversitySynopsis(data) {
     this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
       this.semesterList = response.data;
 
@@ -264,30 +218,26 @@ export class PgPhdGuideComponent {
         this.filteredStudentList = this.filteredStudentList.filter(x => x.session_id == session_id);
       }
 
-      this.totalPgPhdGuide = [1];
-      this.pgPddhGuideArray[0].id = data.id;
-      this.pgPddhGuideArray[0].course_id = data.course_id;
-      this.pgPddhGuideArray[0].semester_id = data.semester_id;
-      this.pgPddhGuideArray[0].staff_id = data.staff_id;
-      this.pgPddhGuideArray[0].student_id = data.student_id;
-      this.pgPddhGuideArray[0].course = data.course;
-      this.pgPddhGuideArray[0].title_name = data.title_name;
-      this.pgPddhGuideArray[0].guide = data.guide;
-      this.pgPddhGuideArray[0].co_guide = data.co_guide;
-      this.pgPddhGuideArray[0].referance_no = data.referance_no;
-      this.pgPddhGuideArray[0].ref_date = data.ref_date;
-      this.pgPddhGuideArray[0].file_name = data.file_name;
-      this.pgPddhGuideArray[0].status = data.status;
+      this.totalUniversitySynopsis = [1];
+      this.universitySynopsisArray[0].id = data.id;
+      this.universitySynopsisArray[0].course_id = data.course_id;
+      this.universitySynopsisArray[0].semester_id = data.semester_id;
+      this.universitySynopsisArray[0].staff_id = data.staff_id;
+      this.universitySynopsisArray[0].student_id = data.student_id;
+      this.universitySynopsisArray[0].institute_name = data.institute_name;
+      this.universitySynopsisArray[0].title = data.title;
+      this.universitySynopsisArray[0].course = data.course;
+      this.universitySynopsisArray[0].referance_no = data.referance_no;
+      this.universitySynopsisArray[0].ref_date = data.ref_date;
+      this.universitySynopsisArray[0].file_name = data.file_name;
+      this.universitySynopsisArray[0].date_evaluation = data.date_evaluation;
 
       this.active = 1;
       this.isUpdatable = true;
     });
-
-
   }
 
-
-  deletePgPhdGuide(data) {
+  deleteUniversitySynopsis(data) {
     Swal.fire({
       title: 'Confirmation',
       text: 'Do you sure to delete ?',
@@ -298,15 +248,60 @@ export class PgPhdGuideComponent {
       confirmButtonText: 'Yes, delete It!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.PgPhdGuideService.deletePgPhdGuide(data.id).subscribe((response: any) => {
+        this.UniversitySynopsisService.deleteuniversitySynopsis(data.id).subscribe((response: any) => {
           if (response.success == 1) {
-            this.pgPhdGuideList = response.data;
+            this.universitySynopsisList = response.data;
           }
         })
       }
     });
   }
 
+
+  addField() {
+    this.counter = this.counter + 1;
+    this.totalUniversitySynopsis[this.counter] = [];
+    let arr = [
+      {
+        'id': null,
+        'course_id': null,
+        'semester_id': null,
+        'staff_id': null,
+        'student_id': null,
+        'institute_name': null,
+        'title': null,
+        'course': null,
+        'referance_no': null,
+        'ref_date ': null,
+        'file_name ': null,
+        'date_evaluation': null,
+      }
+    ];
+    this.universitySynopsisArray.push(arr[0]);
+  }
+
+  cancelUpdate() {
+    this.isUpdatable = false;
+    this.totalUniversitySynopsis = [1];
+    this.universitySynopsisArray = [
+      {
+        'id': null,
+        'course_id': null,
+        'semester_id': null,
+        'staff_id': null,
+        'student_id': null,
+        'institute_name': null,
+        'title': null,
+        'course': null,
+        'referance_no': null,
+        'ref_date ': null,
+        'file_name ': null,
+        'date_evaluation': null,
+      }
+    ]
+    // this.searchForm.reset();
+    this.active = 1;
+  }
 
   activeTab(data) {
     this.active = data;
