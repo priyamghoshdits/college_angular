@@ -23,6 +23,7 @@ import { PgPhdGuideComponent } from './pg-phd-guide/pg-phd-guide.component';
 import {ExaminerComponent} from "./examiner/examiner.component";
 import {AnswerScriptComponent} from "./answer-script/answer-script.component";
 import {SeminarWorkshopFacultyComponent} from "./seminar-workshop-faculty/seminar-workshop-faculty.component";
+import {PayslipComponent} from "./payslip/payslip.component";
 
 const routes: Routes = [
   {
@@ -191,6 +192,14 @@ const routes: Routes = [
     data: {
       title: "Seminar Workshop Faculty",
       breadcrumb: "Seminar Workshop Faculty"
+    }
+  },
+  {
+    path: 'payslip',
+    component: PayslipComponent,
+    data: {
+      title: "Payslip",
+      breadcrumb: "Payslip"
     }
   },
   {
