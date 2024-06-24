@@ -35,7 +35,7 @@ export class SeminarWorkshopFacultyService {
     }
 
     deleteSeminarWorkshopFaculty(data) {
-        return this.http.get(this.BASE_API_URL + '/deleteBookPublication/' + data)
+        return this.http.get(this.BASE_API_URL + '/deleteSeminarWorkshopFaculty/' + data)
             .pipe(catchError(this.errorService.serverError), tap(response => {
 
             }));
