@@ -23,11 +23,8 @@ import { PgPhdGuideComponent } from './pg-phd-guide/pg-phd-guide.component';
 import {ExaminerComponent} from "./examiner/examiner.component";
 import {AnswerScriptComponent} from "./answer-script/answer-script.component";
 import {SeminarWorkshopFacultyComponent} from "./seminar-workshop-faculty/seminar-workshop-faculty.component";
-<<<<<<< HEAD
 import {PayslipComponent} from "./payslip/payslip.component";
-=======
 import { UniversitySynopsisComponent } from './university-synopsis/university-synopsis.component';
->>>>>>> 27d8e7989ce8eefad147b1fb730fd94e42edfc29
 
 const routes: Routes = [
   {
