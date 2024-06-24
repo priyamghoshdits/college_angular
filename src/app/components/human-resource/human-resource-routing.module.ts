@@ -20,6 +20,7 @@ import { PromotionComponent } from './promotion/promotion.component';
 import { BookPublicationComponent } from './book-publication/book-publication.component';
 import {ConsultancyComponent} from "./consultancy/consultancy.component";
 import { PgPhdGuideComponent } from './pg-phd-guide/pg-phd-guide.component';
+import {ExaminerComponent} from "./examiner/examiner.component";
 
 const routes: Routes = [
   {
@@ -172,6 +173,14 @@ const routes: Routes = [
     data: {
       title: "Payroll Types",
       breadcrumb: "Payroll Types"
+    }
+  },
+  {
+    path: 'examiners',
+    component: ExaminerComponent,
+    data: {
+      title: "Examiners",
+      breadcrumb: "Examiners"
     }
   }
 ];
