@@ -1,0 +1,81 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Leave Type</h5><span>Add Leave Type</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="degreeFrom">
+                                <label class="col-form-label pt-0" for="exampleInputEmail1">Leave Type Name</label>
+                                <input class="form-control" formControlName="name" placeholder="Enter Leave Type Name">
+                                <div *ngIf="degreeFrom.controls['name'].errors?.['required'] && degreeFrom.controls['name'].touched "
+                                    class="text text-danger mt-1">Degree Name required</div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"
+                                (click)="saveDegreeForm()">Submit</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                (click)="updateDegreeForm()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                (click)="cancelUpdate()">Cancel</button>
+                            <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-xl-6">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Degree List</h5>
+                                <span>Degree List.</span>
+                            </div>
+                            <!-- <div class="row" style="text-align: center;">
+                                <div class="col-1"></div>
+                                <div style="margin-top: 4px" class="col-3">
+                                    <h4>Search</h4>
+                                </div>
+                                <div class="col-5">
+                                    <input style="width: 140%" class="form-control" [(ngModel)]="searchItem" type="text"
+                                        placeholder="Search Or Filter">
+                                </div>
+                            </div> -->
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let record of degreeList; let indexOfElement=index">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{record.name}}</td>
+                                            <td>
+                                                <a (click)="editDegree(record)"><mat-icon>edit</mat-icon></a>
+                                                <a (click)="deleteDegree(record)"><mat-icon>delete</mat-icon></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- <pagination-controls *ngIf="leaveTypeList.length>4"
+                                    (pageChange)="p = $event"></pagination-controls> -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

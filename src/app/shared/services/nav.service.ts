@@ -145,6 +145,8 @@ export class NavService {
 				{ path: '/human-resource/promotion', title: 'Promotion', type: 'link' },
 				{ path: '/human-resource/pg-phd-guide', title: 'Pg Phd Guide', type: 'link' },
 				{ path: '/human-resource/university-synopsis', title: 'University Synopsis', type: 'link' },
+				{ path: '/human-resource/degree', title: 'Degree', type: 'link' },
+				{ path: '/human-resource/staff-education', title: 'Staff Education', type: 'link' },
 				{ path: '/human-resource/book-publication', title: 'Book Publication', type: 'link' },
 				{ path: '/human-resource/promotion', title: 'Staff Promotion', type: 'link' },
 				{ path: '/human-resource/apply-leave', title: 'Apply Leave', type: 'link' },
