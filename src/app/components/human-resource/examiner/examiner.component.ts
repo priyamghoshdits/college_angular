@@ -5,7 +5,6 @@ import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-
 import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MemberService} from "../../../services/member.service";
-import {ExaminationService} from "../../../services/examination.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import Swal from "sweetalert2";
 import {ExaminerService} from "../../../services/examiner.service";
@@ -45,8 +44,8 @@ export class ExaminerComponent {
     memberList: any[];
 
     constructor(private memberService: MemberService
-                , private roleAndPermissionService: RolesAndPermissionService
-                , private examinerService: ExaminerService) {
+        , private roleAndPermissionService: RolesAndPermissionService
+        , private examinerService: ExaminerService) {
 
         this.paperSettingForm = new FormGroup({
             id: new FormControl(null),

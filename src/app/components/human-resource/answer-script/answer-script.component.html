@@ -1,35 +1,35 @@
 <div class="container-fluid">
-    <div class="row" *ngIf="permission.length > 0">
+    <div *ngIf="permission.length > 0" class="row">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header" [hidden]="active != 1">
+                        <div [hidden]="active != 1" class="card-header">
                             <h5>Answer Script Evaluator</h5><span>Answer Script Evaluator</span>
                         </div>
-                        <div class="card-header" [hidden]="active != 2">
+                        <div [hidden]="active != 2" class="card-header">
                             <h5>Show Answer Script Evaluation</h5>
                         </div>
                         <div class="tabbed-card">
-                            <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
+                            <ul #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary" ngbNav>
                                 <li [ngbNavItem]="1">
-                                    <a ngbNavLink (click)="activeTab(1)">Add Answer Script Evaluator</a>
+                                    <a (click)="activeTab(1)" ngbNavLink>Add Answer Script Evaluator</a>
                                 </li>
                                 <li [ngbNavItem]="2">
-                                    <a ngbNavLink (click)="activeTab(2)">Show Answer Script Evaluator</a>
+                                    <a (click)="activeTab(2)" ngbNavLink>Show Answer Script Evaluator</a>
                                 </li>
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
                         </div>
                         <div [hidden]="active != 1">
-                            <div class="card-body" [hidden]="active != 1">
+                            <div [hidden]="active != 1" class="card-body">
                                 <div *ngFor="let item of answerScriptField ;let indexOfElement=index">
                                     <div class="row">
                                         <div class="col-md-5 mb-3">
                                             <label>Select Staff</label>
-                                            <select style="width: 100%"
-                                                    [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].staff_id"
-                                                    class="form-select" required>
+                                            <select [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].staff_id"
+                                                    class="form-select"
+                                                    required style="width: 100%">
                                                 <option value="null"> Select a Staff</option>
                                                 <option *ngFor="let data of memberList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
@@ -38,66 +38,74 @@
                                         </div>
                                         <div class="col-md-5 mb-3">
                                             <label>Examination Name</label>
-                                            <input type="text" class="form-control"
-                                                   [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].examination_name"
-                                                   placeholder="Examination Name" required>
+                                            <input [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].examination_name" class="form-control"
+                                                   placeholder="Examination Name"
+                                                   required type="text">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-5 mb-3">
                                             <label>Subject Name</label>
-                                            <input type="text" class="form-control"
-                                                   [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].subject_name"
-                                                   placeholder="Subject Name" required>
+                                            <input [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].subject_name" class="form-control"
+                                                   placeholder="Subject Name"
+                                                   required type="text">
                                         </div>
                                         <div class="col-md-5 mb-3">
                                             <label>University Name</label>
-                                            <input type="text" class="form-control"
-                                                   [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].university_name"
-                                                   placeholder="University Name" required>
+                                            <input [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].university_name" class="form-control"
+                                                   placeholder="University Name"
+                                                   required type="text">
                                         </div>
-                                        <div class="col-md-2 mb-3"
-                                             *ngIf="(indexOfElement + 1) == answerScriptField.length !isUpdatable">
-                                            <a (click)="addField()" style=""><mat-icon
-                                                    style="font-size: 40px;height: 60px; width: 40px; line-height: 2">add_box</mat-icon>
+                                        <div *ngIf="(indexOfElement + 1) == answerScriptField.length !isUpdatable"
+                                             class="col-md-2 mb-3">
+                                            <a (click)="addField()" style="">
+                                                <mat-icon
+                                                        style="font-size: 40px;height: 60px; width: 40px; line-height: 2">
+                                                    add_box
+                                                </mat-icon>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label>Referance No.</label>
-                                            <input type="text" class="form-control"
-                                                   [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].referance_no"
-                                                   placeholder="Referance No." required>
+                                            <input [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].referance_no" class="form-control"
+                                                   placeholder="Referance No."
+                                                   required type="text">
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Date</label>
-                                            <input type="date" class="form-control"
-                                                   [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].ref_date" required>
+                                            <input [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].ref_date" class="form-control"
+                                                   required
+                                                   type="date">
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Upload File</label>
-                                            <input type="file" class="form-control"
-                                                   [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].upload_file"
-                                                   (change)="fileUpload($event,indexOfElement)" placeholder="Upload File"
-                                                   required>
+                                            <input (change)="fileUpload($event,indexOfElement)" [(ngModel)]="answerScriptEvaluatorArray[indexOfElement].upload_file"
+                                                   class="form-control"
+                                                   placeholder="Upload File"
+                                                   required
+                                                   type="file">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true"
-                                        class="btn btn-primary me-1" (click)="savePaperSetter()">Submit</button>
-                                <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
-                                        (click)="updatePaperSetter()">Update</button>
-                                <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
-                                        (click)="cancelUpdate()">Cancel</button>
+                                <button (click)="savePaperSetter()" *ngIf="permission[0].permission == 1"
+                                        [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
+                                </button>
+                                <button (click)="updatePaperSetter()" [hidden]="isUpdatable == false"
+                                        class="btn btn-primary me-1">Update
+                                </button>
+                                <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
+                                        class="btn btn-primary me-1">Cancel
+                                </button>
                                 <!--                            <button class="btn btn-secondary">Cancel</button>-->
                             </div>
                         </div>
                         <div [hidden]="active != 2">
                             <div class="card-body">
-                                <form class="theme-form" [formGroup]="answerScriptEvaluatorForm">
+                                <form [formGroup]="answerScriptEvaluatorForm" class="theme-form">
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">From
@@ -105,19 +113,21 @@
                                             <input class="form-control" formControlName="from_date"
                                                    id="exampleInputEmail1" type="date">
                                             <div *ngIf="answerScriptEvaluatorForm.controls['from_date'].errors?.['required'] && answerScriptEvaluatorForm.controls['from_date'].touched "
-                                                 class="text text-danger mt-1">From Date required</div>
+                                                 class="text text-danger mt-1">From Date required
+                                            </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">To Date</label>
                                             <input class="form-control" formControlName="to_date"
                                                    id="exampleInputEmail1" type="date">
                                             <div *ngIf="answerScriptEvaluatorForm.controls['to_date'].errors?.['required'] && answerScriptEvaluatorForm.controls['to_date'].touched "
-                                                 class="text text-danger mt-1">To Date required</div>
+                                                 class="text text-danger mt-1">To Date required
+                                            </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Staff</label>
-                                            <select style="width: 100%" formControlName="staff_id" class="form-select"
-                                                    required>
+                                            <select class="form-select" formControlName="staff_id" required
+                                                    style="width: 100%">
                                                 <option value="null"> Select a Staff</option>
                                                 <option *ngFor="let data of memberList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
@@ -125,8 +135,9 @@
                                             </select>
                                         </div>
                                         <div class="col-md-3 mb-3">
-                                            <button class="btn btn-primary me-1" style="margin-top: 30px;"
-                                                    (click)="getPaperSetting()">Search</button>
+                                            <button (click)="getPaperSetting()" class="btn btn-primary me-1"
+                                                    style="margin-top: 30px;">Search
+                                            </button>
                                         </div>
                                     </div>
                                 </form>
@@ -149,7 +160,7 @@
                                     <tbody>
                                     <tr
                                             *ngFor="let record of searchAnsScriptEvaluatorList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
-                                        <td>{{indexOfElement+1}}</td>
+                                        <td>{{indexOfElement + 1}}</td>
                                         <td>{{record.staff_name}}</td>
                                         <td>{{record.examination_name}}</td>
                                         <td>{{record.subject_name}}</td>
@@ -157,10 +168,14 @@
                                         <td>{{record.referance_no}}</td>
                                         <td>{{record.ref_date}}</td>
                                         <td>
-                                            <a *ngIf="permission[1].permission == 1"
-                                               (click)="editPaperSetter(record)"><mat-icon>edit</mat-icon></a>
-                                            <a *ngIf="permission[2].permission == 1"
-                                               (click)="deletePaperSetter(record)"><mat-icon>delete</mat-icon></a>
+                                            <a (click)="editPaperSetter(record)"
+                                               *ngIf="permission[1].permission == 1">
+                                                <mat-icon>edit</mat-icon>
+                                            </a>
+                                            <a (click)="deletePaperSetter(record)"
+                                               *ngIf="permission[2].permission == 1">
+                                                <mat-icon>delete</mat-icon>
+                                            </a>
                                         </td>
                                     </tr>
                                     </tbody>
