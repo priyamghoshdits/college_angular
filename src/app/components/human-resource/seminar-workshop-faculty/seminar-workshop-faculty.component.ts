@@ -2,10 +2,11 @@ import {Component} from '@angular/core';
 import {MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
 import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MemberService} from "../../../services/member.service";
 import Swal from "sweetalert2";
 import {BookPublicationService} from "../../../services/book-publication.service";
+import {SeminarWorkshopFacultyService} from "../../../services/seminar-workshop-faculty.service";
 
 @Component({
     selector: 'app-seminar-workshop-faculty',
@@ -37,9 +38,11 @@ export class SeminarWorkshopFacultyComponent {
 
     searchForm: FormGroup;
 
-    constructor(private memberService: MemberService, private BookPublicationService: BookPublicationService) {
+    constructor(private memberService: MemberService,private seminarWorkshopFacultyService: SeminarWorkshopFacultyService) {
         this.searchForm = new FormGroup({
             staff_id: new FormControl(null),
+            from_date: new FormControl(null, [Validators.required]),
+            to_date: new FormControl(null, [Validators.required]),
         });
 
         this.memberService.getMemberListener().subscribe((response) => {
@@ -79,18 +82,18 @@ export class SeminarWorkshopFacultyComponent {
         this.seminarWorkshopArray.push(arr[0]);
     }
 
-    saveBookPublication() {
+    saveSeminarWorkshopFaculty() {
         let arr = {
             'post_array': this.seminarWorkshopArray
         };
 
-        this.BookPublicationService.saveBookPublicationArray(arr).subscribe((response: any) => {
+        this.seminarWorkshopFacultyService.saveSeminarWorkshopFaculty(arr).subscribe((response: any) => {
             // @ts-ignore
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Book Publication Saved',
+                    title: 'Saved Successfully',
                     showConfirmButton: false,
                     timer: 1000
                 });
@@ -100,20 +103,26 @@ export class SeminarWorkshopFacultyComponent {
 
     }
 
-    getBookPublicationSearch() {
-        this.BookPublicationService.getBookPublication(this.searchForm.value.staff_id).subscribe((response: any) => {
+    searchSeminarWorkshopFaculty() {
+
+        // if(!this.searchForm.valid){
+        //     this.searchForm.markAllAsTouched();
+        //     return;
+        // }
+
+        this.seminarWorkshopFacultyService.searchSeminarWorkshopFaculty(this.searchForm.value).subscribe((response: any) => {
             if (response.success == 1) {
                 this.seminarWorkshopList = response.data;
             }
         })
     }
 
-    updateBookPublication() {
+    updateSeminarWorkshopFaculty() {
         let arr = {
             'post_array': this.seminarWorkshopArray
         };
 
-        this.BookPublicationService.updateBookPublicationArray(arr).subscribe((response: any) => {
+        this.seminarWorkshopFacultyService.updateSeminarWorkshopFaculty(arr).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
@@ -148,8 +157,7 @@ export class SeminarWorkshopFacultyComponent {
         this.active = 1;
     }
 
-    editBookPublication(data) {
-
+    editSeminarWorkshopFaculty(data) {
         this.totalArray = [1];
         this.seminarWorkshopArray[0].id = data.id;
         this.seminarWorkshopArray[0].staff_id = data.staff_id;
@@ -164,10 +172,10 @@ export class SeminarWorkshopFacultyComponent {
         this.isUpdatable = true;
     }
 
-    deleteBookPublication(data) {
+    deleteSeminarWorkshopFaculty(data) {
         Swal.fire({
             title: 'Confirmation',
-            text: 'Do you sure to delete course ?',
+            text: 'Do you sure to delete ?',
             icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -175,7 +183,7 @@ export class SeminarWorkshopFacultyComponent {
             confirmButtonText: 'Yes, delete It!'
         }).then((result) => {
             if (result.isConfirmed) {
-                this.BookPublicationService.deleteBookPublication(data.id).subscribe((response: any) => {
+                this.seminarWorkshopFacultyService.deleteSeminarWorkshopFaculty(data.id).subscribe((response: any) => {
                     if (response.success == 1) {
                         this.seminarWorkshopList = response.data;
                     }

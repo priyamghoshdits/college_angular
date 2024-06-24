@@ -14,21 +14,21 @@ export class SeminarWorkshopFacultyService {
     }
 
     saveSeminarWorkshopFaculty(data) {
-        return this.http.post(this.BASE_API_URL + '/saveBookPublication', data)
+        return this.http.post(this.BASE_API_URL + '/saveSeminarWorkshopFaculty', data)
             .pipe(catchError(this.errorService.serverError), tap(response => {
 
             }));
     }
 
     updateSeminarWorkshopFaculty(data) {
-        return this.http.post(this.BASE_API_URL + '/updateBookPublication', data)
+        return this.http.post(this.BASE_API_URL + '/updateSeminarWorkshopFaculty', data)
             .pipe(catchError(this.errorService.serverError), tap(response => {
 
             }));
     }
 
-    getBookPublication(data) {
-        return this.http.get(this.BASE_API_URL + '/getBookPublication/' + data)
+    searchSeminarWorkshopFaculty(data) {
+        return this.http.post(this.BASE_API_URL + '/searchSeminarWorkshopFaculty', data)
             .pipe(catchError(this.errorService.serverError), tap(response => {
 
             }));

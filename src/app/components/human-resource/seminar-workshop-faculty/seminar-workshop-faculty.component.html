@@ -38,24 +38,24 @@
                                             </select>
                                         </div>
                                         <div class="col-md-5 mb-3">
-                                            <label>Book Name</label>
+                                            <label>Title of Seminar/Workshop</label>
                                             <input type="text" class="form-control"
-                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].book_name"
-                                                   placeholder="Book Name" required>
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].title_of_seminar"
+                                                   placeholder="Title of Seminar/Workshop" required>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-5 mb-3">
-                                            <label>Publisher Name</label>
+                                            <label>Type of Seminar/Workshop</label>
                                             <input type="text" class="form-control"
-                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].name_of_publisher"
-                                                   placeholder="Publisher Name" required>
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].type_of_seminar"
+                                                   placeholder="Type of Seminar/Workshop" required>
                                         </div>
                                         <div class="col-md-5 mb-3">
-                                            <label>ISBN Number</label>
+                                            <label>Organized By</label>
                                             <input type="text" class="form-control"
-                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].ISBN_number"
-                                                   placeholder="ISBN Number" required>
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].organized_by"
+                                                   placeholder="Organized By" required>
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <a *ngIf="(indexOfElement + 1) == totalArray.length"
@@ -66,29 +66,29 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
-                                            <label>Chapter/Full Book</label>
+                                            <label>Duration</label>
                                             <input type="text" class="form-control"
-                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].chapter_full_book"
-                                                   placeholder="Chapter/Full Book" required>
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].duration"
+                                                   placeholder="Duration" required>
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <label>Chapter Name</label>
-                                            <input type="text" class="form-control"
-                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].chapter_name"
-                                                   placeholder="Chapter Name" required>
+                                            <label>Date</label>
+                                            <input type="date" class="form-control"
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].date"
+                                                   required>
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <label>Page Number</label>
-                                            <input type="text" class="form-control" placeholder="Page Number"
-                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].page_number" required>
+                                            <label>Achievement</label>
+                                            <input type="text" class="form-control" placeholder="Achievement"
+                                                   [(ngModel)]="seminarWorkshopArray[indexOfElement].achievement" required>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"
-                                            (click)="saveBookPublication()">Submit</button>
+                                            (click)="saveSeminarWorkshopFaculty()">Submit</button>
                                     <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
-                                            (click)="updateBookPublication()">Update</button>
+                                            (click)="updateSeminarWorkshopFaculty()">Update</button>
                                     <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
                                             (click)="cancelUpdate()">Cancel</button>
                                 </div>
@@ -98,6 +98,21 @@
                             <div class="card-body">
                                 <form class="theme-form" [formGroup]="searchForm">
                                     <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">From
+                                                Date</label>
+                                            <input class="form-control" formControlName="from_date"
+                                                   id="exampleInputEmail1" type="date">
+                                            <div *ngIf="searchForm.controls['from_date'].errors?.['required'] && searchForm.controls['from_date'].touched "
+                                                 class="text text-danger mt-1">From Date required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">To Date</label>
+                                            <input class="form-control" formControlName="to_date"
+                                                   id="exampleInputEmail1" type="date">
+                                            <div *ngIf="searchForm.controls['to_date'].errors?.['required'] && searchForm.controls['to_date'].touched "
+                                                 class="text text-danger mt-1">To Date required</div>
+                                        </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Staff</label>
                                             <select style="width: 100%" formControlName="staff_id" class="form-select"
@@ -110,7 +125,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <button class="btn btn-primary me-1" style="margin-top: 30px;"
-                                                    (click)="getBookPublicationSearch()">Search</button>
+                                                    (click)="searchSeminarWorkshopFaculty()">Search</button>
                                         </div>
                                     </div>
                                 </form>
@@ -121,12 +136,12 @@
                                     <tr>
                                         <th colspan="2">Sl.NO</th>
                                         <th colspan="2">Staff Name</th>
-                                        <th colspan="2">Book Name</th>
-                                        <th colspan="2">ISBN Number</th>
-                                        <th colspan="2">Name of Publisher</th>
-                                        <th colspan="2">Chapter Full Book</th>
-                                        <th colspan="2">Chapter Name</th>
-                                        <th colspan="2">Page Number</th>
+                                        <th colspan="2">Title</th>
+                                        <th colspan="2">Type</th>
+                                        <th colspan="2">Organized By</th>
+                                        <th colspan="2">Duration</th>
+                                        <th colspan="2">Date</th>
+                                        <th colspan="2">Achievement</th>
                                         <th colspan="1">Action</th>
                                     </tr>
                                     </thead>
@@ -135,16 +150,16 @@
 
                                         <td colspan="2">{{indexOfElement + 1}}</td>
                                         <td colspan="2">{{record.staff_name}}</td>
-                                        <td colspan="2">{{record.book_name}}</td>
-                                        <td colspan="2">{{record.ISBN_number}}</td>
-                                        <td colspan="2">{{record.name_of_publisher}}</td>
-                                        <td colspan="2">{{record.chapter_full_book}}</td>
-                                        <td colspan="2">{{record.chapter_name}}</td>
-                                        <td colspan="2">{{record.page_number}}</td>
+                                        <td colspan="2">{{record.title_of_seminar}}</td>
+                                        <td colspan="2">{{record.type_of_seminar}}</td>
+                                        <td colspan="2">{{record.organized_by}}</td>
+                                        <td colspan="2">{{record.duration}}</td>
+                                        <td colspan="2">{{record.date}}</td>
+                                        <td colspan="2">{{record.achievement}}</td>
                                         <td>
-                                            <a (click)="editBookPublication(record)"><mat-icon>edit</mat-icon></a>
+                                            <a (click)="editSeminarWorkshopFaculty(record)"><mat-icon>edit</mat-icon></a>
                                             <a
-                                                    (click)="deleteBookPublication(record)"><mat-icon>delete</mat-icon></a>
+                                                    (click)="deleteSeminarWorkshopFaculty(record)"><mat-icon>delete</mat-icon></a>
                                         </td>
                                     </tr>
                                     </tbody>

@@ -124,7 +124,7 @@ export class PaperSetterComponent {
     deletePaperSetter(data) {
         Swal.fire({
             title: 'Confirmation',
-            text: 'Do you sure to delete course ?',
+            text: 'Do you sure to delete ?',
             icon: 'info',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
