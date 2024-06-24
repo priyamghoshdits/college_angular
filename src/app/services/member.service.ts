@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { environment } from "../../environments/environment";
-import { HttpClient } from "@angular/common/http";
-import { ErrorService } from "./error.service";
-import { Subject } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
+import {Injectable} from '@angular/core';
+import {environment} from "../../environments/environment";
+import {HttpClient} from "@angular/common/http";
+import {ErrorService} from "./error.service";
+import {Subject} from "rxjs";
+import {catchError, tap} from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -119,6 +119,12 @@ export class MemberService {
     revertToProceedToPay(id) {
         return this.http.get(this.BASE_API_URL + '/revertToProceedToPay/' + id)
             .pipe(catchError(this.errorService.serverError), tap(response => {
+            }));
+    }
+
+    getStaffForPayslip(course_id) {
+        return this.http.get(this.BASE_API_URL + '/getStaffForPayslip/' + course_id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
 
             }));
     }
@@ -184,7 +190,7 @@ export class MemberService {
             }));
     }
 
-    searchPaperSetter(value){
+    searchPaperSetter(value) {
         return this.http.post(this.BASE_API_URL + '/searchPaperSetting', value)
             .pipe(catchError(this.errorService.serverError), tap(response => {
             }));
@@ -196,7 +202,6 @@ export class MemberService {
 
             }));
     }
-
 
 
     saveMember(value) {
@@ -249,6 +254,7 @@ export class MemberService {
                 }
             }));
     }
+
     deletePromotion(id) {
         return this.http.get(this.BASE_API_URL + '/deletePromotion/' + id)
             .pipe(catchError(this.errorService.serverError), tap(response => {
