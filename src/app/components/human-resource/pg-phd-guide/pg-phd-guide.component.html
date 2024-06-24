@@ -1,1 +1,208 @@
-<p>pg-phd-guide works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header" [hidden]="active != 1">
+                            <h5>Book Publication</h5><span>Book Publication</span>
+                        </div>
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>Show All Book Publication</h5>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Add Book Publication</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Show Book Publication</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+                        <div [hidden]="active != 1">
+                            <div class="card-body" [hidden]="active != 1">
+                                <div *ngFor="let item of totalPgPhdGuide ;let indexOfElement=index">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Staff</label>
+                                            <select style="width: 100%"
+                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].staff_id"
+                                                class="form-select" required>
+                                                <option value="null"> Select a Staff</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Course</label>
+                                            <select style="width: 100%"
+                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].course_id"
+                                                class="form-select" (change)="getSemester(indexOfElement)" required>
+                                                <option value="null"> Select a Course</option>
+                                                <option *ngFor="let data of courseList" [value]="data.id">
+                                                    {{data.course_name}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Semester</label>
+                                            <select style="width: 100%"
+                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].semester_id"
+                                                class="form-select" (change)="getStudent(indexOfElement)" required>
+                                                <option value="null"> Select a Student</option>
+                                                <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                                    {{data.name}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Student</label>
+                                            <select style="width: 100%"
+                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].student_id"
+                                                class="form-select" (change)="getStudent(indexOfElement)" required>
+                                                <option value="null"> Select a Student</option>
+                                                <option *ngFor="let data of filteredStudentList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 mb-3">
+                                            <label>Course Name</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].course"
+                                                placeholder="Course Name" required>
+                                        </div>
+                                        <div class="col-md-5 mb-3">
+                                            <label>Title Number</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].title_name"
+                                                placeholder="Title Number" required>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <a *ngIf="(indexOfElement + 1) == totalPgPhdGuide.length && !isUpdatable"
+                                                (click)="addField()" style=""><mat-icon
+                                                    style="font-size: 40px;height: 60px; width: 40px; line-height: 2">add_box</mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Guide</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].guide"
+                                                placeholder="Guide Name" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Co-Guide Name</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].co_guide"
+                                                placeholder="Co-Guide Name" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Referance No.</label>
+                                            <input type="text" class="form-control" placeholder="Referance No."
+                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].referance_no" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Date</label>
+                                            <input type="date" class="form-control"
+                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].ref_date" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Status</label>
+                                            <select type="text" class="form-control"
+                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].status" required>
+                                                <option value="null">Select status</option>
+                                                <option value="0">Ongoing</option>
+                                                <option value="1">Complete</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>File</label>
+                                            <input type="file" class="form-control"
+                                                (change)="fileUpload($event, indexOfElement)" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"
+                                        (click)="savePgPhdGuide()">Submit</button>
+                                    <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                        (click)="updatePgPhdGuide()">Update</button>
+                                    <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                        (click)="cancelUpdate()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div [hidden]="active != 2">
+                            <div class="card-body">
+                                <form class="theme-form" [formGroup]="searchForm">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Staff</label>
+                                            <select style="width: 100%" formControlName="staff_id" class="form-select"
+                                                required>
+                                                <option value="null"> Select a Staff</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <button class="btn btn-primary me-1" style="margin-top: 30px;"
+                                                (click)="getBookPublicationSearch()">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Sl.NO</th>
+                                            <th colspan="2">Staff Name</th>
+                                            <th colspan="2">Student Name</th>
+                                            <th colspan="2">Course Name</th>
+                                            <th colspan="2">Title Name</th>
+                                            <th colspan="2">Guide</th>
+                                            <th colspan="2">Co Guide</th>
+                                            <th colspan="2">Referance No.</th>
+                                            <th colspan="2">Ref. Date</th>
+                                            <th colspan="2">Status</th>
+                                            <th colspan="1">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let record of pgPhdGuideList ;let indexOfElement=index">
+
+                                            <td colspan="2">{{indexOfElement + 1}}</td>
+                                            <td colspan="2">{{record.staff_name}}</td>
+                                            <td colspan="2">{{record.student_name}}</td>
+                                            <td colspan="2">{{record.course}}</td>
+                                            <td colspan="2">{{record.title_name}}</td>
+                                            <td colspan="2">{{record.guide}}</td>
+                                            <td colspan="2">{{record.co_guide}}</td>
+                                            <td colspan="2">{{record.referance_no}}</td>
+                                            <td colspan="2">{{record.ref_date}}</td>
+                                            <td colspan="2">{{record.status_name}}</td>
+                                            <td>
+                                                <a (click)="editPgPhdGuide(record)"><mat-icon>edit</mat-icon></a>
+                                                <a (click)="deletePgPhdGuide(record)"><mat-icon>delete</mat-icon></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <!-- <pagination-controls *ngIf="paperList.length > 5"
+                                (pageChange)="p = $event"></pagination-controls> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
