@@ -5,30 +5,30 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header" [hidden]="active != 1">
-                            <h5>Pg Phd Guide</h5><span>Pg Phd Guide</span>
+                            <h5>University Synopsis</h5><span>University Synopsis</span>
                         </div>
                         <div class="card-header" [hidden]="active != 2">
-                            <h5>Show All Pg Phd Guide</h5>
+                            <h5>Show All University Synopsis</h5>
                         </div>
                         <div class="tabbed-card">
                             <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
                                 <li [ngbNavItem]="1">
-                                    <a ngbNavLink (click)="activeTab(1)">Add Pg Phd Guide</a>
+                                    <a ngbNavLink (click)="activeTab(1)">Add University Synopsis</a>
                                 </li>
                                 <li [ngbNavItem]="2">
-                                    <a ngbNavLink (click)="activeTab(2)">Show Pg Phd Guide</a>
+                                    <a ngbNavLink (click)="activeTab(2)">Show University Synopsis</a>
                                 </li>
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
                         </div>
                         <div [hidden]="active != 1">
-                            <div class="card-body" [hidden]="active != 1">
-                                <div *ngFor="let item of totalPgPhdGuide ;let indexOfElement=index">
+                            <div class="card-body">
+                                <div *ngFor="let item of totalUniversitySynopsis ;let indexOfElement=index">
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Select Staff</label>
                                             <select style="width: 100%"
-                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].staff_id"
+                                                [(ngModel)]="universitySynopsisArray[indexOfElement].staff_id"
                                                 class="form-select" required>
                                                 <option value="null"> Select a Staff</option>
                                                 <option *ngFor="let data of memberList" [value]="data.id">
@@ -39,7 +39,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Select Course</label>
                                             <select style="width: 100%"
-                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].course_id"
+                                                [(ngModel)]="universitySynopsisArray[indexOfElement].course_id"
                                                 class="form-select" (change)="getSemester(indexOfElement)" required>
                                                 <option value="null"> Select a Course</option>
                                                 <option *ngFor="let data of courseList" [value]="data.id">
@@ -49,7 +49,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Select Semester</label>
                                             <select style="width: 100%"
-                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].semester_id"
+                                                [(ngModel)]="universitySynopsisArray[indexOfElement].semester_id"
                                                 class="form-select" (change)="getStudent(indexOfElement)" required>
                                                 <option value="null"> Select a Student</option>
                                                 <option *ngFor="let data of semesterList" [value]="data.semester_id">
@@ -59,7 +59,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Select Student</label>
                                             <select style="width: 100%"
-                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].student_id"
+                                                [(ngModel)]="universitySynopsisArray[indexOfElement].student_id"
                                                 class="form-select" (change)="getStudent(indexOfElement)" required>
                                                 <option value="null"> Select a Student</option>
                                                 <option *ngFor="let data of filteredStudentList" [value]="data.id">
@@ -69,19 +69,19 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-5 mb-3">
-                                            <label>Course Name</label>
+                                            <label>Institute Name</label>
                                             <input type="text" class="form-control"
-                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].course"
-                                                placeholder="Course Name" required>
+                                                [(ngModel)]="universitySynopsisArray[indexOfElement].institute_name"
+                                                placeholder="Institute Name" required>
                                         </div>
                                         <div class="col-md-5 mb-3">
-                                            <label>Title Number</label>
+                                            <label>Title</label>
                                             <input type="text" class="form-control"
-                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].title_name"
-                                                placeholder="Title Number" required>
+                                                [(ngModel)]="universitySynopsisArray[indexOfElement].title"
+                                                placeholder="Title" required>
                                         </div>
                                         <div class="col-md-2 mb-3">
-                                            <a *ngIf="(indexOfElement + 1) == totalPgPhdGuide.length && !isUpdatable"
+                                            <a *ngIf="(indexOfElement + 1) == totalUniversitySynopsis.length && !isUpdatable"
                                                 (click)="addField()" style=""><mat-icon
                                                     style="font-size: 40px;height: 60px; width: 40px; line-height: 2">add_box</mat-icon>
                                             </a>
@@ -89,39 +89,31 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
-                                            <label>Guide</label>
+                                            <label>Course</label>
                                             <input type="text" class="form-control"
-                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].guide"
-                                                placeholder="Guide Name" required>
+                                                [(ngModel)]="universitySynopsisArray[indexOfElement].course"
+                                                placeholder="Course" required>
                                         </div>
                                         <div class="col-md-4 mb-3">
-                                            <label>Co-Guide Name</label>
+                                            <label>Date Evaluation</label>
                                             <input type="text" class="form-control"
-                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].co_guide"
-                                                placeholder="Co-Guide Name" required>
+                                                [(ngModel)]="universitySynopsisArray[indexOfElement].date_evaluation"
+                                                placeholder="Date Evaluation" required>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Referance No.</label>
                                             <input type="text" class="form-control" placeholder="Referance No."
-                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].referance_no" required>
+                                                [(ngModel)]="universitySynopsisArray[indexOfElement].referance_no"
+                                                required>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-6 mb-3">
                                             <label>Date</label>
                                             <input type="date" class="form-control"
-                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].ref_date" required>
+                                                [(ngModel)]="universitySynopsisArray[indexOfElement].ref_date" required>
                                         </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label>Status</label>
-                                            <select type="text" class="form-control"
-                                                [(ngModel)]="pgPddhGuideArray[indexOfElement].status" required>
-                                                <option value="null">Select status</option>
-                                                <option value="0">Ongoing</option>
-                                                <option value="1">Complete</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-6 mb-3">
                                             <label>File</label>
                                             <input type="file" class="form-control"
                                                 (change)="fileUpload($event, indexOfElement)" required>
@@ -130,9 +122,9 @@
                                 </div>
                                 <div class="card-footer">
                                     <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"
-                                        (click)="savePgPhdGuide()">Submit</button>
+                                        (click)="saveUniversitySynopsis()">Submit</button>
                                     <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
-                                        (click)="updatePgPhdGuide()">Update</button>
+                                        (click)="updateUniversitySynopsis()">Update</button>
                                     <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
                                         (click)="cancelUpdate()">Cancel</button>
                                 </div>
@@ -154,7 +146,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <button class="btn btn-primary me-1" style="margin-top: 30px;"
-                                                (click)="getPgPhdguideSearch()">Search</button>
+                                                (click)="getUniversitySynopsis()">Search</button>
                                         </div>
                                     </div>
                                 </form>
@@ -166,32 +158,32 @@
                                             <th colspan="2">Sl.NO</th>
                                             <th colspan="2">Staff Name</th>
                                             <th colspan="2">Student Name</th>
-                                            <th colspan="2">Course Name</th>
-                                            <th colspan="2">Title Name</th>
-                                            <th colspan="2">Guide</th>
-                                            <th colspan="2">Co Guide</th>
+                                            <th colspan="2">Institute Name</th>
+                                            <th colspan="2">Title</th>
+                                            <th colspan="2">Course</th>
                                             <th colspan="2">Referance No.</th>
                                             <th colspan="2">Ref. Date</th>
-                                            <th colspan="2">Status</th>
+                                            <th colspan="2">Date Evaluation</th>
                                             <th colspan="1">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let record of pgPhdGuideList ;let indexOfElement=index">
+                                        <tr *ngFor="let record of universitySynopsisList ;let indexOfElement=index">
 
                                             <td colspan="2">{{indexOfElement + 1}}</td>
                                             <td colspan="2">{{record.staff_name}}</td>
                                             <td colspan="2">{{record.student_name}}</td>
+                                            <td colspan="2">{{record.institute_name}}</td>
+                                            <td colspan="2">{{record.title}}</td>
                                             <td colspan="2">{{record.course}}</td>
-                                            <td colspan="2">{{record.title_name}}</td>
-                                            <td colspan="2">{{record.guide}}</td>
-                                            <td colspan="2">{{record.co_guide}}</td>
                                             <td colspan="2">{{record.referance_no}}</td>
                                             <td colspan="2">{{record.ref_date}}</td>
-                                            <td colspan="2">{{record.status_name}}</td>
+                                            <td colspan="2">{{record.date_evaluation}}</td>
                                             <td>
-                                                <a (click)="editPgPhdGuide(record)"><mat-icon>edit</mat-icon></a>
-                                                <a (click)="deletePgPhdGuide(record)"><mat-icon>delete</mat-icon></a>
+                                                <a
+                                                    (click)="editUniversitySynopsis(record)"><mat-icon>edit</mat-icon></a>
+                                                <a
+                                                    (click)="deleteUniversitySynopsis(record)"><mat-icon>delete</mat-icon></a>
                                             </td>
                                         </tr>
                                     </tbody>

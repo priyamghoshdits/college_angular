@@ -23,6 +23,7 @@ import { PgPhdGuideComponent } from './pg-phd-guide/pg-phd-guide.component';
 import {ExaminerComponent} from "./examiner/examiner.component";
 import {AnswerScriptComponent} from "./answer-script/answer-script.component";
 import {SeminarWorkshopFacultyComponent} from "./seminar-workshop-faculty/seminar-workshop-faculty.component";
+import { UniversitySynopsisComponent } from './university-synopsis/university-synopsis.component';
 
 const routes: Routes = [
   {
@@ -71,6 +72,14 @@ const routes: Routes = [
     data: {
       title: "Book Publication",
       breadcrumb: "Book Publication"
+    }
+  },
+  {
+    path: 'university-synopsis',
+    component: UniversitySynopsisComponent,
+    data: {
+      title: "University Synopsis",
+      breadcrumb: "University Synopsis"
     }
   },
   {
