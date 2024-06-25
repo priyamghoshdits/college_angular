@@ -39,6 +39,7 @@ export class PeriodAttendanceComponent {
     markAllAsLate = false;
     markAllAsHalfDay = false
     showList = true;
+    topic_name = null;
 
     constructor(private subjectService: SubjectService, private studentService: StudentService
         , private sessionService: SessionService, public datepipe: DatePipe) {
@@ -182,6 +183,11 @@ export class PeriodAttendanceComponent {
         this.session_id = JSON.parse(localStorage.getItem('session_id'));
         this.attendanceForm.patchValue({session_id: this.session_id});
 
+        // console.log(this.topic_name);
+        // return;
+
+        const topicName = this.topic_name;
+
         if (!this.session_id) {
             Swal.fire({
                 position: 'center',
@@ -210,6 +216,7 @@ export class PeriodAttendanceComponent {
             value.semester_id = semester_id;
             value.session_id = session_id;
             value._class = _class;
+            value.topic_name = topicName;
         })
         this.studentService.saveStudentAttendance(this.studentList).subscribe((response: any) => {
             if (response.success == 1) {
