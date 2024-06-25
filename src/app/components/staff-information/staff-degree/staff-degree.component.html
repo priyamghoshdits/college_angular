@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-6">
             <div class="row">
                 <div class="col-sm-12">
@@ -17,9 +17,9 @@
                         </div>
                         <div class="card-footer">
                             <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"
-                                (click)="saveDegreeForm()">Submit</button>
+                                (click)="saveDegreeForm()" *ngIf="permission[0].permission == 1">Submit</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
-                                (click)="updateDegreeForm()">Update</button>
+                                (click)="updateDegreeForm()" *ngIf="permission[1].permission == 1">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
                                 (click)="cancelUpdate()">Cancel</button>
                             <!--                            <button class="btn btn-secondary">Cancel</button>-->
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-xl-6">
-            <div class="row">
+            <div class="row" *ngIf="permission[3].permission == 1">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <div class="card">
@@ -53,7 +53,9 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
-                                            <th scope="col">Action</th>
+                                            <th scope="col"
+                                                *ngIf="permission[1].permission == 1 && permission[2].permission == 1">
+                                                Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -61,8 +63,10 @@
                                             <td>{{indexOfElement+1}}</td>
                                             <td>{{record.name}}</td>
                                             <td>
-                                                <a (click)="editDegree(record)"><mat-icon>edit</mat-icon></a>
-                                                <a (click)="deleteDegree(record)"><mat-icon>delete</mat-icon></a>
+                                                <a (click)="editDegree(record)"
+                                                    *ngIf="permission[1].permission == 1"><mat-icon>edit</mat-icon></a>
+                                                <a (click)="deleteDegree(record)"
+                                                    *ngIf="permission[2].permission == 1"><mat-icon>delete</mat-icon></a>
                                             </td>
                                         </tr>
                                     </tbody>

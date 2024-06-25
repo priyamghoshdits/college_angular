@@ -73,11 +73,11 @@ export class PaperSetterComponent {
 
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;
-            this.permission = this.rolesAndPermission.find(x => x.name == 'SUBJECT QUESTION').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'PAPER SETTER').permission;
         });
         this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
         if (this.rolesAndPermission.length > 0) {
-            this.permission = this.rolesAndPermission.find(x => x.name == 'SUBJECT QUESTION').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'PAPER SETTER').permission;
         }
     }
 

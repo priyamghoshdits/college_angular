@@ -6,6 +6,7 @@ import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from '@n
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MemberService } from 'src/app/services/member.service';
 import { PgPhdGuideService } from 'src/app/services/pg-phd-guide.service';
+import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
 import { StudentService } from 'src/app/services/student.service';
 import { SubjectService } from 'src/app/services/subject.service';
 import Swal from 'sweetalert2';
@@ -45,7 +46,10 @@ export class PgPhdGuideComponent {
   pgPhdGuideList: any[] = []
   searchForm: FormGroup;
 
-  constructor(private memberService: MemberService, private studentService: StudentService, private subjectService: SubjectService, private PgPhdGuideService: PgPhdGuideService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+
+  constructor(private memberService: MemberService, private studentService: StudentService, private subjectService: SubjectService, private PgPhdGuideService: PgPhdGuideService, private roleAndPermissionService: RolesAndPermissionService) {
 
     this.searchForm = new FormGroup({
       staff_id: new FormControl(null),
@@ -89,6 +93,17 @@ export class PgPhdGuideComponent {
       this.studentList = response;
     });
     this.studentList = this.studentService.getStudentLists();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'STAFF EXPERIENCE').permission;
+    });
+
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+
+    if (this.rolesAndPermission.length > 0) {
+      this.permission = this.rolesAndPermission.find(x => x.name == 'STAFF EXPERIENCE').permission;
+    }
   }
 
   getStudent(indexOfElement) {

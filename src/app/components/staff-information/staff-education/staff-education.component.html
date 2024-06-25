@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
@@ -96,15 +96,15 @@
                                 </div>
                                 <div class="card-footer">
                                     <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"
-                                        (click)="saveStaffEducation()">Submit</button>
+                                        (click)="saveStaffEducation()" *ngIf="permission[0].permission == 1">Submit</button>
                                     <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
-                                        (click)="updateStaffEducation()">Update</button>
+                                        (click)="updateStaffEducation()" *ngIf="permission[1].permission == 1">Update</button>
                                     <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
                                         (click)="cancelUpdate()">Cancel</button>
                                 </div>
                             </div>
                         </div>
-                        <div [hidden]="active != 2">
+                        <div [hidden]="active != 2" *ngIf="permission[3].permission == 1">
                             <div class="card-body">
                                 <form class="theme-form" [formGroup]="searchForm">
                                     <div class="row">
@@ -136,7 +136,9 @@
                                             <th colspan="2">University Name</th>
                                             <th colspan="2">Percentage</th>
                                             <th colspan="2">Grade</th>
-                                            <th colspan="1">Action</th>
+                                            <th colspan="1"
+                                                *ngIf="permission[1].permission == 1 && permission[2].permission == 1">
+                                                Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -151,9 +153,10 @@
                                             <td colspan="2">{{record.grade}}</td>
                                             <td colspan="2">{{record.status_name}}</td>
                                             <td>
-                                                <a (click)="editStaffEducation(record)"><mat-icon>edit</mat-icon></a>
-                                                <a
-                                                    (click)="deleteStaffEducation(record)"><mat-icon>delete</mat-icon></a>
+                                                <a (click)="editStaffEducation(record)"
+                                                    *ngIf="permission[1].permission == 1"><mat-icon>edit</mat-icon></a>
+                                                <a (click)="deleteStaffEducation(record)"
+                                                    *ngIf="permission[2].permission == 1"><mat-icon>delete</mat-icon></a>
                                             </td>
                                         </tr>
                                     </tbody>

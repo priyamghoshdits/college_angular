@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
@@ -164,7 +164,9 @@
                                             <th colspan="2">Referance No.</th>
                                             <th colspan="2">Ref. Date</th>
                                             <th colspan="2">Date Evaluation</th>
-                                            <th colspan="1">Action</th>
+                                            <th colspan="1"
+                                                *ngIf="permission[1].permission == 1 && permission[2].permission == 1">
+                                                Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -180,10 +182,10 @@
                                             <td colspan="2">{{record.ref_date}}</td>
                                             <td colspan="2">{{record.date_evaluation}}</td>
                                             <td>
-                                                <a
-                                                    (click)="editUniversitySynopsis(record)"><mat-icon>edit</mat-icon></a>
-                                                <a
-                                                    (click)="deleteUniversitySynopsis(record)"><mat-icon>delete</mat-icon></a>
+                                                <a (click)="editUniversitySynopsis(record)"
+                                                    *ngIf="permission[1].permission == 1"><mat-icon>edit</mat-icon></a>
+                                                <a (click)="deleteUniversitySynopsis(record)"
+                                                    *ngIf="permission[2].permission == 1"><mat-icon>delete</mat-icon></a>
                                             </td>
                                         </tr>
                                     </tbody>

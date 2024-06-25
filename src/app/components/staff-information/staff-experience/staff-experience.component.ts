@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
-import {MemberService} from "../../../services/member.service";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgxPaginationModule} from "ngx-pagination";
-import {DepartmentService} from "../../../services/department.service";
+import { Component } from '@angular/core';
+import { MemberService } from "../../../services/member.service";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgxPaginationModule } from "ngx-pagination";
+import { DepartmentService } from "../../../services/department.service";
 import Swal from "sweetalert2";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
 
 @Component({
     selector: 'app-department',
@@ -59,13 +59,13 @@ export class StaffExperienceComponent {
 
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;
-            this.permission = this.rolesAndPermission.find(x => x.name == 'LEAVE TYPE').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'STAFF EXPERIENCE').permission;
         });
 
         this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
 
         if (this.rolesAndPermission.length > 0) {
-            this.permission = this.rolesAndPermission.find(x => x.name == 'LEAVE TYPE').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'STAFF EXPERIENCE').permission;
         }
     }
 
@@ -120,7 +120,7 @@ export class StaffExperienceComponent {
         }).then((result) => {
             if (result.isConfirmed) {
                 this.memberService.deleteStaffExperience(data.id).subscribe((response: any) => {
-                    if(response.success == 1){
+                    if (response.success == 1) {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -137,33 +137,33 @@ export class StaffExperienceComponent {
 
     updateStaffExperience() {
 
-      if (!this.staffExperienceForm.valid) {
-        this.staffExperienceForm.markAllAsTouched();
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append('id', this.staffExperienceForm.value.id);
-      formData.append('staff_id', this.staffExperienceForm.value.staff_id);
-      formData.append('designation', this.staffExperienceForm.value.designation);
-      formData.append('experience', this.staffExperienceForm.value.experience);
-      formData.append('organization', this.staffExperienceForm.value.organization);
-      formData.append('from_date', this.staffExperienceForm.value.from_date);
-      formData.append('to_date', this.staffExperienceForm.value.to_date);
-      formData.append('experience_proof', this.experienceProof);
-
-      this.memberService.updateStaffExperience(formData).subscribe((response: any) => {
-        if(response.success == 1){
-          Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Staff Experience updated',
-            showConfirmButton: false,
-            timer: 1000
-          });
-          this.cancelUpdate();
+        if (!this.staffExperienceForm.valid) {
+            this.staffExperienceForm.markAllAsTouched();
+            return;
         }
-      })
+
+        const formData = new FormData();
+        formData.append('id', this.staffExperienceForm.value.id);
+        formData.append('staff_id', this.staffExperienceForm.value.staff_id);
+        formData.append('designation', this.staffExperienceForm.value.designation);
+        formData.append('experience', this.staffExperienceForm.value.experience);
+        formData.append('organization', this.staffExperienceForm.value.organization);
+        formData.append('from_date', this.staffExperienceForm.value.from_date);
+        formData.append('to_date', this.staffExperienceForm.value.to_date);
+        formData.append('experience_proof', this.experienceProof);
+
+        this.memberService.updateStaffExperience(formData).subscribe((response: any) => {
+            if (response.success == 1) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Staff Experience updated',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                this.cancelUpdate();
+            }
+        })
     }
 
     cancelUpdate() {

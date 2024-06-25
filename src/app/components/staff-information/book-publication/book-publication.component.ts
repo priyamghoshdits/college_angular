@@ -6,6 +6,7 @@ import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from '@n
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BookPublicationService } from 'src/app/services/book-publication.service';
 import { MemberService } from 'src/app/services/member.service';
+import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -38,9 +39,12 @@ export class BookPublicationComponent {
   memberList: any[];
   isUpdatable: boolean = false;
 
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+
   searchForm: FormGroup;
 
-  constructor(private memberService: MemberService, private BookPublicationService: BookPublicationService) {
+  constructor(private memberService: MemberService, private BookPublicationService: BookPublicationService, private roleAndPermissionService: RolesAndPermissionService) {
     this.searchForm = new FormGroup({
       staff_id: new FormControl(null),
     });
@@ -62,6 +66,17 @@ export class BookPublicationComponent {
         'page_number': null,
       }
     ]
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'BOOK PUBLICATION').permission;
+    });
+
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+
+    if (this.rolesAndPermission.length > 0) {
+      this.permission = this.rolesAndPermission.find(x => x.name == 'BOOK PUBLICATION').permission;
+    }
   }
 
   addField() {

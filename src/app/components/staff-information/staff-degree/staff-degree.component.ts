@@ -2,6 +2,7 @@ import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
 import { StaffDegreeService } from 'src/app/services/staff-degree.service';
 import Swal from 'sweetalert2';
 
@@ -22,8 +23,10 @@ export class StaffDegreeComponent {
   degreeFrom: FormGroup;
   isUpdatable: boolean = false;
   degreeList: any[] = [];
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
 
-  constructor(private StaffDegreeService: StaffDegreeService) {
+  constructor(private StaffDegreeService: StaffDegreeService, private roleAndPermissionService: RolesAndPermissionService) {
     this.degreeFrom = new FormGroup({
       id: new FormControl(null),
       name: new FormControl(null, [Validators.required]),
@@ -33,6 +36,17 @@ export class StaffDegreeComponent {
       this.degreeList = response;
     });
     this.degreeList = this.StaffDegreeService.getDegreeList();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'DEGREE').permission;
+    });
+
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+
+    if (this.rolesAndPermission.length > 0) {
+      this.permission = this.rolesAndPermission.find(x => x.name == 'DEGREE').permission;
+    }
   }
 
   saveDegreeForm() {

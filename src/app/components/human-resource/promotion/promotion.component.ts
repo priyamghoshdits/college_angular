@@ -55,13 +55,13 @@ export class PromotionComponent {
 
     this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
       this.rolesAndPermission = response;
-      this.permission = this.rolesAndPermission.find(x => x.name == 'LEAVE TYPE').permission;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'STAFF PROMOTION').permission;
     });
 
     this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
 
     if (this.rolesAndPermission.length > 0) {
-      this.permission = this.rolesAndPermission.find(x => x.name == 'LEAVE TYPE').permission;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'STAFF PROMOTION').permission;
     }
   }
 
