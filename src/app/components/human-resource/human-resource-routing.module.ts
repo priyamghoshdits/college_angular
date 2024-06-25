@@ -13,20 +13,7 @@ import { StaffAttendanceComponent } from "./staff-attendance/staff-attendance.co
 import { PayrollComponent } from "./payroll/payroll.component";
 import { ApproveLeaveComponent } from "./approve-leave/approve-leave.component";
 import { PayrollTypesComponent } from "./payroll-types/payroll-types.component";
-import { StaffExperienceComponent } from "./staff-experience/staff-experience.component";
-import { PaperSetterComponent } from './paper-setter/paper-setter.component';
-import { JournalPublicationComponent } from "./journal-publication/journal-publication.component";
-import { PromotionComponent } from './promotion/promotion.component';
-import { BookPublicationComponent } from './book-publication/book-publication.component';
-import { ConsultancyComponent } from "./consultancy/consultancy.component";
-import { PgPhdGuideComponent } from './pg-phd-guide/pg-phd-guide.component';
-import {ExaminerComponent} from "./examiner/examiner.component";
-import {AnswerScriptComponent} from "./answer-script/answer-script.component";
-import {SeminarWorkshopFacultyComponent} from "./seminar-workshop-faculty/seminar-workshop-faculty.component";
 import {PayslipComponent} from "./payslip/payslip.component";
-import { UniversitySynopsisComponent } from './university-synopsis/university-synopsis.component';
-import { StaffEducationComponent } from './staff-education/staff-education.component';
-import { StaffDegreeComponent } from './staff-degree/staff-degree.component';
 
 const routes: Routes = [
   {
@@ -37,86 +24,7 @@ const routes: Routes = [
       breadcrumb: "Add Staff"
     }
   },
-  {
-    path: 'sponsored-or-consultancy',
-    component: ConsultancyComponent,
-    data: {
-      title: "Sponsored Project/Consultancy",
-      breadcrumb: "Sponsored Project/Consultancy"
-    }
-  },
-  {
-    path: 'journal-publication',
-    component: JournalPublicationComponent,
-    data: {
-      title: "Journal Publication",
-      breadcrumb: "Journal Publication"
-    }
-  },
-  {
-    path: 'staff-experience',
-    component: StaffExperienceComponent,
-    data: {
-      title: "Staff Experience",
-      breadcrumb: "Staff Experience"
-    }
-  },
-  {
-    path: 'promotion',
-    component: PromotionComponent,
-    data: {
-      title: "Promotion",
-      breadcrumb: "Promotion"
-    }
-  },
-  {
-    path: 'book-publication',
-    component: BookPublicationComponent,
-    data: {
-      title: "Book Publication",
-      breadcrumb: "Book Publication"
-    }
-  },
-  {
-    path: 'university-synopsis',
-    component: UniversitySynopsisComponent,
-    data: {
-      title: "University Synopsis",
-      breadcrumb: "University Synopsis"
-    }
-  },
-  {
-    path: 'degree',
-    component: StaffDegreeComponent,
-    data: {
-      title: "Degree",
-      breadcrumb: "Degree"
-    }
-  },
-  {
-    path: 'staff-education',
-    component: StaffEducationComponent,
-    data: {
-      title: "Staff Education",
-      breadcrumb: "Staff Education"
-    }
-  },
-  {
-    path: 'pg-phd-guide',
-    component: PgPhdGuideComponent,
-    data: {
-      title: "Pg Phd Guide",
-      breadcrumb: "Pg Phd Guide"
-    }
-  },
-  {
-    path: 'paper-setter',
-    component: PaperSetterComponent,
-    data: {
-      title: "Paper Setter",
-      breadcrumb: "Paper Setter"
-    }
-  },
+
   {
     path: 'leave-type',
     component: LeaveTypeComponent,
@@ -206,22 +114,6 @@ const routes: Routes = [
     }
   },
   {
-    path: 'answer-script-evaluator',
-    component: AnswerScriptComponent,
-    data: {
-      title: "Answer Script Evaluator",
-      breadcrumb: "Answer Script Evaluator"
-    }
-  },
-  {
-    path: 'seminar-workshop-faculty',
-    component: SeminarWorkshopFacultyComponent,
-    data: {
-      title: "Seminar Workshop Faculty",
-      breadcrumb: "Seminar Workshop Faculty"
-    }
-  },
-  {
     path: 'payslip',
     component: PayslipComponent,
     data: {
@@ -229,14 +121,7 @@ const routes: Routes = [
       breadcrumb: "Payslip"
     }
   },
-  {
-    path: 'examiners',
-    component: ExaminerComponent,
-    data: {
-      title: "Examiners",
-      breadcrumb: "Examiners"
-    }
-  }
+
 ];
 
 @NgModule({

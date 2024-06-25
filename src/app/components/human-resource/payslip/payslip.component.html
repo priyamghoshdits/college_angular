@@ -20,8 +20,27 @@
                                         </select>
                                         <div *ngIf="uploadCertificateForm.controls['course_id'].errors?.['required'] && uploadCertificateForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                     </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Month</label>
+                                        <select style="width: 100%" formControlName="month" class="form-select" required>
+                                            <option value="null"> Select </option>
+                                            <option value="01"> January </option>
+                                            <option value="02"> February </option>
+                                            <option value="03"> March </option>
+                                            <option value="04"> April </option>
+                                            <option value="05"> May </option>
+                                            <option value="06"> June </option>
+                                            <option value="07"> July </option>
+                                            <option value="08"> August </option>
+                                            <option value="09"> September </option>
+                                            <option value="10"> October </option>
+                                            <option value="11"> November </option>
+                                            <option value="12"> December </option>
+                                        </select>
+                                        <div *ngIf="uploadCertificateForm.controls['month'].errors?.['required'] && uploadCertificateForm.controls['month'].touched " class="text text-danger mt-1">Month required</div>
+                                    </div>
                                     <div class="col-md-2 mb-3">
-                                        <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="searchStudents()">Submit</button>
+                                        <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="searchStaff()">Submit</button>
                                     </div>
                                 </div>
                             </form>
@@ -42,26 +61,18 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th scope="col">Name</th>
-                                            <th scope="col">Gender</th>
-                                            <th scope="col">Date Of Birth</th>
-                                            <th scope="col">Mobile No.</th>
                                             <th scope="col">Action</th>
-                                            <th scope="col">Status</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr *ngFor="let record of staffList| customFilter:searchItem ;let indexOfElement=index">
                                             <td>{{indexOfElement+1}}</td>
-                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
-                                            <td>{{record.gender}}</td>
-                                            <td>{{record.dob}}</td>
-                                            <td>{{record.mobile_no}}</td>
+                                            <td>{{record.staff_name}}</td>
                                             <td>
                                                 <a (click)="uploader.click()" style="cursor: pointer"><mat-icon>cloud_upload</mat-icon></a>
-                                                <a *ngIf="record.status" style="cursor: pointer" href="{{FILE_URL}}/certificate/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a>
-                                                <input [hidden]="true" class="form-control" #uploader type="file" (change)="uploadCertificate($event,record)">
+                                                <a *ngIf="record.month != null" style="cursor: pointer" href="{{FILE_URL}}/manual_payslips/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a>
+                                                <input [hidden]="true" class="form-control" #uploader type="file" (change)="uploadPayslip($event,record)">
                                             </td>
-                                            <td>{{record.status}}</td>
                                         </tr>
                                         </tbody>
                                     </table>

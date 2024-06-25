@@ -161,6 +161,24 @@ export class NavService {
 			]
 		},
 
+		{
+			title: 'Staff Information', hidden: false, icon: 'users', type: 'sub', badgeType: 'primary', active: false, children: [
+				{ path: '/staff-information/staff-experience', title: 'Staff Experience', type: 'link' },
+				{ path: '/staff-information/seminar-workshop-faculty', title: 'Seminar / Workshop / Faculty Development Programme', type: 'link' },
+				{ path: '/staff-information/examiners', title: 'Examiners', type: 'link' },
+				{ path: '/staff-information/answer-script-evaluator', title: 'Answer Script Evaluator', type: 'link' },
+				{ path: '/staff-information/sponsored-or-consultancy', title: 'Sponsored project/Consultancy', type: 'link' },
+				{ path: '/staff-information/journal-publication', title: 'Journal Publication', type: 'link' },
+				{ path: '/staff-information/paper-setter', title: 'Paper Setter', type: 'link' },
+				{ path: '/staff-information/pg-phd-guide', title: 'Pg Phd Guide', type: 'link' },
+				{ path: '/staff-information/university-synopsis', title: 'University Synopsis', type: 'link' },
+				{ path: '/staff-information/degree', title: 'Degree', type: 'link' },
+				{ path: '/staff-information/staff-education', title: 'Staff Education', type: 'link' },
+				{ path: '/staff-information/book-publication', title: 'Book Publication', type: 'link' },
+				{ path: '/staff-information/promotion', title: 'Staff Promotion', type: 'link' },
+			]
+		},
+
 
 		{
 			title: 'Income', hidden: false, icon: 'dollar-sign', type: 'sub', badgeType: 'primary', active: false, children: [

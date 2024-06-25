@@ -43,6 +43,7 @@ export class PayslipComponent {
         this.uploadCertificateForm = new FormGroup({
             id: new FormControl(null),
             course_id: new FormControl(null, [Validators.required]),
+            month: new FormControl(null, [Validators.required]),
         });
         this.subjectService.getCourseListener().subscribe((response) => {
             this.courseList = response;
@@ -62,8 +63,8 @@ export class PayslipComponent {
     //     })
     // }
 
-    searchStudents() {
-        this.memberService.getStaffForPayslip(this.uploadCertificateForm.value.course_id).subscribe((response: any) => {
+    searchStaff() {
+        this.memberService.getStaffForPayslip(this.uploadCertificateForm.value.course_id, this.uploadCertificateForm.value.month).subscribe((response: any) => {
             this.staffList = response.data;
         })
 
@@ -105,44 +106,25 @@ export class PayslipComponent {
 
     }
 
-    uploadCertificate(event, record) {
-    //
-    //     // @ts-ignore
-    //     this.session_id = JSON.parse(localStorage.getItem('session_id'));
-    //
-    //     if (!this.session_id) {
-    //         Swal.fire({
-    //             position: 'center',
-    //             icon: 'error',
-    //             title: 'Select Session',
-    //             showConfirmButton: false,
-    //             timer: 1000
-    //         });
-    //         return;
-    //     }
-    //
-    //     const formData = new FormData();
-    //     formData.append("id", record.certificate_id ?? null);
-    //     formData.append("course_id", this.uploadCertificateForm.value.course_id);
-    //     formData.append("semester_id", this.uploadCertificateForm.value.semester_id);
-    //     formData.append("session_id", this.session_id);
-    //     formData.append("certificate_type_id", this.uploadCertificateForm.value.certificate_type_id);
-    //     formData.append("user_id", record.id);
-    //     formData.append("file_name", event.target.files[0]['name']);
-    //     formData.append("file", event.target.files[0]);
-    //
-    //     this.certificateService.saveCertificate(formData).subscribe((response: any) => {
-    //         if (response.success == 1) {
-    //             Swal.fire({
-    //                 position: 'center',
-    //                 icon: 'success',
-    //                 title: 'Certificate Uploaded',
-    //                 showConfirmButton: false,
-    //                 timer: 1000
-    //             });
-    //             this.searchStudents();
-    //         }
-    //     })
+    uploadPayslip(event, record) {
+        const formData = new FormData();
+        formData.append('staff_id',record.staff_id);
+        formData.append('month',this.uploadCertificateForm.value.month);
+        formData.append('file',event.target.files[0]);
+
+        this.memberService.uploadPayslipManual(formData).subscribe((response: any) => {
+           if(response.success == 1){
+               this.searchStaff();
+               Swal.fire({
+                   position: 'center',
+                   icon: 'success',
+                   title: 'Payslip Uploaded',
+                   showConfirmButton: false,
+                   timer: 1000
+               });
+           }
+        });
+
     }
 
 }

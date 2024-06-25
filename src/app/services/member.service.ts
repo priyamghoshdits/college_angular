@@ -116,14 +116,28 @@ export class MemberService {
             }));
     }
 
+    uploadPayslip(value){
+        return this.http.post(this.BASE_API_URL + '/saveProceedToPay/', value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
+
     revertToProceedToPay(id) {
         return this.http.get(this.BASE_API_URL + '/revertToProceedToPay/' + id)
             .pipe(catchError(this.errorService.serverError), tap(response => {
             }));
     }
 
-    getStaffForPayslip(course_id) {
-        return this.http.get(this.BASE_API_URL + '/getStaffForPayslip/' + course_id)
+    getStaffForPayslip(course_id, month) {
+        return this.http.get(this.BASE_API_URL + '/getStaffForPayslip/' + course_id + '/' + month)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
+
+    uploadPayslipManual(value){
+        return this.http.post(this.BASE_API_URL + '/uploadPayslips',value)
             .pipe(catchError(this.errorService.serverError), tap(response => {
 
             }));

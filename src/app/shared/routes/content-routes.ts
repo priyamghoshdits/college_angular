@@ -16,8 +16,8 @@ export const content: Routes = [
     }
   },
   {
-    path: 'staff',
-    loadChildren: () => import('../../components/staff/staff-routing.module').then(m => m.StaffRoutingModule),
+    path: 'staff-information',
+    loadChildren: () => import('../../components/staff-information/staff-routing.module').then(m => m.StaffRoutingModule),
     data: {
       breadcrumb: "Staff"
     }
