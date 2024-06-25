@@ -162,7 +162,6 @@ export class NavService {
 				{ path: '/staff-information/degree', title: 'Degree', type: 'link' },
 				{ path: '/staff-information/staff-education', title: 'Staff Education', type: 'link' },
 				{ path: '/staff-information/book-publication', title: 'Book Publication', type: 'link' },
-				{ path: '/staff-information/promotion', title: 'Staff Promotion', type: 'link' },
 			]
 		},
 
