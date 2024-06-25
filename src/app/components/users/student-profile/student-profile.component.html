@@ -14,8 +14,8 @@
                                 <label class="tab" for="one" id="one-tab">Profile</label>
                                 <label class="tab" for="two" id="two-tab">Achivements</label>
                                 <label class="tab" for="three" id="three-tab">Placement</label>
-                                <label class="tab" for="four" id="four-tab">Fees</label>
-                                <label class="tab" for="five" id="five-tab">Result</label>
+<!--                                <label class="tab" for="four" id="four-tab">Fees</label>-->
+<!--                                <label class="tab" for="five" id="five-tab">Result</label>-->
                             </div>
                             <div class="panels">
                                 <div class="panel" id="one-panel">
@@ -23,7 +23,7 @@
                                         <div class="col-lg-3">
                                             <div *ngIf="student_details" class="leftuser_imgoutsection">
                                                 <div class="jshadow_area">
-                                                    <img class="huimg_designs" src="assets/images/student.jpg">
+                                                    <img class="huimg_designs" src="{{FILE_URL}}/user_image/{{student_details.image}}" onerror="this.src='assets/images/user/blank_default.jpg'">
                                                 </div>
                                                 <div class="newadd">
                                                     <h1 class="studentimgdwnarea">
@@ -229,7 +229,7 @@
                                         <div class="col-lg-3">
                                             <div class="leftuser_imgoutsection">
                                                 <div class="jshadow_area">
-                                                    <img class="huimg_designs" src="assets/images/student.jpg">
+                                                    <img class="huimg_designs" src="{{FILE_URL}}/user_image/{{student_details.image}}" onerror="this.src='assets/images/user/blank_default.jpg'">
                                                 </div>
                                                 <div class="newadd">
                                                     <h1 class="studentimgdwnarea">
@@ -292,7 +292,7 @@
                                         <div class="col-lg-3">
                                             <div class="leftuser_imgoutsection">
                                                 <div class="jshadow_area">
-                                                    <img class="huimg_designs" src="assets/images/student.jpg">
+                                                    <img class="huimg_designs" src="{{FILE_URL}}/user_image/{{student_details.image}}" onerror="this.src='assets/images/user/blank_default.jpg'">
                                                 </div>
                                                 <div class="newadd">
                                                     <h1 class="studentimgdwnarea">
@@ -339,120 +339,120 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel" id="four-panel">
-                                    <div class="row">
-                                        <div class="col-lg-3">
-                                            <div class="leftuser_imgoutsection">
-                                                <div class="jshadow_area">
-                                                    <img class="huimg_designs" src="assets/images/student.jpg">
-                                                </div>
-                                                <div class="newadd">
-                                                    <h1 class="studentimgdwnarea">
-                                                        Course:
-                                                        <span class="studentimgdwnarea1">Diploma Engineering</span>
-                                                    </h1>
-                                                    <h1 class="studentimgdwnarea">
-                                                        Semester:
-                                                        <span class="studentimgdwnarea1">1st Semester</span>
-                                                    </h1>
-                                                    <h1 class="studentimgdwnarea">
-                                                        Admission Date:
-                                                        <span class="studentimgdwnarea1">12/01/2024</span>
-                                                    </h1>
-                                                    <h1 class="studentimgdwnarea">
-                                                        Email No:
-                                                        <span class="studentimgdwnarea1">abcgmail.com</span>
-                                                    </h1>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <div class="ndiv">
-                                                <h2 class="heading">Fees</h2>
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <thead>
-                                                        <tr>
-                                                            <th scope="col">1</th>
-                                                            <th scope="col">2</th>
-                                                            <th scope="col">3</th>
-                                                            <th scope="col">4</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>Table1</td>
-                                                            <td>Table2</td>
-                                                            <td>Table3</td>
-                                                            <td>Table4</td>
+<!--                                <div class="panel" id="four-panel">-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-lg-3">-->
+<!--                                            <div class="leftuser_imgoutsection">-->
+<!--                                                <div class="jshadow_area">-->
+<!--                                                    <img class="huimg_designs" src="assets/images/student.jpg">-->
+<!--                                                </div>-->
+<!--                                                <div class="newadd">-->
+<!--                                                    <h1 class="studentimgdwnarea">-->
+<!--                                                        Course:-->
+<!--                                                        <span class="studentimgdwnarea1">Diploma Engineering</span>-->
+<!--                                                    </h1>-->
+<!--                                                    <h1 class="studentimgdwnarea">-->
+<!--                                                        Semester:-->
+<!--                                                        <span class="studentimgdwnarea1">1st Semester</span>-->
+<!--                                                    </h1>-->
+<!--                                                    <h1 class="studentimgdwnarea">-->
+<!--                                                        Admission Date:-->
+<!--                                                        <span class="studentimgdwnarea1">12/01/2024</span>-->
+<!--                                                    </h1>-->
+<!--                                                    <h1 class="studentimgdwnarea">-->
+<!--                                                        Email No:-->
+<!--                                                        <span class="studentimgdwnarea1">abcgmail.com</span>-->
+<!--                                                    </h1>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-9">-->
+<!--                                            <div class="ndiv">-->
+<!--                                                <h2 class="heading">Fees</h2>-->
+<!--                                                <div class="table-responsive">-->
+<!--                                                    <table class="table">-->
+<!--                                                        <thead>-->
+<!--                                                        <tr>-->
+<!--                                                            <th scope="col">1</th>-->
+<!--                                                            <th scope="col">2</th>-->
+<!--                                                            <th scope="col">3</th>-->
+<!--                                                            <th scope="col">4</th>-->
+<!--                                                        </tr>-->
+<!--                                                        </thead>-->
+<!--                                                        <tbody>-->
+<!--                                                        <tr>-->
+<!--                                                            <td>Table1</td>-->
+<!--                                                            <td>Table2</td>-->
+<!--                                                            <td>Table3</td>-->
+<!--                                                            <td>Table4</td>-->
 
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="panel" id="five-panel">
-                                    <div class="row">
-                                        <div class="col-lg-3">
-                                            <div class="leftuser_imgoutsection">
-                                                <div class="jshadow_area">
-                                                    <img class="huimg_designs" src="assets/images/student.jpg">
-                                                </div>
-                                                <div class="newadd">
-                                                    <h1 class="studentimgdwnarea">
-                                                        Course:
-                                                        <span class="studentimgdwnarea1">Diploma Engineering</span>
-                                                    </h1>
-                                                    <h1 class="studentimgdwnarea">
-                                                        Semester:
-                                                        <span class="studentimgdwnarea1">1st Semester</span>
-                                                    </h1>
-                                                    <h1 class="studentimgdwnarea">
-                                                        Admission Date:
-                                                        <span class="studentimgdwnarea1">12/01/2024</span>
-                                                    </h1>
-                                                    <h1 class="studentimgdwnarea">
-                                                        Email No:
-                                                        <span class="studentimgdwnarea1">abcgmail.com</span>
-                                                    </h1>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-9">
-                                            <div class="ndiv">
-                                                <h2 class="heading">Result</h2>
-                                                <div class="table-responsive">
-                                                    <table class="table">
-                                                        <thead>
-                                                        <tr>
-                                                            <th scope="col">1</th>
-                                                            <th scope="col">2</th>
-                                                            <th scope="col">3</th>
-                                                            <th scope="col">4</th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                        <tr>
-                                                            <td>Table1</td>
-                                                            <td>Table2</td>
-                                                            <td>Table3</td>
-                                                            <td>Table4</td>
-
-                                                        </tr>
-                                                        </tbody>
-                                                    </table>
+<!--                                                        </tr>-->
+<!--                                                        </tbody>-->
+<!--                                                    </table>-->
 
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="panel" id="five-panel">-->
+<!--                                    <div class="row">-->
+<!--                                        <div class="col-lg-3">-->
+<!--                                            <div class="leftuser_imgoutsection">-->
+<!--                                                <div class="jshadow_area">-->
+<!--                                                    <img class="huimg_designs" src="assets/images/student.jpg">-->
+<!--                                                </div>-->
+<!--                                                <div class="newadd">-->
+<!--                                                    <h1 class="studentimgdwnarea">-->
+<!--                                                        Course:-->
+<!--                                                        <span class="studentimgdwnarea1">Diploma Engineering</span>-->
+<!--                                                    </h1>-->
+<!--                                                    <h1 class="studentimgdwnarea">-->
+<!--                                                        Semester:-->
+<!--                                                        <span class="studentimgdwnarea1">1st Semester</span>-->
+<!--                                                    </h1>-->
+<!--                                                    <h1 class="studentimgdwnarea">-->
+<!--                                                        Admission Date:-->
+<!--                                                        <span class="studentimgdwnarea1">12/01/2024</span>-->
+<!--                                                    </h1>-->
+<!--                                                    <h1 class="studentimgdwnarea">-->
+<!--                                                        Email No:-->
+<!--                                                        <span class="studentimgdwnarea1">abcgmail.com</span>-->
+<!--                                                    </h1>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-9">-->
+<!--                                            <div class="ndiv">-->
+<!--                                                <h2 class="heading">Result</h2>-->
+<!--                                                <div class="table-responsive">-->
+<!--                                                    <table class="table">-->
+<!--                                                        <thead>-->
+<!--                                                        <tr>-->
+<!--                                                            <th scope="col">1</th>-->
+<!--                                                            <th scope="col">2</th>-->
+<!--                                                            <th scope="col">3</th>-->
+<!--                                                            <th scope="col">4</th>-->
+<!--                                                        </tr>-->
+<!--                                                        </thead>-->
+<!--                                                        <tbody>-->
+<!--                                                        <tr>-->
+<!--                                                            <td>Table1</td>-->
+<!--                                                            <td>Table2</td>-->
+<!--                                                            <td>Table3</td>-->
+<!--                                                            <td>Table4</td>-->
+
+<!--                                                        </tr>-->
+<!--                                                        </tbody>-->
+<!--                                                    </table>-->
+
+
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                             </div>
                         </div>
                     </div>

@@ -16,6 +16,7 @@ import { JobService } from 'src/app/services/job.service';
 })
 export class UserEditComponent implements OnInit {
   private BASE_API_URL = environment.BASE_API_URL;
+  public FILE_URL = environment.FILE_URL;
   studentCreationForm: FormGroup;
   educationQualificationForm: FormGroup;
   achievementForm: FormGroup;
