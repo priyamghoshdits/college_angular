@@ -20,16 +20,10 @@ import { PromotionComponent } from './promotion/promotion.component';
 import { BookPublicationComponent } from './book-publication/book-publication.component';
 import { ConsultancyComponent } from "./consultancy/consultancy.component";
 import { PgPhdGuideComponent } from './pg-phd-guide/pg-phd-guide.component';
-<<<<<<< HEAD
-import { ExaminerComponent } from "./examiner/examiner.component";
-import { AnswerScriptComponent } from "./answer-script/answer-script.component";
-import { SeminarWorkshopFacultyComponent } from "./seminar-workshop-faculty/seminar-workshop-faculty.component";
-=======
 import {ExaminerComponent} from "./examiner/examiner.component";
 import {AnswerScriptComponent} from "./answer-script/answer-script.component";
 import {SeminarWorkshopFacultyComponent} from "./seminar-workshop-faculty/seminar-workshop-faculty.component";
 import {PayslipComponent} from "./payslip/payslip.component";
->>>>>>> 585a2bf77dce1a95063f7c8414448124b8e1a631
 import { UniversitySynopsisComponent } from './university-synopsis/university-synopsis.component';
 import { StaffEducationComponent } from './staff-education/staff-education.component';
 import { StaffDegreeComponent } from './staff-degree/staff-degree.component';
