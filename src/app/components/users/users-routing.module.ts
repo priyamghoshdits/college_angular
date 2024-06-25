@@ -4,6 +4,7 @@ import { UsersProfileComponent } from './users-profile/users-profile.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserCardsComponent } from './user-cards/user-cards.component';
 import {StudentProfileComponent} from "./student-profile/student-profile.component";
+import {StaffProfileComponent} from "./staff-profile/staff-profile.component";
 
 const routes: Routes = [
   {
@@ -15,6 +16,14 @@ const routes: Routes = [
         data: {
           title: "Profile",
           breadcrumb: "Profile"
+        }
+      },
+      {
+        path: 'staff-profile',
+        component: StaffProfileComponent,
+        data: {
+          title: "Staff Profile",
+          breadcrumb: "Staff Profile"
         }
       },
       {
