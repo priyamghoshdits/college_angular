@@ -15,6 +15,7 @@ import { ApproveLeaveComponent } from "./approve-leave/approve-leave.component";
 import { PayrollTypesComponent } from "./payroll-types/payroll-types.component";
 import {PayslipComponent} from "./payslip/payslip.component";
 import {PromotionComponent} from "./promotion/promotion.component";
+import {DownloadPayslipComponent} from "./download-payslip/download-payslip.component";
 
 const routes: Routes = [
   {
@@ -112,6 +113,14 @@ const routes: Routes = [
     data: {
       title: "Payroll Types",
       breadcrumb: "Payroll Types"
+    }
+  },
+  {
+    path: 'download-payslip',
+    component: DownloadPayslipComponent,
+    data: {
+      title: "Download Payslip",
+      breadcrumb: "Download Payslip"
     }
   },
   {

@@ -1,1 +1,89 @@
-<p>download-payslip works!</p>
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Payslip</h5><span>Upload/Download Payslip</span>
+                        </div>
+                        <div class="card-body">
+                            <form class="theme-form" [formGroup]="uploadCertificateForm">
+                                <div  class="row">
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Course</label>
+                                        <select style="width: 100%" formControlName="course_id" class="form-select">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="uploadCertificateForm.controls['course_id'].errors?.['required'] && uploadCertificateForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Month</label>
+                                        <select style="width: 100%" formControlName="month" class="form-select" required>
+                                            <option value="null"> Select </option>
+                                            <option value="01"> January </option>
+                                            <option value="02"> February </option>
+                                            <option value="03"> March </option>
+                                            <option value="04"> April </option>
+                                            <option value="05"> May </option>
+                                            <option value="06"> June </option>
+                                            <option value="07"> July </option>
+                                            <option value="08"> August </option>
+                                            <option value="09"> September </option>
+                                            <option value="10"> October </option>
+                                            <option value="11"> November </option>
+                                            <option value="12"> December </option>
+                                        </select>
+                                        <div *ngIf="uploadCertificateForm.controls['month'].errors?.['required'] && uploadCertificateForm.controls['month'].touched " class="text text-danger mt-1">Month required</div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="searchStaff()">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <hr>
+                            <h5 *ngIf="staffList.length > 0">Staff List</h5>
+                            <div class="row" *ngIf="staffList.length > 0">
+                                <div class="row">
+                                    <div class="col-3"></div>
+                                    <div class="col-6">
+                                        <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                    </div>
+                                    <div class="col-3"></div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table" style="text-align: center">
+                                        <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr *ngFor="let record of staffList| customFilter:searchItem ;let indexOfElement=index">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{record.staff_name}}</td>
+                                            <td>
+<!--                                                <a (click)="uploader.click()" style="cursor: pointer"><mat-icon>cloud_upload</mat-icon></a>-->
+                                                <a *ngIf="record.month != null" style="cursor: pointer" href="{{FILE_URL}}/manual_payslips/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a>
+<!--                                                <input [hidden]="true" class="form-control" #uploader type="file" (change)="uploadPayslip($event,record)">-->
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

@@ -1,6 +1,6 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
-    <div class="edit-profile">
+    <div class="edit-profile" *ngIf="user">
         <div class="row">
 
             <div class="col-lg-12">
@@ -34,7 +34,7 @@
                                         <div class="col-lg-3">
                                             <div class="leftuser_imgoutsection">
                                                 <div class="jshadow_area">
-                                                    <img class="huimg_designs" src="assets/images/student.jpg">
+                                                    <img class="huimg_designs" src="{{FILE_URL}}/user_image/{{studentCreationForm.value.image}}" onerror="this.src='assets/images/user/blank_default.jpg'">
                                                 </div>
                                                 <h1 class="studentimgdwnarea">
                                                     Course:
@@ -688,6 +688,10 @@
                 </div>
 
             </div>
+        </div>
+
+        <div class="row" *ngIf="user.user_type_id != 3">
+            sdfdsf
         </div>
 
 
