@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MemberService } from 'src/app/services/member.service';
+import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
 import { StaffDegreeService } from 'src/app/services/staff-degree.service';
 import { StaffEducationService } from 'src/app/services/staff-education.service';
 import { StudentService } from 'src/app/services/student.service';
@@ -47,7 +48,10 @@ export class StaffEducationComponent {
   degreeList: any[] = [];
   searchForm: FormGroup;
 
-  constructor(private memberService: MemberService, private StaffEducationService: StaffEducationService, private StaffDegreeService: StaffDegreeService) {
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+
+  constructor(private memberService: MemberService, private StaffEducationService: StaffEducationService, private StaffDegreeService: StaffDegreeService, private roleAndPermissionService: RolesAndPermissionService) {
 
     this.searchForm = new FormGroup({
       staff_id: new FormControl(null),
@@ -75,6 +79,17 @@ export class StaffEducationComponent {
       this.degreeList = response;
     });
     this.degreeList = this.StaffDegreeService.getDegreeList();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'STAFF EDUCATION').permission;
+    });
+
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+
+    if (this.rolesAndPermission.length > 0) {
+      this.permission = this.rolesAndPermission.find(x => x.name == 'STAFF EDUCATION').permission;
+    }
 
   }
 

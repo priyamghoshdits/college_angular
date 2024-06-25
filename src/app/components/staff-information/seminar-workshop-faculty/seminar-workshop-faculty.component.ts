@@ -7,6 +7,7 @@ import {MemberService} from "../../../services/member.service";
 import Swal from "sweetalert2";
 import {BookPublicationService} from "../../../services/book-publication.service";
 import {SeminarWorkshopFacultyService} from "../../../services/seminar-workshop-faculty.service";
+import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
 
 @Component({
     selector: 'app-seminar-workshop-faculty',
@@ -32,13 +33,15 @@ export class SeminarWorkshopFacultyComponent {
     totalArray: any[] = [1];
     seminarWorkshopArray: any[] = [];
     seminarWorkshopList: any[] = [];
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
 
     memberList: any[];
     isUpdatable: boolean = false;
 
     searchForm: FormGroup;
 
-    constructor(private memberService: MemberService,private seminarWorkshopFacultyService: SeminarWorkshopFacultyService) {
+    constructor(private memberService: MemberService,private seminarWorkshopFacultyService: SeminarWorkshopFacultyService, private roleAndPermissionService: RolesAndPermissionService) {
         this.searchForm = new FormGroup({
             staff_id: new FormControl(null),
             from_date: new FormControl(null, [Validators.required]),
@@ -62,6 +65,17 @@ export class SeminarWorkshopFacultyComponent {
                 'achievement': null,
             }
         ]
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'SAMINER WORKSHOP').permission;
+        });
+
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+
+        if (this.rolesAndPermission.length > 0) {
+            this.permission = this.rolesAndPermission.find(x => x.name == 'SAMINER WORKSHOP').permission;
+        }
     }
 
     addField() {
