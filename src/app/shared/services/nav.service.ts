@@ -134,6 +134,7 @@ export class NavService {
 				{ path: '/human-resource/add-staff', title: 'Staff', type: 'link' },
 				{ path: '/human-resource/staff-attendance', title: 'Staff Attendance', type: 'link' }, // need to be added
 				{ path: '/human-resource/payslip', title: 'Payslip', type: 'link' },
+				{ path: '/human-resource/download-payslip', title: 'Download Payslip', type: 'link' },
 				{ path: '/human-resource/leave-type', title: 'Leave Type', type: 'link' },
 				{ path: '/human-resource/allocate-leave', title: 'Allocate Leave', type: 'link' },
 				{ path: '/human-resource/promotion', title: 'Staff Promotion', type: 'link' },
