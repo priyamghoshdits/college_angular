@@ -27,98 +27,102 @@
                                         <div class="col-md-4 mb-3">
                                             <label>Select Course</label>
                                             <select (change)="getSemester()" class="form-select"
-                                                    formControlName="course_id"
-                                                    required style="width: 100%">
+                                                formControlName="course_id" required style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of courseList" [value]="data.id">
                                                     {{data.course_name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="educationQualificationForm.controls['course_id'].errors?.['required'] && educationQualificationForm.controls['course_id'].touched "
-                                                 class="text text-danger mt-1">Course required
+                                                class="text text-danger mt-1">Course required
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Select Semester</label>
                                             <select (change)="getStudent()" class="form-select"
-                                                    formControlName="semester_id" required style="width: 100%">
+                                                formControlName="semester_id" required style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                                     {{data.name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="educationQualificationForm.controls['semester_id'].errors?.['required'] && educationQualificationForm.controls['semester_id'].touched "
-                                                 class="text text-danger mt-1">Semester required
+                                                class="text text-danger mt-1">Semester required
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Select Student</label>
                                             <select class="form-select" formControlName="student_id" required
-                                                    style="width: 100%">
+                                                style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of filteredStudentList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="educationQualificationForm.controls['student_id'].errors?.['required'] && educationQualificationForm.controls['student_id'].touched "
-                                                 class="text text-danger mt-1">Student required
+                                                class="text text-danger mt-1">Student required
                                             </div>
                                         </div>
                                     </div>
                                     <hr>
                                     <h4 class="mt-2 mb-4 text-center">Class 10th/M.P./It's Equivalent</h4>
                                     <div class="row">
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Board/Counsil</label>
                                             <input class="form-control" formControlName="board_ten"
-                                                   placeholder="Board/counsil"
-                                                   type="text">
+                                                placeholder="Board/counsil" type="text">
                                             <div *ngIf="educationQualificationForm.controls['board_ten'].errors?.['required'] && educationQualificationForm.controls['board_ten'].touched "
-                                                 class="text text-danger mt-1">Board required
+                                                class="text text-danger mt-1">Board required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Marks Obtained</label>
                                             <input class="form-control" formControlName="marks_obtained_ten"
-                                                   placeholder="Marks Obtained"
-                                                   type="text">
+                                                placeholder="Marks Obtained" type="text">
                                             <div *ngIf="educationQualificationForm.controls['marks_obtained_ten'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_ten'].touched "
-                                                 class="text text-danger mt-1">Marks Obtained required
+                                                class="text text-danger mt-1">Marks Obtained required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Percentage</label>
                                             <input class="form-control" formControlName="percentage_ten"
-                                                   placeholder="Percentage"
-                                                   type="text">
+                                                placeholder="Percentage" type="text">
                                             <div *ngIf="educationQualificationForm.controls['percentage_ten'].errors?.['required'] && educationQualificationForm.controls['percentage_ten'].touched "
-                                                 class="text text-danger mt-1">Percentage required
+                                                class="text text-danger mt-1">Percentage required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Division/Class</label>
                                             <input class="form-control" formControlName="division_ten"
-                                                   placeholder="Division/Class"
-                                                   type="text">
+                                                placeholder="Division/Class" type="text">
                                             <div *ngIf="educationQualificationForm.controls['division_ten'].errors?.['required'] && educationQualificationForm.controls['division_ten'].touched "
-                                                 class="text text-danger mt-1">Division/Class required
+                                                class="text text-danger mt-1">Division/Class required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
                                             <label>Main Subject</label>
                                             <input class="form-control" formControlName="main_subject_ten"
-                                                   placeholder="Main Subject"
-                                                   type="text">
+                                                placeholder="Main Subject" type="text">
                                             <div *ngIf="educationQualificationForm.controls['main_subject_ten'].errors?.['required'] && educationQualificationForm.controls['main_subject_ten'].touched "
-                                                 class="text text-danger mt-1">Main Subject required
+                                                class="text text-danger mt-1">Main Subject required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label>Year Of Passing</label>
                                             <input class="form-control" formControlName="year_of_passing_ten"
-                                                   placeholder="Year of passing" type="text">
+                                                placeholder="Year of passing" type="text">
                                             <div *ngIf="educationQualificationForm.controls['year_of_passing_ten'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_ten'].touched "
-                                                 class="text text-danger mt-1">Year of passing required
+                                                class="text text-danger mt-1">Year of passing required
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Document</label>
+                                            <input class="form-control" formControlName="file_ten" type="file"
+                                                (change)="uploadFilehelper($event, '10')">
+                                            <div *ngIf="educationQualificationForm.controls['file_ten'].errors?.['required'] && educationQualificationForm.controls['file_ten'].touched "
+                                                class="text text-danger mt-1">Document required
                                             </div>
                                         </div>
                                     </div>
@@ -126,56 +130,62 @@
                                     <hr>
                                     <h4 class="mt-2 mb-4 text-center">10+2/H.S./Equivalent</h4>
                                     <div class="row">
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Board/Counsil</label>
                                             <input class="form-control" formControlName="board_twelve"
-                                                   placeholder="Board/counsil"
-                                                   type="text">
+                                                placeholder="Board/counsil" type="text">
                                             <div *ngIf="educationQualificationForm.controls['board_twelve'].errors?.['required'] && educationQualificationForm.controls['board_twelve'].touched "
-                                                 class="text text-danger mt-1">Board required
+                                                class="text text-danger mt-1">Board required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Marks Obtained</label>
                                             <input class="form-control" formControlName="marks_obtained_twelve"
-                                                   placeholder="Marks Obtained" type="text">
+                                                placeholder="Marks Obtained" type="text">
                                             <div *ngIf="educationQualificationForm.controls['marks_obtained_twelve'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_twelve'].touched "
-                                                 class="text text-danger mt-1">Marks Obtained required
+                                                class="text text-danger mt-1">Marks Obtained required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Percentage</label>
                                             <input class="form-control" formControlName="percentage_twelve"
-                                                   placeholder="Percentage"
-                                                   type="text">
+                                                placeholder="Percentage" type="text">
                                             <div *ngIf="educationQualificationForm.controls['percentage_twelve'].errors?.['required'] && educationQualificationForm.controls['percentage_twelve'].touched "
-                                                 class="text text-danger mt-1">Percentage required
+                                                class="text text-danger mt-1">Percentage required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Division/Class</label>
                                             <input class="form-control" formControlName="division_twelve"
-                                                   placeholder="Division/Class"
-                                                   type="text">
+                                                placeholder="Division/Class" type="text">
                                             <div *ngIf="educationQualificationForm.controls['division_twelve'].errors?.['required'] && educationQualificationForm.controls['division_twelve'].touched "
-                                                 class="text text-danger mt-1">Division/Class required
+                                                class="text text-danger mt-1">Division/Class required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
                                             <label>Main Subject</label>
                                             <input class="form-control" formControlName="main_subject_twelve"
-                                                   placeholder="Main Subject" type="text">
+                                                placeholder="Main Subject" type="text">
                                             <div *ngIf="educationQualificationForm.controls['main_subject_twelve'].errors?.['required'] && educationQualificationForm.controls['main_subject_twelve'].touched "
-                                                 class="text text-danger mt-1">Main Subject required
+                                                class="text text-danger mt-1">Main Subject required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label>Year Of Passing</label>
                                             <input class="form-control" formControlName="year_of_passing_twelve"
-                                                   placeholder="Year of passing"
-                                                   type="text">
+                                                placeholder="Year of passing" type="text">
                                             <div *ngIf="educationQualificationForm.controls['year_of_passing_twelve'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_twelve'].touched "
-                                                 class="text text-danger mt-1">Year of passing required
+                                                class="text text-danger mt-1">Year of passing required
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Document</label>
+                                            <input class="form-control" formControlName="file_twelve" type="file"
+                                                (change)="uploadFilehelper($event, '12')">
+                                            <div *ngIf="educationQualificationForm.controls['file_twelve'].errors?.['required'] && educationQualificationForm.controls['file_twelve'].touched "
+                                                class="text text-danger mt-1">Document required
                                             </div>
                                         </div>
                                     </div>
@@ -184,55 +194,62 @@
                                     <hr>
                                     <h4 class="mt-2 mb-4 text-center">Graduation </h4>
                                     <div class="row">
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Board/Counsil</label>
                                             <input class="form-control" formControlName="board_graduation"
-                                                   placeholder="Board/counsil"
-                                                   type="text">
+                                                placeholder="Board/counsil" type="text">
                                             <div *ngIf="educationQualificationForm.controls['board_graduation'].errors?.['required'] && educationQualificationForm.controls['board_graduation'].touched "
-                                                 class="text text-danger mt-1">Board required
+                                                class="text text-danger mt-1">Board required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Marks Obtained</label>
                                             <input class="form-control" formControlName="marks_obtained_graduation"
-                                                   placeholder="Marks Obtained"
-                                                   type="text">
+                                                placeholder="Marks Obtained" type="text">
                                             <div *ngIf="educationQualificationForm.controls['marks_obtained_graduation'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_graduation'].touched "
-                                                 class="text text-danger mt-1">Marks Obtained required
+                                                class="text text-danger mt-1">Marks Obtained required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Percentage</label>
                                             <input class="form-control" formControlName="percentage_graduation"
-                                                   placeholder="Percentage" type="text">
+                                                placeholder="Percentage" type="text">
                                             <div *ngIf="educationQualificationForm.controls['percentage_graduation'].errors?.['required'] && educationQualificationForm.controls['percentage_graduation'].touched "
-                                                 class="text text-danger mt-1">Percentage required
+                                                class="text text-danger mt-1">Percentage required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Division/Class</label>
                                             <input class="form-control" formControlName="division_graduation"
-                                                   placeholder="Division/Class" type="text">
+                                                placeholder="Division/Class" type="text">
                                             <div *ngIf="educationQualificationForm.controls['division_graduation'].errors?.['required'] && educationQualificationForm.controls['division_graduation'].touched "
-                                                 class="text text-danger mt-1">Division/Class required
+                                                class="text text-danger mt-1">Division/Class required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
                                             <label>Main Subject</label>
                                             <input class="form-control" formControlName="main_subject_graduation"
-                                                   placeholder="Main Subject" type="text">
+                                                placeholder="Main Subject" type="text">
                                             <div *ngIf="educationQualificationForm.controls['main_subject_graduation'].errors?.['required'] && educationQualificationForm.controls['main_subject_graduation'].touched "
-                                                 class="text text-danger mt-1">Main Subject required
+                                                class="text text-danger mt-1">Main Subject required
                                             </div>
                                         </div>
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label>Year Of Passing</label>
                                             <input class="form-control" formControlName="year_of_passing_graduation"
-                                                   placeholder="Year of passing"
-                                                   type="text">
+                                                placeholder="Year of passing" type="text">
                                             <div *ngIf="educationQualificationForm.controls['year_of_passing_graduation'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_graduation'].touched "
-                                                 class="text text-danger mt-1">Year of passing required
+                                                class="text text-danger mt-1">Year of passing required
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Document</label>
+                                            <input class="form-control" formControlName="file_ten" type="file"
+                                                (change)="uploadFilehelper($event, 'graduation')">
+                                            <div *ngIf="educationQualificationForm.controls['file_ten'].errors?.['required'] && educationQualificationForm.controls['file_ten'].touched "
+                                                class="text text-danger mt-1">Document required
                                             </div>
                                         </div>
                                     </div>
@@ -244,46 +261,45 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Select Course</label>
                                             <select (change)="getSemester()" class="form-select"
-                                                    formControlName="course_id"
-                                                    required style="width: 100%">
+                                                formControlName="course_id" required style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of courseList" [value]="data.id">
                                                     {{data.course_name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="searchEducationQualificationForm.controls['course_id'].errors?.['required'] && searchEducationQualificationForm.controls['course_id'].touched "
-                                                 class="text text-danger mt-1">Course required
+                                                class="text text-danger mt-1">Course required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Semester</label>
                                             <select (change)="getStudentForSearch()" class="form-select"
-                                                    formControlName="semester_id" required style="width: 100%">
+                                                formControlName="semester_id" required style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                                     {{data.name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="searchEducationQualificationForm.controls['semester_id'].errors?.['required'] && searchEducationQualificationForm.controls['semester_id'].touched "
-                                                 class="text text-danger mt-1">Semester required
+                                                class="text text-danger mt-1">Semester required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Student</label>
                                             <select class="form-select" formControlName="student_id" required
-                                                    style="width: 100%">
+                                                style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of filteredStudentList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="searchEducationQualificationForm.controls['student_id'].errors?.['required'] && searchEducationQualificationForm.controls['student_id'].touched "
-                                                 class="text text-danger mt-1">Student required
+                                                class="text text-danger mt-1">Student required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <button (click)="searchEducationQualification()"
-                                                    class="btn btn-primary me-1" style="margin-top: 30px">Search
+                                                class="btn btn-primary me-1" style="margin-top: 30px">Search
                                             </button>
                                         </div>
                                     </div>
@@ -292,13 +308,13 @@
                         </div>
                         <div *ngIf="active == 1" class="card-footer">
                             <button (click)="saveEducationQualification()" *ngIf="permission[0].permission === 1"
-                                    [hidden]="isUpdatable" class="btn btn-primary me-1">Submit
+                                [hidden]="isUpdatable" class="btn btn-primary me-1">Submit
                             </button>
                             <button (click)="updateEducationQualification()" *ngIf="permission[1].permission === 1"
-                                    [hidden]="isUpdatable == false" class="btn btn-primary me-1">Update
+                                [hidden]="isUpdatable == false" class="btn btn-primary me-1">Update
                             </button>
                             <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
-                                    class="btn btn-primary me-1">Cancel
+                                class="btn btn-primary me-1">Cancel
                             </button>
                         </div>
                     </div>
@@ -316,8 +332,7 @@
                                         <h5>Class 10th/M.P./It's Equivalent</h5>
                                     </div>
                                     <div class="col-2">
-                                        <button (click)="editEducationQualification()"
-                                                class="btn btn-primary me-1">Edit
+                                        <button (click)="editEducationQualification()" class="btn btn-primary me-1">Edit
                                         </button>
                                     </div>
                                 </div>
@@ -325,24 +340,24 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
-                                    <tr>
-                                        <th scope="col">Board/Council/Others</th>
-                                        <th scope="col">Marks Obtain</th>
-                                        <th scope="col">Percentage</th>
-                                        <th scope="col">Division/Class</th>
-                                        <th scope="col">Main Subjects</th>
-                                        <th scope="col">Year of Passing</th>
-                                    </tr>
+                                        <tr>
+                                            <th scope="col">Board/Council/Others</th>
+                                            <th scope="col">Marks Obtain</th>
+                                            <th scope="col">Percentage</th>
+                                            <th scope="col">Division/Class</th>
+                                            <th scope="col">Main Subjects</th>
+                                            <th scope="col">Year of Passing</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>{{educationQualificationList.board_ten}}</td>
-                                        <td>{{educationQualificationList.marks_obtained_ten}}</td>
-                                        <td>{{educationQualificationList.percentage_ten}}</td>
-                                        <td>{{educationQualificationList.division_ten}}</td>
-                                        <td>{{educationQualificationList.main_subject_ten}}</td>
-                                        <td>{{educationQualificationList.year_of_passing_ten}}</td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{educationQualificationList.board_ten}}</td>
+                                            <td>{{educationQualificationList.marks_obtained_ten}}</td>
+                                            <td>{{educationQualificationList.percentage_ten}}</td>
+                                            <td>{{educationQualificationList.division_ten}}</td>
+                                            <td>{{educationQualificationList.main_subject_ten}}</td>
+                                            <td>{{educationQualificationList.year_of_passing_ten}}</td>
+                                        </tr>
                                     </tbody>
                                 </table>
 
@@ -357,24 +372,24 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">Board/Council/Others</th>
-                                            <th scope="col">Marks Obtain</th>
-                                            <th scope="col">Percentage</th>
-                                            <th scope="col">Division/Class</th>
-                                            <th scope="col">Main Subjects</th>
-                                            <th scope="col">Year of Passing</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">Board/Council/Others</th>
+                                                <th scope="col">Marks Obtain</th>
+                                                <th scope="col">Percentage</th>
+                                                <th scope="col">Division/Class</th>
+                                                <th scope="col">Main Subjects</th>
+                                                <th scope="col">Year of Passing</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
-                                            <td>{{educationQualificationList.board_twelve}}</td>
-                                            <td>{{educationQualificationList.marks_obtained_twelve}}</td>
-                                            <td>{{educationQualificationList.percentage_twelve}}</td>
-                                            <td>{{educationQualificationList.division_twelve}}</td>
-                                            <td>{{educationQualificationList.main_subject_twelve}}</td>
-                                            <td>{{educationQualificationList.year_of_passing_twelve}}</td>
-                                        </tr>
+                                            <tr>
+                                                <td>{{educationQualificationList.board_twelve}}</td>
+                                                <td>{{educationQualificationList.marks_obtained_twelve}}</td>
+                                                <td>{{educationQualificationList.percentage_twelve}}</td>
+                                                <td>{{educationQualificationList.division_twelve}}</td>
+                                                <td>{{educationQualificationList.main_subject_twelve}}</td>
+                                                <td>{{educationQualificationList.year_of_passing_twelve}}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
 
@@ -389,24 +404,24 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
-                                            <tr>
-                                                <th scope="col">Board/Council/Others</th>
-                                                <th scope="col">Marks Obtain</th>
-                                                <th scope="col">Percentage</th>
-                                                <th scope="col">Division/Class</th>
-                                                <th scope="col">Main Subjects</th>
-                                                <th scope="col">Year of Passing</th>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">Board/Council/Others</th>
+                                                    <th scope="col">Marks Obtain</th>
+                                                    <th scope="col">Percentage</th>
+                                                    <th scope="col">Division/Class</th>
+                                                    <th scope="col">Main Subjects</th>
+                                                    <th scope="col">Year of Passing</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td>{{educationQualificationList.board_graduation}}</td>
-                                                <td>{{educationQualificationList.marks_obtained_graduation}}</td>
-                                                <td>{{educationQualificationList.percentage_graduation}}</td>
-                                                <td>{{educationQualificationList.division_graduation}}</td>
-                                                <td>{{educationQualificationList.main_subject_graduation}}</td>
-                                                <td>{{educationQualificationList.year_of_passing_graduation}}</td>
-                                            </tr>
+                                                <tr>
+                                                    <td>{{educationQualificationList.board_graduation}}</td>
+                                                    <td>{{educationQualificationList.marks_obtained_graduation}}</td>
+                                                    <td>{{educationQualificationList.percentage_graduation}}</td>
+                                                    <td>{{educationQualificationList.division_graduation}}</td>
+                                                    <td>{{educationQualificationList.main_subject_graduation}}</td>
+                                                    <td>{{educationQualificationList.year_of_passing_graduation}}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                         <!--                                        <pagination-controls (pageChange)="p = $event"></pagination-controls>-->
