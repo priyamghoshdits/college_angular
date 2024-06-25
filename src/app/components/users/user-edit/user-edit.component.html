@@ -730,7 +730,7 @@
                                         </div>
                                         <div class="col-lg-9">
                                             <div class="rightuser_udetailsoutsection">
-                                                <form>
+                                                <form [formGroup]="staffUpdateForm">
                                                     <div class="row">
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
@@ -918,7 +918,7 @@
                                                   
                                                 </form>
                                                 <div class="card-footer text-end">
-                                                    <button class="btn btn-primary" type="submit">Update Profile</button>
+                                                    <button class="btn btn-primary" (click)="updateStaff()" type="submit">Update Profile</button>
                                                 </div>
                                             </div>
                                         </div>

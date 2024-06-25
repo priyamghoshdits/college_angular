@@ -197,9 +197,14 @@ export class UserEditComponent implements OnInit {
                 }else{
                     this.staffDetails = response.data;
                     this.staffUpdateForm.patchValue(this.staffDetails);
+                    console.log(this.staffUpdateForm.value);
                 }
             }
         });
+    }
+
+    updateStaff(){
+        console.log(this.staffUpdateForm.value);
     }
 
     updateProfile() {
