@@ -14,6 +14,7 @@ import { PayrollComponent } from "./payroll/payroll.component";
 import { ApproveLeaveComponent } from "./approve-leave/approve-leave.component";
 import { PayrollTypesComponent } from "./payroll-types/payroll-types.component";
 import {PayslipComponent} from "./payslip/payslip.component";
+import {PromotionComponent} from "./promotion/promotion.component";
 
 const routes: Routes = [
   {
@@ -103,6 +104,22 @@ const routes: Routes = [
     data: {
       title: "Approve Leave",
       breadcrumb: "Approve Leave"
+    }
+  },
+  {
+    path: 'payroll-types',
+    component: PayrollTypesComponent,
+    data: {
+      title: "Payroll Types",
+      breadcrumb: "Payroll Types"
+    }
+  },
+  {
+    path: 'promotion',
+    component: PromotionComponent,
+    data: {
+      title: "Promotion",
+      breadcrumb: "Promotion"
     }
   },
   {

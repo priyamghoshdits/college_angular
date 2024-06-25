@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import {ConsultancyComponent} from "./consultancy/consultancy.component";
 import {JournalPublicationComponent} from "./journal-publication/journal-publication.component";
 import {StaffExperienceComponent} from "./staff-experience/staff-experience.component";
-import {PromotionComponent} from "./promotion/promotion.component";
 import {BookPublicationComponent} from "./book-publication/book-publication.component";
 import {UniversitySynopsisComponent} from "./university-synopsis/university-synopsis.component";
 import {StaffDegreeComponent} from "./staff-degree/staff-degree.component";
@@ -37,14 +36,6 @@ const routes: Routes = [
     data: {
       title: "Staff Experience",
       breadcrumb: "Staff Experience"
-    }
-  },
-  {
-    path: 'promotion',
-    component: PromotionComponent,
-    data: {
-      title: "Promotion",
-      breadcrumb: "Promotion"
     }
   },
   {
