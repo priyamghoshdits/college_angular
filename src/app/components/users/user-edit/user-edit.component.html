@@ -1,7 +1,7 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
     <div class="edit-profile" *ngIf="user">
-        <div class="row">
+        <div class="row" *ngIf="user.user_type_id == 3">
 
             <div class="col-lg-12">
                 <div class="card">
@@ -691,90 +691,495 @@
         </div>
 
         <div class="row" *ngIf="user.user_type_id != 3">
-            sdfdsf
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header"></div>
+                    <div class="card-body">
+                        <div class="warpper">
+                            <input checked class="radio" id="one" name="group" type="radio">
+                            <input class="radio" id="two" name="group" type="radio">
+                            <input class="radio" id="three" name="group" type="radio">
+                            <input class="radio" id="four" name="group" type="radio">
+                            <input class="radio" id="five" name="group" type="radio">
+
+                            <div class="tabs">
+                                <label class="tab" for="one" id="one-tab">Profile</label>
+                                <label class="tab" for="two" id="two-tab">Educational Qualification</label>
+                                <label class="tab" for="three" id="three-tab">Book Pulication</label>
+                                <label class="tab" for="four" id="four-tab">Experience</label>
+                                <label class="tab" for="five" id="five-tab">Journal Publication</label>
+                              
+                            </div>
+                            <div class="panels">
+                                <div class="panel" id="one-panel">
+                                    <div class="row">
+                                        <div class="col-lg-3">
+                                            <div class="leftuser_imgoutsection">
+                                                <div class="jshadow_area">
+                                                    <img class="huimg_designs" src="{{FILE_URL}}/user_image/{{studentCreationForm.value.image}}" onerror="this.src='assets/images/user/blank_default.jpg'">
+                                                </div>
+                                                <h1 class="studentimgdwnarea">
+                                                  Staff ID:
+                                                    <span class="studentimgdwnarea1"></span>
+                                                </h1>
+                                                <h1 class="studentimgdwnarea">
+                                                Staff Name:
+                                                    <span class="studentimgdwnarea1"></span>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="rightuser_udetailsoutsection">
+                                                <form>
+                                                    <div class="row">
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Staff Id</label>
+                                                                <input class="form-control" name="staff_id" placeholder="staff_id" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">First Name</label>
+                                                                <input class="form-control" name="first_name" placeholder="first_name" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Middle Name</label>
+                                                                <input class="form-control" name="middle_name" placeholder="Middle Name" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Last Name</label>
+                                                                <input class="form-control" name="last_name" placeholder="Last Name" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Gender</label>
+                                                            <select class="form-select" name="gender" style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="Male">Male</option>
+                                                                <option value="Female">Female</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Date Of Birth</label>
+                                                            <input class="form-control" name="dob" placeholder="Date Of Birth" type="date">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Birth Certificate</label>
+                                                            <input class="form-control" type="file">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Date Of Joining</label>
+                                                            <input class="form-control" name="date_of_joining" placeholder="Date Of Joining" type="date">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Upload Joining Letter</label>
+                                                            <input class="form-control" type="file">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Phone Number</label>
+                                                            <input class="form-control" name="mobile_no" placeholder="Phone Number" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Emergency Contact Number</label>
+                                                                <input class="form-control" name="emergency_phone_number" placeholder="Phone Number" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Marital Status</label>
+                                                            <select class="form-select" name="marital_status" style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="Single">Single</option>
+                                                                <option value="Married">Married</option>
+                                                                <option value="Widowed">Widowed</option>
+                                                                <option value="Separated">Separated</option>
+                                                                <option value="Not Specified">Not Specified</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Work Experience</label>
+                                                                <input class="form-control" name="work_experience" placeholder="Work Experience" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Qualification</label>
+                                                                <input class="form-control" name="qualification" placeholder="Qualification" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Upload Image</label>
+                                                            <input class="form-control" type="file">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Blood Group</label>
+                                                            <select class="form-select" name="blood_group" style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="A+">A+</option>
+                                                                <option value="A-">A-</option>
+                                                                <option value="B+">B+</option>
+                                                                <option value="B-">B-</option>
+                                                                <option value="AB+">AB+</option>
+                                                                <option value="AB-">AB-</option>
+                                                                <option value="O+">O+</option>
+                                                                <option value="O-">O-</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Update Lab Report</label>
+                                                            <input class="form-control" type="file">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Religion</label>
+                                                            <select class="form-select" name="religion" style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="Hinduism">Hinduism</option>
+                                                                <option value="Buddhism">Buddhism</option>
+                                                                <option value="Christianity">Christianity</option>
+                                                                <option value="Confucianism">Confucianism</option>
+                                                                <option value="Islam">Islam</option>
+                                                                <option value="Jainism">Jainism</option>
+                                                                <option value="Judaism">Judaism</option>
+                                                                <option value="Shinto">Shinto</option>
+                                                                <option value="Sikhism">Sikhism</option>
+                                                                <option value="Taoism">Taoism</option>
+                                                                <option value="Zoroastrianism">Zoroastrianism</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>User Type</label>
+                                                            <select class="form-select" name="user_type" style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="Super Admin">Super Admin</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Email address (Login Email)</label>
+                                                            <input class="form-control" type="email" name="email" placeholder="name@example.com">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Caste</label>
+                                                            <select class="form-select" name="caste" style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                                <option value="General">General</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">User Caste Certificate</label>
+                                                            <input class="form-control" type="file">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Department</label>
+                                                            <select class="form-select" name="department" style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Select Franchise</label>
+                                                            <select class="form-select" name="franchise" style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Current Address</label>
+                                                            <input class="form-control" name="current_address" placeholder="Current Address" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Permanent Address</label>
+                                                            <input class="form-control" name="permanent_address" placeholder="Permanent Address" type="text">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Upload Aadhar</label>
+                                                            <input class="form-control" type="file">
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label>Designation</label>
+                                                            <select class="form-select" name="designation" style="width: 100%">
+                                                                <option value="null">Select</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Pan Number</label>
+                                                                <input class="form-control" name="pan_number" placeholder="Pan Number" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4 col-md-4">
+                                                            <label class="form-label">Upload Pan</label>
+                                                            <input class="form-control" type="file">
+                                                        </div>
+                                                    </div>
+                                                  
+                                                </form>
+                                                <div class="card-footer text-end">
+                                                    <button class="btn btn-primary" type="submit">Update Profile</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <h3>Bank Account Details</h3>
+                                        <hr>
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Bank Account Number</label>
+                                                <input class="form-control" name="" placeholder="" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Bank Name</label>
+                                                <input class="form-control" name="" placeholder="" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">IFSC Code</label>
+                                                <input class="form-control" name="" placeholder="" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3 col-md-3">
+                                            <div class="form-group">
+                                                <label class="form-label">Bank Branch name</label>
+                                                <input class="form-control" name="" placeholder="" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel" id="two-panel">
+                                    <h3>Education Qualification</h3>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Staff Name</th>
+                                                <th scope="col">Degree</th>
+                                                <th scope="col">Specialization</th>
+                                                <th scope="col">University</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Percentage</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                                <div class="panel" id="three-panel">
+                                    <h3>Book Qualification</h3>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Staff Name</th>
+                                                <th scope="col">Degree</th>
+                                                <th scope="col">Specialization</th>
+                                                <th scope="col">University</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Percentage</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                                <div class="panel" id="four-panel">
+                                    <h3>Experience</h3>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Staff Name</th>
+                                                <th scope="col">Degree</th>
+                                                <th scope="col">Specialization</th>
+                                                <th scope="col">University</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Percentage</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                </div> 
+                                <div class="panel" id="five-panel">
+                                    <h3>Journal Publication</h3>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Staff Name</th>
+                                                <th scope="col">Degree</th>
+                                                <th scope="col">Specialization</th>
+                                                <th scope="col">University</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Percentage</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
 
-        <!--      <div class="col-md-12">-->
-        <!--        <div class="card">-->
-        <!--          <div class="card-header">-->
-        <!--            <h4 class="card-title mb-0">Add projects And Upload</h4>-->
-        <!--            <div class="card-options"><a class="card-options-collapse" [routerLink]="[]" data-bs-toggle="card-collapse"><i-->
-        <!--                  class="fe fe-chevron-up"></i></a><a class="card-options-remove" [routerLink]="[]"-->
-        <!--                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>-->
-        <!--          </div>-->
-        <!--          <div class="table-responsive card-body">-->
-        <!--            <table class="table card-table table-vcenter text-nowrap">-->
-        <!--              <thead>-->
-        <!--                <tr>-->
-        <!--                  <th>Project Name</th>-->
-        <!--                  <th>Date</th>-->
-        <!--                  <th>Status</th>-->
-        <!--                  <th>Price</th>-->
-        <!--                  <th></th>-->
-        <!--                </tr>-->
-        <!--              </thead>-->
-        <!--              <tbody>-->
-        <!--                <tr>-->
-        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents </a></td>-->
-        <!--                  <td>28 May 2018</td>-->
-        <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
-        <!--                  <td>$56,908</td>-->
-        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-        <!--                </tr>-->
-        <!--                <tr>-->
-        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-        <!--                  <td>12 June 2018</td>-->
-        <!--                  <td><span class="status-icon bg-danger"></span> On going</td>-->
-        <!--                  <td>$45,087</td>-->
-        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-        <!--                </tr>-->
-        <!--                <tr>-->
-        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-        <!--                  <td>12 July 2018</td>-->
-        <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
-        <!--                  <td>$60,123</td>-->
-        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-        <!--                </tr>-->
-        <!--                <tr>-->
-        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-        <!--                  <td>14 June 2018</td>-->
-        <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
-        <!--                  <td>$70,435</td>-->
-        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-        <!--                </tr>-->
-        <!--                <tr>-->
-        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-        <!--                  <td>25 June 2018</td>-->
-        <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
-        <!--                  <td>$15,987</td>-->
-        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-        <!--                </tr>-->
-        <!--              </tbody>-->
-        <!--            </table>-->
-        <!--          </div>-->
-        <!--        </div>-->
-        <!--      </div>-->
+            <!--      <div class="col-md-12">-->
+            <!--        <div class="card">-->
+            <!--          <div class="card-header">-->
+            <!--            <h4 class="card-title mb-0">Add projects And Upload</h4>-->
+            <!--            <div class="card-options"><a class="card-options-collapse" [routerLink]="[]" data-bs-toggle="card-collapse"><i-->
+            <!--                  class="fe fe-chevron-up"></i></a><a class="card-options-remove" [routerLink]="[]"-->
+            <!--                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>-->
+            <!--          </div>-->
+            <!--          <div class="table-responsive card-body">-->
+            <!--            <table class="table card-table table-vcenter text-nowrap">-->
+            <!--              <thead>-->
+            <!--                <tr>-->
+            <!--                  <th>Project Name</th>-->
+            <!--                  <th>Date</th>-->
+            <!--                  <th>Status</th>-->
+            <!--                  <th>Price</th>-->
+            <!--                  <th></th>-->
+            <!--                </tr>-->
+            <!--              </thead>-->
+            <!--              <tbody>-->
+            <!--                <tr>-->
+            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents </a></td>-->
+            <!--                  <td>28 May 2018</td>-->
+            <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
+            <!--                  <td>$56,908</td>-->
+            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+            <!--                </tr>-->
+            <!--                <tr>-->
+            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+            <!--                  <td>12 June 2018</td>-->
+            <!--                  <td><span class="status-icon bg-danger"></span> On going</td>-->
+            <!--                  <td>$45,087</td>-->
+            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+            <!--                </tr>-->
+            <!--                <tr>-->
+            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+            <!--                  <td>12 July 2018</td>-->
+            <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
+            <!--                  <td>$60,123</td>-->
+            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+            <!--                </tr>-->
+            <!--                <tr>-->
+            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+            <!--                  <td>14 June 2018</td>-->
+            <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
+            <!--                  <td>$70,435</td>-->
+            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+            <!--                </tr>-->
+            <!--                <tr>-->
+            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+            <!--                  <td>25 June 2018</td>-->
+            <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
+            <!--                  <td>$15,987</td>-->
+            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+            <!--                </tr>-->
+            <!--              </tbody>-->
+            <!--            </table>-->
+            <!--          </div>-->
+            <!--        </div>-->
+            <!--      </div>-->
+        </div>
     </div>
-</div>
-<!-- Container-fluid Ends-->
+    <!-- Container-fluid Ends-->
