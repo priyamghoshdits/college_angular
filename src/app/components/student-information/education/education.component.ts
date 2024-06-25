@@ -1,13 +1,13 @@
-import {Component} from '@angular/core';
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgxPaginationModule} from "ngx-pagination";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
-import {SubjectService} from "../../../services/subject.service";
-import {StudentService} from "../../../services/student.service";
+import { Component } from '@angular/core';
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgxPaginationModule } from "ngx-pagination";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
+import { SubjectService } from "../../../services/subject.service";
+import { StudentService } from "../../../services/student.service";
 import Swal from "sweetalert2";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase} from "@ng-bootstrap/ng-bootstrap";
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
     selector: 'app-education',
@@ -38,6 +38,9 @@ export class EducationComponent {
     educationQualificationList: any;
     isUpdatable = false;
     public active = 1;
+    file_ten: File;
+    file_twelve: File;
+    file_graduation: File;
 
     constructor(private roleAndPermissionService: RolesAndPermissionService, private subjectService: SubjectService, private studentService: StudentService) {
         this.educationQualificationForm = new FormGroup({
@@ -64,6 +67,9 @@ export class EducationComponent {
             division_graduation: new FormControl(null, [Validators.required]),
             main_subject_graduation: new FormControl(null, [Validators.required]),
             year_of_passing_graduation: new FormControl(null, [Validators.required]),
+            file_ten: new FormControl(null),
+            file_twelve: new FormControl(null),
+            file_graduation: new FormControl(null),
         });
 
         this.searchEducationQualificationForm = new FormGroup({
@@ -94,7 +100,7 @@ export class EducationComponent {
         }
     }
 
-    activeTab(data){
+    activeTab(data) {
         this.active = data;
     }
 
@@ -107,7 +113,7 @@ export class EducationComponent {
     getStudent() {
         // @ts-ignore
         const session_id = JSON.parse(localStorage.getItem('session_id'));
-        this.educationQualificationForm.patchValue({session_id: session_id});
+        this.educationQualificationForm.patchValue({ session_id: session_id });
 
         if (this.educationQualificationForm.value.course_id) {
             this.filteredStudentList = this.studentList.filter(x => x.course_id == this.educationQualificationForm.value.course_id);
@@ -120,10 +126,10 @@ export class EducationComponent {
         }
     }
 
-    getStudentForSearch(){
+    getStudentForSearch() {
         // @ts-ignore
         const session_id = JSON.parse(localStorage.getItem('session_id'));
-        this.searchEducationQualificationForm.patchValue({session_id: session_id});
+        this.searchEducationQualificationForm.patchValue({ session_id: session_id });
 
         if (this.searchEducationQualificationForm.value.course_id) {
             this.filteredStudentList = this.studentList.filter(x => x.course_id == this.searchEducationQualificationForm.value.course_id);
@@ -136,9 +142,47 @@ export class EducationComponent {
         }
     }
 
-    saveEducationQualification(){
-        this.studentService.saveEducationQualification(this.educationQualificationForm.value).subscribe((response: any) => {
-            if(response.success == 1){
+    uploadFilehelper(event, type) {
+        if (type == '10') {
+            this.file_ten = event.target.files[0];
+        } else if (type == '12') {
+            this.file_twelve = event.target.files[0];
+        } else {
+            this.file_graduation = event.target.files[0];
+        }
+    }
+
+    saveEducationQualification() {
+        const formData = new FormData();
+        formData.append('id', this.educationQualificationForm.value.id);
+        formData.append('course_id', this.educationQualificationForm.value.course_id);
+        formData.append('semester_id', this.educationQualificationForm.value.semester_id);
+        formData.append('session_id', this.educationQualificationForm.value.session_id);
+        formData.append('student_id', this.educationQualificationForm.value.student_id);
+        formData.append('board_ten', this.educationQualificationForm.value.board_ten);
+        formData.append('marks_obtained_ten', this.educationQualificationForm.value.marks_obtained_ten);
+        formData.append('percentage_ten', this.educationQualificationForm.value.percentage_ten);
+        formData.append('division_ten', this.educationQualificationForm.value.division_ten);
+        formData.append('main_subject_ten', this.educationQualificationForm.value.main_subject_ten);
+        formData.append('year_of_passing_ten', this.educationQualificationForm.value.year_of_passing_ten);
+        formData.append('board_twelve', this.educationQualificationForm.value.board_twelve);
+        formData.append('marks_obtained_twelve', this.educationQualificationForm.value.marks_obtained_twelve);
+        formData.append('percentage_twelve', this.educationQualificationForm.value.percentage_twelve);
+        formData.append('division_twelve', this.educationQualificationForm.value.division_twelve);
+        formData.append('main_subject_twelve', this.educationQualificationForm.value.main_subject_twelve);
+        formData.append('year_of_passing_twelve', this.educationQualificationForm.value.year_of_passing_twelve);
+        formData.append('board_graduation', this.educationQualificationForm.value.board_graduation);
+        formData.append('marks_obtained_graduation', this.educationQualificationForm.value.marks_obtained_graduation);
+        formData.append('percentage_graduation', this.educationQualificationForm.value.percentage_graduation);
+        formData.append('division_graduation', this.educationQualificationForm.value.division_graduation);
+        formData.append('main_subject_graduation', this.educationQualificationForm.value.main_subject_graduation);
+        formData.append('year_of_passing_graduation', this.educationQualificationForm.value.year_of_passing_graduation);
+        formData.append('file_ten', this.file_ten);
+        formData.append('file_twelve', this.file_twelve);
+        formData.append('file_graduation', this.file_graduation);
+
+        this.studentService.saveEducationQualification(formData).subscribe((response: any) => {
+            if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -147,39 +191,77 @@ export class EducationComponent {
                     timer: 1000
                 });
                 this.educationQualificationForm.reset();
+            } else if (response.success == 2) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: response.message,
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                this.educationQualificationForm.reset();
             }
         })
     }
 
-    searchEducationQualification(){
+    searchEducationQualification() {
         this.studentService.searchEducationQualification(this.searchEducationQualificationForm.value.student_id).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 this.educationQualificationList = response.data;
             }
         });
     }
 
-    editEducationQualification(){
-        this.educationQualificationForm.patchValue({course_id: this.searchEducationQualificationForm.value.course_id});
-        if(this.semesterList.findIndex(x => x.semester_id == this.searchEducationQualificationForm.value.semester_id) == -1){
+    editEducationQualification() {
+        this.educationQualificationForm.patchValue({ course_id: this.searchEducationQualificationForm.value.course_id });
+        if (this.semesterList.findIndex(x => x.semester_id == this.searchEducationQualificationForm.value.semester_id) == -1) {
             this.subjectService.getSemesterByCourseId(this.educationQualificationForm.value.course_id).subscribe((response: any) => {
                 this.semesterList = response.data;
-                this.educationQualificationForm.patchValue({semester_id: this.searchEducationQualificationForm.value.semester_id});
+                this.educationQualificationForm.patchValue({ semester_id: this.searchEducationQualificationForm.value.semester_id });
                 this.educationQualificationForm.patchValue(this.educationQualificationList);
                 this.active = 1;
                 this.isUpdatable = true;
             });
-        }else{
-            this.educationQualificationForm.patchValue({semester_id: this.searchEducationQualificationForm.value.semester_id});
+        } else {
+            this.educationQualificationForm.patchValue({ semester_id: this.searchEducationQualificationForm.value.semester_id });
             this.educationQualificationForm.patchValue(this.educationQualificationList);
             this.active = 1;
             this.isUpdatable = true;
         }
     }
 
-    updateEducationQualification(){
-        this.studentService.updateEducationQualification(this.educationQualificationForm.value).subscribe((response: any) => {
-            if(response.success == 1){
+    updateEducationQualification() {
+
+        const formData = new FormData();
+        formData.append('id', this.educationQualificationForm.value.id);
+        formData.append('course_id', this.educationQualificationForm.value.course_id);
+        formData.append('semester_id', this.educationQualificationForm.value.semester_id);
+        formData.append('session_id', this.educationQualificationForm.value.session_id);
+        formData.append('student_id', this.educationQualificationForm.value.student_id);
+        formData.append('board_ten', this.educationQualificationForm.value.board_ten);
+        formData.append('marks_obtained_ten', this.educationQualificationForm.value.marks_obtained_ten);
+        formData.append('percentage_ten', this.educationQualificationForm.value.percentage_ten);
+        formData.append('division_ten', this.educationQualificationForm.value.division_ten);
+        formData.append('main_subject_ten', this.educationQualificationForm.value.main_subject_ten);
+        formData.append('year_of_passing_ten', this.educationQualificationForm.value.year_of_passing_ten);
+        formData.append('board_twelve', this.educationQualificationForm.value.board_twelve);
+        formData.append('marks_obtained_twelve', this.educationQualificationForm.value.marks_obtained_twelve);
+        formData.append('percentage_twelve', this.educationQualificationForm.value.percentage_twelve);
+        formData.append('division_twelve', this.educationQualificationForm.value.division_twelve);
+        formData.append('main_subject_twelve', this.educationQualificationForm.value.main_subject_twelve);
+        formData.append('year_of_passing_twelve', this.educationQualificationForm.value.year_of_passing_twelve);
+        formData.append('board_graduation', this.educationQualificationForm.value.board_graduation);
+        formData.append('marks_obtained_graduation', this.educationQualificationForm.value.marks_obtained_graduation);
+        formData.append('percentage_graduation', this.educationQualificationForm.value.percentage_graduation);
+        formData.append('division_graduation', this.educationQualificationForm.value.division_graduation);
+        formData.append('main_subject_graduation', this.educationQualificationForm.value.main_subject_graduation);
+        formData.append('year_of_passing_graduation', this.educationQualificationForm.value.year_of_passing_graduation);
+        formData.append('file_ten', this.file_ten);
+        formData.append('file_twelve', this.file_twelve);
+        formData.append('file_graduation', this.file_graduation);
+
+        this.studentService.updateEducationQualification(formData).subscribe((response: any) => {
+            if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -194,7 +276,7 @@ export class EducationComponent {
         });
     }
 
-    cancelUpdate(){
+    cancelUpdate() {
         this.isUpdatable = false;
         this.educationQualificationForm.reset();
     }
