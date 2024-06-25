@@ -92,9 +92,6 @@ export class StaffEducationComponent {
       'staff_education_array': this.staffEducationArray
     };
 
-    const formData = new FormData();
-    formData.append('file_name', this.filesArray[0]);
-
     this.filesArray.forEach((file, index) => {
       if (file) {
         const formData = new FormData();
@@ -102,7 +99,6 @@ export class StaffEducationComponent {
 
         // Send the file to the server
         this.StaffEducationService.saveStaffEducationFile(formData).subscribe((response: any) => {
-          // this.pgPddhGuideArray[index].file_name = response.file_name;
         });
       }
     });
