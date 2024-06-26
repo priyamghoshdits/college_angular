@@ -11,6 +11,7 @@ import { DesignationService } from 'src/app/services/designation.service';
 import { DepartmentService } from 'src/app/services/department.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { StaffDegreeService } from 'src/app/services/staff-degree.service';
+import {SubjectService} from "../../../services/subject.service";
 
 @Component({
     selector: 'app-user-edit',
@@ -30,6 +31,7 @@ export class UserEditComponent implements OnInit {
     achievementFile: any;
     achievementList: any[] = [];
     manualFeesList: any[] = [];
+    semesterList: any[] = [];
     categoryList: any[];
     showPopup = true;
     educationUpdate = false;
@@ -58,6 +60,7 @@ export class UserEditComponent implements OnInit {
         last_name: any;
         middle_name: any;
         first_name: any;
+        course_id: any;
     } = {};
     staffDetails = {};
     educations: any[];
@@ -75,7 +78,14 @@ export class UserEditComponent implements OnInit {
 
     private BASE_API_URL = environment.BASE_API_URL;
 
-    constructor(private http: HttpClient, private errorService: ErrorService, private memberService: MemberService, private achievementService: AchievementService, private jobService: JobService, private designationService: DesignationService, private departmentService: DepartmentService, private franchiseService: FranchiseService, private StaffDegreeService: StaffDegreeService) {
+    constructor(private http: HttpClient, private errorService: ErrorService
+                , private memberService: MemberService
+                , private achievementService: AchievementService
+                , private jobService: JobService, private designationService: DesignationService
+                , private departmentService: DepartmentService
+                , private franchiseService: FranchiseService
+                , private subjectService: SubjectService
+                , private StaffDegreeService: StaffDegreeService) {
         this.studentCreationForm = new FormGroup({
             id: new FormControl(null),
             first_name: new FormControl(null),
@@ -262,6 +272,10 @@ export class UserEditComponent implements OnInit {
                     this.achievementList = response.achievement;
                     this.placementList = response.placement;
                     this.manualFeesList = response.manualFeesList;
+                    this.subjectService.getSemesterByCourseId(this.userDetails.course_id).subscribe((response: any) => {
+                        this.semesterList = response.data;
+                        this.manualFeesForm.patchValue({course_id: this.userDetails.course_id});
+                    })
                 } else {
                     this.staffDetails = response.data;
                     this.educations = response.educations;
@@ -326,7 +340,28 @@ export class UserEditComponent implements OnInit {
 
 
     saveManualFeesOwn(){
+        const formData = new FormData();
+        formData.append('course_id', this.manualFeesForm.value.course_id);
+        formData.append('semester_id', this.manualFeesForm.value.semester_id);
+        formData.append('student_id', this.manualFeesForm.value.student_id);
+        formData.append('session_id', this.manualFeesForm.value.session_id);
+        formData.append('date_of_payment', this.manualFeesForm.value.date_of_payment);
+        formData.append('amount', this.manualFeesForm.value.amount);
+        // @ts-ignore
+        formData.append('file', this.manualFeesFile);
 
+        return this.http.post(this.BASE_API_URL + '/saveStudentManualFees', formData)
+            .subscribe(response => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    Swal.fire({
+                        title: "Well Done!!",
+                        text: "Profile Updated",
+                        icon: "success"
+                    });
+                }
+                this.manualFeesForm.reset();
+            });
     }
 
 

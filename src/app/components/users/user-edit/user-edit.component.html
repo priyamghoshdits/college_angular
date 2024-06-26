@@ -696,6 +696,20 @@
                                     <form [formGroup]="manualFeesForm" class="theme-form">
                                         <div class="row">
                                             <div class="col-md-3 mb-3">
+                                                <label>Select Semester</label>
+                                                <select class="form-select"
+                                                        formControlName="semester_id"
+                                                        required style="width: 100%">
+                                                    <option value="null"> Select</option>
+                                                    <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                                        {{data.name}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="manualFeesForm.controls['semester_id'].errors?.['required'] && manualFeesForm.controls['semester_id'].touched "
+                                                     class="text text-danger mt-1">Semester required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
                                                 <label class="col-form-label pt-0">Date of Payment</label>
                                                 <input class="form-control" formControlName="date_of_payment" type="date">
                                                 <div *ngIf="manualFeesForm.controls['date_of_payment'].errors?.['required'] && manualFeesForm.controls['date_of_payment'].touched "
