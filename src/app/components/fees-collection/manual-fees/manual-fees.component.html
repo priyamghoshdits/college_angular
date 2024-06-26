@@ -1,0 +1,160 @@
+<div class="container-fluid">
+    <div *ngIf="permission.length > 0" class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+
+                        <div class="card-header" [hidden]="active != 1">
+                            <h5>Manual Fees</h5><span>Add Manual Fees</span>
+                        </div>
+
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>Manual Fees</h5><span>Show Manual Fees</span>
+                        </div>
+
+                        <div class="tabbed-card">
+                            <ul #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary" ngbNav>
+                                <li [ngbNavItem]="1">
+                                    <a (click)="activeTab(1)" ngbNavLink>Add Manual Fees</a>
+                                </li>
+                                <li *ngIf="permission[3].permission == 1" [ngbNavItem]="2">
+                                    <a (click)="activeTab(2)" ngbNavLink>Show Manual Fees</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div [hidden]="active != 1" class="card-body">
+                            <form [formGroup]="manualFeesForm" class="theme-form">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label>Select Course</label>
+                                        <select (change)="getSemester()" class="form-select" formControlName="course_id"
+                                                required style="width: 100%">
+                                            <option value="null"> Select</option>
+                                            <option *ngFor="let data of courseList" [value]="data.id">
+                                                {{data.course_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="manualFeesForm.controls['course_id'].errors?.['required'] && manualFeesForm.controls['course_id'].touched "
+                                             class="text text-danger mt-1">Course required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label>Select Semester</label>
+                                        <select (change)="getStudent()" class="form-select"
+                                                formControlName="semester_id"
+                                                required style="width: 100%">
+                                            <option value="null"> Select</option>
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="manualFeesForm.controls['semester_id'].errors?.['required'] && manualFeesForm.controls['semester_id'].touched "
+                                             class="text text-danger mt-1">Semester required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label>Select Student</label>
+                                        <select class="form-select" formControlName="student_id" required
+                                                style="width: 100%">
+                                            <option value="null"> Select</option>
+                                            <option *ngFor="let data of filteredStudent" [value]="data.id">
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="manualFeesForm.controls['student_id'].errors?.['required'] && manualFeesForm.controls['student_id'].touched "
+                                             class="text text-danger mt-1">Student required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0">Date of Payment</label>
+                                        <input class="form-control" formControlName="date_of_payment" type="date">
+                                        <div *ngIf="manualFeesForm.controls['date_of_payment'].errors?.['required'] && manualFeesForm.controls['date_of_payment'].touched "
+                                             class="text text-danger mt-1">Date of payment required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0">Amount</label>
+                                        <input class="form-control" formControlName="amount" type="text">
+                                        <div *ngIf="manualFeesForm.controls['amount'].errors?.['required'] && manualFeesForm.controls['amount'].touched "
+                                             class="text text-danger mt-1">Amount required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0">Upload Slip</label>
+                                        <input (change)="selectFile($event)" class="form-control" type="file">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div [hidden]="active != 1" class="card-footer">
+                            <button (click)="saveManualFees()" *ngIf="permission[0].permission === 1"
+                                    [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
+                            </button>
+                            <button (click)="updateManualFees()" *ngIf="permission[1].permission === 1"
+                                    [hidden]="isUpdatable == false" class="btn btn-primary me-1">Update
+                            </button>
+                            <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
+                                    class="btn btn-primary me-1">Cancel
+                            </button>
+                        </div>
+
+
+                        <div [hidden]="active != 2" class="card-body">
+                            <form [formGroup]="searchManualFeesForm" class="theme-form">
+                                <div class="row">
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0">From Date</label>
+                                        <input class="form-control" formControlName="from_date" type="date">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="col-form-label pt-0">To Date</label>
+                                        <input  class="form-control" formControlName="to_date" type="date">
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <button style="margin-top: 30px" (click)="searchManualFees()" class="btn btn-primary me-1">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="table-responsive">
+
+                                <table class="table" style="text-align: center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Course Name</th>
+                                        <th scope="col">Semester Name</th>
+                                        <th scope="col">Student Name</th>
+                                        <th scope="col">Date Of Payment</th>
+                                        <th scope="col">Amount</th>
+                                        <th scope="col">Download</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of manualFeesList; let indexOfElement=index">
+                                        <td>{{indexOfElement + 1}}</td>
+                                        <td>{{record.course_name}}</td>
+                                        <td>{{record.semester_name}}</td>
+                                        <td>{{record.student_name}}</td>
+                                        <td>{{record.date_of_payment}}</td>
+                                        <td>{{record.amount}}</td>
+                                        <td><a href="">Download</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
