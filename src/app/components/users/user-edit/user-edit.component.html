@@ -34,7 +34,9 @@
                                         <div class="col-lg-3">
                                             <div class="leftuser_imgoutsection">
                                                 <div class="jshadow_area">
-                                                    <img class="huimg_designs" src="{{FILE_URL}}/user_image/{{studentCreationForm.value.image}}" onerror="this.src='assets/images/user/blank_default.jpg'">
+                                                    <img class="huimg_designs"
+                                                        src="{{FILE_URL}}/user_image/{{studentCreationForm.value.image}}"
+                                                        onerror="this.src='assets/images/user/blank_default.jpg'">
                                                 </div>
                                                 <h1 class="studentimgdwnarea">
                                                     Course:
@@ -708,7 +710,7 @@
                                 <label class="tab" for="three" id="three-tab">Book Pulication</label>
                                 <label class="tab" for="four" id="four-tab">Experience</label>
                                 <label class="tab" for="five" id="five-tab">Journal Publication</label>
-                              
+
                             </div>
                             <div class="panels">
                                 <div class="panel" id="one-panel">
@@ -716,14 +718,16 @@
                                         <div class="col-lg-3">
                                             <div class="leftuser_imgoutsection">
                                                 <div class="jshadow_area">
-                                                    <img class="huimg_designs" src="{{FILE_URL}}/user_image/{{studentCreationForm.value.image}}" onerror="this.src='assets/images/user/blank_default.jpg'">
+                                                    <img class="huimg_designs"
+                                                        src="{{FILE_URL}}/user_image/{{studentCreationForm.value.image}}"
+                                                        onerror="this.src='assets/images/user/blank_default.jpg'">
                                                 </div>
                                                 <h1 class="studentimgdwnarea">
-                                                  Staff ID:
+                                                    Staff ID:
                                                     <span class="studentimgdwnarea1"></span>
                                                 </h1>
                                                 <h1 class="studentimgdwnarea">
-                                                Staff Name:
+                                                    Staff Name:
                                                     <span class="studentimgdwnarea1"></span>
                                                 </h1>
                                             </div>
@@ -735,30 +739,36 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Staff Id</label>
-                                                                <input class="form-control" name="staff_id" placeholder="staff_id" type="text">
+                                                                <input class="form-control" formControlName="staff_id"
+                                                                    placeholder="staff_id" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">First Name</label>
-                                                                <input class="form-control" name="first_name" placeholder="first_name" type="text">
+                                                                <input class="form-control" formControlName="first_name"
+                                                                    placeholder="first_name" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Middle Name</label>
-                                                                <input class="form-control" name="middle_name" placeholder="Middle Name" type="text">
+                                                                <input class="form-control"
+                                                                    formControlName="middle_name"
+                                                                    placeholder="Middle Name" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Last Name</label>
-                                                                <input class="form-control" name="last_name" placeholder="Last Name" type="text">
+                                                                <input class="form-control" formControlName="last_name"
+                                                                    placeholder="Last Name" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Gender</label>
-                                                            <select class="form-select" name="gender" style="width: 100%">
+                                                            <select class="form-select" formControlName="gender"
+                                                                style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="Male">Male</option>
                                                                 <option value="Female">Female</option>
@@ -766,33 +776,41 @@
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Date Of Birth</label>
-                                                            <input class="form-control" name="dob" placeholder="Date Of Birth" type="date">
+                                                            <input class="form-control" formControlName="dob"
+                                                                placeholder="Date Of Birth" type="date">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Birth Certificate</label>
-                                                            <input class="form-control" type="file">
+                                                            <input class="form-control" type="file" (change)="fileUpload($event, 'birthCertificate')">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Date Of Joining</label>
-                                                            <input class="form-control" name="date_of_joining" placeholder="Date Of Joining" type="date">
+                                                            <input class="form-control"
+                                                                formControlName="date_of_joining"
+                                                                placeholder="Date Of Joining" type="date">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Joining Letter</label>
-                                                            <input class="form-control" type="file">
+                                                            <input class="form-control" type="file" (change)="fileUpload($event, 'uploadJoiningLetter')">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Phone Number</label>
-                                                            <input class="form-control" name="mobile_no" placeholder="Phone Number" type="text">
+                                                            <input class="form-control" formControlName="mobile_no"
+                                                                placeholder="Phone Number" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
-                                                                <label class="form-label">Emergency Contact Number</label>
-                                                                <input class="form-control" name="emergency_phone_number" placeholder="Phone Number" type="text">
+                                                                <label class="form-label">Emergency Contact
+                                                                    Number</label>
+                                                                <input class="form-control"
+                                                                    formControlName="emergency_phone_number"
+                                                                    placeholder="Phone Number" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Marital Status</label>
-                                                            <select class="form-select" name="marital_status" style="width: 100%">
+                                                            <select class="form-select"
+                                                                formControlName="material_status" style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="Single">Single</option>
                                                                 <option value="Married">Married</option>
@@ -804,22 +822,27 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Work Experience</label>
-                                                                <input class="form-control" name="work_experience" placeholder="Work Experience" type="text">
+                                                                <input class="form-control"
+                                                                    formControlName="work_experience"
+                                                                    placeholder="Work Experience" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Qualification</label>
-                                                                <input class="form-control" name="qualification" placeholder="Qualification" type="text">
+                                                                <input class="form-control"
+                                                                    formControlName="qualification"
+                                                                    placeholder="Qualification" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Image</label>
-                                                            <input class="form-control" type="file">
+                                                            <input class="form-control" type="file" (change)="fileUpload($event, 'uploadImage')">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Blood Group</label>
-                                                            <select class="form-select" name="blood_group" style="width: 100%">
+                                                            <select class="form-select" formControlName="blood_group"
+                                                                style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="A+">A+</option>
                                                                 <option value="A-">A-</option>
@@ -837,7 +860,8 @@
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Religion</label>
-                                                            <select class="form-select" name="religion" style="width: 100%">
+                                                            <select class="form-select" formControlName="religion"
+                                                                style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="Hinduism">Hinduism</option>
                                                                 <option value="Buddhism">Buddhism</option>
@@ -854,137 +878,221 @@
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>User Type</label>
-                                                            <select class="form-select" name="user_type" style="width: 100%">
+                                                            <select class="form-select" formControlName="user_type"
+                                                                style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="Super Admin">Super Admin</option>
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
-                                                            <label class="form-label">Email address (Login Email)</label>
-                                                            <input class="form-control" type="email" name="email" placeholder="name@example.com">
+                                                            <label class="form-label">Email address (Login
+                                                                Email)</label>
+                                                            <input class="form-control" type="email"
+                                                                formControlName="email" placeholder="name@example.com">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Caste</label>
-                                                            <select class="form-select" name="caste" style="width: 100%">
+                                                            <select class="form-select" formControlName="caste"
+                                                                style="width: 100%">
                                                                 <option value="null">Select</option>
-                                                                <option value="General">General</option>
+                                                                <option *ngFor="let data of categoryList"
+                                                                    [value]="data.id">
+                                                                    {{data.name}}
+                                                                </option>
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">User Caste Certificate</label>
-                                                            <input class="form-control" type="file">
+                                                            <input class="form-control" type="file" (change)="fileUpload($event, 'userCasteCertificate')">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Department</label>
-                                                            <select class="form-select" name="department" style="width: 100%">
+                                                            <select class="form-select" formControlName="department_id"
+                                                                style="width: 100%">
                                                                 <option value="null">Select</option>
+                                                                <option *ngFor="let data of departmentList"
+                                                                    [value]="data.id">
+                                                                    {{data.name}}
+                                                                </option>
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Select Franchise</label>
-                                                            <select class="form-select" name="franchise" style="width: 100%">
+                                                            <select class="form-select" formControlName="franchise_id"
+                                                                style="width: 100%">
                                                                 <option value="null">Select</option>
+                                                                <option *ngFor="let data of franchiseList"
+                                                                    [value]="data.id">
+                                                                    {{data.name}}
+                                                                </option>
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Current Address</label>
-                                                            <input class="form-control" name="current_address" placeholder="Current Address" type="text">
+                                                            <input class="form-control"
+                                                                formControlName="current_address"
+                                                                placeholder="Current Address" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Permanent Address</label>
-                                                            <input class="form-control" name="permanent_address" placeholder="Permanent Address" type="text">
+                                                            <input class="form-control"
+                                                                formControlName="permanent_address"
+                                                                placeholder="Permanent Address" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Aadhar</label>
-                                                            <input class="form-control" type="file">
+                                                            <input class="form-control" type="file" (change)="fileUpload($event, 'uploadAadhar')">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Designation</label>
-                                                            <select class="form-select" name="designation" style="width: 100%">
+                                                            <select class="form-select" formControlName="designation_id"
+                                                                style="width: 100%">
                                                                 <option value="null">Select</option>
+                                                                <option *ngFor="let data of designationList"
+                                                                    [value]="data.id">
+                                                                    {{data.name}}
+                                                                </option>
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Pan Number</label>
-                                                                <input class="form-control" name="pan_number" placeholder="Pan Number" type="text">
+                                                                <input class="form-control" formControlName="pan_number"
+                                                                    placeholder="Pan Number" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Pan</label>
-                                                            <input class="form-control" type="file">
+                                                            <input class="form-control" type="file" (change)="fileUpload($event, 'uploadPan')">
                                                         </div>
                                                     </div>
-                                                  
+
+                                                    <div class="row">
+                                                        <h3>Bank Account Details</h3>
+                                                        <hr>
+                                                        <div class="col-sm-3 col-md-3">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Bank Account Number</label>
+                                                                <input class="form-control"
+                                                                    formControlName="bank_account_number" placeholder=""
+                                                                    type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-3">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Bank Name</label>
+                                                                <input class="form-control" formControlName="bank_name"
+                                                                    placeholder="" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-3">
+                                                            <div class="form-group">
+                                                                <label class="form-label">IFSC Code</label>
+                                                                <input class="form-control" formControlName="ifsc_code"
+                                                                    placeholder="" type="text">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-3 col-md-3">
+                                                            <div class="form-group">
+                                                                <label class="form-label">Bank Branch name</label>
+                                                                <input class="form-control"
+                                                                    formControlName="bank_branch_name" placeholder=""
+                                                                    type="text">
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </form>
+
                                                 <div class="card-footer text-end">
-                                                    <button class="btn btn-primary" (click)="updateStaff()" type="submit">Update Profile</button>
+                                                    <button class="btn btn-primary" (click)="updateProfileStaff()"
+                                                        type="submit">Update
+                                                        Profile</button>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <h3>Bank Account Details</h3>
-                                        <hr>
-                                        <div class="col-sm-3 col-md-3">
-                                            <div class="form-group">
-                                                <label class="form-label">Bank Account Number</label>
-                                                <input class="form-control" name="" placeholder="" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 col-md-3">
-                                            <div class="form-group">
-                                                <label class="form-label">Bank Name</label>
-                                                <input class="form-control" name="" placeholder="" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 col-md-3">
-                                            <div class="form-group">
-                                                <label class="form-label">IFSC Code</label>
-                                                <input class="form-control" name="" placeholder="" type="text">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3 col-md-3">
-                                            <div class="form-group">
-                                                <label class="form-label">Bank Branch name</label>
-                                                <input class="form-control" name="" placeholder="" type="text">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="panel" id="two-panel">
+
+                                    <div class="card-body">
+                                        <div>
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label>Select Degree</label>
+                                                    <select style="width: 100%" class="form-select" required>
+                                                        <option value="null"> Select a degree</option>
+                                                        <option *ngFor="let degree of degreeList" [value]="degree.id">
+                                                            {{degree.name}}
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>specialization</label>
+                                                    <input type="text" class="form-control" placeholder="specialization"
+                                                        required>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>university_name</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="university_name" required>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label>percentage</label>
+                                                    <input type="text" class="form-control" placeholder="percentage"
+                                                        required>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>grade</label>
+                                                    <input type="text" class="form-control" placeholder="grade"
+                                                        required>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>File</label>
+                                                    <input type="file" class="form-control"
+                                                        (change)="fileUpload($event, 'pan')" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <!-- <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"
+                                                (click)="saveStaffEducation()"
+                                                *ngIf="permission[0].permission == 1">Submit</button>
+                                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                                (click)="updateStaffEducation()"
+                                                *ngIf="permission[1].permission == 1">Update</button>
+                                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                                (click)="cancelUpdate()">Cancel</button> -->
+                                        </div>
+                                    </div>
+
                                     <h3>Education Qualification</h3>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
-                                            <tr>
-                                                <th scope="col">Sl.NO</th>
-                                                <th scope="col">Staff Name</th>
-                                                <th scope="col">Degree</th>
-                                                <th scope="col">Specialization</th>
-                                                <th scope="col">University</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Percentage</th>
-                                                <th scope="col">Grade</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">Sl.NO</th>
+                                                    <th scope="col">Degree</th>
+                                                    <th scope="col">Specialization</th>
+                                                    <th scope="col">University</th>
+                                                    <th scope="col">Percentage</th>
+                                                    <th scope="col">Grade</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                                <tr *ngFor="let record of educations; let indexOfElement=index">
+                                                    <td>{{indexOfElement+1}}</td>
+                                                    <td>{{record.degree_name}}</td>
+                                                    <td>{{record.specialization}}</td>
+                                                    <td>{{record.university_name}}</td>
+                                                    <td>{{record.percentage}}</td>
+                                                    <td>{{record.grade}}</td>
+                                                    <td>{{record.file_name}}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
-
-
                                     </div>
                                 </div>
                                 <div class="panel" id="three-panel">
@@ -992,30 +1100,30 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
-                                            <tr>
-                                                <th scope="col">Sl.NO</th>
-                                                <th scope="col">Staff Name</th>
-                                                <th scope="col">Degree</th>
-                                                <th scope="col">Specialization</th>
-                                                <th scope="col">University</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Percentage</th>
-                                                <th scope="col">Grade</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">Sl.NO</th>
+                                                    <th scope="col">Staff Name</th>
+                                                    <th scope="col">Degree</th>
+                                                    <th scope="col">Specialization</th>
+                                                    <th scope="col">University</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Percentage</th>
+                                                    <th scope="col">Grade</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
                                             </tbody>
                                         </table>
 
@@ -1027,71 +1135,71 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
-                                            <tr>
-                                                <th scope="col">Sl.NO</th>
-                                                <th scope="col">Staff Name</th>
-                                                <th scope="col">Degree</th>
-                                                <th scope="col">Specialization</th>
-                                                <th scope="col">University</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Percentage</th>
-                                                <th scope="col">Grade</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">Sl.NO</th>
+                                                    <th scope="col">Staff Name</th>
+                                                    <th scope="col">Degree</th>
+                                                    <th scope="col">Specialization</th>
+                                                    <th scope="col">University</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Percentage</th>
+                                                    <th scope="col">Grade</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
                                             </tbody>
                                         </table>
 
 
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="panel" id="five-panel">
                                     <h3>Journal Publication</h3>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
-                                            <tr>
-                                                <th scope="col">Sl.NO</th>
-                                                <th scope="col">Staff Name</th>
-                                                <th scope="col">Degree</th>
-                                                <th scope="col">Specialization</th>
-                                                <th scope="col">University</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Percentage</th>
-                                                <th scope="col">Grade</th>
-                                                <th scope="col">Action</th>
-                                            </tr>
+                                                <tr>
+                                                    <th scope="col">Sl.NO</th>
+                                                    <th scope="col">Staff Name</th>
+                                                    <th scope="col">Degree</th>
+                                                    <th scope="col">Specialization</th>
+                                                    <th scope="col">University</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Percentage</th>
+                                                    <th scope="col">Grade</th>
+                                                    <th scope="col">Action</th>
+                                                </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
                                             </tbody>
                                         </table>
 
 
                                     </div>
-                                </div> 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1100,86 +1208,86 @@
         </div>
 
 
-            <!--      <div class="col-md-12">-->
-            <!--        <div class="card">-->
-            <!--          <div class="card-header">-->
-            <!--            <h4 class="card-title mb-0">Add projects And Upload</h4>-->
-            <!--            <div class="card-options"><a class="card-options-collapse" [routerLink]="[]" data-bs-toggle="card-collapse"><i-->
-            <!--                  class="fe fe-chevron-up"></i></a><a class="card-options-remove" [routerLink]="[]"-->
-            <!--                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>-->
-            <!--          </div>-->
-            <!--          <div class="table-responsive card-body">-->
-            <!--            <table class="table card-table table-vcenter text-nowrap">-->
-            <!--              <thead>-->
-            <!--                <tr>-->
-            <!--                  <th>Project Name</th>-->
-            <!--                  <th>Date</th>-->
-            <!--                  <th>Status</th>-->
-            <!--                  <th>Price</th>-->
-            <!--                  <th></th>-->
-            <!--                </tr>-->
-            <!--              </thead>-->
-            <!--              <tbody>-->
-            <!--                <tr>-->
-            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents </a></td>-->
-            <!--                  <td>28 May 2018</td>-->
-            <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
-            <!--                  <td>$56,908</td>-->
-            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-            <!--                  <td>12 June 2018</td>-->
-            <!--                  <td><span class="status-icon bg-danger"></span> On going</td>-->
-            <!--                  <td>$45,087</td>-->
-            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-            <!--                  <td>12 July 2018</td>-->
-            <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
-            <!--                  <td>$60,123</td>-->
-            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-            <!--                  <td>14 June 2018</td>-->
-            <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
-            <!--                  <td>$70,435</td>-->
-            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-            <!--                </tr>-->
-            <!--                <tr>-->
-            <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
-            <!--                  <td>25 June 2018</td>-->
-            <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
-            <!--                  <td>$15,987</td>-->
-            <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
-            <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
-            <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
-            <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
-            <!--                        class="fa fa-trash"></i> Delete</a></td>-->
-            <!--                </tr>-->
-            <!--              </tbody>-->
-            <!--            </table>-->
-            <!--          </div>-->
-            <!--        </div>-->
-            <!--      </div>-->
-        </div>
+        <!--      <div class="col-md-12">-->
+        <!--        <div class="card">-->
+        <!--          <div class="card-header">-->
+        <!--            <h4 class="card-title mb-0">Add projects And Upload</h4>-->
+        <!--            <div class="card-options"><a class="card-options-collapse" [routerLink]="[]" data-bs-toggle="card-collapse"><i-->
+        <!--                  class="fe fe-chevron-up"></i></a><a class="card-options-remove" [routerLink]="[]"-->
+        <!--                data-bs-toggle="card-remove"><i class="fe fe-x"></i></a></div>-->
+        <!--          </div>-->
+        <!--          <div class="table-responsive card-body">-->
+        <!--            <table class="table card-table table-vcenter text-nowrap">-->
+        <!--              <thead>-->
+        <!--                <tr>-->
+        <!--                  <th>Project Name</th>-->
+        <!--                  <th>Date</th>-->
+        <!--                  <th>Status</th>-->
+        <!--                  <th>Price</th>-->
+        <!--                  <th></th>-->
+        <!--                </tr>-->
+        <!--              </thead>-->
+        <!--              <tbody>-->
+        <!--                <tr>-->
+        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents </a></td>-->
+        <!--                  <td>28 May 2018</td>-->
+        <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
+        <!--                  <td>$56,908</td>-->
+        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+        <!--                  <td>12 June 2018</td>-->
+        <!--                  <td><span class="status-icon bg-danger"></span> On going</td>-->
+        <!--                  <td>$45,087</td>-->
+        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+        <!--                  <td>12 July 2018</td>-->
+        <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
+        <!--                  <td>$60,123</td>-->
+        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+        <!--                  <td>14 June 2018</td>-->
+        <!--                  <td><span class="status-icon bg-warning"></span> Pending</td>-->
+        <!--                  <td>$70,435</td>-->
+        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+        <!--                </tr>-->
+        <!--                <tr>-->
+        <!--                  <td><a class="text-inherit" [routerLink]="[]">Untrammelled prevents</a></td>-->
+        <!--                  <td>25 June 2018</td>-->
+        <!--                  <td><span class="status-icon bg-success"></span> Completed</td>-->
+        <!--                  <td>$15,987</td>-->
+        <!--                  <td class="text-end"><a class="icon" [routerLink]="[]"></a><a class="btn btn-primary btn-sm"-->
+        <!--                      [routerLink]="[]"><i class="fa fa-pencil"></i> Edit</a><a class="icon" [routerLink]="[]"></a><a-->
+        <!--                      class="btn btn-transparent btn-sm" [routerLink]="[]"><i class="fa fa-link"></i> Update</a><a-->
+        <!--                      class="icon" [routerLink]="[]"></a><a class="btn btn-danger btn-sm" [routerLink]="[]"><i-->
+        <!--                        class="fa fa-trash"></i> Delete</a></td>-->
+        <!--                </tr>-->
+        <!--              </tbody>-->
+        <!--            </table>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--      </div>-->
     </div>
-    <!-- Container-fluid Ends-->
+</div>
+<!-- Container-fluid Ends-->

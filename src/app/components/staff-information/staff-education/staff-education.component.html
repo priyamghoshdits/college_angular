@@ -96,9 +96,11 @@
                                 </div>
                                 <div class="card-footer">
                                     <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"
-                                        (click)="saveStaffEducation()" *ngIf="permission[0].permission == 1">Submit</button>
+                                        (click)="saveStaffEducation()"
+                                        *ngIf="permission[0].permission == 1">Submit</button>
                                     <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
-                                        (click)="updateStaffEducation()" *ngIf="permission[1].permission == 1">Update</button>
+                                        (click)="updateStaffEducation()"
+                                        *ngIf="permission[1].permission == 1">Update</button>
                                     <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
                                         (click)="cancelUpdate()">Cancel</button>
                                 </div>

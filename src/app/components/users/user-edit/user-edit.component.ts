@@ -1,12 +1,16 @@
-import {Component, OnInit} from '@angular/core';
-import {environment} from "../../../../environments/environment";
-import {HttpClient} from "@angular/common/http";
-import {ErrorService} from "../../../services/error.service";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {MemberService} from "../../../services/member.service";
+import { Component, OnInit } from '@angular/core';
+import { environment } from "../../../../environments/environment";
+import { HttpClient } from "@angular/common/http";
+import { ErrorService } from "../../../services/error.service";
+import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { MemberService } from "../../../services/member.service";
 import Swal from "sweetalert2";
-import {AchievementService} from 'src/app/services/achievement.service';
-import {JobService} from 'src/app/services/job.service';
+import { AchievementService } from 'src/app/services/achievement.service';
+import { JobService } from 'src/app/services/job.service';
+import { DesignationService } from 'src/app/services/designation.service';
+import { DepartmentService } from 'src/app/services/department.service';
+import { FranchiseService } from 'src/app/services/franchise.service';
+import { StaffDegreeService } from 'src/app/services/staff-degree.service';
 
 @Component({
     selector: 'app-user-edit',
@@ -29,6 +33,9 @@ export class UserEditComponent implements OnInit {
     isAchievementFormUpdatable = false;
     isPlacementUpdatable = false;
     companyDetailsList: any[];
+    designationList: any[];
+    departmentList: any[];
+    franchiseList: any[];
     user = JSON.parse(localStorage.getItem('user') || '{}');
     // @ts-ignore
     userDetails: {
@@ -50,9 +57,19 @@ export class UserEditComponent implements OnInit {
         first_name: any;
     } = {};
     staffDetails = {};
+    educations: any[];
+    degreeList: any[];
+
+    birthCertificate: File;
+    uploadJoiningLetter: File;
+    uploadImage: File;
+    uploadPan: File;
+    uploadAadhar: File;
+    userCasteCertificate: File;
+
     private BASE_API_URL = environment.BASE_API_URL;
 
-    constructor(private http: HttpClient, private errorService: ErrorService, private memberService: MemberService, private achievementService: AchievementService, private jobService: JobService) {
+    constructor(private http: HttpClient, private errorService: ErrorService, private memberService: MemberService, private achievementService: AchievementService, private jobService: JobService, private designationService: DesignationService, private departmentService: DepartmentService, private franchiseService: FranchiseService, private StaffDegreeService: StaffDegreeService) {
         this.studentCreationForm = new FormGroup({
             id: new FormControl(null),
             first_name: new FormControl(null),
@@ -143,7 +160,9 @@ export class UserEditComponent implements OnInit {
 
         this.staffUpdateForm = new FormGroup({
             id: new FormControl(null),
+            user_type: new FormControl(null),
             identification_no: new FormControl(null),
+            staff_id: new FormControl(null),
             first_name: new FormControl(null, [Validators.required]),
             middle_name: new FormControl(null),
             last_name: new FormControl(null, [Validators.required]),
@@ -159,6 +178,7 @@ export class UserEditComponent implements OnInit {
             current_address: new FormControl(null, [Validators.required]),
             permanent_address: new FormControl(null, [Validators.required]),
             religion: new FormControl(null),
+            caste: new FormControl(null),
             blood_group: new FormControl(null),
             category_id: new FormControl(null, [Validators.required]),
             user_type_id: new FormControl(null, [Validators.required]),
@@ -183,6 +203,27 @@ export class UserEditComponent implements OnInit {
             this.companyDetailsList = response;
         });
         this.companyDetailsList = this.jobService.getCompanyDetails();
+
+        this.designationService.getDesignationListListener().subscribe((response) => {
+            this.designationList = response;
+        });
+        this.designationList = this.designationService.getDesignationList();
+
+        this.departmentService.getDepartmentListListener().subscribe((response) => {
+            this.departmentList = response;
+        });
+        this.departmentList = this.departmentService.getDepartmentList();
+
+        this.franchiseService.getFranchiseListener().subscribe((response) => {
+            this.franchiseList = response;
+        });
+        this.franchiseList = this.franchiseService.getFranchiseList();
+
+
+        this.StaffDegreeService.getDegreeListListener().subscribe(response => {
+            this.degreeList = response;
+        });
+        this.degreeList = this.StaffDegreeService.getDegreeList();
     }
 
     getUserDetails() {
@@ -194,21 +235,107 @@ export class UserEditComponent implements OnInit {
                     this.educationQualificationForm.patchValue(response.education_details);
                     this.achievementList = response.achievement;
                     this.placementList = response.placement;
-                }else{
+                } else {
                     this.staffDetails = response.data;
+                    this.educations = response.educations;
                     this.staffUpdateForm.patchValue(this.staffDetails);
-                    console.log(this.staffUpdateForm.value);
+                    console.log(response.educations);
                 }
             }
         });
     }
 
-    updateStaff(){
+    updateStaff() {
         console.log(this.staffUpdateForm.value);
     }
 
     updateProfile() {
         return this.http.post(this.BASE_API_URL + '/updateMemberOwn', this.studentCreationForm.value)
+            .subscribe(response => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    Swal.fire({
+                        title: "Well Done!!",
+                        text: "Profile Updated",
+                        icon: "success"
+                    });
+                }
+            });
+    }
+
+    fileUpload(event, type) {
+        if (type == 'birthCertificate') {
+            this.birthCertificate = event.target.files[0];
+        } else if (type == 'uploadJoiningLetter') {
+            this.uploadJoiningLetter = event.target.files[0];
+        } else if (type == 'uploadImage') {
+            this.uploadImage = event.target.files[0];
+        } else if (type == 'uploadPan') {
+            this.uploadPan = event.target.files[0];
+        } else if (type == 'uploadAadhar') {
+            this.uploadAadhar = event.target.files[0];
+        } else if (type == 'userCasteCertificate') {
+            this.userCasteCertificate = event.target.files[0];
+        }
+    }
+
+
+    updateProfileStaff() {
+        const formData = new FormData();
+        formData.append('id', this.staffUpdateForm.value.id);
+        formData.append('user_type', this.staffUpdateForm.value.user_type);
+        formData.append('identification_no', this.staffUpdateForm.value.identification_no);
+        formData.append('staff_id', this.staffUpdateForm.value.staff_id);
+        formData.append('first_name', this.staffUpdateForm.value.first_name);
+        formData.append('middle_name', this.staffUpdateForm.value.middle_name);
+        formData.append('last_name', this.staffUpdateForm.value.last_name);
+        formData.append('gender', this.staffUpdateForm.value.gender);
+        formData.append('dob', this.staffUpdateForm.value.dob);
+        formData.append('date_of_joining', this.staffUpdateForm.value.date_of_joining);
+        formData.append('image', this.staffUpdateForm.value.image);
+        formData.append('mobile_no', this.staffUpdateForm.value.mobile_no);
+        formData.append('emergency_phone_number', this.staffUpdateForm.value.emergency_phone_number);
+        formData.append('material_status', this.staffUpdateForm.value.material_status);
+        formData.append('work_experience', this.staffUpdateForm.value.work_experience);
+        formData.append('qualification', this.staffUpdateForm.value.qualification);
+        formData.append('current_address', this.staffUpdateForm.value.current_address);
+        formData.append('permanent_address', this.staffUpdateForm.value.permanent_address);
+        formData.append('religion', this.staffUpdateForm.value.religion);
+        formData.append('caste', this.staffUpdateForm.value.caste);
+        formData.append('blood_group', this.staffUpdateForm.value.blood_group);
+        formData.append('category_id', this.staffUpdateForm.value.category_id);
+        formData.append('user_type_id', this.staffUpdateForm.value.user_type_id);
+        formData.append('email', this.staffUpdateForm.value.email);
+        formData.append('department_id', this.staffUpdateForm.value.department_id);
+        formData.append('designation_id', this.staffUpdateForm.value.designation_id);
+        formData.append('pan_number', this.staffUpdateForm.value.pan_number);
+        formData.append('epf_number', this.staffUpdateForm.value.epf_number);
+        formData.append('franchise_id', this.staffUpdateForm.value.franchise_id);
+        formData.append('gross_salary', this.staffUpdateForm.value.gross_salary);
+        formData.append('location', this.staffUpdateForm.value.location);
+        formData.append('contract_type', this.staffUpdateForm.value.contract_type);
+        formData.append('bank_account_number', this.staffUpdateForm.value.bank_account_number);
+        formData.append('bank_name', this.staffUpdateForm.value.bank_name);
+        formData.append('ifsc_code', this.staffUpdateForm.value.ifsc_code);
+        formData.append('bank_branch_name', this.staffUpdateForm.value.bank_branch_name);
+        formData.append('password', this.staffUpdateForm.value.password);
+
+        formData.append('password', this.birthCertificate);
+        formData.append('password', this.uploadJoiningLetter);
+        formData.append('password', this.uploadImage);
+        formData.append('password', this.uploadPan);
+        formData.append('password', this.uploadAadhar);
+        formData.append('password', this.userCasteCertificate);
+
+        return this.http.post(this.BASE_API_URL + '/saveMemberFile', this.staffUpdateForm.value)
+            .subscribe(response => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    
+                }
+            });
+
+        return this.http.post(this.BASE_API_URL + '/updateMemberOwn', this.staffUpdateForm.value)
             .subscribe(response => {
                 // @ts-ignore
                 if (response.success == 1) {
