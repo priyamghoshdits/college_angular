@@ -67,6 +67,7 @@ export class UserEditComponent implements OnInit {
     uploadPan: File;
     uploadAadhar: File;
     userCasteCertificate: File;
+    labReport: File;
 
     private BASE_API_URL = environment.BASE_API_URL;
 
@@ -287,10 +288,12 @@ export class UserEditComponent implements OnInit {
             this.uploadAadhar = event.target.files[0];
         } else if (type == 'userCasteCertificate') {
             this.userCasteCertificate = event.target.files[0];
+        } else if (type == 'labReport') {
+            this.labReport = event.target.files[0];
         }
     }
 
-    saveStaffEducation(){
+    saveStaffEducation() {
         const formData = new FormData();
         formData.append('degree', this.staffEducationForm.value.degree);
         formData.append('specialization', this.staffEducationForm.value.specialization);
@@ -343,22 +346,15 @@ export class UserEditComponent implements OnInit {
         formData.append('bank_branch_name', this.staffUpdateForm.value.bank_branch_name);
         formData.append('password', this.staffUpdateForm.value.password);
 
-        formData.append('password', this.birthCertificate);
-        formData.append('password', this.uploadJoiningLetter);
-        formData.append('password', this.uploadImage);
-        formData.append('password', this.uploadPan);
-        formData.append('password', this.uploadAadhar);
-        formData.append('password', this.userCasteCertificate);
+        formData.append('dob_proof', this.birthCertificate);
+        formData.append('blood_group_proof', this.labReport);
+        formData.append('joining_letter_proof', this.uploadJoiningLetter);
+        formData.append('profile_image', this.uploadImage);
+        formData.append('pan_proof', this.uploadPan);
+        formData.append('aadhaar_card_proof', this.uploadAadhar);
+        formData.append('caste_certificate_proof', this.userCasteCertificate);
 
-        return this.http.post(this.BASE_API_URL + '/saveMemberFile', this.staffUpdateForm.value)
-            .subscribe(response => {
-                // @ts-ignore
-                if (response.success == 1) {
-                    
-                }
-            });
-
-        return this.http.post(this.BASE_API_URL + '/updateMemberOwn', this.staffUpdateForm.value)
+        return this.http.post(this.BASE_API_URL + '/updateMemberOwn', formData)
             .subscribe(response => {
                 // @ts-ignore
                 if (response.success == 1) {
