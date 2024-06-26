@@ -1015,11 +1015,11 @@
                                 <div class="panel" id="two-panel">
 
                                     <div class="card-body">
-                                        <div>
+                                        <form [formGroup]="staffEducationForm">
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label>Select Degree</label>
-                                                    <select style="width: 100%" class="form-select" required>
+                                                    <select style="width: 100%" formControlName="degree" class="form-select" required>
                                                         <option value="null"> Select a degree</option>
                                                         <option *ngFor="let degree of degreeList" [value]="degree.id">
                                                             {{degree.name}}
@@ -1028,24 +1028,24 @@
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label>specialization</label>
-                                                    <input type="text" class="form-control" placeholder="specialization"
+                                                    <input formControlName="specialization" type="text" class="form-control" placeholder="specialization"
                                                         required>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label>university_name</label>
-                                                    <input type="text" class="form-control"
+                                                    <input type="text" class="form-control" formControlName="university_name"
                                                         placeholder="university_name" required>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label>percentage</label>
-                                                    <input type="text" class="form-control" placeholder="percentage"
+                                                    <input type="text" class="form-control" placeholder="percentage" formControlName="percentage"
                                                         required>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label>grade</label>
-                                                    <input type="text" class="form-control" placeholder="grade"
+                                                    <input type="text" class="form-control" placeholder="grade" formControlName="grade"
                                                         required>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
@@ -1054,16 +1054,15 @@
                                                         (change)="fileUpload($event, 'pan')" required>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
                                         <div class="card-footer">
-                                            <!-- <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"
-                                                (click)="saveStaffEducation()"
-                                                *ngIf="permission[0].permission == 1">Submit</button>
-                                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
-                                                (click)="updateStaffEducation()"
-                                                *ngIf="permission[1].permission == 1">Update</button>
-                                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
-                                                (click)="cancelUpdate()">Cancel</button> -->
+<!--                                             <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"-->
+<!--                                                (click)="saveStaffEducation()"-->
+<!--                                                *ngIf="permission[0].permission == 1">Submit</button>-->
+                                            <button class="btn btn-primary me-1"
+                                                (click)="saveStaffEducation()" >Update</button>
+<!--                                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"-->
+<!--                                                    (click)="cancelUpdate()">Cancel</button> -->
                                         </div>
                                     </div>
 

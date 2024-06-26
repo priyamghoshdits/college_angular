@@ -23,6 +23,7 @@ export class UserEditComponent implements OnInit {
     staffUpdateForm: FormGroup;
     educationQualificationForm: FormGroup;
     achievementForm: FormGroup;
+    staffEducationForm: FormGroup;
     placementForm: FormGroup;
     placementList: any[] = [];
     achievementFile: any;
@@ -198,6 +199,17 @@ export class UserEditComponent implements OnInit {
             password: new FormControl(null),
         });
 
+        this.staffEducationForm = new FormGroup({
+            id: new FormControl(null),
+            staff_id: new FormControl(null),
+            degree: new FormControl(null),
+            specialization: new FormControl(null),
+            university_name: new FormControl(null),
+            percentage: new FormControl(null),
+            grade: new FormControl(null),
+            file_name: new FormControl(null),
+        });
+
 
         this.jobService.getCompanyDetailsListListener().subscribe((response) => {
             this.companyDetailsList = response;
@@ -239,7 +251,6 @@ export class UserEditComponent implements OnInit {
                     this.staffDetails = response.data;
                     this.educations = response.educations;
                     this.staffUpdateForm.patchValue(this.staffDetails);
-                    console.log(response.educations);
                 }
             }
         });
@@ -277,6 +288,18 @@ export class UserEditComponent implements OnInit {
         } else if (type == 'userCasteCertificate') {
             this.userCasteCertificate = event.target.files[0];
         }
+    }
+
+    saveStaffEducation(){
+        const formData = new FormData();
+        formData.append('degree', this.staffEducationForm.value.degree);
+        formData.append('specialization', this.staffEducationForm.value.specialization);
+        formData.append('university_name', this.staffEducationForm.value.university_name);
+        formData.append('percentage', this.staffEducationForm.value.percentage);
+        formData.append('grade', this.staffEducationForm.value.grade);
+        formData.append('file_name', this.staffEducationForm.value.degree);
+
+
     }
 
 
