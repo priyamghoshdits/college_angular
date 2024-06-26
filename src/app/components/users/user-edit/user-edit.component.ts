@@ -67,6 +67,7 @@ export class UserEditComponent implements OnInit {
     uploadPan: File;
     uploadAadhar: File;
     userCasteCertificate: File;
+    education_file: File;
 
     private BASE_API_URL = environment.BASE_API_URL;
 
@@ -201,7 +202,6 @@ export class UserEditComponent implements OnInit {
 
         this.staffEducationForm = new FormGroup({
             id: new FormControl(null),
-            staff_id: new FormControl(null),
             degree: new FormControl(null),
             specialization: new FormControl(null),
             university_name: new FormControl(null),
@@ -287,7 +287,10 @@ export class UserEditComponent implements OnInit {
             this.uploadAadhar = event.target.files[0];
         } else if (type == 'userCasteCertificate') {
             this.userCasteCertificate = event.target.files[0];
+        }else if(type == 'education_file'){
+            this.education_file = event.target.files[0];
         }
+
     }
 
     saveStaffEducation(){
