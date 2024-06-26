@@ -49,6 +49,14 @@ const routes: Routes = [
           title: "Student Profile",
           breadcrumb: "Student Profile"
         }
+      },
+      {
+        path: 'staff-profile/:id',
+        component: StaffProfileComponent,
+        data: {
+          title: "Staff Profile",
+          breadcrumb: "Staff Profile"
+        }
       }
     ]
   }

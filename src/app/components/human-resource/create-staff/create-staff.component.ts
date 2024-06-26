@@ -33,6 +33,7 @@ import {
     NgbModal,
     NgbTooltip
 } from "@ng-bootstrap/ng-bootstrap";
+import {RouterLink} from "@angular/router";
 
 @Component({
     selector: 'app-create-staff',
@@ -59,6 +60,7 @@ import {
         NgxDropzoneModule,
         CustomFilterPipe,
         NgIf,
+        RouterLink,
     ],
     templateUrl: './create-staff.component.html',
     styleUrl: './create-staff.component.scss'
@@ -121,7 +123,7 @@ export class CreateStaffComponent {
             email: new FormControl(null, [Validators.required, Validators.email]),
             department_id: new FormControl(null, [Validators.required]),
             designation_id: new FormControl(null, [Validators.required]),
-            pan_number: new FormControl(null, [Validators.required]),
+            pan_number: new FormControl(null),
             epf_number: new FormControl(null),
             franchise_id: new FormControl(null),
             gross_salary: new FormControl(null),
@@ -230,6 +232,7 @@ export class CreateStaffComponent {
             this.staffCreationForm.markAllAsTouched();
             return;
         }
+
         Swal.fire({
             title: 'Please Wait !',
             html: 'Saving ...', // add html attribute if you want or remove

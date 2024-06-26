@@ -404,7 +404,7 @@
                                             <tr
                                                 *ngFor="let record of memberList | customFilter: searchItem;let indexOfElement=index">
                                                 <td>{{indexOfElement + 1}}</td>
-                                                <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}
+                                                <td [routerLink]="['/users/staff-profile/', record.id]">{{record.first_name}} {{record.middle_name}} {{record.last_name}}
                                                 </td>
                                                 <td>{{record.gender}}</td>
                                                 <td>{{record.dob}}</td>

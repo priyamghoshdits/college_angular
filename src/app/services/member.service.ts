@@ -95,6 +95,12 @@ export class MemberService {
         return [...this.categoryList];
     }
 
+    getSingleMemberFullDetails(member_id){
+        return this.http.get(this.BASE_API_URL + '/getMemberFullDetails/' + member_id)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
     getStaffAttendance(user_type_id, date) {
         return this.http.get(this.BASE_API_URL + '/getStaffAttendance/' + user_type_id + '/' + date)
             .pipe(catchError(this.errorService.serverError), tap(response => {

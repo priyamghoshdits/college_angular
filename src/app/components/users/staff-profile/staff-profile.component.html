@@ -1,1 +1,258 @@
-<p>staff-profile works!</p>
+<div class="container-fluid">
+    <div class="user-profile">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="warpper">
+                            <input checked class="radio" id="one" name="group" type="radio">
+                            <input class="radio" id="two" name="group" type="radio">
+                            <input class="radio" id="three" name="group" type="radio">
+                            <input class="radio" id="four" name="group" type="radio">
+                            <input class="radio" id="five" name="group" type="radio">
+                            <div class="tabs">
+                                <label class="tab" for="one" id="one-tab">Profile</label>
+                                <label class="tab" for="two" id="two-tab">Education Qualification</label>
+                                <label class="tab" for="three" id="three-tab">Work Experience</label>
+                                <label class="tab" for="four" id="four-tab">Journal Publication</label>
+                                <label class="tab" for="five" id="five-tab">Book Publication</label>
+                            </div>
+                            <div class="panels">
+                                <div class="panel" id="one-panel">
+                                    <div *ngIf="staff_details != null" class="row">
+                                        <div class="col-lg-3">
+                                            <div class="leftuser_imgoutsection">
+                                                <div class="jshadow_area">
+                                                    <img class="huimg_designs" src="{{FILE_URL}}/user_image/{{staff_details.image}}" onerror="this.src='assets/images/user/blank_default.jpg'">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-9">
+                                            <div class="rightuser_udetailsoutsection">
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-user"></i> Staff ID:
+                                                            <span class="studentimgdwnarea3">{{staff_details.identification_no}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-user"></i> Name:
+                                                            <span class="studentimgdwnarea3">{{staff_details.first_name}} {{staff_details.middle_name}} {{staff_details.last_name}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-calendar-days"></i> Date of birth:
+                                                            <span class="studentimgdwnarea3">{{staff_details.dob}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-phone"></i> Phone No:
+                                                            <span class="studentimgdwnarea3">{{staff_details.mobile_no}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-envelope"></i> Email Address:
+                                                            <span class="studentimgdwnarea3">{{staff_details.email}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-graduation-cap"></i> Qualification:
+                                                            <span class="studentimgdwnarea3">{{staff_details.qualification}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-cube"></i> Work Experience:
+                                                            <span class="studentimgdwnarea3">{{staff_details.work_experience}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-cube"></i> Designation:
+                                                            <span class="studentimgdwnarea3">{{staff_details.designation_name}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-cube"></i> Pan Number:
+                                                            <span class="studentimgdwnarea3">{{staff_details.pan_number}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-location-dot"></i> Address:
+                                                            <span class="studentimgdwnarea3">{{staff_details.permanent_address}}</span>
+                                                        </h1>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-user"></i> Blood Group:
+                                                            <span class="studentimgdwnarea3">{{staff_details.blood_group}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-cube"></i> Caste:
+                                                            <span class="studentimgdwnarea3">{{staff_details.category_name}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-cube"></i> Religion:
+                                                            <span class="studentimgdwnarea3">{{staff_details.religion}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-venus-mars"></i> Gender:
+                                                            <span class="studentimgdwnarea3">{{staff_details.gender}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-cube"></i> Marital Status:
+                                                            <span class="studentimgdwnarea3">{{staff_details.material_status}}</span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-download"></i> Download Lab Report:
+                                                            <span class="studentimgdwnarea3" style="color: blue;">
+                                                                <a href="{{FILE_URL}}/blood_group_proof/{{staff_details.blood_group_proof}}">Download Here</a>
+                                                            </span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-download"></i> Download Joining Letter:
+                                                            <span class="studentimgdwnarea3" style="color: blue;">
+                                                                <a href="{{FILE_URL}}/joining_letter_proof/{{staff_details.joining_letter_proof}}">Download Here</a>
+                                                            </span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-download"></i> Download Caste
+                                                            Certificate:
+                                                            <span class="studentimgdwnarea3" style="color: blue;">
+                                                                <a href="{{FILE_URL}}/caste_certificate_proof/{{staff_details.caste_certificate_proof}}">Download Here</a>
+                                                            </span>
+                                                        </h1>
+                                                        <h1 class="studentimgdwnarea2">
+                                                            <i class="fa-solid fa-download"></i> Download Pan Number:
+                                                            <span class="studentimgdwnarea3" style="color: blue;">
+                                                                <a href="{{FILE_URL}}/pan_proof/{{staff_details.pan_proof}}">Download Here</a>
+                                                            </span>
+                                                        </h1>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel" id="two-panel">
+                                    <h3>Education Qualification</h3>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Degree</th>
+                                                <th scope="col">Specialization</th>
+                                                <th scope="col">University</th>
+                                                <th scope="col">Percentage</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">File</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let record of education_qualification; let indexOfElement=index">
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td>{{record.degree_name}}</td>
+                                                <td>{{record.specialization}}</td>
+                                                <td>{{record.university_name}}</td>
+                                                <td>{{record.percentage}}</td>
+                                                <td>{{record.grade}}</td>
+                                                <td>
+                                                    <a href="{{FILE_URL}}/staff_education/{{record.file_name}}">Download</a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="panel" id="three-panel">
+                                    <h3>Work Experience</h3>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Staff Name</th>
+                                                <th scope="col">Designation</th>
+                                                <th scope="col">Organization</th>
+                                                <th scope="col">Experience</th>
+                                                <th scope="col">From Date</th>
+                                                <th scope="col">To Date</th>
+                                                <th scope="col">File</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let record of staff_experience; let indexOfElement=index">
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td>{{record.staff_name}}</td>
+                                                <td>{{record.designation}}</td>
+                                                <td>{{record.organization}}</td>
+                                                <td>{{record.experience}}</td>
+                                                <td>{{record.from_date}}</td>
+                                                <td>{{record.to_date}}</td>
+                                                <td><a href="{{FILE_URL}}/staff_experience_proof/{{record.file}}"></a></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="panel" id="four-panel">
+                                    <h3>Journal Publication</h3>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Journal Name</th>
+                                                <th scope="col">Publication</th>
+                                                <th scope="col">UGC Affiliation</th>
+                                                <th scope="col">Volume Page Number</th>
+                                                <th scope="col">University Name</th>
+                                                <th scope="col">ISSN Number</th>
+                                                <th scope="col">Topic Name</th>
+                                                <th scope="col">Impact Factor</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let record of journal_publication; let indexOfElement=index">
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td>{{record.journal_name}}</td>
+                                                <td>{{record.publication }}</td>
+                                                <td>{{record.ugc_affiliation}}</td>
+                                                <td>{{record.volume_page_number}}</td>
+                                                <td>{{record.university_name}}</td>
+                                                <td>{{record.issn_number}}</td>
+                                                <td>{{record.topic_name}}</td>
+                                                <td>{{record.impact_factor}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="panel" id="five-panel">
+                                    <h3>Book Publication</h3>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Book Name</th>
+                                                <th scope="col">ISBN Number</th>
+                                                <th scope="col">Name of publisher</th>
+                                                <th scope="col">Chapter full book</th>
+                                                <th scope="col">Chapter name</th>
+                                                <th scope="col">Page Number</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let record of book_publication; let indexOfElement=index">
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td>{{record.book_name}}</td>
+                                                <td>{{record.ISBN_number}}</td>
+                                                <td>{{record.name_of_publisher}}</td>
+                                                <td>{{record.chapter_full_book}}</td>
+                                                <td>{{record.chapter_name}}</td>
+                                                <td>{{record.page_number}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
