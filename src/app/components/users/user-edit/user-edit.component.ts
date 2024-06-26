@@ -67,11 +67,8 @@ export class UserEditComponent implements OnInit {
     uploadPan: File;
     uploadAadhar: File;
     userCasteCertificate: File;
-<<<<<<< HEAD
     education_file: File;
-=======
     labReport: File;
->>>>>>> 618bc56e7374119c7eb4e62c7d1da93db2332be8
 
     private BASE_API_URL = environment.BASE_API_URL;
 
@@ -291,13 +288,10 @@ export class UserEditComponent implements OnInit {
             this.uploadAadhar = event.target.files[0];
         } else if (type == 'userCasteCertificate') {
             this.userCasteCertificate = event.target.files[0];
-<<<<<<< HEAD
         }else if(type == 'education_file'){
             this.education_file = event.target.files[0];
-=======
         } else if (type == 'labReport') {
             this.labReport = event.target.files[0];
->>>>>>> 618bc56e7374119c7eb4e62c7d1da93db2332be8
         }
 
     }
