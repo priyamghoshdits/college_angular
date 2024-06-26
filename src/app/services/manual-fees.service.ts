@@ -14,16 +14,22 @@ export class ManualFeesService {
 
     }
 
-  saveManualFees(data){
-    return this.http.post(this.BASE_API_URL + '/saveManualFees', data)
-        .pipe(catchError(this.errorService.serverError), tap(response => {
-        }));
-  }
+    saveManualFees(data) {
+        return this.http.post(this.BASE_API_URL + '/saveManualFees', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+            }));
+    }
 
-  searchManualFees(data){
-      return this.http.post(this.BASE_API_URL + '/searchManualFees', data)
-          .pipe(catchError(this.errorService.serverError), tap(response => {
-          }));
-  }
+    searchManualFees(data) {
+        return this.http.post(this.BASE_API_URL + '/searchManualFees', data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+            }));
+    }
+
+    deleteManualFees(data) {
+        return this.http.get(this.BASE_API_URL + '/deleteManualFees/' + data)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+            }));
+    }
 
 }

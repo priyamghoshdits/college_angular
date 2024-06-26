@@ -9,6 +9,8 @@ import {SubjectService} from "../../../services/subject.service";
 import {StudentService} from "../../../services/student.service";
 import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase} from "@ng-bootstrap/ng-bootstrap";
 import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
+import {environment} from "../../../../environments/environment";
+import Swal from "sweetalert2";
 
 @Component({
     selector: 'app-manual-fees',
@@ -30,7 +32,7 @@ import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
     styleUrl: './manual-fees.component.scss'
 })
 export class ManualFeesComponent {
-
+    public FILE_URL = environment.FILE_URL;
     manualFeesForm: FormGroup;
     searchManualFeesForm: FormGroup;
     rolesAndPermission: any[] = [];
@@ -94,7 +96,7 @@ export class ManualFeesComponent {
         })
     }
 
-    searchManualFees(){
+    searchManualFeesFunc(){
         this.manualFeesService.searchManualFees(this.searchManualFeesForm.value).subscribe((response: any) => {
             if(response.success == 1){
                 this.manualFeesList = response.data;
@@ -132,7 +134,14 @@ export class ManualFeesComponent {
 
         this.manualFeesService.saveManualFees(formData).subscribe((response: any) => {
             if(response.success == 1){
-
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'SuccessFully Saved',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                this.manualFeesForm.reset();
             }
         })
     }
@@ -147,10 +156,54 @@ export class ManualFeesComponent {
     }
 
     editManualFees(data){
+        // this.manualFeesForm.patchValue(data);
+        this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
+            this.semesterList = response.data;
+
+            this.manualFeesForm.patchValue(data);
+
+            // @ts-ignore
+            const session_id = JSON.parse(localStorage.getItem('session_id'));
+            this.manualFeesForm.patchValue({ session_id: session_id });
+
+            let x = this.studentList.filter(x => x.course_id == this.manualFeesForm.value.course_id);
+            this.filteredStudent = x.filter(x => x.current_semester_id == this.manualFeesForm.value.semester_id);
+            this.filteredStudent = this.filteredStudent.filter(x => x.session_id == this.manualFeesForm.value.session_id);
+
+
+            this.manualFeesForm.patchValue(data);
+            this.isUpdatable = true;
+            this.active = 1;
+        })
 
     }
 
     deleteManualFees(data){
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if(result.isConfirmed){
+                this.manualFeesService.deleteManualFees(data.id).subscribe((response: any) => {
+                    if(response.success == 1){
+                        Swal.fire({
+                            position: 'center',
+                            icon: 'success',
+                            title: 'Manual fees deleted',
+                            showConfirmButton: false,
+                            timer: 1000
+                        });
+                        // this.manualFeesList = response.data;
+                        this.searchManualFeesFunc();
+                    }
+                })
+            }
+        });
 
     }
 

@@ -115,7 +115,7 @@
                                         <input  class="form-control" formControlName="to_date" type="date">
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <button style="margin-top: 30px" (click)="searchManualFees()" class="btn btn-primary me-1">Submit</button>
+                                        <button style="margin-top: 30px" (click)="searchManualFeesFunc()" class="btn btn-primary me-1">Submit</button>
                                     </div>
                                 </div>
                             </form>
@@ -142,7 +142,11 @@
                                         <td>{{record.student_name}}</td>
                                         <td>{{record.date_of_payment}}</td>
                                         <td>{{record.amount}}</td>
-                                        <td><a href="">Download</a></td>
+                                        <td><a href="{{FILE_URL}}/manual_payslips/{{record.file_name}}">Download</a></td>
+                                        <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">
+                                            <a *ngIf="permission[1].permission === 1" (click)="editManualFees(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission === 1" (click)="deleteManualFees(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>

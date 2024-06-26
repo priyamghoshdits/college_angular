@@ -21,6 +21,7 @@ export class UserEditComponent implements OnInit {
     public FILE_URL = environment.FILE_URL;
     studentCreationForm: FormGroup;
     staffUpdateForm: FormGroup;
+    manualFeesForm: FormGroup;
     educationQualificationForm: FormGroup;
     achievementForm: FormGroup;
     staffEducationForm: FormGroup;
@@ -28,6 +29,7 @@ export class UserEditComponent implements OnInit {
     placementList: any[] = [];
     achievementFile: any;
     achievementList: any[] = [];
+    manualFeesList: any[] = [];
     categoryList: any[];
     showPopup = true;
     educationUpdate = false;
@@ -69,6 +71,7 @@ export class UserEditComponent implements OnInit {
     userCasteCertificate: File;
     education_file: File;
     labReport: File;
+    manualFeesFile: File;
 
     private BASE_API_URL = environment.BASE_API_URL;
 
@@ -211,6 +214,16 @@ export class UserEditComponent implements OnInit {
             file_name: new FormControl(null),
         });
 
+        this.manualFeesForm = new FormGroup({
+            id: new FormControl(null),
+            course_id: new FormControl(null, [Validators.required]),
+            semester_id: new FormControl(null, [Validators.required]),
+            student_id: new FormControl(null, [Validators.required]),
+            session_id: new FormControl(null, [Validators.required]),
+            date_of_payment: new FormControl(null, [Validators.required]),
+            amount: new FormControl(null, [Validators.required]),
+        });
+
 
         this.jobService.getCompanyDetailsListListener().subscribe((response) => {
             this.companyDetailsList = response;
@@ -248,6 +261,7 @@ export class UserEditComponent implements OnInit {
                     this.educationQualificationForm.patchValue(response.education_details);
                     this.achievementList = response.achievement;
                     this.placementList = response.placement;
+                    this.manualFeesList = response.manualFeesList;
                 } else {
                     this.staffDetails = response.data;
                     this.educations = response.educations;
@@ -292,6 +306,8 @@ export class UserEditComponent implements OnInit {
             this.education_file = event.target.files[0];
         } else if (type == 'labReport') {
             this.labReport = event.target.files[0];
+        }else if(type == 'manualFeesFile'){
+            this.manualFeesFile = event.target.files[0];
         }
 
     }
@@ -305,6 +321,11 @@ export class UserEditComponent implements OnInit {
         formData.append('grade', this.staffEducationForm.value.grade);
         formData.append('file_name', this.staffEducationForm.value.degree);
 
+
+    }
+
+
+    saveManualFeesOwn(){
 
     }
 
