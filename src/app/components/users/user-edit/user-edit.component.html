@@ -865,8 +865,13 @@
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Birth Certificate</label>
+<<<<<<< HEAD
+                                                            <input class="form-control" type="file"
+                                                                (change)="fileUpload($event, 'birthCertificate')">
+=======
                                                             <input (change)="fileUpload($event, 'birthCertificate')" class="form-control"
                                                                    type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Date Of Joining</label>
@@ -876,8 +881,13 @@
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Joining Letter</label>
+<<<<<<< HEAD
+                                                            <input class="form-control" type="file"
+                                                                (change)="fileUpload($event, 'uploadJoiningLetter')">
+=======
                                                             <input (change)="fileUpload($event, 'uploadJoiningLetter')" class="form-control"
                                                                    type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Phone Number</label>
@@ -924,8 +934,13 @@
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Image</label>
+<<<<<<< HEAD
+                                                            <input class="form-control" type="file"
+                                                                (change)="fileUpload($event, 'uploadImage')">
+=======
                                                             <input (change)="fileUpload($event, 'uploadImage')" class="form-control"
                                                                    type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Blood Group</label>
@@ -944,8 +959,13 @@
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Update Lab Report</label>
+<<<<<<< HEAD
+                                                            <input class="form-control" type="file"
+                                                                (change)="fileUpload($event, 'labReport')">
+=======
                                                             <input (change)="fileUpload($event, 'labReport')" class="form-control"
                                                                    type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Religion</label>
@@ -993,8 +1013,13 @@
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">User Caste Certificate</label>
+<<<<<<< HEAD
+                                                            <input class="form-control" type="file"
+                                                                (change)="fileUpload($event, 'userCasteCertificate')">
+=======
                                                             <input (change)="fileUpload($event, 'userCasteCertificate')" class="form-control"
                                                                    type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Department</label>
@@ -1032,8 +1057,13 @@
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Aadhar</label>
+<<<<<<< HEAD
+                                                            <input class="form-control" type="file"
+                                                                (change)="fileUpload($event, 'uploadAadhar')">
+=======
                                                             <input (change)="fileUpload($event, 'uploadAadhar')" class="form-control"
                                                                    type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Designation</label>
@@ -1055,8 +1085,13 @@
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Pan</label>
+<<<<<<< HEAD
+                                                            <input class="form-control" type="file"
+                                                                (change)="fileUpload($event, 'uploadPan')">
+=======
                                                             <input (change)="fileUpload($event, 'uploadPan')" class="form-control"
                                                                    type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                     </div>
 
@@ -1096,7 +1131,6 @@
                                                         </div>
                                                     </div>
                                                 </form>
-
                                                 <div class="card-footer text-end">
                                                     <button (click)="updateProfileStaff()" class="btn btn-primary"
                                                             type="submit">Update
@@ -1107,15 +1141,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel" id="two-panel">
 
+                                <div class="panel" id="two-panel">
                                     <div class="card-body">
                                         <form [formGroup]="staffEducationForm">
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label>Select Degree</label>
+<<<<<<< HEAD
+                                                    <select style="width: 100%" formControlName="degree"
+                                                        class="form-select" required>
+=======
                                                     <select class="form-select" formControlName="degree"
                                                             required style="width: 100%">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         <option value="null"> Select a degree</option>
                                                         <option *ngFor="let degree of degreeList" [value]="degree.id">
                                                             {{degree.name}}
@@ -1124,6 +1163,16 @@
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label>specialization</label>
+<<<<<<< HEAD
+                                                    <input formControlName="specialization" type="text"
+                                                        class="form-control" placeholder="specialization" required>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>university_name</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="university_name" placeholder="university_name"
+                                                        required>
+=======
                                                     <input class="form-control" formControlName="specialization"
                                                            placeholder="specialization" required
                                                            type="text">
@@ -1133,11 +1182,26 @@
                                                     <input class="form-control" formControlName="university_name"
                                                            placeholder="university_name"
                                                            required type="text">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label>percentage</label>
+<<<<<<< HEAD
+                                                    <input type="text" class="form-control" placeholder="percentage"
+                                                        formControlName="percentage" required>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>grade</label>
+                                                    <input type="text" class="form-control" placeholder="grade"
+                                                        formControlName="grade" required>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>File</label>
+                                                    <input type="file" class="form-control"
+                                                        (change)="fileUpload($event, 'educationFileName')" required>
+=======
                                                     <input class="form-control" formControlName="percentage" placeholder="percentage"
                                                            required
                                                            type="text">
@@ -1152,10 +1216,18 @@
                                                     <label>File</label>
                                                     <input (change)="fileUpload($event, 'education_file')" class="form-control"
                                                            required type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                 </div>
                                             </div>
                                         </form>
                                         <div class="card-footer">
+<<<<<<< HEAD
+                                            <button class="btn btn-primary me-1"
+                                                (click)="saveStaffEducation()">Submit</button>
+                                            <button [hidden]="isUpdatableStaffEducation == false"
+                                                class="btn btn-primary me-1"
+                                                (click)="cancelUpdateStaffEducation()">Cancel</button>
+=======
                                             <!--                                             <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"-->
                                             <!--                                                (click)="saveStaffEducation()"-->
                                             <!--                                                *ngIf="permission[0].permission == 1">Submit</button>-->
@@ -1164,6 +1236,7 @@
                                             </button>
                                             <!--                                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"-->
                                             <!--                                                    (click)="cancelUpdate()">Cancel</button> -->
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                         </div>
                                     </div>
 
@@ -1182,6 +1255,22 @@
                                             </tr>
                                             </thead>
                                             <tbody>
+<<<<<<< HEAD
+                                                <tr *ngFor="let record of educations; let indexOfElement=index">
+                                                    <td>{{indexOfElement+1}}</td>
+                                                    <td>{{record.degree_name}}</td>
+                                                    <td>{{record.specialization}}</td>
+                                                    <td>{{record.university_name}}</td>
+                                                    <td>{{record.percentage}}</td>
+                                                    <td>{{record.grade}}</td>
+                                                    <td>
+                                                        <a
+                                                            (click)="editStaffEducation(record)"><mat-icon>edit</mat-icon></a>
+                                                        <a
+                                                            (click)="deleteStaffEducation(record)"><mat-icon>delete</mat-icon></a>
+                                                    </td>
+                                                </tr>
+=======
                                             <tr *ngFor="let record of educations; let indexOfElement=index">
                                                 <td>{{indexOfElement + 1}}</td>
                                                 <td>{{record.degree_name}}</td>
@@ -1191,15 +1280,98 @@
                                                 <td>{{record.grade}}</td>
                                                 <td>{{record.file_name}}</td>
                                             </tr>
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                                 <div class="panel" id="three-panel">
                                     <h3>Book Qualification</h3>
+
+                                    <div class="card-body">
+                                        <form [formGroup]="staffPublicationForm">
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label>Book Name</label>
+                                                    <input formControlName="book_name" type="text" class="form-control"
+                                                        placeholder="Book Name" required>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>Name of Publisher</label>
+                                                    <input type="text" class="form-control"
+                                                        formControlName="name_of_publisher"
+                                                        placeholder="Name of Publisher" required>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>ISBN Number</label>
+                                                    <input type="text" class="form-control" placeholder="ISBN Number"
+                                                        formControlName="ISBN_number" required>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label>Chapter Full Book</label>
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Chapter Full Book"
+                                                        formControlName="chapter_full_book" required>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>Chapter Name</label>
+                                                    <input type="text" class="form-control" placeholder="Chapter Name"
+                                                        formControlName="chapter_name" required>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>Page Number</label>
+                                                    <input type="text" class="form-control" placeholder="Page Number"
+                                                        formControlName="page_number" required>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <div class="card-footer">
+                                            <button class="btn btn-primary me-1"
+                                                (click)="saveStaffPublication()">Submit</button>
+                                            <button [hidden]="isUpdatableStaffPublication == false"
+                                                class="btn btn-primary me-1"
+                                                (click)="cancelUpdateStaffPublication()">Cancel</button>
+                                        </div>
+                                    </div>
+
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
+<<<<<<< HEAD
+                                                <tr>
+                                                    <th>Sl.NO</th>
+                                                    <th>Staff Name</th>
+                                                    <th>Book Name</th>
+                                                    <th>ISBN Number</th>
+                                                    <th>Name of Publisher</th>
+                                                    <th>Chapter Full Book</th>
+                                                    <th>Chapter Name</th>
+                                                    <th>Page Number</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let record of stafBookPublicationList ;let indexOfElement=index">
+
+                                                    <td>{{indexOfElement + 1}}</td>
+                                                    <td>{{record.staff_name}}</td>
+                                                    <td>{{record.book_name}}</td>
+                                                    <td>{{record.ISBN_number}}</td>
+                                                    <td>{{record.name_of_publisher}}</td>
+                                                    <td>{{record.chapter_full_book}}</td>
+                                                    <td>{{record.chapter_name}}</td>
+                                                    <td>{{record.page_number}}</td>
+                                                    <td>
+                                                        <a
+                                                            (click)="editBookPublication(record)"><mat-icon>edit</mat-icon></a>
+                                                        <a
+                                                            (click)="deleteStaffBookPublication(record)"><mat-icon>delete</mat-icon></a>
+                                                    </td>
+                                                </tr>
+=======
                                             <tr>
                                                 <th scope="col">Sl.NO</th>
                                                 <th scope="col">Staff Name</th>
@@ -1224,6 +1396,7 @@
                                                 <td></td>
                                                 <td></td>
                                             </tr>
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                             </tbody>
                                         </table>
 
@@ -1231,10 +1404,120 @@
                                     </div>
                                 </div>
                                 <div class="panel" id="four-panel">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h5>Experience</h5><span>Staff Experience</span>
+                                        </div>
+                                        <div class="card-body">
+                                            <form [formGroup]="staffExperienceForm" class="theme-form">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="col-form-label pt-0">Designation</label>
+                                                        <input class="form-control" formControlName="designation"
+                                                            placeholder="Enter Designation" type="text">
+                                                        <div *ngIf="staffExperienceForm.controls['designation'].errors?.['required'] && staffExperienceForm.controls['designation'].touched "
+                                                            class="text text-danger mt-1">Designation required
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="col-form-label pt-0">From Date</label>
+                                                        <input class="form-control" formControlName="from_date"
+                                                            type="date">
+                                                        <div *ngIf="staffExperienceForm.controls['from_date'].errors?.['required'] && staffExperienceForm.controls['from_date'].touched "
+                                                            class="text text-danger mt-1">From Date required
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="col-form-label pt-0">To Date</label>
+                                                        <input class="form-control" formControlName="to_date"
+                                                            type="date">
+                                                        <div *ngIf="staffExperienceForm.controls['to_date'].errors?.['required'] && staffExperienceForm.controls['to_date'].touched "
+                                                            class="text text-danger mt-1">To Date required
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="col-form-label pt-0">Organization</label>
+                                                        <input class="form-control" formControlName="organization"
+                                                            placeholder="Enter Organization" type="text">
+                                                        <div *ngIf="staffExperienceForm.controls['organization'].errors?.['required'] && staffExperienceForm.controls['organization'].touched "
+                                                            class="text text-danger mt-1">Organization required
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="col-form-label pt-0">Experience(Year and
+                                                            Month)</label>
+                                                        <input class="form-control" formControlName="experience"
+                                                            placeholder="Enter Experience" type="text">
+                                                        <div *ngIf="staffExperienceForm.controls['experience'].errors?.['required'] && staffExperienceForm.controls['experience'].touched "
+                                                            class="text text-danger mt-1">Experience required
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="col-form-label pt-0">Upload Experience
+                                                            Proof</label>
+                                                        <input (change)="fileUpload($event, 'experienceProof')"
+                                                            class="form-control" formControlName="experience_proof"
+                                                            type="file">
+                                                        <div *ngIf="staffExperienceForm.controls['experience_proof'].errors?.['required'] && staffExperienceForm.controls['experience_proof'].touched "
+                                                            class="text text-danger mt-1">Experience Proof required
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button (click)="saveStaffExperience()"
+                                                [hidden]="isUpdatableExperience == true"
+                                                class="btn btn-primary me-1">Submit
+                                            </button>
+                                            <button (click)="updateStaffExperience()"
+                                                [hidden]="isUpdatableExperience == false"
+                                                class="btn btn-primary me-1">Update
+                                            </button>
+                                            <button (click)="cancelUpdateExperience()"
+                                                [hidden]="isUpdatableExperience == false"
+                                                class="btn btn-primary me-1">Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+
                                     <h3>Experience</h3>
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
+<<<<<<< HEAD
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>Designation</th>
+                                                    <th>Organization</th>
+                                                    <th>Experience</th>
+                                                    <th>From Date</th>
+                                                    <th>To Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let record of staffExperienceList ;let indexOfElement=index">
+                                                    <td>{{indexOfElement + 1}}</td>
+                                                    <td>{{record.designation}}</td>
+                                                    <td>{{record.organization}}</td>
+                                                    <td>{{record.experience}}</td>
+                                                    <td>{{record.from_date}}</td>
+                                                    <td>{{record.to_date}}</td>
+
+                                                    <td>
+                                                        <a (click)="editStaffExperience(record)">
+                                                            <mat-icon>edit</mat-icon>
+                                                        </a>
+                                                        <a (click)="deleteStaffExperience(record)">
+                                                            <mat-icon>delete</mat-icon>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+=======
                                             <tr>
                                                 <th scope="col">Sl.NO</th>
                                                 <th scope="col">Staff Name</th>
@@ -1259,6 +1542,7 @@
                                                 <td></td>
                                                 <td></td>
                                             </tr>
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                             </tbody>
                                         </table>
 
@@ -1267,9 +1551,105 @@
                                 </div>
                                 <div class="panel" id="five-panel">
                                     <h3>Journal Publication</h3>
+
+                                    <div>
+                                        <div class="card-body">
+                                            <form [formGroup]="journalPublicationForm">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Journal Name</label>
+                                                        <input class="form-control" formControlName="journal_name"
+                                                            placeholder="Journal Name" required type="text">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Publication</label>
+                                                        <input class="form-control" formControlName="publication"
+                                                            placeholder="Publication" required type="text">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>UGC Affliation</label>
+                                                        <select class="form-select" required style="width: 100%;"
+                                                            formControlName="ugc_affiliation">
+                                                            <option value="null">Select</option>
+                                                            <option value="yes">Yes</option>
+                                                            <option value="no">No</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>University Name</label>
+                                                        <input class="form-control" formControlName="university_name"
+                                                            placeholder="University Name" required type="text">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Volume and Page number</label>
+                                                        <input class="form-control" formControlName="volume_page_number"
+                                                            placeholder="Volume and Page number" required type="text">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>ISSN Number</label>
+                                                        <input class="form-control" formControlName="issn_number"
+                                                            placeholder="ISSN Number" required type="text">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Topic Name</label>
+                                                        <input class="form-control" formControlName="topic_name"
+                                                            placeholder="Topic Name" required type="text">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Imapct Number</label>
+                                                        <input class="form-control" placeholder="Impact Factor"
+                                                            formControlName="impact_factor" required type="text">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button (click)="saveJournalPublication()"
+                                                class="btn btn-primary me-1">Submit
+                                            </button>
+                                            <button (click)="cancelUpdateJournalPublication()"
+                                                class="btn btn-primary me-1" [hidden]="isUpdatablePublication == false">Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
+<<<<<<< HEAD
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th>Journal Name</th>
+                                                    <th>Publication</th>
+                                                    <th>UGC Affiliation</th>
+                                                    <th>Topic name</th>
+                                                    <th>Volume Page number</th>
+                                                    <th>Issn Number</th>
+                                                    <th>Impact Factor</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let record of journalPublicationList; let indexOfElement=index">
+                                                    <td>{{indexOfElement + 1}}</td>
+                                                    <td>{{record.journal_name}}</td>
+                                                    <td>{{record.publication}}</td>
+                                                    <td>{{record.ugc_affiliation}}</td>
+                                                    <td>{{record.topic_name}}</td>
+                                                    <td>{{record.volume_page_number}}</td>
+                                                    <td>{{record.issn_number}}</td>
+                                                    <td>{{record.impact_factor}}</td>
+                                                    <td>
+                                                        <a (click)="editJournalPublication(record)">
+                                                            <mat-icon>edit</mat-icon>
+                                                        </a>
+                                                        <a (click)="deleteJournalPublication(record)">
+                                                            <mat-icon>delete</mat-icon>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+=======
                                             <tr>
                                                 <th scope="col">Sl.NO</th>
                                                 <th scope="col">Staff Name</th>
@@ -1294,6 +1674,7 @@
                                                 <td></td>
                                                 <td></td>
                                             </tr>
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                             </tbody>
                                         </table>
 
