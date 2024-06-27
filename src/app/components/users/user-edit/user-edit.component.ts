@@ -338,12 +338,15 @@ export class UserEditComponent implements OnInit {
 
     }
 
+    editManualFees(data){
+        this.manualFeesForm.patchValue(data);
+    }
 
     saveManualFeesOwn(){
         const formData = new FormData();
+        formData.append('id', this.manualFeesForm.value.id);
         formData.append('course_id', this.manualFeesForm.value.course_id);
         formData.append('semester_id', this.manualFeesForm.value.semester_id);
-        formData.append('student_id', this.manualFeesForm.value.student_id);
         formData.append('session_id', this.manualFeesForm.value.session_id);
         formData.append('date_of_payment', this.manualFeesForm.value.date_of_payment);
         formData.append('amount', this.manualFeesForm.value.amount);
@@ -351,16 +354,16 @@ export class UserEditComponent implements OnInit {
         formData.append('file', this.manualFeesFile);
 
         return this.http.post(this.BASE_API_URL + '/saveStudentManualFees', formData)
-            .subscribe(response => {
-                // @ts-ignore
+            .subscribe((response: any) => {
                 if (response.success == 1) {
                     Swal.fire({
                         title: "Well Done!!",
-                        text: "Profile Updated",
+                        text: "Fees Saved",
                         icon: "success"
                     });
                 }
                 this.manualFeesForm.reset();
+                this.manualFeesList = response.data;
             });
     }
 

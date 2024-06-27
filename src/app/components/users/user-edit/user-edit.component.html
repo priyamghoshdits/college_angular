@@ -27,7 +27,7 @@
                                 <label class="tab" for="two" id="two-tab">Educational Qualification</label>
                                 <label class="tab" for="three" id="three-tab">Achivement</label>
                                 <label class="tab" for="four" id="four-tab">Placement</label>
-                                <label class="tab" for="five" id="five-tab">Placement</label>
+                                <label class="tab" for="five" id="five-tab">Fees</label>
 
                             </div>
                             <div class="panels">
@@ -758,7 +758,7 @@
                                                 <td>{{record.amount}}</td>
                                                 <td><a href="{{FILE_URL}}/manual_payslips/{{record.file_name}}">Download</a></td>
                                                 <td>
-                                                    <a><mat-icon>edit</mat-icon></a>
+                                                    <a (click)="editManualFees(record)"><mat-icon>edit</mat-icon></a>
                                                     <a><mat-icon>delete</mat-icon></a>
                                                 </td>
                                             </tr>
