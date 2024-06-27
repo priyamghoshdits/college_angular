@@ -11,6 +11,8 @@ import { DesignationService } from 'src/app/services/designation.service';
 import { DepartmentService } from 'src/app/services/department.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { StaffDegreeService } from 'src/app/services/staff-degree.service';
+import { StaffEducationService } from 'src/app/services/staff-education.service';
+import { BookPublicationService } from 'src/app/services/book-publication.service';
 
 @Component({
     selector: 'app-user-edit',
@@ -19,12 +21,16 @@ import { StaffDegreeService } from 'src/app/services/staff-degree.service';
 })
 export class UserEditComponent implements OnInit {
     public FILE_URL = environment.FILE_URL;
+    staffId = '';
     studentCreationForm: FormGroup;
     staffUpdateForm: FormGroup;
     educationQualificationForm: FormGroup;
     achievementForm: FormGroup;
     staffEducationForm: FormGroup;
     placementForm: FormGroup;
+    staffPublicationForm: FormGroup;
+    staffExperienceForm: FormGroup;
+    journalPublicationForm: FormGroup;
     placementList: any[] = [];
     achievementFile: any;
     achievementList: any[] = [];
@@ -69,10 +75,20 @@ export class UserEditComponent implements OnInit {
     userCasteCertificate: File;
     education_file: File;
     labReport: File;
+    experienceProof: File;
+
+    educationFileName: File;
+    isUpdatableStaffEducation: boolean = false;
+    isUpdatableStaffPublication: boolean = false;
+    isUpdatableExperience: boolean = false;
+    isUpdatablePublication: boolean = false;
+    stafBookPublicationList: any[];
+    staffExperienceList: any[];
+    journalPublicationList: any[];
 
     private BASE_API_URL = environment.BASE_API_URL;
 
-    constructor(private http: HttpClient, private errorService: ErrorService, private memberService: MemberService, private achievementService: AchievementService, private jobService: JobService, private designationService: DesignationService, private departmentService: DepartmentService, private franchiseService: FranchiseService, private StaffDegreeService: StaffDegreeService) {
+    constructor(private http: HttpClient, private errorService: ErrorService, private memberService: MemberService, private achievementService: AchievementService, private jobService: JobService, private designationService: DesignationService, private departmentService: DepartmentService, private franchiseService: FranchiseService, private StaffDegreeService: StaffDegreeService, private StaffEducationService: StaffEducationService, private BookPublicationService: BookPublicationService) {
         this.studentCreationForm = new FormGroup({
             id: new FormControl(null),
             first_name: new FormControl(null),
@@ -203,14 +219,46 @@ export class UserEditComponent implements OnInit {
 
         this.staffEducationForm = new FormGroup({
             id: new FormControl(null),
-            degree: new FormControl(null),
-            specialization: new FormControl(null),
-            university_name: new FormControl(null),
-            percentage: new FormControl(null),
-            grade: new FormControl(null),
+            degree: new FormControl(null, [Validators.required]),
+            specialization: new FormControl(null, [Validators.required]),
+            university_name: new FormControl(null, [Validators.required]),
+            percentage: new FormControl(null, [Validators.required]),
+            grade: new FormControl(null, [Validators.required]),
             file_name: new FormControl(null),
         });
 
+        this.staffPublicationForm = new FormGroup({
+            id: new FormControl(null),
+            book_name: new FormControl(null, [Validators.required]),
+            ISBN_number: new FormControl(null, [Validators.required]),
+            name_of_publisher: new FormControl(null, [Validators.required]),
+            chapter_full_book: new FormControl(null, [Validators.required]),
+            chapter_name: new FormControl(null, [Validators.required]),
+            page_number: new FormControl(null, [Validators.required]),
+        });
+
+        this.staffExperienceForm = new FormGroup({
+            id: new FormControl(null),
+            staff_id: new FormControl(null),
+            organization: new FormControl(null, [Validators.required]),
+            designation: new FormControl(null, [Validators.required]),
+            experience: new FormControl(null, [Validators.required]),
+            to_date: new FormControl(null, [Validators.required]),
+            from_date: new FormControl(null, [Validators.required]),
+            experience_proof: new FormControl(null),
+        });
+
+        this.journalPublicationForm = new FormGroup({
+            id: new FormControl(null),
+            journal_name: new FormControl(null),
+            publication: new FormControl(null, [Validators.required]),
+            ugc_affiliation: new FormControl(null, [Validators.required]),
+            university_name: new FormControl(null, [Validators.required]),
+            volume_page_number: new FormControl(null, [Validators.required]),
+            issn_number: new FormControl(null, [Validators.required]),
+            topic_name: new FormControl(null, [Validators.required]),
+            impact_factor: new FormControl(null, [Validators.required]),
+        });
 
         this.jobService.getCompanyDetailsListListener().subscribe((response) => {
             this.companyDetailsList = response;
@@ -242,6 +290,7 @@ export class UserEditComponent implements OnInit {
     getUserDetails() {
         this.http.get(this.BASE_API_URL + '/getLoggedInUserData').subscribe((response: any) => {
             if (response.success == 1) {
+                this.staffId = this.user.id;
                 if (this.user.user_type_id == 3) {
                     this.userDetails = response.data;
                     this.studentCreationForm.patchValue(this.userDetails);
@@ -251,6 +300,9 @@ export class UserEditComponent implements OnInit {
                 } else {
                     this.staffDetails = response.data;
                     this.educations = response.educations;
+                    this.stafBookPublicationList = response.publications;
+                    this.staffExperienceList = response.experience;
+                    this.journalPublicationList = response.journal;
                     this.staffUpdateForm.patchValue(this.staffDetails);
                 }
             }
@@ -288,28 +340,304 @@ export class UserEditComponent implements OnInit {
             this.uploadAadhar = event.target.files[0];
         } else if (type == 'userCasteCertificate') {
             this.userCasteCertificate = event.target.files[0];
-        }else if(type == 'education_file'){
+        } else if (type == 'education_file') {
             this.education_file = event.target.files[0];
         } else if (type == 'labReport') {
             this.labReport = event.target.files[0];
+        } else if (type == 'educationFileName') {
+            this.educationFileName = event.target.files[0];
+        } else if (type == 'experienceProof') {
+            this.experienceProof = event.target.files[0];
         }
+    }
+
+    saveJournalPublication() {
+        if (!this.journalPublicationForm.valid) {
+            this.journalPublicationForm.markAllAsTouched();
+            return;
+        }
+
+        return this.http.post(this.BASE_API_URL + '/saveJournalPublicationOwn', this.journalPublicationForm.value)
+            .subscribe((response: any) => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    Swal.fire({
+                        title: "Well Done!!",
+                        text: "Education Updated",
+                        icon: "success"
+                    });
+                    this.journalPublicationList = response.data
+                    this.journalPublicationForm.reset();
+                    this.isUpdatablePublication = false;
+                }
+            });
+    }
+
+    cancelUpdateJournalPublication() {
+        this.isUpdatablePublication = false;
+    }
+
+    editJournalPublication(data) {
+        this.journalPublicationForm.patchValue(data);
+        this.isUpdatablePublication = true;
+    }
+
+    deleteJournalPublication(data) {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete course ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                return this.http.get(this.BASE_API_URL + '/deleteJournalPublication/' + data.id)
+                    .subscribe((response: any) => {
+                        // @ts-ignore
+                        if (response.success == 1) {
+                            Swal.fire({
+                                title: "Well Done!!",
+                                text: "journal Deleted",
+                                icon: "success"
+                            });
+                            this.journalPublicationList = response.journals
+                        }
+                    });
+            }
+        });
 
     }
 
-    saveStaffEducation() {
+    saveStaffExperience() {
+        if (!this.staffExperienceForm.valid) {
+            this.staffExperienceForm.markAllAsTouched();
+            return;
+        }
+
         const formData = new FormData();
+        formData.append('designation', this.staffExperienceForm.value.designation);
+        formData.append('experience', this.staffExperienceForm.value.experience);
+        formData.append('organization', this.staffExperienceForm.value.organization);
+        formData.append('from_date', this.staffExperienceForm.value.from_date);
+        formData.append('to_date', this.staffExperienceForm.value.to_date);
+        formData.append('experience_proof', this.experienceProof);
+
+
+        return this.http.post(this.BASE_API_URL + '/saveExperienceOwn', formData)
+            .subscribe((response: any) => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    Swal.fire({
+                        title: "Well Done!!",
+                        text: "Education Updated",
+                        icon: "success"
+                    });
+                    this.staffExperienceList = response.data
+                }
+            });
+    }
+
+    editStaffExperience(data) {
+        this.staffExperienceForm.patchValue(data);
+        this.isUpdatableExperience = true;
+    }
+
+    deleteStaffExperience(data) {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                return this.http.get(this.BASE_API_URL + '/deleteExperience/' + data.id)
+                    .subscribe((response: any) => {
+                        // @ts-ignore
+                        if (response.success == 1) {
+                            Swal.fire({
+                                title: "Well Done!!",
+                                text: "Education Updated",
+                                icon: "success"
+                            });
+                            this.staffExperienceList = response.experiences
+                        }
+                    });
+            }
+        });
+    }
+
+    updateStaffExperience() {
+
+        if (!this.staffExperienceForm.valid) {
+            this.staffExperienceForm.markAllAsTouched();
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('id', this.staffExperienceForm.value.id);
+        formData.append('staff_id', this.staffExperienceForm.value.staff_id);
+        formData.append('designation', this.staffExperienceForm.value.designation);
+        formData.append('experience', this.staffExperienceForm.value.experience);
+        formData.append('organization', this.staffExperienceForm.value.organization);
+        formData.append('from_date', this.staffExperienceForm.value.from_date);
+        formData.append('to_date', this.staffExperienceForm.value.to_date);
+        formData.append('experience_proof', this.experienceProof);
+
+        return this.http.post(this.BASE_API_URL + '/saveExperienceOwn', formData)
+            .subscribe((response: any) => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    Swal.fire({
+                        title: "Well Done!!",
+                        text: "Education Updated",
+                        icon: "success"
+                    });
+                    this.staffExperienceList = response.data
+                }
+            });
+    }
+
+    cancelUpdateExperience() {
+        this.isUpdatableExperience = false;
+        this.staffExperienceForm.reset();
+    }
+
+
+
+    saveStaffEducation() {
+        if (!this.staffEducationForm.valid) {
+            this.staffEducationForm.markAllAsTouched();
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('id', this.staffEducationForm.value.id);
         formData.append('degree', this.staffEducationForm.value.degree);
         formData.append('specialization', this.staffEducationForm.value.specialization);
         formData.append('university_name', this.staffEducationForm.value.university_name);
         formData.append('percentage', this.staffEducationForm.value.percentage);
         formData.append('grade', this.staffEducationForm.value.grade);
-        formData.append('file_name', this.staffEducationForm.value.degree);
+        formData.append('file_name', this.educationFileName);
 
+        return this.http.post(this.BASE_API_URL + '/saveStaffEducationOwn', formData)
+            .subscribe((response: any) => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    Swal.fire({
+                        title: "Well Done!!",
+                        text: "Education Updated",
+                        icon: "success"
+                    });
+                    this.educations = response.educations
+                }
+            });
+    }
 
+    editStaffEducation(data) {
+        this.staffEducationForm.patchValue(data);
+        this.isUpdatableStaffEducation = true;
+    }
+
+    cancelUpdateStaffEducation() {
+        this.isUpdatableStaffEducation = false;
+        this.staffEducationForm.reset();
+    }
+
+    deleteStaffEducation(data) {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.StaffEducationService.deleteStaffEducation(data.id).subscribe((response: any) => {
+                    if (response.success == 1) {
+                        this.educations = response.data;
+                    }
+                })
+            }
+        });
     }
 
 
+    saveStaffPublication() {
+        if (!this.staffPublicationForm.valid) {
+            this.staffPublicationForm.markAllAsTouched();
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('id', this.staffPublicationForm.value.id);
+        formData.append('staff_id', this.staffPublicationForm.value.staff_id);
+        formData.append('ISBN_number', this.staffPublicationForm.value.ISBN_number);
+        formData.append('book_name', this.staffPublicationForm.value.book_name);
+        formData.append('name_of_publisher', this.staffPublicationForm.value.name_of_publisher);
+        formData.append('chapter_full_book', this.staffPublicationForm.value.chapter_full_book);
+        formData.append('chapter_name', this.staffPublicationForm.value.chapter_name);
+        formData.append('page_number', this.staffPublicationForm.value.page_number);
+
+        return this.http.post(this.BASE_API_URL + '/saveBookPublicationOwn', formData)
+            .subscribe((response: any) => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    Swal.fire({
+                        title: "Well Done!!",
+                        text: "Publication Updated",
+                        icon: "success"
+                    });
+                    this.stafBookPublicationList = response.data;
+                    this.staffPublicationForm.reset();
+                }
+            });
+    }
+
+    editBookPublication(data) {
+        this.staffPublicationForm.patchValue(data);
+        this.isUpdatableStaffPublication = true;
+    }
+
+    cancelUpdateStaffPublication() {
+        this.isUpdatableStaffPublication = false;
+        this.staffEducationForm.reset();
+    }
+
+    deleteStaffBookPublication(data) {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete course ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.BookPublicationService.deleteBookPublication(data.id).subscribe((response: any) => {
+                    if (response.success == 1) {
+                        this.stafBookPublicationList = response.data;
+                    }
+                })
+            }
+        });
+    }
+
+
+
     updateProfileStaff() {
+        if (!this.staffUpdateForm.valid) {
+            this.staffUpdateForm.markAllAsTouched();
+            return;
+        }
+
         const formData = new FormData();
         formData.append('id', this.staffUpdateForm.value.id);
         formData.append('user_type', this.staffUpdateForm.value.user_type);

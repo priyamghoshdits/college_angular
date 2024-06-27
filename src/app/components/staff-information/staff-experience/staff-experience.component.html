@@ -11,22 +11,6 @@
                             <form [formGroup]="staffExperienceForm" class="theme-form">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label class="col-form-label pt-0"> Select
-                                            Staff</label>
-
-                                        <select class="form-select" formControlName="staff_id" required
-                                            style="width: 100%">
-                                            <option value="null"> Select</option>
-                                            <option *ngFor="let data of memberList" [value]="data.id">
-                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
-                                            </option>
-                                        </select>
-
-                                        <div *ngIf="staffExperienceForm.controls['staff_id'].errors?.['required'] && staffExperienceForm.controls['staff_id'].touched "
-                                            class="text text-danger mt-1">Staff required
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Designation</label>
                                         <input class="form-control" formControlName="designation"
                                             placeholder="Enter Designation" type="text">
