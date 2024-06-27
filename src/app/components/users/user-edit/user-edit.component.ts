@@ -11,12 +11,9 @@ import { DesignationService } from 'src/app/services/designation.service';
 import { DepartmentService } from 'src/app/services/department.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { StaffDegreeService } from 'src/app/services/staff-degree.service';
-<<<<<<< HEAD
 import { StaffEducationService } from 'src/app/services/staff-education.service';
 import { BookPublicationService } from 'src/app/services/book-publication.service';
-=======
 import {SubjectService} from "../../../services/subject.service";
->>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
 
 @Component({
     selector: 'app-user-edit',
@@ -83,8 +80,8 @@ export class UserEditComponent implements OnInit {
     userCasteCertificate: File;
     education_file: File;
     labReport: File;
-<<<<<<< HEAD
     experienceProof: File;
+    manualFeesFile: File;
 
     educationFileName: File;
     isUpdatableStaffEducation: boolean = false;
@@ -97,21 +94,7 @@ export class UserEditComponent implements OnInit {
 
     private BASE_API_URL = environment.BASE_API_URL;
 
-    constructor(private http: HttpClient, private errorService: ErrorService, private memberService: MemberService, private achievementService: AchievementService, private jobService: JobService, private designationService: DesignationService, private departmentService: DepartmentService, private franchiseService: FranchiseService, private StaffDegreeService: StaffDegreeService, private StaffEducationService: StaffEducationService, private BookPublicationService: BookPublicationService) {
-=======
-    manualFeesFile: File;
-
-    private BASE_API_URL = environment.BASE_API_URL;
-
-    constructor(private http: HttpClient, private errorService: ErrorService
-                , private memberService: MemberService
-                , private achievementService: AchievementService
-                , private jobService: JobService, private designationService: DesignationService
-                , private departmentService: DepartmentService
-                , private franchiseService: FranchiseService
-                , private subjectService: SubjectService
-                , private StaffDegreeService: StaffDegreeService) {
->>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
+    constructor(private http: HttpClient, private errorService: ErrorService, private memberService: MemberService, private achievementService: AchievementService, private jobService: JobService, private designationService: DesignationService, private departmentService: DepartmentService, private franchiseService: FranchiseService, private StaffDegreeService: StaffDegreeService, private StaffEducationService: StaffEducationService, private BookPublicationService: BookPublicationService, private subjectService: SubjectService) {
         this.studentCreationForm = new FormGroup({
             id: new FormControl(null),
             first_name: new FormControl(null),
@@ -250,7 +233,6 @@ export class UserEditComponent implements OnInit {
             file_name: new FormControl(null),
         });
 
-<<<<<<< HEAD
         this.staffPublicationForm = new FormGroup({
             id: new FormControl(null),
             book_name: new FormControl(null, [Validators.required]),
@@ -283,7 +265,6 @@ export class UserEditComponent implements OnInit {
             topic_name: new FormControl(null, [Validators.required]),
             impact_factor: new FormControl(null, [Validators.required]),
         });
-=======
         this.manualFeesForm = new FormGroup({
             id: new FormControl(null),
             course_id: new FormControl(null, [Validators.required]),
@@ -294,7 +275,6 @@ export class UserEditComponent implements OnInit {
             amount: new FormControl(null, [Validators.required]),
         });
 
->>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
 
         this.jobService.getCompanyDetailsListListener().subscribe((response) => {
             this.companyDetailsList = response;
@@ -385,15 +365,12 @@ export class UserEditComponent implements OnInit {
             this.education_file = event.target.files[0];
         } else if (type == 'labReport') {
             this.labReport = event.target.files[0];
-<<<<<<< HEAD
         } else if (type == 'educationFileName') {
             this.educationFileName = event.target.files[0];
         } else if (type == 'experienceProof') {
             this.experienceProof = event.target.files[0];
-=======
         }else if(type == 'manualFeesFile'){
             this.manualFeesFile = event.target.files[0];
->>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
         }
     }
 
