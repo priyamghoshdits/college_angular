@@ -227,6 +227,8 @@ export class NavService {
 				{ path: '/fees-collection/fees-structure', title: 'Fees Structure', type: 'link' },
 				{ path: '/fees-collection/collect-fees', title: 'Collect Fees', type: 'link' },
 				{ path: '/fees-collection/discount', title: 'Discount/Scholarship', type: 'link' },
+				{ path: '/fees-collection/manual-fees', title: 'Manual Fees', type: 'link' },
+				{ path: '/fees-collection/manual-scholarship', title: 'Manual Scholarship', type: 'link' },
 				// { path: '/fees-collection/search-fees-payment', title: 'Search Fees Payment', type: 'link' },
 			]
 		},

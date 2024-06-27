@@ -11,8 +11,12 @@ import { DesignationService } from 'src/app/services/designation.service';
 import { DepartmentService } from 'src/app/services/department.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { StaffDegreeService } from 'src/app/services/staff-degree.service';
+<<<<<<< HEAD
 import { StaffEducationService } from 'src/app/services/staff-education.service';
 import { BookPublicationService } from 'src/app/services/book-publication.service';
+=======
+import {SubjectService} from "../../../services/subject.service";
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
 
 @Component({
     selector: 'app-user-edit',
@@ -24,6 +28,7 @@ export class UserEditComponent implements OnInit {
     staffId = '';
     studentCreationForm: FormGroup;
     staffUpdateForm: FormGroup;
+    manualFeesForm: FormGroup;
     educationQualificationForm: FormGroup;
     achievementForm: FormGroup;
     staffEducationForm: FormGroup;
@@ -34,6 +39,8 @@ export class UserEditComponent implements OnInit {
     placementList: any[] = [];
     achievementFile: any;
     achievementList: any[] = [];
+    manualFeesList: any[] = [];
+    semesterList: any[] = [];
     categoryList: any[];
     showPopup = true;
     educationUpdate = false;
@@ -62,6 +69,7 @@ export class UserEditComponent implements OnInit {
         last_name: any;
         middle_name: any;
         first_name: any;
+        course_id: any;
     } = {};
     staffDetails = {};
     educations: any[];
@@ -75,6 +83,7 @@ export class UserEditComponent implements OnInit {
     userCasteCertificate: File;
     education_file: File;
     labReport: File;
+<<<<<<< HEAD
     experienceProof: File;
 
     educationFileName: File;
@@ -89,6 +98,20 @@ export class UserEditComponent implements OnInit {
     private BASE_API_URL = environment.BASE_API_URL;
 
     constructor(private http: HttpClient, private errorService: ErrorService, private memberService: MemberService, private achievementService: AchievementService, private jobService: JobService, private designationService: DesignationService, private departmentService: DepartmentService, private franchiseService: FranchiseService, private StaffDegreeService: StaffDegreeService, private StaffEducationService: StaffEducationService, private BookPublicationService: BookPublicationService) {
+=======
+    manualFeesFile: File;
+
+    private BASE_API_URL = environment.BASE_API_URL;
+
+    constructor(private http: HttpClient, private errorService: ErrorService
+                , private memberService: MemberService
+                , private achievementService: AchievementService
+                , private jobService: JobService, private designationService: DesignationService
+                , private departmentService: DepartmentService
+                , private franchiseService: FranchiseService
+                , private subjectService: SubjectService
+                , private StaffDegreeService: StaffDegreeService) {
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
         this.studentCreationForm = new FormGroup({
             id: new FormControl(null),
             first_name: new FormControl(null),
@@ -227,6 +250,7 @@ export class UserEditComponent implements OnInit {
             file_name: new FormControl(null),
         });
 
+<<<<<<< HEAD
         this.staffPublicationForm = new FormGroup({
             id: new FormControl(null),
             book_name: new FormControl(null, [Validators.required]),
@@ -259,6 +283,18 @@ export class UserEditComponent implements OnInit {
             topic_name: new FormControl(null, [Validators.required]),
             impact_factor: new FormControl(null, [Validators.required]),
         });
+=======
+        this.manualFeesForm = new FormGroup({
+            id: new FormControl(null),
+            course_id: new FormControl(null, [Validators.required]),
+            semester_id: new FormControl(null, [Validators.required]),
+            student_id: new FormControl(null, [Validators.required]),
+            session_id: new FormControl(null, [Validators.required]),
+            date_of_payment: new FormControl(null, [Validators.required]),
+            amount: new FormControl(null, [Validators.required]),
+        });
+
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
 
         this.jobService.getCompanyDetailsListListener().subscribe((response) => {
             this.companyDetailsList = response;
@@ -297,6 +333,11 @@ export class UserEditComponent implements OnInit {
                     this.educationQualificationForm.patchValue(response.education_details);
                     this.achievementList = response.achievement;
                     this.placementList = response.placement;
+                    this.manualFeesList = response.manualFeesList;
+                    this.subjectService.getSemesterByCourseId(this.userDetails.course_id).subscribe((response: any) => {
+                        this.semesterList = response.data;
+                        this.manualFeesForm.patchValue({course_id: this.userDetails.course_id});
+                    })
                 } else {
                     this.staffDetails = response.data;
                     this.educations = response.educations;
@@ -344,10 +385,15 @@ export class UserEditComponent implements OnInit {
             this.education_file = event.target.files[0];
         } else if (type == 'labReport') {
             this.labReport = event.target.files[0];
+<<<<<<< HEAD
         } else if (type == 'educationFileName') {
             this.educationFileName = event.target.files[0];
         } else if (type == 'experienceProof') {
             this.experienceProof = event.target.files[0];
+=======
+        }else if(type == 'manualFeesFile'){
+            this.manualFeesFile = event.target.files[0];
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
         }
     }
 
@@ -566,6 +612,35 @@ export class UserEditComponent implements OnInit {
                 })
             }
         });
+    }
+
+    editManualFees(data){
+        this.manualFeesForm.patchValue(data);
+    }
+
+    saveManualFeesOwn(){
+        const formData = new FormData();
+        formData.append('id', this.manualFeesForm.value.id);
+        formData.append('course_id', this.manualFeesForm.value.course_id);
+        formData.append('semester_id', this.manualFeesForm.value.semester_id);
+        formData.append('session_id', this.manualFeesForm.value.session_id);
+        formData.append('date_of_payment', this.manualFeesForm.value.date_of_payment);
+        formData.append('amount', this.manualFeesForm.value.amount);
+        // @ts-ignore
+        formData.append('file', this.manualFeesFile);
+
+        return this.http.post(this.BASE_API_URL + '/saveStudentManualFees', formData)
+            .subscribe((response: any) => {
+                if (response.success == 1) {
+                    Swal.fire({
+                        title: "Well Done!!",
+                        text: "Fees Saved",
+                        icon: "success"
+                    });
+                }
+                this.manualFeesForm.reset();
+                this.manualFeesList = response.data;
+            });
     }
 
 

@@ -1,7 +1,7 @@
 <!-- Container-fluid starts-->
 <div class="container-fluid">
-    <div class="edit-profile" *ngIf="user">
-        <div class="row" *ngIf="user.user_type_id == 3">
+    <div *ngIf="user" class="edit-profile">
+        <div *ngIf="user.user_type_id == 3" class="row">
 
             <div class="col-lg-12">
                 <div class="card">
@@ -20,12 +20,14 @@
                             <input class="radio" id="two" name="group" type="radio">
                             <input class="radio" id="three" name="group" type="radio">
                             <input class="radio" id="four" name="group" type="radio">
+                            <input class="radio" id="five" name="group" type="radio">
 
                             <div class="tabs">
                                 <label class="tab" for="one" id="one-tab">Profile</label>
                                 <label class="tab" for="two" id="two-tab">Educational Qualification</label>
                                 <label class="tab" for="three" id="three-tab">Achivement</label>
                                 <label class="tab" for="four" id="four-tab">Placement</label>
+                                <label class="tab" for="five" id="five-tab">Fees</label>
 
                             </div>
                             <div class="panels">
@@ -35,18 +37,18 @@
                                             <div class="leftuser_imgoutsection">
                                                 <div class="jshadow_area">
                                                     <img class="huimg_designs"
-                                                        src="{{FILE_URL}}/user_image/{{studentCreationForm.value.image}}"
-                                                        onerror="this.src='assets/images/user/blank_default.jpg'">
+                                                         onerror="this.src='assets/images/user/blank_default.jpg'"
+                                                         src="{{FILE_URL}}/user_image/{{studentCreationForm.value.image}}">
                                                 </div>
                                                 <h1 class="studentimgdwnarea">
                                                     Course:
                                                     <span
-                                                        class="studentimgdwnarea1">{{studentCreationForm.value.course_name}}</span>
+                                                            class="studentimgdwnarea1">{{studentCreationForm.value.course_name}}</span>
                                                 </h1>
                                                 <h1 class="studentimgdwnarea">
                                                     Semester:
                                                     <span
-                                                        class="studentimgdwnarea1">{{studentCreationForm.value.current_semester}}</span>
+                                                            class="studentimgdwnarea1">{{studentCreationForm.value.current_semester}}</span>
                                                 </h1>
                                             </div>
                                         </div>
@@ -58,38 +60,38 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">First Name</label>
                                                                 <input class="form-control" formControlName="first_name"
-                                                                    placeholder="First Name" type="text">
+                                                                       placeholder="First Name" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Middle Name</label>
                                                                 <input class="form-control"
-                                                                    formControlName="middle_name"
-                                                                    placeholder="Middle Name" type="text">
+                                                                       formControlName="middle_name"
+                                                                       placeholder="Middle Name" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Last Name</label>
                                                                 <input class="form-control" formControlName="last_name"
-                                                                    placeholder="Last Name" type="text">
+                                                                       placeholder="Last Name" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Date Of Birth</label>
                                                                 <input class="form-control" formControlName="dob"
-                                                                    placeholder="Date Of Birth" type="date">
+                                                                       placeholder="Date Of Birth" type="date">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Phone Number</label>
                                                                 <input class="form-control" formControlName="mobile_no"
-                                                                    placeholder="Phone Number" type="text">
+                                                                       placeholder="Phone Number" type="text">
                                                                 <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']"
-                                                                    class="text text-danger mt-1">Invalid Phone Number
+                                                                     class="text text-danger mt-1">Invalid Phone Number
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -98,10 +100,10 @@
                                                                 <label class="form-label">Emergency Contact
                                                                     Number</label>
                                                                 <input class="form-control"
-                                                                    formControlName="emergency_phone_number"
-                                                                    placeholder="Phone Number" type="text">
+                                                                       formControlName="emergency_phone_number"
+                                                                       placeholder="Phone Number" type="text">
                                                                 <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['pattern']"
-                                                                    class="text text-danger mt-1">Invalid Emergency
+                                                                     class="text text-danger mt-1">Invalid Emergency
                                                                     Contact Number
                                                                 </div>
                                                             </div>
@@ -110,17 +112,17 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Admission Date</label>
                                                                 <input class="form-control"
-                                                                    formControlName="admission_date"
-                                                                    placeholder="Admission Date" type="date">
+                                                                       formControlName="admission_date"
+                                                                       placeholder="Admission Date" type="date">
                                                                 <div *ngIf="studentCreationForm.controls['admission_date'].errors?.['pattern']"
-                                                                    class="text text-danger mt-1">Invalid Phone Number
+                                                                     class="text text-danger mt-1">Invalid Phone Number
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Blood Group</label>
                                                             <select class="form-select" formControlName="blood_group"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="A+"> A+</option>
                                                                 <option value="A-"> A-</option>
@@ -135,7 +137,7 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Religion</label>
                                                             <select class="form-select" formControlName="religion"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="Hinduism"> Hinduism</option>
                                                                 <option value="Buddhism"> Buddhism</option>
@@ -153,10 +155,10 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Caste</label>
                                                             <select class="form-select" formControlName="category_id"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option *ngFor="let data of categoryList"
-                                                                    [value]="data.id">
+                                                                        [value]="data.id">
                                                                     {{data.name}}
                                                                 </option>
                                                             </select>
@@ -164,7 +166,7 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Gender</label>
                                                             <select class="form-select" formControlName="gender"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="Male"> Male</option>
                                                                 <option value="Female"> Female</option>
@@ -173,7 +175,8 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Marital Status</label>
                                                             <select class="form-select"
-                                                                formControlName="material_status" style="width: 100%">
+                                                                    formControlName="material_status"
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="Single"> Single</option>
                                                                 <option value="Married"> Married</option>
@@ -185,25 +188,25 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Current Address</label>
                                                             <input class="form-control"
-                                                                formControlName="current_address"
-                                                                placeholder="Current Address" type="text">
+                                                                   formControlName="current_address"
+                                                                   placeholder="Current Address" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Permanent Address</label>
                                                             <input class="form-control"
-                                                                formControlName="permanent_address"
-                                                                placeholder="Permanent Address" type="text">
+                                                                   formControlName="permanent_address"
+                                                                   placeholder="Permanent Address" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Roll No</label>
                                                             <input class="form-control" formControlName="roll_no"
-                                                                placeholder="Roll No" type="text">
+                                                                   placeholder="Roll No" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Registration No</label>
                                                             <input class="form-control"
-                                                                formControlName="registration_no"
-                                                                placeholder="Registration No" type="text">
+                                                                   formControlName="registration_no"
+                                                                   placeholder="Registration No" type="text">
                                                         </div>
 
                                                         <hr class="mt-4">
@@ -212,79 +215,79 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Father Name</label>
                                                             <input class="form-control" formControlName="father_name"
-                                                                placeholder="Father Name" type="text">
+                                                                   placeholder="Father Name" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Father Phone</label>
                                                             <input class="form-control" formControlName="father_phone"
-                                                                placeholder="Father Phone" type="text">
+                                                                   placeholder="Father Phone" type="text">
                                                             <div *ngIf="studentCreationForm.controls['father_phone'].errors?.['pattern']"
-                                                                class="text text-danger mt-1">Invalid Father Phone
+                                                                 class="text text-danger mt-1">Invalid Father Phone
                                                                 Number
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Father Occupation</label>
                                                             <input class="form-control"
-                                                                formControlName="father_occupation"
-                                                                placeholder="Father Occupation" type="text">
+                                                                   formControlName="father_occupation"
+                                                                   placeholder="Father Occupation" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Mother Name</label>
                                                             <input class="form-control" formControlName="mother_name"
-                                                                placeholder="Father Name" type="text">
+                                                                   placeholder="Father Name" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Mother Phone</label>
                                                             <input class="form-control" formControlName="mother_phone"
-                                                                placeholder="Mother Phone" type="text">
+                                                                   placeholder="Mother Phone" type="text">
                                                             <div *ngIf="studentCreationForm.controls['mother_phone'].errors?.['pattern']"
-                                                                class="text text-danger mt-1">Invalid Mother Phone
+                                                                 class="text text-danger mt-1">Invalid Mother Phone
                                                                 Number
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Mother Occupation</label>
                                                             <input class="form-control"
-                                                                formControlName="mother_occupation"
-                                                                placeholder="Father Occupation" type="text">
+                                                                   formControlName="mother_occupation"
+                                                                   placeholder="Father Occupation" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Guardian Name</label>
                                                             <input class="form-control" formControlName="guardian_name"
-                                                                placeholder="Father Name" type="text">
+                                                                   placeholder="Father Name" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Guardian Phone</label>
                                                             <input class="form-control" formControlName="guardian_phone"
-                                                                placeholder="Guardian Phone" type="text">
+                                                                   placeholder="Guardian Phone" type="text">
                                                             <div *ngIf="studentCreationForm.controls['guardian_phone'].errors?.['pattern']"
-                                                                class="text text-danger mt-1">Invalid Guardian Phone
+                                                                 class="text text-danger mt-1">Invalid Guardian Phone
                                                                 Number
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Guardian Email</label>
                                                             <input class="form-control" formControlName="guardian_email"
-                                                                placeholder="Father Occupation" type="text">
+                                                                   placeholder="Father Occupation" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Guardian Relation</label>
                                                             <input class="form-control"
-                                                                formControlName="guardian_relation"
-                                                                placeholder="Father Name" type="text">
+                                                                   formControlName="guardian_relation"
+                                                                   placeholder="Father Name" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Guardian Occupation</label>
                                                             <input class="form-control"
-                                                                formControlName="guardian_occupation"
-                                                                placeholder="Father Phone" type="text">
+                                                                   formControlName="guardian_occupation"
+                                                                   placeholder="Father Phone" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Guardian Address</label>
                                                             <input class="form-control"
-                                                                formControlName="guardian_address"
-                                                                placeholder="Father Occupation" type="text">
+                                                                   formControlName="guardian_address"
+                                                                   placeholder="Father Occupation" type="text">
                                                         </div>
 
                                                         <!--              <div class="col-sm-12 mt-2">-->
@@ -317,7 +320,8 @@
                                         </div>
                                         <div class="card-footer text-end">
                                             <button (click)="updateProfile()" class="btn btn-primary"
-                                                type="submit">Update Profile</button>
+                                                    type="submit">Update Profile
+                                            </button>
                                         </div>
                                     </div>
 
@@ -329,49 +333,49 @@
                                             <div class="col-md-2 mb-3">
                                                 <label>Board/Counsil</label>
                                                 <input class="form-control" formControlName="board_ten"
-                                                    placeholder="Board/counsil" type="text">
+                                                       placeholder="Board/counsil" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['board_ten'].errors?.['required'] && educationQualificationForm.controls['board_ten'].touched "
-                                                    class="text text-danger mt-1">Board required
+                                                     class="text text-danger mt-1">Board required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Marks Obtained</label>
                                                 <input class="form-control" formControlName="marks_obtained_ten"
-                                                    placeholder="Marks Obtained" type="text">
+                                                       placeholder="Marks Obtained" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['marks_obtained_ten'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_ten'].touched "
-                                                    class="text text-danger mt-1">Marks Obtained required
+                                                     class="text text-danger mt-1">Marks Obtained required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Percentage</label>
                                                 <input class="form-control" formControlName="percentage_ten"
-                                                    placeholder="Percentage" type="text">
+                                                       placeholder="Percentage" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['percentage_ten'].errors?.['required'] && educationQualificationForm.controls['percentage_ten'].touched "
-                                                    class="text text-danger mt-1">Percentage required
+                                                     class="text text-danger mt-1">Percentage required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Division/Class</label>
                                                 <input class="form-control" formControlName="division_ten"
-                                                    placeholder="Division/Class" type="text">
+                                                       placeholder="Division/Class" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['division_ten'].errors?.['required'] && educationQualificationForm.controls['division_ten'].touched "
-                                                    class="text text-danger mt-1">Division/Class required
+                                                     class="text text-danger mt-1">Division/Class required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Main Subject</label>
                                                 <input class="form-control" formControlName="main_subject_ten"
-                                                    placeholder="Main Subject" type="text">
+                                                       placeholder="Main Subject" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['main_subject_ten'].errors?.['required'] && educationQualificationForm.controls['main_subject_ten'].touched "
-                                                    class="text text-danger mt-1">Main Subject required
+                                                     class="text text-danger mt-1">Main Subject required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Year Of Passing</label>
                                                 <input class="form-control" formControlName="year_of_passing_ten"
-                                                    placeholder="Year of passing" type="text">
+                                                       placeholder="Year of passing" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['year_of_passing_ten'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_ten'].touched "
-                                                    class="text text-danger mt-1">Year of passing required
+                                                     class="text text-danger mt-1">Year of passing required
                                                 </div>
                                             </div>
                                         </div>
@@ -382,49 +386,49 @@
                                             <div class="col-md-2 mb-3">
                                                 <label>Board/Counsil</label>
                                                 <input class="form-control" formControlName="board_twelve"
-                                                    placeholder="Board/counsil" type="text">
+                                                       placeholder="Board/counsil" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['board_twelve'].errors?.['required'] && educationQualificationForm.controls['board_twelve'].touched "
-                                                    class="text text-danger mt-1">Board required
+                                                     class="text text-danger mt-1">Board required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Marks Obtained</label>
                                                 <input class="form-control" formControlName="marks_obtained_twelve"
-                                                    placeholder="Marks Obtained" type="text">
+                                                       placeholder="Marks Obtained" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['marks_obtained_twelve'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_twelve'].touched "
-                                                    class="text text-danger mt-1">Marks Obtained required
+                                                     class="text text-danger mt-1">Marks Obtained required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Percentage</label>
                                                 <input class="form-control" formControlName="percentage_twelve"
-                                                    placeholder="Percentage" type="text">
+                                                       placeholder="Percentage" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['percentage_twelve'].errors?.['required'] && educationQualificationForm.controls['percentage_twelve'].touched "
-                                                    class="text text-danger mt-1">Percentage required
+                                                     class="text text-danger mt-1">Percentage required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Division/Class</label>
                                                 <input class="form-control" formControlName="division_twelve"
-                                                    placeholder="Division/Class" type="text">
+                                                       placeholder="Division/Class" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['division_twelve'].errors?.['required'] && educationQualificationForm.controls['division_twelve'].touched "
-                                                    class="text text-danger mt-1">Division/Class required
+                                                     class="text text-danger mt-1">Division/Class required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Main Subject</label>
                                                 <input class="form-control" formControlName="main_subject_twelve"
-                                                    placeholder="Main Subject" type="text">
+                                                       placeholder="Main Subject" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['main_subject_twelve'].errors?.['required'] && educationQualificationForm.controls['main_subject_twelve'].touched "
-                                                    class="text text-danger mt-1">Main Subject required
+                                                     class="text text-danger mt-1">Main Subject required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Year Of Passing</label>
                                                 <input class="form-control" formControlName="year_of_passing_twelve"
-                                                    placeholder="Year of passing" type="text">
+                                                       placeholder="Year of passing" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['year_of_passing_twelve'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_twelve'].touched "
-                                                    class="text text-danger mt-1">Year of passing required
+                                                     class="text text-danger mt-1">Year of passing required
                                                 </div>
                                             </div>
                                         </div>
@@ -436,56 +440,59 @@
                                             <div class="col-md-2 mb-3">
                                                 <label>Board/Counsil</label>
                                                 <input class="form-control" formControlName="board_graduation"
-                                                    placeholder="Board/counsil" type="text">
+                                                       placeholder="Board/counsil" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['board_graduation'].errors?.['required'] && educationQualificationForm.controls['board_graduation'].touched "
-                                                    class="text text-danger mt-1">Board required
+                                                     class="text text-danger mt-1">Board required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Marks Obtained</label>
                                                 <input class="form-control" formControlName="marks_obtained_graduation"
-                                                    placeholder="Marks Obtained" type="text">
+                                                       placeholder="Marks Obtained" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['marks_obtained_graduation'].errors?.['required'] && educationQualificationForm.controls['marks_obtained_graduation'].touched "
-                                                    class="text text-danger mt-1">Marks Obtained required
+                                                     class="text text-danger mt-1">Marks Obtained required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Percentage</label>
                                                 <input class="form-control" formControlName="percentage_graduation"
-                                                    placeholder="Percentage" type="text">
+                                                       placeholder="Percentage" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['percentage_graduation'].errors?.['required'] && educationQualificationForm.controls['percentage_graduation'].touched "
-                                                    class="text text-danger mt-1">Percentage required
+                                                     class="text text-danger mt-1">Percentage required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Division/Class</label>
                                                 <input class="form-control" formControlName="division_graduation"
-                                                    placeholder="Division/Class" type="text">
+                                                       placeholder="Division/Class" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['division_graduation'].errors?.['required'] && educationQualificationForm.controls['division_graduation'].touched "
-                                                    class="text text-danger mt-1">Division/Class required
+                                                     class="text text-danger mt-1">Division/Class required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Main Subject</label>
                                                 <input class="form-control" formControlName="main_subject_graduation"
-                                                    placeholder="Main Subject" type="text">
+                                                       placeholder="Main Subject" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['main_subject_graduation'].errors?.['required'] && educationQualificationForm.controls['main_subject_graduation'].touched "
-                                                    class="text text-danger mt-1">Main Subject required
+                                                     class="text text-danger mt-1">Main Subject required
                                                 </div>
                                             </div>
                                             <div class="col-md-2 mb-3">
                                                 <label>Year Of Passing</label>
                                                 <input class="form-control" formControlName="year_of_passing_graduation"
-                                                    placeholder="Year of passing" type="text">
+                                                       placeholder="Year of passing" type="text">
                                                 <div *ngIf="educationQualificationForm.controls['year_of_passing_graduation'].errors?.['required'] && educationQualificationForm.controls['year_of_passing_graduation'].touched "
-                                                    class="text text-danger mt-1">Year of passing required
+                                                     class="text text-danger mt-1">Year of passing required
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
-                                    <div _ngcontent-ng-c392870171="" class="card-footer text-end"><button
-                                            _ngcontent-ng-c392870171="" type="submit" class="btn btn-primary"
-                                            (click)="updateEducation()">Update</button></div>
+                                    <div _ngcontent-ng-c392870171="" class="card-footer text-end">
+                                        <button
+                                                (click)="updateEducation()" _ngcontent-ng-c392870171="" class="btn btn-primary"
+                                                type="submit">Update
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div class="panel" id="three-panel">
@@ -515,26 +522,26 @@
                                                             <div class="col-md-4 mb-3">
                                                                 <label class="col-form-label pt-0">Date</label>
                                                                 <input class="form-control" formControlName="award_date"
-                                                                    type="date">
+                                                                       type="date">
                                                                 <div *ngIf="achievementForm.controls['award_date'].errors?.['required'] && achievementForm.controls['award_date'].touched "
-                                                                    class="text text-danger mt-1">Date required
+                                                                     class="text text-danger mt-1">Date required
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mb-3">
                                                                 <label class="col-form-label pt-0">Award Name</label>
                                                                 <input class="form-control" formControlName="award_name"
-                                                                    placeholder="Enter award name" type="text">
+                                                                       placeholder="Enter award name" type="text">
                                                                 <div *ngIf="achievementForm.controls['award_name'].errors?.['required'] && achievementForm.controls['award_name'].touched "
-                                                                    class="text text-danger mt-1">Award required
+                                                                     class="text text-danger mt-1">Award required
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mb-3">
                                                                 <label class="col-form-label pt-0">Upload File</label>
                                                                 <input (change)="selectedAchievementFile($event)"
-                                                                    class="form-control" formControlName="file_name"
-                                                                    type="file">
+                                                                       class="form-control" formControlName="file_name"
+                                                                       type="file">
                                                                 <div *ngIf="achievementForm.controls['file_name'].errors?.['required'] && achievementForm.controls['file_name'].touched"
-                                                                    class="text text-danger mt-1">File required
+                                                                     class="text text-danger mt-1">File required
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -542,16 +549,16 @@
                                                 </div>
                                                 <div class="card-footer">
                                                     <button (click)="saveAchievement()"
-                                                        [hidden]="isAchievementFormUpdatable == true"
-                                                        class="btn btn-primary me-1">Submit
+                                                            [hidden]="isAchievementFormUpdatable == true"
+                                                            class="btn btn-primary me-1">Submit
                                                     </button>
                                                     <button (click)="updateAchievement()"
-                                                        [hidden]="isAchievementFormUpdatable == false"
-                                                        class="btn btn-primary me-1">Update
+                                                            [hidden]="isAchievementFormUpdatable == false"
+                                                            class="btn btn-primary me-1">Update
                                                     </button>
                                                     <button (click)="cancelachievementFormUpdate()"
-                                                        [hidden]="isAchievementFormUpdatable == false"
-                                                        class="btn btn-primary me-1">Cancel
+                                                            [hidden]="isAchievementFormUpdatable == false"
+                                                            class="btn btn-primary me-1">Cancel
                                                     </button>
                                                 </div>
                                             </div>
@@ -561,31 +568,33 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Award Name</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Download</th>
-                                                    <th scope="col">Update</th>
-                                                </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Award Name</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Download</th>
+                                                <th scope="col">Update</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let item of achievementList; let indexOfElement=index">
-                                                    <td>{{indexOfElement + 1}}</td>
-                                                    <td>{{item.award_name}}</td>
-                                                    <td>{{item.award_date}}</td>
-                                                    <td><a
-                                                            href="{{item.file_name}}"><mat-icon>cloud_download</mat-icon></a>
-                                                    </td>
-                                                    <td>
-                                                        <a (click)="editAchievement(item)">
-                                                            <mat-icon>edit</mat-icon>
-                                                        </a>
-                                                        <a (click)="deleteAchievement(item)">
-                                                            <mat-icon>delete</mat-icon>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                            <tr *ngFor="let item of achievementList; let indexOfElement=index">
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td>{{item.award_name}}</td>
+                                                <td>{{item.award_date}}</td>
+                                                <td><a
+                                                        href="{{item.file_name}}">
+                                                    <mat-icon>cloud_download</mat-icon>
+                                                </a>
+                                                </td>
+                                                <td>
+                                                    <a (click)="editAchievement(item)">
+                                                        <mat-icon>edit</mat-icon>
+                                                    </a>
+                                                    <a (click)="deleteAchievement(item)">
+                                                        <mat-icon>delete</mat-icon>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -604,32 +613,32 @@
                                                             <div class="col-md-4 mb-3">
                                                                 <label class="col-form-label pt-0">Date</label>
                                                                 <input class="form-control"
-                                                                    formControlName="placement_date" type="date">
+                                                                       formControlName="placement_date" type="date">
                                                                 <div *ngIf="placementForm.controls['placement_date'].errors?.['required'] && placementForm.controls['placement_date'].touched "
-                                                                    class="text text-danger mt-1">Date required
+                                                                     class="text text-danger mt-1">Date required
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mb-3">
                                                                 <label class="col-form-label pt-0">Company</label>
                                                                 <select class="form-control"
-                                                                    formControlName="company_id">
+                                                                        formControlName="company_id">
                                                                     <option value="null">Select Company</option>
                                                                     <option *ngFor="let data of companyDetailsList"
-                                                                        [value]="data.id">
+                                                                            [value]="data.id">
                                                                         {{data.name}}
                                                                     </option>
                                                                 </select>
                                                                 <div *ngIf="placementForm.controls['company_id'].errors?.['required'] && placementForm.controls['company_id'].touched "
-                                                                    class="text text-danger mt-1">Company required
+                                                                     class="text text-danger mt-1">Company required
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-4 mb-3">
                                                                 <label class="col-form-label pt-0">Deacription</label>
                                                                 <input class="form-control"
-                                                                    formControlName="description"
-                                                                    placeholder="Enter Description" type="text">
+                                                                       formControlName="description"
+                                                                       placeholder="Enter Description" type="text">
                                                                 <div *ngIf="placementForm.controls['description'].errors?.['required'] && placementForm.controls['description'].touched "
-                                                                    class="text text-danger mt-1">Description required
+                                                                     class="text text-danger mt-1">Description required
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -637,16 +646,16 @@
                                                 </div>
                                                 <div class="card-footer">
                                                     <button (click)="savePlacementDetails()"
-                                                        [hidden]="isPlacementUpdatable == true"
-                                                        class="btn btn-primary me-1">Submit
+                                                            [hidden]="isPlacementUpdatable == true"
+                                                            class="btn btn-primary me-1">Submit
                                                     </button>
                                                     <button (click)="updatePlacementDetails()"
-                                                        [hidden]="isPlacementUpdatable == false"
-                                                        class="btn btn-primary me-1">Update
+                                                            [hidden]="isPlacementUpdatable == false"
+                                                            class="btn btn-primary me-1">Update
                                                     </button>
                                                     <button (click)="cancelPlacementFormUpdate()"
-                                                        [hidden]="isPlacementUpdatable == false"
-                                                        class="btn btn-primary me-1">Cancel
+                                                            [hidden]="isPlacementUpdatable == false"
+                                                            class="btn btn-primary me-1">Cancel
                                                     </button>
                                                 </div>
                                             </div>
@@ -656,31 +665,106 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
-                                                <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Date</th>
-                                                    <th scope="col">Company Name</th>
-                                                    <th scope="col">Description</th>
-                                                    <th scope="col">Update</th>
-                                                </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Company Name</th>
+                                                <th scope="col">Description</th>
+                                                <th scope="col">Update</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let place of placementList">
-                                                    <td>1</td>
-                                                    <td>{{place.placement_date}}</td>
-                                                    <td>{{place.company_name}}</td>
-                                                    <td>{{place.description}}</td>
-                                                    <td>
-                                                        <a (click)="editPlacementDetails(place)">
-                                                            <mat-icon>edit</mat-icon>
-                                                        </a>
-                                                        <a (click)="deletePlacementDetails(place)">
-                                                            <mat-icon>delete</mat-icon>
-                                                        </a>
-                                                    </td>
-                                                </tr>
+                                            <tr *ngFor="let place of placementList">
+                                                <td>1</td>
+                                                <td>{{place.placement_date}}</td>
+                                                <td>{{place.company_name}}</td>
+                                                <td>{{place.description}}</td>
+                                                <td>
+                                                    <a (click)="editPlacementDetails(place)">
+                                                        <mat-icon>edit</mat-icon>
+                                                    </a>
+                                                    <a (click)="deletePlacementDetails(place)">
+                                                        <mat-icon>delete</mat-icon>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                                <div class="panel" id="five-panel">
+                                    <form [formGroup]="manualFeesForm" class="theme-form">
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                <label>Select Semester</label>
+                                                <select class="form-select"
+                                                        formControlName="semester_id"
+                                                        required style="width: 100%">
+                                                    <option value="null"> Select</option>
+                                                    <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                                        {{data.name}}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="manualFeesForm.controls['semester_id'].errors?.['required'] && manualFeesForm.controls['semester_id'].touched "
+                                                     class="text text-danger mt-1">Semester required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="col-form-label pt-0">Date of Payment</label>
+                                                <input class="form-control" formControlName="date_of_payment" type="date">
+                                                <div *ngIf="manualFeesForm.controls['date_of_payment'].errors?.['required'] && manualFeesForm.controls['date_of_payment'].touched "
+                                                     class="text text-danger mt-1">Date of payment required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="col-form-label pt-0">Amount</label>
+                                                <input class="form-control" formControlName="amount" type="text">
+                                                <div *ngIf="manualFeesForm.controls['amount'].errors?.['required'] && manualFeesForm.controls['amount'].touched "
+                                                     class="text text-danger mt-1">Amount required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label class="col-form-label pt-0">Upload Slip</label>
+                                                <input (change)="fileUpload($event,'manualFeesFile')" class="form-control" type="file">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <button (click)="saveManualFeesOwn()"
+                                                        class="btn btn-primary me-1">Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="table-responsive">
+                                        <table class="table" style="text-align: center">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Course Name</th>
+                                                <th scope="col">Semester Name</th>
+                                                <th scope="col">Student Name</th>
+                                                <th scope="col">Date Of Payment</th>
+                                                <th scope="col">Amount</th>
+                                                <th scope="col">Download</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let record of manualFeesList; let indexOfElement=index">
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td>{{record.course_name}}</td>
+                                                <td>{{record.semester_name}}</td>
+                                                <td>{{record.student_name}}</td>
+                                                <td>{{record.date_of_payment}}</td>
+                                                <td>{{record.amount}}</td>
+                                                <td><a href="{{FILE_URL}}/manual_payslips/{{record.file_name}}">Download</a></td>
+                                                <td>
+                                                    <a (click)="editManualFees(record)"><mat-icon>edit</mat-icon></a>
+                                                    <a><mat-icon>delete</mat-icon></a>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+
                                     </div>
                                 </div>
                             </div>
@@ -692,7 +776,7 @@
             </div>
         </div>
 
-        <div class="row" *ngIf="user.user_type_id != 3">
+        <div *ngIf="user.user_type_id != 3" class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header"></div>
@@ -719,8 +803,8 @@
                                             <div class="leftuser_imgoutsection">
                                                 <div class="jshadow_area">
                                                     <img class="huimg_designs"
-                                                        src="{{FILE_URL}}/user_image/{{studentCreationForm.value.image}}"
-                                                        onerror="this.src='assets/images/user/blank_default.jpg'">
+                                                         onerror="this.src='assets/images/user/blank_default.jpg'"
+                                                         src="{{FILE_URL}}/user_image/{{studentCreationForm.value.image}}">
                                                 </div>
                                                 <h1 class="studentimgdwnarea">
                                                     Staff ID:
@@ -740,35 +824,35 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Staff Id</label>
                                                                 <input class="form-control" formControlName="staff_id"
-                                                                    placeholder="staff_id" type="text">
+                                                                       placeholder="staff_id" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">First Name</label>
                                                                 <input class="form-control" formControlName="first_name"
-                                                                    placeholder="first_name" type="text">
+                                                                       placeholder="first_name" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Middle Name</label>
                                                                 <input class="form-control"
-                                                                    formControlName="middle_name"
-                                                                    placeholder="Middle Name" type="text">
+                                                                       formControlName="middle_name"
+                                                                       placeholder="Middle Name" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Last Name</label>
                                                                 <input class="form-control" formControlName="last_name"
-                                                                    placeholder="Last Name" type="text">
+                                                                       placeholder="Last Name" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Gender</label>
                                                             <select class="form-select" formControlName="gender"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="Male">Male</option>
                                                                 <option value="Female">Female</option>
@@ -777,42 +861,53 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Date Of Birth</label>
                                                             <input class="form-control" formControlName="dob"
-                                                                placeholder="Date Of Birth" type="date">
+                                                                   placeholder="Date Of Birth" type="date">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Birth Certificate</label>
+<<<<<<< HEAD
                                                             <input class="form-control" type="file"
                                                                 (change)="fileUpload($event, 'birthCertificate')">
+=======
+                                                            <input (change)="fileUpload($event, 'birthCertificate')" class="form-control"
+                                                                   type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Date Of Joining</label>
                                                             <input class="form-control"
-                                                                formControlName="date_of_joining"
-                                                                placeholder="Date Of Joining" type="date">
+                                                                   formControlName="date_of_joining"
+                                                                   placeholder="Date Of Joining" type="date">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Joining Letter</label>
+<<<<<<< HEAD
                                                             <input class="form-control" type="file"
                                                                 (change)="fileUpload($event, 'uploadJoiningLetter')">
+=======
+                                                            <input (change)="fileUpload($event, 'uploadJoiningLetter')" class="form-control"
+                                                                   type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Phone Number</label>
                                                             <input class="form-control" formControlName="mobile_no"
-                                                                placeholder="Phone Number" type="text">
+                                                                   placeholder="Phone Number" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Emergency Contact
                                                                     Number</label>
                                                                 <input class="form-control"
-                                                                    formControlName="emergency_phone_number"
-                                                                    placeholder="Phone Number" type="text">
+                                                                       formControlName="emergency_phone_number"
+                                                                       placeholder="Phone Number" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Marital Status</label>
                                                             <select class="form-select"
-                                                                formControlName="material_status" style="width: 100%">
+                                                                    formControlName="material_status"
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="Single">Single</option>
                                                                 <option value="Married">Married</option>
@@ -825,27 +920,32 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Work Experience</label>
                                                                 <input class="form-control"
-                                                                    formControlName="work_experience"
-                                                                    placeholder="Work Experience" type="text">
+                                                                       formControlName="work_experience"
+                                                                       placeholder="Work Experience" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <div class="form-group">
                                                                 <label class="form-label">Qualification</label>
                                                                 <input class="form-control"
-                                                                    formControlName="qualification"
-                                                                    placeholder="Qualification" type="text">
+                                                                       formControlName="qualification"
+                                                                       placeholder="Qualification" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Image</label>
+<<<<<<< HEAD
                                                             <input class="form-control" type="file"
                                                                 (change)="fileUpload($event, 'uploadImage')">
+=======
+                                                            <input (change)="fileUpload($event, 'uploadImage')" class="form-control"
+                                                                   type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Blood Group</label>
                                                             <select class="form-select" formControlName="blood_group"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="A+">A+</option>
                                                                 <option value="A-">A-</option>
@@ -859,13 +959,18 @@
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Update Lab Report</label>
+<<<<<<< HEAD
                                                             <input class="form-control" type="file"
                                                                 (change)="fileUpload($event, 'labReport')">
+=======
+                                                            <input (change)="fileUpload($event, 'labReport')" class="form-control"
+                                                                   type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Religion</label>
                                                             <select class="form-select" formControlName="religion"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="Hinduism">Hinduism</option>
                                                                 <option value="Buddhism">Buddhism</option>
@@ -883,7 +988,7 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>User Type</label>
                                                             <select class="form-select" formControlName="user_type"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option value="Super Admin">Super Admin</option>
                                                             </select>
@@ -891,32 +996,38 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Email address (Login
                                                                 Email)</label>
-                                                            <input class="form-control" type="email"
-                                                                formControlName="email" placeholder="name@example.com">
+                                                            <input class="form-control" formControlName="email"
+                                                                   placeholder="name@example.com"
+                                                                   type="email">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Caste</label>
                                                             <select class="form-select" formControlName="caste"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option *ngFor="let data of categoryList"
-                                                                    [value]="data.id">
+                                                                        [value]="data.id">
                                                                     {{data.name}}
                                                                 </option>
                                                             </select>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">User Caste Certificate</label>
+<<<<<<< HEAD
                                                             <input class="form-control" type="file"
                                                                 (change)="fileUpload($event, 'userCasteCertificate')">
+=======
+                                                            <input (change)="fileUpload($event, 'userCasteCertificate')" class="form-control"
+                                                                   type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Department</label>
                                                             <select class="form-select" formControlName="department_id"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option *ngFor="let data of departmentList"
-                                                                    [value]="data.id">
+                                                                        [value]="data.id">
                                                                     {{data.name}}
                                                                 </option>
                                                             </select>
@@ -924,10 +1035,10 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Select Franchise</label>
                                                             <select class="form-select" formControlName="franchise_id"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option *ngFor="let data of franchiseList"
-                                                                    [value]="data.id">
+                                                                        [value]="data.id">
                                                                     {{data.name}}
                                                                 </option>
                                                             </select>
@@ -935,27 +1046,32 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Current Address</label>
                                                             <input class="form-control"
-                                                                formControlName="current_address"
-                                                                placeholder="Current Address" type="text">
+                                                                   formControlName="current_address"
+                                                                   placeholder="Current Address" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Permanent Address</label>
                                                             <input class="form-control"
-                                                                formControlName="permanent_address"
-                                                                placeholder="Permanent Address" type="text">
+                                                                   formControlName="permanent_address"
+                                                                   placeholder="Permanent Address" type="text">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Aadhar</label>
+<<<<<<< HEAD
                                                             <input class="form-control" type="file"
                                                                 (change)="fileUpload($event, 'uploadAadhar')">
+=======
+                                                            <input (change)="fileUpload($event, 'uploadAadhar')" class="form-control"
+                                                                   type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Designation</label>
                                                             <select class="form-select" formControlName="designation_id"
-                                                                style="width: 100%">
+                                                                    style="width: 100%">
                                                                 <option value="null">Select</option>
                                                                 <option *ngFor="let data of designationList"
-                                                                    [value]="data.id">
+                                                                        [value]="data.id">
                                                                     {{data.name}}
                                                                 </option>
                                                             </select>
@@ -964,13 +1080,18 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Pan Number</label>
                                                                 <input class="form-control" formControlName="pan_number"
-                                                                    placeholder="Pan Number" type="text">
+                                                                       placeholder="Pan Number" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Pan</label>
+<<<<<<< HEAD
                                                             <input class="form-control" type="file"
                                                                 (change)="fileUpload($event, 'uploadPan')">
+=======
+                                                            <input (change)="fileUpload($event, 'uploadPan')" class="form-control"
+                                                                   type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         </div>
                                                     </div>
 
@@ -981,38 +1102,40 @@
                                                             <div class="form-group">
                                                                 <label class="form-label">Bank Account Number</label>
                                                                 <input class="form-control"
-                                                                    formControlName="bank_account_number" placeholder=""
-                                                                    type="text">
+                                                                       formControlName="bank_account_number"
+                                                                       placeholder=""
+                                                                       type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3 col-md-3">
                                                             <div class="form-group">
                                                                 <label class="form-label">Bank Name</label>
                                                                 <input class="form-control" formControlName="bank_name"
-                                                                    placeholder="" type="text">
+                                                                       placeholder="" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3 col-md-3">
                                                             <div class="form-group">
                                                                 <label class="form-label">IFSC Code</label>
                                                                 <input class="form-control" formControlName="ifsc_code"
-                                                                    placeholder="" type="text">
+                                                                       placeholder="" type="text">
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-3 col-md-3">
                                                             <div class="form-group">
                                                                 <label class="form-label">Bank Branch name</label>
                                                                 <input class="form-control"
-                                                                    formControlName="bank_branch_name" placeholder=""
-                                                                    type="text">
+                                                                       formControlName="bank_branch_name" placeholder=""
+                                                                       type="text">
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </form>
                                                 <div class="card-footer text-end">
-                                                    <button class="btn btn-primary" (click)="updateProfileStaff()"
-                                                        type="submit">Update
-                                                        Profile</button>
+                                                    <button (click)="updateProfileStaff()" class="btn btn-primary"
+                                                            type="submit">Update
+                                                        Profile
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>
@@ -1025,8 +1148,13 @@
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label>Select Degree</label>
+<<<<<<< HEAD
                                                     <select style="width: 100%" formControlName="degree"
                                                         class="form-select" required>
+=======
+                                                    <select class="form-select" formControlName="degree"
+                                                            required style="width: 100%">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                         <option value="null"> Select a degree</option>
                                                         <option *ngFor="let degree of degreeList" [value]="degree.id">
                                                             {{degree.name}}
@@ -1035,6 +1163,7 @@
                                                 </div>
                                                 <div class="col-md-4 mb-3">
                                                     <label>specialization</label>
+<<<<<<< HEAD
                                                     <input formControlName="specialization" type="text"
                                                         class="form-control" placeholder="specialization" required>
                                                 </div>
@@ -1043,11 +1172,23 @@
                                                     <input type="text" class="form-control"
                                                         formControlName="university_name" placeholder="university_name"
                                                         required>
+=======
+                                                    <input class="form-control" formControlName="specialization"
+                                                           placeholder="specialization" required
+                                                           type="text">
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>university_name</label>
+                                                    <input class="form-control" formControlName="university_name"
+                                                           placeholder="university_name"
+                                                           required type="text">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
                                                     <label>percentage</label>
+<<<<<<< HEAD
                                                     <input type="text" class="form-control" placeholder="percentage"
                                                         formControlName="percentage" required>
                                                 </div>
@@ -1060,15 +1201,42 @@
                                                     <label>File</label>
                                                     <input type="file" class="form-control"
                                                         (change)="fileUpload($event, 'educationFileName')" required>
+=======
+                                                    <input class="form-control" formControlName="percentage" placeholder="percentage"
+                                                           required
+                                                           type="text">
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>grade</label>
+                                                    <input class="form-control" formControlName="grade" placeholder="grade"
+                                                           required
+                                                           type="text">
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label>File</label>
+                                                    <input (change)="fileUpload($event, 'education_file')" class="form-control"
+                                                           required type="file">
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                                 </div>
                                             </div>
                                         </form>
                                         <div class="card-footer">
+<<<<<<< HEAD
                                             <button class="btn btn-primary me-1"
                                                 (click)="saveStaffEducation()">Submit</button>
                                             <button [hidden]="isUpdatableStaffEducation == false"
                                                 class="btn btn-primary me-1"
                                                 (click)="cancelUpdateStaffEducation()">Cancel</button>
+=======
+                                            <!--                                             <button [hidden]="isUpdatable == true" class="btn btn-primary me-1"-->
+                                            <!--                                                (click)="saveStaffEducation()"-->
+                                            <!--                                                *ngIf="permission[0].permission == 1">Submit</button>-->
+                                            <button (click)="saveStaffEducation()"
+                                                    class="btn btn-primary me-1">Save
+                                            </button>
+                                            <!--                                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"-->
+                                            <!--                                                    (click)="cancelUpdate()">Cancel</button> -->
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                         </div>
                                     </div>
 
@@ -1076,17 +1244,18 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
-                                                <tr>
-                                                    <th scope="col">Sl.NO</th>
-                                                    <th scope="col">Degree</th>
-                                                    <th scope="col">Specialization</th>
-                                                    <th scope="col">University</th>
-                                                    <th scope="col">Percentage</th>
-                                                    <th scope="col">Grade</th>
-                                                    <th scope="col">Action</th>
-                                                </tr>
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Degree</th>
+                                                <th scope="col">Specialization</th>
+                                                <th scope="col">University</th>
+                                                <th scope="col">Percentage</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
                                             </thead>
                                             <tbody>
+<<<<<<< HEAD
                                                 <tr *ngFor="let record of educations; let indexOfElement=index">
                                                     <td>{{indexOfElement+1}}</td>
                                                     <td>{{record.degree_name}}</td>
@@ -1101,6 +1270,17 @@
                                                             (click)="deleteStaffEducation(record)"><mat-icon>delete</mat-icon></a>
                                                     </td>
                                                 </tr>
+=======
+                                            <tr *ngFor="let record of educations; let indexOfElement=index">
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td>{{record.degree_name}}</td>
+                                                <td>{{record.specialization}}</td>
+                                                <td>{{record.university_name}}</td>
+                                                <td>{{record.percentage}}</td>
+                                                <td>{{record.grade}}</td>
+                                                <td>{{record.file_name}}</td>
+                                            </tr>
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                             </tbody>
                                         </table>
                                     </div>
@@ -1159,6 +1339,7 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
+<<<<<<< HEAD
                                                 <tr>
                                                     <th>Sl.NO</th>
                                                     <th>Staff Name</th>
@@ -1190,6 +1371,32 @@
                                                             (click)="deleteStaffBookPublication(record)"><mat-icon>delete</mat-icon></a>
                                                     </td>
                                                 </tr>
+=======
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Staff Name</th>
+                                                <th scope="col">Degree</th>
+                                                <th scope="col">Specialization</th>
+                                                <th scope="col">University</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Percentage</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                             </tbody>
                                         </table>
 
@@ -1280,6 +1487,7 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
+<<<<<<< HEAD
                                                 <tr>
                                                     <th>#</th>
                                                     <th>Designation</th>
@@ -1309,6 +1517,32 @@
                                                         </a>
                                                     </td>
                                                 </tr>
+=======
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Staff Name</th>
+                                                <th scope="col">Degree</th>
+                                                <th scope="col">Specialization</th>
+                                                <th scope="col">University</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Percentage</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                             </tbody>
                                         </table>
 
@@ -1382,6 +1616,7 @@
                                     <div class="table-responsive">
                                         <table class="table">
                                             <thead>
+<<<<<<< HEAD
                                                 <tr>
                                                     <th scope="col">#</th>
                                                     <th>Journal Name</th>
@@ -1414,6 +1649,32 @@
                                                         </a>
                                                     </td>
                                                 </tr>
+=======
+                                            <tr>
+                                                <th scope="col">Sl.NO</th>
+                                                <th scope="col">Staff Name</th>
+                                                <th scope="col">Degree</th>
+                                                <th scope="col">Specialization</th>
+                                                <th scope="col">University</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Percentage</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                            </tr>
+>>>>>>> 1390480d2e2fb095f34fce44f6f3dcb96eaa94ca
                                             </tbody>
                                         </table>
 
