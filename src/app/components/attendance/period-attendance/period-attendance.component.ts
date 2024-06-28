@@ -184,8 +184,16 @@ export class PeriodAttendanceComponent {
         this.session_id = JSON.parse(localStorage.getItem('session_id'));
         this.attendanceForm.patchValue({session_id: this.session_id});
 
-        // console.log(this.topic_name);
-        // return;
+        if(this.topic_name == null){
+            Swal.fire({
+                position: 'center',
+                icon: 'info',
+                title: 'Please enter topic name',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            return;
+        }
 
         const topicName = this.topic_name;
 
