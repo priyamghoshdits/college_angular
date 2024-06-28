@@ -467,8 +467,7 @@ export class StudentAdmisssionComponent {
         formData.append("transaction_id", this.studentCreationForm.value.transaction_id);
         formData.append("caution_money", this.studentCreationForm.value.caution_money);
 
-        this.studentService.updateStudent(formData).subscribe((response) => {
-            // @ts-ignore
+        this.studentService.updateStudent(formData).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',

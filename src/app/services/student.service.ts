@@ -171,7 +171,7 @@ export class StudentService {
     }
 
     updateClassEnd(data) {
-        return this.http.post(this.BASE_API_URL + '/updateClassEnd/', data)
+        return this.http.post(this.BASE_API_URL + '/updateClassEnd', data)
             .pipe(catchError(this.errorService.serverError), tap(response => {
             }));
     }
