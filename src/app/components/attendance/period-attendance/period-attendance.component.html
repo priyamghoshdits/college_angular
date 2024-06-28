@@ -40,7 +40,7 @@
                                     <div class="col-md-2 mb-3">
                                         <label>Select Date</label>
                                         <input class="form-control" formControlName="date" placeholder="Select date"
-                                               type="date">
+                                               type="date" readonly>
                                         <div *ngIf="attendanceForm.controls['date'].errors?.['required'] && attendanceForm.controls['date'].touched "
                                              class="text text-danger mt-1">Date required
                                         </div>
