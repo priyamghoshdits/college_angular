@@ -23,6 +23,8 @@ export class StudentProfileComponent {
     achievement: any[];
     placement: any[];
     education_qualification: any;
+    fees_details: any[] = [];
+    scholarship: any[] = [];
 
     constructor(private route: ActivatedRoute, private studentService: StudentService) {
         this.route.params.subscribe(params => {
@@ -32,6 +34,8 @@ export class StudentProfileComponent {
                     this.achievement = response.achievement;
                     this.placement = response.placement;
                     this.education_qualification = response.education_qualification;
+                    this.fees_details = response.fees_details;
+                    this.scholarship = response.scholarship;
                 }
             })
         });
