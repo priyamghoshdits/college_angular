@@ -38,22 +38,40 @@ export class PayslipComponent {
     file: any;
     searchItem: string;
     session_id = null;
+    year: any[] = [];
 
     constructor(private subjectService: SubjectService, private memberService: MemberService) {
         this.uploadCertificateForm = new FormGroup({
             id: new FormControl(null),
             course_id: new FormControl(null, [Validators.required]),
             month: new FormControl(null, [Validators.required]),
+            year: new FormControl(null, [Validators.required]),
         });
         this.subjectService.getCourseListener().subscribe((response) => {
             this.courseList = response;
         });
         this.courseList = this.subjectService.getCourses();
+
+        for(let i = new Date().getFullYear() - 3; i<=new Date().getFullYear()+3; i++){
+            let x = {
+                "year": i
+            };
+            this.year.push(x);
+        }
     }
 
     searchStaff() {
-        this.memberService.getStaffForPayslip(this.uploadCertificateForm.value.course_id, this.uploadCertificateForm.value.month).subscribe((response: any) => {
+        this.memberService.getStaffForPayslip(this.uploadCertificateForm.value.course_id, this.uploadCertificateForm.value.month, this.uploadCertificateForm.value.year).subscribe((response: any) => {
             this.staffList = response.data;
+            if(this.staffList.length > 0){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'No Data Found',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }
         });
     }
 
@@ -61,6 +79,7 @@ export class PayslipComponent {
         const formData = new FormData();
         formData.append('staff_id',record.staff_id);
         formData.append('month',this.uploadCertificateForm.value.month);
+        formData.append('year',this.uploadCertificateForm.value.year);
         formData.append('file',event.target.files[0]);
 
         this.memberService.uploadPayslipManual(formData).subscribe((response: any) => {

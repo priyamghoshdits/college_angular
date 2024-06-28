@@ -39,6 +39,16 @@
                                         </select>
                                         <div *ngIf="uploadCertificateForm.controls['month'].errors?.['required'] && uploadCertificateForm.controls['month'].touched " class="text text-danger mt-1">Month required</div>
                                     </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label>Select Year</label>
+                                        <select style="width: 100%" formControlName="year" class="form-select" required>
+                                            <option value="null"> Select </option>
+                                            <option *ngFor="let data of year" [value]="data.year" >
+                                                {{data.year}}
+                                            </option>
+                                        </select>
+                                        <div *ngIf="uploadCertificateForm.controls['year'].errors?.['required'] && uploadCertificateForm.controls['year'].touched " class="text text-danger mt-1">Year required</div>
+                                    </div>
                                     <div class="col-md-2 mb-3">
                                         <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="searchStaff()">Submit</button>
                                     </div>

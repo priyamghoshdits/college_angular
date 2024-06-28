@@ -286,12 +286,9 @@ export class CreateStaffComponent {
         formData.append("joining_letter_proof", this.joiningLetterProof);
         formData.append("dob_proof", this.dobCertificateproof);
 
-
-
-
-
         this.memberService.saveMember(formData).subscribe((response: any) => {
             if (response.success == 1) {
+                Swal.close();
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -299,8 +296,16 @@ export class CreateStaffComponent {
                     showConfirmButton: false,
                     timer: 1000
                 });
-                Swal.close();
                 this.staffCreationForm.reset();
+            } else {
+                Swal.close();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: 'Invalid inputs',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
             }
         })
     }

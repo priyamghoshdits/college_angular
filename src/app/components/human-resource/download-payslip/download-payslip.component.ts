@@ -36,6 +36,7 @@ export class DownloadPayslipComponent {
     searchItem: string;
     session_id = null;
     user = null;
+    year: any[] = [];
 
     constructor(private subjectService: SubjectService, private memberService: MemberService) {
 
@@ -46,21 +47,38 @@ export class DownloadPayslipComponent {
             id: new FormControl(null),
             course_id: new FormControl(null, [Validators.required]),
             month: new FormControl(null, [Validators.required]),
+            year: new FormControl(null, [Validators.required]),
         });
         this.subjectService.getCourseListener().subscribe((response) => {
             this.courseList = response;
         });
         this.courseList = this.subjectService.getCourses();
+
+        for(let i = new Date().getFullYear() - 3; i<=new Date().getFullYear()+3; i++){
+            let x = {
+                "year": i
+            };
+            this.year.push(x);
+        }
     }
 
     searchStaff() {
-        this.memberService.getStaffForPayslip(this.uploadCertificateForm.value.course_id, this.uploadCertificateForm.value.month).subscribe((response: any) => {
+        this.memberService.getStaffForPayslip(this.uploadCertificateForm.value.course_id, this.uploadCertificateForm.value.month, this.uploadCertificateForm.value.year).subscribe((response: any) => {
             const staffList = response.data;
+            if(staffList.length > 0){
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'No Data Found',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }
             // @ts-ignore
             if(this.user.user_type_id == 1){
-                this.staffList = staffList.filter(x => x.month !== null);
+                this.staffList = staffList;
             }else{
-                this.staffList = staffList.filter(x => x.month !== null);
+                // this.staffList = staffList.filter(x => x.month !== null);
                 // @ts-ignore
                 this.staffList = this.staffList.filter(x => x.staff_id !== this.user.id);
             }

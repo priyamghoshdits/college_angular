@@ -135,8 +135,8 @@ export class MemberService {
             }));
     }
 
-    getStaffForPayslip(course_id, month) {
-        return this.http.get(this.BASE_API_URL + '/getStaffForPayslip/' + course_id + '/' + month)
+    getStaffForPayslip(course_id, month, year) {
+        return this.http.get(this.BASE_API_URL + '/getStaffForPayslip/' + course_id + '/' + month + '/' + year)
             .pipe(catchError(this.errorService.serverError), tap(response => {
 
             }));
