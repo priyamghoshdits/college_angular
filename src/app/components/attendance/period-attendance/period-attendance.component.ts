@@ -83,7 +83,7 @@ export class PeriodAttendanceComponent {
     }
 
     getClass(){
-        this.subjectService.getClass(this.attendanceForm.value.subject_id).subscribe((response: any) => {
+        this.subjectService.getClass(this.attendanceForm.value.subject_id, null).subscribe((response: any) => {
             if(response.success == 1){
                 this.classList = response.data;
             }
@@ -104,7 +104,8 @@ export class PeriodAttendanceComponent {
         this.studentService.getStudentAttendanceNew(this.attendanceForm.value.course_id
             , this.attendanceForm.value.semester_id, this.attendanceForm.value.date
             , this.attendanceForm.value.subject_id
-            , this.attendanceForm.value.session_id, this.attendanceForm.value.class
+            , this.attendanceForm.value.session_id
+            , this.attendanceForm.value.class
         ).subscribe((response: any) => {
 
             if (response.semester_time_table == 0) {

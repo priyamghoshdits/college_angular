@@ -139,7 +139,7 @@ export class AdminAttendanceComponent {
     }
 
     getClass(){
-        this.subjectService.getClass(this.attendanceForm.value.subject_id).subscribe((response: any) => {
+        this.subjectService.getClass(this.attendanceForm.value.subject_id, this.attendanceForm.value.date).subscribe((response: any) => {
             if(response.success == 1){
                 this.classList = response.data;
             }

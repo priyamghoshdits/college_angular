@@ -176,8 +176,8 @@ export class SubjectService {
           }));
   }
 
-  getClass(subject_id){
-      return this.http.get(this.BASE_API_URL + '/getClass/' + subject_id)
+  getClass(subject_id, date){
+      return this.http.get(this.BASE_API_URL + '/getClass/' + subject_id + '/' + date)
           .pipe(catchError(this.errorService.serverError), tap(response => {
           }));
   }
