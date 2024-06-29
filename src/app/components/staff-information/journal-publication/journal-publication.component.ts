@@ -87,6 +87,8 @@ export class JournalPublicationComponent {
         const file = event.target.files[0];
         if (file) {
             this.filesArray[index] = file;
+            this.journalPublicationArray[index].file_name = file.name;
+
         }
     }
 
@@ -94,6 +96,19 @@ export class JournalPublicationComponent {
         let arr = {
             'journal_publication_array': this.journalPublicationArray
         };
+
+        this.filesArray.forEach((file, index) => {
+            if (file) {
+                const formData = new FormData();
+                formData.append('file_name', file);
+
+                // Send the file to the server
+                this.journalPublicationService.saveUploadFile(formData).subscribe((response: any) => {
+                    this.journalPublicationArray[index].file_name = response.file_name;
+                });
+            }
+        });
+
         this.journalPublicationService.updateJournalPublication(arr).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
@@ -121,6 +136,7 @@ export class JournalPublicationComponent {
         this.journalPublicationArray[0].topic_name = data.topic_name;
         this.journalPublicationArray[0].issn_number = data.issn_number;
         this.journalPublicationArray[0].impact_factor = data.impact_factor;
+        this.journalPublicationArray[0].file_nmae = data.file_name;
         this.active = 1;
         this.isUpdatable = true;
     }
@@ -144,7 +160,6 @@ export class JournalPublicationComponent {
                 })
             }
         });
-
     }
 
 
@@ -188,7 +203,7 @@ export class JournalPublicationComponent {
 
                 // Send the file to the server
                 this.journalPublicationService.saveUploadFile(formData).subscribe((response: any) => {
-                    this.journalPublicationArray[index].file_name = response.file_name;
+                    // this.journalPublicationArray[index].file_name = response.file_name;
                 });
             }
         });
