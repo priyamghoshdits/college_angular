@@ -1,0 +1,146 @@
+<div class="container-fluid">
+    <div *ngIf="permission.length > 0" class="row">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div [hidden]="active != 1" class="card-header">
+                            <h5>Api Score</h5><span>Api Score</span>
+                        </div>
+                        <div [hidden]="active != 2" class="card-header">
+                            <h5>Show Paper Setter</h5>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary" ngbNav>
+                                <li [ngbNavItem]="1">
+                                    <a (click)="activeTab(1)" ngbNavLink>Add Api Score</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a (click)="activeTab(2)" ngbNavLink>Show Api Score</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+                        <div [hidden]="active != 1">
+                            <div [hidden]="active != 1" class="card-body">
+                                <div *ngFor="let item of paperField ;let indexOfElement=index">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Staff</label>
+                                            <select [(ngModel)]="paperSetterArray[indexOfElement].staff_id"
+                                                    class="form-select"
+                                                    required style="width: 100%">
+                                                <option value="null"> Select a Staff</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Assignment Year</label>
+                                            <input [(ngModel)]="paperSetterArray[indexOfElement].assignment_year" class="form-control"
+                                                   placeholder="Assignment Year"
+                                                   required type="text">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Upload File</label>
+                                            <input class="form-control"
+                                                   (change)="fileUpload($event, indexOfElement)"
+                                                   required type="file">
+                                        </div>
+                                        <div *ngIf="(indexOfElement + 1) == paperField.length && !isUpdatable"
+                                             class="col-md-2 mb-3">
+                                            <a (click)="addField()" style="">
+                                                <mat-icon
+                                                        style="font-size: 40px;height: 60px; width: 40px; line-height: 2">
+                                                    add_box
+                                                </mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button (click)="saveApiScore()" *ngIf="permission[0].permission == 1"
+                                        [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
+                                </button>
+                                <button (click)="updatePaperSetter()" [hidden]="isUpdatable == false"
+                                        class="btn btn-primary me-1">Update
+                                </button>
+                                <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
+                                        class="btn btn-primary me-1">Cancel
+                                </button>
+                                <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                            </div>
+                        </div>
+                        <div [hidden]="active != 2">
+                            <div class="card-body">
+                                <form [formGroup]="paperSettingForm" class="theme-form">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Staff</label>
+                                            <select class="form-select" formControlName="staff_id" required
+                                                    style="width: 100%">
+                                                <option value="null"> Select a Staff</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <button (click)="getPaperSetting()" class="btn btn-primary me-1"
+                                                    style="margin-top: 30px;">Search
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table text-center">
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th>Staff Name</th>
+                                        <th>Examination Name</th>
+                                        <th>Subject Name</th>
+                                        <th>University Name</th>
+                                        <th>Reference Name</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr
+                                            *ngFor="let record of searchPaperList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
+                                        <td>{{indexOfElement + 1}}</td>
+                                        <td>{{record.staff_name}}</td>
+                                        <td>{{record.examination_name}}</td>
+                                        <td>{{record.subject_name}}</td>
+                                        <td>{{record.university_name}}</td>
+                                        <td>{{record.referance_no}}</td>
+                                        <td>{{record.ref_date}}</td>
+                                        <td>
+                                            <a (click)="editPaperSetter(record)"
+                                               *ngIf="permission[1].permission == 1">
+                                                <mat-icon>edit</mat-icon>
+                                            </a>
+                                            <a (click)="deletePaperSetter(record)"
+                                               *ngIf="permission[2].permission == 1">
+                                                <mat-icon>delete</mat-icon>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <!-- <pagination-controls *ngIf="paperList.length > 5"
+                                    (pageChange)="p = $event"></pagination-controls> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

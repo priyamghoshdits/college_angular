@@ -154,6 +154,7 @@ export class NavService {
 				{ path: '/staff-information/staff-experience', title: 'Staff Experience', type: 'link' },
 				{ path: '/staff-information/seminar-workshop-faculty', title: 'Seminar / Workshop / Faculty Development Programme', type: 'link' },
 				{ path: '/staff-information/examiners', title: 'Examiners', type: 'link' },
+				{ path: '/staff-information/api-score', title: 'Api Score', type: 'link' },
 				{ path: '/staff-information/answer-script-evaluator', title: 'Answer Script Evaluator', type: 'link' },
 				{ path: '/staff-information/sponsored-or-consultancy', title: 'Sponsored project/Consultancy', type: 'link' },
 				{ path: '/staff-information/journal-publication', title: 'Journal Publication', type: 'link' },

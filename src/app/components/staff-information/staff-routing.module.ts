@@ -12,6 +12,7 @@ import {PaperSetterComponent} from "./paper-setter/paper-setter.component";
 import {AnswerScriptComponent} from "./answer-script/answer-script.component";
 import {SeminarWorkshopFacultyComponent} from "./seminar-workshop-faculty/seminar-workshop-faculty.component";
 import {ExaminerComponent} from "./examiner/examiner.component";
+import {ApiScoreComponent} from "./api-score/api-score.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,14 @@ const routes: Routes = [
     data: {
       title: "Journal Publication",
       breadcrumb: "Journal Publication"
+    }
+  },
+  {
+    path: 'api-score',
+    component: ApiScoreComponent,
+    data: {
+      title: "Api Score",
+      breadcrumb: "Api Score"
     }
   },
   {
