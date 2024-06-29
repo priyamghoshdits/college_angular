@@ -13,7 +13,7 @@ import { FranchiseService } from 'src/app/services/franchise.service';
 import { StaffDegreeService } from 'src/app/services/staff-degree.service';
 import { StaffEducationService } from 'src/app/services/staff-education.service';
 import { BookPublicationService } from 'src/app/services/book-publication.service';
-import {SubjectService} from "../../../services/subject.service";
+import { SubjectService } from "../../../services/subject.service";
 
 @Component({
     selector: 'app-user-edit',
@@ -82,6 +82,7 @@ export class UserEditComponent implements OnInit {
     labReport: File;
     experienceProof: File;
     manualFeesFile: File;
+    journalFile: File;
 
     educationFileName: File;
     isUpdatableStaffEducation: boolean = false;
@@ -316,7 +317,7 @@ export class UserEditComponent implements OnInit {
                     this.manualFeesList = response.manualFeesList;
                     this.subjectService.getSemesterByCourseId(this.userDetails.course_id).subscribe((response: any) => {
                         this.semesterList = response.data;
-                        this.manualFeesForm.patchValue({course_id: this.userDetails.course_id});
+                        this.manualFeesForm.patchValue({ course_id: this.userDetails.course_id });
                     })
                 } else {
                     this.staffDetails = response.data;
@@ -369,9 +370,14 @@ export class UserEditComponent implements OnInit {
             this.educationFileName = event.target.files[0];
         } else if (type == 'experienceProof') {
             this.experienceProof = event.target.files[0];
-        }else if(type == 'manualFeesFile'){
+        } else if (type == 'manualFeesFile') {
             this.manualFeesFile = event.target.files[0];
         }
+    }
+
+
+    journalFileUpload(event) {
+        this.journalFile = event.target.files[0];
     }
 
     saveJournalPublication() {
@@ -380,7 +386,19 @@ export class UserEditComponent implements OnInit {
             return;
         }
 
-        return this.http.post(this.BASE_API_URL + '/saveJournalPublicationOwn', this.journalPublicationForm.value)
+       let formData = new FormData();
+       formData.append('id', this.journalPublicationForm.value.id);
+       formData.append('journal_name', this.journalPublicationForm.value.journal_name);
+       formData.append('publication', this.journalPublicationForm.value.publication);
+       formData.append('ugc_affiliation', this.journalPublicationForm.value.ugc_affiliation);
+       formData.append('university_name', this.journalPublicationForm.value.university_name);
+       formData.append('volume_page_number', this.journalPublicationForm.value.volume_page_number);
+       formData.append('issn_number', this.journalPublicationForm.value.issn_number);
+       formData.append('topic_name', this.journalPublicationForm.value.topic_name);
+       formData.append('impact_factor', this.journalPublicationForm.value.impact_factor);
+       formData.append('file_name', this.journalFile);
+
+        return this.http.post(this.BASE_API_URL + '/saveJournalPublicationOwn', formData)
             .subscribe((response: any) => {
                 // @ts-ignore
                 if (response.success == 1) {
@@ -591,11 +609,11 @@ export class UserEditComponent implements OnInit {
         });
     }
 
-    editManualFees(data){
+    editManualFees(data) {
         this.manualFeesForm.patchValue(data);
     }
 
-    saveManualFeesOwn(){
+    saveManualFeesOwn() {
         const formData = new FormData();
         formData.append('id', this.manualFeesForm.value.id);
         formData.append('course_id', this.manualFeesForm.value.course_id);
