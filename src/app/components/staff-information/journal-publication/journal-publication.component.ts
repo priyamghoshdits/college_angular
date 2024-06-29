@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {NgxPaginationModule} from "ngx-pagination";
-import {MemberService} from "../../../services/member.service";
-import {ExaminationService} from "../../../services/examination.service";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
+import { NgxPaginationModule } from "ngx-pagination";
+import { MemberService } from "../../../services/member.service";
+import { ExaminationService } from "../../../services/examination.service";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
 import Swal from "sweetalert2";
-import {JournalPublicationServiceService} from "../../../services/journal-publication-service.service";
+import { JournalPublicationServiceService } from "../../../services/journal-publication-service.service";
 
 @Component({
-  selector: 'app-journal-publication',
-  standalone: true,
+    selector: 'app-journal-publication',
+    standalone: true,
     imports: [
         FormsModule,
         MatIconModule,
@@ -26,8 +26,8 @@ import {JournalPublicationServiceService} from "../../../services/journal-public
         NgbNavItem,
         NgbNavOutlet
     ],
-  templateUrl: './journal-publication.component.html',
-  styleUrl: './journal-publication.component.scss'
+    templateUrl: './journal-publication.component.html',
+    styleUrl: './journal-publication.component.scss'
 })
 export class JournalPublicationComponent {
     journalPublicationForm: FormGroup;
@@ -64,6 +64,7 @@ export class JournalPublicationComponent {
                 'issn_number': null,
                 'topic_name': null,
                 'impact_factor': null,
+                'file_name': null
             }
         ];
 
@@ -79,6 +80,13 @@ export class JournalPublicationComponent {
         this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
         if (this.rolesAndPermission.length > 0) {
             this.permission = this.rolesAndPermission.find(x => x.name == 'JOURNAL PUBLICATION').permission;
+        }
+    }
+
+    fileUpload(event: any, index: number) {
+        const file = event.target.files[0];
+        if (file) {
+            this.filesArray[index] = file;
         }
     }
 
@@ -154,6 +162,7 @@ export class JournalPublicationComponent {
                 'issn_number': null,
                 'topic_name': null,
                 'impact_factor': null,
+                'file_name': null
             }
         ];
         // this.counter = 0;
@@ -172,17 +181,28 @@ export class JournalPublicationComponent {
             'journal_publication_array': this.journalPublicationArray
         };
 
+        this.filesArray.forEach((file, index) => {
+            if (file) {
+                const formData = new FormData();
+                formData.append('file_name', file);
+
+                // Send the file to the server
+                this.journalPublicationService.saveUploadFile(formData).subscribe((response: any) => {
+                    this.journalPublicationArray[index].file_name = response.file_name;
+                });
+            }
+        });
+
         this.journalPublicationService.saveJournalPublication(arr).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Question Paper Saved',
+                    title: 'Journal Saved',
                     showConfirmButton: false,
                     timer: 1000
                 });
                 this.cancelUpdate();
-
             }
         })
     }
@@ -205,6 +225,7 @@ export class JournalPublicationComponent {
                 'issn_number': null,
                 'topic_name': null,
                 'impact_factor': null,
+                'file_name': null
             }
         ];
         this.journalPublicationArray.push(arr[0]);

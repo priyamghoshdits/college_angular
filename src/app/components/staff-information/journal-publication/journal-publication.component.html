@@ -68,17 +68,22 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-5 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label>University Name</label>
                                             <input [(ngModel)]="journalPublicationArray[indexOfElement].university_name"
                                                 class="form-control" placeholder="University Name" required type="text">
                                         </div>
-                                        <div class="col-md-5 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <label>Volume and Page number</label>
                                             <input
                                                 [(ngModel)]="journalPublicationArray[indexOfElement].volume_page_number"
                                                 class="form-control" placeholder="Volume and Page number" required
                                                 type="text">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Upload File</label>
+                                            <input class="form-control" type="file"
+                                                (change)="fileUpload($event,indexOfElement)">
                                         </div>
                                     </div>
                                     <div class="row">
