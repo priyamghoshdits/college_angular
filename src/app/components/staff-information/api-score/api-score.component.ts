@@ -9,6 +9,7 @@ import {ExaminationService} from "../../../services/examination.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import Swal from "sweetalert2";
 import {ApiScoreService} from "../../../services/api-score.service";
+import {environment} from "../../../../environments/environment";
 
 @Component({
     selector: 'app-api-score',
@@ -30,6 +31,7 @@ import {ApiScoreService} from "../../../services/api-score.service";
     styleUrl: './api-score.component.scss'
 })
 export class ApiScoreComponent {
+    public FILE_URL = environment.FILE_URL;
     paperSettingForm: FormGroup;
     searchPaperList: any[];
     paperField: any[] = [1];
@@ -78,19 +80,19 @@ export class ApiScoreComponent {
         }
     }
 
-    updatePaperSetter() {
+    updateApiScore() {
         const formData = new FormData();
         formData.append('id', this.paperSetterArray[0].id);
         formData.append('staff_id', this.paperSetterArray[0].staff_id);
         formData.append('assignment_year', this.paperSetterArray[0].assignment_year);
         formData.append('file', this.filesArray[0]);
 
-        this.memberService.updatePaperSetter(formData).subscribe((response: any) => {
+        this.apiScoreService.updateApiScore(formData).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Paper Setter Updated',
+                    title: 'Api Score Updated',
                     showConfirmButton: false,
                     timer: 1000
                 });
@@ -102,7 +104,7 @@ export class ApiScoreComponent {
         })
     }
 
-    editPaperSetter(data) {
+    editApiScore(data) {
         this.paperSetterArray[0].id = data.id;
         this.paperSetterArray[0].staff_id = data.staff_id;
         this.paperSetterArray[0].assignment_year = data.assignment_year;
@@ -121,7 +123,7 @@ export class ApiScoreComponent {
             confirmButtonText: 'Yes, delete It!'
         }).then((result) => {
             if (result.isConfirmed) {
-                this.memberService.deletePaperSetter(data.id).subscribe((response: any) => {
+                this.apiScoreService.deleteApiScore(data.id).subscribe((response: any) => {
                     if (response.success == 1) {
                         this.searchPaperList = response.data;
                     }

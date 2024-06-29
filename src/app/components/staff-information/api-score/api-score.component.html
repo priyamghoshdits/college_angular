@@ -64,7 +64,7 @@
                                 <button (click)="saveApiScore()" *ngIf="permission[0].permission == 1"
                                         [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
                                 </button>
-                                <button (click)="updatePaperSetter()" [hidden]="isUpdatable == false"
+                                <button (click)="updateApiScore()" [hidden]="isUpdatable == false"
                                         class="btn btn-primary me-1">Update
                                 </button>
                                 <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
@@ -101,12 +101,8 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th>Staff Name</th>
-                                        <th>Examination Name</th>
-                                        <th>Subject Name</th>
-                                        <th>University Name</th>
-                                        <th>Reference Name</th>
-                                        <th>Date</th>
+                                        <th>Assignment Year</th>
+                                        <th>Download</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -114,14 +110,10 @@
                                     <tr
                                             *ngFor="let record of searchPaperList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
                                         <td>{{indexOfElement + 1}}</td>
-                                        <td>{{record.staff_name}}</td>
-                                        <td>{{record.examination_name}}</td>
-                                        <td>{{record.subject_name}}</td>
-                                        <td>{{record.university_name}}</td>
-                                        <td>{{record.referance_no}}</td>
-                                        <td>{{record.ref_date}}</td>
+                                        <td>{{record.assignment_year}}</td>
+                                        <td><a href="{{FILE_URL}}/api_score/{{record.file_name}}">Download</a></td>
                                         <td>
-                                            <a (click)="editPaperSetter(record)"
+                                            <a (click)="editApiScore(record)"
                                                *ngIf="permission[1].permission == 1">
                                                 <mat-icon>edit</mat-icon>
                                             </a>

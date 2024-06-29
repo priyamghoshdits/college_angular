@@ -27,9 +27,25 @@ export class ApiScoreService {
             }));
     }
 
+    updateApiScore(value) {
+        return this.http.post(this.BASE_API_URL + '/updateApiScore', value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
+
     searchApiScore(value) {
         return this.http.post(this.BASE_API_URL + '/searchApiScore', value)
             .pipe(catchError(this.errorService.serverError), tap(response => {
             }));
     }
+
+    deleteApiScore(value) {
+        return this.http.get(this.BASE_API_URL + '/deleteApiScore/' + value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
+
+
 }
