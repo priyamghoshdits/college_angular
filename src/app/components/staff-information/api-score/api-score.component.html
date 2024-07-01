@@ -8,7 +8,7 @@
                             <h5>Api Score</h5><span>Api Score</span>
                         </div>
                         <div [hidden]="active != 2" class="card-header">
-                            <h5>Show Paper Setter</h5>
+                            <h5>Api isApiScoreUpdateSetter</h5>
                         </div>
                         <div class="tabbed-card">
                             <ul #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary" ngbNav>
@@ -50,7 +50,7 @@
                                         </div>
                                         <div *ngIf="(indexOfElement + 1) == paperField.length && !isUpdatable"
                                              class="col-md-2 mb-3">
-                                            <a (click)="addField()" style="">
+                                            <a (click)="addField()">
                                                 <mat-icon
                                                         style="font-size: 40px;height: 60px; width: 40px; line-height: 2">
                                                     add_box
@@ -111,7 +111,13 @@
                                             *ngFor="let record of searchPaperList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
                                         <td>{{indexOfElement + 1}}</td>
                                         <td>{{record.assignment_year}}</td>
-                                        <td><a href="{{FILE_URL}}/api_score/{{record.file_name}}">Download</a></td>
+                                        <!-- <td><a href="{{FILE_URL}}/api_score/{{record.file_name}}">Download</a></td> -->
+                                        <td ngbTooltip="Download">
+                                            <a data-placement="left" target="_blank" href="{{FILE_URL}}/api_score/{{record.file_name}}">
+                                                Name
+                                            </a>
+                                        </td>
+
                                         <td>
                                             <a (click)="editApiScore(record)"
                                                *ngIf="permission[1].permission == 1">

@@ -1,15 +1,15 @@
-import {Component} from '@angular/core';
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {NgxPaginationModule} from "ngx-pagination";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MemberService} from "../../../services/member.service";
-import {ExaminationService} from "../../../services/examination.service";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { Component } from '@angular/core';
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
+import { NgxPaginationModule } from "ngx-pagination";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MemberService } from "../../../services/member.service";
+import { ExaminationService } from "../../../services/examination.service";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
 import Swal from "sweetalert2";
-import {ApiScoreService} from "../../../services/api-score.service";
-import {environment} from "../../../../environments/environment";
+import { ApiScoreService } from "../../../services/api-score.service";
+import { environment } from "../../../../environments/environment";
 
 @Component({
     selector: 'app-api-score',
@@ -47,9 +47,9 @@ export class ApiScoreComponent {
     memberList: any[];
 
     constructor(private memberService: MemberService
-                , private examinationService: ExaminationService
-                , private apiScoreService: ApiScoreService
-                , private roleAndPermissionService: RolesAndPermissionService) {
+        , private examinationService: ExaminationService
+        , private apiScoreService: ApiScoreService
+        , private roleAndPermissionService: RolesAndPermissionService) {
 
         this.paperSettingForm = new FormGroup({
             id: new FormControl(null),

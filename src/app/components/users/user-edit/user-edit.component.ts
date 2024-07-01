@@ -33,6 +33,8 @@ export class UserEditComponent implements OnInit {
     staffPublicationForm: FormGroup;
     staffExperienceForm: FormGroup;
     journalPublicationForm: FormGroup;
+    pgPhdForm: FormGroup;
+    apiScoreForm: FormGroup;
     placementList: any[] = [];
     achievementFile: any;
     achievementList: any[] = [];
@@ -43,6 +45,8 @@ export class UserEditComponent implements OnInit {
     educationUpdate = false;
     isAchievementFormUpdatable = false;
     isPlacementUpdatable = false;
+    isPgPhdUpdate = false;
+    isApiScoreUpdate = false;
     companyDetailsList: any[];
     designationList: any[];
     departmentList: any[];
@@ -71,6 +75,7 @@ export class UserEditComponent implements OnInit {
     staffDetails = {};
     educations: any[];
     degreeList: any[];
+    apiScoreList: any[];
 
     birthCertificate: File;
     uploadJoiningLetter: File;
@@ -83,6 +88,8 @@ export class UserEditComponent implements OnInit {
     experienceProof: File;
     manualFeesFile: File;
     journalFile: File;
+    pgPhdFile: File;
+    apiScoreFile: File;
 
     educationFileName: File;
     isUpdatableStaffEducation: boolean = false;
@@ -92,6 +99,7 @@ export class UserEditComponent implements OnInit {
     stafBookPublicationList: any[];
     staffExperienceList: any[];
     journalPublicationList: any[];
+    pgPhdList: any[];
 
     private BASE_API_URL = environment.BASE_API_URL;
 
@@ -276,6 +284,22 @@ export class UserEditComponent implements OnInit {
             amount: new FormControl(null, [Validators.required]),
         });
 
+        this.pgPhdForm = new FormGroup({
+            id: new FormControl(null),
+            student_name: new FormControl(null, [Validators.required]),
+            course: new FormControl(null, [Validators.required]),
+            title_name: new FormControl(null, [Validators.required]),
+            guide: new FormControl(null, [Validators.required]),
+            co_guide: new FormControl(null, [Validators.required]),
+            referance_no: new FormControl(null, [Validators.required]),
+            ref_date: new FormControl(null, [Validators.required]),
+            status: new FormControl(null, [Validators.required]),
+        });
+
+        this.apiScoreForm = new FormGroup({
+            id: new FormControl(null),
+            assignment_year: new FormControl(null, [Validators.required]),
+        })
 
         this.jobService.getCompanyDetailsListListener().subscribe((response) => {
             this.companyDetailsList = response;
@@ -325,6 +349,8 @@ export class UserEditComponent implements OnInit {
                     this.stafBookPublicationList = response.publications;
                     this.staffExperienceList = response.experience;
                     this.journalPublicationList = response.journal;
+                    this.pgPhdList = response.pgPhd;
+                    this.apiScoreList = response.apiScoreList;
                     this.staffUpdateForm.patchValue(this.staffDetails);
                 }
             }
@@ -372,7 +398,139 @@ export class UserEditComponent implements OnInit {
             this.experienceProof = event.target.files[0];
         } else if (type == 'manualFeesFile') {
             this.manualFeesFile = event.target.files[0];
+        } else if (type == 'pgPhdFile') {
+            this.pgPhdFile = event.target.files[0];
+        } else if (type == 'apiScoreFile') {
+            this.apiScoreFile = event.target.files[0];
         }
+    }
+
+    saveApiScore() {
+        if (!this.apiScoreForm.valid) {
+            this.apiScoreForm.markAllAsTouched();
+            return;
+        }
+
+        let formData = new FormData();
+        formData.append('id', this.apiScoreForm.value.id);
+        formData.append('assignment_year', this.apiScoreForm.value.assignment_year);
+        formData.append('file_name', this.apiScoreFile);
+
+        return this.http.post(this.BASE_API_URL + '/saveApiScoreOwn', formData)
+            .subscribe((response: any) => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    Swal.fire({
+                        title: "Well Done!!",
+                        text: "Api Score saved",
+                        icon: "success"
+                    });
+                    this.apiScoreList = response.data
+                    this.apiScoreForm.reset();
+                    this.isApiScoreUpdate = false;
+                }
+            });
+    }
+
+    editApiScore(data) {
+        this.apiScoreForm.patchValue(data);
+        this.isApiScoreUpdate = true;
+    }
+    deleteApiScore(data) {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete course ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                return this.http.get(this.BASE_API_URL + '/deleteApiScore/' + data.id)
+                    .subscribe((response: any) => {
+                        // @ts-ignore
+                        if (response.success == 1) {
+                            Swal.fire({
+                                title: "Well Done!!",
+                                text: "journal Deleted",
+                                icon: "success"
+                            });
+                            this.apiScoreList = response.data
+                        }
+                    });
+            }
+        });
+    }
+
+    savePgPhd() {
+        if (!this.pgPhdForm.valid) {
+            this.pgPhdForm.markAllAsTouched();
+            return;
+        }
+
+        let formData = new FormData();
+        formData.append('id', this.pgPhdForm.value.id);
+        formData.append('student_name', this.pgPhdForm.value.student_name);
+        formData.append('course', this.pgPhdForm.value.course);
+        formData.append('title_name', this.pgPhdForm.value.title_name);
+        formData.append('guide', this.pgPhdForm.value.guide);
+        formData.append('co_guide', this.pgPhdForm.value.co_guide);
+        formData.append('referance_no', this.pgPhdForm.value.referance_no);
+        formData.append('ref_date', this.pgPhdForm.value.ref_date);
+        formData.append('status', this.pgPhdForm.value.status);
+        formData.append('file_name', this.pgPhdFile);
+
+        return this.http.post(this.BASE_API_URL + '/savePgPhdGuideOwn', formData)
+            .subscribe((response: any) => {
+                // @ts-ignore
+                if (response.success == 1) {
+                    Swal.fire({
+                        title: "Well Done!!",
+                        text: "Pg Phd saved",
+                        icon: "success"
+                    });
+                    this.pgPhdList = response.data
+                    this.pgPhdForm.reset();
+                    this.isPgPhdUpdate = false;
+                }
+            });
+    }
+
+    editPgPhdGuide(data) {
+        this.pgPhdForm.patchValue(data);
+        this.isPgPhdUpdate = true;
+    }
+    cancelpgPhdUpdate() {
+        this.pgPhdForm.reset();
+        this.isPgPhdUpdate = false;
+    }
+
+    deletePgPhdGuide(data) {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete course ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                return this.http.get(this.BASE_API_URL + '/deletePgPhdGuide/' + data.id)
+                    .subscribe((response: any) => {
+                        // @ts-ignore
+                        if (response.success == 1) {
+                            Swal.fire({
+                                title: "Well Done!!",
+                                text: "journal Deleted",
+                                icon: "success"
+                            });
+                            this.pgPhdList = response.data
+                        }
+                    });
+            }
+        });
     }
 
 
@@ -386,17 +544,17 @@ export class UserEditComponent implements OnInit {
             return;
         }
 
-       let formData = new FormData();
-       formData.append('id', this.journalPublicationForm.value.id);
-       formData.append('journal_name', this.journalPublicationForm.value.journal_name);
-       formData.append('publication', this.journalPublicationForm.value.publication);
-       formData.append('ugc_affiliation', this.journalPublicationForm.value.ugc_affiliation);
-       formData.append('university_name', this.journalPublicationForm.value.university_name);
-       formData.append('volume_page_number', this.journalPublicationForm.value.volume_page_number);
-       formData.append('issn_number', this.journalPublicationForm.value.issn_number);
-       formData.append('topic_name', this.journalPublicationForm.value.topic_name);
-       formData.append('impact_factor', this.journalPublicationForm.value.impact_factor);
-       formData.append('file_name', this.journalFile);
+        let formData = new FormData();
+        formData.append('id', this.journalPublicationForm.value.id);
+        formData.append('journal_name', this.journalPublicationForm.value.journal_name);
+        formData.append('publication', this.journalPublicationForm.value.publication);
+        formData.append('ugc_affiliation', this.journalPublicationForm.value.ugc_affiliation);
+        formData.append('university_name', this.journalPublicationForm.value.university_name);
+        formData.append('volume_page_number', this.journalPublicationForm.value.volume_page_number);
+        formData.append('issn_number', this.journalPublicationForm.value.issn_number);
+        formData.append('topic_name', this.journalPublicationForm.value.topic_name);
+        formData.append('impact_factor', this.journalPublicationForm.value.impact_factor);
+        formData.append('file_name', this.journalFile);
 
         return this.http.post(this.BASE_API_URL + '/saveJournalPublicationOwn', formData)
             .subscribe((response: any) => {

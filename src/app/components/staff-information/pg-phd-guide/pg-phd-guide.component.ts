@@ -63,6 +63,7 @@ export class PgPhdGuideComponent {
         'semester_id': null,
         'staff_id': null,
         'student_id': null,
+        'student_name': null,
         'course': null,
         'title_name': null,
         'guide': null,
@@ -225,6 +226,7 @@ export class PgPhdGuideComponent {
         'semester_id': null,
         'staff_id': null,
         'student_id': null,
+        'student_name': null,
         'course': null,
         'title_name': null,
         'guide': null,
@@ -249,6 +251,7 @@ export class PgPhdGuideComponent {
         'semester_id': null,
         'staff_id': null,
         'student_id': null,
+        'student_name': null,
         'course': null,
         'title_name': null,
         'guide': null,
@@ -281,10 +284,11 @@ export class PgPhdGuideComponent {
 
       this.totalPgPhdGuide = [1];
       this.pgPddhGuideArray[0].id = data.id;
-      this.pgPddhGuideArray[0].course_id = data.course_id;
+      // this.pgPddhGuideArray[0].course_id = data.course_id;
+      // this.pgPddhGuideArray[0].staff_id = data.staff_id;
+      // this.pgPddhGuideArray[0].student_id = data.student_id;
+      this.pgPddhGuideArray[0].student_name = data.student_name;
       this.pgPddhGuideArray[0].semester_id = data.semester_id;
-      this.pgPddhGuideArray[0].staff_id = data.staff_id;
-      this.pgPddhGuideArray[0].student_id = data.student_id;
       this.pgPddhGuideArray[0].course = data.course;
       this.pgPddhGuideArray[0].title_name = data.title_name;
       this.pgPddhGuideArray[0].guide = data.guide;

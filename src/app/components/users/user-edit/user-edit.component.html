@@ -789,6 +789,8 @@
                             <input class="radio" id="three" name="group" type="radio">
                             <input class="radio" id="four" name="group" type="radio">
                             <input class="radio" id="five" name="group" type="radio">
+                            <input class="radio" id="six" name="group" type="radio">
+                            <input class="radio" id="seven" name="group" type="radio">
 
                             <div class="tabs">
                                 <label class="tab" for="one" id="one-tab">Profile</label>
@@ -796,8 +798,10 @@
                                 <label class="tab" for="three" id="three-tab">Book Pulication</label>
                                 <label class="tab" for="four" id="four-tab">Experience</label>
                                 <label class="tab" for="five" id="five-tab">Journal Publication</label>
-
+                                <label class="tab" for="six" id="six-tab">PG PHD</label>
+                                <label class="tab" for="seven" id="seven-tab">API Score</label>
                             </div>
+                            
                             <div class="panels">
                                 <div class="panel" id="one-panel">
                                     <div class="row">
@@ -1105,7 +1109,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="panel" id="two-panel">
                                     <div class="card-body">
                                         <form [formGroup]="staffEducationForm">
@@ -1457,7 +1460,8 @@
                                                     </div>
                                                     <div class="col-md-4 mb-3">
                                                         <label>Upload File</label>
-                                                        <input class="form-control" (change)="journalFileUpload($event)" required type="file">
+                                                        <input class="form-control" (change)="journalFileUpload($event)"
+                                                            required type="file">
                                                     </div>
                                                 </div>
                                             </form>
@@ -1510,8 +1514,177 @@
                                                 </tr>
                                             </tbody>
                                         </table>
+                                    </div>
+                                </div>
+                                <div class="panel" id="six-panel">
+                                    <h3>PG PHD</h3>
+                                    <div>
+                                        <div class="card-body">
+                                            <form [formGroup]="pgPhdForm">
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <label>Student Name</label>
+                                                        <input class="form-control" formControlName="student_name"
+                                                            placeholder="Student Name" required type="text">
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <label>Course Name</label>
+                                                        <input type="text" class="form-control" formControlName="course"
+                                                            placeholder="Course Name" required>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <label>Title Number</label>
+                                                        <input type="text" class="form-control"
+                                                            formControlName="title_name" placeholder="Title Number"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <label>Guide</label>
+                                                        <input type="text" class="form-control" formControlName="guide"
+                                                            placeholder="Guide Name" required>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <label>Co-Guide Name</label>
+                                                        <input type="text" class="form-control"
+                                                            formControlName="co_guide" placeholder="Co-Guide Name"
+                                                            required>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <label>Referance No.</label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Referance No." formControlName="referance_no"
+                                                            required>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-3">
+                                                        <label>Date</label>
+                                                        <input type="date" class="form-control"
+                                                            formControlName="ref_date" required>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <label>Status</label>
+                                                        <select type="text" class="form-control"
+                                                            formControlName="status" required>
+                                                            <option value="null">Select status</option>
+                                                            <option value="0">Ongoing</option>
+                                                            <option value="1">Complete</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-4 mb-3">
+                                                        <label>File</label>
+                                                        <input type="file" class="form-control"
+                                                            (change)="fileUpload($event, 'pgPhdFile')" required>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button (click)="savePgPhd()" class="btn btn-primary me-1">Submit
+                                            </button>
+                                            <button (click)="cancelpgPhdUpdate()" class="btn btn-primary me-1"
+                                                [hidden]="isPgPhdUpdate == false">Cancel
+                                            </button>
+                                        </div>
+                                    </div>
 
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sl.NO</th>
+                                                    <th>Student Name</th>
+                                                    <th>Course Name</th>
+                                                    <th>Title Name</th>
+                                                    <th>Guide</th>
+                                                    <th>Co Guide</th>
+                                                    <th>Referance No.</th>
+                                                    <th>Ref. Date</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let record of pgPhdList ;let indexOfElement=index">
 
+                                                    <td>{{indexOfElement + 1}}</td>
+                                                    <td>{{record.student_name}}</td>
+                                                    <td>{{record.course}}</td>
+                                                    <td>{{record.title_name}}</td>
+                                                    <td>{{record.guide}}</td>
+                                                    <td>{{record.co_guide}}</td>
+                                                    <td>{{record.referance_no}}</td>
+                                                    <td>{{record.ref_date}}</td>
+                                                    <td>{{record.status_name}}</td>
+                                                    <td>
+                                                        <a
+                                                            (click)="editPgPhdGuide(record)"><mat-icon>edit</mat-icon></a>
+                                                        <a
+                                                            (click)="deletePgPhdGuide(record)"><mat-icon>delete</mat-icon></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="panel" id="seven-panel">
+                                    <h3>API Score</h3>
+                                    <div>
+                                        <div class="card-body">
+                                            <form [formGroup]="apiScoreForm">
+                                                <div class="row">
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Assignment Year</label>
+                                                        <input class="form-control" formControlName="assignment_year"
+                                                            placeholder="Assignment Year" required type="text">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>File</label>
+                                                        <input type="file" class="form-control"
+                                                            (change)="fileUpload($event, 'apiScoreFile')" required>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button (click)="saveApiScore()" class="btn btn-primary me-1">Submit
+                                            </button>
+                                            <button (click)="saveApiScore()" class="btn btn-primary me-1"
+                                                [hidden]="isApiScoreUpdate == false">Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th>Assignment Year</th>
+                                                    <th>Download</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let record of apiScoreList ;let indexOfElement=index">
+                                                    <td>{{indexOfElement + 1}}</td>
+                                                    <td>{{record.assignment_year}}</td>
+                                                    <td><a
+                                                            href="{{FILE_URL}}/api_score/{{record.file_name}}">Download</a>
+                                                    </td>
+                                                    <td>
+                                                        <a (click)="editApiScore(record)">
+                                                            <mat-icon>edit</mat-icon>
+                                                        </a>
+                                                        <a (click)="deleteApiScore(record)">
+                                                            <mat-icon>delete</mat-icon>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
