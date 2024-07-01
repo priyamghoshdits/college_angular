@@ -32,7 +32,7 @@ export class PeriodAttendanceComponent {
     sessionList: any[];
     studentList: any[] = [];
     session_id = null;
-    classStatus: any;
+    classStatus: any = null;
     p: number;
     markAllAsPresent = false;
     markAllAsAbsent = true;
@@ -40,6 +40,7 @@ export class PeriodAttendanceComponent {
     markAllAsHalfDay = false
     showList = true;
     topic_name = null;
+    enableClass = false;
 
     constructor(private subjectService: SubjectService, private studentService: StudentService
         , private sessionService: SessionService, public datepipe: DatePipe) {
@@ -107,7 +108,6 @@ export class PeriodAttendanceComponent {
             , this.attendanceForm.value.session_id
             , this.attendanceForm.value.class
         ).subscribe((response: any) => {
-
             if (response.semester_time_table == 0) {
                 Swal.fire({
                     title: 'Confirmation',
@@ -121,7 +121,9 @@ export class PeriodAttendanceComponent {
                     if (result.isConfirmed) {
                         this.studentList = response.data;
                         this.classStatus = response.class_status;
-                        // console.log(this.classStatus);
+                        if(this.classStatus !== null){
+                            this.enableClass = true;
+                        }
                         this.showList = false;
                         if (this.studentList.length == 0) {
                             Swal.fire({
@@ -136,6 +138,11 @@ export class PeriodAttendanceComponent {
                 });
             } else {
                 this.studentList = response.data;
+                this.classStatus = response.class_status;
+                if(this.classStatus !== null){
+                    this.enableClass = true;
+                }
+                this.showList = false;
                 if (this.studentList.length == 0) {
                     Swal.fire({
                         position: 'center',
