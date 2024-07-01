@@ -138,8 +138,8 @@ export class StudentService {
             }));
     }
 
-    getUserAttendance(course_id, semester_id, date, user_id) {
-        return this.http.get(this.BASE_API_URL + '/getStudentOwnAttendance/' + course_id + '/' + semester_id + '/' + date + '/' + user_id)
+    getUserAttendance(course_id, semester_id, date, user_id, member_id) {
+        return this.http.get(this.BASE_API_URL + '/getStudentOwnAttendance/' + course_id + '/' + semester_id + '/' + date + '/' + user_id + '/' + member_id)
             .pipe(catchError(this.errorService.serverError), tap(response => {
             }));
     }

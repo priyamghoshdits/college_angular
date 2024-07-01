@@ -11,38 +11,51 @@
                             <div class="card-body">
                                 <form class="theme-form" [formGroup]="attendanceForm" *ngIf="isSuperAdmin">
                                     <div class="row">
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <label>Select Course</label>
                                             <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                                <option value="null">Select</option>
                                                 <option *ngFor="let data of courseList" [value]="data.id" >
                                                     {{data.course_name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="attendanceForm.controls['course_id'].errors?.['required'] && attendanceForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
                                         </div>
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <label>Select Semester</label>
                                             <select style="width: 100%" formControlName="semester_id" class="form-select" required (change)="getStudents()">
+                                                <option value="null">Select</option>
                                                 <option *ngFor="let data of semesterList" [value]="data.semester_id" >
                                                     {{data.name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="attendanceForm.controls['semester_id'].errors?.['required'] && attendanceForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                         </div>
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <label>Select Date</label>
                                             <input class="form-control" formControlName="date" type="date"
                                                    placeholder="Select date">
                                             <div *ngIf="attendanceForm.controls['date'].errors?.['required'] && attendanceForm.controls['date'].touched " class="text text-danger mt-1">Date required</div>
                                         </div>
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-2 mb-3">
                                             <label>Select Student</label>
-                                            <select style="width: 100%" formControlName="student_id" class="form-select" required>
+                                            <select style="width: 100%" formControlName="student_id" class="form-select">
+                                                <option value="null">Select</option>
                                                 <option *ngFor="let data of copyStudentList" [value]="data.id" >
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="attendanceForm.controls['student_id'].errors?.['required'] && attendanceForm.controls['student_id'].touched " class="text text-danger mt-1">Student required</div>
+                                        </div>
+                                        <div class="col-md-2 mb-3">
+                                            <label>Select Teacher</label>
+                                            <select style="width: 100%" formControlName="member_id" class="form-select">
+                                                <option value="null">Select</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id" >
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="attendanceForm.controls['member_id'].errors?.['required'] && attendanceForm.controls['member_id'].touched " class="text text-danger mt-1">Member required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <div>
@@ -69,10 +82,11 @@
                         </div>
                         <div class="card" *ngIf="attendanceList.length > 0">
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table text-center">
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Student Name</th>
                                         <th scope="col">Subject Name</th>
                                         <th scope="col">Attendance</th>
                                         <th scope="col">Attendance By</th>
@@ -81,6 +95,7 @@
                                     <tbody>
                                     <tr *ngFor="let record of attendanceList;let indexOfElement=index">
                                         <td>{{indexOfElement+1}}</td>
+                                        <td>{{record.student_name}}</td>
                                         <td>{{record.subject_name}}</td>
                                         <td>{{record.attendance}}</td>
                                         <td>{{record.attendance_by_name}}</td>
