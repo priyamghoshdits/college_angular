@@ -72,7 +72,7 @@
                                     </tr>
                                     </tbody>
                                 </table>
-                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                <pagination-controls *ngIf="subjectList.length > 9" (pageChange)="p = $event"></pagination-controls>
 
                             </div>
                         </div>
