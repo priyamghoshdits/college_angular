@@ -228,10 +228,10 @@ export class CreateStaffComponent {
     }
 
     saveMember() {
-        if (!this.staffCreationForm.valid) {
-            this.staffCreationForm.markAllAsTouched();
-            return;
-        }
+        // if (!this.staffCreationForm.valid) {
+        //     this.staffCreationForm.markAllAsTouched();
+        //     return;
+        // }
 
         Swal.fire({
             title: 'Please Wait !',
