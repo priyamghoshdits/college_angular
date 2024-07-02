@@ -23,7 +23,9 @@
                                         <div class="col-lg-3">
                                             <div class="leftuser_imgoutsection">
                                                 <div class="jshadow_area">
-                                                    <img class="huimg_designs" src="{{FILE_URL}}/user_image/{{staff_details.image}}" onerror="this.src='assets/images/user/blank_default.jpg'">
+                                                    <img class="huimg_designs"
+                                                         onerror="this.src='assets/images/user/blank_default.jpg'"
+                                                         src="{{FILE_URL}}/user_image/{{staff_details.image}}">
                                                 </div>
                                             </div>
                                         </div>
@@ -95,27 +97,48 @@
                                                         </h1>
                                                         <h1 class="studentimgdwnarea2">
                                                             <i class="fa-solid fa-download"></i> Download Lab Report:
-                                                            <span class="studentimgdwnarea3" style="color: blue;">
-                                                                <a href="{{FILE_URL}}/blood_group_proof/{{staff_details.blood_group_proof}}">Download Here</a>
+                                                            <span *ngIf="staff_details.blood_group_proof != null"
+                                                                  class="studentimgdwnarea3" style="color: blue;">
+                                                                <a href="{{staff_details.blood_group_proof}}">Download Here</a>
+                                                            </span>
+                                                            <span *ngIf="staff_details.blood_group_proof == null"
+                                                                  class="studentimgdwnarea3" style="color: blue;">
+                                                                <a>No File Uploaded</a>
                                                             </span>
                                                         </h1>
                                                         <h1 class="studentimgdwnarea2">
-                                                            <i class="fa-solid fa-download"></i> Download Joining Letter:
-                                                            <span class="studentimgdwnarea3" style="color: blue;">
-                                                                <a href="{{FILE_URL}}/joining_letter_proof/{{staff_details.joining_letter_proof}}">Download Here</a>
+                                                            <i class="fa-solid fa-download"></i> Download Joining
+                                                            Letter:
+                                                            <span *ngIf="staff_details.joining_letter_proof != null"
+                                                                  class="studentimgdwnarea3" style="color: blue;">
+                                                                <a href="{{staff_details.joining_letter_proof}}">Download Here</a>
+                                                            </span>
+                                                            <span *ngIf="staff_details.joining_letter_proof == null"
+                                                                  class="studentimgdwnarea3" style="color: blue;">
+                                                                <a>No File Uploaded</a>
                                                             </span>
                                                         </h1>
                                                         <h1 class="studentimgdwnarea2">
                                                             <i class="fa-solid fa-download"></i> Download Caste
                                                             Certificate:
-                                                            <span class="studentimgdwnarea3" style="color: blue;">
-                                                                <a href="{{FILE_URL}}/caste_certificate_proof/{{staff_details.caste_certificate_proof}}">Download Here</a>
+                                                            <span *ngIf="staff_details.caste_certificate_proof != null"
+                                                                  class="studentimgdwnarea3" style="color: blue;">
+                                                                <a href="{{staff_details.caste_certificate_proof}}">Download Here</a>
+                                                            </span>
+                                                            <span *ngIf="staff_details.caste_certificate_proof == null"
+                                                                  class="studentimgdwnarea3" style="color: blue;">
+                                                                <a>No File Uploaded</a>
                                                             </span>
                                                         </h1>
                                                         <h1 class="studentimgdwnarea2">
                                                             <i class="fa-solid fa-download"></i> Download Pan Number:
-                                                            <span class="studentimgdwnarea3" style="color: blue;">
-                                                                <a href="{{FILE_URL}}/pan_proof/{{staff_details.pan_proof}}">Download Here</a>
+                                                            <span *ngIf="staff_details.pan_proof != null"
+                                                                  class="studentimgdwnarea3" style="color: blue;">
+                                                                <a href="{{staff_details.pan_proof}}">Download Here</a>
+                                                            </span>
+                                                            <span *ngIf="staff_details.pan_proof == null"
+                                                                  class="studentimgdwnarea3" style="color: blue;">
+                                                                <a>No File Uploaded</a>
                                                             </span>
                                                         </h1>
                                                     </div>
@@ -180,7 +203,8 @@
                                                 <td>{{record.experience}}</td>
                                                 <td>{{record.from_date}}</td>
                                                 <td>{{record.to_date}}</td>
-                                                <td><a href="{{FILE_URL}}/staff_experience_proof/{{record.file}}"></a></td>
+                                                <td><a href="{{FILE_URL}}/staff_experience_proof/{{record.file}}"></a>
+                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>

@@ -112,26 +112,32 @@
                                                         <h1 class="studentimgdwnarea2">
                                                             <i class="fa-solid fa-download"></i> Date of birth
                                                             proof:
-                                                            <span class="studentimgdwnarea3" style="color: blue;"><a
+                                                            <span *ngIf="student_details.dob_proof_file != null" class="studentimgdwnarea3" style="color: blue;"><a
                                                                     href="{{student_details.dob_proof_file}}">Download Here</a></span>
+                                                            <span *ngIf="student_details.dob_proof_file == null" class="studentimgdwnarea3" style="color: blue;"><a
+                                                                    >No File Uploaded</a></span>
                                                         </h1>
                                                         <h1 class="studentimgdwnarea2">
                                                             <i class="fa-solid fa-download"></i> Admission Slip:
-                                                            <span class="studentimgdwnarea3" style="color: blue;"><a
+                                                            <span *ngIf="student_details.admission_slip_file != null" class="studentimgdwnarea3" style="color: blue;"><a
                                                                     href="{{student_details.admission_slip_file}}">Download Here</a></span>
+                                                            <span *ngIf="student_details.admission_slip_file == null" class="studentimgdwnarea3" style="color: blue;"><a
+                                                            >No File Uploaded</a></span>
                                                         </h1>
                                                         <h1 class="studentimgdwnarea2">
                                                             <i class="fa-solid fa-download"></i> Aadhaar Card:
-                                                            <span class="studentimgdwnarea3" style="color: blue;"><a
+                                                            <span *ngIf="student_details.aadhaar_card_file != null" class="studentimgdwnarea3" style="color: blue;"><a
                                                                     href="{{student_details.aadhaar_card_file}}">Download Here</a></span>
+                                                            <span *ngIf="student_details.aadhaar_card_file == null" class="studentimgdwnarea3" style="color: blue;"><a
+                                                            >No File Uploaded</a></span>
                                                         </h1>
                                                         <h1 class="studentimgdwnarea2">
                                                             <i class="fa-solid fa-download"></i> Registration
                                                             certificate:
-                                                            <!--                                                            <span class="studentimgdwnarea3" style="color: blue;"><a-->
-                                                            <!--                                                                    href="{{FILE_URL}}/aadhaar_card_proof/{{student_details.aadhaar_card_file}}">Download Here</a></span>-->
-                                                            <span class="studentimgdwnarea3" style="color: blue;"><a
-                                                                    href="{{student_details.aadhaar_card_file}}">Download Here</a></span>
+                                                            <span *ngIf="student_details.registration_proof != null" class="studentimgdwnarea3" style="color: blue;"><a
+                                                                    href="{{student_details.registration_proof}}">Download Here</a></span>
+                                                            <span *ngIf="student_details.registration_proof == null" class="studentimgdwnarea3" style="color: blue;"><a
+                                                            >No File Uploaded</a></span>
                                                         </h1>
                                                     </div>
                                                 </div>

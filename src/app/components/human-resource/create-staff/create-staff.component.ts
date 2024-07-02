@@ -353,7 +353,52 @@ export class CreateStaffComponent {
             this.staffCreationForm.markAllAsTouched();
             return;
         }
-        this.memberService.updateMember(this.staffCreationForm.value).subscribe((response) => {
+
+        const formData = new FormData();
+        formData.append("id", this.staffCreationForm.value.id);
+        formData.append("identification_no", this.staffCreationForm.value.identification_no);
+        formData.append("first_name", this.staffCreationForm.value.first_name);
+        formData.append("middle_name", this.staffCreationForm.value.middle_name);
+        formData.append("last_name", this.staffCreationForm.value.last_name);
+        formData.append("gender", this.staffCreationForm.value.gender);
+        formData.append("dob", this.staffCreationForm.value.dob);
+        formData.append("date_of_joining", this.staffCreationForm.value.date_of_joining);
+        // formData.append("image", this.staffCreationForm.value.image);
+        formData.append("mobile_no", this.staffCreationForm.value.mobile_no);
+        formData.append("emergency_phone_number", this.staffCreationForm.value.emergency_phone_number);
+        formData.append("material_status", this.staffCreationForm.value.material_status);
+        formData.append("work_experience", this.staffCreationForm.value.work_experience);
+        formData.append("qualification", this.staffCreationForm.value.qualification);
+        formData.append("current_address", this.staffCreationForm.value.current_address);
+        formData.append("permanent_address", this.staffCreationForm.value.permanent_address);
+        formData.append("religion", this.staffCreationForm.value.religion);
+        formData.append("blood_group", this.staffCreationForm.value.blood_group);
+        formData.append("category_id", this.staffCreationForm.value.category_id);
+        formData.append("user_type_id", this.staffCreationForm.value.user_type_id);
+        formData.append("email", this.staffCreationForm.value.email);
+        formData.append("department_id", this.staffCreationForm.value.department_id);
+        formData.append("designation_id", this.staffCreationForm.value.designation_id);
+        formData.append("epf_number", this.staffCreationForm.value.epf_number);
+        formData.append("franchise_id", this.staffCreationForm.value.franchise_id);
+        formData.append("gross_salary", this.staffCreationForm.value.gross_salary);
+        formData.append("location", this.staffCreationForm.value.location);
+        formData.append("contract_type", this.staffCreationForm.value.contract_type);
+        formData.append("bank_account_number", this.staffCreationForm.value.bank_account_number);
+        formData.append("bank_name", this.staffCreationForm.value.bank_name);
+        formData.append("ifsc_code", this.staffCreationForm.value.ifsc_code);
+        formData.append("bank_branch_name", this.staffCreationForm.value.bank_branch_name);
+        formData.append("pan_number", this.staffCreationForm.value.pan_number);
+        formData.append("password", this.staffCreationForm.value.password);
+
+        formData.append("aadhaar_card_proof", this.aadhaarProof);
+        formData.append("pan_proof", this.panProof);
+        formData.append("caste_certificate_proof", this.casteCertificateProof);
+        formData.append("blood_group_proof", this.bloodGroupProof);
+        formData.append("profile_image", this.profileImage);
+        formData.append("joining_letter_proof", this.joiningLetterProof);
+        formData.append("dob_proof", this.dobCertificateproof);
+
+        this.memberService.updateMember(formData).subscribe((response) => {
             // @ts-ignore
             if (response.success == 1) {
                 Swal.fire({

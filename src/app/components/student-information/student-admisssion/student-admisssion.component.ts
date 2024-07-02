@@ -467,6 +467,24 @@ export class StudentAdmisssionComponent {
         formData.append("transaction_id", this.studentCreationForm.value.transaction_id);
         formData.append("caution_money", this.studentCreationForm.value.caution_money);
 
+        //Images or document upload
+        // @ts-ignore
+        formData.append("image", this.profile_image);
+        // @ts-ignore
+        formData.append("dob_proof", this.dob_proof);
+        // @ts-ignore
+        formData.append("blood_group_proof", this.blood_group_proof);
+        // @ts-ignore
+        formData.append("aadhaar_card_proof", this.aadhaar_card_proof);
+        // @ts-ignore
+        formData.append("admission_slip", this.admission_slip);
+        // @ts-ignore
+        formData.append("father_income_proof", this.father_income_proof);
+        // @ts-ignore
+        formData.append("mother_income_proof", this.mother_income_proof);
+        // @ts-ignore
+        formData.append("registration_proof", this.registration_no_proof);
+
         this.studentService.updateStudent(formData).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
