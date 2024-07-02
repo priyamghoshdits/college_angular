@@ -801,7 +801,7 @@
                                 <label class="tab" for="six" id="six-tab">PG PHD</label>
                                 <label class="tab" for="seven" id="seven-tab">API Score</label>
                             </div>
-                            
+
                             <div class="panels">
                                 <div class="panel" id="one-panel">
                                     <div class="row">
@@ -1124,25 +1124,25 @@
                                                     </select>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
-                                                    <label>specialization</label>
+                                                    <label>Specialization</label>
                                                     <input formControlName="specialization" type="text"
                                                         class="form-control" placeholder="specialization" required>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
-                                                    <label>university_name</label>
+                                                    <label>University name</label>
                                                     <input type="text" class="form-control"
-                                                        formControlName="university_name" placeholder="university_name"
+                                                        formControlName="university_name" placeholder="university name"
                                                         required>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-4 mb-3">
-                                                    <label>percentage</label>
+                                                    <label>Percentage</label>
                                                     <input type="text" class="form-control" placeholder="percentage"
                                                         formControlName="percentage" required>
                                                 </div>
                                                 <div class="col-md-4 mb-3">
-                                                    <label>grade</label>
+                                                    <label>Grade</label>
                                                     <input type="text" class="form-control" placeholder="grade"
                                                         formControlName="grade" required>
                                                 </div>
@@ -1173,6 +1173,7 @@
                                                     <th scope="col">University</th>
                                                     <th scope="col">Percentage</th>
                                                     <th scope="col">Grade</th>
+                                                    <th scope="col">Download</th>
                                                     <th scope="col">Action</th>
                                                 </tr>
                                             </thead>
@@ -1184,6 +1185,14 @@
                                                     <td>{{record.university_name}}</td>
                                                     <td>{{record.percentage}}</td>
                                                     <td>{{record.grade}}</td>
+
+                                                    <td ngbTooltip="Download">
+                                                        <a data-placement="left" target="_blank"
+                                                            href="{{record.file_url}}" *ngIf="record.file_url">
+                                                            <mat-icon>cloud_download</mat-icon>
+                                                        </a>
+                                                    </td>
+
                                                     <td>
                                                         <a
                                                             (click)="editStaffEducation(record)"><mat-icon>edit</mat-icon></a>
@@ -1196,7 +1205,7 @@
                                     </div>
                                 </div>
                                 <div class="panel" id="three-panel">
-                                    <h3>Book Qualification</h3>
+                                    <h3>Book Publication</h3>
 
                                     <div class="card-body">
                                         <form [formGroup]="staffPublicationForm">
@@ -1219,21 +1228,26 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-4 mb-3">
+                                                <div class="col-md-3 mb-3">
                                                     <label>Chapter Full Book</label>
                                                     <input type="text" class="form-control"
                                                         placeholder="Chapter Full Book"
                                                         formControlName="chapter_full_book" required>
                                                 </div>
-                                                <div class="col-md-4 mb-3">
+                                                <div class="col-md-3 mb-3">
                                                     <label>Chapter Name</label>
                                                     <input type="text" class="form-control" placeholder="Chapter Name"
                                                         formControlName="chapter_name" required>
                                                 </div>
-                                                <div class="col-md-4 mb-3">
+                                                <div class="col-md-3 mb-3">
                                                     <label>Page Number</label>
                                                     <input type="text" class="form-control" placeholder="Page Number"
                                                         formControlName="page_number" required>
+                                                </div>
+                                                <div class="col-md-3 mb-3">
+                                                    <label>Upload File</label>
+                                                    <input type="file" class="form-control"
+                                                        (change)="fileUpload($event, 'publicationFile')" required>
                                                 </div>
                                             </div>
                                         </form>
@@ -1258,6 +1272,7 @@
                                                     <th>Chapter Full Book</th>
                                                     <th>Chapter Name</th>
                                                     <th>Page Number</th>
+                                                    <th>Download</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -1273,6 +1288,12 @@
                                                     <td>{{record.chapter_full_book}}</td>
                                                     <td>{{record.chapter_name}}</td>
                                                     <td>{{record.page_number}}</td>
+                                                    <td ngbTooltip="Download">
+                                                        <a data-placement="left" target="_blank"
+                                                            href="{{record.file_url}}" *ngIf="record.file_url">
+                                                            <mat-icon>cloud_download</mat-icon>
+                                                        </a>
+                                                    </td>
                                                     <td>
                                                         <a
                                                             (click)="editBookPublication(record)"><mat-icon>edit</mat-icon></a>
@@ -1377,6 +1398,7 @@
                                                     <th>Experience</th>
                                                     <th>From Date</th>
                                                     <th>To Date</th>
+                                                    <th>Download</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -1389,6 +1411,13 @@
                                                     <td>{{record.experience}}</td>
                                                     <td>{{record.from_date}}</td>
                                                     <td>{{record.to_date}}</td>
+
+                                                    <td ngbTooltip="Download">
+                                                        <a data-placement="left" target="_blank"
+                                                            href="{{record.file_url}}" *ngIf="record.file_url">
+                                                            <mat-icon>cloud_download</mat-icon>
+                                                        </a>
+                                                    </td>
 
                                                     <td>
                                                         <a (click)="editStaffExperience(record)">
@@ -1407,7 +1436,6 @@
                                 </div>
                                 <div class="panel" id="five-panel">
                                     <h3>Journal Publication</h3>
-
                                     <div>
                                         <div class="card-body">
                                             <form [formGroup]="journalPublicationForm">
@@ -1489,6 +1517,7 @@
                                                     <th>Volume Page number</th>
                                                     <th>Issn Number</th>
                                                     <th>Impact Factor</th>
+                                                    <th>Download</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -1503,6 +1532,12 @@
                                                     <td>{{record.volume_page_number}}</td>
                                                     <td>{{record.issn_number}}</td>
                                                     <td>{{record.impact_factor}}</td>
+                                                    <td ngbTooltip="Download">
+                                                        <a data-placement="left" target="_blank"
+                                                            href="{{record.file_url}}" *ngIf="record.file_url">
+                                                            <mat-icon>cloud_download</mat-icon>
+                                                        </a>
+                                                    </td>
                                                     <td>
                                                         <a (click)="editJournalPublication(record)">
                                                             <mat-icon>edit</mat-icon>
@@ -1603,6 +1638,7 @@
                                                     <th>Referance No.</th>
                                                     <th>Ref. Date</th>
                                                     <th>Status</th>
+                                                    <th>Download</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
@@ -1618,6 +1654,12 @@
                                                     <td>{{record.referance_no}}</td>
                                                     <td>{{record.ref_date}}</td>
                                                     <td>{{record.status_name}}</td>
+                                                    <td ngbTooltip="Download">
+                                                        <a data-placement="left" target="_blank"
+                                                            href="{{record.file_url}}" *ngIf="record.file_url">
+                                                            <mat-icon>cloud_download</mat-icon>
+                                                        </a>
+                                                    </td>
                                                     <td>
                                                         <a
                                                             (click)="editPgPhdGuide(record)"><mat-icon>edit</mat-icon></a>
@@ -1671,9 +1713,13 @@
                                                 <tr *ngFor="let record of apiScoreList ;let indexOfElement=index">
                                                     <td>{{indexOfElement + 1}}</td>
                                                     <td>{{record.assignment_year}}</td>
-                                                    <td><a
-                                                            href="{{FILE_URL}}/api_score/{{record.file_name}}">Download</a>
+                                                    <td ngbTooltip="Download">
+                                                        <a data-placement="left" target="_blank"
+                                                            href="{{record.file_url}}" *ngIf="record.file_url">
+                                                            <mat-icon>cloud_download</mat-icon>
+                                                        </a>
                                                     </td>
+
                                                     <td>
                                                         <a (click)="editApiScore(record)">
                                                             <mat-icon>edit</mat-icon>

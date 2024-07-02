@@ -90,6 +90,7 @@ export class UserEditComponent implements OnInit {
     journalFile: File;
     pgPhdFile: File;
     apiScoreFile: File;
+    publicationFile: File;
 
     educationFileName: File;
     isUpdatableStaffEducation: boolean = false;
@@ -250,6 +251,7 @@ export class UserEditComponent implements OnInit {
             chapter_full_book: new FormControl(null, [Validators.required]),
             chapter_name: new FormControl(null, [Validators.required]),
             page_number: new FormControl(null, [Validators.required]),
+            file_name: new FormControl(null),
         });
 
         this.staffExperienceForm = new FormGroup({
@@ -402,6 +404,8 @@ export class UserEditComponent implements OnInit {
             this.pgPhdFile = event.target.files[0];
         } else if (type == 'apiScoreFile') {
             this.apiScoreFile = event.target.files[0];
+        } else if (type == 'publicationFile') {
+            this.publicationFile = event.target.files[0];
         }
     }
 
@@ -812,6 +816,7 @@ export class UserEditComponent implements OnInit {
         formData.append('chapter_full_book', this.staffPublicationForm.value.chapter_full_book);
         formData.append('chapter_name', this.staffPublicationForm.value.chapter_name);
         formData.append('page_number', this.staffPublicationForm.value.page_number);
+        formData.append('file_name', this.publicationFile);
 
         return this.http.post(this.BASE_API_URL + '/saveBookPublicationOwn', formData)
             .subscribe((response: any) => {

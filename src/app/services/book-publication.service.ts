@@ -14,6 +14,13 @@ export class BookPublicationService {
 
   }
 
+  saveUploadFile(value) {
+    return this.http.post(this.BASE_API_URL + '/saveBookPublicationFile', value)
+        .pipe(catchError(this.errorService.serverError), tap(response => {
+
+        }));
+}
+
   saveBookPublicationArray(data) {
     return this.http.post(this.BASE_API_URL + '/saveBookPublication', data)
       .pipe(catchError(this.errorService.serverError), tap(response => {

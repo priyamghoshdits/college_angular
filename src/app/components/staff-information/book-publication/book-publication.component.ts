@@ -41,6 +41,7 @@ export class BookPublicationComponent {
 
   rolesAndPermission: any[] = [];
   permission: any[] = [];
+  filesArray: File[] = [];
 
   searchForm: FormGroup;
 
@@ -64,6 +65,7 @@ export class BookPublicationComponent {
         'chapter_full_book': null,
         'chapter_name': null,
         'page_number': null,
+        'file_name': null
       }
     ]
 
@@ -92,18 +94,36 @@ export class BookPublicationComponent {
         'chapter_full_book': null,
         'chapter_name': null,
         'page_number': null,
+        'file_name': null,
       }
     ];
     this.bookPublicationArray.push(arr[0]);
   }
 
+  fileUpload(event: any, index: number) {
+    const file = event.target.files[0];
+    if (file) {
+      this.filesArray[index] = file;
+      this.bookPublicationArray[index].file_name = file.name;
+    }
+  }
+
   saveBookPublication() {
+
+    this.filesArray.forEach((file, index) => {
+      if (file) {
+        const formData = new FormData();
+        formData.append('file_name', file);
+        this.BookPublicationService.saveUploadFile(formData).subscribe((response: any) => {
+        });
+      }
+    });
+
     let arr = {
       'book_publication_array': this.bookPublicationArray
     };
 
     this.BookPublicationService.saveBookPublicationArray(arr).subscribe((response: any) => {
-      // @ts-ignore
       if (response.success == 1) {
         Swal.fire({
           position: 'center',
@@ -126,11 +146,19 @@ export class BookPublicationComponent {
   }
 
   updateBookPublication() {
-    let arr = {
-      'book_publication_array': this.bookPublicationArray
-    };
+    const formData = new FormData();
+    formData.append('id', this.bookPublicationArray[0].id);
+    formData.append('staff_id', this.bookPublicationArray[0].staff_id);
+    formData.append('ISBN_number', this.bookPublicationArray[0].ISBN_number);
+    formData.append('book_name', this.bookPublicationArray[0].book_name);
+    formData.append('name_of_publisher', this.bookPublicationArray[0].name_of_publisher);
+    formData.append('chapter_full_book', this.bookPublicationArray[0].chapter_full_book);
+    formData.append('chapter_name', this.bookPublicationArray[0].chapter_name);
+    formData.append('page_number', this.bookPublicationArray[0].page_number);
+    formData.append('file_name', this.filesArray[0]);
 
-    this.BookPublicationService.updateBookPublicationArray(arr).subscribe((response: any) => {
+
+    this.BookPublicationService.updateBookPublicationArray(formData).subscribe((response: any) => {
       if (response.success == 1) {
         Swal.fire({
           position: 'center',
@@ -159,6 +187,7 @@ export class BookPublicationComponent {
         'chapter_full_book': null,
         'chapter_name': null,
         'page_number': null,
+        'file_name': null,
       }
     ];
     this.searchForm.reset();

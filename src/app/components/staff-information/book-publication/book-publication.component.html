@@ -57,29 +57,34 @@
                                                 placeholder="ISBN Number" required>
                                         </div>
                                         <div class="col-md-2 mb-3">
-                                            <a *ngIf="(indexOfElement + 1) == totalBookPublication.length"
+                                            <a *ngIf="(indexOfElement + 1) == totalBookPublication.length && !isUpdatable"
                                                 (click)="addField()" style=""><mat-icon
                                                     style="font-size: 40px;height: 60px; width: 40px; line-height: 2">add_box</mat-icon>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Chapter/Full Book</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="bookPublicationArray[indexOfElement].chapter_full_book"
                                                 placeholder="Chapter/Full Book" required>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Chapter Name</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="bookPublicationArray[indexOfElement].chapter_name"
                                                 placeholder="Chapter Name" required>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Page Number</label>
                                             <input type="text" class="form-control" placeholder="Page Number"
                                                 [(ngModel)]="bookPublicationArray[indexOfElement].page_number" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Upload File</label>
+                                            <input type="file" class="form-control" formControlName="file_name"
+                                                (change)="fileUpload($event, indexOfElement)" required>
                                         </div>
                                     </div>
                                 </div>
@@ -126,6 +131,7 @@
                                             <th colspan="2">Chapter Full Book</th>
                                             <th colspan="2">Chapter Name</th>
                                             <th colspan="2">Page Number</th>
+                                            <th colspan="2">Download</th>
                                             <th colspan="1"
                                                 *ngIf="permission[1].permission == 1 && permission[2].permission == 1">
                                                 Action</th>
@@ -142,6 +148,12 @@
                                             <td colspan="2">{{record.chapter_full_book}}</td>
                                             <td colspan="2">{{record.chapter_name}}</td>
                                             <td colspan="2">{{record.page_number}}</td>
+                                            <td ngbTooltip="Download">
+                                                <a data-placement="left" target="_blank"
+                                                    href="{{record.file_url}}" *ngIf="record.file_url">
+                                                    <mat-icon>cloud_download</mat-icon>
+                                                </a>
+                                            </td>
                                             <td>
                                                 <a (click)="editBookPublication(record)"
                                                     *ngIf="permission[1].permission == 1"><mat-icon>edit</mat-icon></a>
