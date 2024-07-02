@@ -33,7 +33,7 @@ import {
     NgbModal,
     NgbTooltip
 } from "@ng-bootstrap/ng-bootstrap";
-import {RouterLink} from "@angular/router";
+import { RouterLink } from "@angular/router";
 
 @Component({
     selector: 'app-create-staff',
@@ -398,8 +398,7 @@ export class CreateStaffComponent {
         formData.append("joining_letter_proof", this.joiningLetterProof);
         formData.append("dob_proof", this.dobCertificateproof);
 
-        this.memberService.updateMember(formData).subscribe((response) => {
-            // @ts-ignore
+        this.memberService.updateMember(formData).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
