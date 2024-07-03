@@ -41,6 +41,8 @@ export class PeriodAttendanceComponent {
     showList = true;
     topic_name = null;
     enableClass = false;
+    latitude = null;
+    longitude = null;
 
     constructor(private subjectService: SubjectService, private studentService: StudentService
         , private sessionService: SessionService, public datepipe: DatePipe) {
@@ -63,6 +65,21 @@ export class PeriodAttendanceComponent {
             this.sessionList = response;
         });
         this.sessionList = this.sessionService.getSessionList();
+    }
+
+    getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position: any) => {
+                if (position) {
+                    // console.log("Latitude: " + position.coords.latitude +
+                    //     "Longitude: " + position.coords.longitude);
+                    this.latitude = position.coords.latitude;
+                    this.longitude = position.coords.longitude;
+                }
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
     }
 
     getSemester() {
