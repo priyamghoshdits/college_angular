@@ -164,14 +164,14 @@ export class StudentService {
             }));
     }
 
-    updateClassStart(data) {
-        return this.http.post(this.BASE_API_URL + '/updateClassStart', data)
+    updateClassStart(data,latitude, longitude) {
+        return this.http.get(this.BASE_API_URL + '/updateClassStart/' + data + '/' + latitude + '/'+ longitude)
             .pipe(catchError(this.errorService.serverError), tap(response => {
             }));
     }
 
-    updateClassEnd(data) {
-        return this.http.post(this.BASE_API_URL + '/updateClassEnd', data)
+    updateClassEnd(data,latitude, longitude) {
+        return this.http.get(this.BASE_API_URL + '/updateClassEnd/' + data + '/' + latitude + '/'+ longitude)
             .pipe(catchError(this.errorService.serverError), tap(response => {
             }));
     }
