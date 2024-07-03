@@ -21,6 +21,7 @@
                             <input class="radio" id="three" name="group" type="radio">
                             <input class="radio" id="four" name="group" type="radio">
                             <input class="radio" id="five" name="group" type="radio">
+                            <input class="radio" id="six" name="group" type="radio">
 
                             <div class="tabs">
                                 <label class="tab" for="one" id="one-tab">Profile</label>
@@ -28,6 +29,7 @@
                                 <label class="tab" for="three" id="three-tab">Achivement</label>
                                 <label class="tab" for="four" id="four-tab">Placement</label>
                                 <label class="tab" for="five" id="five-tab">Fees</label>
+                                <label class="tab" for="six" id="six-tab">Scholarship</label>
 
                             </div>
                             <div class="panels">
@@ -579,9 +581,11 @@
                                                     <td>{{indexOfElement + 1}}</td>
                                                     <td>{{item.award_name}}</td>
                                                     <td>{{item.award_date}}</td>
-                                                    <td><a href="{{item.file_name}}">
+                                                    <td>
+                                                        <a href="{{item.file_name}}" *ngIf="item.file_name">
                                                             <mat-icon>cloud_download</mat-icon>
                                                         </a>
+                                                        <span *ngIf="!item.file_name">File not found</span>
                                                     </td>
                                                     <td>
                                                         <a (click)="editAchievement(item)">
@@ -755,13 +759,70 @@
                                                     <td>{{record.student_name}}</td>
                                                     <td>{{record.date_of_payment}}</td>
                                                     <td>{{record.amount}}</td>
-                                                    <td><a
-                                                            href="{{FILE_URL}}/manual_payslips/{{record.file_name}}">Download</a>
+                                                    <td>
+                                                        <a href="{{FILE_URL}}/manual_fees/{{record.file_name}}"
+                                                            *ngIf="record.file_name">Download</a>
+                                                        <span *ngIf="!record.file_name">File not found</span>
                                                     </td>
                                                     <td>
                                                         <a
                                                             (click)="editManualFees(record)"><mat-icon>edit</mat-icon></a>
                                                         <a><mat-icon>delete</mat-icon></a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                                <div class="panel" id="six-panel">
+                                    <form [formGroup]="manualScholarshipForm" class="theme-form">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Type of Scholarship</label>
+                                                <input class="form-control" formControlName="type_of_scholarship"
+                                                    required style="width: 100%" placeholder="Type of Scholarship">
+
+                                                <div *ngIf="manualScholarshipForm.controls['type_of_scholarship'].errors?.['required'] && manualScholarshipForm.controls['type_of_scholarship'].touched "
+                                                    class="text text-danger mt-1">Type of Scholarship required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="col-form-label pt-0">Amount</label>
+                                                <input class="form-control" formControlName="amount" type="number"
+                                                    placeholder="Amount">
+                                                <div *ngIf="manualScholarshipForm.controls['amount'].errors?.['required'] && manualScholarshipForm.controls['amount'].touched "
+                                                    class="text text-danger mt-1">Amount required
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 m-4">
+                                                <button class="btn btn-primary" (click)="saveScholarshipOwn()"
+                                                    class="btn btn-primary me-1">Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <div class="table-responsive">
+                                        <table class="table" style="text-align: center">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th>Type of Scholarship</th>
+                                                    <th>Amount</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let record of manualScholarshipList ;let indexOfElement=index">
+                                                    <td>{{indexOfElement+1}}</td>
+                                                    <td>{{record.type_of_scholarship}}</td>
+                                                    <td>{{record.amount}}</td>
+                                                    <td>
+                                                        <a
+                                                            (click)="editScholarship(record)"><mat-icon>edit</mat-icon></a>
+                                                        <a
+                                                            (click)="deleteScholarship(record)"><mat-icon>delete</mat-icon></a>
                                                     </td>
                                                 </tr>
                                             </tbody>

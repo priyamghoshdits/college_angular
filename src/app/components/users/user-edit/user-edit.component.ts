@@ -35,6 +35,7 @@ export class UserEditComponent implements OnInit {
     journalPublicationForm: FormGroup;
     pgPhdForm: FormGroup;
     apiScoreForm: FormGroup;
+    manualScholarshipForm: FormGroup;
     placementList: any[] = [];
     achievementFile: any;
     achievementList: any[] = [];
@@ -97,9 +98,11 @@ export class UserEditComponent implements OnInit {
     isUpdatableStaffPublication: boolean = false;
     isUpdatableExperience: boolean = false;
     isUpdatablePublication: boolean = false;
+    isScholarshipUpdate: boolean = false;
     stafBookPublicationList: any[];
     staffExperienceList: any[];
     journalPublicationList: any[];
+    manualScholarshipList: any[];
     pgPhdList: any[];
 
     private BASE_API_URL = environment.BASE_API_URL;
@@ -298,6 +301,12 @@ export class UserEditComponent implements OnInit {
             status: new FormControl(null, [Validators.required]),
         });
 
+        this.manualScholarshipForm = new FormGroup({
+            id: new FormControl(null),
+            type_of_scholarship: new FormControl(null, [Validators.required]),
+            amount: new FormControl(null, [Validators.required]),
+        });
+
         this.apiScoreForm = new FormGroup({
             id: new FormControl(null),
             assignment_year: new FormControl(null, [Validators.required]),
@@ -341,6 +350,7 @@ export class UserEditComponent implements OnInit {
                     this.achievementList = response.achievement;
                     this.placementList = response.placement;
                     this.manualFeesList = response.manualFeesList;
+                    this.manualScholarshipList = response.manualScholarshipList;
                     this.subjectService.getSemesterByCourseId(this.userDetails.course_id).subscribe((response: any) => {
                         this.semesterList = response.data;
                         this.manualFeesForm.patchValue({ course_id: this.userDetails.course_id });
@@ -407,6 +417,58 @@ export class UserEditComponent implements OnInit {
         } else if (type == 'publicationFile') {
             this.publicationFile = event.target.files[0];
         }
+    }
+
+
+    saveScholarshipOwn() {
+        if (!this.manualScholarshipForm.valid) {
+            this.manualScholarshipForm.markAllAsTouched();
+            return;
+        }
+
+        this.http.post(this.BASE_API_URL + '/saveManualScholarshipOwn', this.manualScholarshipForm.value).subscribe((response: any) => {
+            if (response.success == 1) {
+                Swal.fire({
+                    title: "Well Done!!",
+                    text: "Scholarship saved",
+                    icon: "success"
+                });
+                this.manualScholarshipForm.reset();
+                this.manualScholarshipList = response.data
+            }
+        });
+    }
+
+    editScholarship(data) {
+        this.manualScholarshipForm.patchValue(data);
+        this.isScholarshipUpdate = true;
+    }
+
+    deleteScholarship(data) {
+        Swal.fire({
+            title: 'Confirmation',
+            text: 'Do you sure to delete course ?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete It!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                return this.http.get(this.BASE_API_URL + '/deleteManualScholarship/' + data.id)
+                    .subscribe((response: any) => {
+                        // @ts-ignore
+                        if (response.success == 1) {
+                            Swal.fire({
+                                title: "Well Done!!",
+                                text: "Scholarship Deleted",
+                                icon: "success"
+                            });
+                            this.manualScholarshipList = response.data
+                        }
+                    });
+            }
+        });
     }
 
     saveApiScore() {
