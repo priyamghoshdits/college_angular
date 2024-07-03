@@ -7,6 +7,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {StudentService} from "../../../services/student.service";
 import Swal from "sweetalert2";
 import {SessionService} from "../../../services/session.service";
+import {retry} from "rxjs";
 
 @Component({
     selector: 'app-period-attendance',
@@ -41,6 +42,8 @@ export class PeriodAttendanceComponent {
     showList = true;
     topic_name = null;
     enableClass = false;
+    latitude = null;
+    longitude = null;
 
     constructor(private subjectService: SubjectService, private studentService: StudentService
         , private sessionService: SessionService, public datepipe: DatePipe) {
@@ -63,6 +66,21 @@ export class PeriodAttendanceComponent {
             this.sessionList = response;
         });
         this.sessionList = this.sessionService.getSessionList();
+        this.getLocation();
+    }
+
+    getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position: any) => {
+                if (position) {
+                    this.latitude = position.coords.latitude;
+                    this.longitude = position.coords.longitude;
+                    console.log(this.latitude);
+                }
+            });
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
     }
 
     getSemester() {
@@ -157,7 +175,7 @@ export class PeriodAttendanceComponent {
     }
 
     updateClassStart() {
-        this.studentService.updateClassStart(this.classStatus.id).subscribe((response: any) => {
+        this.studentService.updateClassStart(this.classStatus.id, this.latitude, this.longitude).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
@@ -172,7 +190,7 @@ export class PeriodAttendanceComponent {
     }
 
     updateClassEnd() {
-        this.studentService.updateClassEnd(this.classStatus.id).subscribe((response: any) => {
+        this.studentService.updateClassEnd(this.classStatus.id, this.latitude, this.longitude).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
