@@ -254,6 +254,7 @@ export class NavService {
 				{ path: '/others/icard', title: 'Icard', type: 'link' },
 				{ path: '/others/agent-student-entry', title: 'Agent Student Entry', type: 'link' },
 				{ path: '/others/agent-payment', title: 'Agent Payment', type: 'link' },
+				{ path: '/others/erp-settings', title: 'ERP Settings', type: 'link' },
 			]
 		},
 

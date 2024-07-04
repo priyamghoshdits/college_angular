@@ -8,6 +8,7 @@ import {AgentStudentEntryComponent} from "./agent-student-entry/agent-student-en
 import {FranchiseComponent} from "./franchise/franchise.component";
 import {UserLogComponent} from "./user-log/user-log.component";
 import {AgentPaymentComponent} from "./agent-payment/agent-payment.component";
+import {ErpSettingsComponent} from "./erp-settings/erp-settings.component";
 
 const routes: Routes = [
   {
@@ -24,6 +25,14 @@ const routes: Routes = [
     data: {
       title: "Roles and permission",
       breadcrumb: "Roles and permission"
+    }
+  },
+  {
+    path: 'erp-settings',
+    component: ErpSettingsComponent,
+    data: {
+      title: "ERP Settings",
+      breadcrumb: "ERP Settings"
     }
   },
   {
