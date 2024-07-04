@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {ConsultancyComponent} from "./consultancy/consultancy.component";
-import {JournalPublicationComponent} from "./journal-publication/journal-publication.component";
-import {StaffExperienceComponent} from "./staff-experience/staff-experience.component";
-import {BookPublicationComponent} from "./book-publication/book-publication.component";
-import {UniversitySynopsisComponent} from "./university-synopsis/university-synopsis.component";
-import {StaffDegreeComponent} from "./staff-degree/staff-degree.component";
-import {StaffEducationComponent} from "./staff-education/staff-education.component";
-import {PgPhdGuideComponent} from "./pg-phd-guide/pg-phd-guide.component";
-import {PaperSetterComponent} from "./paper-setter/paper-setter.component";
-import {AnswerScriptComponent} from "./answer-script/answer-script.component";
-import {SeminarWorkshopFacultyComponent} from "./seminar-workshop-faculty/seminar-workshop-faculty.component";
-import {ExaminerComponent} from "./examiner/examiner.component";
-import {ApiScoreComponent} from "./api-score/api-score.component";
+import { ConsultancyComponent } from "./consultancy/consultancy.component";
+import { JournalPublicationComponent } from "./journal-publication/journal-publication.component";
+import { StaffExperienceComponent } from "./staff-experience/staff-experience.component";
+import { BookPublicationComponent } from "./book-publication/book-publication.component";
+import { UniversitySynopsisComponent } from "./university-synopsis/university-synopsis.component";
+import { StaffDegreeComponent } from "./staff-degree/staff-degree.component";
+import { StaffEducationComponent } from "./staff-education/staff-education.component";
+import { PgPhdGuideComponent } from "./pg-phd-guide/pg-phd-guide.component";
+import { PaperSetterComponent } from "./paper-setter/paper-setter.component";
+import { AnswerScriptComponent } from "./answer-script/answer-script.component";
+import { SeminarWorkshopFacultyComponent } from "./seminar-workshop-faculty/seminar-workshop-faculty.component";
+import { ExaminerComponent } from "./examiner/examiner.component";
+import { ApiScoreComponent } from "./api-score/api-score.component";
+import { PaperPosterComponent } from './paper-poster/paper-poster.component';
 
 const routes: Routes = [
   {
@@ -85,6 +86,14 @@ const routes: Routes = [
     data: {
       title: "Pg Phd Guide",
       breadcrumb: "Pg Phd Guide"
+    }
+  },
+  {
+    path: 'paper-poster',
+    component: PaperPosterComponent,
+    data: {
+      title: "Paper Poster",
+      breadcrumb: "Paper Poster"
     }
   },
   {

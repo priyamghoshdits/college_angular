@@ -1,0 +1,201 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header" [hidden]="active != 1">
+                            <h5>Papper Poster</h5><span>Papper Poster</span>
+                        </div>
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>Show Paper Poster</h5>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Add Papper Poster</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Show Papper Poster</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+                        <div [hidden]="active != 1">
+                            <div class="card-body" [hidden]="active != 1">
+                                <div *ngFor="let item of paperField ;let indexOfElement=index">
+                                    <div class="row">
+                                        <div class="col-md-5 mb-3">
+                                            <label>Select Staff</label>
+                                            <select style="width: 100%"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].staff_id"
+                                                class="form-select" required>
+                                                <option value="null"> Select a Staff</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-5 mb-3">
+                                            <label>Topic Name</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].topic_name"
+                                                placeholder="Topic Name" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5 mb-3">
+                                            <label>Type</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].type" placeholder="Type"
+                                                required>
+                                        </div>
+                                        <div class="col-md-5 mb-3">
+                                            <label>Venue</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].venue" placeholder="Venue"
+                                                required>
+                                        </div>
+                                        <div class="col-md-2 mb-3"
+                                            *ngIf="(indexOfElement + 1) == paperField.length && !isUpdatable">
+                                            <a (click)="addField()"><mat-icon
+                                                    style="font-size: 40px;height: 60px; width: 40px; line-height: 2">add_box</mat-icon>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Organized By</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].organized_by"
+                                                placeholder="Organized By" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Seminer Topic</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].seminer_topic"
+                                                placeholder="Seminer Topic" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Seminer Type</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].seminer_type"
+                                                placeholder="Seminer Type" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Acivement</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].acivement"
+                                                placeholder="Acivement" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>From Date</label>
+                                            <input type="date" class="form-control"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].date_from" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>To Date</label>
+                                            <input type="date" class="form-control"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].date_to" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Upload File</label>
+                                            <input type="file" class="form-control"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].file_name"
+                                                (change)="fileUpload($event,indexOfElement)" placeholder="Upload File"
+                                                required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true"
+                                    class="btn btn-primary me-1" (click)="savePaperPoster()">Submit</button>
+                                <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                    (click)="updatePaperPoster()">Update</button>
+                                <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                    (click)="cancelUpdate()">Cancel</button>
+                                <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                            </div>
+                        </div>
+                        <div [hidden]="active != 2">
+                            <!-- <div class="card-body">
+                                <form class="theme-form" [formGroup]="paperSettingForm">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">From
+                                                Date</label>
+                                            <input class="form-control" formControlName="from_date"
+                                                id="exampleInputEmail1" type="date">
+                                            <div *ngIf="paperSettingForm.controls['from_date'].errors?.['required'] && paperSettingForm.controls['from_date'].touched "
+                                                class="text text-danger mt-1">From Date required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label class="col-form-label pt-0" for="exampleInputEmail1">To Date</label>
+                                            <input class="form-control" formControlName="to_date"
+                                                id="exampleInputEmail1" type="date">
+                                            <div *ngIf="paperSettingForm.controls['to_date'].errors?.['required'] && paperSettingForm.controls['to_date'].touched "
+                                                class="text text-danger mt-1">To Date required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Staff</label>
+                                            <select style="width: 100%" formControlName="staff_id" class="form-select"
+                                                required>
+                                                <option value="null"> Select a Staff</option>
+                                                <option *ngFor="let data of memberList" [value]="data.id">
+                                                    {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <button class="btn btn-primary me-1" style="margin-top: 30px;"
+                                                (click)="getPaperSetting()">Search</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table text-center">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th>Staff Name</th>
+                                            <th>Examination Name</th>
+                                            <th>Subject Name</th>
+                                            <th>University Name</th>
+                                            <th>Reference Name</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let record of searchPaperList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{record.staff_name}}</td>
+                                            <td>{{record.examination_name}}</td>
+                                            <td>{{record.subject_name}}</td>
+                                            <td>{{record.university_name}}</td>
+                                            <td>{{record.referance_no}}</td>
+                                            <td>{{record.ref_date}}</td>
+                                            <td>
+                                                <a *ngIf="permission[1].permission == 1"
+                                                    (click)="editPaperSetter(record)"><mat-icon>edit</mat-icon></a>
+                                                <a *ngIf="permission[2].permission == 1"
+                                                    (click)="deletePaperSetter(record)"><mat-icon>delete</mat-icon></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="paperList.length > 5"
+                                    (pageChange)="p = $event"></pagination-controls>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
