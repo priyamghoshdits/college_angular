@@ -158,6 +158,7 @@ export class NavService {
 				{ path: '/staff-information/answer-script-evaluator', title: 'Answer Script Evaluator', type: 'link' },
 				{ path: '/staff-information/sponsored-or-consultancy', title: 'Sponsored project/Consultancy', type: 'link' },
 				{ path: '/staff-information/journal-publication', title: 'Journal Publication', type: 'link' },
+				{ path: '/staff-information/paper-poster', title: 'Paper Poster', type: 'link' },
 				{ path: '/staff-information/paper-setter', title: 'Paper Setter', type: 'link' },
 				{ path: '/staff-information/pg-phd-guide', title: 'Pg Phd Guide', type: 'link' },
 				{ path: '/staff-information/university-synopsis', title: 'University Synopsis', type: 'link' },
