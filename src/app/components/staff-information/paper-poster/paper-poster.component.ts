@@ -1,8 +1,9 @@
-import { NgFor, NgIf } from '@angular/common';
+import { JsonPipe, NgFor, NgForOf, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { NgbNav, NgbNavItem, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { MemberService } from 'src/app/services/member.service';
 import { PaperPosterService } from 'src/app/services/paper-poster.service';
 import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
@@ -12,19 +13,24 @@ import Swal from 'sweetalert2';
   selector: 'app-paper-poster',
   standalone: true,
   imports: [
+    FormsModule,
+    MatIconModule,
+    NgForOf,
+    NgxPaginationModule,
+    ReactiveFormsModule,
+    NgIf,
+    NgbNav,
+    NgbNavLink,
+    NgbNavLinkBase,
     NgbNavItem,
     NgbNavOutlet,
-    NgbNav,
-    FormsModule,
-    ReactiveFormsModule,
-    NgFor,
-    NgIf,
-    MatIconModule
+    JsonPipe
   ],
   templateUrl: './paper-poster.component.html',
   styleUrl: './paper-poster.component.scss'
 })
 export class PaperPosterComponent {
+  paperPosterForm: FormGroup;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
   memberList: any[] = [];
@@ -32,8 +38,9 @@ export class PaperPosterComponent {
   active: number = 1;
   paperField: any[] = [1];
   paperPosterArray: any[] = [];
-  fileArray: any[] = [];
+  fileArray: File[] = [];
   isUpdatable: boolean = false;
+  paperPosterList: any[] = [];
 
   constructor(private roleAndPermissionService: RolesAndPermissionService, private memberService: MemberService, private paperPosterService: PaperPosterService) {
 
@@ -55,6 +62,12 @@ export class PaperPosterComponent {
       }
     ];
 
+    this.paperPosterForm = new FormGroup({
+      from_date: new FormControl(null, [Validators.required]),
+      to_date: new FormControl(null, [Validators.required]),
+      staff_id: new FormControl(null),
+    })
+
     this.memberService.getMemberListener().subscribe((response) => {
       this.memberList = response;
     });
@@ -70,11 +83,68 @@ export class PaperPosterComponent {
     }
   }
 
+
+  getPaperSetting() {
+    this.paperPosterService.searchPaperSetter(this.paperPosterForm.value).subscribe((response: any) => {
+      if (response.success == 1) {
+        this.paperPosterList = response.data;
+      }
+    })
+  }
+
+
+  calculateNoOFDate(index) {
+    if (this.paperPosterArray[index].date_from && this.paperPosterArray[index].date_to) {
+      // @ts-ignore
+      let x = Math.floor(((new Date(this.paperPosterArray[index].date_to) - new Date(this.paperPosterArray[index].date_from))) / (1000 * 60 * 60 * 24)) + 1;
+      this.paperPosterArray[index].duration = x;
+    }
+  }
+
+  editPaperSetter(data) {
+    this.paperPosterArray[0].id = data.id;
+    this.paperPosterArray[0].staff_id = data.staff_id;
+    this.paperPosterArray[0].topic_name = data.topic_name;
+    this.paperPosterArray[0].type = data.type;
+    this.paperPosterArray[0].venue = data.venue;
+    this.paperPosterArray[0].organized_by = data.organized_by;
+    this.paperPosterArray[0].seminer_topic = data.seminer_topic;
+    this.paperPosterArray[0].seminer_type = data.seminer_type;
+    this.paperPosterArray[0].date_from = data.date_from;
+    this.paperPosterArray[0].date_to = data.date_to;
+    this.paperPosterArray[0].duration = data.duration;
+    this.paperPosterArray[0].acivement = data.acivement;
+    this.paperPosterArray[0].file_name = data.file_name;
+    this.active = 1;
+    this.isUpdatable = true;
+  }
+
+  deletePaperSetter(data) {
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Do you sure to delete ?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete It!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.paperPosterService.deeletePaperPoster(data.id).subscribe((response: any) => {
+          if (response.success == 1) {
+            this.paperPosterList = response.data;
+          }
+        })
+      }
+    });
+  }
+
+
   fileUpload(event, index) {
     const file = event.target.files[0];
     if (file) {
       this.fileArray[index] = file;
-      this.paperPosterArray[index].file_name = file.file_name;
+      this.paperPosterArray[index].file_name = file.name;
     }
   }
 
@@ -128,6 +198,36 @@ export class PaperPosterComponent {
 
   updatePaperPoster() {
 
+    const formData = new FormData();
+    formData.append('id', this.paperPosterArray[0].id);
+    formData.append('staff_id', this.paperPosterArray[0].staff_id);
+    formData.append('topic_name', this.paperPosterArray[0].topic_name);
+    formData.append('type', this.paperPosterArray[0].type);
+    formData.append('venue', this.paperPosterArray[0].venue);
+    formData.append('organized_by', this.paperPosterArray[0].organized_by);
+    formData.append('seminer_topic', this.paperPosterArray[0].seminer_topic);
+    formData.append('seminer_type', this.paperPosterArray[0].seminer_type);
+    formData.append('date_from', this.paperPosterArray[0].date_from);
+    formData.append('date_to', this.paperPosterArray[0].date_to);
+    formData.append('duration', this.paperPosterArray[0].duration);
+    formData.append('acivement', this.paperPosterArray[0].acivement);
+    formData.append('file_name', this.fileArray[0]);
+
+    this.paperPosterService.updatePaperPoster(formData).subscribe((response: any) => {
+      if (response.success == 1) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Paper Setter Updated',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        this.paperField = [1];
+        this.paperPosterForm.reset();
+        this.cancelUpdate();
+        this.paperPosterList = [];
+      }
+    })
   }
 
   cancelUpdate() {
