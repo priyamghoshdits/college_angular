@@ -75,7 +75,6 @@ export class PeriodAttendanceComponent {
                 if (position) {
                     this.latitude = position.coords.latitude;
                     this.longitude = position.coords.longitude;
-                    console.log(this.latitude);
                 }
             });
         } else {
