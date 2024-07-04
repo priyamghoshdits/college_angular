@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {ErrorService} from "./error.service";
-import {Subject} from "rxjs";
-import {environment} from "../../environments/environment";
-import {catchError, tap} from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { ErrorService } from "./error.service";
+import { Subject } from "rxjs";
+import { environment } from "../../environments/environment";
+import { catchError, tap } from "rxjs/operators";
 
 @Injectable({
     providedIn: 'root'
@@ -20,42 +20,46 @@ export class StudentService {
     }
 
     constructor(private http: HttpClient, private errorService: ErrorService) {
-        this.http.get(this.BASE_API_URL + '/getStudents').subscribe((response: any) => {
+        // @ts-ignore
+        const $session_id = JSON.parse(localStorage.getItem('session_id'));
+        this.http.get(this.BASE_API_URL + '/getStudents/' + $session_id).subscribe((response: any) => {
             this.studentList = response.data;
             this.studentListSubject.next([...this.studentList]);
         });
     }
 
-    getSingleStudentFullDetails(student_id){
+    getSingleStudentFullDetails(student_id) {
         return this.http.get(this.BASE_API_URL + '/getStudentFullDetails/' + student_id)
             .pipe(catchError(this.errorService.serverError), tap(response => {
 
             }));
     }
 
-    saveEducationQualification(data){
+    saveEducationQualification(data) {
         return this.http.post(this.BASE_API_URL + '/saveEducationQualification', data)
             .pipe(catchError(this.errorService.serverError), tap(response => {
 
             }));
     }
 
-    updateEducationQualification(data){
+    updateEducationQualification(data) {
         return this.http.post(this.BASE_API_URL + '/updateEducationQualification', data)
             .pipe(catchError(this.errorService.serverError), tap(response => {
 
             }));
     }
 
-    searchEducationQualification(student_id){
-        return this.http.get(this.BASE_API_URL + '/searchEducationQualification/'+ student_id)
+    searchEducationQualification(student_id) {
+        return this.http.get(this.BASE_API_URL + '/searchEducationQualification/' + student_id)
             .pipe(catchError(this.errorService.serverError), tap(response => {
 
             }));
     }
 
     getUpdatedStudentList() {
-        this.http.get(this.BASE_API_URL + '/getStudents').subscribe((response: any) => {
+        // @ts-ignore
+        const $session_id = JSON.parse(localStorage.getItem('session_id'));
+        this.http.get(this.BASE_API_URL + '/getStudents/' + $session_id).subscribe((response: any) => {
             this.studentList = response.data;
             this.studentListSubject.next([...this.studentList]);
         });
@@ -164,14 +168,14 @@ export class StudentService {
             }));
     }
 
-    updateClassStart(data,latitude, longitude) {
-        return this.http.get(this.BASE_API_URL + '/updateClassStart/' + data + '/' + latitude + '/'+ longitude)
+    updateClassStart(data, latitude, longitude) {
+        return this.http.get(this.BASE_API_URL + '/updateClassStart/' + data + '/' + latitude + '/' + longitude)
             .pipe(catchError(this.errorService.serverError), tap(response => {
             }));
     }
 
-    updateClassEnd(data,latitude, longitude) {
-        return this.http.get(this.BASE_API_URL + '/updateClassEnd/' + data + '/' + latitude + '/'+ longitude)
+    updateClassEnd(data, latitude, longitude) {
+        return this.http.get(this.BASE_API_URL + '/updateClassEnd/' + data + '/' + latitude + '/' + longitude)
             .pipe(catchError(this.errorService.serverError), tap(response => {
             }));
     }

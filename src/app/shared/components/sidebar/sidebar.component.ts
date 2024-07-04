@@ -98,6 +98,7 @@ export class SidebarComponent {
     selectSession() {
         localStorage.removeItem("session_id");
         localStorage.setItem("session_id", JSON.stringify(this.session_id));
+        window.location.reload();
     }
 
     // Active Nave state

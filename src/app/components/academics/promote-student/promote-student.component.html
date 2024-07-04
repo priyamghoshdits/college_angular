@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div class="row" *ngIf="permission.length > 0">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
@@ -71,7 +71,7 @@
 
                             <hr>
                             <h5 *ngIf="searched">Students</h5>
-                            <div *ngIf="(filteredStudent.length > 0) && searched" >
+                            <div *ngIf="(filteredStudent.length > 0) && searched && permission[3].permission == 1" >
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
@@ -96,7 +96,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <button style="margin-top: 30px;" class="btn btn-primary me-1" (click)="promoteStudent()">Promote</button>
+                                <button style="margin-top: 30px;" class="btn btn-primary me-1" (click)="promoteStudent()" *ngIf="permission[0].permission == 1">Promote</button>
                             </div>
                             <div *ngIf="(filteredStudent.length == 0) && searched">
                                 <h5 style="text-align: center;">No Data</h5>

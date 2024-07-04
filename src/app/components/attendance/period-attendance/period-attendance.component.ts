@@ -138,9 +138,9 @@ export class PeriodAttendanceComponent {
                     if (result.isConfirmed) {
                         this.studentList = response.data;
                         this.classStatus = response.class_status;
-                        if(this.classStatus !== null){
-                            this.enableClass = true;
-                        }
+                        this.enableClass = true;
+                        // if(this.classStatus !== null){
+                        // }
                         this.showList = false;
                         if (this.studentList.length == 0) {
                             Swal.fire({
