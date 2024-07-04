@@ -12,6 +12,12 @@ export class PaperPosterService {
 
   constructor(private http: HttpClient, private errorService: ErrorService) { }
 
+  searchPaperSetter(value) {
+    return this.http.post(this.BASE_URL + '/searchPaperPoster', value)
+      .pipe(catchError(this.errorService.serverError), tap(response => {
+      }));
+  }
+
   saveUploadFile(data) {
     return this.http.post(this.BASE_URL + '/saveUploadFile', data)
       .pipe(catchError(this.errorService.serverError)
@@ -21,6 +27,18 @@ export class PaperPosterService {
 
   savePaperPoster(data) {
     return this.http.post(this.BASE_URL + '/savePaperPoster', data)
+      .pipe(catchError(this.errorService.serverError)
+        , tap((response: any) => {
+        }));
+  }
+  updatePaperPoster(data) {
+    return this.http.post(this.BASE_URL + '/updatePaperPoster', data)
+      .pipe(catchError(this.errorService.serverError)
+        , tap((response: any) => {
+        }));
+  }
+  deeletePaperPoster(data) {
+    return this.http.get(this.BASE_URL + '/deletePaperPoster/' + data)
       .pipe(catchError(this.errorService.serverError)
         , tap((response: any) => {
         }));

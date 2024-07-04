@@ -64,44 +64,53 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Organized By</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="paperPosterArray[indexOfElement].organized_by"
                                                 placeholder="Organized By" required>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Seminer Topic</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="paperPosterArray[indexOfElement].seminer_topic"
                                                 placeholder="Seminer Topic" required>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Seminer Type</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="paperPosterArray[indexOfElement].seminer_type"
                                                 placeholder="Seminer Type" required>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Acivement</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="paperPosterArray[indexOfElement].acivement"
                                                 placeholder="Acivement" required>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
                                             <label>From Date</label>
                                             <input type="date" class="form-control"
-                                                [(ngModel)]="paperPosterArray[indexOfElement].date_from" required>
+                                                [(ngModel)]="paperPosterArray[indexOfElement].date_from"
+                                                (change)="calculateNoOFDate(indexOfElement)" required>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>To Date</label>
                                             <input type="date" class="form-control"
-                                                [(ngModel)]="paperPosterArray[indexOfElement].date_to" required>
+                                                [(ngModel)]="paperPosterArray[indexOfElement].date_to"
+                                                (change)="calculateNoOFDate(indexOfElement)" required>
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Duration</label>
+                                            <input type="text" class="form-control"
+                                                [(ngModel)]="paperPosterArray[indexOfElement].duration"
+                                                placeholder="Duration" disabled=>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
                                             <label>Upload File</label>
                                             <input type="file" class="form-control"
-                                                [(ngModel)]="paperPosterArray[indexOfElement].file_name"
                                                 (change)="fileUpload($event,indexOfElement)" placeholder="Upload File"
                                                 required>
                                         </div>
@@ -119,22 +128,22 @@
                             </div>
                         </div>
                         <div [hidden]="active != 2">
-                            <!-- <div class="card-body">
-                                <form class="theme-form" [formGroup]="paperSettingForm">
+                            <div class="card-body">
+                                <form class="theme-form" [formGroup]="paperPosterForm">
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">From
                                                 Date</label>
                                             <input class="form-control" formControlName="from_date"
                                                 id="exampleInputEmail1" type="date">
-                                            <div *ngIf="paperSettingForm.controls['from_date'].errors?.['required'] && paperSettingForm.controls['from_date'].touched "
+                                            <div *ngIf="paperPosterForm.controls['from_date'].errors?.['required'] && paperPosterForm.controls['from_date'].touched "
                                                 class="text text-danger mt-1">From Date required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label class="col-form-label pt-0" for="exampleInputEmail1">To Date</label>
                                             <input class="form-control" formControlName="to_date"
                                                 id="exampleInputEmail1" type="date">
-                                            <div *ngIf="paperSettingForm.controls['to_date'].errors?.['required'] && paperSettingForm.controls['to_date'].touched "
+                                            <div *ngIf="paperPosterForm.controls['to_date'].errors?.['required'] && paperPosterForm.controls['to_date'].touched "
                                                 class="text text-danger mt-1">To Date required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -161,24 +170,40 @@
                                         <tr>
                                             <th scope="col">#</th>
                                             <th>Staff Name</th>
-                                            <th>Examination Name</th>
-                                            <th>Subject Name</th>
-                                            <th>University Name</th>
-                                            <th>Reference Name</th>
-                                            <th>Date</th>
+                                            <th>Topic Name</th>
+                                            <th>Type</th>
+                                            <th>Venue</th>
+                                            <th>Organized By</th>
+                                            <th>Seminer Topic</th>
+                                            <th>Seminer Type</th>
+                                            <th>Date From</th>
+                                            <th>Date To</th>
+                                            <th>Duration</th>
+                                            <th>Acivement</th>
+                                            <th>Download</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr
-                                            *ngFor="let record of searchPaperList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
+                                        <tr *ngFor="let record of paperPosterList; let indexOfElement=index">
                                             <td>{{indexOfElement+1}}</td>
                                             <td>{{record.staff_name}}</td>
-                                            <td>{{record.examination_name}}</td>
-                                            <td>{{record.subject_name}}</td>
-                                            <td>{{record.university_name}}</td>
-                                            <td>{{record.referance_no}}</td>
-                                            <td>{{record.ref_date}}</td>
+                                            <td>{{record.topic_name}}</td>
+                                            <td>{{record.type}}</td>
+                                            <td>{{record.venue}}</td>
+                                            <td>{{record.organized_by}}</td>
+                                            <td>{{record.seminer_topic}}</td>
+                                            <td>{{record.seminer_type}}</td>
+                                            <td>{{record.date_from}}</td>
+                                            <td>{{record.date_to}}</td>
+                                            <td>{{record.duration}}</td>
+                                            <td>{{record.acivement}}</td>
+                                            <td>
+                                                <a data-placement="left" target="_blank" href="{{record.file_url}}"
+                                                    *ngIf="record.file_url">
+                                                    <mat-icon>cloud_download</mat-icon>
+                                                </a>
+                                            </td>
                                             <td>
                                                 <a *ngIf="permission[1].permission == 1"
                                                     (click)="editPaperSetter(record)"><mat-icon>edit</mat-icon></a>
@@ -188,9 +213,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
-                                <pagination-controls *ngIf="paperList.length > 5"
-                                    (pageChange)="p = $event"></pagination-controls>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </div>
