@@ -38,61 +38,79 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Student ID</label>
-                                            <input type="text" class="form-control" (blur)="checkUniqueId()" formControlName="identification_no" placeholder="Student Id">
+                                            <input type="text" class="form-control" (blur)="checkUniqueId()"
+                                                formControlName="identification_no" placeholder="Student Id">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>First Name</label>
-                                            <input type="text" class="form-control" formControlName="first_name" placeholder="First name">
-                                            <div *ngIf="studentCreationForm.controls['first_name'].errors?.['required'] && studentCreationForm.controls['first_name'].touched " class="text text-danger mt-1">First Name required</div>
+                                            <input type="text" class="form-control" formControlName="first_name"
+                                                placeholder="First name">
+                                            <div *ngIf="studentCreationForm.controls['first_name'].errors?.['required'] && studentCreationForm.controls['first_name'].touched "
+                                                class="text text-danger mt-1">First Name required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Middle Name</label>
-                                            <input type="text" class="form-control" formControlName="middle_name" placeholder="Middle Name" >
+                                            <input type="text" class="form-control" formControlName="middle_name"
+                                                placeholder="Middle Name">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Last Name</label>
-                                            <input type="text" class="form-control" formControlName="last_name" placeholder="Last Name" >
-                                            <div *ngIf="studentCreationForm.controls['last_name'].errors?.['required'] && studentCreationForm.controls['last_name'].touched " class="text text-danger mt-1">Last Name required</div>
+                                            <input type="text" class="form-control" formControlName="last_name"
+                                                placeholder="Last Name">
+                                            <div *ngIf="studentCreationForm.controls['last_name'].errors?.['required'] && studentCreationForm.controls['last_name'].touched "
+                                                class="text text-danger mt-1">Last Name required</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Date Of Birth</label>
                                             <input class="form-control digits" type="date" formControlName="dob"
-                                                   id="example-datetime-local-input">
-                                            <div *ngIf="studentCreationForm.controls['dob'].errors?.['required'] && studentCreationForm.controls['dob'].touched " class="text text-danger mt-1">Date of Birth required</div>
+                                                id="example-datetime-local-input">
+                                            <div *ngIf="studentCreationForm.controls['dob'].errors?.['required'] && studentCreationForm.controls['dob'].touched "
+                                                class="text text-danger mt-1">Date of Birth required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload date of birth proof</label>
-                                            <input type="file" class="form-control" [multiple]="false" (change)="uploadDateOfBirthProof($event)">
+                                            <input type="file" class="form-control" [multiple]="false"
+                                                (change)="uploadDateOfBirthProof($event)">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Admission date</label>
-                                            <input class="form-control digits" type="date" formControlName="admission_date"
-                                                   id="example-datetime-local-input">
-                                            <div *ngIf="studentCreationForm.controls['admission_date'].errors?.['required'] && studentCreationForm.controls['admission_date'].touched " class="text text-danger mt-1">Admission Date required</div>
+                                            <input class="form-control digits" type="date"
+                                                formControlName="admission_date" id="example-datetime-local-input">
+                                            <div *ngIf="studentCreationForm.controls['admission_date'].errors?.['required'] && studentCreationForm.controls['admission_date'].touched "
+                                                class="text text-danger mt-1">Admission Date required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload Admission Slip</label>
-                                            <input type="file" class="form-control" [multiple]="false" (change)="selectAdmissionSlip($event)">
+                                            <input type="file" class="form-control" [multiple]="false"
+                                                (change)="selectAdmissionSlip($event)">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Phone Number</label>
-                                            <input type="text" class="form-control" formControlName="mobile_no" placeholder="Phone Number">
-                                            <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['required'] && studentCreationForm.controls['mobile_no'].touched " class="text text-danger mt-1">Mobile Number required</div>
-                                            <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']" class="text text-danger mt-1">Invalid Mobile Number</div>
+                                            <input type="text" class="form-control" formControlName="mobile_no"
+                                                placeholder="Phone Number">
+                                            <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['required'] && studentCreationForm.controls['mobile_no'].touched "
+                                                class="text text-danger mt-1">Mobile Number required</div>
+                                            <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']"
+                                                class="text text-danger mt-1">Invalid Mobile Number</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Emergency Contact Number</label>
-                                            <input type="text" class="form-control" formControlName="emergency_phone_number" placeholder="Emergency Contact Number">
-                                            <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['required'] && studentCreationForm.controls['emergency_phone_number'].touched " class="text text-danger mt-1">Emergency phone required</div>
-                                            <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['pattern']" class="text text-danger mt-1">Invalid Emergency Contact</div>
+                                            <input type="text" class="form-control"
+                                                formControlName="emergency_phone_number"
+                                                placeholder="Emergency Contact Number">
+                                            <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['required'] && studentCreationForm.controls['emergency_phone_number'].touched "
+                                                class="text text-danger mt-1">Emergency phone required</div>
+                                            <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['pattern']"
+                                                class="text text-danger mt-1">Invalid Emergency Contact</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Marital Status</label>
-                                            <select style="width: 100%" formControlName="material_status" class="form-select">
+                                            <select style="width: 100%" formControlName="material_status"
+                                                class="form-select">
                                                 <option value="null">Select</option>
                                                 <option value="Single"> Single </option>
                                                 <option value="Married"> Married </option>
@@ -103,24 +121,27 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Gender</label>
-                                            <select style="width: 100%" formControlName="gender" class="form-select" >
+                                            <select style="width: 100%" formControlName="gender" class="form-select">
                                                 <option value="null">Select</option>
                                                 <option value="Male"> Male </option>
                                                 <option value="Female"> Female </option>
                                             </select>
-                                            <div *ngIf="studentCreationForm.controls['gender'].errors?.['required'] && studentCreationForm.controls['gender'].touched " class="text text-danger mt-1">Gender required</div>
+                                            <div *ngIf="studentCreationForm.controls['gender'].errors?.['required'] && studentCreationForm.controls['gender'].touched "
+                                                class="text text-danger mt-1">Gender required</div>
                                         </div>
 
                                     </div>
-                                    <div  class="row">
+                                    <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Profile Image</label>
-<!--                                            <input type="file" class="form-control" [multiple]="false" (change)="onSelect1($event)">-->
-                                            <input type="file" class="form-control" [multiple]="false" (change)="selectProfilePic($event)">
+                                            <!--                                            <input type="file" class="form-control" [multiple]="false" (change)="onSelect1($event)">-->
+                                            <input type="file" class="form-control" [multiple]="false"
+                                                (change)="selectProfilePic($event)">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Blood Group</label>
-                                            <select style="width: 100%" formControlName="blood_group" class="form-select">
+                                            <select style="width: 100%" formControlName="blood_group"
+                                                class="form-select">
                                                 <option value="null">Select</option>
                                                 <option value="A+"> A+ </option>
                                                 <option value="A-"> A- </option>
@@ -132,31 +153,33 @@
                                                 <option value="O-"> O- </option>
                                             </select>
 
-<!--                                            <ng-select [items]="cities"-->
-<!--                                                       [searchFn]="customSearchFn"-->
-<!--                                                       bindLabel="name"-->
-<!--                                                       placeholder="Select city"-->
-<!--                                                       [(ngModel)]="selectedCity">-->
-<!--                                            </ng-select>-->
+                                            <!--                                            <ng-select [items]="cities"-->
+                                            <!--                                                       [searchFn]="customSearchFn"-->
+                                            <!--                                                       bindLabel="name"-->
+                                            <!--                                                       placeholder="Select city"-->
+                                            <!--                                                       [(ngModel)]="selectedCity">-->
+                                            <!--                                            </ng-select>-->
 
 
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload Lab Report</label>
-                                            <input type="file" class="form-control" [multiple]="false" (change)="uploadLabReport($event)">
+                                            <input type="file" class="form-control" [multiple]="false"
+                                                (change)="uploadLabReport($event)">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Agent</label>
                                             <select style="width: 100%" formControlName="agent_id" class="form-select">
                                                 <option value="null">Select</option>
-                                                <option *ngFor="let data of agentList" [value]="data.id" >
+                                                <option *ngFor="let data of agentList" [value]="data.id">
                                                     {{data.first_name}} {{data.last_name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="studentCreationForm.controls['agent_id'].errors?.['required'] && studentCreationForm.controls['agent_id'].touched " class="text text-danger mt-1">Agent required</div>
+                                            <div *ngIf="studentCreationForm.controls['agent_id'].errors?.['required'] && studentCreationForm.controls['agent_id'].touched "
+                                                class="text text-danger mt-1">Agent required</div>
                                         </div>
                                     </div>
-                                    <div  class="row">
+                                    <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Religion</label>
                                             <select style="width: 100%" formControlName="religion" class="form-select">
@@ -177,114 +200,166 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Email address (Login Email)</label>
                                             <input type="email" class="form-control" formControlName="email"
-                                                   placeholder="name@example.com">
-                                            <div *ngIf="studentCreationForm.controls['email'].errors?.['required'] && studentCreationForm.controls['email'].touched " class="text text-danger mt-1">Email is required</div>
-                                            <div *ngIf="studentCreationForm.controls['email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
+                                                placeholder="name@example.com">
+                                            <div *ngIf="studentCreationForm.controls['email'].errors?.['required'] && studentCreationForm.controls['email'].touched "
+                                                class="text text-danger mt-1">Email is required</div>
+                                            <div *ngIf="studentCreationForm.controls['email'].errors?.['email']"
+                                                class="text text-danger mt-1">Invalid Email</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Course</label>
-                                            <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                            <select style="width: 100%" formControlName="course_id" class="form-select"
+                                                required (change)="getSemester()">
                                                 <option value="null">Select</option>
-                                                <option *ngFor="let data of courseList" [value]="data.id" >
+                                                <option *ngFor="let data of courseList" [value]="data.id">
                                                     {{data.course_name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="studentCreationForm.controls['course_id'].errors?.['required'] && studentCreationForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                            <div *ngIf="studentCreationForm.controls['course_id'].errors?.['required'] && studentCreationForm.controls['course_id'].touched "
+                                                class="text text-danger mt-1">Course required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Semester</label>
-                                            <select style="width: 100%" formControlName="semester_id" class="form-select">
+                                            <select style="width: 100%" formControlName="semester_id"
+                                                class="form-select">
                                                 <option value="null">Select</option>
-                                                <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                                <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                                     {{data.name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="studentCreationForm.controls['semester_id'].errors?.['required'] && studentCreationForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                            <div *ngIf="studentCreationForm.controls['semester_id'].errors?.['required'] && studentCreationForm.controls['semester_id'].touched "
+                                                class="text text-danger mt-1">Semester required</div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Caste</label>
-                                            <select style="width: 100%" formControlName="category_id" class="form-select">
+                                            <select style="width: 100%" formControlName="category_id"
+                                                class="form-select">
                                                 <option value="null">Select</option>
-                                                <option *ngFor="let data of categoryList" [value]="data.id" >
+                                                <option *ngFor="let data of categoryList" [value]="data.id">
                                                     {{data.name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="studentCreationForm.controls['category_id'].errors?.['required'] && studentCreationForm.controls['category_id'].touched " class="text text-danger mt-1">Caste required</div>
+                                            <div *ngIf="studentCreationForm.controls['category_id'].errors?.['required'] && studentCreationForm.controls['category_id'].touched "
+                                                class="text text-danger mt-1">Caste required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Current Address</label>
-                                            <input type="text" class="form-control" formControlName="current_address" placeholder="Current Address">
-                                            <div *ngIf="studentCreationForm.controls['current_address'].errors?.['required'] && studentCreationForm.controls['current_address'].touched " class="text text-danger mt-1">Current Address required</div>
+                                            <input type="text" class="form-control" formControlName="current_address"
+                                                placeholder="Current Address">
+                                            <div *ngIf="studentCreationForm.controls['current_address'].errors?.['required'] && studentCreationForm.controls['current_address'].touched "
+                                                class="text text-danger mt-1">Current Address required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Permanent Address</label>
-                                            <input type="text" class="form-control" formControlName="permanent_address" placeholder="Permanent Address">
-                                            <div *ngIf="studentCreationForm.controls['permanent_address'].errors?.['required'] && studentCreationForm.controls['permanent_address'].touched " class="text text-danger mt-1">Permanent Address required</div>
+                                            <input type="text" class="form-control" formControlName="permanent_address"
+                                                placeholder="Permanent Address">
+                                            <div *ngIf="studentCreationForm.controls['permanent_address'].errors?.['required'] && studentCreationForm.controls['permanent_address'].touched "
+                                                class="text text-danger mt-1">Permanent Address required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload aadhaar Card</label>
-                                            <input type="file" class="form-control" [multiple]="false" (change)="uploadAadhaarCard($event)">
+                                            <input type="file" class="form-control" [multiple]="false"
+                                                (change)="uploadAadhaarCard($event)">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Select Franchise</label>
-                                            <select style="width: 100%" formControlName="franchise_id" class="form-select">
+                                            <select style="width: 100%" formControlName="franchise_id"
+                                                class="form-select">
                                                 <option value="null">Select</option>
-                                                <option *ngFor="let data of franchiseList" [value]="data.id" >
+                                                <option *ngFor="let data of franchiseList" [value]="data.id">
                                                     {{data.name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="studentCreationForm.controls['franchise_id'].errors?.['required'] && studentCreationForm.controls['franchise_id'].touched " class="text text-danger mt-1">Franchise required</div>
+                                            <div *ngIf="studentCreationForm.controls['franchise_id'].errors?.['required'] && studentCreationForm.controls['franchise_id'].touched "
+                                                class="text text-danger mt-1">Franchise required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Roll No</label>
-                                            <input type="text" class="form-control" formControlName="roll_no" placeholder="Roll No">
-                                            <div *ngIf="studentCreationForm.controls['roll_no'].errors?.['required'] && studentCreationForm.controls['roll_no'].touched " class="text text-danger mt-1">Roll No required</div>
+                                            <input type="text" class="form-control" formControlName="roll_no"
+                                                placeholder="Roll No">
+                                            <div *ngIf="studentCreationForm.controls['roll_no'].errors?.['required'] && studentCreationForm.controls['roll_no'].touched "
+                                                class="text text-danger mt-1">Roll No required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Registration No</label>
-                                            <input type="text" class="form-control" formControlName="registration_no" placeholder="Registration No">
-                                            <div *ngIf="studentCreationForm.controls['registration_no'].errors?.['required'] && studentCreationForm.controls['registration_no'].touched " class="text text-danger mt-1">Registration No required</div>
+                                            <input type="text" class="form-control" formControlName="registration_no"
+                                                placeholder="Registration No">
+                                            <div *ngIf="studentCreationForm.controls['registration_no'].errors?.['required'] && studentCreationForm.controls['registration_no'].touched "
+                                                class="text text-danger mt-1">Registration No required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload registration certificate</label>
-                                            <input type="file" class="form-control" [multiple]="false" (change)="selectRegistrationFile($event)">
+                                            <input type="file" class="form-control" [multiple]="false"
+                                                (change)="selectRegistrationFile($event)">
                                         </div>
                                     </div>
-
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>ABC ID</label>
+                                            <input type="text" class="form-control" formControlName="abc_id"
+                                                placeholder="Enter ABC ID">
+                                            <div *ngIf="studentCreationForm.controls['abc_id'].errors?.['required'] && studentCreationForm.controls['abc_id'].touched "
+                                                class="text text-danger mt-1">Roll No required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Upload ABC</label>
+                                            <input type="file" class="form-control" [multiple]="false"
+                                                (change)="uploadAbcId($event)">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Upload Student Signature</label>
+                                            <input type="file" class="form-control" [multiple]="false"
+                                                (change)="uploadSignature($event)">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Admission Allotment Letter</label>
+                                            <input type="file" class="form-control" [multiple]="false"
+                                                (change)="uploadAdmissionLatter($event)">
+                                        </div>
+                                    </div>
                                     <hr>
                                     <h3>Caution Money Payment Details</h3>
                                     <hr>
-                                    <div  class="row">
+                                    <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Payment Date</label>
-                                            <input type="date" class="form-control" formControlName="payment_date" placeholder="Pre-Admission Amount">
-                                            <div *ngIf="studentCreationForm.controls['payment_date'].errors?.['required'] && studentCreationForm.controls['payment_date'].touched " class="text text-danger mt-1">Payment Date required</div>
+                                            <input type="date" class="form-control" formControlName="payment_date"
+                                                placeholder="Pre-Admission Amount">
+                                            <div *ngIf="studentCreationForm.controls['payment_date'].errors?.['required'] && studentCreationForm.controls['payment_date'].touched "
+                                                class="text text-danger mt-1">Payment Date required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Payment Mode</label>
-                                            <select style="width: 100%" formControlName="mode_of_payment" class="form-select">
+                                            <select style="width: 100%" formControlName="mode_of_payment"
+                                                class="form-select">
                                                 <option value="null"> Select </option>
                                                 <option value="Cash"> Cash </option>
                                                 <option value="Cheque"> Cheque </option>
                                                 <option value="Transfer To Bank"> Transfer To Bank </option>
                                                 <option value="Others"> Others </option>
                                             </select>
-                                            <div *ngIf="studentCreationForm.controls['mode_of_payment'].errors?.['required'] && studentCreationForm.controls['mode_of_payment'].touched " class="text text-danger mt-1">Mode Of Payment required</div>
+                                            <div *ngIf="studentCreationForm.controls['mode_of_payment'].errors?.['required'] && studentCreationForm.controls['mode_of_payment'].touched "
+                                                class="text text-danger mt-1">Mode Of Payment required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Transaction Id</label>
-                                            <input type="text" class="form-control" formControlName="transaction_id" placeholder="Transaction Id">
-                                            <div *ngIf="studentCreationForm.controls['transaction_id'].errors?.['required'] && studentCreationForm.controls['transaction_id'].touched " class="text text-danger mt-1">Transaction Id required</div>
+                                            <input type="text" class="form-control" formControlName="transaction_id"
+                                                placeholder="Transaction Id">
+                                            <div *ngIf="studentCreationForm.controls['transaction_id'].errors?.['required'] && studentCreationForm.controls['transaction_id'].touched "
+                                                class="text text-danger mt-1">Transaction Id required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Caution Money Amount</label>
-                                            <input type="text" class="form-control" formControlName="caution_money" placeholder="Caution Money Amount">
-                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['required'] && studentCreationForm.controls['caution_money'].touched " class="text text-danger mt-1">Amount required</div>
-                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['pattern']" class="text text-danger mt-1">Invalid Amount</div>
+                                            <input type="text" class="form-control" formControlName="caution_money"
+                                                placeholder="Caution Money Amount">
+                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['required'] && studentCreationForm.controls['caution_money'].touched "
+                                                class="text text-danger mt-1">Amount required</div>
+                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['pattern']"
+                                                class="text text-danger mt-1">Invalid Amount</div>
                                         </div>
                                     </div>
 
@@ -293,7 +368,7 @@
                                     <h3>Guardian Details</h3>
                                     <hr>
 
-                                    <div  class="row">
+                                    <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Father Name</label>
                                             <input type="text" class="form-control" formControlName="father_name">
@@ -301,7 +376,8 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Father Phone no.</label>
                                             <input type="text" class="form-control" formControlName="father_phone">
-                                            <div *ngIf="studentCreationForm.controls['father_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone no.</div>
+                                            <div *ngIf="studentCreationForm.controls['father_phone'].errors?.['pattern']"
+                                                class="text text-danger mt-1">Invalid Phone no.</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Father Occupation</label>
@@ -309,11 +385,12 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload Father's Income Certificate</label>
-                                            <input type="file" class="form-control" [multiple]="false" (change)="uploadFatherIncomeCertificate($event)">
+                                            <input type="file" class="form-control" [multiple]="false"
+                                                (change)="uploadFatherIncomeCertificate($event)">
                                         </div>
                                     </div>
 
-                                    <div  class="row">
+                                    <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Mother Name</label>
                                             <input type="text" class="form-control" formControlName="mother_name">
@@ -321,7 +398,8 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Mother Phone no.</label>
                                             <input type="text" class="form-control" formControlName="mother_phone">
-                                            <div *ngIf="studentCreationForm.controls['mother_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone no.</div>
+                                            <div *ngIf="studentCreationForm.controls['mother_phone'].errors?.['pattern']"
+                                                class="text text-danger mt-1">Invalid Phone no.</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Mother Occupation</label>
@@ -329,11 +407,12 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload Mother's Income Certificate</label>
-                                            <input type="file" class="form-control" [multiple]="false" (change)="uploadMotherIncomeCertificate($event)">
+                                            <input type="file" class="form-control" [multiple]="false"
+                                                (change)="uploadMotherIncomeCertificate($event)">
                                         </div>
                                     </div>
 
-                                    <div  class="row">
+                                    <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Guardian Name</label>
                                             <input type="text" class="form-control" formControlName="guardian_name">
@@ -341,22 +420,25 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Guardian Phone no.</label>
                                             <input type="text" class="form-control" formControlName="guardian_phone">
-                                            <div *ngIf="studentCreationForm.controls['guardian_phone'].errors?.['pattern']" class="text text-danger mt-1">Invalid Phone no.</div>
+                                            <div *ngIf="studentCreationForm.controls['guardian_phone'].errors?.['pattern']"
+                                                class="text text-danger mt-1">Invalid Phone no.</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Guardian Email</label>
                                             <input type="text" class="form-control" formControlName="guardian_email">
-                                            <div *ngIf="studentCreationForm.controls['guardian_email'].errors?.['email']" class="text text-danger mt-1">Invalid Email</div>
+                                            <div *ngIf="studentCreationForm.controls['guardian_email'].errors?.['email']"
+                                                class="text text-danger mt-1">Invalid Email</div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Guardian Relation</label>
                                             <input type="text" class="form-control" formControlName="guardian_relation">
                                         </div>
                                     </div>
-                                    <div  class="row">
+                                    <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Guardian Occupation</label>
-                                            <input type="text" class="form-control" formControlName="guardian_occupation">
+                                            <input type="text" class="form-control"
+                                                formControlName="guardian_occupation">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Guardian Address</label>
@@ -364,57 +446,75 @@
                                         </div>
                                     </div>
 
-                                    <button *ngIf="permission[0].permission == 1" [hidden]="isUpdateable" class="btn btn-primary me-1" type="submit" (click)="saveStudent()">Save Student</button>
-                                    <button *ngIf="permission[1].permission == 1" [hidden]="!isUpdateable" class="btn btn-primary me-1" type="submit" (click)="updateStudent()">Update Student</button>
-                                    <button [hidden]="!isUpdateable" class="btn btn-primary me-1" type="submit" (click)="cancelUpdate()">cancel</button>
+                                    <button *ngIf="permission[0].permission == 1" [hidden]="isUpdateable"
+                                        class="btn btn-primary me-1" type="submit" (click)="saveStudent()">Save
+                                        Student</button>
+                                    <button *ngIf="permission[1].permission == 1" [hidden]="!isUpdateable"
+                                        class="btn btn-primary me-1" type="submit" (click)="updateStudent()">Update
+                                        Student</button>
+                                    <button [hidden]="!isUpdateable" class="btn btn-primary me-1" type="submit"
+                                        (click)="cancelUpdate()">cancel</button>
                                 </form>
                             </div>
                         </div>
                         <div [hidden]="active != 2" *ngIf="permission[3].permission == 1">
                             <div class="row" style="text-align: center;">
-                                <div style="margin-top: 9px" class="col-3"><h4>Search</h4></div>
+                                <div style="margin-top: 9px" class="col-3">
+                                    <h4>Search</h4>
+                                </div>
                                 <div class="col-9">
-                                    <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                    <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text"
+                                        placeholder="Search Or Filter">
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="table-responsive">
                                     <table class="table" style="text-align: center">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Gender</th>
-                                            <th scope="col">Date Of Birth</th>
-                                            <th scope="col">Blood Group</th>
-                                            <th scope="col">Type</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col" *ngIf="permission[0].permission == 1 && permission[1].permission == 1">Action</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Gender</th>
+                                                <th scope="col">Date Of Birth</th>
+                                                <th scope="col">Blood Group</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Status</th>
+                                                <th scope="col"
+                                                    *ngIf="permission[0].permission == 1 && permission[1].permission == 1">
+                                                    Action</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr *ngFor="let record of studentList | customFilter:searchItem;let indexOfElement=index">
-                                            <td>{{indexOfElement + 1}}</td>
-                                            <td style="cursor: pointer; color: blueviolet" [routerLink]="['/users/student-profile', record.id]">{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
-                                            <td>{{record.gender}}</td>
-                                            <td>{{record.dob}}</td>
-                                            <td>{{record.blood_group}}</td>
-                                            <td>{{record.user_type}}</td>
-                                            <td>{{record.email}}</td>
-                                            <td>
-                                                <a *ngIf="record.status == 1">
-                                                    <button class="btn btn-primary me-1" type="submit" (click)="changeStatus(record.id)">Disable</button>
-                                                </a>
-                                                <a *ngIf="record.status == 0">
-                                                    <button class="btn btn-primary me-1" type="submit" (click)="changeStatus(record.id)">Enable</button>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a *ngIf="permission[1].permission == 1" (click)="editStudent(record)"><mat-icon>edit</mat-icon></a>
-                                                <a *ngIf="permission[2].permission == 1" (click)="deleteStudent(record)"><mat-icon>delete</mat-icon></a>
-                                            </td>
-                                        </tr>
+                                            <tr
+                                                *ngFor="let record of studentList | customFilter:searchItem;let indexOfElement=index">
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td style="cursor: pointer; color: blueviolet"
+                                                    [routerLink]="['/users/student-profile', record.id]">
+                                                    {{record.first_name}} {{record.middle_name}} {{record.last_name}}
+                                                </td>
+                                                <td>{{record.gender}}</td>
+                                                <td>{{record.dob}}</td>
+                                                <td>{{record.blood_group}}</td>
+                                                <td>{{record.user_type}}</td>
+                                                <td>{{record.email}}</td>
+                                                <td>
+                                                    <a *ngIf="record.status == 1">
+                                                        <button class="btn btn-primary me-1" type="submit"
+                                                            (click)="changeStatus(record.id)">Disable</button>
+                                                    </a>
+                                                    <a *ngIf="record.status == 0">
+                                                        <button class="btn btn-primary me-1" type="submit"
+                                                            (click)="changeStatus(record.id)">Enable</button>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a *ngIf="permission[1].permission == 1"
+                                                        (click)="editStudent(record)"><mat-icon>edit</mat-icon></a>
+                                                    <a *ngIf="permission[2].permission == 1"
+                                                        (click)="deleteStudent(record)"><mat-icon>delete</mat-icon></a>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 
@@ -423,48 +523,59 @@
                         </div>
                         <div [hidden]="active != 3" *ngIf="permission[3].permission == 1">
                             <div class="row" style="text-align: center;">
-                                <div style="margin-top: 9px" class="col-3"><h4>Search</h4></div>
+                                <div style="margin-top: 9px" class="col-3">
+                                    <h4>Search</h4>
+                                </div>
                                 <div class="col-9">
-                                    <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                    <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text"
+                                        placeholder="Search Or Filter">
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="table-responsive" style="text-align: center">
                                     <table class="table">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Type</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Refund</th>
-                                            <th scope="col">Admit</th>
-                                            <th scope="col" *ngIf="permission[0].permission == 1 && permission[1].permission == 1">Action</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Refund</th>
+                                                <th scope="col">Admit</th>
+                                                <th scope="col"
+                                                    *ngIf="permission[0].permission == 1 && permission[1].permission == 1">
+                                                    Action</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr *ngFor="let record of nonAdmittedStudents | customFilter:searchItem;let indexOfElement=index">
-                                            <td>{{indexOfElement + 1}}</td>
-                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
-                                            <td>{{record.user_type}}</td>
-                                            <td>{{record.email}}</td>
-                                            <td *ngIf="record.refund == 0">
-                                                <button class="btn btn-primary me-1" type="submit" (click)="refundAmount(record)">Refund</button>
-                                            </td>
-                                            <td *ngIf="record.refund == 1">
-                                                Refunded
-                                            </td>
-                                            <td *ngIf="record.refund == 0">
-                                                <button class="btn btn-primary me-1" type="submit" (click)="editStudent(record)">Admit</button>
-                                            </td>
-                                            <td *ngIf="record.refund == 1">
+                                            <tr
+                                                *ngFor="let record of nonAdmittedStudents | customFilter:searchItem;let indexOfElement=index">
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}
+                                                </td>
+                                                <td>{{record.user_type}}</td>
+                                                <td>{{record.email}}</td>
+                                                <td *ngIf="record.refund == 0">
+                                                    <button class="btn btn-primary me-1" type="submit"
+                                                        (click)="refundAmount(record)">Refund</button>
+                                                </td>
+                                                <td *ngIf="record.refund == 1">
+                                                    Refunded
+                                                </td>
+                                                <td *ngIf="record.refund == 0">
+                                                    <button class="btn btn-primary me-1" type="submit"
+                                                        (click)="editStudent(record)">Admit</button>
+                                                </td>
+                                                <td *ngIf="record.refund == 1">
 
-                                            </td>
-                                            <td>
-                                                <a *ngIf="permission[1].permission == 1" (click)="editStudent(record)"><mat-icon>edit</mat-icon></a>
-                                                <a *ngIf="permission[2].permission == 1" (click)="deleteStudent(record)"><mat-icon>delete</mat-icon></a>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                <td>
+                                                    <a *ngIf="permission[1].permission == 1"
+                                                        (click)="editStudent(record)"><mat-icon>edit</mat-icon></a>
+                                                    <a *ngIf="permission[2].permission == 1"
+                                                        (click)="deleteStudent(record)"><mat-icon>delete</mat-icon></a>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 
@@ -474,39 +585,46 @@
 
                         <div [hidden]="active != 4" *ngIf="permission[3].permission == 1">
                             <div class="row" style="text-align: center;">
-                                <div style="margin-top: 9px" class="col-3"><h4>Search</h4></div>
+                                <div style="margin-top: 9px" class="col-3">
+                                    <h4>Search</h4>
+                                </div>
                                 <div class="col-9">
-                                    <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                    <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text"
+                                        placeholder="Search Or Filter">
                                 </div>
                             </div>
                             <div class="card">
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Type</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Status</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr *ngFor="let record of disabledStudents | customFilter:searchItem;let indexOfElement=index">
-                                            <td>{{indexOfElement + 1}}</td>
-                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
-                                            <td>{{record.user_type}}</td>
-                                            <td>{{record.email}}</td>
-                                            <td>
+                                            <tr
+                                                *ngFor="let record of disabledStudents | customFilter:searchItem;let indexOfElement=index">
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}
+                                                </td>
+                                                <td>{{record.user_type}}</td>
+                                                <td>{{record.email}}</td>
+                                                <td>
 
-                                                <a *ngIf="record.status == 1">
-                                                    <button class="btn btn-primary me-1" type="submit" (click)="changeStatus(record.id)">Disable</button>
-                                                </a>
-                                                <a *ngIf="record.status == 0">
-                                                    <button class="btn btn-primary me-1" type="submit" (click)="changeStatus(record.id)">Enable</button>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                                    <a *ngIf="record.status == 1">
+                                                        <button class="btn btn-primary me-1" type="submit"
+                                                            (click)="changeStatus(record.id)">Disable</button>
+                                                    </a>
+                                                    <a *ngIf="record.status == 0">
+                                                        <button class="btn btn-primary me-1" type="submit"
+                                                            (click)="changeStatus(record.id)">Enable</button>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 

@@ -17,12 +17,12 @@ export class AppComponent {
   erpSettings: any;
   favicon_url = null;
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
-    this.http.get(this.BASE_API_URL + '/getErpSettings').subscribe((response: any) => {
-      this.erpSettings = response.data;
-      // @ts-ignore
-      this.favicon_url = this.sanitizeUrl(this.FILE_URL + '/fav_icon/' + this.erpSettings.fav_icon);
-      console.log(this.favicon_url);
-    });
+    // this.http.get(this.BASE_API_URL + '/getErpSettings').subscribe((response: any) => {
+    //   this.erpSettings = response.data;
+    //   // @ts-ignore
+    //   this.favicon_url = this.sanitizeUrl(this.FILE_URL + '/fav_icon/' + this.erpSettings.fav_icon);
+    //   console.log(this.favicon_url);
+    // });
   }
 
   sanitizeUrl(url: string): SafeResourceUrl {

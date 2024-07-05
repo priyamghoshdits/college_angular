@@ -1,20 +1,20 @@
-import {Component} from '@angular/core';
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MemberService} from "../../../services/member.service";
-import {SubjectService} from "../../../services/subject.service";
-import {SessionService} from "../../../services/session.service";
-import {StudentService} from "../../../services/student.service";
+import { Component } from '@angular/core';
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MemberService } from "../../../services/member.service";
+import { SubjectService } from "../../../services/subject.service";
+import { SessionService } from "../../../services/session.service";
+import { StudentService } from "../../../services/student.service";
 import Swal from "sweetalert2";
-import {ImageService} from "../../../services/image.service";
-import {AgentService} from "../../../services/agent.service";
-import {CustomFilterPipe} from "custom-filter.pipe";
-import {CommonService} from "../../../services/common.service";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
-import {FranchiseService} from "../../../services/franchise.service";
-import {RouterLink} from "@angular/router";
+import { ImageService } from "../../../services/image.service";
+import { AgentService } from "../../../services/agent.service";
+import { CustomFilterPipe } from "custom-filter.pipe";
+import { CommonService } from "../../../services/common.service";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
+import { FranchiseService } from "../../../services/franchise.service";
+import { RouterLink } from "@angular/router";
 
 @Component({
     selector: 'app-student-admisssion',
@@ -61,6 +61,11 @@ export class StudentAdmisssionComponent {
     admission_slip: null;
     father_income_proof: null;
     mother_income_proof: null;
+
+    abcFile: File;
+    studentSignatureFile: File;
+    admissionLetterFile: File;
+
     user: {
         user_type_id: number;
     };
@@ -105,7 +110,8 @@ export class StudentAdmisssionComponent {
             email: new FormControl(null, [Validators.required, Validators.email]),
             course_id: new FormControl(null, [Validators.required]),
             semester_id: new FormControl(null, [Validators.required]),
-            agent_id: new FormControl(null, [Validators.required]),
+            agent_id: new FormControl(null),
+            abc_id: new FormControl(null),
             father_name: new FormControl(null),
             father_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
             father_occupation: new FormControl(null),
@@ -234,6 +240,18 @@ export class StudentAdmisssionComponent {
         this.mother_income_proof = event.target.files[0];
     }
 
+    uploadAbcId(event) {
+        this.abcFile = event.target.files[0];
+    }
+
+    uploadSignature(event) {
+        this.studentSignatureFile = event.target.files[0];
+    }
+
+    uploadAdmissionLatter(event) {
+        this.admissionLetterFile = event.target.files[0];
+    }
+
     activeTab(data) {
         this.active = data;
     }
@@ -252,7 +270,7 @@ export class StudentAdmisssionComponent {
     saveStudent() {
         // @ts-ignore
         this.session_id = JSON.parse(localStorage.getItem('session_id'));
-        this.studentCreationForm.patchValue({session_id: this.session_id});
+        this.studentCreationForm.patchValue({ session_id: this.session_id });
 
         if (!this.session_id) {
             Swal.fire({
@@ -274,7 +292,7 @@ export class StudentAdmisssionComponent {
             });
             return;
         }
-        this.studentCreationForm.patchValue({admission_status: 1});
+        this.studentCreationForm.patchValue({ admission_status: 1 });
         Swal.fire({
             title: 'Please Wait !',
             html: 'Saving ...', // add html attribute if you want or remove
@@ -349,6 +367,10 @@ export class StudentAdmisssionComponent {
         // @ts-ignore
         formData.append("registration_proof", this.registration_no_proof);
 
+        formData.append("abc_id", this.studentCreationForm.value.abc_id);
+        formData.append("abc_file", this.abcFile);
+        formData.append("student_signature", this.studentSignatureFile);
+        formData.append("admission_allotment", this.admissionLetterFile);
 
         // dob_proof: null;
         // blood_group_proof: null;
@@ -412,7 +434,7 @@ export class StudentAdmisssionComponent {
     updateStudent() {
         // @ts-ignore
         this.session_id = JSON.parse(localStorage.getItem('session_id'));
-        this.studentCreationForm.patchValue({session_id: this.session_id});
+        this.studentCreationForm.patchValue({ session_id: this.session_id });
         if (!this.studentCreationForm.valid) {
             this.studentCreationForm.markAllAsTouched();
             window.scroll({
@@ -422,7 +444,7 @@ export class StudentAdmisssionComponent {
             });
             return;
         }
-        this.studentCreationForm.patchValue({admission_status: 1});
+        this.studentCreationForm.patchValue({ admission_status: 1 });
 
         const formData = new FormData();
         formData.append("id", this.studentCreationForm.value.id);
@@ -466,24 +488,6 @@ export class StudentAdmisssionComponent {
         formData.append("mode_of_payment", this.studentCreationForm.value.mode_of_payment);
         formData.append("transaction_id", this.studentCreationForm.value.transaction_id);
         formData.append("caution_money", this.studentCreationForm.value.caution_money);
-
-        //Images or document upload
-        // @ts-ignore
-        formData.append("image", this.profile_image);
-        // @ts-ignore
-        formData.append("dob_proof", this.dob_proof);
-        // @ts-ignore
-        formData.append("blood_group_proof", this.blood_group_proof);
-        // @ts-ignore
-        formData.append("aadhaar_card_proof", this.aadhaar_card_proof);
-        // @ts-ignore
-        formData.append("admission_slip", this.admission_slip);
-        // @ts-ignore
-        formData.append("father_income_proof", this.father_income_proof);
-        // @ts-ignore
-        formData.append("mother_income_proof", this.mother_income_proof);
-        // @ts-ignore
-        formData.append("registration_proof", this.registration_no_proof);
 
         this.studentService.updateStudent(formData).subscribe((response: any) => {
             if (response.success == 1) {
