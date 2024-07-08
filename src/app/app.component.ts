@@ -1,7 +1,8 @@
 import { Component } from "@angular/core";
-import {environment} from "../environments/environment";
-import {HttpClient} from "@angular/common/http";
+import { environment } from "../environments/environment";
+import { HttpClient } from "@angular/common/http";
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { ErpSettingService } from "./services/erp-setting.service";
 
 
 @Component({
@@ -16,13 +17,22 @@ export class AppComponent {
   title = "COLLEGE MANAGEMENT SYSTEM";
   erpSettings: any;
   favicon_url = null;
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer, private erpService: ErpSettingService) {
     // this.http.get(this.BASE_API_URL + '/getErpSettings').subscribe((response: any) => {
     //   this.erpSettings = response.data;
+    //   console.log(response);
+
     //   // @ts-ignore
-    //   this.favicon_url = this.sanitizeUrl(this.FILE_URL + '/fav_icon/' + this.erpSettings.fav_icon);
-    //   console.log(this.favicon_url);
+    //   // this.favicon_url = this.sanitizeUrl(this.FILE_URL + '/fav_icon/' + this.erpSettings.fav_icon);
+    //   // console.log(this.favicon_url);
     // });
+
+    this.erpService.erpSettingListener().subscribe((data: any) => {
+      this.erpSettings = data;
+    });
+
+    this.erpSettings = this.erpService.getErpSetting();
+
   }
 
   sanitizeUrl(url: string): SafeResourceUrl {
