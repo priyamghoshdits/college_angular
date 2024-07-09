@@ -1,7 +1,7 @@
 <!-- ================================dashboard first area start===================================== -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 dashboard_fstoutstructure">
+        <div class="col-lg-12 dashboard_fstoutstructure" *ngIf="userTypeId == 1">
             <div class="swsfst_areaout">
                 <i class="fa-solid fa-users swsft_icondesign"></i>
                 <span class="swsft_textdesign">Stage Wise Statistics(2023-2024)</span>
@@ -129,12 +129,140 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-12 dashboard_fstoutstructure" *ngIf="userTypeId != 1 && userTypeId != 2">
+            <div class="swsfst_areaout">
+                <i class="fa-solid fa-users swsft_icondesign"></i>
+                <span class="swsft_textdesign">Stage Wise Statistics(2023-2024)</span>
+            </div>
+            <div class="row jufcx">
+                <div class="col-lg-3">
+                    <div class="swfstbox_outarea">
+                        <div class="swfstbox_outarea1">
+                            <div class="textarea_outbox">
+                                <h1 class="iknumber_textdesign">
+                                    {{total_assignment}}
+                                </h1>
+                                <h3 class="afomtext_hdesign">
+                                    Assignment
+                                </h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="vwjhbox_outsecion">
+                                        <h2 class="vdetext_designtext">
+                                            View Details
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="vwjhbox_outsecion">
+                                        <a class="yhxcv" routerLink="/download-center/assignment">
+                                            <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="swfstbox_outarea">
+                        <div class="swfstbox_outarea2">
+                            <div class="textarea_outbox">
+                                <h1 class="iknumber_textdesign">
+                                    {{total_study_material}}
+                                </h1>
+                                <h3 class="afomtext_hdesign">
+                                    Study Material
+                                </h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="vwjhbox_outsecion">
+                                        <h2 class="vdetext_designtext">
+                                            View Details
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="vwjhbox_outsecion">
+                                        <a class="yhxcv" routerLink="/download-center/study-material">
+                                            <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="swfstbox_outarea">
+                        <div class="swfstbox_outarea3">
+                            <div class="textarea_outbox">
+                                <h1 class="iknumber_textdesign">
+                                    {{totalAchivement}}
+                                </h1>
+                                <h3 class="afomtext_hdesign">
+                                    Achivement
+                                </h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="vwjhbox_outsecion">
+                                        <h2 class="vdetext_designtext">
+                                            View Details
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="vwjhbox_outsecion">
+                                        <a class="yhxcv" routerLink="/users/show-profile">
+                                            <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="swfstbox_outarea">
+                        <div class="swfstbox_outarea4">
+                            <div class="textarea_outbox">
+                                <h1 class="iknumber_textdesign">
+                                    {{total_books}}
+                                </h1>
+                                <h3 class="afomtext_hdesign">
+                                    Library Books
+                                </h3>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-7">
+                                    <div class="vwjhbox_outsecion">
+                                        <h2 class="vdetext_designtext">
+                                            View Details
+                                        </h2>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="vwjhbox_outsecion">
+                                        <a class="yhxcv" routerLink="/library/book-list">
+                                            <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- ================================dashboard first area end======================================= -->
 
 <!-- ================================dashboard second area start==================================== -->
-<div class="container">
+<div class="container" *ngIf="userTypeId == 1">
     <div class="row">
         <div class="col-lg-12 chartbox_foutarea">
             <div class="row">
@@ -148,16 +276,12 @@
                             <div class="flot-chart-container">
                                 <div class="flot-chart-placeholder ngx-chart-direction" id="github-issues">
                                     <ngx-charts-bar-vertical-2d (select)="onSelect($event)"
-                                                                [gradient]="barChartGradient"
-                                                                [legend]="barChartShowLegend"
-                                                                [results]="studentChart" [roundEdges]="false"
-                                                                [scheme]="barChartColorScheme"
-                                                                [showXAxisLabel]="barChartShowXAxisLabel"
-                                                                [showYAxisLabel]="barChartShowYAxisLabel"
-                                                                [xAxisLabel]="barChartXAxisLabel"
-                                                                [xAxis]="barChartShowXAxis"
-                                                                [yAxisLabel]="barChartYAxisLabel"
-                                                                [yAxis]="barChartShowYAxis">
+                                        [gradient]="barChartGradient" [legend]="barChartShowLegend"
+                                        [results]="studentChart" [roundEdges]="false" [scheme]="barChartColorScheme"
+                                        [showXAxisLabel]="barChartShowXAxisLabel"
+                                        [showYAxisLabel]="barChartShowYAxisLabel" [xAxisLabel]="barChartXAxisLabel"
+                                        [xAxis]="barChartShowXAxis" [yAxisLabel]="barChartYAxisLabel"
+                                        [yAxis]="barChartShowYAxis">
                                     </ngx-charts-bar-vertical-2d>
                                 </div>
                             </div>
@@ -251,6 +375,123 @@
 </div>
 <!-- ================================dashboard second area end====================================== -->
 
+
+
+<div class="container" *ngIf="userTypeId != 1 && userTypeId != 2">
+    <div class="row">
+        <div class="col-lg-12 chartbox_foutarea">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="chartbox_leftoutsectionds">
+                        <div class="swsfst_areaout">
+                            <i class="fa-solid fa-chart-simple swsft_icondesign"></i>
+                            <span class="swsft_textdesign">Attendence Chart In Current Year</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="flot-chart-container">
+                                <div class="flot-chart-placeholder ngx-chart-direction" id="github-issues">
+                                    <ngx-charts-bar-vertical-2d (select)="onSelect($event)"
+                                        [gradient]="barChartGradient" [legend]="barChartShowLegend"
+                                        [results]="studentAttendenceChart" [roundEdges]="false"
+                                        [scheme]="barChartColorScheme" [showXAxisLabel]="barChartShowXAxisLabel"
+                                        [showYAxisLabel]="barChartShowYAxisLabel" [xAxisLabel]="barChartXAxisLabel"
+                                        [xAxis]="barChartShowXAxis" [yAxisLabel]="barChartYAxisLabel"
+                                        [yAxis]="barChartShowYAxis">
+                                    </ngx-charts-bar-vertical-2d>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-lg-3">
+                    <div class="chartbox_rightoutsection">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="nboxout_dsarea">
+                                    <span class="erchlox">
+                                        <i class="fa-solid fa-indian-rupee-sign hrupee_sign"></i>
+                                    </span>
+                                    <div class="info_box_content">
+                                        <span class="info_box_text">
+                                            Monthly Fees Collection
+                                        </span>
+                                        <span class="info_box_number">
+                                            ₹{{total_fees_received}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="nboxout_dsarea">
+                                    <span class="erchlox">
+                                        <i class="fa-solid fa-credit-card hrupee_sign"></i>
+                                    </span>
+                                    <div class="info_box_content">
+                                        <span class="info_box_text">
+                                            Monthly Expenses
+                                        </span>
+                                        <span class="info_box_number">
+                                            ₹{{total_expense}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="nboxout_dsarea">
+                                    <span class="erchlox">
+                                        <i class="fa-solid fa-user hrupee_sign"></i>
+                                    </span>
+                                    <div class="info_box_content">
+                                        <span class="info_box_text">
+                                            Student
+                                        </span>
+                                        <span class="info_box_number">
+                                            {{total_student}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="nboxout_dsarea">
+                                    <span class="erchlox">
+                                        <i class="fa-solid fa-user-tie hrupee_sign"></i>
+                                    </span>
+                                    <div class="info_box_content">
+                                        <span class="info_box_text">
+                                            Teacher
+                                        </span>
+                                        <span class="info_box_number">
+                                            {{total_teacher}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="nboxout_dsarea">
+                                    <span class="erchlox">
+                                        <i class="fa-solid fa-users hrupee_sign"></i>
+                                    </span>
+                                    <div class="info_box_content">
+                                        <span class="info_box_text">
+                                            ACCOUNTANT
+                                        </span>
+                                        <span class="info_box_number">
+                                            {{total_accountant}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <!-- ================================dashboard third area start===================================== -->
 <div class="container">
     <div class="row">
@@ -260,7 +501,7 @@
                 <span class="swsft_textdesign">Calender</span>
             </div>
             <ngb-datepicker #dp (dateSelect)="openModal($event,content)" (navigate)="date = $event.next"
-                            [ngModel]="datePick" class="custom-datepicker university-datepicker">
+                [ngModel]="datePick" class="custom-datepicker university-datepicker">
             </ngb-datepicker>
         </div>
     </div>
@@ -278,10 +519,9 @@
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Event Title <span
                                 style="color: red">*</span></label>
                         <input class="form-control" formControlName="event_title" id="exampleInputEmail1"
-                               placeholder="Enter Event Title"
-                               type="text">
+                            placeholder="Enter Event Title" type="text">
                         <div *ngIf="universityFormCalender.controls['event_title'].errors?.['required'] && universityFormCalender.controls['event_title'].touched "
-                             class="text text-danger mt-1">Event Title required
+                            class="text text-danger mt-1">Event Title required
                         </div>
                     </div>
                 </div>
@@ -289,10 +529,9 @@
                     <div class="col-md-12 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
                         <textarea class="form-control" formControlName="description" id="exampleInputEmail1"
-                                  placeholder="Enter Description"
-                                  type="text"></textarea>
+                            placeholder="Enter Description" type="text"></textarea>
                         <div *ngIf="universityFormCalender.controls['description'].errors?.['required'] && universityFormCalender.controls['description'].touched "
-                             class="text text-danger mt-1">Description required
+                            class="text text-danger mt-1">Description required
                         </div>
                     </div>
                 </div>
@@ -300,19 +539,17 @@
                     <div class="col-md-6 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Event From</label>
                         <input class="form-control" formControlName="event_from" id="exampleInputEmail1"
-                               placeholder="Event From"
-                               type="date">
+                            placeholder="Event From" type="date">
                         <div *ngIf="universityFormCalender.controls['event_from'].errors?.['required'] && universityFormCalender.controls['event_from'].touched "
-                             class="text text-danger mt-1">Event From required
+                            class="text text-danger mt-1">Event From required
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Event To</label>
                         <input class="form-control" formControlName="event_to" id="exampleInputEmail1"
-                               placeholder="Enter Event To"
-                               type="date">
+                            placeholder="Enter Event To" type="date">
                         <div *ngIf="universityFormCalender.controls['event_to'].errors?.['required'] && universityFormCalender.controls['event_to'].touched "
-                             class="text text-danger mt-1">Event To required
+                            class="text text-danger mt-1">Event To required
                         </div>
                     </div>
                 </div>
@@ -327,15 +564,15 @@
                             <option value="Protected}"> Seperated</option>
                         </select>
                         <div *ngIf="universityFormCalender.controls['event_type'].errors?.['required'] && universityFormCalender.controls['event_type'].touched "
-                             class="text text-danger mt-1">Event Type required
+                            class="text text-danger mt-1">Event Type required
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Upload Image</label>
                         <input accept="image/jpg, image/jpeg" class="form-control" formControlName="event_to"
-                               placeholder="Enter Event To" type="file">
+                            placeholder="Enter Event To" type="file">
                         <div *ngIf="universityFormCalender.controls['event_type'].errors?.['required'] && universityFormCalender.controls['event_type'].touched "
-                             class="text text-danger mt-1">Event Type required
+                            class="text text-danger mt-1">Event Type required
                         </div>
                     </div>
                 </div>
@@ -353,6 +590,8 @@
     <div class="row">
         <div class="col-lg-12 dashboard_hfourthoutsection">
             <div class="row">
+
+
                 <div class="col-lg-6">
                     <div class="leftfrth_dashboardoutarea">
                         <div class="swsfst_areaout">
@@ -366,53 +605,48 @@
                                         <app-feather-icons [icon]="'book'"></app-feather-icons>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <p class="mb-0"><span
-                                                class="pull-right">{{record.published_on | date:'fullDate' }}</span></p>
+                                        <p class="mb-0"><span class="pull-right">{{record.published_on | date:'fullDate'
+                                                }}</span></p>
                                         <h6 class="f-w-600">{{record.subject}}</h6>
                                         <p [innerHTML]="record.body" class="mb-0">A math quiz competition will be held
                                             on 15.05.2024
                                         </p>
                                     </div>
                                 </div>
-                                <!--                                <div class="upcoming-innner d-flex">-->
-                                <!--                                    <div class="ikxz_areasection left m-r-20">-->
-                                <!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
-                                <!--                                    </div>-->
-                                <!--                                    <div class="flex-grow-1">-->
-                                <!--                                        <p class="mb-0"><span class="pull-right">Sep 18</span></p>-->
-                                <!--                                        <h6 class="f-w-600">Singing Competition</h6>-->
-                                <!--                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024-->
-                                <!--                                        </p>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
-                                <!--                                <div class="upcoming-innner d-flex">-->
-                                <!--                                    <div class="ikxz_areasection left m-r-20">-->
-                                <!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
-                                <!--                                    </div>-->
-                                <!--                                    <div class="flex-grow-1">-->
-                                <!--                                        <p class="mb-0"><span class="pull-right">Dec 18</span></p>-->
-                                <!--                                        <h6 class="f-w-600">Diwali Celebration</h6>-->
-                                <!--                                        <p class="mb-0">Lorem Ipsum is simply dummy text of the printing and typesetting-->
-                                <!--                                            industry. lorem ipsum-->
-                                <!--                                        </p>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
-                                <!--                                <div class="upcoming-innner d-flex">-->
-                                <!--                                    <div class="ikxz_areasection left m-r-20">-->
-                                <!--                                        <app-feather-icons [icon]="'book'"></app-feather-icons>-->
-                                <!--                                    </div>-->
-                                <!--                                    <div class="flex-grow-1">-->
-                                <!--                                        <p class="mb-0"><span class="pull-right">Sep 18</span></p>-->
-                                <!--                                        <h6 class="f-w-600">Singing Competition</h6>-->
-                                <!--                                        <p class="mb-0">A singing quiz competition will be held on 14.05.2024-->
-                                <!--                                        </p>-->
-                                <!--                                    </div>-->
-                                <!--                                </div>-->
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
+
+
+                <div class="col-lg-6" *ngIf="userTypeId != 1 && userTypeId != 2">
+                    <div class="leftfrth_dashboardoutarea">
+                        <div class="swsfst_areaout">
+                            <i class="fa-solid fa-file swsft_icondesign"></i>
+                            <span class="swsft_textdesign">Upcoming live Classes</span>
+                        </div>
+                        <div class="card-body ugbdy_outsectionxz">
+                            <div class="upcoming-event ucnxsd_outarea">
+                                <div *ngFor="let record of liveClassList" class="upcoming-innner d-flex">
+                                    <div class="ikxz_areasection left m-r-20">
+                                        <app-feather-icons [icon]="'book'"></app-feather-icons>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="mb-0"><span class="pull-right">{{record.date_of_class |
+                                                date:'fullDate' }} {{record.time_of_class}}</span></p>
+                                        <h6 class="f-w-600" target="_blank">{{record.platform}}</h6>
+                                        <a href="{{record.link}}">{{record.link}}</a>
+                                        <p [innerHTML]="record.body" class="mb-0">A math quiz competition will be
+                                            held
+                                            on 15.05.2024
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" *ngIf="userTypeId == 1">
                     <div class="leftfrth_dashboardoutarea">
                         <div class="swsfst_areaout">
                             <i class="fa-solid fa-graduation-cap swsft_icondesign"></i>
@@ -420,12 +654,9 @@
                         </div>
                         <div class="card-body">
                             <div class="flot-chart-placeholder" id="website-visiter-chart">
-                                <ngx-charts-pie-chart [arcWidth]=0.30
-                                                      [doughnut]="true"
-                                                      [explodeSlices]="true" [gradient]="dailydoughnutChartGradient"
-                                                      [labels]="dailydoughnutChartShowLabels"
-                                                      [results]="dailydoughnutData22"
-                                                      [scheme]="dailydoughnutChartColorScheme">
+                                <ngx-charts-pie-chart [arcWidth]=0.30 [doughnut]="true" [explodeSlices]="true"
+                                    [gradient]="dailydoughnutChartGradient" [labels]="dailydoughnutChartShowLabels"
+                                    [results]="dailydoughnutData22" [scheme]="dailydoughnutChartColorScheme">
                                 </ngx-charts-pie-chart>
                             </div>
                             <!-- <canvas baseChart class="chart flot-chart-placeholder" id="myLineCharts" [legend]="admissionChartLegend"
@@ -448,11 +679,9 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </div>
 <!-- ================================dashboard fourth area start==================================== -->
-
-
-
