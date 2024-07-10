@@ -11,6 +11,16 @@
                             <form [formGroup]="staffExperienceForm" class="theme-form">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
+                                        <label>Select Staff</label>
+                                        <select formControlName="staff_id" class="form-select" required
+                                            style="width: 100%">
+                                            <option value="null"> Select a Staff</option>
+                                            <option *ngFor="let data of memberList" [value]="data.id">
+                                                {{data.first_name}} {{data.middle_name}} {{data.last_name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Designation</label>
                                         <input class="form-control" formControlName="designation"
                                             placeholder="Enter Designation" type="text">
