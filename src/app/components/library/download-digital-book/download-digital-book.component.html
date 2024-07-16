@@ -33,7 +33,7 @@
                                         </select>
                                     </div>
                                     <div class="col-md-4 mb-3">
-                                        <button (click)="searchDigitalBooks()" class="btn btn-primary me-1"
+                                        <button (click)="searchDigitalBooks()" *ngIf="permission[3].permission == 1" class="btn btn-primary me-1"
                                                 style="margin-top: 30px">Submit
                                         </button>
                                     </div>

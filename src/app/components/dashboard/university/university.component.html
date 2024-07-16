@@ -1,7 +1,7 @@
 <!-- ================================dashboard first area start===================================== -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 dashboard_fstoutstructure" *ngIf="userTypeId == 1">
+        <div class="col-lg-12 dashboard_fstoutstructure" *ngIf="userTypeId == 1 || userTypeId == 5">
             <div class="swsfst_areaout">
                 <i class="fa-solid fa-users swsft_icondesign"></i>
                 <span class="swsft_textdesign">Stage Wise Statistics(2023-2024)</span>
@@ -129,7 +129,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-12 dashboard_fstoutstructure" *ngIf="userTypeId != 1 && userTypeId != 2">
+        <div class="col-lg-12 dashboard_fstoutstructure" *ngIf="userTypeId != 1 && userTypeId != 5">
             <div class="swsfst_areaout">
                 <i class="fa-solid fa-users swsft_icondesign"></i>
                 <span class="swsft_textdesign">Stage Wise Statistics(2023-2024)</span>
@@ -262,7 +262,7 @@
 <!-- ================================dashboard first area end======================================= -->
 
 <!-- ================================dashboard second area start==================================== -->
-<div class="container" *ngIf="userTypeId == 1">
+<div class="container" *ngIf="userTypeId == 1 || userTypeId == 5">
     <div class="row">
         <div class="col-lg-12 chartbox_foutarea">
             <div class="row">
@@ -377,7 +377,7 @@
 
 
 
-<div class="container" *ngIf="userTypeId != 1 && userTypeId != 2">
+<div class="container" *ngIf="userTypeId != 1 && userTypeId != 5">
     <div class="row">
         <div class="col-lg-12 chartbox_foutarea">
             <div class="row">
@@ -619,7 +619,7 @@
                 </div>
 
 
-                <div class="col-lg-6" *ngIf="userTypeId != 1 && userTypeId != 2">
+                <div class="col-lg-6" *ngIf="userTypeId != 1 && userTypeId != 5">
                     <div class="leftfrth_dashboardoutarea">
                         <div class="swsfst_areaout">
                             <i class="fa-solid fa-file swsft_icondesign"></i>
@@ -646,7 +646,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6" *ngIf="userTypeId == 1">
+                <div class="col-lg-6" *ngIf="userTypeId == 1 || userTypeId == 5">
                     <div class="leftfrth_dashboardoutarea">
                         <div class="swsfst_areaout">
                             <i class="fa-solid fa-graduation-cap swsft_icondesign"></i>

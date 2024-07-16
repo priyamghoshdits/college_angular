@@ -26,7 +26,7 @@
                             <div class="card-body" [hidden]="active != 1">
                                 <div *ngFor="let item of totalArray ;let indexOfElement=index">
                                     <div class="row">
-                                        <div class="col-md-5 mb-3">
+                                        <div class="col-md-5 mb-3" *ngIf="this.user.user_type_id == 1 || this.user.user_type_id == 5">
                                             <label>Select Staff</label>
                                             <select style="width: 100%"
                                                 [(ngModel)]="seminarWorkshopArray[indexOfElement].staff_id"

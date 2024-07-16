@@ -34,6 +34,8 @@ export class StaffExperienceComponent {
     experienceProof: any = '';
     staffExperienceList: any[];
 
+    user = JSON.parse(localStorage.getItem('user') || '{}');
+
     constructor(private memberService: MemberService, private departmentService: DepartmentService, private roleAndPermissionService: RolesAndPermissionService) {
 
         this.staffExperienceForm = new FormGroup({
@@ -52,10 +54,13 @@ export class StaffExperienceComponent {
         })
         this.staffExperienceList = this.memberService.getStaffExperienceList();
 
-        this.memberService.getMemberListener().subscribe((response) => {
-            this.memberList = response;
-        });
-        this.memberList = this.memberService.getMemberList();
+        if (this.user.user_type_id == 1 || this.user.user_type_id == 5) {
+            this.memberService.getMemberListener().subscribe((response) => {
+                this.memberList = response;
+            });
+            this.memberList = this.memberService.getMemberList();
+        }
+
 
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;

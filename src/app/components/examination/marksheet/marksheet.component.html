@@ -171,7 +171,7 @@
                             </form>
                         </div>
                         <div [hidden]="active != 1" class="card-footer">
-                            <button (click)="addMarksheet()" [hidden]="isUpdatable == true"
+                            <button *ngIf="permission[0].permission === 1" (click)="addMarksheet()" [hidden]="isUpdatable == true"
                                     class="btn btn-primary me-1">Add
                             </button>
                             <!--                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
@@ -218,7 +218,7 @@
                                 </table>
                             </div>
                             <div class="card-footer">
-                                <button (click)="saveMarkSheet()" [disabled]="tempMarkSheet.length == 0"
+                                <button *ngIf="permission[0].permission === 1" (click)="saveMarkSheet()" [disabled]="tempMarkSheet.length == 0"
                                         class="btn btn-primary me-1">Save
                                 </button>
                             </div>

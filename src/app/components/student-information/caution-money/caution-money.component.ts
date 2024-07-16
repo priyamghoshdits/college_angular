@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgxPaginationModule} from "ngx-pagination";
-import {SubjectService} from "../../../services/subject.service";
-import {SessionService} from "../../../services/session.service";
-import {CautionMoneyService} from "../../../services/caution-money.service";
-import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
-import {NgbModal, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgxPaginationModule } from "ngx-pagination";
+import { SubjectService } from "../../../services/subject.service";
+import { SessionService } from "../../../services/session.service";
+import { CautionMoneyService } from "../../../services/caution-money.service";
+import { CustomFilterPipe } from "../../../../../custom-filter.pipe";
+import { NgbModal, NgbTooltip } from "@ng-bootstrap/ng-bootstrap";
 import Swal from "sweetalert2";
+import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
 
 @Component({
   selector: 'app-caution-money',
@@ -36,8 +37,12 @@ export class CautionMoneyComponent {
   searchItem: string;
   selectedCautionMoney = 0;
   session_id = null;
+
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+
   constructor(private subjectService: SubjectService, private sessionService: SessionService
-              ,private cautionMoneyService: CautionMoneyService, private modalService: NgbModal) {
+    , private cautionMoneyService: CautionMoneyService, private modalService: NgbModal, private roleAndPermissionService: RolesAndPermissionService) {
     this.cautionMoneyForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
@@ -51,7 +56,7 @@ export class CautionMoneyComponent {
       refund_payment_date: new FormControl(null, [Validators.required]),
       refund_mode_of_payment: new FormControl(null, [Validators.required]),
       refund_transaction_id: new FormControl(null, [Validators.required]),
-      caution_money_deduction: new FormControl(null, [Validators.required,Validators.pattern("^[0-9]*$")]),
+      caution_money_deduction: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
     });
 
     this.subjectService.getCourseListener().subscribe((response) => {
@@ -63,26 +68,35 @@ export class CautionMoneyComponent {
       this.sessionList = response;
     });
     this.sessionList = this.sessionService.getSessionList();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'CAUTION MONEY').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if (this.rolesAndPermission.length > 0) {
+      this.permission = this.rolesAndPermission.find(x => x.name == 'CAUTION MONEY').permission;
+    }
   }
 
-  getSemester(){
+  getSemester() {
     this.subjectService.getSemesterByCourseId(this.cautionMoneyForm.value.course_id).subscribe((response: any) => {
       this.semesterList = response.data;
     })
   }
 
-  openCustomModal(content,record) {
-    this.modalService.open(content,{ size: 'xl'});
-    this.cautionMoneyRefundForm.patchValue({user_id: record.id});
+  openCustomModal(content, record) {
+    this.modalService.open(content, { size: 'xl' });
+    this.cautionMoneyRefundForm.patchValue({ user_id: record.id });
     this.selectedCautionMoney = record.caution_money ?? 0;
   }
 
-  getCautionMoney(){
+  getCautionMoney() {
     // @ts-ignore
     this.session_id = JSON.parse(localStorage.getItem('session_id'));
-    this.cautionMoneyForm.patchValue({session_id: this.session_id});
+    this.cautionMoneyForm.patchValue({ session_id: this.session_id });
 
-    if(!this.session_id){
+    if (!this.session_id) {
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -94,9 +108,9 @@ export class CautionMoneyComponent {
     }
 
     this.cautionMoneyService.getStudentsForCautionMoney(this.cautionMoneyForm.value).subscribe((response: any) => {
-      if(response.success == 1){
+      if (response.success == 1) {
         this.studentList = response.data;
-        if(this.studentList.length == 0){
+        if (this.studentList.length == 0) {
           Swal.fire({
             position: 'center',
             icon: 'error',
@@ -109,12 +123,12 @@ export class CautionMoneyComponent {
     })
   }
 
-  refundCaution(modal){
-    if(!this.cautionMoneyRefundForm.valid){
+  refundCaution(modal) {
+    if (!this.cautionMoneyRefundForm.valid) {
       this.cautionMoneyRefundForm.markAllAsTouched();
       return;
     }
-    if(this.cautionMoneyRefundForm.value.caution_money_deduction > this.selectedCautionMoney){
+    if (this.cautionMoneyRefundForm.value.caution_money_deduction > this.selectedCautionMoney) {
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -125,7 +139,7 @@ export class CautionMoneyComponent {
       return;
     }
     this.cautionMoneyService.refundCautionMoney(this.cautionMoneyRefundForm.value).subscribe((response: any) => {
-      if(response.success == 1){
+      if (response.success == 1) {
         this.getCautionMoney();
         Swal.fire({
           position: 'center',
@@ -140,7 +154,7 @@ export class CautionMoneyComponent {
     })
   }
 
-  revertCautionMoneyPayment(data){
+  revertCautionMoneyPayment(data) {
     Swal.fire({
       title: 'Confirmation',
       text: 'Confirm Revert ?',
@@ -150,9 +164,9 @@ export class CautionMoneyComponent {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, Revert!'
     }).then((result) => {
-      if(result.isConfirmed){
+      if (result.isConfirmed) {
         this.cautionMoneyService.revertRefundCautionMoney(data.id).subscribe((response: any) => {
-          if(response.success == 1){
+          if (response.success == 1) {
             this.getCautionMoney();
             Swal.fire({
               position: 'center',

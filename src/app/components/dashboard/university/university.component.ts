@@ -88,8 +88,9 @@ export class UniversityComponent implements OnInit {
 
     // @ts-ignore
     this.session_id = JSON.parse(localStorage.getItem('session_id'));
-
-    if (this.userTypeId == 1) {
+    console.log(this.userTypeId);
+    
+    if (this.userTypeId == 1 || this.userTypeId == 5) {
       this.dashboardService.getDashboardData().subscribe((response: any) => {
         this.total_books = response.data.total_books;
         this.no_of_fees_received = response.data.no_of_fees_received;

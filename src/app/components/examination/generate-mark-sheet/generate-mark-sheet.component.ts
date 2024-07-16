@@ -8,6 +8,7 @@ import {SessionService} from "../../../services/session.service";
 import {ExaminationService} from "../../../services/examination.service";
 import {NgxPrintDirective} from "ngx-print";
 import Swal from "sweetalert2";
+import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
 
 @Component({
   selector: 'app-generate-mark-sheet',
@@ -37,8 +38,12 @@ export class GenerateMarkSheetComponent {
   grandTotal = 0;
   totalFullMarks = 0;
   percentageObtained = 0;
+
+  rolesAndPermission: any[] = [];
+  permission: any[] = [];
+
   numWords = require('num-words');
-  constructor(private subjectService: SubjectService, private sessionSubject: SessionService, public examinationService: ExaminationService) {
+  constructor(private subjectService: SubjectService, private sessionSubject: SessionService, public examinationService: ExaminationService, private roleAndPermissionService: RolesAndPermissionService) {
     this.subjectMarksSearchForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
@@ -53,6 +58,15 @@ export class GenerateMarkSheetComponent {
       this.sessionList = response;
     });
     this.sessionList = this.sessionSubject.getSessionList();
+
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'GENERATE MARK SHEET').permission;
+  });
+  this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+  if(this.rolesAndPermission.length > 0){
+      this.permission = this.rolesAndPermission.find(x => x.name == 'GENERATE MARK SHEET').permission;
+  }
   }
 
   getSemester(){

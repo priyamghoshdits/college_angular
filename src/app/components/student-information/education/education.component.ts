@@ -92,11 +92,11 @@ export class EducationComponent {
 
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;
-            this.permission = this.rolesAndPermission.find(x => x.name == 'COURSE').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'EDUCATION QUALIFICATION').permission;
         });
         this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
         if (this.rolesAndPermission.length > 0) {
-            this.permission = this.rolesAndPermission.find(x => x.name == 'COURSE').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'EDUCATION QUALIFICATION').permission;
         }
     }
 

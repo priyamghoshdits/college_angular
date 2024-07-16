@@ -63,11 +63,11 @@ export class UploadContentComponent {
 
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;
-            this.permission = this.rolesAndPermission.find(x => x.name == 'USER TYPE').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'UPLOAD CONTENT').permission;
         });
         this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
         if (this.rolesAndPermission.length > 0) {
-            this.permission = this.rolesAndPermission.find(x => x.name == 'USER TYPE').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'UPLOAD CONTENT').permission;
         }
     }
 

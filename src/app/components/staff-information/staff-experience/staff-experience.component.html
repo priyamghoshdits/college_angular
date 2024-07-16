@@ -10,7 +10,7 @@
                         <div class="card-body">
                             <form [formGroup]="staffExperienceForm" class="theme-form">
                                 <div class="row">
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-3" *ngIf="this.user.user_type_id == 1 || this.user.user_type_id == 5">
                                         <label>Select Staff</label>
                                         <select formControlName="staff_id" class="form-select" required
                                             style="width: 100%">

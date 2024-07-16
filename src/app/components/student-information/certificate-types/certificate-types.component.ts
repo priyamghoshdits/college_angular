@@ -5,6 +5,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CertificateService} from "../../../services/certificate.service";
 import Swal from "sweetalert2";
+import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
 
 @Component({
   selector: 'app-certificate-types',
@@ -24,7 +25,11 @@ export class CertificateTypesComponent {
     isUpdatable = false;
     certificateTypeList: any[];
     p: number;
-    constructor(private certificateService: CertificateService) {
+
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
+
+    constructor(private certificateService: CertificateService, private roleAndPermissionService: RolesAndPermissionService) {
         this.certificateTypeForm = new FormGroup({
             id: new FormControl(null),
             name: new FormControl(null, [Validators.required]),
@@ -33,6 +38,15 @@ export class CertificateTypesComponent {
             this.certificateTypeList = response;
         });
         this.certificateTypeList = this.certificateService.getCertificateType();
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'CERTIFICATE TYPES').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if (this.rolesAndPermission.length > 0) {
+            this.permission = this.rolesAndPermission.find(x => x.name == 'CERTIFICATE TYPES').permission;
+        }
     }
     saveCertificateType(){
         this.certificateService.saveCertificateTypes(this.certificateTypeForm.value).subscribe((response: any) => {

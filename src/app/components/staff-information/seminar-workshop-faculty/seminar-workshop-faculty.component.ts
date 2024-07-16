@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MemberService} from "../../../services/member.service";
+import { Component } from '@angular/core';
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MemberService } from "../../../services/member.service";
 import Swal from "sweetalert2";
-import {BookPublicationService} from "../../../services/book-publication.service";
-import {SeminarWorkshopFacultyService} from "../../../services/seminar-workshop-faculty.service";
+import { BookPublicationService } from "../../../services/book-publication.service";
+import { SeminarWorkshopFacultyService } from "../../../services/seminar-workshop-faculty.service";
 import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
 
 @Component({
@@ -40,8 +40,9 @@ export class SeminarWorkshopFacultyComponent {
     isUpdatable: boolean = false;
 
     searchForm: FormGroup;
+    user = JSON.parse(localStorage.getItem('user') || '{}');
 
-    constructor(private memberService: MemberService,private seminarWorkshopFacultyService: SeminarWorkshopFacultyService, private roleAndPermissionService: RolesAndPermissionService) {
+    constructor(private memberService: MemberService, private seminarWorkshopFacultyService: SeminarWorkshopFacultyService, private roleAndPermissionService: RolesAndPermissionService) {
         this.searchForm = new FormGroup({
             staff_id: new FormControl(null),
             from_date: new FormControl(null, [Validators.required]),

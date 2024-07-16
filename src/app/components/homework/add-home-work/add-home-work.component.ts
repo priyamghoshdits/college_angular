@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {NgxPaginationModule} from "ngx-pagination";
-import {SubjectService} from "../../../services/subject.service";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
+import { NgxPaginationModule } from "ngx-pagination";
+import { SubjectService } from "../../../services/subject.service";
 import Swal from "sweetalert2";
-import {HomeworkService} from "../../../services/homework.service";
-import {environment} from "../../../../environments/environment";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { HomeworkService } from "../../../services/homework.service";
+import { environment } from "../../../../environments/environment";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
 
 @Component({
   selector: 'app-add-home-work',
@@ -43,7 +43,7 @@ export class AddHomeWorkComponent {
   rolesAndPermission: any[] = [];
   permission: any[] = [];
   constructor(private subjectService: SubjectService, public homeworkService: HomeworkService
-              , private roleAndPermissionService: RolesAndPermissionService) {
+    , private roleAndPermissionService: RolesAndPermissionService) {
     this.homeworkForm = new FormGroup({
       id: new FormControl(null),
       course_id: new FormControl(null, [Validators.required]),
@@ -64,35 +64,35 @@ export class AddHomeWorkComponent {
     });
     this.courseList = this.subjectService.getCourses();
 
-      this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
-          this.rolesAndPermission = response;
-          this.permission = this.rolesAndPermission.find(x => x.name == 'HOMEWORK').permission;
-      });
-      this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
-      if(this.rolesAndPermission.length > 0){
-          this.permission = this.rolesAndPermission.find(x => x.name == 'HOMEWORK').permission;
-      }
+    this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+      this.rolesAndPermission = response;
+      this.permission = this.rolesAndPermission.find(x => x.name == 'HOMEWORK').permission;
+    });
+    this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+    if (this.rolesAndPermission.length > 0) {
+      this.permission = this.rolesAndPermission.find(x => x.name == 'HOMEWORK').permission;
+    }
   }
 
-  getSemester(){
+  getSemester() {
     this.subjectService.getSemesterByCourseId(this.homeworkForm.value.course_id).subscribe((response: any) => {
       this.semesterList = response.data;
     })
   }
 
-  getSubject(){
+  getSubject() {
     this.subjectService.getSubjects(this.homeworkForm.value.course_id, this.homeworkForm.value.semester_id)
-        .subscribe((response: any) => {
-          this.subjectList = response.data;
-        });
+      .subscribe((response: any) => {
+        this.subjectList = response.data;
+      });
   }
 
-  setFile(event){
+  setFile(event) {
     this.file = event.target.files[0];
   }
 
-  saveHomework(){
-    if(!this.file){
+  saveHomework() {
+    if (!this.file) {
       Swal.fire({
         position: 'center',
         icon: 'error',
@@ -113,7 +113,7 @@ export class AddHomeWorkComponent {
     formData.append("file_name", this.file['name']);
     formData.append("file", this.file);
     this.homeworkService.saveHomework(formData).subscribe((response: any) => {
-      if(response.success == 1){
+      if (response.success == 1) {
         Swal.fire({
           position: 'center',
           icon: 'success',
@@ -126,7 +126,7 @@ export class AddHomeWorkComponent {
     })
   }
 
-  editHomework(data){
+  editHomework(data) {
     Swal.fire({
       title: 'Please Wait !',
       html: 'Editing ...', // add html attribute if you want or remove
@@ -139,66 +139,66 @@ export class AddHomeWorkComponent {
     this.subjectService.getSemesterByCourseId(this.homeworkForm.value.course_id).subscribe((response: any) => {
       this.semesterList = response.data;
       this.subjectService.getSubjects(this.homeworkForm.value.course_id, this.homeworkForm.value.semester_id)
-          .subscribe((response: any) => {
-            this.subjectList = response.data;
-            this.homeworkForm.patchValue(data);
-            this.isUpdatable = true;
-            Swal.close();
-          });
+        .subscribe((response: any) => {
+          this.subjectList = response.data;
+          this.homeworkForm.patchValue(data);
+          this.isUpdatable = true;
+          Swal.close();
+        });
     })
   }
 
-  updateHomework(){
-      const formData = new FormData();
-      formData.append("id", this.homeworkForm.value.id);
-      formData.append("course_id", this.homeworkForm.value.course_id);
-      formData.append("semester_id", this.homeworkForm.value.semester_id);
-      formData.append("subject_id", this.homeworkForm.value.subject_id);
-      formData.append("homework_date", this.homeworkForm.value.homework_date);
-      formData.append("submission_date", this.homeworkForm.value.submission_date);
-      formData.append("file_name", this.file['name']);
-      formData.append("file", this.file);
-      this.homeworkService.updateHomework(formData).subscribe((response: any) => {
-          if(response.success == 1){
-              Swal.fire({
-                  position: 'center',
-                  icon: 'success',
-                  title: 'Homework Updated',
-                  showConfirmButton: false,
-                  timer: 1000
-              });
-              this.cancelUpdate();
-          }
-      })
+  updateHomework() {
+    const formData = new FormData();
+    formData.append("id", this.homeworkForm.value.id);
+    formData.append("course_id", this.homeworkForm.value.course_id);
+    formData.append("semester_id", this.homeworkForm.value.semester_id);
+    formData.append("subject_id", this.homeworkForm.value.subject_id);
+    formData.append("homework_date", this.homeworkForm.value.homework_date);
+    formData.append("submission_date", this.homeworkForm.value.submission_date);
+    formData.append("file_name", this.file['name']);
+    formData.append("file", this.file);
+    this.homeworkService.updateHomework(formData).subscribe((response: any) => {
+      if (response.success == 1) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Homework Updated',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        this.cancelUpdate();
+      }
+    })
   }
 
-  deleteHomework(data){
-      Swal.fire({
-          title: 'Confirmation',
-          text: 'Do you sure to delete ?',
-          icon: 'question',
-          showCancelButton: true,
-          confirmButtonColor: '#3085d6',
-          cancelButtonColor: '#d33',
-          confirmButtonText: 'Yes, delete It!'
-      }).then((result) => {
-          if(result.isConfirmed){
-              this.homeworkService.deleteHomework(data.id).subscribe((response: any) => {
-                  if(response.success == 1){
-                      Swal.fire({
-                          position: 'center',
-                          icon: 'success',
-                          title: 'Homework Deleted',
-                          showConfirmButton: false,
-                          timer: 1000
-                      });
-                  }
-              })
+  deleteHomework(data) {
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Do you sure to delete ?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete It!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.homeworkService.deleteHomework(data.id).subscribe((response: any) => {
+          if (response.success == 1) {
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: 'Homework Deleted',
+              showConfirmButton: false,
+              timer: 1000
+            });
           }
-      });
+        })
+      }
+    });
   }
 
-  cancelUpdate(){
+  cancelUpdate() {
     this.homeworkForm.reset();
     this.isUpdatable = false;
   }

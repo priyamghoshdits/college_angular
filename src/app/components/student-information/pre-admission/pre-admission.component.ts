@@ -64,11 +64,11 @@ export class PreAdmissionComponent {
 
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
             this.rolesAndPermission = response;
-            this.permission = this.rolesAndPermission.find(x => x.name == 'STUDENT ADMISSION').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'PRE ADMISSION').permission;
         });
         this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
         if (this.rolesAndPermission.length > 0) {
-            this.permission = this.rolesAndPermission.find(x => x.name == 'STUDENT ADMISSION').permission;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'PRE ADMISSION').permission;
         }
 
         this.studentCreationForm = new FormGroup({

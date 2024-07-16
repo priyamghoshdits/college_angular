@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row">
+    <div *ngIf="permission.length > 0" class="row">
         <div class="col-sm-12 col-xl-6">
             <div class="row">
                 <div class="col-sm-12">
@@ -20,8 +20,8 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCertificateType()">Submit</button>
-                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCertificateType()">Update</button>
+                            <button [hidden]="isUpdatable == true" *ngIf="permission[0].permission === 1" class="btn btn-primary me-1" (click)="saveCertificateType()">Submit</button>
+                            <button [hidden]="isUpdatable == false" *ngIf="permission[1].permission === 1" class="btn btn-primary me-1" (click)="updateCertificateType()">Update</button>
                             <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="col-sm-12 col-xl-6">
-            <div class="row">
+            <div class="row" *ngIf="permission[3].permission === 1">
                 <div class="col-sm-12">
                     <div class="col-sm-12">
                         <div class="card">

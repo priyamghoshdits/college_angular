@@ -9,6 +9,7 @@ import {StudentService} from "../../../services/student.service";
 import {SessionService} from "../../../services/session.service";
 import {ExaminationService} from "../../../services/examination.service";
 import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
+import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
 
 @Component({
   selector: 'app-marksheet',
@@ -40,12 +41,14 @@ export class MarksheetComponent {
     sessionList: any[];
     studentList: any[];
     tempMarkSheet: any[] = [];
+    rolesAndPermission: any[] = [];
+    permission: any[] = [];
     active = 1;
     markSheetList: any[];
     session_id = null;
 
     constructor(private subjectService: SubjectService,private studentSubject: StudentService
-        , private sessionSubject: SessionService, private examinationService: ExaminationService) {
+        , private sessionSubject: SessionService, private examinationService: ExaminationService, private roleAndPermissionService: RolesAndPermissionService) {
         this.subjectMarksForm = new FormGroup({
             id: new FormControl(null),
             course_id: new FormControl(null, [Validators.required]),
@@ -74,6 +77,15 @@ export class MarksheetComponent {
             this.sessionList = response;
         });
         this.sessionList = this.sessionSubject.getSessionList();
+
+        this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
+            this.rolesAndPermission = response;
+            this.permission = this.rolesAndPermission.find(x => x.name == 'UPDATE MARKS').permission;
+        });
+        this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
+        if(this.rolesAndPermission.length > 0){
+            this.permission = this.rolesAndPermission.find(x => x.name == 'UPDATE MARKS').permission;
+        }
     }
 
     activeTab(data) {

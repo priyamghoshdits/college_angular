@@ -41,7 +41,7 @@
 <!--                                        <div *ngIf="cautionMoneyForm.controls['session_id'].errors?.['required'] && cautionMoneyForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
 <!--                                    </div>-->
                                     <div class="col-md-3 mb-3">
-                                        <button class="btn btn-primary me-1" style="margin-top: 30px" (click)="getCautionMoney()">Submit</button>
+                                        <button *ngIf="permission[3].permission == 1" class="btn btn-primary me-1" style="margin-top: 30px" (click)="getCautionMoney()">Submit</button>
                                     </div>
                                 </div>
                             </form>

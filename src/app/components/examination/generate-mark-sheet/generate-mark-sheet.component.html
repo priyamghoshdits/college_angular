@@ -41,7 +41,7 @@
 <!--                                        <div *ngIf="subjectMarksSearchForm.controls['session_id'].errors?.['required'] && subjectMarksSearchForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
 <!--                                    </div>-->
                                     <div class="col-md-3 mb-12">
-                                        <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="getMarkSheet()">Search</button>
+                                        <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="getMarkSheet()" *ngIf="permission[3].permission == 1">Search</button>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -64,7 +64,7 @@
                                             <td>
 <!--                                                <button class="btn btn-primary me-1" (click)="generateMarksheet(record)" ><mat-icon>print</mat-icon></button>-->
 
-                                                <a style="cursor: pointer;" (click)="generateMarksheet(record)"> <mat-icon>print</mat-icon> </a>
+                                                <a style="cursor: pointer;" (click)="generateMarksheet(record)" *ngIf="permission[0].permission == 1"> <mat-icon>print</mat-icon> </a>
                                                 <button [hidden]="true" #divClick class="btn btn-primary me-1" [useExistingCss]="true" #print printSectionId="sectionToPrint" ngxPrint >print</button>
 <!--                                                <button class="btn btn-primary me-1" (click)="generateMarksheet()">Generate</button>-->
 <!--                                                <a (click)="editMarksheet(record)"><mat-icon>edit</mat-icon></a>-->
