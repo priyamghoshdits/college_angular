@@ -201,7 +201,7 @@ export class AnswerScriptComponent {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Question Paper Saved',
+                    title: 'Answer Script Evaluator Saved',
                     showConfirmButton: false,
                     timer: 1000
                 });

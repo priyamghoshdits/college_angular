@@ -168,7 +168,7 @@ export class PaperPosterComponent {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Data Saved',
+          title: 'Paper Posetr Saved',
           showConfirmButton: false,
           timer: 1000
         });
@@ -218,7 +218,7 @@ export class PaperPosterComponent {
         Swal.fire({
           position: 'center',
           icon: 'success',
-          title: 'Paper Setter Updated',
+          title: 'Paper Poster Updated',
           showConfirmButton: false,
           timer: 1000
         });

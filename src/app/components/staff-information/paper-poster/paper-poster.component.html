@@ -5,7 +5,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header" [hidden]="active != 1">
-                            <h5>Papper Poster</h5><span>Papper Poster</span>
+                            <h5>Paper Poster</h5><span>Paper Poster</span>
                         </div>
                         <div class="card-header" [hidden]="active != 2">
                             <h5>Show Paper Poster</h5>
@@ -13,10 +13,10 @@
                         <div class="tabbed-card">
                             <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
                                 <li [ngbNavItem]="1">
-                                    <a ngbNavLink (click)="activeTab(1)">Add Papper Poster</a>
+                                    <a ngbNavLink (click)="activeTab(1)">Add Paper Poster</a>
                                 </li>
                                 <li [ngbNavItem]="2">
-                                    <a ngbNavLink (click)="activeTab(2)">Show Papper Poster</a>
+                                    <a ngbNavLink (click)="activeTab(2)">Show Paper Poster</a>
                                 </li>
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
@@ -83,10 +83,10 @@
                                                 placeholder="Seminer Type" required>
                                         </div>
                                         <div class="col-md-3 mb-3">
-                                            <label>Acivement</label>
+                                            <label>Achivement</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="paperPosterArray[indexOfElement].acivement"
-                                                placeholder="Acivement" required>
+                                                placeholder="Achivement" required>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -103,7 +103,7 @@
                                                 (change)="calculateNoOFDate(indexOfElement)" required>
                                         </div>
                                         <div class="col-md-3 mb-3">
-                                            <label>Duration</label>
+                                            <label>Duration (Days)</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="paperPosterArray[indexOfElement].duration"
                                                 placeholder="Duration" disabled=>
@@ -178,7 +178,7 @@
                                             <th>Seminer Type</th>
                                             <th>Date From</th>
                                             <th>Date To</th>
-                                            <th>Duration</th>
+                                            <th>Duration (Days)</th>
                                             <th>Acivement</th>
                                             <th>Download</th>
                                             <th>Action</th>

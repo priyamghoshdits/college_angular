@@ -213,7 +213,7 @@ export class ConsultancyComponent {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Question Paper Saved',
+                    title: 'Sponsored Project/Consultancy Saved',
                     showConfirmButton: false,
                     timer: 1000
                 });

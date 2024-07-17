@@ -114,7 +114,7 @@ export class JournalPublicationComponent {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Paper Setter Updated',
+                    title: 'Journal Publication Updated',
                     showConfirmButton: false,
                     timer: 1000
                 });
@@ -213,7 +213,7 @@ export class JournalPublicationComponent {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Journal Saved',
+                    title: 'Journal Publication Saved',
                     showConfirmButton: false,
                     timer: 1000
                 });
