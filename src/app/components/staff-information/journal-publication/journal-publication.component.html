@@ -154,6 +154,7 @@
                                             <th>Volume Page number</th>
                                             <th>Issn Number</th>
                                             <th>Impact Factor</th>
+                                            <th>Download</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -169,6 +170,13 @@
                                             <td>{{record.volume_page_number}}</td>
                                             <td>{{record.issn_number}}</td>
                                             <td>{{record.impact_factor}}</td>
+                                            <td>
+                                                <a data-placement="left" target="_blank" href="{{record.file_url}}"
+                                                    *ngIf="record.file_url">
+                                                    <mat-icon>cloud_download</mat-icon>
+                                                </a>
+                                                <span *ngIf="!record.file_url">No file found</span>
+                                            </td>
                                             <td>
                                                 <a (click)="editJournalPublication(record)"
                                                     *ngIf="permission[1].permission == 1">

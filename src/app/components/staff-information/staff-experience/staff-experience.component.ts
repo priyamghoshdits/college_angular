@@ -51,6 +51,8 @@ export class StaffExperienceComponent {
 
         this.memberService.getStaffExperienceListener().subscribe((response) => {
             this.staffExperienceList = response;
+            console.log(this.staffExperienceList);
+            
         })
         this.staffExperienceList = this.memberService.getStaffExperienceList();
 

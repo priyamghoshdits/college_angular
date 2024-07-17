@@ -174,6 +174,8 @@ export class ExaminerComponent {
         this.examinerService.searchExaminer(this.paperSettingForm.value).subscribe((response: any) => {
             if (response.success == 1) {
                 this.searchPaperList = response.data;
+                console.log(this.searchPaperList);
+                
             }
         })
     }

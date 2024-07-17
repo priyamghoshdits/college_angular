@@ -115,6 +115,7 @@
                                             <th scope="col">Experience</th>
                                             <th scope="col">From Date</th>
                                             <th scope="col">To Date</th>
+                                            <th scope="col">Download</th>
 
                                             <th *ngIf="permission[1].permission == 1 && permission[2].permission == 1"
                                                 scope="col">
@@ -132,6 +133,13 @@
                                             <td>{{record.experience}}</td>
                                             <td>{{record.from_date}}</td>
                                             <td>{{record.to_date}}</td>
+                                            <td>
+                                                <a data-placement="left" target="_blank" href="{{record.file_url}}"
+                                                    *ngIf="record.file_url">
+                                                    <mat-icon>cloud_download</mat-icon>
+                                                </a>
+                                                <span *ngIf="!record.file_url">No file found</span>
+                                            </td>
 
                                             <td>
                                                 <a (click)="editStaffExperience(record)"

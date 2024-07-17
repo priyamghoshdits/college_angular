@@ -5,12 +5,12 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5>Leave Type</h5><span>Add Leave Type</span>
+                            <h5>Degree</h5><span>Add New Degree</span>
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="degreeFrom">
-                                <label class="col-form-label pt-0" for="exampleInputEmail1">Leave Type Name</label>
-                                <input class="form-control" formControlName="name" placeholder="Enter Leave Type Name">
+                                <label class="col-form-label pt-0" for="exampleInputEmail1">Degree Name</label>
+                                <input class="form-control" formControlName="name" placeholder="Enter Degree Name">
                                 <div *ngIf="degreeFrom.controls['name'].errors?.['required'] && degreeFrom.controls['name'].touched "
                                     class="text text-danger mt-1">Degree Name required</div>
                             </form>

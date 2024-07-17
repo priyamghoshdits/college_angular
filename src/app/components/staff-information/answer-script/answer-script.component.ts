@@ -173,6 +173,8 @@ export class AnswerScriptComponent {
         this.answerScriptService.searchAnswerScriptEvaluator(this.answerScriptEvaluatorForm.value).subscribe((response: any) => {
             if (response.success == 1) {
                 this.searchAnsScriptEvaluatorList = response.data;
+                console.log(this.searchAnsScriptEvaluatorList);
+                
             }
         })
     }

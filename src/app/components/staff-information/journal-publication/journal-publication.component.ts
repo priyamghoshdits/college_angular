@@ -187,6 +187,8 @@ export class JournalPublicationComponent {
         this.journalPublicationService.searchJournalPublication(this.journalPublicationForm.value.staff_id).subscribe((response: any) => {
             if (response.success == 1) {
                 this.searchPaperList = response.data;
+                console.log(this.searchPaperList);
+                
             }
         })
     }

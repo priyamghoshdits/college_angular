@@ -175,6 +175,8 @@ export class UniversitySynopsisComponent {
     this.UniversitySynopsisService.getuniversitySynopsis(this.searchForm.value.staff_id).subscribe((response: any) => {
       if (response.success == 1) {
         this.universitySynopsisList = response.data;
+        console.log(this.universitySynopsisList);
+        
       }
     })
   }

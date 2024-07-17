@@ -5,7 +5,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header" [hidden]="active != 1">
-                            <h5>Papper Setter</h5><span>Papper Setter</span>
+                            <h5>Paper Setter</h5><span>Paper Setter</span>
                         </div>
                         <div class="card-header" [hidden]="active != 2">
                             <h5>Show Paper Setter</h5>
@@ -13,10 +13,10 @@
                         <div class="tabbed-card">
                             <ul ngbNav #nav="ngbNav" [activeId]="active" class="pull-right nav nav-pills nav-primary">
                                 <li [ngbNavItem]="1">
-                                    <a ngbNavLink (click)="activeTab(1)">Add Papper Setter</a>
+                                    <a ngbNavLink (click)="activeTab(1)">Add Paper Setter</a>
                                 </li>
                                 <li [ngbNavItem]="2">
-                                    <a ngbNavLink (click)="activeTab(2)">Show Papper Setter</a>
+                                    <a ngbNavLink (click)="activeTab(2)">Show Paper Setter</a>
                                 </li>
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
@@ -141,8 +141,9 @@
                                             <th>Examination Name</th>
                                             <th>Subject Name</th>
                                             <th>University Name</th>
-                                            <th>Reference Name</th>
+                                            <th>Reference No.</th>
                                             <th>Date</th>
+                                            <th>Download</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -156,6 +157,13 @@
                                             <td>{{record.university_name}}</td>
                                             <td>{{record.referance_no}}</td>
                                             <td>{{record.ref_date}}</td>
+                                            <td>
+                                                <a data-placement="left" target="_blank" href="{{record.file_url}}"
+                                                    *ngIf="record.file_url">
+                                                    <mat-icon>cloud_download</mat-icon>
+                                                </a>
+                                                <span *ngIf="!record.file_url">No file found</span>
+                                            </td>
                                             <td>
                                                 <a *ngIf="permission[1].permission == 1"
                                                     (click)="editPaperSetter(record)"><mat-icon>edit</mat-icon></a>

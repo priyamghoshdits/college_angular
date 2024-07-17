@@ -108,7 +108,7 @@ export class SeminarWorkshopFacultyComponent {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Saved Successfully',
+                    title: 'Seminar/Workshop/Faculty Saved Successfully.',
                     showConfirmButton: false,
                     timer: 1000
                 });
@@ -142,7 +142,7 @@ export class SeminarWorkshopFacultyComponent {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Book Publication Saved',
+                    title: 'Seminar/Workshop/Faculty Upadted Successfully.',
                     showConfirmButton: false,
                     timer: 1000
                 });

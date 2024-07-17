@@ -143,6 +143,7 @@
                                         <th>University Name</th>
                                         <th>Reference Name</th>
                                         <th>Date</th>
+                                        <th>Download</th>
                                         <th>Action</th>
                                     </tr>
                                     </thead>
@@ -156,6 +157,13 @@
                                         <td>{{record.university_name}}</td>
                                         <td>{{record.referance_no}}</td>
                                         <td>{{record.ref_date}}</td>
+                                        <td>
+                                            <a data-placement="left" target="_blank" href="{{record.file_url}}"
+                                                *ngIf="record.file_url">
+                                                <mat-icon>cloud_download</mat-icon>
+                                            </a>
+                                            <span *ngIf="!record.file_url">No file found</span>
+                                        </td>
                                         <td>
                                             <a *ngIf="permission[1].permission == 1"
                                                (click)="editPaperSetter(record)"><mat-icon>edit</mat-icon></a>

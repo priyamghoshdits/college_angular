@@ -172,6 +172,7 @@ export class PaperSetterComponent {
         this.memberService.searchPaperSetter(this.paperSettingForm.value).subscribe((response: any) => {
             if (response.success == 1) {
                 this.searchPaperList = response.data;
+                console.log(this.searchPaperList);
             }
         })
     }
@@ -200,7 +201,7 @@ export class PaperSetterComponent {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
-                    title: 'Question Paper Saved',
+                    title: 'Paper Setter Saved',
                     showConfirmButton: false,
                     timer: 1000
                 });

@@ -82,10 +82,10 @@
                                                 placeholder="Course Name" required>
                                         </div>
                                         <div class="col-md-5 mb-3">
-                                            <label>Title Number</label>
+                                            <label>Title Name</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="pgPddhGuideArray[indexOfElement].title_name"
-                                                placeholder="Title Number" required>
+                                                placeholder="Title Name" required>
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <a *ngIf="(indexOfElement + 1) == totalPgPhdGuide.length && !isUpdatable"
@@ -179,7 +179,8 @@
                                             <th colspan="2">Guide</th>
                                             <th colspan="2">Co Guide</th>
                                             <th colspan="2">Referance No.</th>
-                                            <th colspan="2">Ref. Date</th>
+                                            <th colspan="2">Date</th>
+                                            <th colspan="2">Download</th>
                                             <th colspan="2">Status</th>
                                             <th colspan="1"
                                                 *ngIf="permission[1].permission == 1 && permission[2].permission == 1">
@@ -198,6 +199,13 @@
                                             <td colspan="2">{{record.co_guide}}</td>
                                             <td colspan="2">{{record.referance_no}}</td>
                                             <td colspan="2">{{record.ref_date}}</td>
+                                            <td>
+                                                <a data-placement="left" target="_blank" href="{{record.file_url}}"
+                                                    *ngIf="record.file_url">
+                                                    <mat-icon>cloud_download</mat-icon>
+                                                </a>
+                                                <span *ngIf="!record.file_url">No file found</span>
+                                            </td>
                                             <td colspan="2">{{record.status_name}}</td>
                                             <td>
                                                 <a (click)="editPgPhdGuide(record)"
