@@ -10,6 +10,7 @@ import { RolesAndPermissionService } from "../../../services/roles-and-permissio
 import Swal from "sweetalert2";
 import { ApiScoreService } from "../../../services/api-score.service";
 import { environment } from "../../../../environments/environment";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-api-score',
@@ -25,7 +26,8 @@ import { environment } from "../../../../environments/environment";
         ReactiveFormsModule,
         FormsModule,
         NgbNavItem,
-        NgbNavOutlet
+        NgbNavOutlet,
+        NgSelectModule
     ],
     templateUrl: './api-score.component.html',
     styleUrl: './api-score.component.scss'

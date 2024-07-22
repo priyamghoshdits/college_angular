@@ -9,6 +9,7 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
 import * as XLSX from 'xlsx';
 import {SubjectService} from "../../../services/subject.service";
 import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-library-item-stock',
@@ -20,7 +21,8 @@ import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
     NgxPaginationModule,
     ReactiveFormsModule,
     NgIf,
-    CustomFilterPipe
+    CustomFilterPipe,
+    NgSelectModule
   ],
   templateUrl: './library-item-stock.component.html',
   styleUrl: './library-item-stock.component.scss'

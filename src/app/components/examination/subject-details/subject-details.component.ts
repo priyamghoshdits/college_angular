@@ -10,6 +10,7 @@ import {ExaminationService} from "../../../services/examination.service";
 import Swal from "sweetalert2";
 import {NgbTimepicker} from "@ng-bootstrap/ng-bootstrap";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-subject-details',
@@ -20,7 +21,8 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
     NgxPaginationModule,
     ReactiveFormsModule,
     NgbTimepicker,
-    NgIf
+    NgIf,
+    NgSelectModule
   ],
   templateUrl: './subject-details.component.html',
   styleUrl: './subject-details.component.scss'

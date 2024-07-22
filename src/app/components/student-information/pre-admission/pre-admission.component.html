@@ -115,7 +115,7 @@
                                     <div  class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Upload Image</label>
-                                            <input type="file" class="form-control" [multiple]="false" (change)="onSelect1($event)">
+                                            <input type="file" class="form-control" formControlName="image" [multiple]="false" (change)="onSelect1($event)">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Blood Group</label>
@@ -235,7 +235,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Transaction Id</label>
-                                            <input type="text" class="form-control" formControlName="transaction_id" placeholder="Pre-Admission Amount">
+                                            <input type="text" class="form-control" formControlName="transaction_id" placeholder="Transaction Id">
                                             <div *ngIf="studentCreationForm.controls['transaction_id'].errors?.['required'] && studentCreationForm.controls['transaction_id'].touched " class="text text-danger mt-1">Transaction Id required</div>
                                         </div>
                                         <div class="col-md-3 mb-3">

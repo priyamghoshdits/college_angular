@@ -13,13 +13,19 @@
                                     <div class="col-md-12 mb-3">
                                         <label class="col-form-label pt-0"> Select Staff</label>
 
-                                        <select class="form-select" formControlName="staff_id" required
+                                        <!-- <select class="form-select" formControlName="staff_id" required
                                             style="width: 100%">
                                             <option value="null"> Select Staff</option>
                                             <option *ngFor="let data of memberList" [value]="data.id">
                                                 {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                             </option>
-                                        </select>
+                                        </select> -->
+                                        <ng-select formControlName="staff_id" class="form-control">
+                                            @for (car of memberList; track car.id) {
+                                            <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                {{car.last_name}}</ng-option>
+                                            }
+                                        </ng-select>
 
                                         <div *ngIf="promotionForm.controls['staff_id'].errors?.['required'] && promotionForm.controls['staff_id'].touched "
                                             class="text text-danger mt-1">Staff required
@@ -116,7 +122,8 @@
                                             <td>{{record.to}}</td>
                                             <td>{{record.promotion_date}}</td>
                                             <td>
-                                                <a style="cursor: pointer" href="{{record.file}}" target="_blank" download><mat-icon>cloud_download</mat-icon></a>
+                                                <a style="cursor: pointer" href="{{record.file}}" target="_blank"
+                                                    download><mat-icon>cloud_download</mat-icon></a>
                                             </td>
 
                                             <td>

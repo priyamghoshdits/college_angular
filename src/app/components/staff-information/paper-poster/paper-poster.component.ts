@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MemberService } from 'src/app/services/member.service';
 import { PaperPosterService } from 'src/app/services/paper-poster.service';
@@ -24,7 +25,8 @@ import Swal from 'sweetalert2';
     NgbNavLinkBase,
     NgbNavItem,
     NgbNavOutlet,
-    JsonPipe
+    JsonPipe,
+    NgSelectModule
   ],
   templateUrl: './paper-poster.component.html',
   styleUrl: './paper-poster.component.scss'

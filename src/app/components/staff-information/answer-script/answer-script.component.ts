@@ -9,6 +9,7 @@ import {ExaminationService} from "../../../services/examination.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import Swal from "sweetalert2";
 import {AnswerScriptEvaluatorService} from "../../../services/answer-script-evaluator.service";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-answer-script',
@@ -24,7 +25,8 @@ import {AnswerScriptEvaluatorService} from "../../../services/answer-script-eval
         ReactiveFormsModule,
         FormsModule,
         NgbNavItem,
-        NgbNavOutlet
+        NgbNavOutlet,
+        NgSelectModule
     ],
     templateUrl: './answer-script.component.html',
     styleUrl: './answer-script.component.scss'

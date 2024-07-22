@@ -16,6 +16,7 @@ import "hammerjs";
 import "mousetrap";
 import {MatIconModule} from "@angular/material/icon";
 import {NgxCaptchaModule} from "ngx-captcha";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 // @ts-ignore
 @NgModule({
@@ -39,6 +40,7 @@ import {NgxCaptchaModule} from "ngx-captcha";
             },
         }),
         MatIconModule,
+        NgSelectModule
     ],
   // providers: [ AdminGuard, CookieService, DecimalPipe],
   // providers: [

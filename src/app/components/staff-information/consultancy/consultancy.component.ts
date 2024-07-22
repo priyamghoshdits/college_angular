@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 import {SubjectService} from "../../../services/subject.service";
 import {StudentService} from "../../../services/student.service";
 import {ConsultancyService} from "../../../services/consultancy.service";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-consultancy',
@@ -26,7 +27,8 @@ import {ConsultancyService} from "../../../services/consultancy.service";
     NgxPaginationModule,
     ReactiveFormsModule,
     NgbNavItem,
-    NgbNavOutlet
+    NgbNavOutlet,
+    NgSelectModule
   ],
     templateUrl: './consultancy.component.html',
     styleUrl: './consultancy.component.scss'

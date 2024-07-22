@@ -8,6 +8,7 @@ import {MemberService} from "../../../services/member.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import Swal from "sweetalert2";
 import {ExaminerService} from "../../../services/examiner.service";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-examiner',
@@ -23,7 +24,8 @@ import {ExaminerService} from "../../../services/examiner.service";
         ReactiveFormsModule,
         FormsModule,
         NgbNavItem,
-        NgbNavOutlet
+        NgbNavOutlet,
+        NgSelectModule
     ],
     templateUrl: './examiner.component.html',
     styleUrl: './examiner.component.scss'

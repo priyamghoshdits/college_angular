@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
 import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
 import { MemberService } from 'src/app/services/member.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-paper-setter',
@@ -24,7 +25,8 @@ import { MemberService } from 'src/app/services/member.service';
         NgbNavLinkBase,
         NgbNavItem,
         NgbNavOutlet,
-        JsonPipe
+        JsonPipe,
+        NgSelectModule
     ],
     templateUrl: './paper-setter.component.html',
     styleUrl: './paper-setter.component.scss'

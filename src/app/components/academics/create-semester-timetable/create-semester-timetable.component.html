@@ -64,12 +64,19 @@
                                 <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <label>Select Subject</label>
-                                        <select style="width: 100%" formControlName="subject_id" class="form-select" required>
+                                        <!-- <select style="width: 100%" formControlName="subject_id" class="form-select" required>
                                             <option value="null">Select</option>
                                             <option [selected]="false" *ngFor="let data of subjectList" [value]="data.id" >
                                                 {{data.name}}
                                             </option>
-                                        </select>
+                                        </select> -->
+
+                                        <ng-select formControlName="subject_id" class="form-control">
+                                            @for (data of subjectList; track data.id) {
+                                                <ng-option [value]="data.id">{{data.name}}</ng-option>
+                                            }
+                                        </ng-select>
+                                        
                                         <div *ngIf="semesterTimeTableForm.controls['subject_id'].errors?.['required'] && semesterTimeTableForm.controls['subject_id'].touched " class="text text-danger mt-1">Subject Name required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">

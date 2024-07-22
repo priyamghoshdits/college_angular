@@ -47,13 +47,20 @@
                                     </div>
                                     <div class="col-md-2 mb-3">
                                         <label>Select Subject</label>
-                                        <select class="form-select" formControlName="subject_id" required (change)="getClass()"
+                                        <!-- <select class="form-select" formControlName="subject_id" required (change)="getClass()"
                                                 style="width: 100%">
                                             <option value="null">Select</option>
                                             <option *ngFor="let data of subjectList" [value]="data.id">
                                                 {{data.name}}
                                             </option>
-                                        </select>
+                                        </select> -->
+
+                                        <ng-select formControlName="subject_id" class="form-control">
+                                            @for (data of subjectList; track data.id) {
+                                                <ng-option [value]="data.id">{{data.name}}</ng-option>
+                                            }
+                                        </ng-select>
+                                        
                                         <div *ngIf="attendanceForm.controls['subject_id'].errors?.['required'] && attendanceForm.controls['subject_id'].touched "
                                              class="text text-danger mt-1">Subject required
                                         </div>

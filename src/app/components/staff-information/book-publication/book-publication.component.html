@@ -27,14 +27,21 @@
                                     <div class="row">
                                         <div class="col-md-5 mb-3">
                                             <label>Select Staff</label>
-                                            <select style="width: 100%"
+                                            <!-- <select style="width: 100%"
                                                 [(ngModel)]="bookPublicationArray[indexOfElement].staff_id"
                                                 class="form-select" required>
                                                 <option value="null"> Select a Staff</option>
                                                 <option *ngFor="let data of memberList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
-                                            </select>
+                                            </select> -->
+                                            <ng-select [(ngModel)]="bookPublicationArray[indexOfElement].staff_id"
+                                                class="form-control">
+                                                @for (car of memberList; track car.id) {
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
+                                                }
+                                            </ng-select>
                                         </div>
                                         <div class="col-md-5 mb-3">
                                             <label>Book Name</label>
@@ -83,7 +90,7 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload File</label>
-                                            <input type="file" class="form-control" formControlName="file_name"
+                                            <input type="file" class="form-control" [(ngModel)]="bookPublicationArray[indexOfElement].file_name"
                                                 (change)="fileUpload($event, indexOfElement)" required>
                                         </div>
                                     </div>
@@ -104,13 +111,20 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Select Staff</label>
-                                            <select style="width: 100%" formControlName="staff_id" class="form-select"
+                                            <!-- <select style="width: 100%" formControlName="staff_id" class="form-select"
                                                 required>
                                                 <option value="null"> Select a Staff</option>
                                                 <option *ngFor="let data of memberList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
-                                            </select>
+                                            </select> -->
+                                            <ng-select formControlName="staff_id"
+                                                class="form-control">
+                                                @for (car of memberList; track car.id) {
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
+                                                }
+                                            </ng-select>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <button class="btn btn-primary me-1" style="margin-top: 30px;"
@@ -132,7 +146,7 @@
                                             <th colspan="2">Chapter Name</th>
                                             <th colspan="2">Page Number</th>
                                             <th colspan="2">Download</th>
-                                            <th colspan="1"
+                                            <th colspan="2"
                                                 *ngIf="permission[1].permission == 1 && permission[2].permission == 1">
                                                 Action</th>
                                         </tr>
@@ -148,13 +162,13 @@
                                             <td colspan="2">{{record.chapter_full_book}}</td>
                                             <td colspan="2">{{record.chapter_name}}</td>
                                             <td colspan="2">{{record.page_number}}</td>
-                                            <td ngbTooltip="Download">
+                                            <td colspan="2" ngbTooltip="Download">
                                                 <a data-placement="left" target="_blank"
                                                     href="{{record.file_url}}" *ngIf="record.file_url">
                                                     <mat-icon>cloud_download</mat-icon>
                                                 </a>
                                             </td>
-                                            <td>
+                                            <td colspan="2">
                                                 <a (click)="editBookPublication(record)"
                                                     *ngIf="permission[1].permission == 1"><mat-icon>edit</mat-icon></a>
                                                 <a (click)="deleteBookPublication(record)"

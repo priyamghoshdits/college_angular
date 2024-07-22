@@ -8,6 +8,7 @@ import {StudentService} from "../../../services/student.service";
 import Swal from "sweetalert2";
 import {SessionService} from "../../../services/session.service";
 import {retry} from "rxjs";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-period-attendance',
@@ -19,6 +20,7 @@ import {retry} from "rxjs";
         NgxPaginationModule,
         ReactiveFormsModule,
         NgIf,
+        NgSelectModule
     ],
     providers: [DatePipe],
     templateUrl: './period-attendance.component.html',

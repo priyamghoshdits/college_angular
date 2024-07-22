@@ -83,6 +83,7 @@ export class StaffDegreeComponent {
           timer: 1000
         });
         this.degreeFrom.reset();
+        this.isUpdatable = false;
       }
     })
   }

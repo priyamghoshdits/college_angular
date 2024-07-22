@@ -67,7 +67,7 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Select Staff</label>
-                                            <select [(ngModel)]="consultationArray[indexOfElement].staff_id"
+                                            <!-- <select [(ngModel)]="consultationArray[indexOfElement].staff_id"
                                                     class="form-select"
                                                     required
                                                     style="width: 100%">
@@ -75,7 +75,14 @@
                                                 <option *ngFor="let data of memberList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
-                                            </select>
+                                            </select> -->
+                                            <ng-select [(ngModel)]="consultationArray[indexOfElement].staff_id"
+                                                class="form-control">
+                                                @for (car of memberList; track car.id) {
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
+                                                }
+                                            </ng-select>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Project/Consultancy</label>
@@ -111,7 +118,7 @@
                                         </div>
                                         <div class="col-md-2 mb-3">
                                             <a (click)="addField()"
-                                               *ngIf="(indexOfElement + 1) == consultationArray.length" style="">
+                                               *ngIf="(indexOfElement + 1) == consultationArray.length">
                                                 <mat-icon
                                                         style="font-size: 40px;height: 60px; width: 40px; line-height: 2">
                                                     add_box
@@ -161,7 +168,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label class="col-form-label pt-0">From
                                                 Date</label>
-                                            <select class="form-select"
+                                            <!-- <select class="form-select"
                                                     formControlName="staff_id"
                                                     required
                                                     style="width: 100%">
@@ -169,7 +176,14 @@
                                                 <option *ngFor="let data of memberList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
-                                            </select>
+                                            </select> -->
+                                            <ng-select formControlName="staff_id"
+                                                class="form-control">
+                                                @for (car of memberList; track car.id) {
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
+                                                }
+                                            </ng-select>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <button (click)="getConsultancy()" class="btn btn-primary me-1"

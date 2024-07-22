@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import {MatIconModule} from "@angular/material/icon";
 import {CustomFilterPipe} from "custom-filter.pipe";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-upload-content',
@@ -18,6 +19,7 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
         CustomFilterPipe,
         FormsModule,
         NgIf,
+        NgSelectModule
         // Ng2SearchPipeModule
     ],
     templateUrl: './upload-content.component.html',

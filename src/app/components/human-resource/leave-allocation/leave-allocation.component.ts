@@ -8,6 +8,7 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-leave-allocation',
@@ -19,7 +20,8 @@ import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
     ReactiveFormsModule,
     NgIf,
     CustomFilterPipe,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ],
   templateUrl: './leave-allocation.component.html',
   styleUrl: './leave-allocation.component.scss'

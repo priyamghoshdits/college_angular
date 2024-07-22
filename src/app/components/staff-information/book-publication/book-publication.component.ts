@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BookPublicationService } from 'src/app/services/book-publication.service';
 import { MemberService } from 'src/app/services/member.service';
@@ -24,7 +25,8 @@ import Swal from 'sweetalert2';
     NgbNavLinkBase,
     NgbNavItem,
     NgbNavOutlet,
-    JsonPipe
+    JsonPipe,
+    NgSelectModule
   ],
   templateUrl: './book-publication.component.html',
   styleUrl: './book-publication.component.scss'

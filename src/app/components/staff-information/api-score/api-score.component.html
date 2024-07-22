@@ -27,32 +27,38 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Select Staff</label>
-                                            <select [(ngModel)]="paperSetterArray[indexOfElement].staff_id"
+                                            <!-- <select [(ngModel)]="paperSetterArray[indexOfElement].staff_id"
                                                     class="form-select"
                                                     required style="width: 100%">
                                                 <option value="null"> Select a Staff</option>
                                                 <option *ngFor="let data of memberList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
-                                            </select>
+                                            </select> -->
+                                            <ng-select [(ngModel)]="paperSetterArray[indexOfElement].staff_id"
+                                                class="form-control">
+                                                @for (car of memberList; track car.id) {
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
+                                                }
+                                            </ng-select>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Assignment Year</label>
-                                            <input [(ngModel)]="paperSetterArray[indexOfElement].assignment_year" class="form-control"
-                                                   placeholder="Assignment Year"
-                                                   required type="number">
+                                            <input [(ngModel)]="paperSetterArray[indexOfElement].assignment_year"
+                                                class="form-control" placeholder="Assignment Year" required
+                                                type="number">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload File</label>
-                                            <input class="form-control"
-                                                   (change)="fileUpload($event, indexOfElement)"
-                                                   required type="file">
+                                            <input class="form-control" (change)="fileUpload($event, indexOfElement)"
+                                                required type="file">
                                         </div>
                                         <div *ngIf="(indexOfElement + 1) == paperField.length && !isUpdatable"
-                                             class="col-md-2 mb-3">
+                                            class="col-md-2 mb-3">
                                             <a (click)="addField()">
                                                 <mat-icon
-                                                        style="font-size: 40px;height: 60px; width: 40px; line-height: 2">
+                                                    style="font-size: 40px;height: 60px; width: 40px; line-height: 2">
                                                     add_box
                                                 </mat-icon>
                                             </a>
@@ -62,13 +68,13 @@
                             </div>
                             <div class="card-footer">
                                 <button (click)="saveApiScore()" *ngIf="permission[0].permission == 1"
-                                        [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
+                                    [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
                                 </button>
                                 <button (click)="updateApiScore()" [hidden]="isUpdatable == false"
-                                        class="btn btn-primary me-1">Update
+                                    class="btn btn-primary me-1">Update
                                 </button>
                                 <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
-                                        class="btn btn-primary me-1">Cancel
+                                    class="btn btn-primary me-1">Cancel
                                 </button>
                                 <!--                            <button class="btn btn-secondary">Cancel</button>-->
                             </div>
@@ -79,17 +85,23 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Select Staff</label>
-                                            <select class="form-select" formControlName="staff_id" required
+                                            <!-- <select class="form-select" formControlName="staff_id" required
                                                     style="width: 100%">
                                                 <option value="null"> Select a Staff</option>
                                                 <option *ngFor="let data of memberList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
-                                            </select>
+                                            </select> -->
+                                            <ng-select formControlName="staff_id" class="form-control">
+                                                @for (car of memberList; track car.id) {
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
+                                                }
+                                            </ng-select>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <button (click)="getPaperSetting()" class="btn btn-primary me-1"
-                                                    style="margin-top: 30px;">Search
+                                                style="margin-top: 30px;">Search
                                             </button>
                                         </div>
                                     </div>
@@ -99,36 +111,36 @@
                             <div class="table-responsive">
                                 <table class="table text-center">
                                     <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th>Assignment Year</th>
-                                        <th>Download</th>
-                                        <th>Action</th>
-                                    </tr>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th>Assignment Year</th>
+                                            <th>Download</th>
+                                            <th>Action</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr
+                                        <tr
                                             *ngFor="let record of searchPaperList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
-                                        <td>{{indexOfElement + 1}}</td>
-                                        <td>{{record.assignment_year}}</td>
-                                        <!-- <td><a href="{{FILE_URL}}/api_score/{{record.file_name}}">Download</a></td> -->
-                                        <td ngbTooltip="Download">
-                                            <a data-placement="left" target="_blank" href="{{FILE_URL}}/api_score/{{record.file_name}}">
-                                                <mat-icon>cloud_download</mat-icon>
-                                            </a>
-                                        </td>
+                                            <td>{{indexOfElement + 1}}</td>
+                                            <td>{{record.assignment_year}}</td>
+                                            <!-- <td><a href="{{FILE_URL}}/api_score/{{record.file_name}}">Download</a></td> -->
+                                            <td ngbTooltip="Download">
+                                                <a data-placement="left" target="_blank"
+                                                    href="{{FILE_URL}}/api_score/{{record.file_name}}">
+                                                    <mat-icon>cloud_download</mat-icon>
+                                                </a>
+                                            </td>
 
-                                        <td>
-                                            <a (click)="editApiScore(record)"
-                                               *ngIf="permission[1].permission == 1">
-                                                <mat-icon>edit</mat-icon>
-                                            </a>
-                                            <a (click)="deletePaperSetter(record)"
-                                               *ngIf="permission[2].permission == 1">
-                                                <mat-icon>delete</mat-icon>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                            <td>
+                                                <a (click)="editApiScore(record)" *ngIf="permission[1].permission == 1">
+                                                    <mat-icon>edit</mat-icon>
+                                                </a>
+                                                <a (click)="deletePaperSetter(record)"
+                                                    *ngIf="permission[2].permission == 1">
+                                                    <mat-icon>delete</mat-icon>
+                                                </a>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <!-- <pagination-controls *ngIf="paperList.length > 5"

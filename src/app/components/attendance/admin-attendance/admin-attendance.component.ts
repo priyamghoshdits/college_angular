@@ -6,6 +6,7 @@ import {SubjectService} from "../../../services/subject.service";
 import {StudentService} from "../../../services/student.service";
 import {SessionService} from "../../../services/session.service";
 import Swal from "sweetalert2";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-admin-attendance',
@@ -15,7 +16,8 @@ import Swal from "sweetalert2";
         NgIf,
         NgxPaginationModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        NgSelectModule
     ],
     providers: [DatePipe],
     templateUrl: './admin-attendance.component.html',

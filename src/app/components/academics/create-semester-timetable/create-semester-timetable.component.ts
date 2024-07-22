@@ -16,6 +16,7 @@ import {
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {SessionService} from "../../../services/session.service";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-create-semester-timetable',
@@ -35,7 +36,8 @@ import {SessionService} from "../../../services/session.service";
         NgbNavLinkBase,
         NgbNavItem,
         NgbNavOutlet,
-        NgbTooltip
+        NgbTooltip,
+        NgSelectModule
     ],
   templateUrl: './create-semester-timetable.component.html',
   styleUrl: './create-semester-timetable.component.scss'

@@ -8,6 +8,7 @@ import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} fr
 import Swal from "sweetalert2";
 import {NgbInputDatepicker, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-apply-leave',
@@ -20,7 +21,8 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
     JsonPipe,
     FormsModule,
     NgbInputDatepicker,
-    NgIf
+    NgIf,
+    NgSelectModule
   ],
   templateUrl: './apply-leave.component.html',
   styleUrl: './apply-leave.component.scss'

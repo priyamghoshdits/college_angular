@@ -7,6 +7,7 @@ import { NgxPaginationModule } from "ngx-pagination";
 import { DepartmentService } from "../../../services/department.service";
 import Swal from "sweetalert2";
 import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-department',
@@ -17,7 +18,8 @@ import { RolesAndPermissionService } from "../../../services/roles-and-permissio
         NgForOf,
         NgxPaginationModule,
         ReactiveFormsModule,
-        NgIf
+        NgIf,
+        NgSelectModule
     ],
     templateUrl: './staff-experience.component.html',
     styleUrl: './staff-experience.component.scss'
@@ -51,8 +53,6 @@ export class StaffExperienceComponent {
 
         this.memberService.getStaffExperienceListener().subscribe((response) => {
             this.staffExperienceList = response;
-            console.log(this.staffExperienceList);
-            
         })
         this.staffExperienceList = this.memberService.getStaffExperienceList();
 

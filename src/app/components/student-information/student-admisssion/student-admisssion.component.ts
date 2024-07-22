@@ -92,7 +92,7 @@ export class StudentAdmisssionComponent {
             roll_no: new FormControl(null),
             registration_no: new FormControl(null),
             first_name: new FormControl(null, [Validators.required]),
-            middle_name: new FormControl(null),
+            middle_name: new FormControl(),
             last_name: new FormControl(null, [Validators.required]),
             gender: new FormControl(null, [Validators.required]),
             dob: new FormControl(null, [Validators.required]),
@@ -129,7 +129,7 @@ export class StudentAdmisssionComponent {
             payment_date: new FormControl(null, [Validators.required]),
             mode_of_payment: new FormControl(null, [Validators.required]),
             transaction_id: new FormControl(null, [Validators.required]),
-            caution_money: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
+            caution_money: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
         });
 
         this.franchiseService.getFranchiseListener().subscribe((response) => {
@@ -257,10 +257,17 @@ export class StudentAdmisssionComponent {
     }
 
     editStudent(data) {
+        console.log(data);
+        
         this.studentCreationForm.reset();
         this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response) => {
             // @ts-ignore
             this.semesterList = response.data;
+
+            data.transaction_id = data.caution_money_transaction_id;
+            data.payment_date = data.caution_money_payment_date;
+            data.mode_of_payment = data.caution_money_mode_of_payment;
+
             this.studentCreationForm.patchValue(data);
             this.isUpdateable = true;
             this.active = 1;

@@ -9,6 +9,7 @@ import { ExaminationService } from "../../../services/examination.service";
 import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
 import Swal from "sweetalert2";
 import { JournalPublicationServiceService } from "../../../services/journal-publication-service.service";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-journal-publication',
@@ -24,7 +25,8 @@ import { JournalPublicationServiceService } from "../../../services/journal-publ
         NgxPaginationModule,
         ReactiveFormsModule,
         NgbNavItem,
-        NgbNavOutlet
+        NgbNavOutlet,
+        NgSelectModule
     ],
     templateUrl: './journal-publication.component.html',
     styleUrl: './journal-publication.component.scss'

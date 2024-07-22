@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from '@ng-bootstrap/ng-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MemberService } from 'src/app/services/member.service';
 import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
@@ -27,7 +28,8 @@ import Swal from 'sweetalert2';
     NgbNavLinkBase,
     NgbNavItem,
     NgbNavOutlet,
-    JsonPipe
+    JsonPipe,
+    NgSelectModule
   ],
   templateUrl: './staff-education.component.html',
   styleUrl: './staff-education.component.scss'

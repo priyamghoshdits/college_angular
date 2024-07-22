@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import { BookPublicationService } from "../../../services/book-publication.service";
 import { SeminarWorkshopFacultyService } from "../../../services/seminar-workshop-faculty.service";
 import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-seminar-workshop-faculty',
@@ -22,7 +23,8 @@ import { RolesAndPermissionService } from 'src/app/services/roles-and-permission
         ReactiveFormsModule,
         FormsModule,
         NgbNavItem,
-        NgbNavOutlet
+        NgbNavOutlet,
+        NgSelectModule
     ],
     templateUrl: './seminar-workshop-faculty.component.html',
     styleUrl: './seminar-workshop-faculty.component.scss'

@@ -6,6 +6,7 @@ import { MemberService } from 'src/app/services/member.service';
 import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
 import Swal from 'sweetalert2';
 import { MatIconModule } from "@angular/material/icon";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-promotion',
@@ -16,7 +17,8 @@ import { MatIconModule } from "@angular/material/icon";
     NgIf,
     NgForOf,
     NgxPaginationModule,
-    MatIconModule
+    MatIconModule,
+    NgSelectModule
   ],
   templateUrl: './promotion.component.html',
   styleUrl: './promotion.component.scss'
