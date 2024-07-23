@@ -31,7 +31,7 @@
                                         </select>
                                         <div *ngIf="promotionForm.controls['semester_id'].errors?.['required'] && promotionForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <!-- <div class="col-md-4 mb-3">
                                         <label>Session <span style="color: red">*</span></label>
                                         <select style="width: 100%" formControlName="session_id" class="form-select" required>
                                             <option value="null">--Select--</option>
@@ -40,7 +40,7 @@
                                             </option>
                                         </select>
                                         <div *ngIf="promotionForm.controls['session_id'].errors?.['required'] && promotionForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <h5 style="margin-bottom: 23px">Promote To:-</h5>
                                 <div class="row">
@@ -54,7 +54,7 @@
                                         </select>
                                         <div *ngIf="promotionForm.controls['promote_semester_id'].errors?.['required'] && promotionForm.controls['promote_semester_id'].touched " class="text text-danger mt-1">Semester required</div>
                                     </div>
-                                    <div class="col-md-4 mb-3">
+                                    <!-- <div class="col-md-4 mb-3">
                                         <label>Session <span style="color: red">*</span></label>
                                         <select style="width: 100%" formControlName="promote_session_id" class="form-select" required>
                                             <option value="null">--Select--</option>
@@ -63,7 +63,7 @@
                                             </option>
                                         </select>
                                         <div *ngIf="promotionForm.controls['promote_session_id'].errors?.['required'] && promotionForm.controls['promote_session_id'].touched " class="text text-danger mt-1">Session required</div>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <button class="btn btn-primary me-1" (click)="searchStudents()">Search</button>

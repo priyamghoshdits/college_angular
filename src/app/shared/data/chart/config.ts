@@ -7,9 +7,9 @@ export var barChartShowYAxis = true;
 export var barChartGradient = true;
 export var barChartShowLegend = false;
 export var barChartShowXAxisLabel = true;
-export var barChartXAxisLabel = 'Country';
+export var barChartXAxisLabel = 'Month';
 export var barChartShowYAxisLabel = true;
-export var barChartYAxisLabel = 'Population';
+export var barChartYAxisLabel = '';
 export var roundEdges: boolean = true;
 export var barChartshowGridLines = false;
 export var barChartColorScheme :any = {
@@ -31,9 +31,9 @@ export var areaChartshowXAxis = true;
 export var areaChartshowYAxis = true;
 export var areaChartgradient = false;
 export var areaChartshowXAxisLabel = true;
-export var areaChartxAxisLabel = 'Country';
+export var areaChartxAxisLabel = 'Month';
 export var areaChartshowYAxisLabel = true;
-export var areaChartyAxisLabel = 'Population';
+export var areaChartyAxisLabel = '';
 export var areaChartcolorScheme :any= {
     domain: ["#007bff", "#ff9f40", "#ff5370"]
 }

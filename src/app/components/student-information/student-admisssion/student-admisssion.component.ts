@@ -15,6 +15,7 @@ import { CommonService } from "../../../services/common.service";
 import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
 import { FranchiseService } from "../../../services/franchise.service";
 import { RouterLink } from "@angular/router";
+import * as XLSX from 'xlsx';
 
 @Component({
     selector: 'app-student-admisssion',
@@ -258,7 +259,7 @@ export class StudentAdmisssionComponent {
 
     editStudent(data) {
         console.log(data);
-        
+
         this.studentCreationForm.reset();
         this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response) => {
             // @ts-ignore
@@ -541,5 +542,117 @@ export class StudentAdmisssionComponent {
             }
         });
 
+    }
+
+    exportStudentListExcel(type) {
+        // @ts-ignore
+        let x: [{ "Identification Number": any; "Name": any; "Gender": any; "DOB": any; "Religion": any; "Mobile No": any; "Email": any; "Session Name": any; "Category Name": any; "Admission Date": any; "Blood Group": any; "Course Name": any; "Semester": any; "Current Semester": any }] = [];
+        let output = [];
+
+        if (type === 1) {
+            if (this.studentList.length == 0) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'No Data To Export',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                return;
+            }
+
+            this.studentList.forEach(function (value) {
+                x = [{
+                    'Identification Number': value.identification_no,
+                    'Name': value.first_name ?? '' + ' ' + value.middle_name ?? '' + ' ' + value.last_name ?? '',
+                    'Gender': value.gender,
+                    'DOB': value.dob,
+                    'Religion': value.Hinduism,
+                    'Mobile No': value.mobile_no,
+                    'Email': value.email,
+                    'Session Name': value.session_name,
+                    'Category Name': value.category_name,
+                    'Admission Date': value.admission_date,
+                    'Blood Group': value.blood_group,
+                    'Course Name': value.course_name,
+                    'Semester': value.semester,
+                    'Current Semester': value.current_semester,
+                }];
+                // @ts-ignore
+                output.push(x[0]);
+            })
+        } else if (type === 2) {
+            if (this.nonAdmittedStudents.length == 0) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'No Data To Export',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                return;
+            }
+
+            this.nonAdmittedStudents.forEach(function (value) {
+                x = [{
+                    'Identification Number': value.identification_no,
+                    'Name': value.first_name ?? '' + ' ' + value.middle_name ?? '' + ' ' + value.last_name ?? '',
+                    'Gender': value.gender,
+                    'DOB': value.dob,
+                    'Religion': value.Hinduism,
+                    'Mobile No': value.mobile_no,
+                    'Email': value.email,
+                    'Session Name': value.session_name,
+                    'Category Name': value.category_name,
+                    'Admission Date': value.admission_date,
+                    'Blood Group': value.blood_group,
+                    'Course Name': value.course_name,
+                    'Semester': value.semester,
+                    'Current Semester': value.current_semester,
+                }];
+                // @ts-ignore
+                output.push(x[0]);
+            })
+        } else if (type === 3) {
+            if (this.disabledStudents.length == 0) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: 'No Data To Export',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+                return;
+            }
+
+            this.disabledStudents.forEach(function (value) {
+                x = [{
+                    'Identification Number': value.identification_no,
+                    'Name': value.first_name ?? '' + ' ' + value.middle_name ?? '' + ' ' + value.last_name ?? '',
+                    'Gender': value.gender,
+                    'DOB': value.dob,
+                    'Religion': value.Hinduism,
+                    'Mobile No': value.mobile_no,
+                    'Email': value.email,
+                    'Session Name': value.session_name,
+                    'Category Name': value.category_name,
+                    'Admission Date': value.admission_date,
+                    'Blood Group': value.blood_group,
+                    'Course Name': value.course_name,
+                    'Semester': value.semester,
+                    'Current Semester': value.current_semester,
+                }];
+                // @ts-ignore
+                output.push(x[0]);
+            })
+        }
+
+        /* pass here the table id */
+        const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(output);
+        /* generate workbook and add the worksheet */
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+        /* save to file */
+        XLSX.writeFile(wb, 'Student-List-Report.xlsx');
     }
 }

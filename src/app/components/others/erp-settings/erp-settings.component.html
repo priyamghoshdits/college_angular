@@ -8,75 +8,91 @@
                             <h5>System Settings</h5><span>System Settings</span>
                         </div>
                         <div class="card-body">
-                            <form class="theme-form" [formGroup]="courseForm">
-                                <div  class="row">
+                            <form class="theme-form" [formGroup]="erpForm">
+                                <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Title</label>
-                                        <input class="form-control" formControlName="title" id="exampleInputEmail1" type="text"
-                                               placeholder="Enter title">
-                                        <div *ngIf="courseForm.controls['title'].errors?.['required'] && courseForm.controls['title'].touched " class="text text-danger mt-1">Title required</div>
+                                        <input class="form-control" formControlName="title" id="exampleInputEmail1"
+                                            type="text" placeholder="Enter title">
+                                        <div *ngIf="erpForm.controls['title'].errors?.['required'] && erpForm.controls['title'].touched "
+                                            class="text text-danger mt-1">Title required</div>
                                     </div>
                                 </div>
-                                <div  class="row">
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Session</label>
+                                        <select style="width: 100%" class="form-select" formControlName="session_id">
+                                            <option value="null">Select</option>
+                                            <option *ngFor="let data of sessionList" [value]="data.id">
+                                                {{data.name}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- <div  class="row">
                                     <div class="col-md-12 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Fav icon</label>
                                         <input class="form-control" formControlName="fav_icon" id="exampleInputEmail1" type="text"
                                                placeholder="Enter fav_icon">
                                         <div *ngIf="courseForm.controls['fav_icon'].errors?.['required'] && courseForm.controls['fav_icon'].touched " class="text text-danger mt-1">Fav Icon required</div>
                                     </div>
+                                </div> -->
+
+                                <div class="col-md-3 mb-3">
+                                    <button *ngIf="permission[3].permission == 1" class="btn btn-primary me-1" style="margin-top: 30px" (click)="saveErpForm()">Submit</button>
                                 </div>
                             </form>
                         </div>
-<!--                        <div class="card-footer">-->
-<!--                            <button *ngIf="permission[0].permission === 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCourse()">Submit</button>-->
-<!--                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
-<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
-<!--                        </div>-->
+                        <!--                        <div class="card-footer">-->
+                        <!--                            <button *ngIf="permission[0].permission === 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCourse()">Submit</button>-->
+                        <!--                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
+                        <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
+                        <!--                        </div>-->
                     </div>
                 </div>
             </div>
         </div>
-<!--        <div class="col-sm-12 col-xl-6">-->
-<!--            <div class="row" *ngIf="permission[3].permission === 1">-->
-<!--                <div class="col-sm-12">-->
-<!--                    <div class="col-sm-12">-->
-<!--                        <div class="card">-->
-<!--                            <div class="card-header">-->
-<!--                                <h5>Course List</h5>-->
-<!--                                <span>Full Course List.</span>-->
-<!--                            </div>-->
-<!--                            <div class="table-responsive" >-->
-<!--                                <table class="table" >-->
-<!--                                    <thead>-->
-<!--                                    <tr>-->
-<!--                                        <th scope="col">#</th>-->
-<!--                                        <th scope="col">Name</th>-->
-<!--                                        <th scope="col">Semester</th>-->
-<!--                                        <th scope="col" *ngIf="permission[1].permission === 1 || permission[2].permission === 1">Action</th>-->
-<!--                                    </tr>-->
-<!--                                    </thead>-->
-<!--                                    <tbody>-->
-<!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
-<!--                                        <td>{{indexOfElement+1}}</td>-->
-<!--                                        <td>{{record.course_name}}</td>-->
-<!--                                        <td>-->
-<!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
-<!--                                        </td>-->
-<!--                                        <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">-->
-<!--                                            <a *ngIf="permission[1].permission === 1" (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
-<!--                                            <a *ngIf="permission[2].permission === 1" (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
-<!--                                        </td>-->
-<!--                                    </tr>-->
-<!--                                    </tbody>-->
-<!--                                </table>-->
-<!--                                <pagination-controls *ngIf="courseList.length > 9" (pageChange)="p = $event"></pagination-controls>-->
+        <!--        <div class="col-sm-12 col-xl-6">-->
+        <!--            <div class="row" *ngIf="permission[3].permission === 1">-->
+        <!--                <div class="col-sm-12">-->
+        <!--                    <div class="col-sm-12">-->
+        <!--                        <div class="card">-->
+        <!--                            <div class="card-header">-->
+        <!--                                <h5>Course List</h5>-->
+        <!--                                <span>Full Course List.</span>-->
+        <!--                            </div>-->
+        <!--                            <div class="table-responsive" >-->
+        <!--                                <table class="table" >-->
+        <!--                                    <thead>-->
+        <!--                                    <tr>-->
+        <!--                                        <th scope="col">#</th>-->
+        <!--                                        <th scope="col">Name</th>-->
+        <!--                                        <th scope="col">Semester</th>-->
+        <!--                                        <th scope="col" *ngIf="permission[1].permission === 1 || permission[2].permission === 1">Action</th>-->
+        <!--                                    </tr>-->
+        <!--                                    </thead>-->
+        <!--                                    <tbody>-->
+        <!--                                    <tr *ngFor="let record of courseList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">-->
+        <!--                                        <td>{{indexOfElement+1}}</td>-->
+        <!--                                        <td>{{record.course_name}}</td>-->
+        <!--                                        <td>-->
+        <!--                                            <p *ngFor="let records of record.semester"> {{records.name}} </p>-->
+        <!--                                        </td>-->
+        <!--                                        <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">-->
+        <!--                                            <a *ngIf="permission[1].permission === 1" (click)="editCourse(record)"><mat-icon>edit</mat-icon></a>-->
+        <!--                                            <a *ngIf="permission[2].permission === 1" (click)="deleteCourse(record)"><mat-icon>delete</mat-icon></a>-->
+        <!--                                        </td>-->
+        <!--                                    </tr>-->
+        <!--                                    </tbody>-->
+        <!--                                </table>-->
+        <!--                                <pagination-controls *ngIf="courseList.length > 9" (pageChange)="p = $event"></pagination-controls>-->
 
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+        <!--                            </div>-->
+        <!--                        </div>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
     </div>
 </div>
 <!-- Container-fluid Ends-->

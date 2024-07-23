@@ -35,6 +35,7 @@ export class PromoteStudentComponent {
     p: number;
     rolesAndPermission: any[] = [];
     permission: any[] = [];
+    session_id: any;
 
     constructor(private subjectService: SubjectService, private sessionService: SessionService, private studentService: StudentService, private roleAndPermissionService: RolesAndPermissionService) {
         this.promotionForm = new FormGroup({
@@ -42,8 +43,8 @@ export class PromoteStudentComponent {
             course_id: new FormControl(null, [Validators.required]),
             semester_id: new FormControl(null, [Validators.required]),
             promote_semester_id: new FormControl(null, [Validators.required]),
-            session_id: new FormControl(null, [Validators.required]),
-            promote_session_id: new FormControl(null, [Validators.required]),
+            // session_id: new FormControl(null, [Validators.required]),
+            // promote_session_id: new FormControl(null, [Validators.required]),
         });
         this.subjectService.getCourseListener().subscribe((response) => {
             this.courseList = response;
@@ -67,6 +68,9 @@ export class PromoteStudentComponent {
         if (this.rolesAndPermission.length > 0) {
             this.permission = this.rolesAndPermission.find(x => x.name == 'PROMOTE STUDENTS').permission;
         }
+
+        //@ts-ignore
+        this.session_id = JSON.parse(localStorage.getItem('session_id'));
     }
 
     getSemester() {
@@ -83,7 +87,7 @@ export class PromoteStudentComponent {
         }
         let studentsByCourse = this.studentList.filter(x => x.course_id == this.promotionForm.value.course_id);
         let studentsBySemester = studentsByCourse.filter(x => x.current_semester_id == this.promotionForm.value.semester_id);
-        this.filteredStudent = studentsBySemester.filter(x => x.session_id == this.promotionForm.value.session_id);
+        this.filteredStudent = studentsBySemester.filter(x => x.session_id == this.session_id);
         this.filteredStudent.forEach(function (value) {
             value.checked = false;
         });
@@ -125,7 +129,7 @@ export class PromoteStudentComponent {
             return;
         }
         let promote_semester_id = this.promotionForm.value.promote_semester_id;
-        let promote_session_id = this.promotionForm.value.promote_session_id;
+        let promote_session_id = this.session_id;
         checkedStudent.forEach(function (value) {
             value.promote_semester_id = promote_semester_id;
             value.promote_session_id = promote_session_id;

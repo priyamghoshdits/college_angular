@@ -6,6 +6,7 @@ import {CommonService} from "../../../services/common.service";
 import {HttpClient} from "@angular/common/http";
 import {SessionService} from "../../../services/session.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { ErpSettingService } from 'src/app/services/erp-setting.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -25,7 +26,7 @@ export class SidebarComponent {
 
     constructor(private router: Router, public navServices: NavService
         , private commonService: CommonService, private rolesAndPermission: RolesAndPermissionService
-        , private http: HttpClient, private sessionService: SessionService) {
+        , private http: HttpClient, private sessionService: SessionService, private erpSettingService: ErpSettingService) {
         // @ts-ignore
         this.user = JSON.parse(localStorage.getItem('user'));
         if (this.user) {
