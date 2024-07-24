@@ -61,7 +61,7 @@ export class SessionService {
           // @ts-ignore
           if(response.success == 1){
             // @ts-ignore
-            const index = this.sessionList.findIndex(x => x.course_id === response.data.course_id);
+            const index = this.sessionList.findIndex(x => x.id === response.data.id);
             this.sessionList.splice(index,1);
             this.sessionListSubject.next([...this.sessionList]);
           }
