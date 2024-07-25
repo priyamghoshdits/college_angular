@@ -63,6 +63,8 @@ export class StudentAdmisssionComponent {
     father_income_proof: null;
     mother_income_proof: null;
 
+    maxSize =  1 * 1024 * 1024; // 1 MB in bytes
+
     abcFile: File;
     studentSignatureFile: File;
     admissionLetterFile: File;
@@ -210,46 +212,167 @@ export class StudentAdmisssionComponent {
     // }
 
     selectProfilePic(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
         this.profile_image = event.target.files[0];
     }
 
     selectAdmissionSlip(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
         this.admission_slip = event.target.files[0];
     }
 
     selectRegistrationFile(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
         this.registration_no_proof = event.target.files[0];
     }
 
     uploadAadhaarCard(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
         this.aadhaar_card_proof = event.target.files[0];
     }
 
     uploadLabReport(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
         this.blood_group_proof = event.target.files[0];
     }
 
     uploadDateOfBirthProof(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
         this.dob_proof = event.target.files[0];
     }
 
     uploadFatherIncomeCertificate(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
         this.father_income_proof = event.target.files[0];
     }
 
     uploadMotherIncomeCertificate(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
         this.mother_income_proof = event.target.files[0];
     }
 
     uploadAbcId(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
         this.abcFile = event.target.files[0];
     }
 
     uploadSignature(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
         this.studentSignatureFile = event.target.files[0];
     }
 
     uploadAdmissionLatter(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
         this.admissionLetterFile = event.target.files[0];
     }
 
