@@ -43,7 +43,7 @@ export class JournalPublicationComponent {
     rolesAndPermission: any[] = [];
     permission: any[] = [];
     filesArray: File[] = [];
-
+    maxSize =  1 * 1024 * 1024; // 1 MB in bytes
     memberList: any[];
 
     constructor(private memberService: MemberService, private examinationService: ExaminationService
@@ -86,6 +86,19 @@ export class JournalPublicationComponent {
     }
 
     fileUpload(event: any, index: number) {
+
+        if (event.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
         const file = event.target.files[0];
         if (file) {
             this.filesArray[index] = file;
@@ -190,7 +203,7 @@ export class JournalPublicationComponent {
             if (response.success == 1) {
                 this.searchPaperList = response.data;
                 console.log(this.searchPaperList);
-                
+
             }
         })
     }

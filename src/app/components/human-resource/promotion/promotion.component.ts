@@ -32,6 +32,7 @@ export class PromotionComponent {
   permission: any[] = [];
   promotionList: any[];
   p: number;
+  maxSize =  1 * 1024 * 1024; // 1 MB in bytes
 
 
   constructor(private memberService: MemberService, private roleAndPermissionService: RolesAndPermissionService) {
@@ -68,8 +69,20 @@ export class PromotionComponent {
   }
 
 
-  uploadPromotionFile(evenet) {
-    this.promotionFile = evenet.target.files[0];
+  uploadPromotionFile(event) {
+    if (event.target.files[0].size > this.maxSize) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select file max 1 mb',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      event.target.value = '';
+      return;
+    }
+
+    this.promotionFile = event.target.files[0];
   }
 
   savePromotionForm() {

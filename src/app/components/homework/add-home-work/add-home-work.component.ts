@@ -42,6 +42,8 @@ export class AddHomeWorkComponent {
   p: number;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
+  maxSize = 1 * 1024 * 1024; // 1 MB in bytes
+
   constructor(private subjectService: SubjectService, public homeworkService: HomeworkService
     , private roleAndPermissionService: RolesAndPermissionService) {
     this.homeworkForm = new FormGroup({
@@ -88,6 +90,18 @@ export class AddHomeWorkComponent {
   }
 
   setFile(event) {
+    if (event.target.files[0].size > this.maxSize) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select file max 1 mb',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      event.target.value = '';
+      return;
+    }
+
     this.file = event.target.files[0];
   }
 

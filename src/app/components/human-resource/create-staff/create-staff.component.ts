@@ -93,6 +93,8 @@ export class CreateStaffComponent {
     aadhaarProof: any = null;
     panProof: any = null;
 
+    maxSize = 1 * 1024 * 1024; // 1 MB in bytes
+
     constructor(private departmentService: DepartmentService, private modalService: NgbModal
         , private calendar: NgbCalendar, private memberService: MemberService
         , private imageService: ImageService, private designationService: DesignationService
@@ -187,6 +189,18 @@ export class CreateStaffComponent {
     }
 
     onSelect1(event) {
+        if (event.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
         let file;
         file = event.target.files[0];
         const formData = new FormData();
@@ -200,30 +214,114 @@ export class CreateStaffComponent {
 
 
     uploadDobCertificate(e: any) {
+        if (e.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            e.target.value = '';
+            return;
+        }
+
         this.dobCertificateproof = e.target.files[0];
     }
 
     uploadJoiningLetter(e: any) {
+        if (e.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            e.target.value = '';
+            return;
+        }
+
         this.joiningLetterProof = e.target.files[0];
     }
 
     uploadProfileImage(e: any) {
+        if (e.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            e.target.value = '';
+            return;
+        }
+
         this.profileImage = e.target.files[0];
     }
 
     uploadBloodGroupProof(e: any) {
+        if (e.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            e.target.value = '';
+            return;
+        }
+
         this.bloodGroupProof = e.target.files[0];
     }
 
     uploadCasteCertificate(e: any) {
+        if (e.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            e.target.value = '';
+            return;
+        }
+
         this.casteCertificateProof = e.target.files[0];
     }
 
     uploadAadhaar(e: any) {
+        if (e.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            e.target.value = '';
+            return;
+        }
+
         this.aadhaarProof = e.target.files[0];
     }
 
     uploadPan(e: any) {
+        if (e.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            e.target.value = '';
+            return;
+        }
+
         this.panProof = e.target.files[0];
     }
 

@@ -43,6 +43,7 @@ export class PaperPosterComponent {
   fileArray: File[] = [];
   isUpdatable: boolean = false;
   paperPosterList: any[] = [];
+  maxSize = 1 * 1024 * 1024; // 1 MB in bytes
 
   constructor(private roleAndPermissionService: RolesAndPermissionService, private memberService: MemberService, private paperPosterService: PaperPosterService) {
 
@@ -143,6 +144,18 @@ export class PaperPosterComponent {
 
 
   fileUpload(event, index) {
+    if (event.target.files[0].size > this.maxSize) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select file max 1 mb',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      event.target.value = '';
+      return;
+    }
+
     const file = event.target.files[0];
     if (file) {
       this.fileArray[index] = file;

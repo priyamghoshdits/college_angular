@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {SubjectService} from "../../../services/subject.service";
-import {LibraryService} from "../../../services/library.service";
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
+import { SubjectService } from "../../../services/subject.service";
+import { LibraryService } from "../../../services/library.service";
 import Swal from "sweetalert2";
-import {environment} from "../../../../environments/environment";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { environment } from "../../../../environments/environment";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
 
 @Component({
-  selector: 'app-upload-digital-book',
-  standalone: true,
+    selector: 'app-upload-digital-book',
+    standalone: true,
     imports: [
         MatIconModule,
         NgForOf,
         NgIf,
         ReactiveFormsModule
     ],
-  templateUrl: './upload-digital-book.component.html',
-  styleUrl: './upload-digital-book.component.scss'
+    templateUrl: './upload-digital-book.component.html',
+    styleUrl: './upload-digital-book.component.scss'
 })
 export class UploadDigitalBookComponent {
     public FILE_URL = environment.FILE_URL;
@@ -31,9 +31,10 @@ export class UploadDigitalBookComponent {
     libraryDigitalBookList: any[];
     rolesAndPermission: any[] = [];
     permission: any[] = [];
+    maxSize =  10 * 1024 * 1024; // 1 MB in bytes
 
     constructor(private subjectService: SubjectService, private libraryService: LibraryService
-                , private roleAndPermissionService: RolesAndPermissionService) {
+        , private roleAndPermissionService: RolesAndPermissionService) {
         this.libraryDigitalBookForm = new FormGroup({
             id: new FormControl(null),
             book_id: new FormControl(null, [Validators.required]),
@@ -47,7 +48,7 @@ export class UploadDigitalBookComponent {
             this.permission = this.rolesAndPermission.find(x => x.name == 'UPLOAD DIGITAL BOOK').permission;
         });
         this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
-        if(this.rolesAndPermission.length > 0){
+        if (this.rolesAndPermission.length > 0) {
             this.permission = this.rolesAndPermission.find(x => x.name == 'UPLOAD DIGITAL BOOK').permission;
         }
 
@@ -61,20 +62,20 @@ export class UploadDigitalBookComponent {
         });
         this.courseList = this.subjectService.getCourses();
 
-        this.libraryService.getLibraryItemListener().subscribe((response) =>{
+        this.libraryService.getLibraryItemListener().subscribe((response) => {
             this.libraryItemList = response;
         });
         this.libraryItemList = this.libraryService.getLibraryItemList();
     }
 
-    getSemester(){
+    getSemester() {
         this.subjectService.getSemesterByCourseId(this.libraryDigitalBookForm.value.course_id).subscribe((response: any) => {
             this.semesterList = response.data;
         })
     };
 
-    uploadDigitalBooks(){
-        if(!this.file){
+    uploadDigitalBooks() {
+        if (!this.file) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -92,7 +93,7 @@ export class UploadDigitalBookComponent {
         formData.append("file_name", this.file['name']);
         formData.append("file", this.file);
         this.libraryService.saveLibraryDigitalBooks(formData).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -105,19 +106,19 @@ export class UploadDigitalBookComponent {
         })
     }
 
-    updateDigitalBooks(){
+    updateDigitalBooks() {
 
         const formData = new FormData();
         formData.append("id", this.libraryDigitalBookForm.value.id);
         formData.append("book_id", this.libraryDigitalBookForm.value.book_id);
         formData.append("course_id", this.libraryDigitalBookForm.value.course_id);
         formData.append("semester_id", this.libraryDigitalBookForm.value.semester_id);
-        if(this.file){
+        if (this.file) {
             formData.append("file_name", this.file['name']);
             formData.append("file", this.file);
         }
         this.libraryService.updateLibraryDigitalBooks(formData).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -130,27 +131,41 @@ export class UploadDigitalBookComponent {
         })
     }
 
-    cancelUpdate(){
+    cancelUpdate() {
         this.libraryDigitalBookForm.reset();
         this.isUpdatable = false;
     }
 
-    setFile(event){
+    setFile(event) {
+        if (event.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
         this.file = event.target.files[0];
     }
 
-    editDigitalBook(data){
+    editDigitalBook(data) {
         this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 this.semesterList = response.data;
-                this.libraryDigitalBookForm.patchValue({id: data.id, book_id: data.book_id
-                    , course_id: data.course_id, semester_id: data.semester_id });
+                this.libraryDigitalBookForm.patchValue({
+                    id: data.id, book_id: data.book_id
+                    , course_id: data.course_id, semester_id: data.semester_id
+                });
                 this.isUpdatable = true;
             }
         })
     }
 
-    deleteDigitalBook(data){
+    deleteDigitalBook(data) {
         Swal.fire({
             title: 'Confirmation',
             text: 'Do you sure to delete ?',
@@ -160,9 +175,9 @@ export class UploadDigitalBookComponent {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, save It!'
         }).then((result) => {
-            if(result.isConfirmed){
+            if (result.isConfirmed) {
                 this.libraryService.deleteLibraryDigitalBooks(data.id).subscribe((response: any) => {
-                    if(response.success == 1){
+                    if (response.success == 1) {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',

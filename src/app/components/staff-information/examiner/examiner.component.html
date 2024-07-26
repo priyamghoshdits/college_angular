@@ -87,7 +87,7 @@
                                             <label>Upload File</label>
                                             <input type="file" class="form-control"
                                                 [(ngModel)]="examinerArray[indexOfElement].upload_file"
-                                                (change)="fileUpload($event,indexOfElement)" placeholder="Upload File"
+                                                (change)="fileUpload($event,indexOfElement)" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" placeholder="Upload File"
                                                 required>
                                         </div>
                                     </div>

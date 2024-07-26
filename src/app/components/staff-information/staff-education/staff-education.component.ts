@@ -49,7 +49,7 @@ export class StaffEducationComponent {
   staffEducationList: any[] = []
   degreeList: any[] = [];
   searchForm: FormGroup;
-
+  maxSize = 1 * 1024 * 1024; // 1 MB in bytes
   rolesAndPermission: any[] = [];
   permission: any[] = [];
 
@@ -97,6 +97,19 @@ export class StaffEducationComponent {
 
 
   fileUpload(event: any, index: number) {
+
+    if (event.target.files[0].size > this.maxSize) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select file max 1 mb',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      event.target.value = '';
+      return;
+    }
+
     const file = event.target.files[0];
     if (file) {
       this.filesArray[index] = file; // Store file in the files array

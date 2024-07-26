@@ -1,12 +1,12 @@
-import {Component} from '@angular/core';
-import {NgForOf, NgIf} from "@angular/common";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {SubjectService} from "../../../services/subject.service";
-import {DownloadCenterService} from "../../../services/download-center.service";
+import { Component } from '@angular/core';
+import { NgForOf, NgIf } from "@angular/common";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { SubjectService } from "../../../services/subject.service";
+import { DownloadCenterService } from "../../../services/download-center.service";
 import Swal from "sweetalert2";
-import {MatIconModule} from "@angular/material/icon";
-import {CustomFilterPipe} from "custom-filter.pipe";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { MatIconModule } from "@angular/material/icon";
+import { CustomFilterPipe } from "custom-filter.pipe";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
 import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
@@ -37,6 +37,7 @@ export class UploadContentComponent {
     searchItem: string;
     rolesAndPermission: any[] = [];
     permission: any[] = [];
+    maxSize = 10 * 1024 * 1024; // 1 MB in bytes
 
     constructor(private subjectService: SubjectService, private downloadCenterService: DownloadCenterService
         , private roleAndPermissionService: RolesAndPermissionService) {
@@ -94,6 +95,18 @@ export class UploadContentComponent {
     }
 
     setFile(event) {
+        if (event.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
         this.file = event.target.files[0];
     }
 

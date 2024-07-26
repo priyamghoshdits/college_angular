@@ -79,7 +79,7 @@
                                     <div class="col-md-12 mb-3">
                                         <label class="col-form-label pt-0">Upload Experience Proof</label>
                                         <input (change)="uploadExperienceProof($event)" class="form-control"
-                                            formControlName="experience_proof" type="file">
+                                            formControlName="experience_proof" type="file" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                         <div *ngIf="staffExperienceForm.controls['experience_proof'].errors?.['required'] && staffExperienceForm.controls['experience_proof'].touched "
                                             class="text text-danger mt-1">Experience Proof required
                                         </div>

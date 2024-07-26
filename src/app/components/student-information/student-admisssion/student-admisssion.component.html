@@ -38,87 +38,89 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Student ID</label>
-                                            <input (blur)="checkUniqueId()" class="form-control" formControlName="identification_no"
-                                                   placeholder="Student Id" type="text">
+                                            <input (blur)="checkUniqueId()" class="form-control"
+                                                formControlName="identification_no" placeholder="Student Id"
+                                                type="text">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>First Name</label>
-                                            <input class="form-control" formControlName="first_name" placeholder="First name"
-                                                   type="text">
+                                            <input class="form-control" formControlName="first_name"
+                                                placeholder="First name" type="text">
                                             <div *ngIf="studentCreationForm.controls['first_name'].errors?.['required'] && studentCreationForm.controls['first_name'].touched "
-                                                 class="text text-danger mt-1">First Name required
+                                                class="text text-danger mt-1">First Name required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Middle Name</label>
-                                            <input class="form-control" formControlName="middle_name" placeholder="Middle Name"
-                                                   type="text">
+                                            <input class="form-control" formControlName="middle_name"
+                                                placeholder="Middle Name" type="text">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Last Name</label>
-                                            <input class="form-control" formControlName="last_name" placeholder="Last Name"
-                                                   type="text">
+                                            <input class="form-control" formControlName="last_name"
+                                                placeholder="Last Name" type="text">
                                             <div *ngIf="studentCreationForm.controls['last_name'].errors?.['required'] && studentCreationForm.controls['last_name'].touched "
-                                                 class="text text-danger mt-1">Last Name required
+                                                class="text text-danger mt-1">Last Name required
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Date Of Birth</label>
-                                            <input class="form-control digits" formControlName="dob" id="example-datetime-local-input"
-                                                   type="date">
+                                            <input class="form-control digits" formControlName="dob"
+                                                id="example-datetime-local-input" type="date">
                                             <div *ngIf="studentCreationForm.controls['dob'].errors?.['required'] && studentCreationForm.controls['dob'].touched "
-                                                 class="text text-danger mt-1">Date of Birth required
+                                                class="text text-danger mt-1">Date of Birth required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload date of birth proof</label>
-                                            <input accept=".pdf, .xls, .xlsx, .doc, .docx" (change)="uploadDateOfBirthProof($event)" [multiple]="false" class="form-control"
-                                                   type="file">
+                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                (change)="uploadDateOfBirthProof($event)" [multiple]="false"
+                                                class="form-control" type="file">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Admission date</label>
                                             <input class="form-control digits" formControlName="admission_date"
-                                                   id="example-datetime-local-input" type="date">
+                                                id="example-datetime-local-input" type="date">
                                             <div *ngIf="studentCreationForm.controls['admission_date'].errors?.['required'] && studentCreationForm.controls['admission_date'].touched "
-                                                 class="text text-danger mt-1">Admission Date required
+                                                class="text text-danger mt-1">Admission Date required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload Admission Slip</label>
-                                            <input accept=".pdf, .xls, .xlsx, .doc, .docx" (change)="selectAdmissionSlip($event)" [multiple]="false" class="form-control"
-                                                   type="file">
+                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                (change)="selectAdmissionSlip($event)" [multiple]="false"
+                                                class="form-control" type="file">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Phone Number</label>
-                                            <input class="form-control" formControlName="mobile_no" placeholder="Phone Number"
-                                                   type="text">
+                                            <input class="form-control" formControlName="mobile_no"
+                                                placeholder="Phone Number" type="text">
                                             <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['required'] && studentCreationForm.controls['mobile_no'].touched "
-                                                 class="text text-danger mt-1">Mobile Number required
+                                                class="text text-danger mt-1">Mobile Number required
                                             </div>
                                             <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']"
-                                                 class="text text-danger mt-1">Invalid Mobile Number
+                                                class="text text-danger mt-1">Invalid Mobile Number
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Emergency Contact Number</label>
                                             <input class="form-control" formControlName="emergency_phone_number"
-                                                   placeholder="Emergency Contact Number"
-                                                   type="text">
+                                                placeholder="Emergency Contact Number" type="text">
                                             <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['required'] && studentCreationForm.controls['emergency_phone_number'].touched "
-                                                 class="text text-danger mt-1">Emergency phone required
+                                                class="text text-danger mt-1">Emergency phone required
                                             </div>
                                             <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['pattern']"
-                                                 class="text text-danger mt-1">Invalid Emergency Contact
+                                                class="text text-danger mt-1">Invalid Emergency Contact
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Marital Status</label>
                                             <select class="form-select" formControlName="material_status"
-                                                    style="width: 100%">
+                                                style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option value="Single"> Single</option>
                                                 <option value="Married"> Married</option>
@@ -135,7 +137,7 @@
                                                 <option value="Female"> Female</option>
                                             </select>
                                             <div *ngIf="studentCreationForm.controls['gender'].errors?.['required'] && studentCreationForm.controls['gender'].touched "
-                                                 class="text text-danger mt-1">Gender required
+                                                class="text text-danger mt-1">Gender required
                                             </div>
                                         </div>
 
@@ -144,13 +146,13 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Profile Image</label>
                                             <!--                                            <input type="file" class="form-control" [multiple]="false" (change)="onSelect1($event)">-->
-                                            <input accept=".jpg, .jpeg, .png" (change)="selectProfilePic($event)" [multiple]="false" class="form-control"
-                                                   type="file">
+                                            <input accept=".jpg, .jpeg, .png" (change)="selectProfilePic($event)"
+                                                [multiple]="false" class="form-control" type="file">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Blood Group</label>
                                             <select class="form-select" formControlName="blood_group"
-                                                    style="width: 100%">
+                                                style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option value="A+"> A+</option>
                                                 <option value="A-"> A-</option>
@@ -173,8 +175,9 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload Lab Report</label>
-                                            <input accept=".pdf, .xls, .xlsx, .doc, .docx" (change)="uploadLabReport($event)" [multiple]="false" class="form-control"
-                                                   type="file">
+                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                (change)="uploadLabReport($event)" [multiple]="false"
+                                                class="form-control" type="file">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Agent</label>
@@ -185,7 +188,7 @@
                                                 </option>
                                             </select>
                                             <div *ngIf="studentCreationForm.controls['agent_id'].errors?.['required'] && studentCreationForm.controls['agent_id'].touched "
-                                                 class="text text-danger mt-1">Agent required
+                                                class="text text-danger mt-1">Agent required
                                             </div>
                                         </div>
                                     </div>
@@ -209,39 +212,39 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Email address (Login Email)</label>
-                                            <input class="form-control" formControlName="email" placeholder="name@example.com"
-                                                   type="email">
+                                            <input class="form-control" formControlName="email"
+                                                placeholder="name@example.com" type="email">
                                             <div *ngIf="studentCreationForm.controls['email'].errors?.['required'] && studentCreationForm.controls['email'].touched "
-                                                 class="text text-danger mt-1">Email is required
+                                                class="text text-danger mt-1">Email is required
                                             </div>
                                             <div *ngIf="studentCreationForm.controls['email'].errors?.['email']"
-                                                 class="text text-danger mt-1">Invalid Email
+                                                class="text text-danger mt-1">Invalid Email
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Course</label>
-                                            <select (change)="getSemester()" class="form-select" formControlName="course_id"
-                                                    required style="width: 100%">
+                                            <select (change)="getSemester()" class="form-select"
+                                                formControlName="course_id" required style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of courseList" [value]="data.id">
                                                     {{data.course_name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="studentCreationForm.controls['course_id'].errors?.['required'] && studentCreationForm.controls['course_id'].touched "
-                                                 class="text text-danger mt-1">Course required
+                                                class="text text-danger mt-1">Course required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Semester</label>
                                             <select class="form-select" formControlName="semester_id"
-                                                    style="width: 100%">
+                                                style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                                     {{data.name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="studentCreationForm.controls['semester_id'].errors?.['required'] && studentCreationForm.controls['semester_id'].touched "
-                                                 class="text text-danger mt-1">Semester required
+                                                class="text text-danger mt-1">Semester required
                                             </div>
                                         </div>
                                     </div>
@@ -249,97 +252,102 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Caste</label>
                                             <select class="form-select" formControlName="category_id"
-                                                    style="width: 100%">
+                                                style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of categoryList" [value]="data.id">
                                                     {{data.name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="studentCreationForm.controls['category_id'].errors?.['required'] && studentCreationForm.controls['category_id'].touched "
-                                                 class="text text-danger mt-1">Caste required
+                                                class="text text-danger mt-1">Caste required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Current Address</label>
-                                            <input class="form-control" formControlName="current_address" placeholder="Current Address"
-                                                   type="text">
+                                            <input class="form-control" formControlName="current_address"
+                                                placeholder="Current Address" type="text">
                                             <div *ngIf="studentCreationForm.controls['current_address'].errors?.['required'] && studentCreationForm.controls['current_address'].touched "
-                                                 class="text text-danger mt-1">Current Address required
+                                                class="text text-danger mt-1">Current Address required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Permanent Address</label>
-                                            <input class="form-control" formControlName="permanent_address" placeholder="Permanent Address"
-                                                   type="text">
+                                            <input class="form-control" formControlName="permanent_address"
+                                                placeholder="Permanent Address" type="text">
                                             <div *ngIf="studentCreationForm.controls['permanent_address'].errors?.['required'] && studentCreationForm.controls['permanent_address'].touched "
-                                                 class="text text-danger mt-1">Permanent Address required
+                                                class="text text-danger mt-1">Permanent Address required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload aadhaar Card</label>
-                                            <input accept=".pdf, .xls, .xlsx, .doc, .docx" (change)="uploadAadhaarCard($event)" [multiple]="false" class="form-control"
-                                                   type="file">
+                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                (change)="uploadAadhaarCard($event)" [multiple]="false"
+                                                class="form-control" type="file">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Select Franchise</label>
                                             <select class="form-select" formControlName="franchise_id"
-                                                    style="width: 100%">
+                                                style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of franchiseList" [value]="data.id">
                                                     {{data.name}}
                                                 </option>
                                             </select>
                                             <div *ngIf="studentCreationForm.controls['franchise_id'].errors?.['required'] && studentCreationForm.controls['franchise_id'].touched "
-                                                 class="text text-danger mt-1">Franchise required
+                                                class="text text-danger mt-1">Franchise required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Roll No</label>
                                             <input class="form-control" formControlName="roll_no" placeholder="Roll No"
-                                                   type="text">
+                                                type="text">
                                             <div *ngIf="studentCreationForm.controls['roll_no'].errors?.['required'] && studentCreationForm.controls['roll_no'].touched "
-                                                 class="text text-danger mt-1">Roll No required
+                                                class="text text-danger mt-1">Roll No required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Registration No</label>
-                                            <input class="form-control" formControlName="registration_no" placeholder="Registration No"
-                                                   type="text">
+                                            <input class="form-control" formControlName="registration_no"
+                                                placeholder="Registration No" type="text">
                                             <div *ngIf="studentCreationForm.controls['registration_no'].errors?.['required'] && studentCreationForm.controls['registration_no'].touched "
-                                                 class="text text-danger mt-1">Registration No required
+                                                class="text text-danger mt-1">Registration No required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload registration certificate</label>
-                                            <input accept=".pdf, .xls, .xlsx, .doc, .docx" (change)="selectRegistrationFile($event)" [multiple]="false" class="form-control"
-                                                   type="file">
+                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                (change)="selectRegistrationFile($event)" [multiple]="false"
+                                                class="form-control" type="file">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>ABC ID (Academic bank of credit)</label>
-                                            <input class="form-control" formControlName="abc_id" placeholder="Enter ABC ID"
-                                                   type="text">
+                                            <input class="form-control" formControlName="abc_id"
+                                                placeholder="Enter ABC ID" type="text">
                                             <div *ngIf="studentCreationForm.controls['abc_id'].errors?.['required'] && studentCreationForm.controls['abc_id'].touched "
-                                                 class="text text-danger mt-1">Roll No required
+                                                class="text text-danger mt-1">Roll No required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload ABC</label>
-                                            <input accept=".pdf, .xls, .xlsx, .doc, .docx" (change)="uploadAbcId($event)" [multiple]="false" class="form-control"
-                                                   type="file">
+                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                (change)="uploadAbcId($event)" [multiple]="false" class="form-control"
+                                                type="file">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload Student Signature</label>
-                                            <input accept=".pdf, .xls, .xlsx, .doc, .docx" (change)="uploadSignature($event)" [multiple]="false" class="form-control"
-                                                   type="file">
+                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                (change)="uploadSignature($event)" [multiple]="false"
+                                                class="form-control" type="file">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Admission Allotment Letter</label>
-                                            <input accept=".pdf, .xls, .xlsx, .doc, .docx" (change)="uploadAdmissionLatter($event)" [multiple]="false" class="form-control"
-                                                   type="file">
+                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                (change)="uploadAdmissionLatter($event)" [multiple]="false"
+                                                class="form-control" type="file">
                                         </div>
                                     </div>
                                     <hr>
@@ -348,16 +356,16 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Payment Date</label>
-                                            <input class="form-control" formControlName="payment_date" placeholder="Pre-Admission Amount"
-                                                   type="date">
+                                            <input class="form-control" formControlName="payment_date"
+                                                placeholder="Pre-Admission Amount" type="date">
                                             <div *ngIf="studentCreationForm.controls['payment_date'].errors?.['required'] && studentCreationForm.controls['payment_date'].touched "
-                                                 class="text text-danger mt-1">Payment Date required
+                                                class="text text-danger mt-1">Payment Date required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Payment Mode</label>
                                             <select class="form-select" formControlName="mode_of_payment"
-                                                    style="width: 100%">
+                                                style="width: 100%">
                                                 <option value="null"> Select</option>
                                                 <option value="Cash"> Cash</option>
                                                 <option value="Cheque"> Cheque</option>
@@ -365,26 +373,26 @@
                                                 <option value="Others"> Others</option>
                                             </select>
                                             <div *ngIf="studentCreationForm.controls['mode_of_payment'].errors?.['required'] && studentCreationForm.controls['mode_of_payment'].touched "
-                                                 class="text text-danger mt-1">Mode Of Payment required
+                                                class="text text-danger mt-1">Mode Of Payment required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Transaction Id</label>
-                                            <input class="form-control" formControlName="transaction_id" placeholder="Transaction Id"
-                                                   type="text">
+                                            <input class="form-control" formControlName="transaction_id"
+                                                placeholder="Transaction Id" type="text">
                                             <div *ngIf="studentCreationForm.controls['transaction_id'].errors?.['required'] && studentCreationForm.controls['transaction_id'].touched "
-                                                 class="text text-danger mt-1">Transaction Id required
+                                                class="text text-danger mt-1">Transaction Id required
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Caution Money Amount</label>
-                                            <input class="form-control" formControlName="caution_money" placeholder="Caution Money Amount"
-                                                   type="text">
+                                            <input class="form-control" formControlName="caution_money"
+                                                placeholder="Caution Money Amount" type="text">
                                             <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['required'] && studentCreationForm.controls['caution_money'].touched "
-                                                 class="text text-danger mt-1">Amount required
+                                                class="text text-danger mt-1">Amount required
                                             </div>
                                             <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['pattern']"
-                                                 class="text text-danger mt-1">Invalid Amount
+                                                class="text text-danger mt-1">Invalid Amount
                                             </div>
                                         </div>
                                     </div>
@@ -403,7 +411,7 @@
                                             <label>Father Phone no.</label>
                                             <input class="form-control" formControlName="father_phone" type="text">
                                             <div *ngIf="studentCreationForm.controls['father_phone'].errors?.['pattern']"
-                                                 class="text text-danger mt-1">Invalid Phone no.
+                                                class="text text-danger mt-1">Invalid Phone no.
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -412,8 +420,9 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload Father's Income Certificate</label>
-                                            <input accept=".pdf, .xls, .xlsx, .doc, .docx" (change)="uploadFatherIncomeCertificate($event)" [multiple]="false" class="form-control"
-                                                   type="file">
+                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                (change)="uploadFatherIncomeCertificate($event)" [multiple]="false"
+                                                class="form-control" type="file">
                                         </div>
                                     </div>
 
@@ -426,7 +435,7 @@
                                             <label>Mother Phone no.</label>
                                             <input class="form-control" formControlName="mother_phone" type="text">
                                             <div *ngIf="studentCreationForm.controls['mother_phone'].errors?.['pattern']"
-                                                 class="text text-danger mt-1">Invalid Phone no.
+                                                class="text text-danger mt-1">Invalid Phone no.
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -435,8 +444,9 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Upload Mother's Income Certificate</label>
-                                            <input accept=".pdf, .xls, .xlsx, .doc, .docx" (change)="uploadMotherIncomeCertificate($event)" [multiple]="false" class="form-control"
-                                                   type="file">
+                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                (change)="uploadMotherIncomeCertificate($event)" [multiple]="false"
+                                                class="form-control" type="file">
                                         </div>
                                     </div>
 
@@ -449,14 +459,14 @@
                                             <label>Guardian Phone no.</label>
                                             <input class="form-control" formControlName="guardian_phone" type="text">
                                             <div *ngIf="studentCreationForm.controls['guardian_phone'].errors?.['pattern']"
-                                                 class="text text-danger mt-1">Invalid Phone no.
+                                                class="text text-danger mt-1">Invalid Phone no.
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Guardian Email</label>
                                             <input class="form-control" formControlName="guardian_email" type="text">
                                             <div *ngIf="studentCreationForm.controls['guardian_email'].errors?.['email']"
-                                                 class="text text-danger mt-1">Invalid Email
+                                                class="text text-danger mt-1">Invalid Email
                                             </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
@@ -468,7 +478,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Guardian Occupation</label>
                                             <input class="form-control" formControlName="guardian_occupation"
-                                                   type="text">
+                                                type="text">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Guardian Address</label>
@@ -477,15 +487,15 @@
                                     </div>
 
                                     <button (click)="saveStudent()" *ngIf="permission[0].permission == 1"
-                                            [hidden]="isUpdateable" class="btn btn-primary me-1" type="submit">Save
+                                        [hidden]="isUpdateable" class="btn btn-primary me-1" type="submit">Save
                                         Student
                                     </button>
                                     <button (click)="updateStudent()" *ngIf="permission[1].permission == 1"
-                                            [hidden]="!isUpdateable" class="btn btn-primary me-1" type="submit">Update
+                                        [hidden]="!isUpdateable" class="btn btn-primary me-1" type="submit">Update
                                         Student
                                     </button>
-                                    <button (click)="cancelUpdate()" [hidden]="!isUpdateable" class="btn btn-primary me-1"
-                                            type="submit">cancel
+                                    <button (click)="cancelUpdate()" [hidden]="!isUpdateable"
+                                        class="btn btn-primary me-1" type="submit">cancel
                                     </button>
                                 </form>
                             </div>
@@ -496,11 +506,11 @@
                                     <h4>Search</h4>
                                 </div>
                                 <div class="col-9">
-                                    <input [(ngModel)]="searchItem" class="form-control" placeholder="Search Or Filter" style="width: 60%"
-                                           type="text">
+                                    <input [(ngModel)]="searchItem" class="form-control" placeholder="Search Or Filter"
+                                        style="width: 60%" type="text">
 
                                     <a (click)="exportStudentListExcel(1)" class="pull-right"
-                                       style="margin-top: 22px;margin-right: 40px;cursor: pointer;">
+                                        style="margin-top: 22px;margin-right: 40px;cursor: pointer;">
                                         <mat-icon>cloud_download</mat-icon>
                                     </a>
                                 </div>
@@ -509,57 +519,57 @@
                                 <div class="table-responsive">
                                     <table class="table" style="text-align: center">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Gender</th>
-                                            <th scope="col">Date Of Birth</th>
-                                            <th scope="col">Blood Group</th>
-                                            <th scope="col">Type</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Status</th>
-                                            <th *ngIf="permission[0].permission == 1 && permission[1].permission == 1"
-                                                scope="col">
-                                                Action
-                                            </th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Gender</th>
+                                                <th scope="col">Date Of Birth</th>
+                                                <th scope="col">Blood Group</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Status</th>
+                                                <th *ngIf="permission[0].permission == 1 && permission[1].permission == 1"
+                                                    scope="col">
+                                                    Action
+                                                </th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr
+                                            <tr
                                                 *ngFor="let record of studentList | customFilter:searchItem;let indexOfElement=index">
-                                            <td>{{indexOfElement + 1}}</td>
-                                            <td [routerLink]="['/users/student-profile', record.id]"
-                                                style="cursor: pointer; color: blueviolet">
-                                                {{record.first_name}} {{record.middle_name}} {{record.last_name}}
-                                            </td>
-                                            <td>{{record.gender}}</td>
-                                            <td>{{record.dob}}</td>
-                                            <td>{{record.blood_group}}</td>
-                                            <td>{{record.user_type}}</td>
-                                            <td>{{record.email}}</td>
-                                            <td>
-                                                <a *ngIf="record.status == 1">
-                                                    <button (click)="changeStatus(record.id)" class="btn btn-primary me-1"
-                                                            type="submit">Disable
-                                                    </button>
-                                                </a>
-                                                <a *ngIf="record.status == 0">
-                                                    <button (click)="changeStatus(record.id)" class="btn btn-primary me-1"
-                                                            type="submit">Enable
-                                                    </button>
-                                                </a>
-                                            </td>
-                                            <td>
-                                                <a (click)="editStudent(record)"
-                                                   *ngIf="permission[1].permission == 1">
-                                                    <mat-icon>edit</mat-icon>
-                                                </a>
-                                                <a (click)="deleteStudent(record)"
-                                                   *ngIf="permission[2].permission == 1">
-                                                    <mat-icon>delete</mat-icon>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td [routerLink]="['/users/student-profile', record.id]"
+                                                    style="cursor: pointer; color: blueviolet">
+                                                    {{record.first_name}} {{record.middle_name}} {{record.last_name}}
+                                                </td>
+                                                <td>{{record.gender}}</td>
+                                                <td>{{record.dob}}</td>
+                                                <td>{{record.blood_group}}</td>
+                                                <td>{{record.user_type}}</td>
+                                                <td>{{record.email}}</td>
+                                                <td>
+                                                    <a *ngIf="record.status == 1">
+                                                        <button (click)="changeStatus(record.id)"
+                                                            class="btn btn-primary me-1" type="submit">Disable
+                                                        </button>
+                                                    </a>
+                                                    <a *ngIf="record.status == 0">
+                                                        <button (click)="changeStatus(record.id)"
+                                                            class="btn btn-primary me-1" type="submit">Enable
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a (click)="editStudent(record)"
+                                                        *ngIf="permission[1].permission == 1">
+                                                        <mat-icon>edit</mat-icon>
+                                                    </a>
+                                                    <a (click)="deleteStudent(record)"
+                                                        *ngIf="permission[2].permission == 1">
+                                                        <mat-icon>delete</mat-icon>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 
@@ -572,11 +582,11 @@
                                     <h4>Search</h4>
                                 </div>
                                 <div class="col-9">
-                                    <input [(ngModel)]="searchItem" class="form-control" placeholder="Search Or Filter" style="width: 60%"
-                                           type="text">
+                                    <input [(ngModel)]="searchItem" class="form-control" placeholder="Search Or Filter"
+                                        style="width: 60%" type="text">
 
                                     <a (click)="exportStudentListExcel(2)" class="pull-right"
-                                       style="margin-top: 22px;margin-right: 40px;cursor: pointer;">
+                                        style="margin-top: 22px;margin-right: 40px;cursor: pointer;">
                                         <mat-icon>cloud_download</mat-icon>
                                     </a>
                                 </div>
@@ -585,54 +595,54 @@
                                 <div class="table-responsive" style="text-align: center">
                                     <table class="table">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Type</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Refund</th>
-                                            <th scope="col">Admit</th>
-                                            <th *ngIf="permission[0].permission == 1 && permission[1].permission == 1"
-                                                scope="col">
-                                                Action
-                                            </th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Refund</th>
+                                                <th scope="col">Admit</th>
+                                                <th *ngIf="permission[0].permission == 1 && permission[1].permission == 1"
+                                                    scope="col">
+                                                    Action
+                                                </th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr
+                                            <tr
                                                 *ngFor="let record of nonAdmittedStudents | customFilter:searchItem;let indexOfElement=index">
-                                            <td>{{indexOfElement + 1}}</td>
-                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}
-                                            </td>
-                                            <td>{{record.user_type}}</td>
-                                            <td>{{record.email}}</td>
-                                            <td *ngIf="record.refund == 0">
-                                                <button (click)="refundAmount(record)" class="btn btn-primary me-1"
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}
+                                                </td>
+                                                <td>{{record.user_type}}</td>
+                                                <td>{{record.email}}</td>
+                                                <td *ngIf="record.refund == 0">
+                                                    <button (click)="refundAmount(record)" class="btn btn-primary me-1"
                                                         type="submit">Refund
-                                                </button>
-                                            </td>
-                                            <td *ngIf="record.refund == 1">
-                                                Refunded
-                                            </td>
-                                            <td *ngIf="record.refund == 0">
-                                                <button (click)="editStudent(record)" class="btn btn-primary me-1"
+                                                    </button>
+                                                </td>
+                                                <td *ngIf="record.refund == 1">
+                                                    Refunded
+                                                </td>
+                                                <td *ngIf="record.refund == 0">
+                                                    <button (click)="editStudent(record)" class="btn btn-primary me-1"
                                                         type="submit">Admit
-                                                </button>
-                                            </td>
-                                            <td *ngIf="record.refund == 1">
+                                                    </button>
+                                                </td>
+                                                <td *ngIf="record.refund == 1">
 
-                                            </td>
-                                            <td>
-                                                <a (click)="editStudent(record)"
-                                                   *ngIf="permission[1].permission == 1">
-                                                    <mat-icon>edit</mat-icon>
-                                                </a>
-                                                <a (click)="deleteStudent(record)"
-                                                   *ngIf="permission[2].permission == 1">
-                                                    <mat-icon>delete</mat-icon>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                                </td>
+                                                <td>
+                                                    <a (click)="editStudent(record)"
+                                                        *ngIf="permission[1].permission == 1">
+                                                        <mat-icon>edit</mat-icon>
+                                                    </a>
+                                                    <a (click)="deleteStudent(record)"
+                                                        *ngIf="permission[2].permission == 1">
+                                                        <mat-icon>delete</mat-icon>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 
@@ -646,11 +656,11 @@
                                     <h4>Search</h4>
                                 </div>
                                 <div class="col-9">
-                                    <input [(ngModel)]="searchItem" class="form-control" placeholder="Search Or Filter" style="width: 60%"
-                                           type="text">
+                                    <input [(ngModel)]="searchItem" class="form-control" placeholder="Search Or Filter"
+                                        style="width: 60%" type="text">
 
                                     <a (click)="exportStudentListExcel(3)" class="pull-right"
-                                       style="margin-top: 22px;margin-right: 40px;cursor: pointer;">
+                                        style="margin-top: 22px;margin-right: 40px;cursor: pointer;">
                                         <mat-icon>cloud_download</mat-icon>
                                     </a>
                                 </div>
@@ -659,36 +669,36 @@
                                 <div class="table-responsive">
                                     <table class="table">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Type</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Status</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Type</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr
+                                            <tr
                                                 *ngFor="let record of disabledStudents | customFilter:searchItem;let indexOfElement=index">
-                                            <td>{{indexOfElement + 1}}</td>
-                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}
-                                            </td>
-                                            <td>{{record.user_type}}</td>
-                                            <td>{{record.email}}</td>
-                                            <td>
+                                                <td>{{indexOfElement + 1}}</td>
+                                                <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}
+                                                </td>
+                                                <td>{{record.user_type}}</td>
+                                                <td>{{record.email}}</td>
+                                                <td>
 
-                                                <a *ngIf="record.status == 1">
-                                                    <button (click)="changeStatus(record.id)" class="btn btn-primary me-1"
-                                                            type="submit">Disable
-                                                    </button>
-                                                </a>
-                                                <a *ngIf="record.status == 0">
-                                                    <button (click)="changeStatus(record.id)" class="btn btn-primary me-1"
-                                                            type="submit">Enable
-                                                    </button>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                                    <a *ngIf="record.status == 1">
+                                                        <button (click)="changeStatus(record.id)"
+                                                            class="btn btn-primary me-1" type="submit">Disable
+                                                        </button>
+                                                    </a>
+                                                    <a *ngIf="record.status == 0">
+                                                        <button (click)="changeStatus(record.id)"
+                                                            class="btn btn-primary me-1" type="submit">Enable
+                                                        </button>
+                                                    </a>
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 

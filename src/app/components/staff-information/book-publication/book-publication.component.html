@@ -91,7 +91,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Upload File</label>
                                             <input type="file" class="form-control" [(ngModel)]="bookPublicationArray[indexOfElement].file_name"
-                                                (change)="fileUpload($event, indexOfElement)" required>
+                                                (change)="fileUpload($event, indexOfElement)" required accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                         </div>
                                     </div>
                                 </div>

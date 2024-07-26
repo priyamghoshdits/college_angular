@@ -104,6 +104,7 @@ export class UserEditComponent implements OnInit {
     journalPublicationList: any[];
     manualScholarshipList: any[];
     pgPhdList: any[];
+    maxSize = 1 * 1024 * 1024; // 1 MB in bytes
 
     private BASE_API_URL = environment.BASE_API_URL;
 
@@ -388,6 +389,19 @@ export class UserEditComponent implements OnInit {
     }
 
     fileUpload(event, type) {
+
+        if (event.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
         if (type == 'birthCertificate') {
             this.birthCertificate = event.target.files[0];
         } else if (type == 'uploadJoiningLetter') {
@@ -601,6 +615,18 @@ export class UserEditComponent implements OnInit {
 
 
     journalFileUpload(event) {
+        if (event.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
         this.journalFile = event.target.files[0];
     }
 
@@ -1069,6 +1095,18 @@ export class UserEditComponent implements OnInit {
     }
 
     selectedAchievementFile(event) {
+        if (event.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
         this.achievementFile = event.target.files[0];
     }
 

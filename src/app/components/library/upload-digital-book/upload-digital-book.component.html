@@ -13,25 +13,25 @@
                                     <div class="col-md-6 mb-3">
                                         <label>Select Course</label>
                                         <select (change)="getSemester()" class="form-select" formControlName="course_id"
-                                                required style="width: 100%">
+                                            required style="width: 100%">
                                             <option *ngFor="let data of courseList" [value]="data.id">
                                                 {{data.course_name}}
                                             </option>
                                         </select>
                                         <div *ngIf="libraryDigitalBookForm.controls['course_id'].errors?.['required'] && libraryDigitalBookForm.controls['course_id'].touched "
-                                             class="text text-danger mt-1">Course required
+                                            class="text text-danger mt-1">Course required
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Select Semester</label>
                                         <select class="form-select" formControlName="semester_id" required
-                                                style="width: 100%">
+                                            style="width: 100%">
                                             <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                                 {{data.name}}
                                             </option>
                                         </select>
                                         <div *ngIf="libraryDigitalBookForm.controls['semester_id'].errors?.['required'] && libraryDigitalBookForm.controls['semester_id'].touched "
-                                             class="text text-danger mt-1">Semester required
+                                            class="text text-danger mt-1">Semester required
                                         </div>
                                     </div>
                                 </div>
@@ -39,13 +39,13 @@
                                     <div class="col-md-12 mb-3">
                                         <label>Select Book</label>
                                         <select class="form-select" formControlName="book_id" required
-                                                style="width: 100%">
+                                            style="width: 100%">
                                             <option *ngFor="let data of libraryItemList" [value]="data.id">
                                                 {{data.name}}
                                             </option>
                                         </select>
                                         <div *ngIf="libraryDigitalBookForm.controls['book_id'].errors?.['required'] && libraryDigitalBookForm.controls['book_id'].touched "
-                                             class="text text-danger mt-1">Book required
+                                            class="text text-danger mt-1">Book required
                                         </div>
                                     </div>
                                 </div>
@@ -53,7 +53,8 @@
                                     <div class="col-md-12 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Upload File</label>
                                         <input (change)="setFile($event)" accept="application/pdf" class="form-control"
-                                               formControlName="file_name" id="exampleInputEmail1" type="file">
+                                            formControlName="file_name" id="exampleInputEmail1" type="file"
+                                            accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                     </div>
                                 </div>
 
@@ -61,13 +62,13 @@
                         </div>
                         <div class="card-footer">
                             <button (click)="uploadDigitalBooks()" *ngIf="permission[0].permission == 1"
-                                    [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
+                                [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
                             </button>
                             <button (click)="updateDigitalBooks()" *ngIf="permission[1].permission == 1"
-                                    [hidden]="isUpdatable == false" class="btn btn-primary me-1">Update
+                                [hidden]="isUpdatable == false" class="btn btn-primary me-1">Update
                             </button>
                             <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
-                                    class="btn btn-primary me-1">Cancel
+                                class="btn btn-primary me-1">Cancel
                             </button>
                             <!--                            <button class="btn btn-secondary">Cancel</button>-->
                         </div>
@@ -88,37 +89,39 @@
 
                                 <table class="table" style="text-align: center">
                                     <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Course</th>
-                                        <th scope="col">Semester</th>
-                                        <th scope="col">Book</th>
-                                        <th scope="col">Download</th>
-                                        <th *ngIf="permission[1].permission == 1 && permission[2].permission == 1"
-                                            scope="col">
-                                            Action
-                                        </th>
-                                    </tr>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Course</th>
+                                            <th scope="col">Semester</th>
+                                            <th scope="col">Book</th>
+                                            <th scope="col">Download</th>
+                                            <th *ngIf="permission[1].permission == 1 && permission[2].permission == 1"
+                                                scope="col">
+                                                Action
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr *ngFor="let record of libraryDigitalBookList ;let indexOfElement=index">
-                                        <td>{{indexOfElement + 1}}</td>
-                                        <td>{{record.course_name}}</td>
-                                        <td>{{record.semester_name}}</td>
-                                        <td>{{record.book_name}}</td>
-                                        <td>
-                                            <a href="{{FILE_URL}}/library_books/{{record.file_name}}">{{record.file_name}}</a>
-                                        </td>
-                                        <td>
-                                            <a (click)="editDigitalBook(record)" *ngIf="permission[1].permission == 1">
-                                                <mat-icon>edit</mat-icon>
-                                            </a>
-                                            <a (click)="deleteDigitalBook(record)"
-                                               *ngIf="permission[2].permission == 1">
-                                                <mat-icon>delete</mat-icon>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                        <tr *ngFor="let record of libraryDigitalBookList ;let indexOfElement=index">
+                                            <td>{{indexOfElement + 1}}</td>
+                                            <td>{{record.course_name}}</td>
+                                            <td>{{record.semester_name}}</td>
+                                            <td>{{record.book_name}}</td>
+                                            <td>
+                                                <a
+                                                    href="{{FILE_URL}}/library_books/{{record.file_name}}">{{record.file_name}}</a>
+                                            </td>
+                                            <td>
+                                                <a (click)="editDigitalBook(record)"
+                                                    *ngIf="permission[1].permission == 1">
+                                                    <mat-icon>edit</mat-icon>
+                                                </a>
+                                                <a (click)="deleteDigitalBook(record)"
+                                                    *ngIf="permission[2].permission == 1">
+                                                    <mat-icon>delete</mat-icon>
+                                                </a>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                                 <!--                                <pagination-controls (pageChange)="p = $event"></pagination-controls>-->

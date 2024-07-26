@@ -38,7 +38,8 @@
                                             <ng-select [(ngModel)]="staffEducationArray[indexOfElement].staff_id"
                                                 class="form-control">
                                                 @for (car of memberList; track car.id) {
-                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}} {{car.last_name}}</ng-option>
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
                                                 }
                                             </ng-select>
                                         </div>
@@ -97,7 +98,8 @@
                                             <label>File</label>
                                             <input type="file" class="form-control"
                                                 [(ngModel)]="staffEducationArray[indexOfElement].file_name"
-                                                (change)="fileUpload($event, indexOfElement)" required>
+                                                (change)="fileUpload($event, indexOfElement)" required
+                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                         </div>
                                     </div>
                                 </div>
@@ -126,10 +128,10 @@
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
                                             </select> -->
-                                            <ng-select formControlName="staff_id"
-                                                class="form-control">
+                                            <ng-select formControlName="staff_id" class="form-control">
                                                 @for (car of memberList; track car.id) {
-                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}} {{car.last_name}}</ng-option>
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
                                                 }
                                             </ng-select>
                                         </div>

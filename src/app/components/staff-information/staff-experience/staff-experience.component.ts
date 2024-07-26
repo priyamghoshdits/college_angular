@@ -35,6 +35,7 @@ export class StaffExperienceComponent {
     permission: any[] = [];
     experienceProof: any = '';
     staffExperienceList: any[];
+    maxSize =  1 * 1024 * 1024; // 1 MB in bytes
 
     user = JSON.parse(localStorage.getItem('user') || '{}');
 
@@ -77,6 +78,18 @@ export class StaffExperienceComponent {
     }
 
     uploadExperienceProof(e) {
+        if (e.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            e.target.value = '';
+            return;
+        }
+
         this.experienceProof = e.target.files[0];
     }
 

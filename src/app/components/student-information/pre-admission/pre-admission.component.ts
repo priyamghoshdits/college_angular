@@ -55,6 +55,8 @@ export class PreAdmissionComponent {
     user: {
         user_type_id: number;
     };
+    maxSize =  1 * 1024 * 1024; // 1 MB in bytes
+    
     constructor(private memberService: MemberService, private subjectService: SubjectService
         , private sessionService: SessionService, private studentService: StudentService
         , private imageService: ImageService, private agentService: AgentService
@@ -181,6 +183,19 @@ export class PreAdmissionComponent {
 
 
     onSelect1(event) {
+
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
         let file;
         file = event.target.files[0];
         const formData = new FormData();

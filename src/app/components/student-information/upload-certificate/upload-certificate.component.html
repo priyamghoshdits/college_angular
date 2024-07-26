@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row" >
+    <div class="row">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
@@ -9,48 +9,54 @@
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="uploadCertificateForm">
-                                <div  class="row">
+                                <div class="row">
                                     <div class="col-md-3 mb-3">
                                         <label>Select Course</label>
-                                        <select style="width: 100%" formControlName="course_id" class="form-select" (change)="getSemester()">
+                                        <select style="width: 100%" formControlName="course_id" class="form-select"
+                                            (change)="getSemester()">
                                             <option value="null">Select</option>
-                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                            <option *ngFor="let data of courseList" [value]="data.id">
                                                 {{data.course_name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="uploadCertificateForm.controls['course_id'].errors?.['required'] && uploadCertificateForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                        <div *ngIf="uploadCertificateForm.controls['course_id'].errors?.['required'] && uploadCertificateForm.controls['course_id'].touched "
+                                            class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Select Semester</label>
                                         <select style="width: 100%" formControlName="semester_id" class="form-select">
                                             <option value="null">Select</option>
-                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                                 {{data.name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="uploadCertificateForm.controls['semester_id'].errors?.['required'] && uploadCertificateForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                        <div *ngIf="uploadCertificateForm.controls['semester_id'].errors?.['required'] && uploadCertificateForm.controls['semester_id'].touched "
+                                            class="text text-danger mt-1">Semester required</div>
                                     </div>
-<!--                                    <div class="col-md-2 mb-3">-->
-<!--                                        <label>Select Session</label>-->
-<!--                                        <select style="width: 100%" formControlName="session_id" class="form-select">-->
-<!--                                            <option *ngFor="let data of sessionList" [value]="data.id">-->
-<!--                                                {{data.name}}-->
-<!--                                            </option>-->
-<!--                                        </select>-->
-<!--                                        <div *ngIf="uploadCertificateForm.controls['session_id'].errors?.['required'] && uploadCertificateForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
-<!--                                    </div>-->
+                                    <!--                                    <div class="col-md-2 mb-3">-->
+                                    <!--                                        <label>Select Session</label>-->
+                                    <!--                                        <select style="width: 100%" formControlName="session_id" class="form-select">-->
+                                    <!--                                            <option *ngFor="let data of sessionList" [value]="data.id">-->
+                                    <!--                                                {{data.name}}-->
+                                    <!--                                            </option>-->
+                                    <!--                                        </select>-->
+                                    <!--                                        <div *ngIf="uploadCertificateForm.controls['session_id'].errors?.['required'] && uploadCertificateForm.controls['session_id'].touched " class="text text-danger mt-1">Session required</div>-->
+                                    <!--                                    </div>-->
                                     <div class="col-md-3 mb-3">
                                         <label>Select Certificate Type</label>
-                                        <select style="width: 100%" formControlName="certificate_type_id" class="form-select">
+                                        <select style="width: 100%" formControlName="certificate_type_id"
+                                            class="form-select">
                                             <option value="null">Select</option>
                                             <option *ngFor="let data of certificateTypeList" [value]="data.id">
                                                 {{data.name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="uploadCertificateForm.controls['certificate_type_id'].errors?.['required'] && uploadCertificateForm.controls['certificate_type_id'].touched " class="text text-danger mt-1">Certificate Type required</div>
+                                        <div *ngIf="uploadCertificateForm.controls['certificate_type_id'].errors?.['required'] && uploadCertificateForm.controls['certificate_type_id'].touched "
+                                            class="text text-danger mt-1">Certificate Type required</div>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="searchStudents()">Submit</button>
+                                        <button style="margin-top: 30px" class="btn btn-primary me-1"
+                                            (click)="searchStudents()">Submit</button>
                                     </div>
                                 </div>
                             </form>
@@ -60,7 +66,8 @@
                                 <div class="row">
                                     <div class="col-3"></div>
                                     <div class="col-6">
-                                        <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                        <input style="width: 60%" class="form-control" [(ngModel)]="searchItem"
+                                            type="text" placeholder="Search Or Filter">
                                     </div>
                                     <div class="col-3"></div>
                                 </div>
@@ -68,46 +75,52 @@
                                 <div class="table-responsive">
                                     <table class="table" style="text-align: center">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Gender</th>
-                                            <th scope="col">Date Of Birth</th>
-                                            <th scope="col">Mobile No.</th>
-                                            <th scope="col">Action</th>
-                                            <th scope="col">Status</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Gender</th>
+                                                <th scope="col">Date Of Birth</th>
+                                                <th scope="col">Mobile No.</th>
+                                                <th scope="col">Action</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr *ngFor="let record of filteredStudentList| customFilter:searchItem ;let indexOfElement=index">
-                                            <td>{{indexOfElement+1}}</td>
-                                            <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}</td>
-                                            <td>{{record.gender}}</td>
-                                            <td>{{record.dob}}</td>
-                                            <td>{{record.mobile_no}}</td>
-                                            <td>
-                                                <a (click)="uploader.click()" style="cursor: pointer"><mat-icon>cloud_upload</mat-icon></a>
-                                                <a *ngIf="record.status" style="cursor: pointer" href="{{FILE_URL}}/certificate/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a>
-                                                <input [hidden]="true" class="form-control" #uploader type="file" (change)="uploadCertificate($event,record)">
-                                            </td>
-                                            <td>{{record.status}}</td>
-                                        </tr>
+                                            <tr
+                                                *ngFor="let record of filteredStudentList| customFilter:searchItem ;let indexOfElement=index">
+                                                <td>{{indexOfElement+1}}</td>
+                                                <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}
+                                                </td>
+                                                <td>{{record.gender}}</td>
+                                                <td>{{record.dob}}</td>
+                                                <td>{{record.mobile_no}}</td>
+                                                <td>
+                                                    <a (click)="uploader.click()"
+                                                        style="cursor: pointer"><mat-icon>cloud_upload</mat-icon></a>
+                                                    <a *ngIf="record.status" style="cursor: pointer"
+                                                        href="{{FILE_URL}}/certificate/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a>
+                                                    <input [hidden]="true" class="form-control" #uploader type="file"
+                                                        accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                        (change)="uploadCertificate($event,record)">
+                                                </td>
+                                                <td>{{record.status}}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
 
                                 </div>
+                            </div>
+                            <!--                        <div class="card-footer">-->
+                            <!--                            <button *ngIf="permission[0].permission === 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCourse()">Submit</button>-->
+                            <!--                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
+                            <!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
+                            <!--                            &lt;!&ndash;                            <button class="btn btn-secondary">Cancel</button>&ndash;&gt;-->
+                            <!--                        </div>-->
                         </div>
-<!--                        <div class="card-footer">-->
-<!--                            <button *ngIf="permission[0].permission === 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveCourse()">Submit</button>-->
-<!--                            <button *ngIf="permission[1].permission === 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateCourse()">Update</button>-->
-<!--                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>-->
-<!--                            &lt;!&ndash;                            <button class="btn btn-secondary">Cancel</button>&ndash;&gt;-->
-<!--                        </div>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 <!-- Container-fluid Ends-->

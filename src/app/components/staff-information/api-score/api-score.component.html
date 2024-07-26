@@ -52,7 +52,7 @@
                                         <div class="col-md-3 mb-3">
                                             <label>Upload File</label>
                                             <input class="form-control" (change)="fileUpload($event, indexOfElement)"
-                                                required type="file">
+                                                required type="file" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                         </div>
                                         <div *ngIf="(indexOfElement + 1) == paperField.length && !isUpdatable"
                                             class="col-md-2 mb-3">

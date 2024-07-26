@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Upload File</label>
-                                        <input (change)="selectedFile($event)" class="form-control"
+                                        <input (change)="selectedFile($event)" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" class="form-control"
                                                formControlName="file_name"
                                                type="file">
                                         <div *ngIf="achievementForm.controls['file_name'].errors?.['required'] && achievementForm.controls['file_name'].touched"

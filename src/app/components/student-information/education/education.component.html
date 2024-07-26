@@ -119,7 +119,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Document</label>
-                                            <input class="form-control" formControlName="file_ten" type="file"
+                                            <input class="form-control" formControlName="file_ten" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" type="file"
                                                 (change)="uploadFilehelper($event, '10')">
                                             <div *ngIf="educationQualificationForm.controls['file_ten'].errors?.['required'] && educationQualificationForm.controls['file_ten'].touched "
                                                 class="text text-danger mt-1">Document required
@@ -182,7 +182,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Document</label>
-                                            <input class="form-control" formControlName="file_twelve" type="file"
+                                            <input class="form-control" formControlName="file_twelve" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" type="file"
                                                 (change)="uploadFilehelper($event, '12')">
                                             <div *ngIf="educationQualificationForm.controls['file_twelve'].errors?.['required'] && educationQualificationForm.controls['file_twelve'].touched "
                                                 class="text text-danger mt-1">Document required
@@ -246,7 +246,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Document</label>
-                                            <input class="form-control" formControlName="file_ten" type="file"
+                                            <input class="form-control" formControlName="file_ten" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" type="file"
                                                 (change)="uploadFilehelper($event, 'graduation')">
                                             <div *ngIf="educationQualificationForm.controls['file_ten'].errors?.['required'] && educationQualificationForm.controls['file_ten'].touched "
                                                 class="text text-danger mt-1">Document required

@@ -37,7 +37,8 @@ export class AchivementComponent {
     isUpdatable = false;
     file: any;
     p: number;
-
+    maxSize =  1 * 1024 * 1024; // 1 MB in bytes
+    
     constructor(private roleAndPermissionService: RolesAndPermissionService, private subjectService: SubjectService
         , private studentService: StudentService, private achievementService: AchievementService) {
         this.achievementForm = new FormGroup({
@@ -105,6 +106,18 @@ export class AchivementComponent {
     }
 
     selectedFile(event) {
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
         this.file = event.target.files[0];
     }
 

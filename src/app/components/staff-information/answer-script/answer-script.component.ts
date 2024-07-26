@@ -1,14 +1,14 @@
-import {Component} from '@angular/core';
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {NgxPaginationModule} from "ngx-pagination";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MemberService} from "../../../services/member.service";
-import {ExaminationService} from "../../../services/examination.service";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { Component } from '@angular/core';
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
+import { NgxPaginationModule } from "ngx-pagination";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MemberService } from "../../../services/member.service";
+import { ExaminationService } from "../../../services/examination.service";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
 import Swal from "sweetalert2";
-import {AnswerScriptEvaluatorService} from "../../../services/answer-script-evaluator.service";
+import { AnswerScriptEvaluatorService } from "../../../services/answer-script-evaluator.service";
 import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
@@ -43,7 +43,7 @@ export class AnswerScriptComponent {
     rolesAndPermission: any[] = [];
     permission: any[] = [];
     filesArray: File[] = [];
-
+    maxSize = 1 * 1024 * 1024; // 1 MB in bytes
     memberList: any[];
 
     constructor(private memberService: MemberService, private answerScriptService: AnswerScriptEvaluatorService, private roleAndPermissionService: RolesAndPermissionService) {
@@ -163,6 +163,19 @@ export class AnswerScriptComponent {
     }
 
     fileUpload(event: any, index: number) {
+
+        if (event.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
         const file = event.target.files[0];
         if (file) {
             this.filesArray[index] = file; // Store file in the files array
@@ -176,7 +189,7 @@ export class AnswerScriptComponent {
             if (response.success == 1) {
                 this.searchAnsScriptEvaluatorList = response.data;
                 console.log(this.searchAnsScriptEvaluatorList);
-                
+
             }
         })
     }

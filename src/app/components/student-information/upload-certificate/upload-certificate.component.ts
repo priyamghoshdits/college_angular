@@ -37,7 +37,8 @@ export class UploadCertificateComponent {
     file: any;
     searchItem: string;
     session_id = null;
-
+    maxSize =  1 * 1024 * 1024; // 1 MB in bytes
+    
     constructor(private subjectService: SubjectService, private sessionService: SessionService
         , private certificateService: CertificateService) {
         this.uploadCertificateForm = new FormGroup({
@@ -113,6 +114,18 @@ export class UploadCertificateComponent {
     }
 
     uploadCertificate(event, record) {
+
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
 
         // @ts-ignore
         this.session_id = JSON.parse(localStorage.getItem('session_id'));

@@ -1,15 +1,15 @@
-import {Component} from '@angular/core';
-import {ManualFeesService} from "../../../services/manual-fees.service";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgxPaginationModule} from "ngx-pagination";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
-import {SubjectService} from "../../../services/subject.service";
-import {StudentService} from "../../../services/student.service";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase} from "@ng-bootstrap/ng-bootstrap";
-import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
-import {environment} from "../../../../environments/environment";
+import { Component } from '@angular/core';
+import { ManualFeesService } from "../../../services/manual-fees.service";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgxPaginationModule } from "ngx-pagination";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
+import { SubjectService } from "../../../services/subject.service";
+import { StudentService } from "../../../services/student.service";
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase } from "@ng-bootstrap/ng-bootstrap";
+import { CustomFilterPipe } from "../../../../../custom-filter.pipe";
+import { environment } from "../../../../environments/environment";
 import Swal from "sweetalert2";
 
 @Component({
@@ -46,7 +46,8 @@ export class ManualFeesComponent {
     active = 1;
     manualFeesList: any[] = [];
     p: number;
-
+    maxSize =  1 * 1024 * 1024; // 1 MB in bytes
+    
     constructor(private manualFeesService: ManualFeesService, private roleAndPermissionService: RolesAndPermissionService
         , private subjectService: SubjectService, private studentService: StudentService) {
         this.roleAndPermissionService.getRolesAndPermissionListener().subscribe((response) => {
@@ -86,7 +87,7 @@ export class ManualFeesComponent {
 
     }
 
-    activeTab(data){
+    activeTab(data) {
         this.active = data;
     }
 
@@ -96,9 +97,9 @@ export class ManualFeesComponent {
         })
     }
 
-    searchManualFeesFunc(){
+    searchManualFeesFunc() {
         this.manualFeesService.searchManualFees(this.searchManualFeesForm.value).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 this.manualFeesList = response.data;
             }
         })
@@ -115,12 +116,24 @@ export class ManualFeesComponent {
         this.filteredStudent = this.filteredStudent.filter(x => x.session_id == this.manualFeesForm.value.session_id);
     }
 
-    selectFile($event){
-        this.selectedFile = $event.target.files[0];
+    selectFile(event) {
+        if (event.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
+        this.selectedFile = event.target.files[0];
     }
 
 
-    saveManualFees(){
+    saveManualFees() {
 
         const formData = new FormData();
         formData.append('course_id', this.manualFeesForm.value.course_id);
@@ -133,7 +146,7 @@ export class ManualFeesComponent {
         formData.append('file', this.selectedFile);
 
         this.manualFeesService.saveManualFees(formData).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -146,16 +159,16 @@ export class ManualFeesComponent {
         })
     }
 
-    updateManualFees(){
+    updateManualFees() {
 
     }
 
-    cancelUpdate(){
+    cancelUpdate() {
         this.manualFeesForm.reset();
         this.isUpdatable = false;
     }
 
-    editManualFees(data){
+    editManualFees(data) {
         // this.manualFeesForm.patchValue(data);
         this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
             this.semesterList = response.data;
@@ -178,7 +191,7 @@ export class ManualFeesComponent {
 
     }
 
-    deleteManualFees(data){
+    deleteManualFees(data) {
         Swal.fire({
             title: 'Confirmation',
             text: 'Do you sure to delete ?',
@@ -188,9 +201,9 @@ export class ManualFeesComponent {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete It!'
         }).then((result) => {
-            if(result.isConfirmed){
+            if (result.isConfirmed) {
                 this.manualFeesService.deleteManualFees(data.id).subscribe((response: any) => {
-                    if(response.success == 1){
+                    if (response.success == 1) {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',

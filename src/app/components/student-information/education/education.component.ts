@@ -41,6 +41,7 @@ export class EducationComponent {
     file_ten: File;
     file_twelve: File;
     file_graduation: File;
+    maxSize =  1 * 1024 * 1024; // 1 MB in bytes
 
     constructor(private roleAndPermissionService: RolesAndPermissionService, private subjectService: SubjectService, private studentService: StudentService) {
         this.educationQualificationForm = new FormGroup({
@@ -143,6 +144,19 @@ export class EducationComponent {
     }
 
     uploadFilehelper(event, type) {
+
+        if(event.target.files[0].size > this.maxSize){
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
         if (type == '10') {
             this.file_ten = event.target.files[0];
         } else if (type == '12') {
