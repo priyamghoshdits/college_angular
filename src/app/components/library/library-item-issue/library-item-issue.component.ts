@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import {SubjectService} from "../../../services/subject.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-library-item-issue',
@@ -18,8 +19,8 @@ import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
         ReactiveFormsModule,
         NgIf,
         FormsModule,
-        CustomFilterPipe
-
+        CustomFilterPipe,
+        NgSelectModule
     ],
     templateUrl: './library-item-issue.component.html',
     styleUrl: './library-item-issue.component.scss'

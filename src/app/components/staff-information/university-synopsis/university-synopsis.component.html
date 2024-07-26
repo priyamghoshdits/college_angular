@@ -64,13 +64,21 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Student</label>
-                                            <select style="width: 100%"
+                                            <!-- <select style="width: 100%"
                                                 [(ngModel)]="universitySynopsisArray[indexOfElement].student_id"
                                                 class="form-select" (change)="getStudent(indexOfElement)" required>
                                                 <option value="null"> Select a Student</option>
                                                 <option *ngFor="let data of filteredStudentList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}</option>
-                                            </select>
+                                            </select> -->
+
+                                            <ng-select [(ngModel)]="universitySynopsisArray[indexOfElement].student_id" class="form-select">
+                                                @for (car of filteredStudentList; track car.id) {
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
+                                                }
+                                            </ng-select>
+
                                         </div>
                                     </div>
                                     <div class="row">

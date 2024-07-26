@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgxPaginationModule} from "ngx-pagination";
-import {SubjectService} from "../../../services/subject.service";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgxPaginationModule } from "ngx-pagination";
+import { SubjectService } from "../../../services/subject.service";
 import Swal from "sweetalert2";
-import {StudentService} from "../../../services/student.service";
-import {SessionService} from "../../../services/session.service";
-import {ExaminationService} from "../../../services/examination.service";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
+import { StudentService } from "../../../services/student.service";
+import { SessionService } from "../../../services/session.service";
+import { ExaminationService } from "../../../services/examination.service";
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
 import { RolesAndPermissionService } from 'src/app/services/roles-and-permission.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
-  selector: 'app-marksheet',
-  standalone: true,
+    selector: 'app-marksheet',
+    standalone: true,
     imports: [
         FormsModule,
         MatIconModule,
@@ -25,10 +26,11 @@ import { RolesAndPermissionService } from 'src/app/services/roles-and-permission
         NgbNavLink,
         NgbNavLinkBase,
         NgbNavItem,
-        NgbNavOutlet
+        NgbNavOutlet,
+        NgSelectModule
     ],
-  templateUrl: './marksheet.component.html',
-  styleUrl: './marksheet.component.scss'
+    templateUrl: './marksheet.component.html',
+    styleUrl: './marksheet.component.scss'
 })
 export class MarksheetComponent {
     isUpdatable = false;
@@ -47,7 +49,7 @@ export class MarksheetComponent {
     markSheetList: any[];
     session_id = null;
 
-    constructor(private subjectService: SubjectService,private studentSubject: StudentService
+    constructor(private subjectService: SubjectService, private studentSubject: StudentService
         , private sessionSubject: SessionService, private examinationService: ExaminationService, private roleAndPermissionService: RolesAndPermissionService) {
         this.subjectMarksForm = new FormGroup({
             id: new FormControl(null),
@@ -83,7 +85,7 @@ export class MarksheetComponent {
             this.permission = this.rolesAndPermission.find(x => x.name == 'UPDATE MARKS').permission;
         });
         this.rolesAndPermission = this.roleAndPermissionService.getRolesAndPermission();
-        if(this.rolesAndPermission.length > 0){
+        if (this.rolesAndPermission.length > 0) {
             this.permission = this.rolesAndPermission.find(x => x.name == 'UPDATE MARKS').permission;
         }
     }
@@ -92,16 +94,16 @@ export class MarksheetComponent {
         this.active = data;
     }
 
-    getSemester(){
+    getSemester() {
         this.subjectService.getSemesterByCourseId(this.subjectMarksForm.value.course_id ?? this.subjectMarksSearchForm.value.course_id).subscribe((response: any) => {
             this.semesterList = response.data;
         })
     }
 
-    getSubject(){
+    getSubject() {
         // @ts-ignore
         const session_id = JSON.parse(localStorage.getItem('session_id'));
-        this.subjectMarksForm.patchValue({session_id: session_id});
+        this.subjectMarksForm.patchValue({ session_id: session_id });
         this.subjectService.getSubjects(this.subjectMarksForm.value.course_id, this.subjectMarksForm.value.semester_id)
             .subscribe((response: any) => {
                 this.subjectList = response.data;
@@ -110,23 +112,23 @@ export class MarksheetComponent {
             });
     }
 
-    getStudent(){
+    getStudent() {
         this.studentSubject.getSessionWiseStudent(this.subjectMarksForm.value).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 this.studentList = response.data;
             }
         })
     }
 
-    getMarkSheet(){
+    getMarkSheet() {
         this.examinationService.getMarkSheet(this.subjectMarksSearchForm.value).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 this.markSheetList = response.data;
             }
         })
     }
 
-    addMarksheet(){
+    addMarksheet() {
 
         // @ts-ignore
         this.session_id = JSON.parse(localStorage.getItem('session_id'));
@@ -143,11 +145,11 @@ export class MarksheetComponent {
             return;
         }
 
-        if(!this.subjectMarksForm.valid){
+        if (!this.subjectMarksForm.valid) {
             this.subjectMarksForm.markAllAsTouched();
             return;
         }
-        if(parseInt(this.subjectMarksForm.value.full_marks) < parseInt(this.subjectMarksForm.value.marks)){
+        if (parseInt(this.subjectMarksForm.value.full_marks) < parseInt(this.subjectMarksForm.value.marks)) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -173,25 +175,25 @@ export class MarksheetComponent {
         }];
         this.tempMarkSheet.push(a[0]);
         const index = this.subjectList.findIndex(x => x.id == this.subjectMarksForm.value.subject_id);
-        this.subjectList.splice(index,1);
+        this.subjectList.splice(index, 1);
         this.subjectMarksForm.controls['subject_id'].reset();
         this.subjectMarksForm.controls['marks'].reset();
     }
 
-    editMarksheet(record){
+    editMarksheet(record) {
         this.subjectMarksForm.patchValue(record);
         this.studentSubject.getSessionWiseStudent(this.subjectMarksForm.value).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 this.studentList = response.data;
                 this.subjectService.getSubjects(this.subjectMarksForm.value.course_id, this.subjectMarksForm.value.semester_id)
                     .subscribe((response: any) => {
                         // this.subjectMarksForm.patchValue(record);
                         this.subjectList = response.data;
                         this.copySubjectList = [...this.subjectList];
-                        const temp : [] = [];
+                        const temp: [] = [];
                         const subjectList = [...this.subjectList];
                         this.subjectMarksForm.patchValue(record);
-                        record.subject_details.forEach(function (value){
+                        record.subject_details.forEach(function (value) {
                             let a = [{
                                 'course_id': record.course_id,
                                 'semester_id': record.semester_id,
@@ -205,7 +207,7 @@ export class MarksheetComponent {
                             // @ts-ignore
                             temp.push(a[0]);
                             const index = subjectList.findIndex(x => x.id == value.subject_id);
-                            subjectList.splice(index,1);
+                            subjectList.splice(index, 1);
                         });
                         this.subjectList = subjectList;
                         this.tempMarkSheet = temp;
@@ -215,16 +217,16 @@ export class MarksheetComponent {
         this.active = 1;
     }
 
-    removeFromArray(index,record){
+    removeFromArray(index, record) {
         // console.log(record);
         // console.log(this.copySubjectList);
-        this.tempMarkSheet.splice(index,1);
+        this.tempMarkSheet.splice(index, 1);
         this.subjectList.push(this.copySubjectList.find(x => x.id == record.subject_id));
     }
 
-    saveMarkSheet(){
+    saveMarkSheet() {
         this.examinationService.saveMarksheet(this.tempMarkSheet).subscribe((response: any) => {
-            if(response.success == 1){
+            if (response.success == 1) {
                 Swal.fire({
                     position: 'center',
                     icon: 'success',

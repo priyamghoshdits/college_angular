@@ -11,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import { ManualScholarshipService } from 'src/app/services/manual-scholarship.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-manual-scholarship',
@@ -26,7 +27,8 @@ import { ManualScholarshipService } from 'src/app/services/manual-scholarship.se
     ReactiveFormsModule,
     FormsModule,
     NgbNavOutlet,
-    NgbNavItem
+    NgbNavItem,
+    NgSelectModule
   ],
   templateUrl: './manual-scholarship.component.html',
   styleUrl: './manual-scholarship.component.scss'

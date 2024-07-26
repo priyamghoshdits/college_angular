@@ -52,13 +52,21 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Select Student</label>
-                                            <select class="form-select" formControlName="student_id" required
+                                            <!-- <select class="form-select" formControlName="student_id" required
                                                 style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of filteredStudentList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
-                                            </select>
+                                            </select> -->
+
+                                            <ng-select formControlName="student_id" class="form-select">
+                                                @for (car of filteredStudentList; track car.id) {
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
+                                                }
+                                            </ng-select>
+
                                             <div *ngIf="educationQualificationForm.controls['student_id'].errors?.['required'] && educationQualificationForm.controls['student_id'].touched "
                                                 class="text text-danger mt-1">Student required
                                             </div>
@@ -119,7 +127,8 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Document</label>
-                                            <input class="form-control" formControlName="file_ten" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" type="file"
+                                            <input class="form-control" formControlName="file_ten"
+                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" type="file"
                                                 (change)="uploadFilehelper($event, '10')">
                                             <div *ngIf="educationQualificationForm.controls['file_ten'].errors?.['required'] && educationQualificationForm.controls['file_ten'].touched "
                                                 class="text text-danger mt-1">Document required
@@ -182,7 +191,8 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Document</label>
-                                            <input class="form-control" formControlName="file_twelve" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" type="file"
+                                            <input class="form-control" formControlName="file_twelve"
+                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" type="file"
                                                 (change)="uploadFilehelper($event, '12')">
                                             <div *ngIf="educationQualificationForm.controls['file_twelve'].errors?.['required'] && educationQualificationForm.controls['file_twelve'].touched "
                                                 class="text text-danger mt-1">Document required
@@ -246,7 +256,8 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Document</label>
-                                            <input class="form-control" formControlName="file_ten" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" type="file"
+                                            <input class="form-control" formControlName="file_ten"
+                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" type="file"
                                                 (change)="uploadFilehelper($event, 'graduation')">
                                             <div *ngIf="educationQualificationForm.controls['file_ten'].errors?.['required'] && educationQualificationForm.controls['file_ten'].touched "
                                                 class="text text-danger mt-1">Document required
@@ -286,13 +297,21 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Student</label>
-                                            <select class="form-select" formControlName="student_id" required
+                                            <!-- <select class="form-select" formControlName="student_id" required
                                                 style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of filteredStudentList" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
-                                            </select>
+                                            </select> -->
+
+                                            <ng-select formControlName="student_id" class="form-select">
+                                                @for (car of filteredStudentList; track car.id) {
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
+                                                }
+                                            </ng-select>
+
                                             <div *ngIf="searchEducationQualificationForm.controls['student_id'].errors?.['required'] && searchEducationQualificationForm.controls['student_id'].touched "
                                                 class="text text-danger mt-1">Student required
                                             </div>

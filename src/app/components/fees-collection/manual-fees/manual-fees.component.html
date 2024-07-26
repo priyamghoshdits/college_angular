@@ -55,13 +55,21 @@
                                     </div>
                                     <div class="col-md-4 mb-3">
                                         <label>Select Student</label>
-                                        <select class="form-select" formControlName="student_id" required
+                                        <!-- <select class="form-select" formControlName="student_id" required
                                             style="width: 100%">
                                             <option value="null"> Select</option>
                                             <option *ngFor="let data of filteredStudent" [value]="data.id">
                                                 {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                             </option>
-                                        </select>
+                                        </select> -->
+
+                                        <ng-select formControlName="student_id" class="form-select">
+                                            @for (car of filteredStudent; track car.id) {
+                                            <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                {{car.last_name}}</ng-option>
+                                            }
+                                        </ng-select>
+
                                         <div *ngIf="manualFeesForm.controls['student_id'].errors?.['required'] && manualFeesForm.controls['student_id'].touched "
                                             class="text text-danger mt-1">Student required
                                         </div>

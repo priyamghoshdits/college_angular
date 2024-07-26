@@ -8,6 +8,7 @@ import { SubjectService } from "../../../services/subject.service";
 import { StudentService } from "../../../services/student.service";
 import Swal from "sweetalert2";
 import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase } from "@ng-bootstrap/ng-bootstrap";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-education',
@@ -21,7 +22,8 @@ import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase } from "@ng-bootstrap/ng
         NgbNav,
         NgbNavLink,
         NgbNavLinkBase,
-        NgbNavItem
+        NgbNavItem,
+        NgSelectModule
     ],
     templateUrl: './education.component.html',
     styleUrl: './education.component.scss'

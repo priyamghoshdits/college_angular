@@ -56,7 +56,7 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Select Student</label>
-                                            <select class="form-select"
+                                            <!-- <select class="form-select"
                                                 [(ngModel)]="scholarshipArray[indexOfElement].student_id" required
                                                 style="width: 100%">
                                                 <option value="null">Select</option>
@@ -64,7 +64,15 @@
                                                     [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
-                                            </select>
+                                            </select> -->
+
+                                            <ng-select [(ngModel)]="scholarshipArray[indexOfElement].student_id" class="form-select">
+                                                @for (car of filteredStudentList[indexOfElement]; track car.id) {
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
+                                                }
+                                            </ng-select>
+
                                             <!-- <div *ngIf="educationQualificationForm.controls['student_id'].errors?.['required'] && educationQualificationForm.controls['student_id'].touched "
                                                 class="text text-danger mt-1">Student required
                                             </div> -->
@@ -136,13 +144,21 @@
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Select Student</label>
-                                            <select class="form-select" formControlName="student_id" required
+                                            <!-- <select class="form-select" formControlName="student_id" required
                                                 style="width: 100%">
                                                 <option value="null">Select</option>
                                                 <option *ngFor="let data of studentListSearch" [value]="data.id">
                                                     {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                                 </option>
-                                            </select>
+                                            </select> -->
+
+                                            <ng-select formControlName="student_id" class="form-select">
+                                                @for (car of studentListSearch; track car.id) {
+                                                <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                    {{car.last_name}}</ng-option>
+                                                }
+                                            </ng-select>
+
                                             <div *ngIf="scholarshipSearchForm.controls['semester_id'].errors?.['required'] && scholarshipSearchForm.controls['semester_id'].touched "
                                                 class="text text-danger mt-1">Semester Name required</div>
                                         </div>

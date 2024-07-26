@@ -8,6 +8,7 @@ import {SubjectService} from "../../../services/subject.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {JobService} from "../../../services/job.service";
 import Swal from "sweetalert2";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-placement',
@@ -18,7 +19,8 @@ import Swal from "sweetalert2";
         NgForOf,
         NgIf,
         NgxPaginationModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgSelectModule
     ],
     templateUrl: './placement.component.html',
     styleUrl: './placement.component.scss'

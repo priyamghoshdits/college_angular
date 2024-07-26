@@ -9,6 +9,7 @@ import {StudentService} from "../../../services/student.service";
 import Swal from "sweetalert2";
 import {AchievementService} from "../../../services/achievement.service";
 import {environment} from "../../../../environments/environment";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-achivement',
@@ -18,7 +19,8 @@ import {environment} from "../../../../environments/environment";
         NgForOf,
         NgIf,
         NgxPaginationModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgSelectModule
     ],
     templateUrl: './achivement.component.html',
     styleUrl: './achivement.component.scss'

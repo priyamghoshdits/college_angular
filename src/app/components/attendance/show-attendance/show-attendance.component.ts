@@ -6,6 +6,7 @@ import {StudentService} from "../../../services/student.service";
 import {SubjectService} from "../../../services/subject.service";
 import Swal from "sweetalert2";
 import {MemberService} from "../../../services/member.service";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-show-attendance',
@@ -15,7 +16,8 @@ import {MemberService} from "../../../services/member.service";
         NgForOf,
         NgxPaginationModule,
         ReactiveFormsModule,
-        NgIf
+        NgIf,
+        NgSelectModule
     ],
     providers: [DatePipe],
     templateUrl: './show-attendance.component.html',

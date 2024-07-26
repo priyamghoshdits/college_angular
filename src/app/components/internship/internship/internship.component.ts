@@ -8,6 +8,7 @@ import {StudentService} from "../../../services/student.service";
 import Swal from "sweetalert2";
 import {SubjectService} from "../../../services/subject.service";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-internship',
@@ -18,7 +19,8 @@ import {RolesAndPermissionService} from "../../../services/roles-and-permission.
     NgForOf,
     NgxPaginationModule,
     ReactiveFormsModule,
-    NgIf
+    NgIf,
+    NgSelectModule
   ],
   templateUrl: './internship.component.html',
   styleUrl: './internship.component.scss'

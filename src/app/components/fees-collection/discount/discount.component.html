@@ -12,66 +12,85 @@
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label>Select Course</label>
-                                        <select style="width: 100%" formControlName="course_id" class="form-select" required (change)="getSemester()">
+                                        <select style="width: 100%" formControlName="course_id" class="form-select"
+                                            required (change)="getSemester()">
                                             <option value="null"> Select </option>
-                                            <option *ngFor="let data of courseList" [value]="data.id" >
+                                            <option *ngFor="let data of courseList" [value]="data.id">
                                                 {{data.course_name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="discountForm.controls['course_id'].errors?.['required'] && discountForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
+                                        <div *ngIf="discountForm.controls['course_id'].errors?.['required'] && discountForm.controls['course_id'].touched "
+                                            class="text text-danger mt-1">Course required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label>Select Semester</label>
-                                        <select style="width: 100%" formControlName="semester_id" class="form-select" required (change)="getStudent()">
+                                        <select style="width: 100%" formControlName="semester_id" class="form-select"
+                                            required (change)="getStudent()">
                                             <option value="null"> Select </option>
-                                            <option *ngFor="let data of semesterList" [value]="data.semester_id" >
+                                            <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                                 {{data.name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="discountForm.controls['semester_id'].errors?.['required'] && discountForm.controls['semester_id'].touched " class="text text-danger mt-1">Semester required</div>
+                                        <div *ngIf="discountForm.controls['semester_id'].errors?.['required'] && discountForm.controls['semester_id'].touched "
+                                            class="text text-danger mt-1">Semester required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label>Select Student</label>
-                                        <select style="width: 100%" formControlName="student_id" class="form-select" required>
+                                        <!-- <select style="width: 100%" formControlName="student_id" class="form-select" required>
                                             <option value="null"> Select </option>
                                             <option *ngFor="let data of filteredStudent" [value]="data.id" >
                                                 {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                             </option>
-                                        </select>
-                                        <div *ngIf="discountForm.controls['student_id'].errors?.['required'] && discountForm.controls['student_id'].touched " class="text text-danger mt-1">Student required</div>
+                                        </select> -->
+
+                                        <ng-select formControlName="student_id" class="form-select">
+                                            @for (car of filteredStudent; track car.id) {
+                                            <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                {{car.last_name}}</ng-option>
+                                            }
+                                        </ng-select>
+
+                                        <div *ngIf="discountForm.controls['student_id'].errors?.['required'] && discountForm.controls['student_id'].touched "
+                                            class="text text-danger mt-1">Student required</div>
                                     </div>
                                     <div class="col-md-6 mb-3">
-                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Scholarship Code</label>
-                                        <input class="form-control" formControlName="scholarship_code" id="exampleInputEmail1" type="text"
-                                               placeholder="Enter Scholarship Code">
-                                        <div *ngIf="discountForm.controls['scholarship_code'].errors?.['required'] && discountForm.controls['scholarship_code'].touched " class="text text-danger mt-1">Scholarship code required</div>
+                                        <label class="col-form-label pt-0" for="exampleInputEmail1">Scholarship
+                                            Code</label>
+                                        <input class="form-control" formControlName="scholarship_code"
+                                            id="exampleInputEmail1" type="text" placeholder="Enter Scholarship Code">
+                                        <div *ngIf="discountForm.controls['scholarship_code'].errors?.['required'] && discountForm.controls['scholarship_code'].touched "
+                                            class="text text-danger mt-1">Scholarship code required</div>
                                     </div>
                                 </div>
                                 <div class="row">
 
                                     <div class="col-md-12 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Amount</label>
-                                        <input class="form-control" formControlName="amount" id="exampleInputEmail1" type="text"
-                                               placeholder="Enter Amount">
-                                        <div *ngIf="discountForm.controls['amount'].errors?.['required'] && discountForm.controls['amount'].touched " class="text text-danger mt-1">Amount required</div>
+                                        <input class="form-control" formControlName="amount" id="exampleInputEmail1"
+                                            type="text" placeholder="Enter Amount">
+                                        <div *ngIf="discountForm.controls['amount'].errors?.['required'] && discountForm.controls['amount'].touched "
+                                            class="text text-danger mt-1">Amount required</div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
-                                        <input class="form-control" formControlName="description" id="exampleInputEmail1" type="text"
-                                               placeholder="Enter Description">
+                                        <input class="form-control" formControlName="description"
+                                            id="exampleInputEmail1" type="text" placeholder="Enter Description">
                                     </div>
                                 </div>
 
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveDiscount()">Submit</button>
-                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateDiscount()">Update</button>
-                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                            <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true"
+                                class="btn btn-primary me-1" (click)="saveDiscount()">Submit</button>
+                            <button *ngIf="permission[1].permission == 1" [hidden]="isUpdatable == false"
+                                class="btn btn-primary me-1" (click)="updateDiscount()">Update</button>
+                            <button [hidden]="isUpdatable == false" class="btn btn-primary me-1"
+                                (click)="cancelUpdate()">Cancel</button>
                             <!--                            <button class="btn btn-secondary">Cancel</button>-->
                         </div>
                     </div>
@@ -89,30 +108,36 @@
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Student Name</th>
-                                        <th scope="col">Fees Type Name</th>
-                                        <th scope="col">Scholarship Code</th>
-                                        <th scope="col">Amount</th>
-                                        <th scope="col" *ngIf="permission[1].permission == 1 && permission[2].permission == 1">Action</th>
-                                    </tr>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Student Name</th>
+                                            <th scope="col">Fees Type Name</th>
+                                            <th scope="col">Scholarship Code</th>
+                                            <th scope="col">Amount</th>
+                                            <th scope="col"
+                                                *ngIf="permission[1].permission == 1 && permission[2].permission == 1">
+                                                Action</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr *ngFor="let record of discountList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
-                                        <td>{{indexOfElement+1}}</td>
-                                        <td>{{record.student_name}}</td>
-                                        <td>{{record.fees_type_name}}</td>
-                                        <td>{{record.scholarship_code}}</td>
-                                        <td>{{record.amount}}</td>
-                                        <td>
-                                            <a *ngIf="permission[1].permission == 1" (click)="editDiscount(record)"><mat-icon>edit</mat-icon></a>
-                                            <a *ngIf="permission[2].permission == 1" (click)="deleteDiscount(record)"><mat-icon>delete</mat-icon></a>
-                                        </td>
-                                    </tr>
+                                        <tr
+                                            *ngFor="let record of discountList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                            <td>{{indexOfElement+1}}</td>
+                                            <td>{{record.student_name}}</td>
+                                            <td>{{record.fees_type_name}}</td>
+                                            <td>{{record.scholarship_code}}</td>
+                                            <td>{{record.amount}}</td>
+                                            <td>
+                                                <a *ngIf="permission[1].permission == 1"
+                                                    (click)="editDiscount(record)"><mat-icon>edit</mat-icon></a>
+                                                <a *ngIf="permission[2].permission == 1"
+                                                    (click)="deleteDiscount(record)"><mat-icon>delete</mat-icon></a>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
-                                <pagination-controls *ngIf="discountList.length > 9" (pageChange)="p = $event"></pagination-controls>
+                                <pagination-controls *ngIf="discountList.length > 9"
+                                    (pageChange)="p = $event"></pagination-controls>
 
                             </div>
                         </div>

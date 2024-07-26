@@ -11,6 +11,7 @@ import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase } from "@ng-bootstrap/ng
 import { CustomFilterPipe } from "../../../../../custom-filter.pipe";
 import { environment } from "../../../../environments/environment";
 import Swal from "sweetalert2";
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
     selector: 'app-manual-fees',
@@ -26,7 +27,8 @@ import Swal from "sweetalert2";
         NgbNavLink,
         NgbNavLinkBase,
         NgbNavItem,
-        CustomFilterPipe
+        CustomFilterPipe,
+        NgSelectModule
     ],
     templateUrl: './manual-fees.component.html',
     styleUrl: './manual-fees.component.scss'

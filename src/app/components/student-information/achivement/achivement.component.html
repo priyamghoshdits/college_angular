@@ -13,51 +13,58 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Select Course</label>
                                         <select (change)="getSemester()" class="form-select" formControlName="course_id"
-                                                required style="width: 100%">
+                                            required style="width: 100%">
                                             <option value="null">Select</option>
                                             <option *ngFor="let data of courseList" [value]="data.id">
                                                 {{data.course_name}}
                                             </option>
                                         </select>
                                         <div *ngIf="achievementForm.controls['course_id'].errors?.['required'] && achievementForm.controls['course_id'].touched "
-                                             class="text text-danger mt-1">Course required
+                                            class="text text-danger mt-1">Course required
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Select Semester</label>
                                         <select (change)="getStudent()" class="form-select"
-                                                formControlName="semester_id"
-                                                style="width: 100%">
+                                            formControlName="semester_id" style="width: 100%">
                                             <option value="null">Select</option>
                                             <option *ngFor="let data of semesterList" [value]="data.semester_id">
                                                 {{data.name}}
                                             </option>
                                         </select>
                                         <div *ngIf="achievementForm.controls['semester_id'].errors?.['required'] && achievementForm.controls['semester_id'].touched "
-                                             class="text text-danger mt-1">Semester required
+                                            class="text text-danger mt-1">Semester required
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Select Student</label>
-                                        <select class="form-select"
+                                        <!-- <select class="form-select"
                                                 formControlName="student_id"
                                                 required style="width: 100%">
                                             <option value="null">Select</option>
                                             <option *ngFor="let data of filteredStudent" [value]="data.id">
                                                 {{data.first_name}} {{data.middle_name}} {{data.last_name}}
                                             </option>
-                                        </select>
+                                        </select> -->
+
+                                        <ng-select formControlName="student_id" class="form-control">
+                                            @for (car of filteredStudent; track car.id) {
+                                            <ng-option [value]="car.id">{{car.first_name}} {{car.middle_name}}
+                                                {{car.last_name}}</ng-option>
+                                            }
+                                        </ng-select>
+
                                         <div *ngIf="achievementForm.controls['student_id'].errors?.['required'] && achievementForm.controls['student_id'].touched "
-                                             class="text text-danger mt-1">Student required
+                                            class="text text-danger mt-1">Student required
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Date</label>
                                         <input class="form-control" formControlName="award_date" type="date">
                                         <div *ngIf="achievementForm.controls['award_date'].errors?.['required'] && achievementForm.controls['award_date'].touched "
-                                             class="text text-danger mt-1">Date required
+                                            class="text text-danger mt-1">Date required
                                         </div>
                                     </div>
                                 </div>
@@ -65,19 +72,18 @@
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Award Name</label>
                                         <input class="form-control" formControlName="award_name"
-                                               placeholder="Enter award name"
-                                               type="text">
+                                            placeholder="Enter award name" type="text">
                                         <div *ngIf="achievementForm.controls['award_name'].errors?.['required'] && achievementForm.controls['award_name'].touched "
-                                             class="text text-danger mt-1">Award required
+                                            class="text text-danger mt-1">Award required
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Upload File</label>
-                                        <input (change)="selectedFile($event)" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx" class="form-control"
-                                               formControlName="file_name"
-                                               type="file">
+                                        <input (change)="selectedFile($event)"
+                                            accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                            class="form-control" formControlName="file_name" type="file">
                                         <div *ngIf="achievementForm.controls['file_name'].errors?.['required'] && achievementForm.controls['file_name'].touched"
-                                             class="text text-danger mt-1">File required
+                                            class="text text-danger mt-1">File required
                                         </div>
                                     </div>
                                 </div>
@@ -85,13 +91,13 @@
                         </div>
                         <div class="card-footer">
                             <button (click)="saveAchievement()" *ngIf="permission[0].permission === 1"
-                                    [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
+                                [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
                             </button>
                             <button (click)="updateAchievement()" *ngIf="permission[1].permission === 1"
-                                    [hidden]="isUpdatable == false" class="btn btn-primary me-1">Update
+                                [hidden]="isUpdatable == false" class="btn btn-primary me-1">Update
                             </button>
                             <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
-                                    class="btn btn-primary me-1">Cancel
+                                class="btn btn-primary me-1">Cancel
                             </button>
                         </div>
                     </div>
@@ -110,41 +116,47 @@
                             <div class="table-responsive text-center">
                                 <table class="table">
                                     <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Semester</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Student Name</th>
-                                        <th scope="col">Download</th>
-                                        <th *ngIf="permission[1].permission === 1 || permission[2].permission === 1"
-                                            scope="col">
-                                            Action
-                                        </th>
-                                    </tr>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Semester</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Student Name</th>
+                                            <th scope="col">Download</th>
+                                            <th *ngIf="permission[1].permission === 1 || permission[2].permission === 1"
+                                                scope="col">
+                                                Action
+                                            </th>
+                                        </tr>
                                     </thead>
                                     <tbody>
-                                    <tr *ngFor="let record of achievementList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
-                                        <td>{{indexOfElement + 1}}</td>
-                                        <td>{{record.course_name}}</td>
-                                        <td>{{record.semester_name}}</td>
-                                        <td>{{record.award_date}}</td>
-                                        <td>{{record.student_name}}</td>
-                                        <td><a href="{{FILE_URL}}/achievement/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a></td>
+                                        <tr
+                                            *ngFor="let record of achievementList | paginate: { itemsPerPage: 10, currentPage: p } ;let indexOfElement=index">
+                                            <td>{{indexOfElement + 1}}</td>
+                                            <td>{{record.course_name}}</td>
+                                            <td>{{record.semester_name}}</td>
+                                            <td>{{record.award_date}}</td>
+                                            <td>{{record.student_name}}</td>
+                                            <td><a
+                                                    href="{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a>
+                                            </td>
 
-                                        <td *ngIf="permission[1].permission === 1 || permission[2].permission === 1">
-                                            <a (click)="editAchievement(record)" *ngIf="permission[1].permission === 1">
-                                                <mat-icon>edit</mat-icon>
-                                            </a>
-                                            <a (click)="deleteAchievement(record)"
-                                               *ngIf="permission[2].permission === 1">
-                                                <mat-icon>delete</mat-icon>
-                                            </a>
-                                        </td>
-                                    </tr>
+                                            <td
+                                                *ngIf="permission[1].permission === 1 || permission[2].permission === 1">
+                                                <a (click)="editAchievement(record)"
+                                                    *ngIf="permission[1].permission === 1">
+                                                    <mat-icon>edit</mat-icon>
+                                                </a>
+                                                <a (click)="deleteAchievement(record)"
+                                                    *ngIf="permission[2].permission === 1">
+                                                    <mat-icon>delete</mat-icon>
+                                                </a>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
-                                <pagination-controls (pageChange)="p = $event" *ngIf="achievementList.length >9"></pagination-controls>
+                                <pagination-controls (pageChange)="p = $event"
+                                    *ngIf="achievementList.length >9"></pagination-controls>
 
                             </div>
                         </div>
