@@ -35,459 +35,474 @@
                         <div [hidden]="active != 1">
                             <div class="card-body">
                                 <form [formGroup]="studentCreationForm">
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Student ID</label>
-                                            <input (blur)="checkUniqueId()" class="form-control"
-                                                formControlName="identification_no" placeholder="Student Id"
-                                                type="text">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>First Name</label>
-                                            <input class="form-control" formControlName="first_name"
-                                                placeholder="First name" type="text">
-                                            <div *ngIf="studentCreationForm.controls['first_name'].errors?.['required'] && studentCreationForm.controls['first_name'].touched "
-                                                class="text text-danger mt-1">First Name required
+                                    <div class="onedividersection">
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Student ID</label>
+                                                                <input (blur)="checkUniqueId()" class="form-control"
+                                                                    formControlName="identification_no" placeholder="Student Id"
+                                                                    type="text">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>First Name</label>
+                                                                <input class="form-control" formControlName="first_name"
+                                                                    placeholder="First name" type="text">
+                                                                <div *ngIf="studentCreationForm.controls['first_name'].errors?.['required'] && studentCreationForm.controls['first_name'].touched "
+                                                                    class="text text-danger mt-1">First Name required
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Middle Name</label>
+                                                                <input class="form-control" formControlName="middle_name"
+                                                                    placeholder="Middle Name" type="text">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Last Name</label>
+                                                                <input class="form-control" formControlName="last_name"
+                                                                    placeholder="Last Name" type="text">
+                                                                <div *ngIf="studentCreationForm.controls['last_name'].errors?.['required'] && studentCreationForm.controls['last_name'].touched "
+                                                                    class="text text-danger mt-1">Last Name required
+                                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Middle Name</label>
-                                            <input class="form-control" formControlName="middle_name"
-                                                placeholder="Middle Name" type="text">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Last Name</label>
-                                            <input class="form-control" formControlName="last_name"
-                                                placeholder="Last Name" type="text">
-                                            <div *ngIf="studentCreationForm.controls['last_name'].errors?.['required'] && studentCreationForm.controls['last_name'].touched "
-                                                class="text text-danger mt-1">Last Name required
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Date Of Birth</label>
+                                                                <input class="form-control digits" formControlName="dob"
+                                                                    id="example-datetime-local-input" type="date">
+                                                                <div *ngIf="studentCreationForm.controls['dob'].errors?.['required'] && studentCreationForm.controls['dob'].touched "
+                                                                    class="text text-danger mt-1">Date of Birth required
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Upload date of birth proof</label>
+                                                                <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                                    (change)="uploadDateOfBirthProof($event)" [multiple]="false"
+                                                                    class="form-control" type="file">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Admission date</label>
+                                                                <input class="form-control digits" formControlName="admission_date"
+                                                                    id="example-datetime-local-input" type="date">
+                                                                <div *ngIf="studentCreationForm.controls['admission_date'].errors?.['required'] && studentCreationForm.controls['admission_date'].touched "
+                                                                    class="text text-danger mt-1">Admission Date required
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Upload Admission Slip</label>
+                                                                <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                                    (change)="selectAdmissionSlip($event)" [multiple]="false"
+                                                                    class="form-control" type="file">
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Date Of Birth</label>
-                                            <input class="form-control digits" formControlName="dob"
-                                                id="example-datetime-local-input" type="date">
-                                            <div *ngIf="studentCreationForm.controls['dob'].errors?.['required'] && studentCreationForm.controls['dob'].touched "
-                                                class="text text-danger mt-1">Date of Birth required
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Phone Number</label>
+                                                                <input class="form-control" formControlName="mobile_no"
+                                                                    placeholder="Phone Number" type="text">
+                                                                <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['required'] && studentCreationForm.controls['mobile_no'].touched "
+                                                                    class="text text-danger mt-1">Mobile Number required
+                                                                </div>
+                                                                <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']"
+                                                                    class="text text-danger mt-1">Invalid Mobile Number
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Emergency Contact Number</label>
+                                                                <input class="form-control" formControlName="emergency_phone_number"
+                                                                    placeholder="Emergency Contact Number" type="text">
+                                                                <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['required'] && studentCreationForm.controls['emergency_phone_number'].touched "
+                                                                    class="text text-danger mt-1">Emergency phone required
+                                                                </div>
+                                                                <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['pattern']"
+                                                                    class="text text-danger mt-1">Invalid Emergency Contact
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Marital Status</label>
+                                                                <select class="form-select" formControlName="material_status"
+                                                                    style="width: 100%">
+                                                                    <option value="null">Select</option>
+                                                                    <option value="Single"> Single</option>
+                                                                    <option value="Married"> Married</option>
+                                                                    <option value="Widowed"> Widowed</option>
+                                                                    <option value="Seperated"> Seperated</option>
+                                                                    <option value="Not Specified"> Not Specified</option>
+                                                                </select>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Gender</label>
+                                                                <select class="form-select" formControlName="gender" style="width: 100%">
+                                                                    <option value="null">Select</option>
+                                                                    <option value="Male"> Male</option>
+                                                                    <option value="Female"> Female</option>
+                                                                </select>
+                                                                <div *ngIf="studentCreationForm.controls['gender'].errors?.['required'] && studentCreationForm.controls['gender'].touched "
+                                                                    class="text text-danger mt-1">Gender required
+                                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Upload date of birth proof</label>
-                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                (change)="uploadDateOfBirthProof($event)" [multiple]="false"
-                                                class="form-control" type="file">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Admission date</label>
-                                            <input class="form-control digits" formControlName="admission_date"
-                                                id="example-datetime-local-input" type="date">
-                                            <div *ngIf="studentCreationForm.controls['admission_date'].errors?.['required'] && studentCreationForm.controls['admission_date'].touched "
-                                                class="text text-danger mt-1">Admission Date required
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Profile Image</label>
+                                                                <!--                                            <input type="file" class="form-control" [multiple]="false" (change)="onSelect1($event)">-->
+                                                                <input accept=".jpg, .jpeg, .png" (change)="selectProfilePic($event)"
+                                                                    [multiple]="false" class="form-control" type="file">
                                             </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Upload Admission Slip</label>
-                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                (change)="selectAdmissionSlip($event)" [multiple]="false"
-                                                class="form-control" type="file">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Phone Number</label>
-                                            <input class="form-control" formControlName="mobile_no"
-                                                placeholder="Phone Number" type="text">
-                                            <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['required'] && studentCreationForm.controls['mobile_no'].touched "
-                                                class="text text-danger mt-1">Mobile Number required
-                                            </div>
-                                            <div *ngIf="studentCreationForm.controls['mobile_no'].errors?.['pattern']"
-                                                class="text text-danger mt-1">Invalid Mobile Number
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Emergency Contact Number</label>
-                                            <input class="form-control" formControlName="emergency_phone_number"
-                                                placeholder="Emergency Contact Number" type="text">
-                                            <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['required'] && studentCreationForm.controls['emergency_phone_number'].touched "
-                                                class="text text-danger mt-1">Emergency phone required
-                                            </div>
-                                            <div *ngIf="studentCreationForm.controls['emergency_phone_number'].errors?.['pattern']"
-                                                class="text text-danger mt-1">Invalid Emergency Contact
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Marital Status</label>
-                                            <select class="form-select" formControlName="material_status"
-                                                style="width: 100%">
-                                                <option value="null">Select</option>
-                                                <option value="Single"> Single</option>
-                                                <option value="Married"> Married</option>
-                                                <option value="Widowed"> Widowed</option>
-                                                <option value="Seperated"> Seperated</option>
-                                                <option value="Not Specified"> Not Specified</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Gender</label>
-                                            <select class="form-select" formControlName="gender" style="width: 100%">
-                                                <option value="null">Select</option>
-                                                <option value="Male"> Male</option>
-                                                <option value="Female"> Female</option>
-                                            </select>
-                                            <div *ngIf="studentCreationForm.controls['gender'].errors?.['required'] && studentCreationForm.controls['gender'].touched "
-                                                class="text text-danger mt-1">Gender required
-                                            </div>
-                                        </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Blood Group</label>
+                                                                <select class="form-select" formControlName="blood_group"
+                                                                    style="width: 100%">
+                                                                    <option value="null">Select</option>
+                                                                    <option value="A+"> A+</option>
+                                                                    <option value="A-"> A-</option>
+                                                                    <option value="B+"> B+</option>
+                                                                    <option value="B-"> B-</option>
+                                                                    <option value="AB+"> AB+</option>
+                                                                    <option value="AB-"> AB-</option>
+                                                                    <option value="O+"> O+</option>
+                                                                    <option value="O-"> O-</option>
+                                                                </select>
 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Profile Image</label>
-                                            <!--                                            <input type="file" class="form-control" [multiple]="false" (change)="onSelect1($event)">-->
-                                            <input accept=".jpg, .jpeg, .png" (change)="selectProfilePic($event)"
-                                                [multiple]="false" class="form-control" type="file">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Blood Group</label>
-                                            <select class="form-select" formControlName="blood_group"
-                                                style="width: 100%">
-                                                <option value="null">Select</option>
-                                                <option value="A+"> A+</option>
-                                                <option value="A-"> A-</option>
-                                                <option value="B+"> B+</option>
-                                                <option value="B-"> B-</option>
-                                                <option value="AB+"> AB+</option>
-                                                <option value="AB-"> AB-</option>
-                                                <option value="O+"> O+</option>
-                                                <option value="O-"> O-</option>
-                                            </select>
-
-                                            <!--                                            <ng-select [items]="cities"-->
-                                            <!--                                                       [searchFn]="customSearchFn"-->
-                                            <!--                                                       bindLabel="name"-->
-                                            <!--                                                       placeholder="Select city"-->
-                                            <!--                                                       [(ngModel)]="selectedCity">-->
-                                            <!--                                            </ng-select>-->
+                                                                <!--                                            <ng-select [items]="cities"-->
+                                                                <!--                                                       [searchFn]="customSearchFn"-->
+                                                                <!--                                                       bindLabel="name"-->
+                                                                <!--                                                       placeholder="Select city"-->
+                                                                <!--                                                       [(ngModel)]="selectedCity">-->
+                                                                <!--                                            </ng-select>-->
 
 
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Upload Lab Report</label>
-                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                (change)="uploadLabReport($event)" [multiple]="false"
-                                                class="form-control" type="file">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Agent</label>
-                                            <select class="form-select" formControlName="agent_id" style="width: 100%">
-                                                <option value="null">Select</option>
-                                                <option *ngFor="let data of agentList" [value]="data.id">
-                                                    {{data.first_name}} {{data.last_name}}
-                                                </option>
-                                            </select>
-                                            <div *ngIf="studentCreationForm.controls['agent_id'].errors?.['required'] && studentCreationForm.controls['agent_id'].touched "
-                                                class="text text-danger mt-1">Agent required
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Upload Lab Report</label>
+                                                                <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                                    (change)="uploadLabReport($event)" [multiple]="false"
+                                                                    class="form-control" type="file">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Agent</label>
+                                                                <select class="form-select" formControlName="agent_id" style="width: 100%">
+                                                                    <option value="null">Select</option>
+                                                                    <option *ngFor="let data of agentList" [value]="data.id">
+                                                                        {{data.first_name}} {{data.last_name}}
+                                                                    </option>
+                                                                </select>
+                                                                <div *ngIf="studentCreationForm.controls['agent_id'].errors?.['required'] && studentCreationForm.controls['agent_id'].touched "
+                                                                    class="text text-danger mt-1">Agent required
+                                                                </div>
+                                            </div>
+                                        </div>      
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Religion</label>
+                                                                <select class="form-select" formControlName="religion" style="width: 100%">
+                                                                    <option value="null">Select</option>
+                                                                    <option value="Hinduism"> Hinduism</option>
+                                                                    <option value="Buddhism"> Buddhism</option>
+                                                                    <option value="Christianity"> Christianity</option>
+                                                                    <option value="Confucianism"> Confucianism</option>
+                                                                    <option value="Islam"> Islam</option>
+                                                                    <option value="Jainism"> Jainism</option>
+                                                                    <option value="Judaism"> Judaism</option>
+                                                                    <option value="Shinto"> Shinto</option>
+                                                                    <option value="Sikhism"> Sikhism</option>
+                                                                    <option value="Taoism"> Taoism</option>
+                                                                    <option value="Zoroastrianism"> Zoroastrianism</option>
+                                                                </select>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Email address (Login Email)</label>
+                                                                <input class="form-control" formControlName="email"
+                                                                    placeholder="name@example.com" type="email">
+                                                                <div *ngIf="studentCreationForm.controls['email'].errors?.['required'] && studentCreationForm.controls['email'].touched "
+                                                                    class="text text-danger mt-1">Email is required
+                                                                </div>
+                                                                <div *ngIf="studentCreationForm.controls['email'].errors?.['email']"
+                                                                    class="text text-danger mt-1">Invalid Email
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Select Course</label>
+                                                                <select (change)="getSemester()" class="form-select"
+                                                                    formControlName="course_id" required style="width: 100%">
+                                                                    <option value="null">Select</option>
+                                                                    <option *ngFor="let data of courseList" [value]="data.id">
+                                                                        {{data.course_name}}
+                                                                    </option>
+                                                                </select>
+                                                                <div *ngIf="studentCreationForm.controls['course_id'].errors?.['required'] && studentCreationForm.controls['course_id'].touched "
+                                                                    class="text text-danger mt-1">Course required
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Select Semester</label>
+                                                                <select class="form-select" formControlName="semester_id"
+                                                                    style="width: 100%">
+                                                                    <option value="null">Select</option>
+                                                                    <option *ngFor="let data of semesterList" [value]="data.semester_id">
+                                                                        {{data.name}}
+                                                                    </option>
+                                                                </select>
+                                                                <div *ngIf="studentCreationForm.controls['semester_id'].errors?.['required'] && studentCreationForm.controls['semester_id'].touched "
+                                                                    class="text text-danger mt-1">Semester required
+                                                                </div>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Caste</label>
+                                                                <select class="form-select" formControlName="category_id"
+                                                                    style="width: 100%">
+                                                                    <option value="null">Select</option>
+                                                                    <option *ngFor="let data of categoryList" [value]="data.id">
+                                                                        {{data.name}}
+                                                                    </option>
+                                                                </select>
+                                                                <div *ngIf="studentCreationForm.controls['category_id'].errors?.['required'] && studentCreationForm.controls['category_id'].touched "
+                                                                    class="text text-danger mt-1">Caste required
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Current Address</label>
+                                                                <input class="form-control" formControlName="current_address"
+                                                                    placeholder="Current Address" type="text">
+                                                                <div *ngIf="studentCreationForm.controls['current_address'].errors?.['required'] && studentCreationForm.controls['current_address'].touched "
+                                                                    class="text text-danger mt-1">Current Address required
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Permanent Address</label>
+                                                                <input class="form-control" formControlName="permanent_address"
+                                                                    placeholder="Permanent Address" type="text">
+                                                                <div *ngIf="studentCreationForm.controls['permanent_address'].errors?.['required'] && studentCreationForm.controls['permanent_address'].touched "
+                                                                    class="text text-danger mt-1">Permanent Address required
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Upload aadhaar Card</label>
+                                                                <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                                    (change)="uploadAadhaarCard($event)" [multiple]="false"
+                                                                    class="form-control" type="file">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Select Franchise</label>
+                                                                <select class="form-select" formControlName="franchise_id"
+                                                                    style="width: 100%">
+                                                                    <option value="null">Select</option>
+                                                                    <option *ngFor="let data of franchiseList" [value]="data.id">
+                                                                        {{data.name}}
+                                                                    </option>
+                                                                </select>
+                                                                <div *ngIf="studentCreationForm.controls['franchise_id'].errors?.['required'] && studentCreationForm.controls['franchise_id'].touched "
+                                                                    class="text text-danger mt-1">Franchise required
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Roll No</label>
+                                                                <input class="form-control" formControlName="roll_no" placeholder="Roll No"
+                                                                    type="text">
+                                                                <div *ngIf="studentCreationForm.controls['roll_no'].errors?.['required'] && studentCreationForm.controls['roll_no'].touched "
+                                                                    class="text text-danger mt-1">Roll No required
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Registration No</label>
+                                                                <input class="form-control" formControlName="registration_no"
+                                                                    placeholder="Registration No" type="text">
+                                                                <div *ngIf="studentCreationForm.controls['registration_no'].errors?.['required'] && studentCreationForm.controls['registration_no'].touched "
+                                                                    class="text text-danger mt-1">Registration No required
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Upload registration certificate</label>
+                                                                <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                                    (change)="selectRegistrationFile($event)" [multiple]="false"
+                                                                    class="form-control" type="file">
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                                <label>ABC ID (Academic bank of credit)</label>
+                                                                <input class="form-control" formControlName="abc_id"
+                                                                    placeholder="Enter ABC ID" type="text">
+                                                                <div *ngIf="studentCreationForm.controls['abc_id'].errors?.['required'] && studentCreationForm.controls['abc_id'].touched "
+                                                                    class="text text-danger mt-1">Roll No required
+                                                                </div>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Upload ABC</label>
+                                                                <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                                    (change)="uploadAbcId($event)" [multiple]="false" class="form-control"
+                                                                    type="file">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Upload Student Signature</label>
+                                                                <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                                    (change)="uploadSignature($event)" [multiple]="false"
+                                                                    class="form-control" type="file">
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                                <label>Admission Allotment Letter</label>
+                                                                <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                                    (change)="uploadAdmissionLatter($event)" [multiple]="false"
+                                                                    class="form-control" type="file">
+                                            </div>
+                                        </div> 
                                     </div>
+                                    <hr>
+                                    <h3 class="innerform_headingtext">
+                                        <img src="assets/images/money.png" class="hdnameimg_design">
+                                        Caution Money Payment Details
+                                    </h3>
+                                    <hr>
                                     <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Religion</label>
-                                            <select class="form-select" formControlName="religion" style="width: 100%">
-                                                <option value="null">Select</option>
-                                                <option value="Hinduism"> Hinduism</option>
-                                                <option value="Buddhism"> Buddhism</option>
-                                                <option value="Christianity"> Christianity</option>
-                                                <option value="Confucianism"> Confucianism</option>
-                                                <option value="Islam"> Islam</option>
-                                                <option value="Jainism"> Jainism</option>
-                                                <option value="Judaism"> Judaism</option>
-                                                <option value="Shinto"> Shinto</option>
-                                                <option value="Sikhism"> Sikhism</option>
-                                                <option value="Taoism"> Taoism</option>
-                                                <option value="Zoroastrianism"> Zoroastrianism</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Email address (Login Email)</label>
-                                            <input class="form-control" formControlName="email"
-                                                placeholder="name@example.com" type="email">
-                                            <div *ngIf="studentCreationForm.controls['email'].errors?.['required'] && studentCreationForm.controls['email'].touched "
-                                                class="text text-danger mt-1">Email is required
+                                        <div class="col-lg-12">
+                                            <div class="fullform_dividersection">
+                                                <div class="row">
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Payment Date</label>
+                                                        <input class="form-control" formControlName="payment_date"
+                                                            placeholder="Pre-Admission Amount" type="date">
+                                                        <div *ngIf="studentCreationForm.controls['payment_date'].errors?.['required'] && studentCreationForm.controls['payment_date'].touched "
+                                                            class="text text-danger mt-1">Payment Date required
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Select Payment Mode</label>
+                                                        <select class="form-select" formControlName="mode_of_payment"
+                                                            style="width: 100%">
+                                                            <option value="null"> Select</option>
+                                                            <option value="Cash"> Cash</option>
+                                                            <option value="Cheque"> Cheque</option>
+                                                            <option value="Transfer To Bank"> Transfer To Bank</option>
+                                                            <option value="Others"> Others</option>
+                                                        </select>
+                                                        <div *ngIf="studentCreationForm.controls['mode_of_payment'].errors?.['required'] && studentCreationForm.controls['mode_of_payment'].touched "
+                                                            class="text text-danger mt-1">Mode Of Payment required
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Transaction Id</label>
+                                                        <input class="form-control" formControlName="transaction_id"
+                                                            placeholder="Transaction Id" type="text">
+                                                        <div *ngIf="studentCreationForm.controls['transaction_id'].errors?.['required'] && studentCreationForm.controls['transaction_id'].touched "
+                                                            class="text text-danger mt-1">Transaction Id required
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Caution Money Amount</label>
+                                                        <input class="form-control" formControlName="caution_money"
+                                                            placeholder="Caution Money Amount" type="text">
+                                                        <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['required'] && studentCreationForm.controls['caution_money'].touched "
+                                                            class="text text-danger mt-1">Amount required
+                                                        </div>
+                                                        <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['pattern']"
+                                                            class="text text-danger mt-1">Invalid Amount
+                                                        </div>
+                                                    </div>
+                                                </div>    
                                             </div>
-                                            <div *ngIf="studentCreationForm.controls['email'].errors?.['email']"
-                                                class="text text-danger mt-1">Invalid Email
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Select Course</label>
-                                            <select (change)="getSemester()" class="form-select"
-                                                formControlName="course_id" required style="width: 100%">
-                                                <option value="null">Select</option>
-                                                <option *ngFor="let data of courseList" [value]="data.id">
-                                                    {{data.course_name}}
-                                                </option>
-                                            </select>
-                                            <div *ngIf="studentCreationForm.controls['course_id'].errors?.['required'] && studentCreationForm.controls['course_id'].touched "
-                                                class="text text-danger mt-1">Course required
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Select Semester</label>
-                                            <select class="form-select" formControlName="semester_id"
-                                                style="width: 100%">
-                                                <option value="null">Select</option>
-                                                <option *ngFor="let data of semesterList" [value]="data.semester_id">
-                                                    {{data.name}}
-                                                </option>
-                                            </select>
-                                            <div *ngIf="studentCreationForm.controls['semester_id'].errors?.['required'] && studentCreationForm.controls['semester_id'].touched "
-                                                class="text text-danger mt-1">Semester required
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Caste</label>
-                                            <select class="form-select" formControlName="category_id"
-                                                style="width: 100%">
-                                                <option value="null">Select</option>
-                                                <option *ngFor="let data of categoryList" [value]="data.id">
-                                                    {{data.name}}
-                                                </option>
-                                            </select>
-                                            <div *ngIf="studentCreationForm.controls['category_id'].errors?.['required'] && studentCreationForm.controls['category_id'].touched "
-                                                class="text text-danger mt-1">Caste required
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Current Address</label>
-                                            <input class="form-control" formControlName="current_address"
-                                                placeholder="Current Address" type="text">
-                                            <div *ngIf="studentCreationForm.controls['current_address'].errors?.['required'] && studentCreationForm.controls['current_address'].touched "
-                                                class="text text-danger mt-1">Current Address required
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Permanent Address</label>
-                                            <input class="form-control" formControlName="permanent_address"
-                                                placeholder="Permanent Address" type="text">
-                                            <div *ngIf="studentCreationForm.controls['permanent_address'].errors?.['required'] && studentCreationForm.controls['permanent_address'].touched "
-                                                class="text text-danger mt-1">Permanent Address required
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Upload aadhaar Card</label>
-                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                (change)="uploadAadhaarCard($event)" [multiple]="false"
-                                                class="form-control" type="file">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Select Franchise</label>
-                                            <select class="form-select" formControlName="franchise_id"
-                                                style="width: 100%">
-                                                <option value="null">Select</option>
-                                                <option *ngFor="let data of franchiseList" [value]="data.id">
-                                                    {{data.name}}
-                                                </option>
-                                            </select>
-                                            <div *ngIf="studentCreationForm.controls['franchise_id'].errors?.['required'] && studentCreationForm.controls['franchise_id'].touched "
-                                                class="text text-danger mt-1">Franchise required
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Roll No</label>
-                                            <input class="form-control" formControlName="roll_no" placeholder="Roll No"
-                                                type="text">
-                                            <div *ngIf="studentCreationForm.controls['roll_no'].errors?.['required'] && studentCreationForm.controls['roll_no'].touched "
-                                                class="text text-danger mt-1">Roll No required
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Registration No</label>
-                                            <input class="form-control" formControlName="registration_no"
-                                                placeholder="Registration No" type="text">
-                                            <div *ngIf="studentCreationForm.controls['registration_no'].errors?.['required'] && studentCreationForm.controls['registration_no'].touched "
-                                                class="text text-danger mt-1">Registration No required
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Upload registration certificate</label>
-                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                (change)="selectRegistrationFile($event)" [multiple]="false"
-                                                class="form-control" type="file">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>ABC ID (Academic bank of credit)</label>
-                                            <input class="form-control" formControlName="abc_id"
-                                                placeholder="Enter ABC ID" type="text">
-                                            <div *ngIf="studentCreationForm.controls['abc_id'].errors?.['required'] && studentCreationForm.controls['abc_id'].touched "
-                                                class="text text-danger mt-1">Roll No required
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Upload ABC</label>
-                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                (change)="uploadAbcId($event)" [multiple]="false" class="form-control"
-                                                type="file">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Upload Student Signature</label>
-                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                (change)="uploadSignature($event)" [multiple]="false"
-                                                class="form-control" type="file">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Admission Allotment Letter</label>
-                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                (change)="uploadAdmissionLatter($event)" [multiple]="false"
-                                                class="form-control" type="file">
                                         </div>
                                     </div>
                                     <hr>
-                                    <h3>Caution Money Payment Details</h3>
+                                    <h3 class="innerform_headingtext">
+                                        <img src="assets/images/family.png" class="hdnameimg_design">
+                                        Guardian Details
+                                    </h3>
                                     <hr>
                                     <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Payment Date</label>
-                                            <input class="form-control" formControlName="payment_date"
-                                                placeholder="Pre-Admission Amount" type="date">
-                                            <div *ngIf="studentCreationForm.controls['payment_date'].errors?.['required'] && studentCreationForm.controls['payment_date'].touched "
-                                                class="text text-danger mt-1">Payment Date required
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Select Payment Mode</label>
-                                            <select class="form-select" formControlName="mode_of_payment"
-                                                style="width: 100%">
-                                                <option value="null"> Select</option>
-                                                <option value="Cash"> Cash</option>
-                                                <option value="Cheque"> Cheque</option>
-                                                <option value="Transfer To Bank"> Transfer To Bank</option>
-                                                <option value="Others"> Others</option>
-                                            </select>
-                                            <div *ngIf="studentCreationForm.controls['mode_of_payment'].errors?.['required'] && studentCreationForm.controls['mode_of_payment'].touched "
-                                                class="text text-danger mt-1">Mode Of Payment required
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Transaction Id</label>
-                                            <input class="form-control" formControlName="transaction_id"
-                                                placeholder="Transaction Id" type="text">
-                                            <div *ngIf="studentCreationForm.controls['transaction_id'].errors?.['required'] && studentCreationForm.controls['transaction_id'].touched "
-                                                class="text text-danger mt-1">Transaction Id required
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Caution Money Amount</label>
-                                            <input class="form-control" formControlName="caution_money"
-                                                placeholder="Caution Money Amount" type="text">
-                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['required'] && studentCreationForm.controls['caution_money'].touched "
-                                                class="text text-danger mt-1">Amount required
-                                            </div>
-                                            <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['pattern']"
-                                                class="text text-danger mt-1">Invalid Amount
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <hr>
-                                    <h3>Guardian Details</h3>
-                                    <hr>
-
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Father Name</label>
-                                            <input class="form-control" formControlName="father_name" type="text">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Father Phone no.</label>
-                                            <input class="form-control" formControlName="father_phone" type="text">
-                                            <div *ngIf="studentCreationForm.controls['father_phone'].errors?.['pattern']"
-                                                class="text text-danger mt-1">Invalid Phone no.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Father Occupation</label>
-                                            <input class="form-control" formControlName="father_occupation" type="text">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Upload Father's Income Certificate</label>
-                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                (change)="uploadFatherIncomeCertificate($event)" [multiple]="false"
-                                                class="form-control" type="file">
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Mother Name</label>
-                                            <input class="form-control" formControlName="mother_name" type="text">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Mother Phone no.</label>
-                                            <input class="form-control" formControlName="mother_phone" type="text">
-                                            <div *ngIf="studentCreationForm.controls['mother_phone'].errors?.['pattern']"
-                                                class="text text-danger mt-1">Invalid Phone no.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Mother Occupation</label>
-                                            <input class="form-control" formControlName="mother_occupation" type="text">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Upload Mother's Income Certificate</label>
-                                            <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                (change)="uploadMotherIncomeCertificate($event)" [multiple]="false"
-                                                class="form-control" type="file">
+                                        <div class="col-lg-12">
+                                            <div class="lastform_dividersection">
+                                                <div class="row">
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Father Name</label>
+                                                        <input class="form-control" formControlName="father_name" type="text">
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Father Phone no.</label>
+                                                        <input class="form-control" formControlName="father_phone" type="text">
+                                                        <div *ngIf="studentCreationForm.controls['father_phone'].errors?.['pattern']"
+                                                            class="text text-danger mt-1">Invalid Phone no.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Father Occupation</label>
+                                                        <input class="form-control" formControlName="father_occupation" type="text">
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Income Certificate</label>
+                                                        <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                            (change)="uploadFatherIncomeCertificate($event)" [multiple]="false"
+                                                            class="form-control" type="file">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Mother Name</label>
+                                                        <input class="form-control" formControlName="mother_name" type="text">
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Mother Phone no.</label>
+                                                        <input class="form-control" formControlName="mother_phone" type="text">
+                                                        <div *ngIf="studentCreationForm.controls['mother_phone'].errors?.['pattern']"
+                                                            class="text text-danger mt-1">Invalid Phone no.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Mother Occupation</label>
+                                                        <input class="form-control" formControlName="mother_occupation" type="text">
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Income Certificate</label>
+                                                        <input accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                            (change)="uploadMotherIncomeCertificate($event)" [multiple]="false"
+                                                            class="form-control" type="file">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Guardian Name</label>
+                                                        <input class="form-control" formControlName="guardian_name" type="text">
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Guardian Phone no.</label>
+                                                        <input class="form-control" formControlName="guardian_phone" type="text">
+                                                        <div *ngIf="studentCreationForm.controls['guardian_phone'].errors?.['pattern']"
+                                                            class="text text-danger mt-1">Invalid Phone no.
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Guardian Email</label>
+                                                        <input class="form-control" formControlName="guardian_email" type="text">
+                                                        <div *ngIf="studentCreationForm.controls['guardian_email'].errors?.['email']"
+                                                            class="text text-danger mt-1">Invalid Email
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Guardian Relation</label>
+                                                        <input class="form-control" formControlName="guardian_relation" type="text">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Guardian Occupation</label>
+                                                        <input class="form-control" formControlName="guardian_occupation"
+                                                            type="text">
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Guardian Address</label>
+                                                        <input class="form-control" formControlName="guardian_address" type="text">
+                                                    </div>
+                                                </div>
+                                            </div>    
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Guardian Name</label>
-                                            <input class="form-control" formControlName="guardian_name" type="text">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Guardian Phone no.</label>
-                                            <input class="form-control" formControlName="guardian_phone" type="text">
-                                            <div *ngIf="studentCreationForm.controls['guardian_phone'].errors?.['pattern']"
-                                                class="text text-danger mt-1">Invalid Phone no.
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Guardian Email</label>
-                                            <input class="form-control" formControlName="guardian_email" type="text">
-                                            <div *ngIf="studentCreationForm.controls['guardian_email'].errors?.['email']"
-                                                class="text text-danger mt-1">Invalid Email
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Guardian Relation</label>
-                                            <input class="form-control" formControlName="guardian_relation" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-3 mb-3">
-                                            <label>Guardian Occupation</label>
-                                            <input class="form-control" formControlName="guardian_occupation"
-                                                type="text">
-                                        </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Guardian Address</label>
-                                            <input class="form-control" formControlName="guardian_address" type="text">
-                                        </div>
-                                    </div>
 
                                     <button (click)="saveStudent()" *ngIf="permission[0].permission == 1"
-                                        [hidden]="isUpdateable" class="btn btn-primary me-1" type="submit">Save
+                                        [hidden]="isUpdateable" class="btn btn-primary me-1 ssthreebtn_design" type="submit">Save
                                         Student
                                     </button>
                                     <button (click)="updateStudent()" *ngIf="permission[1].permission == 1"

@@ -14,9 +14,21 @@ div.review canvas {
 }
 .swsfst_areaout
 {
-  background-color: #1ea6ec;
+  background-color: #3d52a0;
   padding: 10px 0px 10px 30px;
   border-radius: 5px 5px 0px 0px;
+}
+.jsecond_backcolorarea
+{
+  background-color: #0fa4af !important;
+}
+.third_bxoutsection
+{
+  background-color: #124e66 !important;
+}
+.fourth_bckarea
+{
+  background-color: #346e6f !important;
 }
 .swsft_icondesign
 {
@@ -41,6 +53,8 @@ div.review canvas {
   border-radius: 15px;
   padding: 10px 10px;
   background: #FFF;
+  width: 18%;
+  float: left;
 }
 .swfstbox_outarea1
 {
@@ -65,7 +79,14 @@ div.review canvas {
 }
 .swfstbox_outarea4
 {
-  background: #735DA5;
+  background: #116466;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+.swfstbox_outarea5
+{
+  background: #88bdbc;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 10px 10px;
@@ -184,6 +205,16 @@ div.review canvas {
 {
   border: none;
 }
+.thdashboardf_outsection
+{
+  border: none;
+}
+.ucnxsd_outarea1
+{
+  height: 500px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 .canlendarout_section
 {
   margin: 40px 0px 0px 0px;
@@ -206,6 +237,7 @@ div.review canvas {
 }
 .leftfrth_dashboardoutarea
 {
+  margin: 40px 0px 0px 0px;
   padding: 0px;
   background-color: #FFF;
   border-radius: 0px 0px 5px 5px;
@@ -280,4 +312,12 @@ div.review canvas {
   top: -18px;
   right: 31%;
   background-color: #1ea6ec;
+}
+.countstudent_outsection
+{
+  height: 585px;
+}
+.clender_vzxsection
+{
+  margin: 50px 0px 0px 0px;
 }

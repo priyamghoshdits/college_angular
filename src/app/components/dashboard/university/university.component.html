@@ -1,14 +1,14 @@
 <!-- ================================dashboard first area start===================================== -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 dashboard_fstoutstructure" *ngIf="userTypeId == 1 || userTypeId == 5">
+        <div class="col-lg-12" *ngIf="userTypeId == 1 || userTypeId == 5">
+            <div class="dashboard_fstoutstructure">
             <div class="swsfst_areaout">
                 <i class="fa-solid fa-users swsft_icondesign"></i>
                 <span class="swsft_textdesign">Stage Wise Statistics(2023-2024)</span>
             </div>
             <div class="row jufcx">
-                <div class="col-lg-3">
-                    <div class="swfstbox_outarea">
+                <div class="swfstbox_outarea">
                         <div class="swfstbox_outarea1">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
@@ -35,10 +35,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="swfstbox_outarea">
+                <div class="swfstbox_outarea">
                         <div class="swfstbox_outarea2">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
@@ -65,10 +63,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="swfstbox_outarea">
+                <div class="swfstbox_outarea">
                         <div class="swfstbox_outarea3">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
@@ -95,10 +91,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="swfstbox_outarea">
+                <div class="swfstbox_outarea">
                         <div class="swfstbox_outarea4">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
@@ -125,11 +119,40 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                </div>
+                <div class="swfstbox_outarea">
+                    <div class="swfstbox_outarea5">
+                        <div class="textarea_outbox">
+                            <h1 class="iknumber_textdesign">
+                                {{total_books}}
+                            </h1>
+                            <h3 class="afomtext_hdesign">
+                                Job Placement
+                            </h3>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="vwjhbox_outsecion">
+                                    <h2 class="vdetext_designtext">
+                                        View Details
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="vwjhbox_outsecion">
+                                    <a class="yhxcv" routerLink="/library/book-list">
+                                        <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                 </div>
             </div>
+            </div>
+            </div>
         </div>
-        <div class="col-lg-12 dashboard_fstoutstructure" *ngIf="userTypeId != 1 && userTypeId != 5">
+        <div class="col-lg-12" *ngIf="userTypeId != 1 && userTypeId != 5">
+            <div class="dashboard_fstoutstructure">
             <div class="swsfst_areaout">
                 <i class="fa-solid fa-users swsft_icondesign"></i>
                 <span class="swsft_textdesign">Stage Wise Statistics(2023-2024)</span>
@@ -227,7 +250,7 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="swfstbox_outarea">
-                        <div class="swfstbox_outarea4">
+                        <div class="swfstbox_outarea5">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
                                     {{total_books}}
@@ -256,6 +279,7 @@
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </div>
 </div>
@@ -264,11 +288,12 @@
 <!-- ================================dashboard second area start==================================== -->
 <div class="container" *ngIf="userTypeId == 1 || userTypeId == 5">
     <div class="row">
-        <div class="col-lg-12 chartbox_foutarea">
-            <div class="row">
+        <div class="col-lg-12">
+            <div class="chartbox_foutarea">
+              <div class="row">
                 <div class="col-lg-9">
                     <div class="chartbox_leftoutsectionds">
-                        <div class="swsfst_areaout">
+                        <div class="swsfst_areaout jsecond_backcolorarea">
                             <i class="fa-solid fa-chart-simple swsft_icondesign"></i>
                             <span class="swsft_textdesign">Admission Chart In Current Year</span>
                         </div>
@@ -369,6 +394,7 @@
                         </div>
                     </div>
                 </div>
+              </div>
             </div>
         </div>
     </div>
@@ -495,14 +521,82 @@
 <!-- ================================dashboard third area start===================================== -->
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 canlendarout_section">
-            <div class="swsfst_areaout">
-                <i class="fa-solid fa-calendar-days swsft_icondesign"></i>
-                <span class="swsft_textdesign">Calender</span>
-            </div>
-            <ngb-datepicker #dp (dateSelect)="openModal($event,content)" (navigate)="date = $event.next"
-                [ngModel]="datePick" class="custom-datepicker university-datepicker">
-            </ngb-datepicker>
+        <div class="col-lg-12">
+           <div class="thdashboardf_outsection">
+               <div class="row">
+                    <div class="col-lg-6">
+                        <div class="canlendarout_section">
+                            <div class="swsfst_areaout third_bxoutsection">
+                                <i class="fa-solid fa-calendar-days swsft_icondesign"></i>
+                                <span class="swsft_textdesign">Calender</span>
+                            </div>
+                            <ngb-datepicker #dp (dateSelect)="openModal($event,content)" (navigate)="date = $event.next"
+                                [ngModel]="datePick" class="custom-datepicker university-datepicker">
+                            </ngb-datepicker>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" *ngIf="userTypeId != 1 && userTypeId != 5">
+                        <div class="leftfrth_dashboardoutarea">
+                            <div class="swsfst_areaout third_bxoutsection">
+                                <i class="fa-solid fa-file swsft_icondesign"></i>
+                                <span class="swsft_textdesign">Upcoming live Classes</span>
+                            </div>
+                            <div class="card-body ugbdy_outsectionxz">
+                                <div class="upcoming-event ucnxsd_outarea">
+                                    <div *ngFor="let record of liveClassList" class="upcoming-innner d-flex">
+                                        <div class="ikxz_areasection left m-r-20">
+                                            <app-feather-icons [icon]="'book'"></app-feather-icons>
+                                        </div>
+                                        <div class="flex-grow-1">
+                                            <p class="mb-0"><span class="pull-right">{{record.date_of_class |
+                                                    date:'fullDate' }} {{record.time_of_class}}</span></p>
+                                            <h6 class="f-w-600" target="_blank">{{record.platform}}</h6>
+                                            <a href="{{record.link}}">{{record.link}}</a>
+                                            <p [innerHTML]="record.body" class="mb-0">A math quiz competition will be
+                                                held
+                                                on 15.05.2024
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6" *ngIf="userTypeId == 1 || userTypeId == 5">
+                        <div class="leftfrth_dashboardoutarea countstudent_outsection">
+                            <div class="swsfst_areaout third_bxoutsection">
+                                <i class="fa-solid fa-graduation-cap swsft_icondesign"></i>
+                                <span class="swsft_textdesign">Students</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="flot-chart-placeholder clender_vzxsection" id="website-visiter-chart">
+                                    <ngx-charts-pie-chart [arcWidth]=0.30 [doughnut]="true" [explodeSlices]="true"
+                                        [gradient]="dailydoughnutChartGradient" [labels]="dailydoughnutChartShowLabels"
+                                        [results]="dailydoughnutData22" [scheme]="dailydoughnutChartColorScheme">
+                                    </ngx-charts-pie-chart>
+                                </div>
+                                <!-- <canvas baseChart class="chart flot-chart-placeholder" id="myLineCharts" [legend]="admissionChartLegend"
+                                 [datasets]="admissionChartData" [labels]="admissionChartLabels" [options]="admissionChartOptions"
+                                 [type]="admissionChartType"></canvas> -->
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="mfstudent_outsection">
+                                        <h4 class="item-title">Female Students</h4>
+                                        <div class="item-number">{{total_female_student}}</div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="mfstudent_outsectionmu">
+                                        <h4 class="item-title">Male Students</h4>
+                                        <div class="item-number">{{total_male_student}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+               </div>
+           </div>
         </div>
     </div>
 </div>
@@ -590,11 +684,9 @@
     <div class="row">
         <div class="col-lg-12 dashboard_hfourthoutsection">
             <div class="row">
-
-
                 <div class="col-lg-6">
                     <div class="leftfrth_dashboardoutarea">
-                        <div class="swsfst_areaout">
+                        <div class="swsfst_areaout fourth_bckarea">
                             <i class="fa-solid fa-file swsft_icondesign"></i>
                             <span class="swsft_textdesign">Upcoming Notice</span>
                         </div>
@@ -617,27 +709,23 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div class="col-lg-6" *ngIf="userTypeId != 1 && userTypeId != 5">
+                <div class="col-lg-6">
                     <div class="leftfrth_dashboardoutarea">
-                        <div class="swsfst_areaout">
-                            <i class="fa-solid fa-file swsft_icondesign"></i>
-                            <span class="swsft_textdesign">Upcoming live Classes</span>
+                        <div class="swsfst_areaout fourth_bckarea">
+                            <i class="fa-solid fa-calendar-days swsft_icondesign"></i>
+                            <span class="swsft_textdesign">Upcoming Events</span>
                         </div>
                         <div class="card-body ugbdy_outsectionxz">
                             <div class="upcoming-event ucnxsd_outarea">
-                                <div *ngFor="let record of liveClassList" class="upcoming-innner d-flex">
+                                <div *ngFor="let record of noticeList" class="upcoming-innner d-flex">
                                     <div class="ikxz_areasection left m-r-20">
                                         <app-feather-icons [icon]="'book'"></app-feather-icons>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <p class="mb-0"><span class="pull-right">{{record.date_of_class |
-                                                date:'fullDate' }} {{record.time_of_class}}</span></p>
-                                        <h6 class="f-w-600" target="_blank">{{record.platform}}</h6>
-                                        <a href="{{record.link}}">{{record.link}}</a>
-                                        <p [innerHTML]="record.body" class="mb-0">A math quiz competition will be
-                                            held
+                                        <p class="mb-0"><span class="pull-right">{{record.published_on | date:'fullDate'
+                                                }}</span></p>
+                                        <h6 class="f-w-600">{{record.subject}}</h6>
+                                        <p [innerHTML]="record.body" class="mb-0">A math quiz competition will be held
                                             on 15.05.2024
                                         </p>
                                     </div>
@@ -646,40 +734,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6" *ngIf="userTypeId == 1 || userTypeId == 5">
-                    <div class="leftfrth_dashboardoutarea">
-                        <div class="swsfst_areaout">
-                            <i class="fa-solid fa-graduation-cap swsft_icondesign"></i>
-                            <span class="swsft_textdesign">Students</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="flot-chart-placeholder" id="website-visiter-chart">
-                                <ngx-charts-pie-chart [arcWidth]=0.30 [doughnut]="true" [explodeSlices]="true"
-                                    [gradient]="dailydoughnutChartGradient" [labels]="dailydoughnutChartShowLabels"
-                                    [results]="dailydoughnutData22" [scheme]="dailydoughnutChartColorScheme">
-                                </ngx-charts-pie-chart>
-                            </div>
-                            <!-- <canvas baseChart class="chart flot-chart-placeholder" id="myLineCharts" [legend]="admissionChartLegend"
-                             [datasets]="admissionChartData" [labels]="admissionChartLabels" [options]="admissionChartOptions"
-                             [type]="admissionChartType"></canvas> -->
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="mfstudent_outsection">
-                                    <h4 class="item-title">Female Students</h4>
-                                    <div class="item-number">{{total_female_student}}</div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="mfstudent_outsectionmu">
-                                    <h4 class="item-title">Male Students</h4>
-                                    <div class="item-number">{{total_male_student}}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
