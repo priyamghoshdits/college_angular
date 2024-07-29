@@ -24,6 +24,7 @@
                         <div [hidden]="active != 1">
                             <div class="card-body">
                                 <form [formGroup]="studentCreationForm">
+                                    <div class="onedividersection">
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Student ID</label>
@@ -216,7 +217,6 @@
                                             <div *ngIf="studentCreationForm.controls['semester_id'].errors?.['required'] && studentCreationForm.controls['semester_id'].touched "
                                                 class="text text-danger mt-1">Semester required</div>
                                         </div>
-
                                         <div class="col-md-3 mb-3">
                                             <label>Select Franchise</label>
                                             <select style="width: 100%" formControlName="franchise_id"
@@ -229,7 +229,6 @@
                                             <div *ngIf="studentCreationForm.controls['franchise_id'].errors?.['required'] && studentCreationForm.controls['franchise_id'].touched "
                                                 class="text text-danger mt-1">Franchise required</div>
                                         </div>
-
                                     </div>
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
@@ -364,13 +363,14 @@
                                     </div> -->
 
                                     <button *ngIf="permission[0].permission == 1" [hidden]="isUpdateable == true"
-                                        class="btn btn-primary me-1" type="submit" (click)="saveStudent()">Save
+                                        class="btn btn-primary me-1 ssthreebtn_design" type="submit" (click)="saveStudent()">Save
                                         Student</button>
                                     <button *ngIf="permission[1].permission == 1" [hidden]="isUpdateable == false"
                                         class="btn btn-primary me-1" type="submit" (click)="updateStudent()">Update
                                         Student</button>
                                     <button [hidden]="isUpdateable == false" class="btn btn-primary me-1" type="submit"
                                         (click)="cancelUpdate()">cancel</button>
+                                    </div>    
                                 </form>
                             </div>
                         </div>
