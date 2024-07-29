@@ -248,7 +248,7 @@
                                         </div>
                                     </div>
 
-                                    <hr>
+                                    <!-- <hr>
                                     <h3>Payment Details</h3>
                                     <hr>
                                     <div class="row">
@@ -288,10 +288,10 @@
                                             <div *ngIf="studentCreationForm.controls['amount'].errors?.['pattern']"
                                                 class="text text-danger mt-1">Invalid Amount</div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
 
-                                    <hr>
+                                    <!-- <hr>
                                     <h3>Guardian Details</h3>
                                     <hr>
 
@@ -361,7 +361,7 @@
                                             <label>Guardian Address</label>
                                             <input type="text" class="form-control" formControlName="guardian_address">
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <button *ngIf="permission[0].permission == 1" [hidden]="isUpdateable == true"
                                         class="btn btn-primary me-1" type="submit" (click)="saveStudent()">Save
@@ -470,10 +470,13 @@
                                                 </td>
                                                 <td>{{record.user_type}}</td>
                                                 <td>{{record.email}}</td>
-                                                <td>{{record.amount}}</td>
+                                                <td>{{record.amount ?? 'N/A'}}</td>
                                                 <td *ngIf="record.refund == 0">
                                                     <button class="btn btn-primary me-1" type="submit"
                                                         (click)="refundAmount(record)">Refund</button>
+                                                </td>
+                                                <td *ngIf="record.refund != 0">
+                                                    N/A
                                                 </td>
                                                 <td *ngIf="record.refund == 1">
                                                     Refunded
