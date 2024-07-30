@@ -11,6 +11,8 @@ import { barChartSingle, pieChart, multiData, single } from '../../../shared/dat
 import * as graphoptions from '../../../shared/data/chart/config';
 import { monthlydoughnutData, dailydoughnutData } from '../../../shared/data/widgets-chart/chart-widget';
 import { DashboardService } from "../../../services/dashboard.service";
+import { EventService } from "src/app/services/event.service";
+import Swal from "sweetalert2";
 
 // var Knob = require('knob') // browserify require
 
@@ -68,8 +70,13 @@ export class UniversityComponent implements OnInit {
   studentAttendenceChart: any[] = [];
   totalAchivement = 0;
 
+  eventList: any[] = [];
+  eventFile: File;
+  maxSize = 1 * 1024 * 1024; // 1 MB in bytes
+  isUpdate: boolean = false;
 
-  constructor(private modalService: NgbModal, public datepipe: DatePipe, public dashboardService: DashboardService) {
+
+  constructor(private modalService: NgbModal, public datepipe: DatePipe, public dashboardService: DashboardService, private eventService: EventService) {
 
     // @ts-ignore
     // const userType = JSON.parse(localStorage.getItem('user'));
@@ -79,17 +86,17 @@ export class UniversityComponent implements OnInit {
     Object.assign(this, { monthlydoughnutData, dailydoughnutData })
     this.universityFormCalender = new FormGroup({
       id: new FormControl(null),
-      event_title: new FormControl(null, [Validators.required]),
-      description: new FormControl(null),
-      event_from: new FormControl(null),
-      event_to: new FormControl(null),
-      event_type: new FormControl(null),
+      title: new FormControl(null, [Validators.required]),
+      description: new FormControl(null, [Validators.required]),
+      form_date: new FormControl(null, [Validators.required]),
+      // to_date: new FormControl(null, [Validators.required]),
+      event_type: new FormControl(null,[Validators.required]),
     });
 
     // @ts-ignore
     this.session_id = JSON.parse(localStorage.getItem('session_id'));
     console.log(this.userTypeId);
-    
+
     if (this.userTypeId == 1 || this.userTypeId == 5) {
       this.dashboardService.getDashboardData().subscribe((response: any) => {
         this.total_books = response.data.total_books;
@@ -129,6 +136,11 @@ export class UniversityComponent implements OnInit {
         this.studentAttendenceChart = response.data.student_chart;
       });
     }
+
+    this.eventList = this.eventService.getEvent();
+    this.eventService.getEventListener().subscribe((response: any) => {
+      this.eventList = response;
+    });
   }
 
 
@@ -157,7 +169,112 @@ export class UniversityComponent implements OnInit {
     const new_date_create = new Date(data.year + '-' + data.month + '-' + data.day);
     const new_date_create4 = this.datepipe.transform(new_date_create, 'yyyy-MM-dd');
     this.modalService.open(content, { size: 'xl' });
-    this.universityFormCalender.patchValue({ event_from: new_date_create4, event_to: new_date_create4 });
+    this.universityFormCalender.patchValue({ form_date: new_date_create4, to_date: new_date_create4 });
+  }
+
+
+  uploadPromotionFile(event) {
+    if (event.target.files[0].size > this.maxSize) {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Select file max 1 mb',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      event.target.value = '';
+      return;
+    }
+
+    this.eventFile = event.target.files[0];
+  }
+
+  saveEvent() {
+    const formData = new FormData();
+    formData.append('title', this.universityFormCalender.value.title);
+    formData.append('description', this.universityFormCalender.value.description);
+    formData.append('form_date', this.universityFormCalender.value.form_date);
+    // formData.append('to_date', this.universityFormCalender.value.to_date);
+    formData.append('event_type', this.universityFormCalender.value.event_type);
+    formData.append('file_name', this.eventFile);
+
+    this.eventService.saveEvent(formData).subscribe((response: any) => {
+      if (response.success == 1) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Event Created',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        this.modalService.dismissAll();
+        this.universityFormCalender.reset();
+      }
+    });
+  }
+
+
+  openEditModal(data, content) {
+    this.isUpdate = true;
+    this.modalService.open(content, { size: 'xl' });
+    this.universityFormCalender.patchValue(data);
+  }
+
+  updateEvent() {
+    const formData = new FormData();
+    formData.append('id', this.universityFormCalender.value.id);
+    formData.append('title', this.universityFormCalender.value.title);
+    formData.append('description', this.universityFormCalender.value.description);
+    formData.append('form_date', this.universityFormCalender.value.form_date);
+    // formData.append('to_date', this.universityFormCalender.value.to_date);
+    formData.append('event_type', this.universityFormCalender.value.event_type);
+    formData.append('file_name', this.eventFile);
+
+    this.eventService.updateEvent(formData).subscribe((response: any) => {
+      if (response.success == 1) {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Event updated',
+          showConfirmButton: false,
+          timer: 1000
+        });
+        this.modalService.dismissAll();
+        this.universityFormCalender.reset();
+        this.isUpdate = false;
+      }
+    });
+  }
+
+  deleteEvent() {
+    Swal.fire({
+      title: 'Confirmation',
+      text: 'Do you sure to delete ?',
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete It!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.eventService.deleteEvent(this.universityFormCalender.value.id).subscribe((response) => {
+          this.cancelFunc();
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Event Deleted',
+            showConfirmButton: false,
+            timer: 1000
+          });
+        })
+      }
+    });
+  }
+
+  cancelFunc() {
+    this.modalService.dismissAll();
+    this.universityFormCalender.reset();
+    this.isUpdate = false;
   }
 
   public onSelect(e) { }

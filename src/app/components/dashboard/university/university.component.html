@@ -3,12 +3,12 @@
     <div class="row">
         <div class="col-lg-12" *ngIf="userTypeId == 1 || userTypeId == 5">
             <div class="dashboard_fstoutstructure">
-            <div class="swsfst_areaout">
-                <i class="fa-solid fa-users swsft_icondesign"></i>
-                <span class="swsft_textdesign">Stage Wise Statistics(2023-2024)</span>
-            </div>
-            <div class="row jufcx">
-                <div class="swfstbox_outarea">
+                <div class="swsfst_areaout">
+                    <i class="fa-solid fa-users swsft_icondesign"></i>
+                    <span class="swsft_textdesign">Stage Wise Statistics(2023-2024)</span>
+                </div>
+                <div class="row jufcx">
+                    <div class="swfstbox_outarea">
                         <div class="swfstbox_outarea1">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
@@ -35,8 +35,8 @@
                                 </div>
                             </div>
                         </div>
-                </div>
-                <div class="swfstbox_outarea">
+                    </div>
+                    <div class="swfstbox_outarea">
                         <div class="swfstbox_outarea2">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
@@ -63,8 +63,8 @@
                                 </div>
                             </div>
                         </div>
-                </div>
-                <div class="swfstbox_outarea">
+                    </div>
+                    <div class="swfstbox_outarea">
                         <div class="swfstbox_outarea3">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
@@ -91,8 +91,8 @@
                                 </div>
                             </div>
                         </div>
-                </div>
-                <div class="swfstbox_outarea">
+                    </div>
+                    <div class="swfstbox_outarea">
                         <div class="swfstbox_outarea4">
                             <div class="textarea_outbox">
                                 <h1 class="iknumber_textdesign">
@@ -119,136 +119,7 @@
                                 </div>
                             </div>
                         </div>
-                </div>
-                <div class="swfstbox_outarea">
-                    <div class="swfstbox_outarea5">
-                        <div class="textarea_outbox">
-                            <h1 class="iknumber_textdesign">
-                                {{total_books}}
-                            </h1>
-                            <h3 class="afomtext_hdesign">
-                                Job Placement
-                            </h3>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-7">
-                                <div class="vwjhbox_outsecion">
-                                    <h2 class="vdetext_designtext">
-                                        View Details
-                                    </h2>
-                                </div>
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="vwjhbox_outsecion">
-                                    <a class="yhxcv" routerLink="/library/book-list">
-                                        <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-            </div>
-            </div>
-            </div>
-        </div>
-        <div class="col-lg-12" *ngIf="userTypeId != 1 && userTypeId != 5">
-            <div class="dashboard_fstoutstructure">
-            <div class="swsfst_areaout">
-                <i class="fa-solid fa-users swsft_icondesign"></i>
-                <span class="swsft_textdesign">Stage Wise Statistics(2023-2024)</span>
-            </div>
-            <div class="row jufcx">
-                <div class="col-lg-3">
-                    <div class="swfstbox_outarea">
-                        <div class="swfstbox_outarea1">
-                            <div class="textarea_outbox">
-                                <h1 class="iknumber_textdesign">
-                                    {{total_assignment}}
-                                </h1>
-                                <h3 class="afomtext_hdesign">
-                                    Assignment
-                                </h3>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-7">
-                                    <div class="vwjhbox_outsecion">
-                                        <h2 class="vdetext_designtext">
-                                            View Details
-                                        </h2>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    <div class="vwjhbox_outsecion">
-                                        <a class="yhxcv" routerLink="/download-center/assignment">
-                                            <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="swfstbox_outarea">
-                        <div class="swfstbox_outarea2">
-                            <div class="textarea_outbox">
-                                <h1 class="iknumber_textdesign">
-                                    {{total_study_material}}
-                                </h1>
-                                <h3 class="afomtext_hdesign">
-                                    Study Material
-                                </h3>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-7">
-                                    <div class="vwjhbox_outsecion">
-                                        <h2 class="vdetext_designtext">
-                                            View Details
-                                        </h2>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    <div class="vwjhbox_outsecion">
-                                        <a class="yhxcv" routerLink="/download-center/study-material">
-                                            <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="swfstbox_outarea">
-                        <div class="swfstbox_outarea3">
-                            <div class="textarea_outbox">
-                                <h1 class="iknumber_textdesign">
-                                    {{totalAchivement}}
-                                </h1>
-                                <h3 class="afomtext_hdesign">
-                                    Achivement
-                                </h3>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-7">
-                                    <div class="vwjhbox_outsecion">
-                                        <h2 class="vdetext_designtext">
-                                            View Details
-                                        </h2>
-                                    </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    <div class="vwjhbox_outsecion">
-                                        <a class="yhxcv" routerLink="/users/show-profile">
-                                            <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
                     <div class="swfstbox_outarea">
                         <div class="swfstbox_outarea5">
                             <div class="textarea_outbox">
@@ -256,7 +127,7 @@
                                     {{total_books}}
                                 </h1>
                                 <h3 class="afomtext_hdesign">
-                                    Library Books
+                                    Job Placement
                                 </h3>
                             </div>
                             <div class="row">
@@ -269,7 +140,7 @@
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="vwjhbox_outsecion">
-                                        <a class="yhxcv" routerLink="/library/book-list">
+                                        <a class="yhxcv" routerLink="/job/placement">
                                             <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
                                         </a>
                                     </div>
@@ -279,6 +150,135 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="col-lg-12" *ngIf="userTypeId != 1 && userTypeId != 5">
+            <div class="dashboard_fstoutstructure">
+                <div class="swsfst_areaout">
+                    <i class="fa-solid fa-users swsft_icondesign"></i>
+                    <span class="swsft_textdesign">Stage Wise Statistics(2023-2024)</span>
+                </div>
+                <div class="row jufcx">
+                    <div class="col-lg-3">
+                        <div class="swfstbox_outarea">
+                            <div class="swfstbox_outarea1">
+                                <div class="textarea_outbox">
+                                    <h1 class="iknumber_textdesign">
+                                        {{total_assignment}}
+                                    </h1>
+                                    <h3 class="afomtext_hdesign">
+                                        Assignment
+                                    </h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="vwjhbox_outsecion">
+                                            <h2 class="vdetext_designtext">
+                                                View Details
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="vwjhbox_outsecion">
+                                            <a class="yhxcv" routerLink="/download-center/assignment">
+                                                <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="swfstbox_outarea">
+                            <div class="swfstbox_outarea2">
+                                <div class="textarea_outbox">
+                                    <h1 class="iknumber_textdesign">
+                                        {{total_study_material}}
+                                    </h1>
+                                    <h3 class="afomtext_hdesign">
+                                        Study Material
+                                    </h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="vwjhbox_outsecion">
+                                            <h2 class="vdetext_designtext">
+                                                View Details
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="vwjhbox_outsecion">
+                                            <a class="yhxcv" routerLink="/download-center/study-material">
+                                                <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="swfstbox_outarea">
+                            <div class="swfstbox_outarea3">
+                                <div class="textarea_outbox">
+                                    <h1 class="iknumber_textdesign">
+                                        {{totalAchivement}}
+                                    </h1>
+                                    <h3 class="afomtext_hdesign">
+                                        Achivement
+                                    </h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="vwjhbox_outsecion">
+                                            <h2 class="vdetext_designtext">
+                                                View Details
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="vwjhbox_outsecion">
+                                            <a class="yhxcv" routerLink="/users/show-profile">
+                                                <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="swfstbox_outarea">
+                            <div class="swfstbox_outarea5">
+                                <div class="textarea_outbox">
+                                    <h1 class="iknumber_textdesign">
+                                        {{total_books}}
+                                    </h1>
+                                    <h3 class="afomtext_hdesign">
+                                        Library Books
+                                    </h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-7">
+                                        <div class="vwjhbox_outsecion">
+                                            <h2 class="vdetext_designtext">
+                                                View Details
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="vwjhbox_outsecion">
+                                            <a class="yhxcv" routerLink="/library/book-list">
+                                                <i class="fa-solid fa-arrow-right-long yhicon_design"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -290,111 +290,111 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="chartbox_foutarea">
-              <div class="row">
-                <div class="col-lg-9">
-                    <div class="chartbox_leftoutsectionds">
-                        <div class="swsfst_areaout jsecond_backcolorarea">
-                            <i class="fa-solid fa-chart-simple swsft_icondesign"></i>
-                            <span class="swsft_textdesign">Admission Chart In Current Year</span>
-                        </div>
-                        <div class="card-body">
-                            <div class="flot-chart-container">
-                                <div class="flot-chart-placeholder ngx-chart-direction" id="github-issues">
-                                    <ngx-charts-bar-vertical-2d (select)="onSelect($event)"
-                                        [gradient]="barChartGradient" [legend]="barChartShowLegend"
-                                        [results]="studentChart" [roundEdges]="false" [scheme]="barChartColorScheme"
-                                        [showXAxisLabel]="barChartShowXAxisLabel"
-                                        [showYAxisLabel]="barChartShowYAxisLabel" [xAxisLabel]="barChartXAxisLabel"
-                                        [xAxis]="barChartShowXAxis" [yAxisLabel]="barChartYAxisLabel"
-                                        [yAxis]="barChartShowYAxis">
-                                    </ngx-charts-bar-vertical-2d>
-                                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="chartbox_leftoutsectionds">
+                            <div class="swsfst_areaout jsecond_backcolorarea">
+                                <i class="fa-solid fa-chart-simple swsft_icondesign"></i>
+                                <span class="swsft_textdesign">Admission Chart In Current Year</span>
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="chartbox_rightoutsection">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="nboxout_dsarea">
-                                    <span class="erchlox">
-                                        <i class="fa-solid fa-indian-rupee-sign hrupee_sign"></i>
-                                    </span>
-                                    <div class="info_box_content">
-                                        <span class="info_box_text">
-                                            Monthly Fees Collection
-                                        </span>
-                                        <span class="info_box_number">
-                                            ₹{{total_fees_received}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="nboxout_dsarea">
-                                    <span class="erchlox">
-                                        <i class="fa-solid fa-credit-card hrupee_sign"></i>
-                                    </span>
-                                    <div class="info_box_content">
-                                        <span class="info_box_text">
-                                            Monthly Expenses
-                                        </span>
-                                        <span class="info_box_number">
-                                            ₹{{total_expense}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="nboxout_dsarea">
-                                    <span class="erchlox">
-                                        <i class="fa-solid fa-user hrupee_sign"></i>
-                                    </span>
-                                    <div class="info_box_content">
-                                        <span class="info_box_text">
-                                            Student
-                                        </span>
-                                        <span class="info_box_number">
-                                            {{total_student}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="nboxout_dsarea">
-                                    <span class="erchlox">
-                                        <i class="fa-solid fa-user-tie hrupee_sign"></i>
-                                    </span>
-                                    <div class="info_box_content">
-                                        <span class="info_box_text">
-                                            Teacher
-                                        </span>
-                                        <span class="info_box_number">
-                                            {{total_teacher}}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-12">
-                                <div class="nboxout_dsarea">
-                                    <span class="erchlox">
-                                        <i class="fa-solid fa-users hrupee_sign"></i>
-                                    </span>
-                                    <div class="info_box_content">
-                                        <span class="info_box_text">
-                                            ACCOUNTANT
-                                        </span>
-                                        <span class="info_box_number">
-                                            {{total_accountant}}
-                                        </span>
+                            <div class="card-body">
+                                <div class="flot-chart-container">
+                                    <div class="flot-chart-placeholder ngx-chart-direction" id="github-issues">
+                                        <ngx-charts-bar-vertical-2d (select)="onSelect($event)"
+                                            [gradient]="barChartGradient" [legend]="barChartShowLegend"
+                                            [results]="studentChart" [roundEdges]="false" [scheme]="barChartColorScheme"
+                                            [showXAxisLabel]="barChartShowXAxisLabel"
+                                            [showYAxisLabel]="barChartShowYAxisLabel" [xAxisLabel]="barChartXAxisLabel"
+                                            [xAxis]="barChartShowXAxis" [yAxisLabel]="barChartYAxisLabel"
+                                            [yAxis]="barChartShowYAxis">
+                                        </ngx-charts-bar-vertical-2d>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-3">
+                        <div class="chartbox_rightoutsection">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="nboxout_dsarea">
+                                        <span class="erchlox">
+                                            <i class="fa-solid fa-indian-rupee-sign hrupee_sign"></i>
+                                        </span>
+                                        <div class="info_box_content">
+                                            <span class="info_box_text">
+                                                Monthly Fees Collection
+                                            </span>
+                                            <span class="info_box_number">
+                                                ₹{{total_fees_received}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="nboxout_dsarea">
+                                        <span class="erchlox">
+                                            <i class="fa-solid fa-credit-card hrupee_sign"></i>
+                                        </span>
+                                        <div class="info_box_content">
+                                            <span class="info_box_text">
+                                                Monthly Expenses
+                                            </span>
+                                            <span class="info_box_number">
+                                                ₹{{total_expense}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="nboxout_dsarea">
+                                        <span class="erchlox">
+                                            <i class="fa-solid fa-user hrupee_sign"></i>
+                                        </span>
+                                        <div class="info_box_content">
+                                            <span class="info_box_text">
+                                                Student
+                                            </span>
+                                            <span class="info_box_number">
+                                                {{total_student}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="nboxout_dsarea">
+                                        <span class="erchlox">
+                                            <i class="fa-solid fa-user-tie hrupee_sign"></i>
+                                        </span>
+                                        <div class="info_box_content">
+                                            <span class="info_box_text">
+                                                Teacher
+                                            </span>
+                                            <span class="info_box_number">
+                                                {{total_teacher}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="nboxout_dsarea">
+                                        <span class="erchlox">
+                                            <i class="fa-solid fa-users hrupee_sign"></i>
+                                        </span>
+                                        <div class="info_box_content">
+                                            <span class="info_box_text">
+                                                ACCOUNTANT
+                                            </span>
+                                            <span class="info_box_number">
+                                                {{total_accountant}}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
         </div>
     </div>
@@ -522,8 +522,8 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
-           <div class="thdashboardf_outsection">
-               <div class="row">
+            <div class="thdashboardf_outsection">
+                <div class="row">
                     <div class="col-lg-6">
                         <div class="canlendarout_section">
                             <div class="swsfst_areaout third_bxoutsection">
@@ -595,8 +595,8 @@
                             </div>
                         </div>
                     </div>
-               </div>
-           </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -612,9 +612,9 @@
                     <div class="col-md-12 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Event Title <span
                                 style="color: red">*</span></label>
-                        <input class="form-control" formControlName="event_title" id="exampleInputEmail1"
+                        <input class="form-control" formControlName="title" id="exampleInputEmail1"
                             placeholder="Enter Event Title" type="text">
-                        <div *ngIf="universityFormCalender.controls['event_title'].errors?.['required'] && universityFormCalender.controls['event_title'].touched "
+                        <div *ngIf="universityFormCalender.controls['title'].errors?.['required'] && universityFormCalender.controls['title'].touched "
                             class="text text-danger mt-1">Event Title required
                         </div>
                     </div>
@@ -630,48 +630,46 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Event From</label>
-                        <input class="form-control" formControlName="event_from" id="exampleInputEmail1"
+                        <input class="form-control" formControlName="form_date" id="exampleInputEmail1"
                             placeholder="Event From" type="date">
-                        <div *ngIf="universityFormCalender.controls['event_from'].errors?.['required'] && universityFormCalender.controls['event_from'].touched "
+                        <div *ngIf="universityFormCalender.controls['form_date'].errors?.['required'] && universityFormCalender.controls['form_date'].touched "
                             class="text text-danger mt-1">Event From required
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="col-form-label pt-0" for="exampleInputEmail1">Event To</label>
-                        <input class="form-control" formControlName="event_to" id="exampleInputEmail1"
-                            placeholder="Enter Event To" type="date">
-                        <div *ngIf="universityFormCalender.controls['event_to'].errors?.['required'] && universityFormCalender.controls['event_to'].touched "
-                            class="text text-danger mt-1">Event To required
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Event Type</label>
                         <select class="form-select" formControlName="event_type" style="width: 100%">
                             <option value="null">Select</option>
                             <option value="public"> Public</option>
                             <option value="private"> Private</option>
                             <option value="all super admin"> All Super Admin</option>
-                            <option value="Protected}"> Seperated</option>
+                            <option value="Protected"> Seperated</option>
                         </select>
                         <div *ngIf="universityFormCalender.controls['event_type'].errors?.['required'] && universityFormCalender.controls['event_type'].touched "
                             class="text text-danger mt-1">Event Type required
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Upload Image</label>
-                        <input accept="image/jpg, image/jpeg" class="form-control" formControlName="event_to"
-                            placeholder="Enter Event To" type="file">
+                        <input accept="image/jpg, image/jpeg" class="form-control" formControlName="file_name"
+                            placeholder="Enter Event To" type="file" (change)="uploadPromotionFile($event)">
                         <div *ngIf="universityFormCalender.controls['event_type'].errors?.['required'] && universityFormCalender.controls['event_type'].touched "
                             class="text text-danger mt-1">Event Type required
                         </div>
                     </div>
                 </div>
                 <div class="col-md-12 mb-3">
-                    <button class="btn btn-primary me-1" style="margin-top: 30px; float: right">Save</button>
+                    <button [hidden]="isUpdate" class="btn btn-primary me-1" style="margin-top: 30px; float: right"
+                        (click)="saveEvent()">Save</button>
+
+                    <button [hidden]="!isUpdate" class="btn btn-danger me-1" style="margin-top: 30px; float: right"
+                        (click)="deleteEvent()">Delete</button>
+                    <button [hidden]="!isUpdate" class="btn btn-info me-1" style="margin-top: 30px; float: right"
+                        (click)="cancelFunc()">Cancel</button>
+                    <button [hidden]="!isUpdate" class="btn btn-primary me-1" style="margin-top: 30px; float: right"
+                        (click)="updateEvent()">Update</button>
                 </div>
             </form>
         </div>
@@ -717,17 +715,18 @@
                         </div>
                         <div class="card-body ugbdy_outsectionxz">
                             <div class="upcoming-event ucnxsd_outarea">
-                                <div *ngFor="let record of noticeList" class="upcoming-innner d-flex">
-                                    <div class="ikxz_areasection left m-r-20">
+                                <div *ngFor="let record of eventList" class="upcoming-innner d-flex">
+                                    <div class="ikxz_areasection left m-r-20" (click)="openEditModal(record, content)">
                                         <app-feather-icons [icon]="'book'"></app-feather-icons>
                                     </div>
-                                    <div class="flex-grow-1">
-                                        <p class="mb-0"><span class="pull-right">{{record.published_on | date:'fullDate'
+                                    <div class="flex-grow-1" (click)="openEditModal(record, content)">
+                                        <p class="mb-0"><span class="pull-right">{{record.form_date | date:'fullDate'
                                                 }}</span></p>
-                                        <h6 class="f-w-600">{{record.subject}}</h6>
-                                        <p [innerHTML]="record.body" class="mb-0">A math quiz competition will be held
-                                            on 15.05.2024
+                                        <h6 class="f-w-600">{{record.title}}</h6>
+                                        <p [innerHTML]="record.description" class="mb-0">{{record.description}}
                                         </p>
+                                        <!-- <p class="mb-0"><span class="pull-right">{{record.to_date | date:'fullDate'
+                                                }}</span></p> -->
                                     </div>
                                 </div>
                             </div>
