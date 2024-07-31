@@ -40,6 +40,8 @@ export class SeminarWorkshopFacultyComponent {
 
     memberList: any[];
     isUpdatable: boolean = false;
+    filesArray: File[] = [];
+    maxSize = 1 * 1024 * 1024; // 1 MB in bytes
 
     searchForm: FormGroup;
     user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -65,6 +67,7 @@ export class SeminarWorkshopFacultyComponent {
                 'organized_by': null,
                 'duration': null,
                 'date': null,
+                'end_date': null,
                 'achievement': null,
             }
         ]
@@ -93,16 +96,59 @@ export class SeminarWorkshopFacultyComponent {
                 'organized_by': null,
                 'duration': null,
                 'date': null,
+                'end_date': null,
                 'achievement': null,
             }
         ];
         this.seminarWorkshopArray.push(arr[0]);
     }
 
+    calculateNoOFDate(index) {
+        if (this.seminarWorkshopArray[index].date && this.seminarWorkshopArray[index].end_date) {
+            // @ts-ignore
+            let x = Math.floor(((new Date(this.seminarWorkshopArray[index].end_date) - new Date(this.seminarWorkshopArray[index].date))) / (1000 * 60 * 60 * 24)) + 1;
+            this.seminarWorkshopArray[index].duration = x;
+        }
+    }
+
+    fileUpload(event: any, index: number) {
+
+        if (event.target.files[0].size > this.maxSize) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select file max 1 mb',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            event.target.value = '';
+            return;
+        }
+
+        const file = event.target.files[0];
+        if (file) {
+            this.filesArray[index] = file;
+            this.seminarWorkshopArray[index].file_name = file.name;
+
+        }
+    }
+
     saveSeminarWorkshopFaculty() {
         let arr = {
             'post_array': this.seminarWorkshopArray
         };
+
+        this.filesArray.forEach((file, index) => {
+            if (file) {
+                const formData = new FormData();
+                formData.append('file_name', file);
+
+                // Send the file to the server
+                this.seminarWorkshopFacultyService.saveUploadFile(formData).subscribe((response: any) => {
+                    this.seminarWorkshopArray[index].file_name = response.file_name;
+                });
+            }
+        });
 
         this.seminarWorkshopFacultyService.saveSeminarWorkshopFaculty(arr).subscribe((response: any) => {
             // @ts-ignore
@@ -167,6 +213,7 @@ export class SeminarWorkshopFacultyComponent {
                 'organized_by': null,
                 'duration': null,
                 'date': null,
+                'end_date': null,
                 'achievement': null,
             }
         ];
@@ -183,6 +230,7 @@ export class SeminarWorkshopFacultyComponent {
         this.seminarWorkshopArray[0].organized_by = data.organized_by;
         this.seminarWorkshopArray[0].duration = data.duration;
         this.seminarWorkshopArray[0].date = data.date;
+        this.seminarWorkshopArray[0].end_date = data.end_date;
         this.seminarWorkshopArray[0].achievement = data.achievement;
 
         this.active = 1;

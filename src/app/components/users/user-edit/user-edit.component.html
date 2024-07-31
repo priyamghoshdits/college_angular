@@ -539,7 +539,8 @@
                                                                 <label class="col-form-label pt-0">Upload File</label>
                                                                 <input (change)="selectedAchievementFile($event)"
                                                                     class="form-control" formControlName="file_name"
-                                                                    type="file" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                                    type="file"
+                                                                    accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                                 <div *ngIf="achievementForm.controls['file_name'].errors?.['required'] && achievementForm.controls['file_name'].touched"
                                                                     class="text text-danger mt-1">File required
                                                                 </div>
@@ -720,7 +721,8 @@
                                             </div>
                                             <div class="col-md-3 mb-3">
                                                 <label class="col-form-label pt-0">Amount</label>
-                                                <input class="form-control" formControlName="amount" type="text" placeholder="Amount">
+                                                <input class="form-control" formControlName="amount" type="text"
+                                                    placeholder="Amount">
                                                 <div *ngIf="manualFeesForm.controls['amount'].errors?.['required'] && manualFeesForm.controls['amount'].touched "
                                                     class="text text-danger mt-1">Amount required
                                                 </div>
@@ -728,7 +730,8 @@
                                             <div class="col-md-3 mb-3">
                                                 <label class="col-form-label pt-0">Upload Slip</label>
                                                 <input (change)="fileUpload($event,'manualFeesFile')"
-                                                    class="form-control" type="file" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                    class="form-control" type="file"
+                                                    accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                             </div>
                                             <div class="col-md-3 mb-3">
                                                 <button (click)="saveManualFeesOwn()"
@@ -933,7 +936,8 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Birth Certificate</label>
                                                             <input class="form-control" type="file"
-                                                                (change)="fileUpload($event, 'birthCertificate')" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                                (change)="fileUpload($event, 'birthCertificate')"
+                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Date Of Joining</label>
@@ -944,7 +948,8 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Joining Letter</label>
                                                             <input class="form-control" type="file"
-                                                                (change)="fileUpload($event, 'uploadJoiningLetter')" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                                (change)="fileUpload($event, 'uploadJoiningLetter')"
+                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Phone Number</label>
@@ -991,7 +996,8 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Image</label>
                                                             <input class="form-control" type="file"
-                                                                (change)="fileUpload($event, 'uploadImage')" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                                (change)="fileUpload($event, 'uploadImage')"
+                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Blood Group</label>
@@ -1011,7 +1017,8 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Update Lab Report</label>
                                                             <input class="form-control" type="file"
-                                                                (change)="fileUpload($event, 'labReport')" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                                (change)="fileUpload($event, 'labReport')"
+                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Religion</label>
@@ -1059,7 +1066,8 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">User Caste Certificate</label>
                                                             <input class="form-control" type="file"
-                                                                (change)="fileUpload($event, 'userCasteCertificate')" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                                (change)="fileUpload($event, 'userCasteCertificate')"
+                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Department</label>
@@ -1098,7 +1106,8 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Aadhar</label>
                                                             <input class="form-control" type="file"
-                                                                (change)="fileUpload($event, 'uploadAadhar')" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                                (change)="fileUpload($event, 'uploadAadhar')"
+                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                         </div>
                                                         <div class="col-sm-4 col-md-4">
                                                             <label>Designation</label>
@@ -1121,7 +1130,8 @@
                                                         <div class="col-sm-4 col-md-4">
                                                             <label class="form-label">Upload Pan</label>
                                                             <input class="form-control" type="file"
-                                                                (change)="fileUpload($event, 'uploadPan')" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                                (change)="fileUpload($event, 'uploadPan')"
+                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                         </div>
                                                     </div>
 
@@ -1210,7 +1220,8 @@
                                                 <div class="col-md-4 mb-3">
                                                     <label>File</label>
                                                     <input type="file" class="form-control"
-                                                        (change)="fileUpload($event, 'educationFileName')" required accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                        (change)="fileUpload($event, 'educationFileName')" required
+                                                        accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                 </div>
                                             </div>
                                         </form>
@@ -1291,9 +1302,9 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-3 mb-3">
-                                                    <label>Chapter Full Book</label>
+                                                    <label>Chapter/Full Book</label>
                                                     <input type="text" class="form-control"
-                                                        placeholder="Chapter Full Book"
+                                                        placeholder="Chapter/Full Book"
                                                         formControlName="chapter_full_book" required>
                                                 </div>
                                                 <div class="col-md-3 mb-3">
@@ -1309,7 +1320,8 @@
                                                 <div class="col-md-3 mb-3">
                                                     <label>Upload File</label>
                                                     <input type="file" class="form-control"
-                                                        (change)="fileUpload($event, 'publicationFile')" required accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                        (change)="fileUpload($event, 'publicationFile')" required
+                                                        accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                 </div>
                                             </div>
                                         </form>
@@ -1331,7 +1343,7 @@
                                                     <th>Book Name</th>
                                                     <th>ISBN Number</th>
                                                     <th>Name of Publisher</th>
-                                                    <th>Chapter Full Book</th>
+                                                    <th>Chapter/Full Book</th>
                                                     <th>Chapter Name</th>
                                                     <th>Page Number</th>
                                                     <th>Download</th>
@@ -1425,7 +1437,8 @@
                                                             Proof</label>
                                                         <input (change)="fileUpload($event, 'experienceProof')"
                                                             class="form-control" formControlName="experience_proof"
-                                                            type="file" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                            type="file"
+                                                            accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                         <div *ngIf="staffExperienceForm.controls['experience_proof'].errors?.['required'] && staffExperienceForm.controls['experience_proof'].touched "
                                                             class="text text-danger mt-1">Experience Proof required
                                                         </div>
@@ -1540,20 +1553,29 @@
                                                     </div>
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-4 mb-3">
+                                                    <div class="col-md-6 mb-3">
                                                         <label>Topic Name</label>
                                                         <input class="form-control" formControlName="topic_name"
                                                             placeholder="Topic Name" required type="text">
                                                     </div>
-                                                    <div class="col-md-4 mb-3">
+                                                    <div class="col-md-6 mb-3">
                                                         <label>Imapct Number</label>
                                                         <input class="form-control" placeholder="Impact Factor"
                                                             formControlName="impact_factor" required type="text">
                                                     </div>
-                                                    <div class="col-md-4 mb-3">
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-md-6 mb-3">
+                                                        <label>Year of Acceptance</label>
+                                                        <input class="form-control" placeholder="Year of Acceptance"
+                                                            formControlName="acceptance_year" required type="number">
+                                                    </div>
+                                                    <div class="col-md-6 mb-3">
                                                         <label>Upload File</label>
                                                         <input class="form-control" (change)="journalFileUpload($event)"
-                                                            required type="file" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                            required type="file" formControlName="file_name"
+                                                            accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                     </div>
                                                 </div>
                                             </form>
@@ -1676,7 +1698,8 @@
                                                     <div class="col-md-4 mb-3">
                                                         <label>File</label>
                                                         <input type="file" class="form-control"
-                                                            (change)="fileUpload($event, 'pgPhdFile')" required accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                            (change)="fileUpload($event, 'pgPhdFile')" required
+                                                            accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                     </div>
                                                 </div>
                                             </form>
@@ -1743,15 +1766,17 @@
                                         <div class="card-body">
                                             <form [formGroup]="apiScoreForm">
                                                 <div class="row">
-                                                    <div class="col-md-6 mb-3">
+                                                    <div class="col-md-4 mb-3">
                                                         <label>Assignment Year</label>
                                                         <input class="form-control" formControlName="assignment_year"
-                                                            placeholder="Assignment Year" required type="text">
+                                                            placeholder="Assignment Year" required type="number">
                                                     </div>
-                                                    <div class="col-md-6 mb-3">
-                                                        <label>File</label>
+                                                    <div class="col-md-8 mb-3">
+                                                        <label>Upload Summary of API Scores Minimum total Average annul
+                                                            score under category: I, II, III</label>
                                                         <input type="file" class="form-control"
-                                                            (change)="fileUpload($event, 'apiScoreFile')" required accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
+                                                            (change)="fileUpload($event, 'apiScoreFile')" required
+                                                            accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                                     </div>
                                                 </div>
                                             </form>

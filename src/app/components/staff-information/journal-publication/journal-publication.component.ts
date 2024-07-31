@@ -66,6 +66,7 @@ export class JournalPublicationComponent {
                 'issn_number': null,
                 'topic_name': null,
                 'impact_factor': null,
+                'acceptance_year': null,
                 'file_name': null
             }
         ];
@@ -151,6 +152,7 @@ export class JournalPublicationComponent {
         this.journalPublicationArray[0].topic_name = data.topic_name;
         this.journalPublicationArray[0].issn_number = data.issn_number;
         this.journalPublicationArray[0].impact_factor = data.impact_factor;
+        this.journalPublicationArray[0].acceptance_year = data.acceptance_year;
         this.journalPublicationArray[0].file_nmae = data.file_name;
         this.active = 1;
         this.isUpdatable = true;
@@ -192,6 +194,7 @@ export class JournalPublicationComponent {
                 'issn_number': null,
                 'topic_name': null,
                 'impact_factor': null,
+                'acceptance_year': null,
                 'file_name': null
             }
         ];
@@ -202,7 +205,7 @@ export class JournalPublicationComponent {
         this.journalPublicationService.searchJournalPublication(this.journalPublicationForm.value.staff_id).subscribe((response: any) => {
             if (response.success == 1) {
                 this.searchPaperList = response.data;
-                console.log(this.searchPaperList);
+                // console.log(this.searchPaperList);
 
             }
         })
@@ -257,6 +260,7 @@ export class JournalPublicationComponent {
                 'issn_number': null,
                 'topic_name': null,
                 'impact_factor': null,
+                'acceptance_year': null,
                 'file_name': null
             }
         ];

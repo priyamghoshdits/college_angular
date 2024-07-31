@@ -278,7 +278,9 @@ export class UserEditComponent implements OnInit {
             volume_page_number: new FormControl(null, [Validators.required]),
             issn_number: new FormControl(null, [Validators.required]),
             topic_name: new FormControl(null, [Validators.required]),
+            acceptance_year: new FormControl(null, [Validators.required]),
             impact_factor: new FormControl(null, [Validators.required]),
+            file_name: new FormControl(null),
         });
         this.manualFeesForm = new FormGroup({
             id: new FormControl(null),
@@ -533,7 +535,7 @@ export class UserEditComponent implements OnInit {
                         if (response.success == 1) {
                             Swal.fire({
                                 title: "Well Done!!",
-                                text: "journal Deleted",
+                                text: "API Score Deleted",
                                 icon: "success"
                             });
                             this.apiScoreList = response.data
@@ -603,7 +605,7 @@ export class UserEditComponent implements OnInit {
                         if (response.success == 1) {
                             Swal.fire({
                                 title: "Well Done!!",
-                                text: "journal Deleted",
+                                text: "PG Phd Guide Deleted",
                                 icon: "success"
                             });
                             this.pgPhdList = response.data
@@ -646,6 +648,7 @@ export class UserEditComponent implements OnInit {
         formData.append('issn_number', this.journalPublicationForm.value.issn_number);
         formData.append('topic_name', this.journalPublicationForm.value.topic_name);
         formData.append('impact_factor', this.journalPublicationForm.value.impact_factor);
+        formData.append('acceptance_year', this.journalPublicationForm.value.acceptance_year);
         formData.append('file_name', this.journalFile);
 
         return this.http.post(this.BASE_API_URL + '/saveJournalPublicationOwn', formData)

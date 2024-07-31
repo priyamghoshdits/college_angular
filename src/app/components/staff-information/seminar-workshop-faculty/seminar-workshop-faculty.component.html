@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-5 mb-3">
-                                            <label>Type of Seminar/Workshop</label>
+                                            <label>Type of Seminar/Workshop/FDP</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="seminarWorkshopArray[indexOfElement].type_of_seminar"
                                                 placeholder="Type of Seminar/Workshop" required>
@@ -66,28 +66,43 @@
                                                 placeholder="Organized By" required>
                                         </div>
                                         <div class="col-md-2 mb-3">
-                                            <a *ngIf="(indexOfElement + 1) == totalArray.length" (click)="addField()"
-                                                style=""><mat-icon
+                                            <a *ngIf="(indexOfElement + 1) == totalArray.length && !isUpdatable"
+                                                (click)="addField()"><mat-icon
                                                     style="font-size: 40px;height: 60px; width: 40px; line-height: 2">add_box</mat-icon>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
+                                            <label>From Date</label>
+                                            <input type="date" class="form-control"
+                                                [(ngModel)]="seminarWorkshopArray[indexOfElement].date" required
+                                                (change)="calculateNoOFDate(indexOfElement)">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>To Date</label>
+                                            <input type="date" class="form-control"
+                                                [(ngModel)]="seminarWorkshopArray[indexOfElement].end_date" required
+                                                (change)="calculateNoOFDate(indexOfElement)">
+                                        </div>
+                                        <div class="col-md-4 mb-3">
                                             <label>Duration</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="seminarWorkshopArray[indexOfElement].duration"
-                                                placeholder="Duration" required>
+                                                placeholder="Duration" required disabled>
                                         </div>
-                                        <div class="col-md-4 mb-3">
-                                            <label>Date</label>
-                                            <input type="date" class="form-control"
-                                                [(ngModel)]="seminarWorkshopArray[indexOfElement].date" required>
-                                        </div>
-                                        <div class="col-md-4 mb-3">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
                                             <label>Achievement</label>
                                             <input type="text" class="form-control" placeholder="Achievement"
                                                 [(ngModel)]="seminarWorkshopArray[indexOfElement].achievement" required>
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label>Upload File</label>
+                                            <input class="form-control" type="file"
+                                                (change)="fileUpload($event,indexOfElement)"
+                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +172,9 @@
                                             <th colspan="2">Organized By</th>
                                             <th colspan="2">Duration</th>
                                             <th colspan="2">Date</th>
+                                            <th colspan="2">To Date</th>
                                             <th colspan="2">Achievement</th>
+                                            <th colspan="2">Download</th>
                                             <th colspan="1"
                                                 *ngIf="permission[1].permission == 1 && permission[2].permission == 1">
                                                 Action</th>
@@ -173,7 +190,15 @@
                                             <td colspan="2">{{record.organized_by}}</td>
                                             <td colspan="2">{{record.duration}}</td>
                                             <td colspan="2">{{record.date}}</td>
+                                            <td colspan="2">{{record.end_date}}</td>
                                             <td colspan="2">{{record.achievement}}</td>
+                                            <td colspan="2">
+                                                <a data-placement="left" target="_blank" href="{{record.file_url}}"
+                                                    *ngIf="record.file_url">
+                                                    <mat-icon>cloud_download</mat-icon>
+                                                </a>
+                                                <span *ngIf="!record.file_url">No file found</span>
+                                            </td>
                                             <td>
                                                 <a (click)="editSeminarWorkshopFaculty(record)"
                                                     *ngIf="permission[1].permission == 1"><mat-icon>edit</mat-icon></a>

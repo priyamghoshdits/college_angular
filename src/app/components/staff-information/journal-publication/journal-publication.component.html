@@ -94,20 +94,25 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>ISSN Number</label>
                                             <input [(ngModel)]="journalPublicationArray[indexOfElement].issn_number"
                                                 class="form-control" placeholder="ISSN Number" required type="text">
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Topic Name</label>
                                             <input [(ngModel)]="journalPublicationArray[indexOfElement].topic_name"
                                                 class="form-control" placeholder="Topic Name" required type="text">
                                         </div>
-                                        <div class="col-md-4 mb-3">
+                                        <div class="col-md-3 mb-3">
                                             <label>Imapct Factor</label>
                                             <input [(ngModel)]="journalPublicationArray[indexOfElement].impact_factor"
                                                 class="form-control" placeholder="Impact Factor" required type="text">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Year of Acceptance</label>
+                                            <input [(ngModel)]="journalPublicationArray[indexOfElement].acceptance_year"
+                                                class="form-control" required placeholder="Year of Acceptance" type="number">
                                         </div>
                                     </div>
                                 </div>
@@ -167,6 +172,7 @@
                                             <th>Volume Page number</th>
                                             <th>Issn Number</th>
                                             <th>Impact Factor</th>
+                                            <th>Year of Acceptance</th>
                                             <th>Download</th>
                                             <th>Action</th>
                                         </tr>
@@ -183,6 +189,7 @@
                                             <td>{{record.volume_page_number}}</td>
                                             <td>{{record.issn_number}}</td>
                                             <td>{{record.impact_factor}}</td>
+                                            <td>{{record.acceptance_year}}</td>
                                             <td>
                                                 <a data-placement="left" target="_blank" href="{{record.file_url}}"
                                                     *ngIf="record.file_url">
