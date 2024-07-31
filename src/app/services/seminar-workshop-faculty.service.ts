@@ -13,6 +13,13 @@ export class SeminarWorkshopFacultyService {
     constructor(private http: HttpClient, private errorService: ErrorService) {
     }
 
+    saveUploadFile(value) {
+        return this.http.post(this.BASE_API_URL + '/saveSeminarWorkshopFacultyFile', value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
+
     saveSeminarWorkshopFaculty(data) {
         return this.http.post(this.BASE_API_URL + '/saveSeminarWorkshopFaculty', data)
             .pipe(catchError(this.errorService.serverError), tap(response => {

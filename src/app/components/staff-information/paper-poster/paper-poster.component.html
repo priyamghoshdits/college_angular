@@ -5,7 +5,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-header" [hidden]="active != 1">
-                            <h5>Paper Poster</h5><span>Paper Poster</span>
+                            <h5>Paper/Poster/Resource Person (speaker)/Chairperson of the Session</h5><span>Paper Poster</span>
                         </div>
                         <div class="card-header" [hidden]="active != 2">
                             <h5>Show Paper Poster</h5>
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-5 mb-3">
-                                            <label>Type</label>
+                                            <label>Type of Performance</label>
                                             <input type="text" class="form-control"
                                                 [(ngModel)]="paperPosterArray[indexOfElement].type" placeholder="Type"
                                                 required>

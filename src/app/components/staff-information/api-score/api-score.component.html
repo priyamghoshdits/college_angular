@@ -49,13 +49,13 @@
                                                 class="form-control" placeholder="Assignment Year" required
                                                 type="number">
                                         </div>
-                                        <div class="col-md-3 mb-3">
-                                            <label>Upload File</label>
+                                        <div class="col-md-5 mb-3">
+                                            <label class="thirdfile_textdesign">Upload Summary of API Scores Minimum total Average annul score under category: I, II, III</label>
                                             <input class="form-control" (change)="fileUpload($event, indexOfElement)"
                                                 required type="file" accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx">
                                         </div>
                                         <div *ngIf="(indexOfElement + 1) == paperField.length && !isUpdatable"
-                                            class="col-md-2 mb-3">
+                                            class="col-md-1 mb-3">
                                             <a (click)="addField()">
                                                 <mat-icon
                                                     style="font-size: 40px;height: 60px; width: 40px; line-height: 2">
