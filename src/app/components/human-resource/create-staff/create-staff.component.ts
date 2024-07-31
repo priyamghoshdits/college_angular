@@ -34,6 +34,8 @@ import {
     NgbTooltip
 } from "@ng-bootstrap/ng-bootstrap";
 import { RouterLink } from "@angular/router";
+import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
+import {MatButton} from "@angular/material/button";
 
 @Component({
     selector: 'app-create-staff',
@@ -61,6 +63,12 @@ import { RouterLink } from "@angular/router";
         CustomFilterPipe,
         NgIf,
         RouterLink,
+        MatStep,
+        MatStepper,
+        MatStepLabel,
+        MatButton,
+        MatStepperNext,
+        MatStepperPrevious,
     ],
     templateUrl: './create-staff.component.html',
     styleUrl: './create-staff.component.scss'
@@ -92,6 +100,7 @@ export class CreateStaffComponent {
     casteCertificateProof: any = null;
     aadhaarProof: any = null;
     panProof: any = null;
+    isLinear = false;
 
     maxSize = 1 * 1024 * 1024; // 1 MB in bytes
 
