@@ -1,21 +1,24 @@
-import { Component } from '@angular/core';
-import { MatIconModule } from "@angular/material/icon";
-import { NgForOf, NgIf } from "@angular/common";
-import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
-import { MemberService } from "../../../services/member.service";
-import { SubjectService } from "../../../services/subject.service";
-import { SessionService } from "../../../services/session.service";
-import { StudentService } from "../../../services/student.service";
+import {Component} from '@angular/core';
+import {MatIconModule} from "@angular/material/icon";
+import {NgForOf, NgIf} from "@angular/common";
+import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {MemberService} from "../../../services/member.service";
+import {SubjectService} from "../../../services/subject.service";
+import {SessionService} from "../../../services/session.service";
+import {StudentService} from "../../../services/student.service";
 import Swal from "sweetalert2";
-import { ImageService } from "../../../services/image.service";
-import { AgentService } from "../../../services/agent.service";
-import { CustomFilterPipe } from "custom-filter.pipe";
-import { CommonService } from "../../../services/common.service";
-import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
-import { FranchiseService } from "../../../services/franchise.service";
-import { RouterLink } from "@angular/router";
+import {ImageService} from "../../../services/image.service";
+import {AgentService} from "../../../services/agent.service";
+import {CustomFilterPipe} from "custom-filter.pipe";
+import {CommonService} from "../../../services/common.service";
+import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
+import {FranchiseService} from "../../../services/franchise.service";
+import {RouterLink} from "@angular/router";
 import * as XLSX from 'xlsx';
+import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
+import {MatFormField, MatInput, MatLabel} from "@angular/material/input";
+import {MatButton} from "@angular/material/button";
 
 @Component({
     selector: 'app-student-admisssion',
@@ -33,12 +36,25 @@ import * as XLSX from 'xlsx';
         CustomFilterPipe,
         NgIf,
         RouterLink,
+        MatStepper,
+        MatStep,
+        MatStepLabel,
+        MatInput,
+        MatButton,
+        MatStepperNext,
+        MatFormField,
+        MatLabel,
+        MatStepperPrevious,
     ],
     templateUrl: './student-admisssion.component.html',
     styleUrl: './student-admisssion.component.scss'
 })
 export class StudentAdmisssionComponent {
     studentCreationForm: FormGroup;
+    studentCreationForm1: FormGroup;
+    studentCreationForm2: FormGroup;
+    studentCreationForm3: FormGroup;
+    studentCreationForm4: FormGroup;
     public active = 1;
     categoryList: any[];
     courseList: any[];
@@ -62,8 +78,9 @@ export class StudentAdmisssionComponent {
     admission_slip: null;
     father_income_proof: null;
     mother_income_proof: null;
+    isLinear = false;
 
-    maxSize =  1 * 1024 * 1024; // 1 MB in bytes
+    maxSize = 1 * 1024 * 1024; // 1 MB in bytes
 
     abcFile: File;
     studentSignatureFile: File;
@@ -88,6 +105,60 @@ export class StudentAdmisssionComponent {
         if (this.rolesAndPermission.length > 0) {
             this.permission = this.rolesAndPermission.find(x => x.name == 'STUDENT ADMISSION').permission;
         }
+
+        this.studentCreationForm1 = new FormGroup({
+            id: new FormControl(null),
+            identification_no: new FormControl(null),
+            roll_no: new FormControl(null),
+            registration_no: new FormControl(null),
+            first_name: new FormControl(null, [Validators.required]),
+            middle_name: new FormControl(),
+            last_name: new FormControl(null, [Validators.required]),
+            gender: new FormControl(null, [Validators.required]),
+            dob: new FormControl(null, [Validators.required]),
+            admission_date: new FormControl(null, [Validators.required]),
+            mobile_no: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
+            emergency_phone_number: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
+            material_status: new FormControl(null),
+            admission_status: new FormControl(null),
+            current_address: new FormControl(null, [Validators.required]),
+            permanent_address: new FormControl(null, [Validators.required]),
+            religion: new FormControl(null),
+            blood_group: new FormControl(null),
+            category_id: new FormControl(null, [Validators.required]),
+            email: new FormControl(null, [Validators.required, Validators.email]),
+            course_id: new FormControl(null, [Validators.required]),
+            semester_id: new FormControl(null, [Validators.required]),
+            agent_id: new FormControl(null),
+            abc_id: new FormControl(null),
+            franchise_id: new FormControl(null)
+        });
+
+        this.studentCreationForm2 = new FormGroup({
+
+        });
+
+        this.studentCreationForm3 = new FormGroup({
+            payment_date: new FormControl(null, [Validators.required]),
+            mode_of_payment: new FormControl(null, [Validators.required]),
+            transaction_id: new FormControl(null, [Validators.required]),
+            caution_money: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
+        });
+
+        this.studentCreationForm4 = new FormGroup({
+            father_name: new FormControl(null),
+            father_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
+            father_occupation: new FormControl(null),
+            mother_name: new FormControl(null),
+            mother_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
+            mother_occupation: new FormControl(null),
+            guardian_name: new FormControl(null),
+            guardian_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
+            guardian_email: new FormControl(null, [Validators.email]),
+            guardian_relation: new FormControl(null),
+            guardian_occupation: new FormControl(null),
+            guardian_address: new FormControl(null),
+        });
 
         this.studentCreationForm = new FormGroup({
             id: new FormControl(null),
@@ -115,6 +186,12 @@ export class StudentAdmisssionComponent {
             semester_id: new FormControl(null, [Validators.required]),
             agent_id: new FormControl(null),
             abc_id: new FormControl(null),
+            franchise_id: new FormControl(null),
+            session_id: new FormControl(null, [Validators.required]),
+            payment_date: new FormControl(null, [Validators.required]),
+            mode_of_payment: new FormControl(null, [Validators.required]),
+            transaction_id: new FormControl(null, [Validators.required]),
+            caution_money: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
             father_name: new FormControl(null),
             father_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
             father_occupation: new FormControl(null),
@@ -127,12 +204,6 @@ export class StudentAdmisssionComponent {
             guardian_relation: new FormControl(null),
             guardian_occupation: new FormControl(null),
             guardian_address: new FormControl(null),
-            franchise_id: new FormControl(null),
-            session_id: new FormControl(null, [Validators.required]),
-            payment_date: new FormControl(null, [Validators.required]),
-            mode_of_payment: new FormControl(null, [Validators.required]),
-            transaction_id: new FormControl(null, [Validators.required]),
-            caution_money: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
         });
 
         this.franchiseService.getFranchiseListener().subscribe((response) => {
@@ -212,7 +283,7 @@ export class StudentAdmisssionComponent {
     // }
 
     selectProfilePic(event) {
-        if(event.target.files[0].size > this.maxSize){
+        if (event.target.files[0].size > this.maxSize) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -227,7 +298,7 @@ export class StudentAdmisssionComponent {
     }
 
     selectAdmissionSlip(event) {
-        if(event.target.files[0].size > this.maxSize){
+        if (event.target.files[0].size > this.maxSize) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -242,7 +313,7 @@ export class StudentAdmisssionComponent {
     }
 
     selectRegistrationFile(event) {
-        if(event.target.files[0].size > this.maxSize){
+        if (event.target.files[0].size > this.maxSize) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -257,7 +328,7 @@ export class StudentAdmisssionComponent {
     }
 
     uploadAadhaarCard(event) {
-        if(event.target.files[0].size > this.maxSize){
+        if (event.target.files[0].size > this.maxSize) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -272,7 +343,7 @@ export class StudentAdmisssionComponent {
     }
 
     uploadLabReport(event) {
-        if(event.target.files[0].size > this.maxSize){
+        if (event.target.files[0].size > this.maxSize) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -287,7 +358,7 @@ export class StudentAdmisssionComponent {
     }
 
     uploadDateOfBirthProof(event) {
-        if(event.target.files[0].size > this.maxSize){
+        if (event.target.files[0].size > this.maxSize) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -302,7 +373,7 @@ export class StudentAdmisssionComponent {
     }
 
     uploadFatherIncomeCertificate(event) {
-        if(event.target.files[0].size > this.maxSize){
+        if (event.target.files[0].size > this.maxSize) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -317,7 +388,7 @@ export class StudentAdmisssionComponent {
     }
 
     uploadMotherIncomeCertificate(event) {
-        if(event.target.files[0].size > this.maxSize){
+        if (event.target.files[0].size > this.maxSize) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -332,7 +403,7 @@ export class StudentAdmisssionComponent {
     }
 
     uploadAbcId(event) {
-        if(event.target.files[0].size > this.maxSize){
+        if (event.target.files[0].size > this.maxSize) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -347,7 +418,7 @@ export class StudentAdmisssionComponent {
     }
 
     uploadSignature(event) {
-        if(event.target.files[0].size > this.maxSize){
+        if (event.target.files[0].size > this.maxSize) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -362,7 +433,7 @@ export class StudentAdmisssionComponent {
     }
 
     uploadAdmissionLatter(event) {
-        if(event.target.files[0].size > this.maxSize){
+        if (event.target.files[0].size > this.maxSize) {
             Swal.fire({
                 position: 'center',
                 icon: 'error',
@@ -381,11 +452,8 @@ export class StudentAdmisssionComponent {
     }
 
     editStudent(data) {
-        console.log(data);
-
         this.studentCreationForm.reset();
-        this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response) => {
-            // @ts-ignore
+        this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
             this.semesterList = response.data;
 
             data.transaction_id = data.caution_money_transaction_id;
@@ -395,13 +463,13 @@ export class StudentAdmisssionComponent {
             this.studentCreationForm.patchValue(data);
             this.isUpdateable = true;
             this.active = 1;
-        })
+        });
     }
 
     saveStudent() {
         // @ts-ignore
         this.session_id = JSON.parse(localStorage.getItem('session_id'));
-        this.studentCreationForm.patchValue({ session_id: this.session_id });
+        this.studentCreationForm.patchValue({session_id: this.session_id});
 
         if (!this.session_id) {
             Swal.fire({
@@ -423,7 +491,7 @@ export class StudentAdmisssionComponent {
             });
             return;
         }
-        this.studentCreationForm.patchValue({ admission_status: 1 });
+        this.studentCreationForm.patchValue({admission_status: 1});
         Swal.fire({
             title: 'Please Wait !',
             html: 'Saving ...', // add html attribute if you want or remove
@@ -565,7 +633,7 @@ export class StudentAdmisssionComponent {
     updateStudent() {
         // @ts-ignore
         this.session_id = JSON.parse(localStorage.getItem('session_id'));
-        this.studentCreationForm.patchValue({ session_id: this.session_id });
+        this.studentCreationForm.patchValue({session_id: this.session_id});
         if (!this.studentCreationForm.valid) {
             this.studentCreationForm.markAllAsTouched();
             window.scroll({
@@ -575,7 +643,7 @@ export class StudentAdmisssionComponent {
             });
             return;
         }
-        this.studentCreationForm.patchValue({ admission_status: 1 });
+        this.studentCreationForm.patchValue({admission_status: 1});
 
         const formData = new FormData();
         formData.append("id", this.studentCreationForm.value.id);
@@ -669,7 +737,22 @@ export class StudentAdmisssionComponent {
 
     exportStudentListExcel(type) {
         // @ts-ignore
-        let x: [{ "Identification Number": any; "Name": any; "Gender": any; "DOB": any; "Religion": any; "Mobile No": any; "Email": any; "Session Name": any; "Category Name": any; "Admission Date": any; "Blood Group": any; "Course Name": any; "Semester": any; "Current Semester": any }] = [];
+        let x: [{
+            "Identification Number": any;
+            "Name": any;
+            "Gender": any;
+            "DOB": any;
+            "Religion": any;
+            "Mobile No": any;
+            "Email": any;
+            "Session Name": any;
+            "Category Name": any;
+            "Admission Date": any;
+            "Blood Group": any;
+            "Course Name": any;
+            "Semester": any;
+            "Current Semester": any
+        }] = [];
         let output = [];
 
         if (type === 1) {
