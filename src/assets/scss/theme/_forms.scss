@@ -179,7 +179,8 @@ aw-wizard-navigation-bar.horizontal {
     height: auto;
   }
   .form-control{
-    border: 1px solid $light-semi-gray;
+    // border: 1px solid $light-semi-gray;
+    
     :focus {
       box-shadow: 0 0 0 0.2rem rgba(171, 140, 228, 0.05);
     }
