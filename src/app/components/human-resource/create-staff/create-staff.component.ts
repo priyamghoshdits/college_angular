@@ -75,6 +75,10 @@ import {MatButton} from "@angular/material/button";
 })
 export class CreateStaffComponent {
     staffCreationForm: FormGroup;
+    staffCreationForm1: FormGroup;
+    staffCreationForm2: FormGroup;
+    staffCreationForm3: FormGroup;
+    staffCreationForm4: FormGroup;
     model: NgbDateStruct;
     today = this.calendar.getToday();
     public active = 1;
@@ -110,6 +114,53 @@ export class CreateStaffComponent {
         , private userTypeService: UserTypeService, private commonService: CommonService
         , private roleAndPermissionService: RolesAndPermissionService, private franchiseService: FranchiseService) {
         this.user = JSON.parse(localStorage.getItem('user') || '{}');
+
+        this.staffCreationForm1 = new FormGroup({
+            id: new FormControl(null),
+            identification_no: new FormControl(null),
+            first_name: new FormControl(null, [Validators.required]),
+            middle_name: new FormControl(null),
+            last_name: new FormControl(null, [Validators.required]),
+            gender: new FormControl(null, [Validators.required]),
+            dob: new FormControl(null, [Validators.required]),
+            date_of_joining: new FormControl(null, [Validators.required]),
+            mobile_no: new FormControl(null, [Validators.required]),
+            emergency_phone_number: new FormControl(null, [Validators.required]),
+            material_status: new FormControl(null, [Validators.required]),
+            work_experience: new FormControl(null, [Validators.required]),
+            qualification: new FormControl(null, [Validators.required]),
+            current_address: new FormControl(null, [Validators.required]),
+            permanent_address: new FormControl(null, [Validators.required]),
+            religion: new FormControl(null),
+            blood_group: new FormControl(null),
+            category_id: new FormControl(null, [Validators.required]),
+            user_type_id: new FormControl(null, [Validators.required]),
+            email: new FormControl(null, [Validators.required, Validators.email]),
+            department_id: new FormControl(null, [Validators.required]),
+            designation_id: new FormControl(null, [Validators.required]),
+            pan_number: new FormControl(null),
+            franchise_id: new FormControl(null),
+            password: new FormControl(null),
+        });
+
+        this.staffCreationForm3 = new FormGroup({
+
+        });
+
+        this.staffCreationForm3 = new FormGroup({
+            epf_number: new FormControl(null),
+            gross_salary: new FormControl(null),
+            location: new FormControl(null),
+            contract_type: new FormControl(null, [Validators.required])
+        });
+
+        this.staffCreationForm4 = new FormGroup({
+            bank_account_number: new FormControl(null),
+            bank_name: new FormControl(null),
+            ifsc_code: new FormControl(null),
+            bank_branch_name: new FormControl(null),
+        });
+
         this.staffCreationForm = new FormGroup({
             id: new FormControl(null),
             identification_no: new FormControl(null),
