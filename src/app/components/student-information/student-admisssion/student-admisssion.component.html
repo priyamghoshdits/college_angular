@@ -35,7 +35,7 @@
                         <div [hidden]="active != 1">
                             <mat-stepper #stepper [linear]="isLinear">
                                 <mat-step [stepControl]="studentCreationForm">
-                                    <div class="card-body">
+                                    <div class="card-body multiform_cardbodydesign">
                                         <form [formGroup]="studentCreationForm">
                                             <ng-template matStepLabel>Fill out your name</ng-template>
                                             <div class="onedividersection">
@@ -307,13 +307,13 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <button mat-button matStepperNext>Next</button>
+                                                <button mat-button matStepperNext class="steperbutton_design">Next</button>
                                             </div>
                                         </form>
                                     </div>
                                 </mat-step>
                                 <mat-step [stepControl]="studentCreationForm">
-                                    <div class="card-body">
+                                    <div class="card-body multiform_cardbodydesign">
                                         <form [formGroup]="studentCreationForm">
                                             <ng-template matStepLabel>Upload Documents</ng-template>
                                             <div class="fullform_dividersection">
@@ -392,14 +392,14 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <button mat-button matStepperPrevious>Back</button>
-                                                <button mat-button matStepperNext>Next</button>
+                                                <button mat-button matStepperPrevious class="steperbutton_design1">Back</button>
+                                                <button mat-button matStepperNext class="steperbutton_design">Next</button>
                                             </div>
                                         </form>
                                     </div>
                                 </mat-step>
                                 <mat-step [stepControl]="studentCreationForm">
-                                    <div class="card-body">
+                                    <div class="card-body multiform_cardbodydesign">
                                         <form [formGroup]="studentCreationForm">
                                             <ng-template matStepLabel>Caution Money</ng-template>
                                             <div class="fullform_dividersection">
@@ -448,14 +448,14 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <button mat-button matStepperPrevious>Back</button>
-                                                <button mat-button matStepperNext>Next</button>
+                                                <button mat-button matStepperPrevious class="steperbutton_design1">Back</button>
+                                                <button mat-button matStepperNext class="steperbutton_design">Next</button>
                                             </div>
                                         </form>
                                     </div>
                                 </mat-step>
                                 <mat-step [stepControl]="studentCreationForm4">
-                                    <div class="card-body">
+                                    <div class="card-body multiform_cardbodydesign">
                                         <form [formGroup]="studentCreationForm4">
                                             <ng-template matStepLabel>Guardian Details</ng-template>
                                             <div class="lastform_dividersection">
@@ -555,9 +555,9 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <button mat-button matStepperPrevious>Back</button>
+                                                <button mat-button matStepperPrevious class="steperbutton_design1">Back</button>
                                                 <!--                                            <button (click)="stepper.reset()" mat-button>Reset</button>-->
-                                                <button (click)="saveStudent()" mat-button>Submit</button>
+                                                <button (click)="saveStudent()" mat-button class="steperbutton_design2">Submit</button>
                                             </div>
                                         </form>
                                     </div>

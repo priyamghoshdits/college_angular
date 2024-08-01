@@ -526,7 +526,7 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="canlendarout_section">
-                            <div class="swsfst_areaout third_bxoutsection">
+                            <div class="third_bxoutsection">
                                 <i class="fa-solid fa-calendar-days swsft_icondesign"></i>
                                 <span class="swsft_textdesign">Calender</span>
                             </div>
@@ -537,7 +537,7 @@
                     </div>
                     <div class="col-lg-6" *ngIf="userTypeId != 1 && userTypeId != 5">
                         <div class="leftfrth_dashboardoutarea">
-                            <div class="swsfst_areaout third_bxoutsection">
+                            <div class="third_bxoutsection">
                                 <i class="fa-solid fa-file swsft_icondesign"></i>
                                 <span class="swsft_textdesign">Upcoming live Classes</span>
                             </div>
@@ -564,7 +564,7 @@
                     </div>
                     <div class="col-lg-6" *ngIf="userTypeId == 1 || userTypeId == 5">
                         <div class="leftfrth_dashboardoutarea countstudent_outsection">
-                            <div class="swsfst_areaout third_bxoutsection">
+                            <div class="third_bxoutsection">
                                 <i class="fa-solid fa-graduation-cap swsft_icondesign"></i>
                                 <span class="swsft_textdesign">Students</span>
                             </div>
@@ -580,13 +580,13 @@
                                  [type]="admissionChartType"></canvas> -->
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-6">
                                     <div class="mfstudent_outsection">
                                         <h4 class="item-title">Female Students</h4>
                                         <div class="item-number">{{total_female_student}}</div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-6 col-6">
                                     <div class="mfstudent_outsectionmu">
                                         <h4 class="item-title">Male Students</h4>
                                         <div class="item-number">{{total_male_student}}</div>
@@ -622,7 +622,11 @@
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label class="col-form-label pt-0" for="exampleInputEmail1">Description</label>
+<<<<<<< HEAD
                         <textarea rows="8" class="form-control" formControlName="description" id="exampleInputEmail1"
+=======
+                        <textarea class="form-control dashboardmodal_formdesign" formControlName="description" id="exampleInputEmail1"
+>>>>>>> cebf268847a77c190ad417c047894fb59687933c
                             placeholder="Enter Description" type="text"></textarea>
                         <div *ngIf="universityFormCalender.controls['description'].errors?.['required'] && universityFormCalender.controls['description'].touched "
                             class="text text-danger mt-1">Description required
@@ -683,8 +687,8 @@
         <div class="col-lg-12 dashboard_hfourthoutsection">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="leftfrth_dashboardoutarea">
-                        <div class="swsfst_areaout fourth_bckarea">
+                    <div class="leftfrth_dashboardoutarea1">
+                        <div class="fourth_bckarea">
                             <i class="fa-solid fa-file swsft_icondesign"></i>
                             <span class="swsft_textdesign">Upcoming Notice</span>
                         </div>
@@ -708,8 +712,8 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="leftfrth_dashboardoutarea">
-                        <div class="swsfst_areaout fourth_bckarea">
+                    <div class="leftfrth_dashboardoutarea1">
+                        <div class="fourth_bckarea">
                             <i class="fa-solid fa-calendar-days swsft_icondesign"></i>
                             <span class="swsft_textdesign">Upcoming Events</span>
                         </div>

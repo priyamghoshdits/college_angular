@@ -24,11 +24,15 @@ div.review canvas {
 }
 .third_bxoutsection
 {
-  background-color: #124e66 !important;
+  background-color: #124e66;
+  padding: 10px 0px 10px 30px;
+  border-radius: 5px 5px 0px 0px;
 }
 .fourth_bckarea
 {
-  background-color: #346e6f !important;
+  background-color: #7091e6;
+  padding: 10px 0px 10px 30px;
+  border-radius: 5px 5px 0px 0px;
 }
 .swsft_icondesign
 {
@@ -243,6 +247,14 @@ div.review canvas {
   border-radius: 0px 0px 5px 5px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
+.leftfrth_dashboardoutarea1
+{
+  margin: 0px 0px 0px 0px;
+  padding: 0px;
+  background-color: #FFF;
+  border-radius: 0px 0px 5px 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
 .ugbdy_outsectionxz
 {
   padding: 20px 20px 20px 20px;
@@ -320,4 +332,36 @@ div.review canvas {
 .clender_vzxsection
 {
   margin: 50px 0px 0px 0px;
+}
+.dashboardmodal_formdesign
+{
+  height: 150px;
+}
+@media(max-width: 767px)
+{
+  .swfstbox_outarea
+  {
+    width: 43%;
+    margin: 10px 10px 10px 10px;
+  }
+  .mfstudent_outsectionmu
+  {
+    padding: 0px 0px 0px 0px;
+  }
+  .mfstudent_outsectionmu:after
+  {
+    right: 67%;
+  }
+  .mfstudent_outsection
+  {
+    padding: 0px 0px 15px 20px;
+  }
+  .leftfrth_dashboardoutarea1
+  {
+    margin: 20px 0px 20px 0px;
+  }
+  .dashboard_hfourthoutsection
+  {
+    margin: 20px 0px 40px 0px;
+  }
 }
