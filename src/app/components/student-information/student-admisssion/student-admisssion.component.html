@@ -307,25 +307,15 @@
                                                 </div>
                                             </div>
                                             <div>
-<<<<<<< HEAD
-                                                <button mat-button matStepperNext (click)="saveStudent(1)" [disabled]="!studentCreationForm.valid" [hidden]="isUpdateable">Next</button>
-                                                <button mat-button matStepperNext (click)="updateStudent(1)" [disabled]="!studentCreationForm.valid" [hidden]="!isUpdateable">Next</button>
-=======
-                                                <button mat-button matStepperNext class="steperbutton_design">Next</button>
->>>>>>> 9e38fb6e36f610380a43b2379823fd9ed35d4b45
+                                                <button mat-button matStepperNext (click)="saveStudent(1)" [disabled]="!studentCreationForm.valid" [hidden]="isUpdateable" class="steperbutton_design">Next</button>
+                                                <button mat-button matStepperNext (click)="updateStudent(1)" [disabled]="!studentCreationForm.valid" [hidden]="!isUpdateable" class="steperbutton_design">Next</button>
                                             </div>
                                         </form>
                                     </div>
                                 </mat-step>
-<<<<<<< HEAD
                                 <mat-step [stepControl]="studentCreationForm2">
-                                    <div class="card-body">
-                                        <form [formGroup]="studentCreationForm2">
-=======
-                                <mat-step [stepControl]="studentCreationForm">
                                     <div class="card-body multiform_cardbodydesign">
-                                        <form [formGroup]="studentCreationForm">
->>>>>>> 9e38fb6e36f610380a43b2379823fd9ed35d4b45
+                                        <form [formGroup]="studentCreationForm2">
                                             <ng-template matStepLabel>Upload Documents</ng-template>
                                             <div class="fullform_dividersection">
                                                 <div class="row">
@@ -333,42 +323,42 @@
                                                         <label>Profile Image</label>
                                                         <input (change)="selectProfilePic($event)" [multiple]="false"
                                                                accept=".jpg, .jpeg, .png" class="form-control"
-                                                               type="file" formControlName="">
+                                                               type="file" formControlName="image">
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Upload date of birth proof</label>
                                                         <input (change)="uploadDateOfBirthProof($event)"
                                                                [multiple]="false"
                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                               class="form-control" type="file">
+                                                               class="form-control" type="file" formControlName="dob_proof">
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Upload Admission Slip</label>
                                                         <input (change)="selectAdmissionSlip($event)"
                                                                [multiple]="false"
                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                               class="form-control" type="file">
+                                                               class="form-control" type="file" formControlName="admission_slip">
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Upload Lab Report</label>
                                                         <input (change)="uploadLabReport($event)"
                                                                [multiple]="false"
                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                               class="form-control" type="file">
+                                                               class="form-control" type="file" formControlName="blood_group_proof">
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Upload aadhaar Card</label>
                                                         <input (change)="uploadAadhaarCard($event)"
                                                                [multiple]="false"
                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                               class="form-control" type="file">
+                                                               class="form-control" type="file" formControlName="aadhaar_card_proof">
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Upload registration certificate</label>
                                                         <input (change)="selectRegistrationFile($event)"
                                                                [multiple]="false"
                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                               class="form-control" type="file">
+                                                               class="form-control" type="file" formControlName="registration_proof">
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Upload ABC</label>
@@ -376,54 +366,48 @@
                                                                [multiple]="false"
                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
                                                                class="form-control"
-                                                               type="file">
-                                                    </div>
-                                                    <div class="col-md-3 mb-3">
-                                                        <label>Upload ABC</label>
-                                                        <input (change)="uploadAbcId($event)"
-                                                               [multiple]="false"
-                                                               accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                               class="form-control"
-                                                               type="file">
+                                                               type="file" formControlName="abc_file">
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Upload Student Signature</label>
                                                         <input (change)="uploadSignature($event)"
                                                                [multiple]="false"
                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                               class="form-control" type="file">
+                                                               class="form-control" type="file" formControlName="student_signature">
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Admission Allotment Letter</label>
                                                         <input (change)="uploadAdmissionLatter($event)"
                                                                [multiple]="false"
                                                                accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                               class="form-control" type="file" formControlName="admission_allotment">
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Mother Income Certificate</label>
+                                                        <input (change)="uploadMotherIncomeCertificate($event)"
+                                                               [multiple]="false"
+                                                               accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
+                                                               class="form-control" type="file">
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <label>Father Income Certificate</label>
+                                                        <input (change)="uploadFatherIncomeCertificate($event)"
+                                                               accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
                                                                class="form-control" type="file">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div>
-<<<<<<< HEAD
-                                                <button mat-button matStepperPrevious>Back</button>
-                                                <button mat-button matStepperNext [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid" (click)="saveStudent(2)" [hidden]="isUpdateable">Next</button>
-                                                <button mat-button matStepperNext [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid" (click)="updateStudent(2)" [hidden]="!isUpdateable">Next</button>
-=======
                                                 <button mat-button matStepperPrevious class="steperbutton_design1">Back</button>
-                                                <button mat-button matStepperNext class="steperbutton_design">Next</button>
->>>>>>> 9e38fb6e36f610380a43b2379823fd9ed35d4b45
+                                                <button mat-button matStepperNext [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid" (click)="saveStudent(2)" [hidden]="isUpdateable" class="steperbutton_design">Next</button>
+                                                <button mat-button matStepperNext [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid" (click)="updateStudent(2)" [hidden]="!isUpdateable" class="steperbutton_design">Next</button>
                                             </div>
                                         </form>
                                     </div>
                                 </mat-step>
-<<<<<<< HEAD
                                 <mat-step [stepControl]="studentCreationForm3">
-                                    <div class="card-body">
-                                        <form [formGroup]="studentCreationForm3">
-=======
-                                <mat-step [stepControl]="studentCreationForm">
                                     <div class="card-body multiform_cardbodydesign">
-                                        <form [formGroup]="studentCreationForm">
->>>>>>> 9e38fb6e36f610380a43b2379823fd9ed35d4b45
+                                        <form [formGroup]="studentCreationForm3">
                                             <ng-template matStepLabel>Caution Money</ng-template>
                                             <div class="fullform_dividersection">
                                                 <div class="row">
@@ -471,14 +455,9 @@
                                                 </div>
                                             </div>
                                             <div>
-<<<<<<< HEAD
-                                                <button mat-button matStepperPrevious>Back</button>
-                                                <button mat-button matStepperNext (click)="saveStudent(3)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid" [hidden]="isUpdateable">Next</button>
-                                                <button mat-button matStepperNext (click)="updateStudent(3)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid" [hidden]="!isUpdateable">Next</button>
-=======
                                                 <button mat-button matStepperPrevious class="steperbutton_design1">Back</button>
-                                                <button mat-button matStepperNext class="steperbutton_design">Next</button>
->>>>>>> 9e38fb6e36f610380a43b2379823fd9ed35d4b45
+                                                <button mat-button matStepperNext (click)="saveStudent(3)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid" [hidden]="isUpdateable" class="steperbutton_design">Next</button>
+                                                <button mat-button matStepperNext (click)="updateStudent(3)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid" [hidden]="!isUpdateable" class="steperbutton_design">Next</button>
                                             </div>
                                         </form>
                                     </div>
@@ -489,12 +468,12 @@
                                             <ng-template matStepLabel>Guardian Details</ng-template>
                                             <div class="lastform_dividersection">
                                                 <div class="row">
-                                                    <div class="col-md-3 mb-3">
+                                                    <div class="col-md-4 mb-3">
                                                         <label>Father Name</label>
                                                         <input class="form-control" formControlName="father_name"
                                                                type="text">
                                                     </div>
-                                                    <div class="col-md-3 mb-3">
+                                                    <div class="col-md-4 mb-3">
                                                         <label>Father Phone no.</label>
                                                         <input class="form-control" formControlName="father_phone"
                                                                type="text">
@@ -502,25 +481,20 @@
                                                              class="text text-danger mt-1">Invalid Phone no.
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3 mb-3">
+                                                    <div class="col-md-4 mb-3">
                                                         <label>Father Occupation</label>
                                                         <input class="form-control" formControlName="father_occupation"
                                                                type="text">
                                                     </div>
-                                                    <div class="col-md-3 mb-3">
-                                                        <label>Income Certificate</label>
-                                                        <input (change)="uploadFatherIncomeCertificate($event)"
-                                                               accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                               class="form-control" type="file">
-                                                    </div>
+                                                    
                                                 </div>
                                                 <div class="row">
-                                                    <div class="col-md-3 mb-3">
+                                                    <div class="col-md-4 mb-3">
                                                         <label>Mother Name</label>
                                                         <input class="form-control" formControlName="mother_name"
                                                                type="text">
                                                     </div>
-                                                    <div class="col-md-3 mb-3">
+                                                    <div class="col-md-4 mb-3">
                                                         <label>Mother Phone no.</label>
                                                         <input class="form-control" formControlName="mother_phone"
                                                                type="text">
@@ -528,18 +502,12 @@
                                                              class="text text-danger mt-1">Invalid Phone no.
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3 mb-3">
+                                                    <div class="col-md-4 mb-3">
                                                         <label>Mother Occupation</label>
                                                         <input class="form-control" formControlName="mother_occupation"
                                                                type="text">
                                                     </div>
-                                                    <div class="col-md-3 mb-3">
-                                                        <label>Income Certificate</label>
-                                                        <input (change)="uploadMotherIncomeCertificate($event)"
-                                                               [multiple]="false"
-                                                               accept=".jpg, .jpeg, .png, .pdf, .xls, .xlsx, .doc, .docx"
-                                                               class="form-control" type="file">
-                                                    </div>
+                                                    
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-3 mb-3">
@@ -586,12 +554,8 @@
                                             <div>
                                                 <button mat-button matStepperPrevious class="steperbutton_design1">Back</button>
                                                 <!--                                            <button (click)="stepper.reset()" mat-button>Reset</button>-->
-<<<<<<< HEAD
-                                                <button (click)="saveStudent(2)" mat-button (click)="saveStudent(4)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid || !studentCreationForm4.valid" [hidden]="isUpdateable">Submit</button>
-                                                <button (click)="saveStudent(2)" mat-button (click)="updateStudent(4)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid || !studentCreationForm4.valid" [hidden]="!isUpdateable">Update</button>
-=======
-                                                <button (click)="saveStudent()" mat-button class="steperbutton_design2">Submit</button>
->>>>>>> 9e38fb6e36f610380a43b2379823fd9ed35d4b45
+                                                <button (click)="saveStudent(2)" mat-button (click)="saveStudent(4)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid || !studentCreationForm4.valid" [hidden]="isUpdateable" class="steperbutton_design2">Submit</button>
+                                                <button (click)="saveStudent(2)" mat-button (click)="updateStudent(4)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid || !studentCreationForm4.valid" [hidden]="!isUpdateable" class="steperbutton_design2">Update</button>
                                             </div>
                                         </form>
                                     </div>

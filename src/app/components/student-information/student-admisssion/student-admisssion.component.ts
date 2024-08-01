@@ -107,33 +107,33 @@ export class StudentAdmisssionComponent {
             this.permission = this.rolesAndPermission.find(x => x.name == 'STUDENT ADMISSION').permission;
         }
 
-        this.studentCreationForm1 = new FormGroup({
-            id: new FormControl(null),
-            identification_no: new FormControl(null),
-            roll_no: new FormControl(null),
-            registration_no: new FormControl(null),
-            first_name: new FormControl(null, [Validators.required]),
-            middle_name: new FormControl(),
-            last_name: new FormControl(null, [Validators.required]),
-            gender: new FormControl(null, [Validators.required]),
-            dob: new FormControl(null, [Validators.required]),
-            admission_date: new FormControl(null, [Validators.required]),
-            mobile_no: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
-            emergency_phone_number: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
-            material_status: new FormControl(null),
-            admission_status: new FormControl(null),
-            current_address: new FormControl(null, [Validators.required]),
-            permanent_address: new FormControl(null, [Validators.required]),
-            religion: new FormControl(null),
-            blood_group: new FormControl(null),
-            category_id: new FormControl(null, [Validators.required]),
-            email: new FormControl(null, [Validators.required, Validators.email]),
-            course_id: new FormControl(null, [Validators.required]),
-            semester_id: new FormControl(null, [Validators.required]),
-            agent_id: new FormControl(null),
-            abc_id: new FormControl(null),
-            franchise_id: new FormControl(null)
-        });
+        // this.studentCreationForm1 = new FormGroup({
+        //     id: new FormControl(null),
+        //     identification_no: new FormControl(null),
+        //     roll_no: new FormControl(null),
+        //     registration_no: new FormControl(null),
+        //     first_name: new FormControl(null, [Validators.required]),
+        //     middle_name: new FormControl(null),
+        //     last_name: new FormControl(null, [Validators.required]),
+        //     gender: new FormControl(null, [Validators.required]),
+        //     dob: new FormControl(null, [Validators.required]),
+        //     admission_date: new FormControl(null, [Validators.required]),
+        //     mobile_no: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
+        //     emergency_phone_number: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
+        //     material_status: new FormControl(null),
+        //     admission_status: new FormControl(null),
+        //     current_address: new FormControl(null, [Validators.required]),
+        //     permanent_address: new FormControl(null, [Validators.required]),
+        //     religion: new FormControl(null),
+        //     blood_group: new FormControl(null),
+        //     category_id: new FormControl(null, [Validators.required]),
+        //     email: new FormControl(null, [Validators.required, Validators.email]),
+        //     course_id: new FormControl(null, [Validators.required]),
+        //     semester_id: new FormControl(null, [Validators.required]),
+        //     agent_id: new FormControl(null),
+        //     abc_id: new FormControl(null),
+        //     franchise_id: new FormControl(null)
+        // });
 
         this.studentCreationForm2 = new FormGroup({
             image: new FormControl(null),
@@ -141,7 +141,9 @@ export class StudentAdmisssionComponent {
             blood_group_proof: new FormControl(null),
             admission_slip: new FormControl(null),
             aadhaar_card_proof: new FormControl(null),
-            father_income_proof: new FormControl(null),
+            // father_income_proof: new FormControl(null),
+            // mother_income_proof: new FormControl(null),
+            abc_id: new FormControl(null),
             mother_income_proof: new FormControl(null),
             registration_proof: new FormControl(null),
             abc_file: new FormControl(null),
@@ -177,7 +179,7 @@ export class StudentAdmisssionComponent {
             roll_no: new FormControl(null),
             registration_no: new FormControl(null),
             first_name: new FormControl(null, [Validators.required]),
-            middle_name: new FormControl(),
+            middle_name: new FormControl(null),
             last_name: new FormControl(null, [Validators.required]),
             gender: new FormControl(null, [Validators.required]),
             dob: new FormControl(null, [Validators.required]),
@@ -199,7 +201,6 @@ export class StudentAdmisssionComponent {
             abc_id: new FormControl(null),
             franchise_id: new FormControl(null),
             // session_id: new FormControl(null, [Validators.required]),
-
         });
 
         this.franchiseService.getFranchiseListener().subscribe((response) => {
@@ -448,6 +449,8 @@ export class StudentAdmisssionComponent {
     }
 
     editStudent(data) {
+        console.log(data);
+        
         this.studentCreationForm.reset();
         this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
             this.semesterList = response.data;
@@ -457,7 +460,7 @@ export class StudentAdmisssionComponent {
             data.mode_of_payment = data.caution_money_mode_of_payment;
 
             this.studentCreationForm.patchValue(data);
-            this.studentCreationForm2.patchValue(data);
+            // this.studentCreationForm2.patchValue(data);
             this.studentCreationForm3.patchValue(data);
             this.studentCreationForm4.patchValue(data);
             this.isUpdateable = true;
@@ -531,8 +534,8 @@ export class StudentAdmisssionComponent {
             formData.append("semester_id", this.studentCreationForm.value.semester_id);
             formData.append("agent_id", this.studentCreationForm.value.agent_id);
             formData.append("franchise_id", this.studentCreationForm.value.franchise_id);
-            // formData.append("session_id", this.studentCreationForm.value.session_id);
             formData.append("abc_id", this.studentCreationForm.value.abc_id);
+            // formData.append("session_id", this.studentCreationForm.value.session_id);
         } else if (form_id == 4) {
             formData.append("user_id", this.userId);
             formData.append("father_name", this.studentCreationForm4.value.father_name);
@@ -690,8 +693,8 @@ export class StudentAdmisssionComponent {
             formData.append("semester_id", this.studentCreationForm.value.semester_id);
             formData.append("agent_id", this.studentCreationForm.value.agent_id);
             formData.append("franchise_id", this.studentCreationForm.value.franchise_id);
-            // formData.append("session_id", this.studentCreationForm.value.session_id);
             formData.append("abc_id", this.studentCreationForm.value.abc_id);
+            // formData.append("session_id", this.studentCreationForm.value.session_id);
         } else if (form_id == 4) {
             formData.append("id", this.userId);
             formData.append("father_name", this.studentCreationForm4.value.father_name);
