@@ -307,14 +307,15 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <button mat-button matStepperNext>Next</button>
+                                                <button mat-button matStepperNext (click)="saveStudent(1)" [disabled]="!studentCreationForm.valid" [hidden]="isUpdateable">Next</button>
+                                                <button mat-button matStepperNext (click)="updateStudent(1)" [disabled]="!studentCreationForm.valid" [hidden]="!isUpdateable">Next</button>
                                             </div>
                                         </form>
                                     </div>
                                 </mat-step>
-                                <mat-step [stepControl]="studentCreationForm">
+                                <mat-step [stepControl]="studentCreationForm2">
                                     <div class="card-body">
-                                        <form [formGroup]="studentCreationForm">
+                                        <form [formGroup]="studentCreationForm2">
                                             <ng-template matStepLabel>Upload Documents</ng-template>
                                             <div class="fullform_dividersection">
                                                 <div class="row">
@@ -322,7 +323,7 @@
                                                         <label>Profile Image</label>
                                                         <input (change)="selectProfilePic($event)" [multiple]="false"
                                                                accept=".jpg, .jpeg, .png" class="form-control"
-                                                               type="file">
+                                                               type="file" formControlName="">
                                                     </div>
                                                     <div class="col-md-3 mb-3">
                                                         <label>Upload date of birth proof</label>
@@ -393,14 +394,15 @@
                                             </div>
                                             <div>
                                                 <button mat-button matStepperPrevious>Back</button>
-                                                <button mat-button matStepperNext>Next</button>
+                                                <button mat-button matStepperNext [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid" (click)="saveStudent(2)" [hidden]="isUpdateable">Next</button>
+                                                <button mat-button matStepperNext [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid" (click)="updateStudent(2)" [hidden]="!isUpdateable">Next</button>
                                             </div>
                                         </form>
                                     </div>
                                 </mat-step>
-                                <mat-step [stepControl]="studentCreationForm">
+                                <mat-step [stepControl]="studentCreationForm3">
                                     <div class="card-body">
-                                        <form [formGroup]="studentCreationForm">
+                                        <form [formGroup]="studentCreationForm3">
                                             <ng-template matStepLabel>Caution Money</ng-template>
                                             <div class="fullform_dividersection">
                                                 <div class="row">
@@ -408,7 +410,7 @@
                                                         <label>Payment Date</label>
                                                         <input class="form-control" formControlName="payment_date"
                                                                placeholder="Pre-Admission Amount" type="date">
-                                                        <div *ngIf="studentCreationForm.controls['payment_date'].errors?.['required'] && studentCreationForm.controls['payment_date'].touched "
+                                                        <div *ngIf="studentCreationForm3.controls['payment_date'].errors?.['required'] && studentCreationForm3.controls['payment_date'].touched "
                                                              class="text text-danger mt-1">Payment Date required
                                                         </div>
                                                     </div>
@@ -422,7 +424,7 @@
                                                             <option value="Transfer To Bank"> Transfer To Bank</option>
                                                             <option value="Others"> Others</option>
                                                         </select>
-                                                        <div *ngIf="studentCreationForm.controls['mode_of_payment'].errors?.['required'] && studentCreationForm.controls['mode_of_payment'].touched "
+                                                        <div *ngIf="studentCreationForm3.controls['mode_of_payment'].errors?.['required'] && studentCreationForm3.controls['mode_of_payment'].touched "
                                                              class="text text-danger mt-1">Mode Of Payment required
                                                         </div>
                                                     </div>
@@ -430,7 +432,7 @@
                                                         <label>Transaction Id</label>
                                                         <input class="form-control" formControlName="transaction_id"
                                                                placeholder="Transaction Id" type="text">
-                                                        <div *ngIf="studentCreationForm.controls['transaction_id'].errors?.['required'] && studentCreationForm.controls['transaction_id'].touched "
+                                                        <div *ngIf="studentCreationForm3.controls['transaction_id'].errors?.['required'] && studentCreationForm3.controls['transaction_id'].touched "
                                                              class="text text-danger mt-1">Transaction Id required
                                                         </div>
                                                     </div>
@@ -438,10 +440,10 @@
                                                         <label>Caution Money Amount</label>
                                                         <input class="form-control" formControlName="caution_money"
                                                                placeholder="Caution Money Amount" type="text">
-                                                        <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['required'] && studentCreationForm.controls['caution_money'].touched "
+                                                        <div *ngIf="studentCreationForm3.controls['caution_money'].errors?.['required'] && studentCreationForm3.controls['caution_money'].touched "
                                                              class="text text-danger mt-1">Amount required
                                                         </div>
-                                                        <div *ngIf="studentCreationForm.controls['caution_money'].errors?.['pattern']"
+                                                        <div *ngIf="studentCreationForm3.controls['caution_money'].errors?.['pattern']"
                                                              class="text text-danger mt-1">Invalid Amount
                                                         </div>
                                                     </div>
@@ -449,7 +451,8 @@
                                             </div>
                                             <div>
                                                 <button mat-button matStepperPrevious>Back</button>
-                                                <button mat-button matStepperNext>Next</button>
+                                                <button mat-button matStepperNext (click)="saveStudent(3)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid" [hidden]="isUpdateable">Next</button>
+                                                <button mat-button matStepperNext (click)="updateStudent(3)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid" [hidden]="!isUpdateable">Next</button>
                                             </div>
                                         </form>
                                     </div>
@@ -557,7 +560,8 @@
                                             <div>
                                                 <button mat-button matStepperPrevious>Back</button>
                                                 <!--                                            <button (click)="stepper.reset()" mat-button>Reset</button>-->
-                                                <button (click)="saveStudent()" mat-button>Submit</button>
+                                                <button (click)="saveStudent(2)" mat-button (click)="saveStudent(4)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid || !studentCreationForm4.valid" [hidden]="isUpdateable">Submit</button>
+                                                <button (click)="saveStudent(2)" mat-button (click)="updateStudent(4)" [disabled]="!studentCreationForm.valid || !studentCreationForm2.valid || !studentCreationForm3.valid || !studentCreationForm4.valid" [hidden]="!isUpdateable">Update</button>
                                             </div>
                                         </form>
                                     </div>

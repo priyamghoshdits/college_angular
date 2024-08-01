@@ -1,24 +1,24 @@
-import {Component} from '@angular/core';
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet} from "@ng-bootstrap/ng-bootstrap";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MemberService} from "../../../services/member.service";
-import {SubjectService} from "../../../services/subject.service";
-import {SessionService} from "../../../services/session.service";
-import {StudentService} from "../../../services/student.service";
+import { Component } from '@angular/core';
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { NgbNav, NgbNavItem, NgbNavLink, NgbNavLinkBase, NgbNavOutlet } from "@ng-bootstrap/ng-bootstrap";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MemberService } from "../../../services/member.service";
+import { SubjectService } from "../../../services/subject.service";
+import { SessionService } from "../../../services/session.service";
+import { StudentService } from "../../../services/student.service";
 import Swal from "sweetalert2";
-import {ImageService} from "../../../services/image.service";
-import {AgentService} from "../../../services/agent.service";
-import {CustomFilterPipe} from "custom-filter.pipe";
-import {CommonService} from "../../../services/common.service";
-import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
-import {FranchiseService} from "../../../services/franchise.service";
-import {RouterLink} from "@angular/router";
+import { ImageService } from "../../../services/image.service";
+import { AgentService } from "../../../services/agent.service";
+import { CustomFilterPipe } from "custom-filter.pipe";
+import { CommonService } from "../../../services/common.service";
+import { RolesAndPermissionService } from "../../../services/roles-and-permission.service";
+import { FranchiseService } from "../../../services/franchise.service";
+import { RouterLink } from "@angular/router";
 import * as XLSX from 'xlsx';
-import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
-import {MatFormField, MatInput, MatLabel} from "@angular/material/input";
-import {MatButton} from "@angular/material/button";
+import { MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious } from "@angular/material/stepper";
+import { MatFormField, MatInput, MatLabel } from "@angular/material/input";
+import { MatButton } from "@angular/material/button";
 
 @Component({
     selector: 'app-student-admisssion',
@@ -86,6 +86,7 @@ export class StudentAdmisssionComponent {
     studentSignatureFile: File;
     admissionLetterFile: File;
 
+    userId = '';
     user: {
         user_type_id: number;
     };
@@ -135,7 +136,17 @@ export class StudentAdmisssionComponent {
         });
 
         this.studentCreationForm2 = new FormGroup({
-
+            image: new FormControl(null),
+            dob_proof: new FormControl(null),
+            blood_group_proof: new FormControl(null),
+            admission_slip: new FormControl(null),
+            aadhaar_card_proof: new FormControl(null),
+            father_income_proof: new FormControl(null),
+            mother_income_proof: new FormControl(null),
+            registration_proof: new FormControl(null),
+            abc_file: new FormControl(null),
+            student_signature: new FormControl(null),
+            admission_allotment: new FormControl(null),
         });
 
         this.studentCreationForm3 = new FormGroup({
@@ -171,7 +182,7 @@ export class StudentAdmisssionComponent {
             gender: new FormControl(null, [Validators.required]),
             dob: new FormControl(null, [Validators.required]),
             admission_date: new FormControl(null, [Validators.required]),
-            image: new FormControl(null),
+            // image: new FormControl(null),
             mobile_no: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
             emergency_phone_number: new FormControl(null, [Validators.required, Validators.pattern("[0-9]{10}")]),
             material_status: new FormControl(null),
@@ -187,23 +198,8 @@ export class StudentAdmisssionComponent {
             agent_id: new FormControl(null),
             abc_id: new FormControl(null),
             franchise_id: new FormControl(null),
-            session_id: new FormControl(null, [Validators.required]),
-            payment_date: new FormControl(null, [Validators.required]),
-            mode_of_payment: new FormControl(null, [Validators.required]),
-            transaction_id: new FormControl(null, [Validators.required]),
-            caution_money: new FormControl(null, [Validators.required, Validators.pattern("^[0-9]*$")]),
-            father_name: new FormControl(null),
-            father_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
-            father_occupation: new FormControl(null),
-            mother_name: new FormControl(null),
-            mother_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
-            mother_occupation: new FormControl(null),
-            guardian_name: new FormControl(null),
-            guardian_phone: new FormControl(null, [Validators.pattern("[0-9]{10}")]),
-            guardian_email: new FormControl(null, [Validators.email]),
-            guardian_relation: new FormControl(null),
-            guardian_occupation: new FormControl(null),
-            guardian_address: new FormControl(null),
+            // session_id: new FormControl(null, [Validators.required]),
+
         });
 
         this.franchiseService.getFranchiseListener().subscribe((response) => {
@@ -461,15 +457,18 @@ export class StudentAdmisssionComponent {
             data.mode_of_payment = data.caution_money_mode_of_payment;
 
             this.studentCreationForm.patchValue(data);
+            this.studentCreationForm2.patchValue(data);
+            this.studentCreationForm3.patchValue(data);
+            this.studentCreationForm4.patchValue(data);
             this.isUpdateable = true;
             this.active = 1;
         });
     }
 
-    saveStudent() {
+    saveStudent(form_id) {
         // @ts-ignore
         this.session_id = JSON.parse(localStorage.getItem('session_id'));
-        this.studentCreationForm.patchValue({session_id: this.session_id});
+        this.studentCreationForm.patchValue({ session_id: this.session_id });
 
         if (!this.session_id) {
             Swal.fire({
@@ -482,94 +481,101 @@ export class StudentAdmisssionComponent {
             return;
         }
 
-        if (!this.studentCreationForm.valid) {
-            this.studentCreationForm.markAllAsTouched();
-            window.scroll({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-            });
-            return;
-        }
-        this.studentCreationForm.patchValue({admission_status: 1});
+        // if (!this.studentCreationForm.valid) {
+        //     this.studentCreationForm.markAllAsTouched();
+        //     window.scroll({
+        //         top: 0,
+        //         left: 0,
+        //         behavior: 'smooth'
+        //     });
+        //     return;
+        // }
+
+        this.studentCreationForm.patchValue({ admission_status: 1 });
+        this.studentCreationForm.patchValue({ form_id: form_id });
         Swal.fire({
             title: 'Please Wait !',
-            html: 'Saving ...', // add html attribute if you want or remove
+            html: 'Saving ...',
             allowOutsideClick: false,
             didOpen: () => {
                 Swal.showLoading();
             }
         });
 
-        //     mode_of_payment: new FormControl(null, [Validators.required]),
-        //     transaction_id: new FormControl(null, [Validators.required]),
-        //     caution_money: new FormControl(0, [Validators.required, Validators.pattern("^[0-9]*$")]),
-
         const formData = new FormData();
         formData.append("id", this.studentCreationForm.value.id);
-        formData.append("identification_no", this.studentCreationForm.value.identification_no);
-        formData.append("roll_no", this.studentCreationForm.value.roll_no);
-        formData.append("registration_no", this.studentCreationForm.value.registration_no);
-        formData.append("first_name", this.studentCreationForm.value.first_name);
-        formData.append("middle_name", this.studentCreationForm.value.middle_name);
-        formData.append("last_name", this.studentCreationForm.value.last_name);
-        formData.append("gender", this.studentCreationForm.value.gender);
-        formData.append("dob", this.studentCreationForm.value.dob);
-        formData.append("admission_date", this.studentCreationForm.value.admission_date);
-        formData.append("mobile_no", this.studentCreationForm.value.mobile_no);
-        formData.append("emergency_phone_number", this.studentCreationForm.value.emergency_phone_number);
-        formData.append("material_status", this.studentCreationForm.value.material_status);
-        formData.append("admission_status", this.studentCreationForm.value.admission_status);
-        formData.append("current_address", this.studentCreationForm.value.current_address);
-        formData.append("permanent_address", this.studentCreationForm.value.permanent_address);
-        formData.append("religion", this.studentCreationForm.value.religion);
-        formData.append("blood_group", this.studentCreationForm.value.blood_group);
-        formData.append("category_id", this.studentCreationForm.value.category_id);
-        formData.append("email", this.studentCreationForm.value.email);
-        formData.append("course_id", this.studentCreationForm.value.course_id);
-        formData.append("semester_id", this.studentCreationForm.value.semester_id);
-        formData.append("agent_id", this.studentCreationForm.value.agent_id);
-        formData.append("father_name", this.studentCreationForm.value.father_name);
-        formData.append("father_phone", this.studentCreationForm.value.father_phone);
-        formData.append("father_occupation", this.studentCreationForm.value.father_occupation);
-        formData.append("mother_name", this.studentCreationForm.value.mother_name);
-        formData.append("mother_phone", this.studentCreationForm.value.mother_phone);
-        formData.append("mother_occupation", this.studentCreationForm.value.mother_occupation);
-        formData.append("guardian_name", this.studentCreationForm.value.guardian_name);
-        formData.append("guardian_phone", this.studentCreationForm.value.guardian_phone);
-        formData.append("guardian_email", this.studentCreationForm.value.guardian_email);
-        formData.append("guardian_relation", this.studentCreationForm.value.guardian_relation);
-        formData.append("guardian_occupation", this.studentCreationForm.value.guardian_occupation);
-        formData.append("guardian_address", this.studentCreationForm.value.guardian_address);
-        formData.append("franchise_id", this.studentCreationForm.value.franchise_id);
-        formData.append("session_id", this.studentCreationForm.value.session_id);
-        formData.append("payment_date", this.studentCreationForm.value.payment_date);
-        formData.append("mode_of_payment", this.studentCreationForm.value.mode_of_payment);
-        formData.append("transaction_id", this.studentCreationForm.value.transaction_id);
-        formData.append("caution_money", this.studentCreationForm.value.caution_money);
+        formData.append("form_id", form_id);
+        formData.append("session_id", this.session_id);
 
-        //Images or document upload
-        // @ts-ignore
-        formData.append("image", this.profile_image);
-        // @ts-ignore
-        formData.append("dob_proof", this.dob_proof);
-        // @ts-ignore
-        formData.append("blood_group_proof", this.blood_group_proof);
-        // @ts-ignore
-        formData.append("aadhaar_card_proof", this.aadhaar_card_proof);
-        // @ts-ignore
-        formData.append("admission_slip", this.admission_slip);
-        // @ts-ignore
-        formData.append("father_income_proof", this.father_income_proof);
-        // @ts-ignore
-        formData.append("mother_income_proof", this.mother_income_proof);
-        // @ts-ignore
-        formData.append("registration_proof", this.registration_no_proof);
-
-        formData.append("abc_id", this.studentCreationForm.value.abc_id);
-        formData.append("abc_file", this.abcFile);
-        formData.append("student_signature", this.studentSignatureFile);
-        formData.append("admission_allotment", this.admissionLetterFile);
+        if (form_id == 1) {
+            formData.append("identification_no", this.studentCreationForm.value.identification_no);
+            formData.append("roll_no", this.studentCreationForm.value.roll_no);
+            formData.append("registration_no", this.studentCreationForm.value.registration_no);
+            formData.append("first_name", this.studentCreationForm.value.first_name);
+            formData.append("middle_name", this.studentCreationForm.value.middle_name);
+            formData.append("last_name", this.studentCreationForm.value.last_name);
+            formData.append("gender", this.studentCreationForm.value.gender);
+            formData.append("dob", this.studentCreationForm.value.dob);
+            formData.append("admission_date", this.studentCreationForm.value.admission_date);
+            formData.append("mobile_no", this.studentCreationForm.value.mobile_no);
+            formData.append("emergency_phone_number", this.studentCreationForm.value.emergency_phone_number);
+            formData.append("material_status", this.studentCreationForm.value.material_status);
+            formData.append("admission_status", this.studentCreationForm.value.admission_status);
+            formData.append("current_address", this.studentCreationForm.value.current_address);
+            formData.append("permanent_address", this.studentCreationForm.value.permanent_address);
+            formData.append("religion", this.studentCreationForm.value.religion);
+            formData.append("blood_group", this.studentCreationForm.value.blood_group);
+            formData.append("category_id", this.studentCreationForm.value.category_id);
+            formData.append("email", this.studentCreationForm.value.email);
+            formData.append("course_id", this.studentCreationForm.value.course_id);
+            formData.append("semester_id", this.studentCreationForm.value.semester_id);
+            formData.append("agent_id", this.studentCreationForm.value.agent_id);
+            formData.append("franchise_id", this.studentCreationForm.value.franchise_id);
+            // formData.append("session_id", this.studentCreationForm.value.session_id);
+            formData.append("abc_id", this.studentCreationForm.value.abc_id);
+        } else if (form_id == 4) {
+            formData.append("user_id", this.userId);
+            formData.append("father_name", this.studentCreationForm4.value.father_name);
+            formData.append("father_phone", this.studentCreationForm4.value.father_phone);
+            formData.append("father_occupation", this.studentCreationForm4.value.father_occupation);
+            formData.append("mother_name", this.studentCreationForm4.value.mother_name);
+            formData.append("mother_phone", this.studentCreationForm4.value.mother_phone);
+            formData.append("mother_occupation", this.studentCreationForm4.value.mother_occupation);
+            formData.append("guardian_name", this.studentCreationForm4.value.guardian_name);
+            formData.append("guardian_phone", this.studentCreationForm4.value.guardian_phone);
+            formData.append("guardian_email", this.studentCreationForm4.value.guardian_email);
+            formData.append("guardian_relation", this.studentCreationForm4.value.guardian_relation);
+            formData.append("guardian_occupation", this.studentCreationForm4.value.guardian_occupation);
+            formData.append("guardian_address", this.studentCreationForm4.value.guardian_address);
+        } else if (form_id == 3) {
+            formData.append("user_id", this.userId);
+            formData.append("payment_date", this.studentCreationForm3.value.payment_date);
+            formData.append("mode_of_payment", this.studentCreationForm3.value.mode_of_payment);
+            formData.append("transaction_id", this.studentCreationForm3.value.transaction_id);
+            formData.append("caution_money", this.studentCreationForm3.value.caution_money);
+        } else if (form_id == 2) {
+            formData.append("user_id", this.userId);
+            //Images or document upload
+            // @ts-ignore
+            formData.append("image", this.profile_image);
+            // @ts-ignore
+            formData.append("dob_proof", this.dob_proof);
+            // @ts-ignore
+            formData.append("blood_group_proof", this.blood_group_proof);
+            // @ts-ignore
+            formData.append("aadhaar_card_proof", this.aadhaar_card_proof);
+            // @ts-ignore
+            formData.append("admission_slip", this.admission_slip);
+            // @ts-ignore
+            formData.append("father_income_proof", this.father_income_proof);
+            // @ts-ignore
+            formData.append("mother_income_proof", this.mother_income_proof);
+            // @ts-ignore
+            formData.append("registration_proof", this.registration_no_proof);
+            formData.append("abc_file", this.abcFile);
+            formData.append("student_signature", this.studentSignatureFile);
+            formData.append("admission_allotment", this.admissionLetterFile);
+        }
 
         // dob_proof: null;
         // blood_group_proof: null;
@@ -587,10 +593,20 @@ export class StudentAdmisssionComponent {
         // this.imageService.uploadProfilePic(formData).subscribe();
         // this.studentCreationForm.patchValue({ image: file['name'] });
 
-        this.studentService.saveStudent(formData).subscribe((response) => {
-            // @ts-ignore
+        this.studentService.saveStudent(formData).subscribe((response: any) => {
             if (response.success == 1) {
                 Swal.close();
+                this.userId = response.data.id;
+                // Swal.fire({
+                //     position: 'center',
+                //     icon: 'success',
+                //     title: 'Student Saved',
+                //     showConfirmButton: false,
+                //     timer: 1000
+                // });
+            } else if (response.success == 2) {
+                Swal.close();
+                // this.userId = response.data.id;
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -598,7 +614,6 @@ export class StudentAdmisssionComponent {
                     showConfirmButton: false,
                     timer: 1000
                 });
-                this.studentCreationForm.reset();
             }
         })
     }
@@ -630,10 +645,10 @@ export class StudentAdmisssionComponent {
     }
 
 
-    updateStudent() {
+    updateStudent(form_id) {
         // @ts-ignore
         this.session_id = JSON.parse(localStorage.getItem('session_id'));
-        this.studentCreationForm.patchValue({session_id: this.session_id});
+        this.studentCreationForm.patchValue({ session_id: this.session_id });
         if (!this.studentCreationForm.valid) {
             this.studentCreationForm.markAllAsTouched();
             window.scroll({
@@ -643,53 +658,98 @@ export class StudentAdmisssionComponent {
             });
             return;
         }
-        this.studentCreationForm.patchValue({admission_status: 1});
-
+        this.studentCreationForm.patchValue({ admission_status: 1 });
         const formData = new FormData();
         formData.append("id", this.studentCreationForm.value.id);
-        formData.append("identification_no", this.studentCreationForm.value.identification_no);
-        formData.append("roll_no", this.studentCreationForm.value.roll_no);
-        formData.append("registration_no", this.studentCreationForm.value.registration_no);
-        formData.append("first_name", this.studentCreationForm.value.first_name);
-        formData.append("middle_name", this.studentCreationForm.value.middle_name);
-        formData.append("last_name", this.studentCreationForm.value.last_name);
-        formData.append("gender", this.studentCreationForm.value.gender);
-        formData.append("dob", this.studentCreationForm.value.dob);
-        formData.append("admission_date", this.studentCreationForm.value.admission_date);
-        formData.append("mobile_no", this.studentCreationForm.value.mobile_no);
-        formData.append("emergency_phone_number", this.studentCreationForm.value.emergency_phone_number);
-        formData.append("material_status", this.studentCreationForm.value.material_status);
-        formData.append("admission_status", this.studentCreationForm.value.admission_status);
-        formData.append("current_address", this.studentCreationForm.value.current_address);
-        formData.append("permanent_address", this.studentCreationForm.value.permanent_address);
-        formData.append("religion", this.studentCreationForm.value.religion);
-        formData.append("blood_group", this.studentCreationForm.value.blood_group);
-        formData.append("category_id", this.studentCreationForm.value.category_id);
-        formData.append("email", this.studentCreationForm.value.email);
-        formData.append("course_id", this.studentCreationForm.value.course_id);
-        formData.append("semester_id", this.studentCreationForm.value.semester_id);
-        formData.append("agent_id", this.studentCreationForm.value.agent_id);
-        formData.append("father_name", this.studentCreationForm.value.father_name);
-        formData.append("father_phone", this.studentCreationForm.value.father_phone);
-        formData.append("father_occupation", this.studentCreationForm.value.father_occupation);
-        formData.append("mother_name", this.studentCreationForm.value.mother_name);
-        formData.append("mother_phone", this.studentCreationForm.value.mother_phone);
-        formData.append("mother_occupation", this.studentCreationForm.value.mother_occupation);
-        formData.append("guardian_name", this.studentCreationForm.value.guardian_name);
-        formData.append("guardian_phone", this.studentCreationForm.value.guardian_phone);
-        formData.append("guardian_email", this.studentCreationForm.value.guardian_email);
-        formData.append("guardian_relation", this.studentCreationForm.value.guardian_relation);
-        formData.append("guardian_occupation", this.studentCreationForm.value.guardian_occupation);
-        formData.append("guardian_address", this.studentCreationForm.value.guardian_address);
-        formData.append("franchise_id", this.studentCreationForm.value.franchise_id);
-        formData.append("session_id", this.studentCreationForm.value.session_id);
-        formData.append("payment_date", this.studentCreationForm.value.payment_date);
-        formData.append("mode_of_payment", this.studentCreationForm.value.mode_of_payment);
-        formData.append("transaction_id", this.studentCreationForm.value.transaction_id);
-        formData.append("caution_money", this.studentCreationForm.value.caution_money);
+        formData.append("form_id", form_id);
+        // @ts-ignore
+        formData.append("session_id", this.session_id);
+
+
+        if (form_id == 1) {
+            formData.append("identification_no", this.studentCreationForm.value.identification_no);
+            formData.append("roll_no", this.studentCreationForm.value.roll_no);
+            formData.append("registration_no", this.studentCreationForm.value.registration_no);
+            formData.append("first_name", this.studentCreationForm.value.first_name);
+            formData.append("middle_name", this.studentCreationForm.value.middle_name);
+            formData.append("last_name", this.studentCreationForm.value.last_name);
+            formData.append("gender", this.studentCreationForm.value.gender);
+            formData.append("dob", this.studentCreationForm.value.dob);
+            formData.append("admission_date", this.studentCreationForm.value.admission_date);
+            formData.append("mobile_no", this.studentCreationForm.value.mobile_no);
+            formData.append("emergency_phone_number", this.studentCreationForm.value.emergency_phone_number);
+            formData.append("material_status", this.studentCreationForm.value.material_status);
+            formData.append("admission_status", this.studentCreationForm.value.admission_status);
+            formData.append("current_address", this.studentCreationForm.value.current_address);
+            formData.append("permanent_address", this.studentCreationForm.value.permanent_address);
+            formData.append("religion", this.studentCreationForm.value.religion);
+            formData.append("blood_group", this.studentCreationForm.value.blood_group);
+            formData.append("category_id", this.studentCreationForm.value.category_id);
+            formData.append("email", this.studentCreationForm.value.email);
+            formData.append("course_id", this.studentCreationForm.value.course_id);
+            formData.append("semester_id", this.studentCreationForm.value.semester_id);
+            formData.append("agent_id", this.studentCreationForm.value.agent_id);
+            formData.append("franchise_id", this.studentCreationForm.value.franchise_id);
+            // formData.append("session_id", this.studentCreationForm.value.session_id);
+            formData.append("abc_id", this.studentCreationForm.value.abc_id);
+        } else if (form_id == 4) {
+            formData.append("id", this.userId);
+            formData.append("father_name", this.studentCreationForm4.value.father_name);
+            formData.append("father_phone", this.studentCreationForm4.value.father_phone);
+            formData.append("father_occupation", this.studentCreationForm4.value.father_occupation);
+            formData.append("mother_name", this.studentCreationForm4.value.mother_name);
+            formData.append("mother_phone", this.studentCreationForm4.value.mother_phone);
+            formData.append("mother_occupation", this.studentCreationForm4.value.mother_occupation);
+            formData.append("guardian_name", this.studentCreationForm4.value.guardian_name);
+            formData.append("guardian_phone", this.studentCreationForm4.value.guardian_phone);
+            formData.append("guardian_email", this.studentCreationForm4.value.guardian_email);
+            formData.append("guardian_relation", this.studentCreationForm4.value.guardian_relation);
+            formData.append("guardian_occupation", this.studentCreationForm4.value.guardian_occupation);
+            formData.append("guardian_address", this.studentCreationForm4.value.guardian_address);
+        } else if (form_id == 3) {
+            formData.append("id", this.userId);
+            formData.append("payment_date", this.studentCreationForm3.value.payment_date);
+            formData.append("mode_of_payment", this.studentCreationForm3.value.mode_of_payment);
+            formData.append("transaction_id", this.studentCreationForm3.value.transaction_id);
+            formData.append("caution_money", this.studentCreationForm3.value.caution_money);
+        } else if (form_id == 2) {
+            formData.append("user_id", this.userId);
+            //Images or document upload
+            // @ts-ignore
+            formData.append("image", this.profile_image);
+            // @ts-ignore
+            formData.append("dob_proof", this.dob_proof);
+            // @ts-ignore
+            formData.append("blood_group_proof", this.blood_group_proof);
+            // @ts-ignore
+            formData.append("aadhaar_card_proof", this.aadhaar_card_proof);
+            // @ts-ignore
+            formData.append("admission_slip", this.admission_slip);
+            // @ts-ignore
+            formData.append("father_income_proof", this.father_income_proof);
+            // @ts-ignore
+            formData.append("mother_income_proof", this.mother_income_proof);
+            // @ts-ignore
+            formData.append("registration_proof", this.registration_no_proof);
+            formData.append("abc_file", this.abcFile);
+            formData.append("student_signature", this.studentSignatureFile);
+            formData.append("admission_allotment", this.admissionLetterFile);
+        }
 
         this.studentService.updateStudent(formData).subscribe((response: any) => {
             if (response.success == 1) {
+                Swal.close();
+                this.userId = response.data.id;
+
+                // Swal.fire({
+                //     position: 'center',
+                //     icon: 'success',
+                //     title: 'Student Updated',
+                //     showConfirmButton: false,
+                //     timer: 1000
+                // });
+            } else if (response.success == 2) {
+                Swal.close();
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
