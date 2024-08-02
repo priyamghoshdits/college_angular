@@ -34,8 +34,8 @@ import {
     NgbTooltip
 } from "@ng-bootstrap/ng-bootstrap";
 import { RouterLink } from "@angular/router";
-import {MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious} from "@angular/material/stepper";
-import {MatButton} from "@angular/material/button";
+import { MatStep, MatStepLabel, MatStepper, MatStepperNext, MatStepperPrevious } from "@angular/material/stepper";
+import { MatButton } from "@angular/material/button";
 
 @Component({
     selector: 'app-create-staff',
@@ -115,35 +115,35 @@ export class CreateStaffComponent {
         , private roleAndPermissionService: RolesAndPermissionService, private franchiseService: FranchiseService) {
         this.user = JSON.parse(localStorage.getItem('user') || '{}');
 
-        this.staffCreationForm1 = new FormGroup({
-            id: new FormControl(null),
-            identification_no: new FormControl(null),
-            first_name: new FormControl(null, [Validators.required]),
-            middle_name: new FormControl(null),
-            last_name: new FormControl(null, [Validators.required]),
-            gender: new FormControl(null, [Validators.required]),
-            dob: new FormControl(null, [Validators.required]),
-            date_of_joining: new FormControl(null, [Validators.required]),
-            mobile_no: new FormControl(null, [Validators.required]),
-            emergency_phone_number: new FormControl(null, [Validators.required]),
-            material_status: new FormControl(null, [Validators.required]),
-            work_experience: new FormControl(null, [Validators.required]),
-            qualification: new FormControl(null, [Validators.required]),
-            current_address: new FormControl(null, [Validators.required]),
-            permanent_address: new FormControl(null, [Validators.required]),
-            religion: new FormControl(null),
-            blood_group: new FormControl(null),
-            category_id: new FormControl(null, [Validators.required]),
-            user_type_id: new FormControl(null, [Validators.required]),
-            email: new FormControl(null, [Validators.required, Validators.email]),
-            department_id: new FormControl(null, [Validators.required]),
-            designation_id: new FormControl(null, [Validators.required]),
-            pan_number: new FormControl(null),
-            franchise_id: new FormControl(null),
-            password: new FormControl(null),
-        });
+        // this.staffCreationForm1 = new FormGroup({
+        //     id: new FormControl(null),
+        //     identification_no: new FormControl(null),
+        //     first_name: new FormControl(null, [Validators.required]),
+        //     middle_name: new FormControl(null),
+        //     last_name: new FormControl(null, [Validators.required]),
+        //     gender: new FormControl(null, [Validators.required]),
+        //     dob: new FormControl(null, [Validators.required]),
+        //     date_of_joining: new FormControl(null, [Validators.required]),
+        //     mobile_no: new FormControl(null, [Validators.required]),
+        //     emergency_phone_number: new FormControl(null, [Validators.required]),
+        //     material_status: new FormControl(null, [Validators.required]),
+        //     work_experience: new FormControl(null, [Validators.required]),
+        //     qualification: new FormControl(null, [Validators.required]),
+        //     current_address: new FormControl(null, [Validators.required]),
+        //     permanent_address: new FormControl(null, [Validators.required]),
+        //     religion: new FormControl(null),
+        //     blood_group: new FormControl(null),
+        //     category_id: new FormControl(null, [Validators.required]),
+        //     user_type_id: new FormControl(null, [Validators.required]),
+        //     email: new FormControl(null, [Validators.required, Validators.email]),
+        //     department_id: new FormControl(null, [Validators.required]),
+        //     designation_id: new FormControl(null, [Validators.required]),
+        //     pan_number: new FormControl(null),
+        //     franchise_id: new FormControl(null),
+        //     password: new FormControl(null),
+        // });
 
-        this.staffCreationForm3 = new FormGroup({
+        this.staffCreationForm2 = new FormGroup({
 
         });
 
@@ -186,15 +186,7 @@ export class CreateStaffComponent {
             department_id: new FormControl(null, [Validators.required]),
             designation_id: new FormControl(null, [Validators.required]),
             pan_number: new FormControl(null),
-            epf_number: new FormControl(null),
             franchise_id: new FormControl(null),
-            gross_salary: new FormControl(null),
-            location: new FormControl(null),
-            contract_type: new FormControl(null, [Validators.required]),
-            bank_account_number: new FormControl(null),
-            bank_name: new FormControl(null),
-            ifsc_code: new FormControl(null),
-            bank_branch_name: new FormControl(null),
             password: new FormControl(null),
         });
 
@@ -386,10 +378,10 @@ export class CreateStaffComponent {
     }
 
     saveMember() {
-        // if (!this.staffCreationForm.valid) {
-        //     this.staffCreationForm.markAllAsTouched();
-        //     return;
-        // }
+        if (!this.staffCreationForm.valid) {
+            this.staffCreationForm.markAllAsTouched();
+            return;
+        }
 
         Swal.fire({
             title: 'Please Wait !',
@@ -424,15 +416,18 @@ export class CreateStaffComponent {
         formData.append("email", this.staffCreationForm.value.email);
         formData.append("department_id", this.staffCreationForm.value.department_id);
         formData.append("designation_id", this.staffCreationForm.value.designation_id);
-        formData.append("epf_number", this.staffCreationForm.value.epf_number);
         formData.append("franchise_id", this.staffCreationForm.value.franchise_id);
-        formData.append("gross_salary", this.staffCreationForm.value.gross_salary);
-        formData.append("location", this.staffCreationForm.value.location);
-        formData.append("contract_type", this.staffCreationForm.value.contract_type);
-        formData.append("bank_account_number", this.staffCreationForm.value.bank_account_number);
-        formData.append("bank_name", this.staffCreationForm.value.bank_name);
-        formData.append("ifsc_code", this.staffCreationForm.value.ifsc_code);
-        formData.append("bank_branch_name", this.staffCreationForm.value.bank_branch_name);
+
+        formData.append("epf_number", this.staffCreationForm3.value.epf_number);
+        formData.append("gross_salary", this.staffCreationForm3.value.gross_salary);
+        formData.append("location", this.staffCreationForm3.value.location);
+        formData.append("contract_type", this.staffCreationForm3.value.contract_type);
+
+        formData.append("bank_account_number", this.staffCreationForm4.value.bank_account_number);
+        formData.append("bank_name", this.staffCreationForm4.value.bank_name);
+        formData.append("ifsc_code", this.staffCreationForm4.value.ifsc_code);
+        formData.append("bank_branch_name", this.staffCreationForm4.value.bank_branch_name);
+
         formData.append("pan_number", this.staffCreationForm.value.pan_number);
         formData.append("password", this.staffCreationForm.value.password);
 
@@ -471,6 +466,9 @@ export class CreateStaffComponent {
 
     editMember(data) {
         this.staffCreationForm.patchValue(data);
+        this.staffCreationForm2.patchValue(data);
+        this.staffCreationForm3.patchValue(data);
+        this.staffCreationForm4.patchValue(data);
         this.active = 1;
         this.isUpdateable = true;
     }
@@ -536,15 +534,18 @@ export class CreateStaffComponent {
         formData.append("email", this.staffCreationForm.value.email);
         formData.append("department_id", this.staffCreationForm.value.department_id);
         formData.append("designation_id", this.staffCreationForm.value.designation_id);
-        formData.append("epf_number", this.staffCreationForm.value.epf_number);
         formData.append("franchise_id", this.staffCreationForm.value.franchise_id);
-        formData.append("gross_salary", this.staffCreationForm.value.gross_salary);
-        formData.append("location", this.staffCreationForm.value.location);
-        formData.append("contract_type", this.staffCreationForm.value.contract_type);
-        formData.append("bank_account_number", this.staffCreationForm.value.bank_account_number);
-        formData.append("bank_name", this.staffCreationForm.value.bank_name);
-        formData.append("ifsc_code", this.staffCreationForm.value.ifsc_code);
-        formData.append("bank_branch_name", this.staffCreationForm.value.bank_branch_name);
+
+        formData.append("epf_number", this.staffCreationForm3.value.epf_number);
+        formData.append("gross_salary", this.staffCreationForm3.value.gross_salary);
+        formData.append("location", this.staffCreationForm3.value.location);
+        formData.append("contract_type", this.staffCreationForm3.value.contract_type);
+
+        formData.append("bank_account_number", this.staffCreationForm4.value.bank_account_number);
+        formData.append("bank_name", this.staffCreationForm4.value.bank_name);
+        formData.append("ifsc_code", this.staffCreationForm4.value.ifsc_code);
+        formData.append("bank_branch_name", this.staffCreationForm4.value.bank_branch_name);
+
         formData.append("pan_number", this.staffCreationForm.value.pan_number);
         formData.append("password", this.staffCreationForm.value.password);
 
