@@ -43,8 +43,18 @@
                                 <hr>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
+                                        <div class="row mb-2">
+                                            <div class="col-6">
+                                                <label class="col-form-label pt-0" for="exampleInputEmail1">Search Subject</label>
+                                            </div>
+                                            <div class="col-6">
+                                                <input style="width: 300%" class="form-control" formControlName="search_item" placeholder="Search Or Filter"
+                                                       type="text" (keyup)="filterData()">
+                                            </div>
+                                        </div>
+
                                         <label class="col-form-label pt-0" for="exampleInputEmail1">Subject List</label>
-                                        <div *ngFor="let record of subjectList">
+                                        <div *ngFor="let record of subjectList | customFilter:searchItem">
                                             <input style="margin: 10px !important;" [checked]="record.checked" id="checkbox-primary-1" type="checkbox" (change)="importSubject(record, $event)">
                                             <label for="checkbox-primary-1">{{record.name}}</label>
                                         </div>

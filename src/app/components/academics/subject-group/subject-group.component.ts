@@ -2,22 +2,25 @@ import {Component} from '@angular/core';
 import {MatIconModule} from "@angular/material/icon";
 import {NgForOf, NgIf} from "@angular/common";
 import {NgxPaginationModule} from "ngx-pagination";
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {SubjectService} from "../../../services/subject.service";
 import Swal from "sweetalert2";
 import {RolesAndPermissionService} from "../../../services/roles-and-permission.service";
 import {cloneDeep} from 'lodash';
+import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
 
 @Component({
   selector: 'app-subject-group',
   standalone: true,
-  imports: [
-    MatIconModule,
-    NgForOf,
-    NgxPaginationModule,
-    ReactiveFormsModule,
-    NgIf
-  ],
+    imports: [
+        MatIconModule,
+        NgForOf,
+        NgxPaginationModule,
+        ReactiveFormsModule,
+        NgIf,
+        CustomFilterPipe,
+        FormsModule
+    ],
   templateUrl: './subject-group.component.html',
   styleUrl: './subject-group.component.scss'
 })
@@ -35,6 +38,7 @@ export class SubjectGroupComponent {
   p: number;
   rolesAndPermission: any[] = [];
   permission: any[] = [];
+  searchItem: string;
 
   constructor(private subjectService: SubjectService, private roleAndPermissionService: RolesAndPermissionService){
     this.subjectGroupForm = new FormGroup({
@@ -42,6 +46,7 @@ export class SubjectGroupComponent {
       name: new FormControl(null, [Validators.required]),
       course_id: new FormControl(null, [Validators.required]),
       old_semester_id: new FormControl(null),
+      search_item: new FormControl(null),
       semester_id: new FormControl(null, [Validators.required]),
       subject_id: new FormControl(null),
     });
@@ -75,9 +80,13 @@ export class SubjectGroupComponent {
     }
   }
 
+  filterData(){
+    console.log(this.subjectGroupForm.value.search_item);
+    this.searchItem = this.subjectGroupForm.value.search_item;
+  }
+
   getSemester(){
-    this.subjectService.getSemesterByCourseId(this.subjectGroupForm.value.course_id).subscribe((response) => {
-      // @ts-ignore
+    this.subjectService.getSemesterByCourseId(this.subjectGroupForm.value.course_id).subscribe((response: any) => {
       this.semesterList = response.data;
     })
   }
