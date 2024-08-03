@@ -45,7 +45,7 @@
                                              class="text text-danger mt-1">Date required
                                         </div>
                                     </div>
-                                    <div class="col-md-2 mb-3">
+                                    <div class="col-md-4 mb-3">
                                         <label>Select Subject</label>
                                         <!-- <select class="form-select" formControlName="subject_id" required (click)="getClass()"
                                                 style="width: 100%">
@@ -55,7 +55,7 @@
                                             </option>
                                         </select> -->
 
-                                        <ng-select formControlName="subject_id" class="form-control">
+                                        <ng-select formControlName="subject_id" class="form-control" (change)="getClass()">
                                             @for (data of subjectList; track data.id) {
                                                 <ng-option [value]="data.id">{{data.name}}</ng-option>
                                             }
@@ -78,6 +78,18 @@
                                         </select>
                                         <div *ngIf="attendanceForm.controls['class'].errors?.['required'] && attendanceForm.controls['class'].touched "
                                              class="text text-danger mt-1">Class required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 mb-3">
+                                        <label>Select class type</label>
+                                        <select class="form-select" formControlName="class_type" required
+                                                style="width: 100%">
+                                            <option value="null">Select</option>
+                                            <option value="theory">Theory</option>
+                                            <option value="practical">Practical</option>
+                                        </select>
+                                        <div *ngIf="attendanceForm.controls['class_type'].errors?.['required'] && attendanceForm.controls['class_type'].touched "
+                                             class="text text-danger mt-1">Class type required
                                         </div>
                                     </div>
                                     <!-- <div class="col-md-2 mb-3">

@@ -51,6 +51,7 @@ export class AdminAttendanceComponent {
             subject_id: new FormControl(null, [Validators.required]),
             session_id: new FormControl(null, [Validators.required]),
             class: new FormControl(null, [Validators.required]),
+            class_type: new FormControl(null, [Validators.required]),
         });
         this.attendanceForm.patchValue({date: this.datepipe.transform(new Date(), 'yyyy-MM-dd')});
         this.subjectService.getCourseListener().subscribe((response) => {
@@ -183,6 +184,7 @@ export class AdminAttendanceComponent {
         let semester_id = this.attendanceForm.value.semester_id;
         let session_id = this.attendanceForm.value.session_id;
         let _class = this.attendanceForm.value.class;
+        let class_type = this.attendanceForm.value.class_type;
 
 
         this.studentList.forEach(function (value) {
@@ -193,6 +195,7 @@ export class AdminAttendanceComponent {
             value.session_id = session_id;
             value._class = _class;
             value.topic_name = topicName;
+            value.class_type = class_type;
         })
         this.studentService.saveStudentAttendance(this.studentList).subscribe((response: any) => {
             if (response.success == 1) {
