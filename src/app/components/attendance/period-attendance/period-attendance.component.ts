@@ -141,6 +141,7 @@ export class PeriodAttendanceComponent {
                     if (result.isConfirmed) {
                         this.studentList = response.data;
                         this.classStatus = response.class_status;
+                        this.topic_name = response.class_status.topic_name;
                         this.enableClass = true;
                         this.getClass();
                         // if(this.classStatus !== null){
@@ -160,6 +161,7 @@ export class PeriodAttendanceComponent {
             } else {
                 this.studentList = response.data;
                 this.classStatus = response.class_status;
+                this.topic_name = response.class_status.topic_name;
                 if(this.classStatus !== null){
                     this.enableClass = true;
                 }

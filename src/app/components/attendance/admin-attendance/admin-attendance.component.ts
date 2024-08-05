@@ -101,8 +101,8 @@ export class AdminAttendanceComponent {
             , this.attendanceForm.value.session_id
             , this.attendanceForm.value.class
         ).subscribe((response: any) => {
-
             this.studentList = response.data;
+            this.topic_name = response.class_status.topic_name;
             this.showList = false;
             if (this.studentList.length == 0) {
                 Swal.fire({
