@@ -43,7 +43,6 @@ export class AppComponent {
         this.erpService.erpSettingListener().subscribe((data: any) => {
             this.erpSettings = data;
         });
-
         this.erpSettings = this.erpService.getErpSetting();
 
     }

@@ -34,7 +34,7 @@ export class SidebarComponent {
         }
 
         // @ts-ignore
-        const session_data = JSON.parse(localStorage.getItem('session_id')) ?? null;
+        const session_data = JSON.parse(localStorage.getItem('session_id'));
         if (session_data) {
             this.session_id = session_data;
         }

@@ -19,10 +19,10 @@ export class ErpSettingService {
       this.erpDataSubject.next(response.data);
 
       // @ts-ignore
-      // const session_data = JSON.parse(localStorage.getItem('session_id'));
-      // if (!session_data) {
+      const session_data = JSON.parse(localStorage.getItem('session_id'));
+      if (!session_data) {
         localStorage.setItem("session_id", JSON.stringify(response.data.session_id));
-      // }
+      }
     });
 
   }

@@ -138,6 +138,8 @@ export class HeaderComponent implements OnInit {
   }
 
   SignOut(){
+    localStorage.removeItem("session_id");
+    localStorage.removeItem("user");
     this.authService.logout();
     // this.http.get(this.BASE_API_URL + '/logout',).subscribe((response: any) =>{
     // });
