@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
-                                        <label>Select Company</label>
+                                        <label>Type of Organization</label>
                                         <select class="form-select" formControlName="company_id" required
                                                 style="width: 100%">
                                             <option value="null"> Select</option>
@@ -75,7 +75,15 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12 mb-3">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="col-form-label pt-0">Name of Organization</label>
+                                        <input class="form-control" formControlName="organization_name" placeholder="Name of Organization"
+                                               type="text">
+                                        <div *ngIf="placementDetailsForm.controls['organization_name'].errors?.['required'] && placementDetailsForm.controls['organization_name'].touched "
+                                             class="text text-danger mt-1">From Date required
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
                                         <label class="col-form-label pt-0">Date</label>
                                         <input class="form-control" formControlName="placement_date" placeholder="Date"
                                                type="date">
@@ -129,7 +137,8 @@
                                     <thead>
                                     <tr>
                                         <th colspan="2">#</th>
-                                        <th colspan="2">Company Name</th>
+                                        <th colspan="2">Type of Organization</th>
+                                        <th colspan="2">Name of Organization</th>
                                         <th colspan="2">Student Name</th>
                                         <th colspan="2">Placement Date</th>
                                         <th *ngIf="permission[1].permission == 1 && permission[2].permission == 1"
@@ -142,6 +151,7 @@
                                     <tr *ngFor="let record of placementDetailsList | paginate: { itemsPerPage: 10, currentPage: p }  ;let indexOfElement=index">
                                         <td colspan="2">{{indexOfElement + 1}}</td>
                                         <td colspan="2">{{record.company_name}}</td>
+                                        <td colspan="2">{{record.organization_name}}</td>
                                         <td colspan="2">{{record.user_name}}</td>
                                         <td colspan="2">{{record.placement_date}}</td>
                                         <td colspan="2">

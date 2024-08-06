@@ -43,6 +43,7 @@ export class PlacementComponent {
         this.placementDetailsForm = new FormGroup({
             id: new FormControl(null),
             company_id: new FormControl(null, [Validators.required]),
+            organization_name: new FormControl(null, [Validators.required]),
             user_id: new FormControl(null, [Validators.required]),
             placement_date: new FormControl(null, [Validators.required]),
             course_id: new FormControl(null, [Validators.required]),

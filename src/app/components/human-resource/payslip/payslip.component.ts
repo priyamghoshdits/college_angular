@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import {CustomFilterPipe} from "../../../../../custom-filter.pipe";
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
-import {MatIconModule} from "@angular/material/icon";
-import {NgForOf, NgIf} from "@angular/common";
-import {environment} from "../../../../environments/environment";
-import {SubjectService} from "../../../services/subject.service";
-import {SessionService} from "../../../services/session.service";
-import {CertificateService} from "../../../services/certificate.service";
+import { CustomFilterPipe } from "../../../../../custom-filter.pipe";
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from "@angular/forms";
+import { MatIconModule } from "@angular/material/icon";
+import { NgForOf, NgIf } from "@angular/common";
+import { environment } from "../../../../environments/environment";
+import { SubjectService } from "../../../services/subject.service";
+import { SessionService } from "../../../services/session.service";
+import { CertificateService } from "../../../services/certificate.service";
 import Swal from "sweetalert2";
-import {MemberService} from "../../../services/member.service";
+import { MemberService } from "../../../services/member.service";
 
 @Component({
-  selector: 'app-payslip',
-  standalone: true,
+    selector: 'app-payslip',
+    standalone: true,
     imports: [
         CustomFilterPipe,
         FormsModule,
@@ -21,8 +21,8 @@ import {MemberService} from "../../../services/member.service";
         NgIf,
         ReactiveFormsModule
     ],
-  templateUrl: './payslip.component.html',
-  styleUrl: './payslip.component.scss'
+    templateUrl: './payslip.component.html',
+    styleUrl: './payslip.component.scss'
 })
 export class PayslipComponent {
 
@@ -43,7 +43,7 @@ export class PayslipComponent {
     constructor(private subjectService: SubjectService, private memberService: MemberService) {
         this.uploadCertificateForm = new FormGroup({
             id: new FormControl(null),
-            course_id: new FormControl(null, [Validators.required]),
+            // course_id: new FormControl(null, [Validators.required]),
             month: new FormControl(null, [Validators.required]),
             year: new FormControl(null, [Validators.required]),
         });
@@ -52,18 +52,23 @@ export class PayslipComponent {
         });
         this.courseList = this.subjectService.getCourses();
 
-        for(let i = new Date().getFullYear() - 3; i<=new Date().getFullYear()+3; i++){
+        for (let i = new Date().getFullYear() - 3; i <= new Date().getFullYear() + 3; i++) {
             let x = {
                 "year": i
             };
             this.year.push(x);
         }
+
+        this.memberService.getMemberListener().subscribe(response => {
+            this.staffList = response;
+        });
+        this.staffList = this.memberService.getMemberList();
     }
 
     searchStaff() {
         this.memberService.getStaffForPayslip(this.uploadCertificateForm.value.course_id, this.uploadCertificateForm.value.month, this.uploadCertificateForm.value.year).subscribe((response: any) => {
             this.staffList = response.data;
-            if(this.staffList.length > 0){
+            if (this.staffList.length > 0) {
                 Swal.fire({
                     position: 'center',
                     icon: 'info',
@@ -75,24 +80,50 @@ export class PayslipComponent {
         });
     }
 
+    fromDataCheck() {
+        if (!this.uploadCertificateForm.valid) {
+            Swal.fire({
+                position: 'center',
+                icon: 'info',
+                title: 'Please select Month & Year.',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            this.uploadCertificateForm.markAllAsTouched();
+            throw 404;
+        }
+    }
+
     uploadPayslip(event, record) {
+        if (!this.uploadCertificateForm.valid) {
+            Swal.fire({
+                position: 'center',
+                icon: 'info',
+                title: 'Please select Month & Year.',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            this.uploadCertificateForm.markAllAsTouched();
+            throw 404;
+        }
+
         const formData = new FormData();
-        formData.append('staff_id',record.staff_id);
-        formData.append('month',this.uploadCertificateForm.value.month);
-        formData.append('year',this.uploadCertificateForm.value.year);
-        formData.append('file',event.target.files[0]);
+        formData.append('staff_id', record.staff_id);
+        formData.append('month', this.uploadCertificateForm.value.month);
+        formData.append('year', this.uploadCertificateForm.value.year);
+        formData.append('file', event.target.files[0]);
 
         this.memberService.uploadPayslipManual(formData).subscribe((response: any) => {
-           if(response.success == 1){
-               this.searchStaff();
-               Swal.fire({
-                   position: 'center',
-                   icon: 'success',
-                   title: 'Payslip Uploaded',
-                   showConfirmButton: false,
-                   timer: 1000
-               });
-           }
+            if (response.success == 1) {
+                this.searchStaff();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Payslip Uploaded',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }
         });
     }
 

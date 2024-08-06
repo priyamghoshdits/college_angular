@@ -64,6 +64,7 @@ export class StudentAdmisssionComponent {
     studentList: any[];
     nonAdmittedStudents: any[];
     disabledStudents: any[];
+    showStudent: any[];
     agentList: any[];
     searchItem: string;
     rolesAndPermission: any[] = [];
@@ -90,6 +91,9 @@ export class StudentAdmisssionComponent {
     user: {
         user_type_id: number;
     };
+
+    searchCource: string = '';
+    searchSemester: string = '';
 
     constructor(private memberService: MemberService, private subjectService: SubjectService
         , private sessionService: SessionService, private studentService: StudentService
@@ -230,6 +234,7 @@ export class StudentAdmisssionComponent {
 
         this.studentService.getStudentListener().subscribe((response) => {
             this.studentList = response;
+            this.showStudent = this.studentList;
             this.nonAdmittedStudents = this.studentList.filter(x => x.admission_status == 0);
             this.disabledStudents = this.studentList.filter(x => x.status == 0);
         });
@@ -238,7 +243,33 @@ export class StudentAdmisssionComponent {
             this.nonAdmittedStudents = this.studentList.filter(x => x.admission_status == 0);
             this.disabledStudents = this.studentList.filter(x => x.status == 0);
         }
+    }
 
+    filterStudent(type) {
+        if (!this.searchCource || !this.searchSemester) {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Select Course & Semester',
+                showConfirmButton: false,
+                timer: 1000
+            });
+            return;
+        }
+
+        if (type == '0') {
+            this.disabledStudents = this.studentList.filter(x => x.status == 0 && x.course_id == this.searchCource && x.semester_id == this.searchSemester);
+        } else if (type == '1') {
+            this.showStudent = this.studentList.filter(x => x.course_id == this.searchCource && x.semester_id == this.searchSemester);
+        } else if (type == '2') {
+            this.nonAdmittedStudents = this.studentList.filter(x => x.admission_status == 0 && x.course_id == this.searchCource && x.semester_id == this.searchSemester);
+        }
+    }
+
+    getSearchSemester() {
+        this.subjectService.getSemesterByCourseId(this.searchCource).subscribe((response: any) => {
+            this.semesterList = response.data;
+        })
     }
 
     getSemester() {
@@ -450,7 +481,7 @@ export class StudentAdmisssionComponent {
 
     editStudent(data) {
         console.log(data);
-        
+
         this.studentCreationForm.reset();
         this.subjectService.getSemesterByCourseId(data.course_id).subscribe((response: any) => {
             this.semesterList = response.data;
