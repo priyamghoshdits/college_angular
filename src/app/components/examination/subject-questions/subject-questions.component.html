@@ -1,118 +1,234 @@
 <div class="container-fluid">
-    <div class="row" *ngIf="permission.length > 0">
+    <div *ngIf="permission.length > 0" class="row">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card">
-                        <div class="card-header" [hidden]="active != 1">
+                        <div [hidden]="active != 1" class="card-header">
                             <h5>Questions</h5><span>Add Questions</span>
                         </div>
-                        <div class="card-header" [hidden]="active != 2">
+                        <div [hidden]="active != 2" class="card-header">
                             <h5>Show All Questions</h5>
                         </div>
                         <div class="tabbed-card">
-                            <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
+                            <ul #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary" ngbNav>
                                 <li [ngbNavItem]="1">
-                                    <a ngbNavLink (click)="activeTab(1)">Add Questions</a>
+                                    <a (click)="activeTab(1)" ngbNavLink>Add Questions</a>
                                 </li>
                                 <li [ngbNavItem]="2">
-                                    <a ngbNavLink (click)="activeTab(2)">Show Questions</a>
+                                    <a (click)="activeTab(2)" ngbNavLink>Show Questions</a>
                                 </li>
                             </ul>
                             <div [ngbNavOutlet]="nav" class="mt-2"></div>
                         </div>
                         <div [hidden]="active != 1">
-                            <div class="card-body" [hidden]="active != 1">
-                                <form class="theme-form" [formGroup]="questionForm">
+                            <div [hidden]="active != 1" class="card-body">
+                                <form [formGroup]="questionForm" class="theme-form">
                                     <div class="row">
                                         <div class="col-md-3 mb-3">
                                             <label>Select Subject Details</label>
-                                            <select style="width: 100%" formControlName="subject_details_id" class="form-select" required (change)="selectDetails()">
-                                                <option value="null"> Select </option>
-                                                <option *ngFor="let data of subjectDetailsList" [value]="data.id" >
+                                            <select (change)="selectDetails()" class="form-select"
+                                                    formControlName="subject_details_id" required style="width: 100%">
+                                                <option value="null"> Select</option>
+                                                <option *ngFor="let data of subjectDetailsList" [value]="data.id">
                                                     {{data.name}}
                                                 </option>
                                             </select>
-                                            <div *ngIf="questionForm.controls['subject_details_id'].errors?.['required'] && questionForm.controls['subject_details_id'].touched " class="text text-danger mt-1">Subject details required</div>
+                                            <div *ngIf="questionForm.controls['subject_details_id'].errors?.['required'] && questionForm.controls['subject_details_id'].touched "
+                                                 class="text text-danger mt-1">Subject details required
+                                            </div>
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Course Name</label>
-                                            <input type="text" class="form-control" formControlName="course_name" placeholder="Course Name" required>
+                                            <input class="form-control" formControlName="course_name"
+                                                   placeholder="Course Name"
+                                                   required type="text">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Semester</label>
-                                            <input type="text" class="form-control" formControlName="semester_name" placeholder="Semester" required>
+                                            <input class="form-control" formControlName="semester_name"
+                                                   placeholder="Semester"
+                                                   required type="text">
                                         </div>
                                         <div class="col-md-3 mb-3">
                                             <label>Session</label>
-                                            <input type="text" class="form-control" formControlName="session_name" placeholder="Session" required>
+                                            <input class="form-control" formControlName="session_name"
+                                                   placeholder="Session"
+                                                   required type="text">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label>Subject Name</label>
-                                            <input type="text" class="form-control" formControlName="subject_name" placeholder="Subject Name" required>
+                                            <input class="form-control" formControlName="subject_name"
+                                                   placeholder="Subject Name"
+                                                   required type="text">
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label>Full Marks</label>
-                                            <input type="text" class="form-control" formControlName="full_marks" placeholder="Full Marks" required>
+                                            <input class="form-control" formControlName="full_marks"
+                                                   placeholder="Full Marks"
+                                                   required type="text">
                                         </div>
                                     </div>
                                 </form>
-                                    <hr>
-                                    <h3>Add Questions</h3>
-                                    <div *ngFor="let item of total_question ;let indexOfElement=index">
-                                        <div class="row mt-5">
-                                            <div class="col-md-11 mb-3">
-                                                <label>Question {{indexOfElement + 1}}</label>
-                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].question" placeholder="Questions" required>
-                                            </div>
-                                            <div class="col-md-1 mb-3">
-                                                <a *ngIf="(indexOfElement + 1) == total_question.length" (click)="addField()" style=""><mat-icon style="font-size: 40px;height: 60px; width: 40px; line-height: 2">add_box</mat-icon></a>
-                                            </div>
+                                <hr>
+                                <h3>Add Questions</h3>
+                                <div *ngFor="let item of total_question ;let indexOfElement=index">
+                                    <div class="row mt-5">
+                                        <div class="col-md-11 mb-3">
+                                            <label>Question {{indexOfElement + 1}}</label>
+                                            <input [(ngModel)]="questionAnswers[indexOfElement].question"
+                                                   class="form-control"
+                                                   placeholder="Questions"
+                                                   required type="text">
                                         </div>
-                                        <div class="row">
-                                            <div class="col-md-3 mb-3">
-                                                <label>Option 1</label>
-                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].option_1" placeholder="Option 1" required>
-                                            </div>
-                                            <div class="col-md-3 mb-3">
-                                                <label>Option 2</label>
-                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].option_2" placeholder="Option 2" required>
-                                            </div>
-                                            <div class="col-md-3 mb-3">
-                                                <label>Option 3</label>
-                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].option_3" placeholder="Option 3" required>
-                                            </div>
-                                            <div class="col-md-3 mb-3">
-                                                <label>Option 4</label>
-                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].option_4" placeholder="Option 4" required>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-3 mb-3">
-                                                <label>Marks</label>
-                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].marks" placeholder="marks" (change)="updateMarks(indexOfElement)" required>
-                                            </div>
-                                            <div class="col-md-3 mb-3">
-                                                <label>Correct Ans (input 1,2,3 or 4)</label>
-                                                <input (change)="checkValidityAnswer(indexOfElement)" type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].answer" placeholder="Correct Answer" required>
-                                            </div>
+                                        <div class="col-md-1 mb-3">
+                                            <a (click)="addField()"
+                                               *ngIf="(indexOfElement + 1) == total_question.length" style="">
+                                                <mat-icon
+                                                        style="font-size: 40px;height: 60px; width: 40px; line-height: 2">
+                                                    add_box
+                                                </mat-icon>
+                                            </a>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Option 1</label>
+                                            <input [(ngModel)]="questionAnswers[indexOfElement].option_1"
+                                                   class="form-control"
+                                                   placeholder="Option 1"
+                                                   required type="text">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Option 2</label>
+                                            <input [(ngModel)]="questionAnswers[indexOfElement].option_2"
+                                                   class="form-control"
+                                                   placeholder="Option 2"
+                                                   required type="text">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Option 3</label>
+                                            <input [(ngModel)]="questionAnswers[indexOfElement].option_3"
+                                                   class="form-control"
+                                                   placeholder="Option 3"
+                                                   required type="text">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Option 4</label>
+                                            <input [(ngModel)]="questionAnswers[indexOfElement].option_4"
+                                                   class="form-control"
+                                                   placeholder="Option 4"
+                                                   required type="text">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Marks</label>
+                                            <input (change)="updateMarks(indexOfElement)"
+                                                   [(ngModel)]="questionAnswers[indexOfElement].marks"
+                                                   class="form-control"
+                                                   placeholder="marks" required type="text">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Correct Ans (input 1,2,3 or 4)</label>
+                                            <input (change)="checkValidityAnswer(indexOfElement)"
+                                                   [(ngModel)]="questionAnswers[indexOfElement].answer"
+                                                   class="form-control"
+                                                   placeholder="Correct Answer"
+                                                   required type="text">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div style="float: right">
-                                    <input disabled [(ngModel)]="totalMarks" type="text" class="form-control"  placeholder="Total Marks" required>
+                                    <input [(ngModel)]="totalMarks" class="form-control" disabled
+                                           placeholder="Total Marks"
+                                           required type="text">
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveQuestions()">Submit</button>
-                                <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateQuestionPaper()">Update</button>
-                                <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                                <button (click)="saveQuestions()" *ngIf="permission[0].permission == 1"
+                                        [hidden]="isUpdatable == true" class="btn btn-primary me-1">Submit
+                                </button>
+                                <button (click)="updateQuestionPaper()" [hidden]="isUpdatable == false"
+                                        class="btn btn-primary me-1">Update
+                                </button>
+                                <button (click)="cancelUpdate()" [hidden]="isUpdatable == false"
+                                        class="btn btn-primary me-1">Cancel
+                                </button>
                                 <!--                            <button class="btn btn-secondary">Cancel</button>-->
                             </div>
                         </div>
                         <div [hidden]="active != 2">
-                            <div class="table-responsive">
+                            <div *ngFor="let record of questionList" class="container">
+                                <div class="courserea">
+                                    <div class="row">
+
+                                        <div class="col-lg-4">
+                                            <div class="Course-text">
+                                                <h6><b><i class="fa-solid fa-graduation-cap mr"></i>Course Name:
+                                                </b>{{record.course_name}}
+                                                </h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="Course-text">
+                                                <h6><b><i class="fa-solid fa-book-open mr"></i>Semester:
+                                                </b>{{record.semester_name}}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="Course-text">
+                                                <h6><b><i class="fa-solid fa-book-reader mr"></i>Subject:
+                                                </b>{{record.subject_name}}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div *ngFor="let record of record.questions ;let indexOfElement1=index"
+                                         class="Questionsarea">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="questions">
+                                                    <h6>
+                                                        <i class="fa-solid fa-cube mr"></i>Question {{indexOfElement1 + 1}}
+                                                        : <span class="nm1">{{record.question}}</span>
+                                                    </h6>
+                                                </div>
+                                                <div class="Options">
+                                                    <h6><i class="fa-solid fa-cube mr"></i>Options:</h6><span>
+                                                <ul class="newli">
+                                                    <li>{{record.option_1}}</li>
+                                                    <li>{{record.option_2}}</li>
+                                                    <li>{{record.option_3}}</li>
+                                                    <li>{{record.option_4}}</li>
+                                                </ul>
+                                               
+                                            </span>
+                                                </div>
+                                                <div class="Marks">
+                                                    <h6><i class="fa-solid fa-cube mr"></i>Marks: <span
+                                                            class="nm">{{record.marks}}</span></h6>
+                                                </div>
+                                                <div class="Status">
+                                                    <h6><i class="fa-solid fa-cube mr"></i>Status: <span
+                                                            class="nm">
+                                                        <input (click)="updateStatus(record.id)"
+                                                               [checked]="record.status" id="checkbox-primary-1"
+                                                               type="checkbox">
+                                                    </span>
+                                                    </h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                            <!-- <div class="table-responsive">
                                 <table class="table" >
                                     <thead>
                                     <tr>
@@ -166,7 +282,7 @@
                                 </table>
                                 <pagination-controls *ngIf="questionList.length > 5" (pageChange)="p = $event"></pagination-controls>
 
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

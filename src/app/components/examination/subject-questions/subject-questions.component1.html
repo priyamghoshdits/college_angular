@@ -1,0 +1,177 @@
+<div class="container-fluid">
+    <div class="row" *ngIf="permission.length > 0">
+        <div class="col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header" [hidden]="active != 1">
+                            <h5>Questions</h5><span>Add Questions</span>
+                        </div>
+                        <div class="card-header" [hidden]="active != 2">
+                            <h5>Show All Questions</h5>
+                        </div>
+                        <div class="tabbed-card">
+                            <ul ngbNav #nav="ngbNav" [activeId]="1" class="pull-right nav nav-pills nav-primary">
+                                <li [ngbNavItem]="1">
+                                    <a ngbNavLink (click)="activeTab(1)">Add Questions</a>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                    <a ngbNavLink (click)="activeTab(2)">Show Questions</a>
+                                </li>
+                            </ul>
+                            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                        </div>
+                        <div [hidden]="active != 1">
+                            <div class="card-body" [hidden]="active != 1">
+                                <form class="theme-form" [formGroup]="questionForm">
+                                    <div class="row">
+                                        <div class="col-md-3 mb-3">
+                                            <label>Select Subject Details</label>
+                                            <select style="width: 100%" formControlName="subject_details_id" class="form-select" required (change)="selectDetails()">
+                                                <option value="null"> Select </option>
+                                                <option *ngFor="let data of subjectDetailsList" [value]="data.id" >
+                                                    {{data.name}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="questionForm.controls['subject_details_id'].errors?.['required'] && questionForm.controls['subject_details_id'].touched " class="text text-danger mt-1">Subject details required</div>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Course Name</label>
+                                            <input type="text" class="form-control" formControlName="course_name" placeholder="Course Name" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Semester</label>
+                                            <input type="text" class="form-control" formControlName="semester_name" placeholder="Semester" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label>Session</label>
+                                            <input type="text" class="form-control" formControlName="session_name" placeholder="Session" required>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Subject Name</label>
+                                            <input type="text" class="form-control" formControlName="subject_name" placeholder="Subject Name" required>
+                                        </div>
+                                        <div class="col-md-4 mb-3">
+                                            <label>Full Marks</label>
+                                            <input type="text" class="form-control" formControlName="full_marks" placeholder="Full Marks" required>
+                                        </div>
+                                    </div>
+                                </form>
+                                    <hr>
+                                    <h3>Add Questions</h3>
+                                    <div *ngFor="let item of total_question ;let indexOfElement=index">
+                                        <div class="row mt-5">
+                                            <div class="col-md-11 mb-3">
+                                                <label>Question {{indexOfElement + 1}}</label>
+                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].question" placeholder="Questions" required>
+                                            </div>
+                                            <div class="col-md-1 mb-3">
+                                                <a *ngIf="(indexOfElement + 1) == total_question.length" (click)="addField()" style=""><mat-icon style="font-size: 40px;height: 60px; width: 40px; line-height: 2">add_box</mat-icon></a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                <label>Option 1</label>
+                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].option_1" placeholder="Option 1" required>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label>Option 2</label>
+                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].option_2" placeholder="Option 2" required>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label>Option 3</label>
+                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].option_3" placeholder="Option 3" required>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label>Option 4</label>
+                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].option_4" placeholder="Option 4" required>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3 mb-3">
+                                                <label>Marks</label>
+                                                <input type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].marks" placeholder="marks" (change)="updateMarks(indexOfElement)" required>
+                                            </div>
+                                            <div class="col-md-3 mb-3">
+                                                <label>Correct Ans (input 1,2,3 or 4)</label>
+                                                <input (change)="checkValidityAnswer(indexOfElement)" type="text" class="form-control" [(ngModel)]="questionAnswers[indexOfElement].answer" placeholder="Correct Answer" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div style="float: right">
+                                    <input disabled [(ngModel)]="totalMarks" type="text" class="form-control"  placeholder="Total Marks" required>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button *ngIf="permission[0].permission == 1" [hidden]="isUpdatable == true" class="btn btn-primary me-1" (click)="saveQuestions()">Submit</button>
+                                <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="updateQuestionPaper()">Update</button>
+                                <button [hidden]="isUpdatable == false" class="btn btn-primary me-1" (click)="cancelUpdate()">Cancel</button>
+                                <!--                            <button class="btn btn-secondary">Cancel</button>-->
+                            </div>
+                        </div>
+                        <div [hidden]="active != 2">
+                            <div class="table-responsive">
+                                <table class="table" >
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">Subject Name</th>
+                                        <th colspan="2">Course Name</th>
+                                        <th colspan="7">Question</th>
+                                        <th colspan="1">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let record of questionList | paginate: { itemsPerPage: 5, currentPage: p } ;let indexOfElement=index">
+                                        <td colspan="2">{{record.subject_name}}</td>
+                                        <td colspan="2">{{record.course_name}}</td>
+                                        <td colspan="7">
+                                            <div *ngFor="let record of record.questions ;let indexOfElement1=index">
+                                                <div class="row m-1">
+                                                    <div class="col-3">Question {{indexOfElement1 + 1}}</div>
+                                                    <div class="col">{{record.question}}</div>
+                                                </div>
+
+                                                <div class="row m-1">
+                                                    <div class="col-3" >Options</div>
+                                                    <div class="col">{{record.option_1}}</div>
+                                                    <div class="col">{{record.option_2}}</div>
+                                                    <div class="col">{{record.option_3}}</div>
+                                                    <div class="col">{{record.option_4}}</div>
+                                                </div>
+
+                                                <div class="row m-1">
+                                                    <div class="col-3" >Marks</div>
+                                                    <div class="col" >{{record.marks}}</div>
+                                                </div>
+
+                                                <div class="row m-1">
+                                                    <div class="col-3" >Status</div>
+                                                    <div class="col" >
+                                                        <input (click)="updateStatus(record.id)" [checked]="record.status" id="checkbox-primary-1" type="checkbox">
+                                                    </div>
+                                                </div>
+
+                                                <br>
+                                                <br>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a *ngIf="permission[1].permission == 1" (click)="editQuestionPaper(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteQuestionPaper(record)"><mat-icon>delete</mat-icon></a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls *ngIf="questionList.length > 5" (pageChange)="p = $event"></pagination-controls>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->

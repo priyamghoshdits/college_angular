@@ -345,8 +345,10 @@ export class SubjectQuestionsComponent {
     }
 
     updateStatus(id) {
-        this.examinationService.updateSubjectStatus(id).subscribe((response) => {
-
+        this.examinationService.updateSubjectStatus(id).subscribe((response: any) => {
+            if(response.success == 1){
+                this.examinationService.getUpdatedQuestionList();
+            }
         })
     }
 
