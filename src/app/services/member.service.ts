@@ -223,6 +223,12 @@ export class MemberService {
             }));
     }
 
+    saveUploadFilePaperSetter(value) {
+        return this.http.post(this.BASE_API_URL + '/saveUploadFilePaperSetter', value)
+            .pipe(catchError(this.errorService.serverError), tap(response => {
+
+            }));
+    }
 
     saveMember(value) {
         return this.http.post(this.BASE_API_URL + '/saveMember', value)

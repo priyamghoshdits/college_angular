@@ -202,7 +202,7 @@ export class PaperSetterComponent {
                 formData.append('paper_file', file);
 
                 // Send the file to the server
-                this.memberService.saveUploadFile(formData).subscribe((response: any) => {
+                this.memberService.saveUploadFilePaperSetter(formData).subscribe((response: any) => {
                     this.paperSetterArray[index].paper_file = response.file_name;
                 });
             }

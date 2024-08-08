@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="row" >
+    <div class="row">
         <div class="col-sm-12 col-xl-12">
             <div class="row">
                 <div class="col-sm-12">
@@ -9,8 +9,8 @@
                         </div>
                         <div class="card-body">
                             <form class="theme-form" [formGroup]="uploadCertificateForm">
-                                <div  class="row">
-                                    <div class="col-md-3 mb-3">
+                                <div class="row">
+                                    <!-- <div class="col-md-3 mb-3">
                                         <label>Select Course</label>
                                         <select style="width: 100%" formControlName="course_id" class="form-select">
                                             <option value="null">Select</option>
@@ -19,10 +19,11 @@
                                             </option>
                                         </select>
                                         <div *ngIf="uploadCertificateForm.controls['course_id'].errors?.['required'] && uploadCertificateForm.controls['course_id'].touched " class="text text-danger mt-1">Course required</div>
-                                    </div>
+                                    </div> -->
                                     <div class="col-md-3 mb-3">
                                         <label>Select Month</label>
-                                        <select style="width: 100%" formControlName="month" class="form-select" required>
+                                        <select style="width: 100%" formControlName="month" class="form-select"
+                                            required>
                                             <option value="null"> Select </option>
                                             <option value="01"> January </option>
                                             <option value="02"> February </option>
@@ -37,20 +38,23 @@
                                             <option value="11"> November </option>
                                             <option value="12"> December </option>
                                         </select>
-                                        <div *ngIf="uploadCertificateForm.controls['month'].errors?.['required'] && uploadCertificateForm.controls['month'].touched " class="text text-danger mt-1">Month required</div>
+                                        <div *ngIf="uploadCertificateForm.controls['month'].errors?.['required'] && uploadCertificateForm.controls['month'].touched "
+                                            class="text text-danger mt-1">Month required</div>
                                     </div>
                                     <div class="col-md-3 mb-3">
                                         <label>Select Year</label>
                                         <select style="width: 100%" formControlName="year" class="form-select" required>
                                             <option value="null"> Select </option>
-                                            <option *ngFor="let data of year" [value]="data.year" >
+                                            <option *ngFor="let data of year" [value]="data.year">
                                                 {{data.year}}
                                             </option>
                                         </select>
-                                        <div *ngIf="uploadCertificateForm.controls['year'].errors?.['required'] && uploadCertificateForm.controls['year'].touched " class="text text-danger mt-1">Year required</div>
+                                        <div *ngIf="uploadCertificateForm.controls['year'].errors?.['required'] && uploadCertificateForm.controls['year'].touched "
+                                            class="text text-danger mt-1">Year required</div>
                                     </div>
                                     <div class="col-md-2 mb-3">
-                                        <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="searchStaff()">Submit</button>
+                                        <button style="margin-top: 30px" class="btn btn-primary me-1"
+                                            (click)="searchStaff()">Submit</button>
                                     </div>
                                 </div>
                             </form>
@@ -60,7 +64,8 @@
                                 <div class="row">
                                     <div class="col-3"></div>
                                     <div class="col-6">
-                                        <input style="width: 60%" class="form-control" [(ngModel)]="searchItem" type="text" placeholder="Search Or Filter">
+                                        <input style="width: 60%" class="form-control" [(ngModel)]="searchItem"
+                                            type="text" placeholder="Search Or Filter">
                                     </div>
                                     <div class="col-3"></div>
                                 </div>
@@ -68,22 +73,24 @@
                                 <div class="table-responsive">
                                     <table class="table" style="text-align: center">
                                         <thead>
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Action</th>
-                                        </tr>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Action</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
-                                        <tr *ngFor="let record of staffList| customFilter:searchItem ;let indexOfElement=index">
-                                            <td>{{indexOfElement+1}}</td>
-                                            <td>{{record.staff_name}}</td>
-                                            <td>
-<!--                                                <a (click)="uploader.click()" style="cursor: pointer"><mat-icon>cloud_upload</mat-icon></a>-->
-                                                <a *ngIf="record.month != null" style="cursor: pointer" href="{{FILE_URL}}/manual_payslips/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a>
-<!--                                                <input [hidden]="true" class="form-control" #uploader type="file" (change)="uploadPayslip($event,record)">-->
-                                            </td>
-                                        </tr>
+                                            <tr
+                                                *ngFor="let record of staffList| customFilter:searchItem ;let indexOfElement=index">
+                                                <td>{{indexOfElement+1}}</td>
+                                                <td>{{record.staff_name}}</td>
+                                                <td>
+                                                    <!--                                                <a (click)="uploader.click()" style="cursor: pointer"><mat-icon>cloud_upload</mat-icon></a>-->
+                                                    <a *ngIf="record.month != null" style="cursor: pointer"
+                                                        href="{{FILE_URL}}/manual_payslips/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a>
+                                                    <!--                                                <input [hidden]="true" class="form-control" #uploader type="file" (change)="uploadPayslip($event,record)">-->
+                                                </td>
+                                            </tr>
                                         </tbody>
                                     </table>
 

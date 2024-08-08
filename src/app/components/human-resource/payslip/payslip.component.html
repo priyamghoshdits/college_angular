@@ -52,9 +52,10 @@
                                         <div *ngIf="uploadCertificateForm.controls['year'].errors?.['required'] && uploadCertificateForm.controls['year'].touched "
                                             class="text text-danger mt-1">Year required</div>
                                     </div>
-                                    <!-- <div class="col-md-2 mb-3">
-                                        <button style="margin-top: 30px" class="btn btn-primary me-1" (click)="searchStaff()">Submit</button>
-                                    </div> -->
+                                    <div class="col-md-2 mb-3">
+                                        <button style="margin-top: 23px" class="btn btn-primary"
+                                            (click)="searchStaff()">Search</button>
+                                    </div>
                                 </div>
                             </form>
                             <hr>
@@ -82,15 +83,17 @@
                                             <tr
                                                 *ngFor="let record of staffList| customFilter:searchItem ;let indexOfElement=index">
                                                 <td>{{indexOfElement+1}}</td>
-                                                <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}
-                                                </td>
+                                                <td>{{record.staff_name}}</td>
+                                                <!-- <td>{{record.first_name}} {{record.middle_name}} {{record.last_name}}
+                                                </td> -->
                                                 <td>
                                                     <a (click)="uploader.click()"
                                                         style="cursor: pointer"><mat-icon>cloud_upload</mat-icon></a>
                                                     <a *ngIf="record.month != null" style="cursor: pointer"
                                                         href="{{FILE_URL}}/manual_payslips/{{record.file_name}}"><mat-icon>cloud_download</mat-icon></a>
                                                     <input [hidden]="true" class="form-control" #uploader type="file"
-                                                        (change)="uploadPayslip($event,record)" (click)="fromDataCheck()">
+                                                        (change)="uploadPayslip($event,record)"
+                                                        (click)="fromDataCheck()">
                                                 </td>
                                             </tr>
                                         </tbody>

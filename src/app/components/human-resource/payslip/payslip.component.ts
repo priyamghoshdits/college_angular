@@ -59,16 +59,16 @@ export class PayslipComponent {
             this.year.push(x);
         }
 
-        this.memberService.getMemberListener().subscribe(response => {
-            this.staffList = response;
-        });
-        this.staffList = this.memberService.getMemberList();
+        // this.memberService.getMemberListener().subscribe(response => {
+        //     this.staffList = response;
+        // });
+        // this.staffList = this.memberService.getMemberList();
     }
 
     searchStaff() {
-        this.memberService.getStaffForPayslip(this.uploadCertificateForm.value.course_id, this.uploadCertificateForm.value.month, this.uploadCertificateForm.value.year).subscribe((response: any) => {
+        this.memberService.getStaffForPayslip(1, this.uploadCertificateForm.value.month, this.uploadCertificateForm.value.year).subscribe((response: any) => {
             this.staffList = response.data;
-            if (this.staffList.length > 0) {
+            if (this.staffList.length == 0) {
                 Swal.fire({
                     position: 'center',
                     icon: 'info',
@@ -90,7 +90,6 @@ export class PayslipComponent {
                 timer: 1000
             });
             this.uploadCertificateForm.markAllAsTouched();
-            throw 404;
         }
     }
 
@@ -104,7 +103,6 @@ export class PayslipComponent {
                 timer: 1000
             });
             this.uploadCertificateForm.markAllAsTouched();
-            throw 404;
         }
 
         const formData = new FormData();
@@ -115,7 +113,7 @@ export class PayslipComponent {
 
         this.memberService.uploadPayslipManual(formData).subscribe((response: any) => {
             if (response.success == 1) {
-                this.searchStaff();
+                // this.searchStaff();
                 Swal.fire({
                     position: 'center',
                     icon: 'success',

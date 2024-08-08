@@ -19,7 +19,7 @@ export class PaperPosterService {
   }
 
   saveUploadFile(data) {
-    return this.http.post(this.BASE_URL + '/saveUploadFile', data)
+    return this.http.post(this.BASE_URL + '/saveUploadFilePaperPoster', data)
       .pipe(catchError(this.errorService.serverError)
         , tap((response: any) => {
         }));
