@@ -165,24 +165,28 @@
                                 <div class="courserea">
                                     <div class="row">
 
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <div class="Course-text">
                                                 <h6><b><i class="fa-solid fa-graduation-cap mr"></i>Course Name:
                                                 </b>{{record.course_name}}
                                                 </h6>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <div class="Course-text">
                                                 <h6><b><i class="fa-solid fa-book-open mr"></i>Semester:
                                                 </b>{{record.semester_name}}</h6>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+                                        <div class="col-lg-3">
                                             <div class="Course-text">
                                                 <h6><b><i class="fa-solid fa-book-reader mr"></i>Subject:
                                                 </b>{{record.subject_name}}</h6>
                                             </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <a *ngIf="permission[1].permission == 1" (click)="editQuestionPaper(record)"><mat-icon>edit</mat-icon></a>
+                                            <a *ngIf="permission[2].permission == 1" (click)="deleteQuestionPaper(record)"><mat-icon>delete</mat-icon></a>
                                         </div>
                                     </div>
 
